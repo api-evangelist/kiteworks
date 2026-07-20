@@ -1,0 +1,76 @@
+generated: '2026-07-19'
+method: searched
+source: https://developer.kiteworks.com/authentication.html
+docs: https://developer.kiteworks.com/authentication.html
+note: The published v28 OpenAPI declares no components.securitySchemes, so this profile is taken from
+  the developer portal authentication guide rather than derived from the spec. Endpoints are per-tenant
+  against the customer Kiteworks appliance.
+summary:
+  types:
+  - oauth2
+  api_key_in: []
+  oauth2_flows:
+  - authorizationCode
+  - jwt-bearer
+  token_header: 'Authorization: Bearer <access_token>'
+prerequisites:
+- 'Enterprise package with the Developer Suite add-on enabled (Admin console: Application Setup -> Licenses,
+  API row must show "Enabled")'
+- A registered custom application providing client_id, client_secret, permitted scopes, redirect URIs
+  and token lifetimes
+schemes:
+- name: OAuth2AuthorizationCode
+  type: oauth2
+  flow: authorizationCode
+  authorizationUrl: https://{kiteworks_server}/oauth/authorize
+  tokenUrl: https://{kiteworks_server}/oauth/token
+  grant_type: authorization_code
+  pkce: Strongly recommended; required for public clients (mobile apps, SPAs)
+  purpose: Interactive user sign-in for web, desktop and mobile applications.
+  request_params:
+  - client_id
+  - client_secret
+  - redirect_uri
+  - scope
+  - response_type=code
+  - state (optional)
+  - m=1 (optional, mobile-friendly UI)
+  response_fields:
+  - access_token
+  - expires_in
+  - token_type (always "bearer")
+  - scope
+  - refresh_token (when configured)
+- name: OAuth2JWTBearer
+  type: oauth2
+  flow: jwt-bearer
+  tokenUrl: https://{kiteworks_server}/oauth/token
+  grant_type: urn:ietf:params:oauth:grant-type:jwt-bearer
+  purpose: Backend automation, scheduled jobs and unattended scripts; server-side user impersonation.
+  signing: RS256 by default (RSA key pair generated with OpenSSL; public key registered in the Admin console)
+  jwt_claims:
+  - iss (issuer)
+  - sub (Kiteworks user email)
+  - aud (audience)
+  - iat
+  - nbf
+  - exp (typically 5 minutes)
+  - jti (unique id, replay prevention)
+  response_fields:
+  - access_token
+  - expires_in
+  - token_type
+  - scope
+  refresh_token: false
+api_keys:
+  supported: false
+  evidence: The authentication guide documents OAuth 2.0 only; no API key scheme is offered.
+mcp_auth:
+  protocol: OAuth 2.1
+  dynamic_client_registration: true
+  pkce: true
+  note: The Kiteworks MCP Server (remote HTTPS mode) authenticates with OAuth 2.1 including Dynamic Client
+    Registration; see mcp/kiteworks-mcp.yml.
+see:
+- scopes/kiteworks-scopes.yml
+- conventions/kiteworks-conventions.yml
