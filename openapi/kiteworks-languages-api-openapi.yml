@@ -1,0 +1,129 @@
+openapi: 3.0.2
+info:
+  version: '28'
+  title: Kiteworks API Documentation activities languages API
+tags:
+- name: languages
+paths:
+  /rest/languages:
+    get:
+      tags:
+      - languages
+      summary: List languages
+      description: Returns a list of available languages.
+      responses:
+        '200':
+          description: List of languages retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Language'
+              examples:
+                LanguageList:
+                  summary: List of available languages
+                  value:
+                    data:
+                    - id: 1
+                      name: English
+                      symbol: en
+                    - id: 2
+                      name: French
+                      symbol: fr
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: name
+        description: Language name
+        schema:
+          type: string
+      - in: query
+        name: name:contains
+        description: Language name. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: symbol
+        description: Language symbol
+        schema:
+          type: string
+      - in: query
+        name: orderBy
+        description: Sorting options
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - id:asc
+          - id:desc
+          - name:asc
+          - name:desc
+          - symbol:asc
+          - symbol:desc
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+  /rest/languages/{id}:
+    get:
+      tags:
+      - languages
+      summary: Get a language
+      description: Returns the details of a specified language, including its name and symbol.
+      responses:
+        '200':
+          description: Language details retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Language'
+              examples:
+                LanguageInfo:
+                  summary: Details of a single language
+                  value:
+                    id: 1
+                    name: English
+                    symbol: en
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the language to be retrieved
+        required: true
+        schema:
+          type: integer
+components:
+  schemas:
+    Language:
+      description: Class Language
+      properties:
+        id:
+          description: Language unique identifier
+          type: integer
+        name:
+          description: Display name of the language
+          type: string
+        symbol:
+          description: Short symbol code identifying the language
+          type: string
+        ietf:
+          description: IETF BCP 47 language tag used for locale identification, e.g. `en-US`
+          type: string
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string

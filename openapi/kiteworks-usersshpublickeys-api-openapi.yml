@@ -1,0 +1,701 @@
+openapi: 3.0.2
+info:
+  version: '28'
+  title: Kiteworks API Documentation activities userSshPublicKeys API
+tags:
+- name: userSshPublicKeys
+paths:
+  /rest/userSshPublicKeys/create:
+    post:
+      summary: Register an SSH public key for the current user
+      description: "### Description:\n  Registers an existing SSH public key for the current user.\n### Precondition:\n  SFTP access must be enabled for the user's profile and role.\n### Response:\n  The SSH public key is registered.\n"
+      tags:
+      - userSshPublicKeys
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserSshPublicKeysPostCreateRequest'
+      responses:
+        '201':
+          description: The SSH public key was successfully registered.
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_PROFILE_SFTP_DISABLED, ERR_SYSTEM_ROLE_SFTP_DISABLED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_PROFILE_SFTP_DISABLED:
+                  summary: SFTP is not enabled for this profile
+                  description: SFTP is not enabled for this profile
+                  value:
+                    errors:
+                    - code: ERR_PROFILE_SFTP_DISABLED
+                      message: SFTP is not enabled for this profile
+                ERR_SYSTEM_ROLE_SFTP_DISABLED:
+                  summary: SFTP role is not enabled on server
+                  description: SFTP role is not enabled on server
+                  value:
+                    errors:
+                    - code: ERR_SYSTEM_ROLE_SFTP_DISABLED
+                      message: SFTP role is not enabled on server
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INVALID_PARAMETER, ERR_SSH_PUBLIC_KEY_EXISTS'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INVALID_PARAMETER:
+                  summary: Invalid Parameter Exception
+                  description: Invalid Parameter Exception
+                  value:
+                    errors:
+                    - code: ERR_INVALID_PARAMETER
+                      message: Invalid Parameter Exception
+                ERR_SSH_PUBLIC_KEY_EXISTS:
+                  summary: Same ssh public key name exists
+                  description: Same ssh public key name exists
+                  value:
+                    errors:
+                    - code: ERR_SSH_PUBLIC_KEY_EXISTS
+                      message: Same ssh public key name exists
+        '490':
+          description: Request blocked by WAF
+  /rest/userSshPublicKeys/generate:
+    post:
+      summary: Generate a new SSH public/private key pair
+      description: "### Description:\n  Generates a new SSH public/private key pair for the current user and registers the public key.\n### Precondition:\n  SFTP access must be enabled for the user's profile and role.\n### Response:\n  The generated SSH public/private key pair is returned.\n"
+      tags:
+      - userSshPublicKeys
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserSshPublicKeysPostGenerateRequest'
+      responses:
+        '201':
+          description: The SSH key pair was successfully generated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserGeneratedSshPublicKeyKey'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_PROFILE_SFTP_DISABLED, ERR_SYSTEM_ROLE_SFTP_DISABLED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_PROFILE_SFTP_DISABLED:
+                  summary: SFTP is not enabled for this profile
+                  description: SFTP is not enabled for this profile
+                  value:
+                    errors:
+                    - code: ERR_PROFILE_SFTP_DISABLED
+                      message: SFTP is not enabled for this profile
+                ERR_SYSTEM_ROLE_SFTP_DISABLED:
+                  summary: SFTP role is not enabled on server
+                  description: SFTP role is not enabled on server
+                  value:
+                    errors:
+                    - code: ERR_SYSTEM_ROLE_SFTP_DISABLED
+                      message: SFTP role is not enabled on server
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INVALID_PARAMETER, ERR_SSH_PUBLIC_KEY_EXISTS'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INVALID_PARAMETER:
+                  summary: Invalid Parameter Exception
+                  description: Invalid Parameter Exception
+                  value:
+                    errors:
+                    - code: ERR_INVALID_PARAMETER
+                      message: Invalid Parameter Exception
+                ERR_SSH_PUBLIC_KEY_EXISTS:
+                  summary: Same ssh public key name exists
+                  description: Same ssh public key name exists
+                  value:
+                    errors:
+                    - code: ERR_SSH_PUBLIC_KEY_EXISTS
+                      message: Same ssh public key name exists
+        '490':
+          description: Request blocked by WAF
+  /rest/userSshPublicKeys/{id}:
+    delete:
+      summary: Delete an SSH public key
+      description: "### Description:\n  Deletes the specified SSH public key belonging to the current user.\n### Precondition:\n  SFTP access must be enabled for the user's profile and role.\n### Response:\n  The SSH public key is deleted.\n"
+      tags:
+      - userSshPublicKeys
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier of the entity.
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: The SSH public key was successfully deleted.
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_ENTITY_DELETED, ERR_PROFILE_SFTP_DISABLED, ERR_SYSTEM_ROLE_SFTP_DISABLED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_ENTITY_DELETED:
+                  summary: Entity is deleted
+                  description: Entity is deleted
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_DELETED
+                      message: Entity is deleted
+                ERR_PROFILE_SFTP_DISABLED:
+                  summary: SFTP is not enabled for this profile
+                  description: SFTP is not enabled for this profile
+                  value:
+                    errors:
+                    - code: ERR_PROFILE_SFTP_DISABLED
+                      message: SFTP is not enabled for this profile
+                ERR_SYSTEM_ROLE_SFTP_DISABLED:
+                  summary: SFTP role is not enabled on server
+                  description: SFTP role is not enabled on server
+                  value:
+                    errors:
+                    - code: ERR_SYSTEM_ROLE_SFTP_DISABLED
+                      message: SFTP role is not enabled on server
+        '490':
+          description: Request blocked by WAF
+  /rest/userSshPublicKeys:
+    get:
+      summary: List the current user's SSH public keys
+      description: "### Description:\n  Returns the list of SSH public keys registered for the current user.\n### Precondition:\n  SFTP access must be enabled for the user's profile and role.\n### Response:\n  A list of SSH public key records is returned.\n"
+      tags:
+      - userSshPublicKeys
+      parameters:
+      - in: query
+        name: limit
+        required: false
+        description: Maximum number of SSH public keys to return.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: The list of SSH public keys has been successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserSshPublicKeyList'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_PROFILE_SFTP_DISABLED, ERR_SYSTEM_ROLE_SFTP_DISABLED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_PROFILE_SFTP_DISABLED:
+                  summary: SFTP is not enabled for this profile
+                  description: SFTP is not enabled for this profile
+                  value:
+                    errors:
+                    - code: ERR_PROFILE_SFTP_DISABLED
+                      message: SFTP is not enabled for this profile
+                ERR_SYSTEM_ROLE_SFTP_DISABLED:
+                  summary: SFTP role is not enabled on server
+                  description: SFTP role is not enabled on server
+                  value:
+                    errors:
+                    - code: ERR_SYSTEM_ROLE_SFTP_DISABLED
+                      message: SFTP role is not enabled on server
+        '490':
+          description: Request blocked by WAF
+  /rest/admin/users/{id}/userSshPublicKeys:
+    get:
+      summary: List SSH public keys for a user
+      description: "### Description:\n  Returns all SSH public keys associated with the specified user.\n### Precondition:\n  The user must be an administrator. SFTP must be enabled for the user's profile and system role.\n### Response:\n  A list of SSH public keys for the specified user is returned.\n"
+      tags:
+      - userSshPublicKeys
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier (UUID) of the entity.
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: The list of SSH public keys was returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminUserSshPublicKeyList'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_PROFILE_SFTP_DISABLED, ERR_SYSTEM_ROLE_SFTP_DISABLED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_PROFILE_SFTP_DISABLED:
+                  summary: SFTP is not enabled for this profile
+                  description: SFTP is not enabled for this profile
+                  value:
+                    errors:
+                    - code: ERR_PROFILE_SFTP_DISABLED
+                      message: SFTP is not enabled for this profile
+                ERR_SYSTEM_ROLE_SFTP_DISABLED:
+                  summary: SFTP role is not enabled on server
+                  description: SFTP role is not enabled on server
+                  value:
+                    errors:
+                    - code: ERR_SYSTEM_ROLE_SFTP_DISABLED
+                      message: SFTP role is not enabled on server
+        '490':
+          description: Request blocked by WAF
+  /rest/admin/users/{id}/userSshPublicKeys/create:
+    post:
+      summary: Create an SSH public key for a user
+      description: "### Description:\n  Creates a new SSH public key record for the specified user using a provided public key string.\n### Precondition:\n  The user must be an administrator. SFTP must be enabled for the user's profile and system role.\n### Response:\n  The SSH public key record is created successfully.\n"
+      tags:
+      - userSshPublicKeys
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier (UUID) of the entity.
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserSshPublicKeysPostCreateRequest'
+      responses:
+        '201':
+          description: The SSH public key record was created successfully.
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_PROFILE_SFTP_DISABLED, ERR_SYSTEM_ROLE_SFTP_DISABLED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_PROFILE_SFTP_DISABLED:
+                  summary: SFTP is not enabled for this profile
+                  description: SFTP is not enabled for this profile
+                  value:
+                    errors:
+                    - code: ERR_PROFILE_SFTP_DISABLED
+                      message: SFTP is not enabled for this profile
+                ERR_SYSTEM_ROLE_SFTP_DISABLED:
+                  summary: SFTP role is not enabled on server
+                  description: SFTP role is not enabled on server
+                  value:
+                    errors:
+                    - code: ERR_SYSTEM_ROLE_SFTP_DISABLED
+                      message: SFTP role is not enabled on server
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INVALID_PARAMETER, ERR_SSH_PUBLIC_KEY_EXISTS'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INVALID_PARAMETER:
+                  summary: Invalid Parameter Exception
+                  description: Invalid Parameter Exception
+                  value:
+                    errors:
+                    - code: ERR_INVALID_PARAMETER
+                      message: Invalid Parameter Exception
+                ERR_SSH_PUBLIC_KEY_EXISTS:
+                  summary: Same ssh public key name exists
+                  description: Same ssh public key name exists
+                  value:
+                    errors:
+                    - code: ERR_SSH_PUBLIC_KEY_EXISTS
+                      message: Same ssh public key name exists
+        '490':
+          description: Request blocked by WAF
+  /rest/admin/users/{id}/userSshPublicKeys/generate:
+    post:
+      summary: Generate an SSH key pair for a user
+      description: "### Description:\n  Generates a new SSH public/private key pair for the specified user and stores the public key.\n### Precondition:\n  The user must be an administrator. SFTP must be enabled for the user's profile and system role.\n### Response:\n  The newly generated public/private key pair is returned.\n"
+      tags:
+      - userSshPublicKeys
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier (UUID) of the entity.
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserSshPublicKeysPostGenerateRequest'
+      responses:
+        '201':
+          description: The SSH key pair was generated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserGeneratedSshPublicKeyKey'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_PROFILE_SFTP_DISABLED, ERR_SYSTEM_ROLE_SFTP_DISABLED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_PROFILE_SFTP_DISABLED:
+                  summary: SFTP is not enabled for this profile
+                  description: SFTP is not enabled for this profile
+                  value:
+                    errors:
+                    - code: ERR_PROFILE_SFTP_DISABLED
+                      message: SFTP is not enabled for this profile
+                ERR_SYSTEM_ROLE_SFTP_DISABLED:
+                  summary: SFTP role is not enabled on server
+                  description: SFTP role is not enabled on server
+                  value:
+                    errors:
+                    - code: ERR_SYSTEM_ROLE_SFTP_DISABLED
+                      message: SFTP role is not enabled on server
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INVALID_PARAMETER, ERR_SSH_PUBLIC_KEY_EXISTS'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INVALID_PARAMETER:
+                  summary: Invalid Parameter Exception
+                  description: Invalid Parameter Exception
+                  value:
+                    errors:
+                    - code: ERR_INVALID_PARAMETER
+                      message: Invalid Parameter Exception
+                ERR_SSH_PUBLIC_KEY_EXISTS:
+                  summary: Same ssh public key name exists
+                  description: Same ssh public key name exists
+                  value:
+                    errors:
+                    - code: ERR_SSH_PUBLIC_KEY_EXISTS
+                      message: Same ssh public key name exists
+        '490':
+          description: Request blocked by WAF
+components:
+  schemas:
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    UserSshPublicKeysPostCreateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 50
+          description: The display name for the SSH public key (maximum 50 characters).
+        publicKey:
+          type: string
+          description: The SSH public key string to register.
+      required:
+      - name
+      - publicKey
+    UserSshPublicKeysPostGenerateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 50
+          description: The display name for the SSH public key (maximum 50 characters).
+        passphrase:
+          type: string
+          description: Optional passphrase to protect the generated private key.
+      required:
+      - name
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    AdminUserSshPublicKeyList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserSshPublicKey1'
+    UserSshPublicKey:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the SSH public key.
+        userId:
+          type: string
+        publicKey:
+          type: string
+          description: SSH public key string.
+        name:
+          type: string
+          description: Display name for the SSH public key.
+        active:
+          type: boolean
+          description: Indicates whether the SSH public key is active and can be used for authentication.
+        adminActive:
+          type: boolean
+          description: Indicates whether an administrator has enabled this SSH public key.
+    UserGeneratedSshPublicKeyKey:
+      type: object
+      properties:
+        privateKey:
+          type: string
+          description: Generated SSH private key.
+        publicKey:
+          type: string
+          description: Generated SSH public key.
+    UserSshPublicKeyList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserSshPublicKey'
+    UserSshPublicKey1:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the SSH public key.
+        userId:
+          type: string
+        publicKey:
+          type: string
+          description: SSH public key string.
+        name:
+          type: string
+          description: Display name for the SSH public key.
+        active:
+          type: boolean
+          description: Indicates whether the SSH public key is active and can be used for authentication.
+        adminActive:
+          type: boolean
+          description: Indicates whether an administrator has enabled this SSH public key.
+        deleted:
+          type: boolean
+          description: Indicates whether the SSH public key has been deleted.

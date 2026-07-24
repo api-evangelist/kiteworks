@@ -1,0 +1,954 @@
+openapi: 3.0.2
+info:
+  version: '28'
+  title: Kiteworks API Documentation activities system API
+tags:
+- name: system
+paths:
+  /rest/nodeHealth/status:
+    get:
+      summary: Get node health status for system monitoring
+      description: "### Description:\n  Retrieves node health status information for system components including MariaDB cluster status, required services status, memory usage, and system load average.\n### Precondition:\n  This endpoint is restricted by IP whitelist and rate limiting.\n### Response:\n  Returns the overall node health status.\n"
+      tags:
+      - system
+      responses:
+        '200':
+          description: Node health status returned successfully - all components are healthy.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeHealthStatusResponse'
+              example:
+                ok: 1
+        '503':
+          description: Service unavailable - one or more components are unhealthy.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeHealthStatusResponse'
+              example:
+                ok: 0
+        '490':
+          description: Request blocked by WAF
+        '500':
+          description: ERR_INTERNAL_SERVER_ERROR
+  /rest/system/epgdb/import/{id}:
+    post:
+      summary: Upload EPGDB backup chunk for database restore
+      description: Endpoint for uploading a chunk to an existing EPGDB backup upload session, identified by its session ID.
+      tags:
+      - system
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The upload session ID
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EpgdbImportRequest'
+      responses:
+        '200':
+          description: Successfully received the upload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EpgdbImportPost'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_DENIED, ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_DENIED:
+                  summary: Your access is denied.
+                  description: Your access is denied.
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_DENIED
+                      message: Your access is denied.
+                      redirectUrl: /login?code=3317
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INVALID_PARAMETER, ERR_FILE_TOO_LARGE'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INVALID_PARAMETER:
+                  summary: Invalid Parameter Exception
+                  description: Invalid Parameter Exception
+                  value:
+                    errors:
+                    - code: ERR_INVALID_PARAMETER
+                      message: Invalid Parameter Exception
+                ERR_FILE_TOO_LARGE:
+                  summary: Size of the file exceeds the allowed limit.
+                  description: Size of the file exceeds the allowed limit.
+                  value:
+                    errors:
+                    - code: ERR_FILE_TOO_LARGE
+                      message: Size of the file exceeds the allowed limit.
+        '503':
+          description: 'Service Unavailable<br /><br /><i>Possible error codes: </i>ERR_SESSION_LIMIT_REACHED, ERR_UPLOAD_CHUNK_FAILED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_SESSION_LIMIT_REACHED:
+                  summary: Session limit reached. Unable to create a new session.
+                  description: Session limit reached. Unable to create a new session.
+                  value:
+                    errors:
+                    - code: ERR_SESSION_LIMIT_REACHED
+                      message: Session limit reached. Unable to create a new session.
+                ERR_UPLOAD_CHUNK_FAILED:
+                  summary: Upload chunk failed.
+                  description: Upload chunk failed.
+                  value:
+                    errors:
+                    - code: ERR_UPLOAD_CHUNK_FAILED
+                      message: Upload chunk failed.
+        '507':
+          description: 'Insufficient Storage<br /><br /><i>Possible error codes: </i>ERR_INSUFFICIENT_DISK_SPACE'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INSUFFICIENT_DISK_SPACE:
+                  summary: Server does not have enough storage to process the upload.
+                  description: Server does not have enough storage to process the upload.
+                  value:
+                    errors:
+                    - code: ERR_INSUFFICIENT_DISK_SPACE
+                      message: Server does not have enough storage to process the upload.
+        '490':
+          description: Request blocked by WAF
+  /rest/system/epgdb/import:
+    post:
+      summary: Upload EPGDB backup for database restore
+      description: Endpoint for uploading an EPGDB backup for restoring the database. Starts a new upload session.
+      tags:
+      - system
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EpgdbImportRequest'
+      responses:
+        '200':
+          description: Successfully received the upload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EpgdbImportPost'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_DENIED, ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_DENIED:
+                  summary: Your access is denied.
+                  description: Your access is denied.
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_DENIED
+                      message: Your access is denied.
+                      redirectUrl: /login?code=3317
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INVALID_PARAMETER, ERR_FILE_TOO_LARGE'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INVALID_PARAMETER:
+                  summary: Invalid Parameter Exception
+                  description: Invalid Parameter Exception
+                  value:
+                    errors:
+                    - code: ERR_INVALID_PARAMETER
+                      message: Invalid Parameter Exception
+                ERR_FILE_TOO_LARGE:
+                  summary: Size of the file exceeds the allowed limit.
+                  description: Size of the file exceeds the allowed limit.
+                  value:
+                    errors:
+                    - code: ERR_FILE_TOO_LARGE
+                      message: Size of the file exceeds the allowed limit.
+        '503':
+          description: 'Service Unavailable<br /><br /><i>Possible error codes: </i>ERR_SESSION_LIMIT_REACHED, ERR_UPLOAD_CHUNK_FAILED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_SESSION_LIMIT_REACHED:
+                  summary: Session limit reached. Unable to create a new session.
+                  description: Session limit reached. Unable to create a new session.
+                  value:
+                    errors:
+                    - code: ERR_SESSION_LIMIT_REACHED
+                      message: Session limit reached. Unable to create a new session.
+                ERR_UPLOAD_CHUNK_FAILED:
+                  summary: Upload chunk failed.
+                  description: Upload chunk failed.
+                  value:
+                    errors:
+                    - code: ERR_UPLOAD_CHUNK_FAILED
+                      message: Upload chunk failed.
+        '507':
+          description: 'Insufficient Storage<br /><br /><i>Possible error codes: </i>ERR_INSUFFICIENT_DISK_SPACE'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INSUFFICIENT_DISK_SPACE:
+                  summary: Server does not have enough storage to process the upload.
+                  description: Server does not have enough storage to process the upload.
+                  value:
+                    errors:
+                    - code: ERR_INSUFFICIENT_DISK_SPACE
+                      message: Server does not have enough storage to process the upload.
+        '490':
+          description: Request blocked by WAF
+    get:
+      summary: Get EPGDB import status
+      description: Endpoint for polling the status of the import
+      tags:
+      - system
+      responses:
+        '200':
+          description: Successfully returned the import status
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_DENIED, ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_DENIED:
+                  summary: Your access is denied.
+                  description: Your access is denied.
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_DENIED
+                      message: Your access is denied.
+                      redirectUrl: /login?code=3317
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INVALID_PARAMETER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INVALID_PARAMETER:
+                  summary: Invalid Parameter Exception
+                  description: Invalid Parameter Exception
+                  value:
+                    errors:
+                    - code: ERR_INVALID_PARAMETER
+                      message: Invalid Parameter Exception
+        '490':
+          description: Request blocked by WAF
+    delete:
+      summary: Cancel active EPGDB import session
+      description: Endpoint for cancelling the current active import session
+      tags:
+      - system
+      responses:
+        '200':
+          description: Successfully deleted the session
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_DENIED, ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_DENIED:
+                  summary: Your access is denied.
+                  description: Your access is denied.
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_DENIED
+                      message: Your access is denied.
+                      redirectUrl: /login?code=3317
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+  /rest/system/epgdb/export/{filename}:
+    get:
+      summary: Download EPGDB export file
+      description: Get EPGDB export download
+      tags:
+      - system
+      parameters:
+      - in: path
+        name: filename
+        required: true
+        description: The name of the EPGDB export file to download.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: EPGDB export download
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_DENIED, ERR_ACCESS_USER, ERR_DB_BACKUP_FAILED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_DENIED:
+                  summary: Your access is denied.
+                  description: Your access is denied.
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_DENIED
+                      message: Your access is denied.
+                      redirectUrl: /login?code=3317
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_DB_BACKUP_FAILED:
+                  summary: Database backup failed due to an unexpected error
+                  description: Database backup failed due to an unexpected error
+                  value:
+                    errors:
+                    - code: ERR_DB_BACKUP_FAILED
+                      message: Database backup failed due to an unexpected error
+        '490':
+          description: Request blocked by WAF
+  /rest/system/epgdb/export:
+    post:
+      summary: Start EPGDB export
+      description: Start EPGDB export with precheck validation
+      tags:
+      - system
+      responses:
+        '200':
+          description: EPGDB export started successfully
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_DENIED, ERR_ACCESS_USER, ERR_JOB_IN_PROGRESS'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_DENIED:
+                  summary: Your access is denied.
+                  description: Your access is denied.
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_DENIED
+                      message: Your access is denied.
+                      redirectUrl: /login?code=3317
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_JOB_IN_PROGRESS:
+                  summary: The job is currently still in progress
+                  description: The job is currently still in progress
+                  value:
+                    errors:
+                    - code: ERR_JOB_IN_PROGRESS
+                      message: The job is currently still in progress
+        '404':
+          description: 'Not Found<br /><br /><i>Possible error codes: </i>ERR_EPGDB_NOT_FOUND'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_EPGDB_NOT_FOUND:
+                  summary: Failed to locate EPGDB
+                  description: Failed to locate EPGDB
+                  value:
+                    errors:
+                    - code: ERR_EPGDB_NOT_FOUND
+                      message: Failed to locate EPGDB
+        '507':
+          description: 'Insufficient Storage<br /><br /><i>Possible error codes: </i>ERR_INSUFFICIENT_TMP_STORAGE'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INSUFFICIENT_TMP_STORAGE:
+                  summary: Insufficient storage space in the Tmp storage partition
+                  description: Insufficient storage space in the Tmp storage partition
+                  value:
+                    errors:
+                    - code: ERR_INSUFFICIENT_TMP_STORAGE
+                      message: Insufficient storage space in the Tmp storage partition
+        '490':
+          description: Request blocked by WAF
+    get:
+      summary: Get EPGDB export status
+      description: Get EPGDB export status
+      tags:
+      - system
+      responses:
+        '200':
+          description: EPGDB export status returned successfully
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_DENIED, ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_DENIED:
+                  summary: Your access is denied.
+                  description: Your access is denied.
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_DENIED
+                      message: Your access is denied.
+                      redirectUrl: /login?code=3317
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+    delete:
+      summary: Perform cleanup for EPGDB export
+      description: Perform cleanup for EPGDB export
+      tags:
+      - system
+      responses:
+        '200':
+          description: Delete EPGDB export
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_DENIED, ERR_ACCESS_USER, ERR_JOB_IN_PROGRESS'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_DENIED:
+                  summary: Your access is denied.
+                  description: Your access is denied.
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_DENIED
+                      message: Your access is denied.
+                      redirectUrl: /login?code=3317
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_JOB_IN_PROGRESS:
+                  summary: The job is currently still in progress
+                  description: The job is currently still in progress
+                  value:
+                    errors:
+                    - code: ERR_JOB_IN_PROGRESS
+                      message: The job is currently still in progress
+        '490':
+          description: Request blocked by WAF
+  /rest/nodeHealth/{node_id}/metrics/{metric_name}:
+    get:
+      summary: Get node health metrics for specified metric type
+      description: "### Description:\n  Retrieves health metrics for database, web requests, job queue, SFTP, system resources, or all metrics.\n### Precondition:\n  The user must be an administrator with access to `System Services`.\n### Response:\n  Returns the list of metrics for the specified metric type.\n"
+      tags:
+      - system
+      parameters:
+      - in: path
+        name: node_id
+        required: true
+        schema:
+          type: string
+        description: Kiteworks node id to retrieve metrics from.
+      - in: path
+        name: metric_name
+        required: true
+        schema:
+          type: string
+          enum:
+          - kwDatabase
+          - webRequests
+          - jobqueued
+          - sftp
+          - systemResources
+          - diskSpace
+          - mailQueues
+          - allMetrics
+        description: The type of metric to retrieve.
+      responses:
+        '200':
+          description: The node health metrics have been successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeHealthMetricResponse'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INVALID_PARAMETER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INVALID_PARAMETER:
+                  summary: Invalid Parameter Exception
+                  description: Invalid Parameter Exception
+                  value:
+                    errors:
+                    - code: ERR_INVALID_PARAMETER
+                      message: Invalid Parameter Exception
+        '500':
+          description: 'Internal Server Error<br /><br /><i>Possible error codes: </i>ERR_INTERNAL_SERVER_ERROR'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INTERNAL_SERVER_ERROR:
+                  summary: Internal Server Error
+                  description: Internal Server Error
+                  value:
+                    errors:
+                    - code: ERR_INTERNAL_SERVER_ERROR
+                      message: Internal Server Error
+        '490':
+          description: Request blocked by WAF
+components:
+  schemas:
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    WebRequestsMetric:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - unknown
+          - abnormal
+          - warn
+          - running
+          - stopped
+          description: The Nginx service status.<br>`active` – Service is running.<br>`inactive` – Service is not running.
+        active_connections:
+          type: integer
+          description: Real-time number of active connections to the local Nginx instance.
+        reading:
+          type: integer
+          description: Real-time number of connections currently reading the request header.
+        writing:
+          type: integer
+          description: Real-time number of connections currently writing a response.
+        connection_efficiency:
+          type: number
+          description: Ratio of handled connections to accepted connections.
+        avg_requests_per_connection:
+          type: number
+          description: Ratio of total requests to handled connections.
+    NodeHealthMetricResponse:
+      type: object
+      properties:
+        kw_database:
+          nullable: true
+          description: Database health metrics. Present when `metric_name` is `kwDatabase` or `allMetrics`.
+          allOf:
+          - $ref: '#/components/schemas/KwDatabaseMetric'
+        web_requests:
+          nullable: true
+          description: Web request health metrics. Present when `metric_name` is `webRequests` or `allMetrics`.
+          allOf:
+          - $ref: '#/components/schemas/WebRequestsMetric'
+        jobqueued:
+          nullable: true
+          description: Job queue health metrics. Present when `metric_name` is `jobqueued` or `allMetrics`.
+          allOf:
+          - $ref: '#/components/schemas/JobQueuedMetric'
+        sftp:
+          nullable: true
+          description: SFTP health metrics. Present when `metric_name` is `sftp` or `allMetrics`.
+          allOf:
+          - $ref: '#/components/schemas/SftpMetric'
+        system_resources:
+          nullable: true
+          description: System resource metrics. Present when `metric_name` is `systemResources` or `allMetrics`.
+          allOf:
+          - $ref: '#/components/schemas/SystemResourcesMetric'
+    EpgdbImportPost:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Upload session ID
+    NodeHealthStatusResponse:
+      type: object
+      properties:
+        ok:
+          type: integer
+          description: Overall health status indicator. `1` means all components are healthy; `0` means one or more components are unhealthy.
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    JobQueuedMetric:
+      type: object
+      properties:
+        service_status:
+          type: string
+          enum:
+          - unknown
+          - abnormal
+          - warn
+          - running
+          - stopped
+          description: The job queue service status.<br>`active` – Service is running.<br>`inactive` – Service is not running.
+        memory_usage_mb:
+          type: integer
+          description: RSS memory usage of the job queue service in MB.
+        queue_jq_acfs_conv:
+          type: integer
+          description: Number of jobs in the file preview queue.
+        queue_jq_scan:
+          type: integer
+          description: Number of jobs in the antivirus scan queue.
+        queue_jq_acfs:
+          type: integer
+          description: Number of fingerprint jobs queued to be executed on the ACFS node.
+        current_queued_job_count:
+          type: integer
+          description: Real-time number of jobs currently waiting in the queue.
+        current_working_job_count:
+          type: integer
+          description: Real-time number of jobs currently being processed.
+        current_failed_job_count:
+          type: integer
+          description: Real-time number of jobs that have failed.
+    SftpMetric:
+      type: object
+      properties:
+        active_connection_count:
+          type: integer
+          description: Number of active SFTP connections.
+        memory_usage_mb:
+          type: integer
+          description: Total RSS memory usage by SFTP processes in MB.
+    EpgdbImportRequest:
+      type: object
+      properties:
+        filename:
+          type: string
+          description: The filename of the EPGDB backup file being uploaded.
+      required:
+      - filename
+    KwDatabaseMetric:
+      type: object
+      properties:
+        service_status:
+          type: string
+          enum:
+          - unknown
+          - abnormal
+          - warn
+          - running
+          - stopped
+          description: The MariaDB service status.<br>`active` – Service is running.<br>`inactive` – Service is not running.
+        active_connection_count:
+          type: integer
+          description: Real-time number of active database connections.
+        wsrep_cluster_status:
+          type: string
+          description: Galera cluster status indicating whether this node is the primary component.
+        wsrep_cluster_size:
+          type: integer
+          description: Number of healthy nodes in the Galera cluster.
+        wsrep_local_state_comment:
+          type: string
+          description: Galera local state indicating readiness to accept read/write requests. `Synced` is the healthy value.
+        memory_usage_mb:
+          type: integer
+          description: Real-time RSS memory usage of the MariaDB service in MB.
+        cpu_usage_percentage:
+          type: number
+          description: Real-time CPU usage percentage by the MariaDB service.
+        db_partition_free_mb:
+          type: integer
+          description: Free space available on the database partition in MB.
+        db_partition_used_mb:
+          type: integer
+          description: Used space on the database partition in MB.
+    SystemResourcesMetric:
+      type: object
+      properties:
+        total_memory_usage_mb:
+          type: integer
+          description: Total system RSS memory usage in MB.
+        total_swap_usage_mb:
+          type: integer
+          description: Total system swap usage in MB.
+        total_cpu_usage_percent:
+          type: number
+          description: Total system CPU usage as a percentage.
+        system_load_average_1min:
+          type: number
+          description: System load average over the last 1 minute.
+        system_load_average_5min:
+          type: number
+          description: System load average over the last 5 minutes.
+        system_load_average_15min:
+          type: number
+          description: System load average over the last 15 minutes.

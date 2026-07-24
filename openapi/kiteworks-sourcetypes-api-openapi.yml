@@ -1,0 +1,106 @@
+openapi: 3.0.2
+info:
+  version: '28'
+  title: Kiteworks API Documentation activities sourceTypes API
+tags:
+- name: sourceTypes
+paths:
+  /rest/sourceTypes:
+    get:
+      tags:
+      - sourceTypes
+      summary: List all ECM source types
+      description: Returns a list of available ECM source types, including each type's name and whether users can configure sources of that type.
+      responses:
+        '200':
+          description: List of ECM source types retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SourceType'
+              examples:
+                SourceTypeList:
+                  summary: List of available ECM source types
+                  value:
+                    data:
+                    - id: 1
+                      name: SharePoint
+                      userCanSet: true
+                    - id: 2
+                      name: OneDrive
+                      userCanSet: true
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: mode
+        description: Filter source types by mode flag.
+        schema:
+          type: boolean
+      - in: query
+        name: orderBy
+        description: Sorting options
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - id:asc
+          - id:desc
+          - name:asc
+          - name:desc
+  /rest/sourceTypes/{id}:
+    get:
+      tags:
+      - sourceTypes
+      summary: Returns requested ECM source type
+      description: Returns the details of the specified ECM source type, including its name and whether users can configure sources of that type.
+      responses:
+        '200':
+          description: ECM source type details retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceType'
+              examples:
+                SourceTypeInfo:
+                  summary: Details of a single ECM source type
+                  value:
+                    id: 1
+                    name: SharePoint
+                    userCanSet: true
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the sourceType to be retrieved
+        required: true
+        schema:
+          type: integer
+components:
+  schemas:
+    SourceType:
+      description: Class SourceType
+      properties:
+        id:
+          description: Unique identifier of Source type
+          type: integer
+        name:
+          description: Display name of the source type
+          type: string
+        userCanSet:
+          description: Indicates whether the user can set this source type
+          type: boolean
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string

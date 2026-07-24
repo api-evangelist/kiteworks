@@ -1,0 +1,4291 @@
+openapi: 3.0.2
+info:
+  version: '28'
+  title: Kiteworks API Documentation activities mail API
+tags:
+- name: mail
+paths:
+  /rest/mail:
+    get:
+      summary: Get messages in mail folders
+      description: "### Description:\n  Gets a list of messages from the current user's mailbox folders: Inbox, Sent & Tracked, Drafts, Trash, and Outbox. Each result includes the email ID, sent date, and send status.\n### Precondition:\n  None.\n### Response:\n  Returns the list of messages across the user's mail folders.\n### Sorting:\n  Sort string syntax `FIELD_NAME:ORDER`.\n\n  ORDER can be `asc` or `desc`.\n### Sorting options:\n  | FIELD_NAME | Description              |\n  |------------|--------------------------|\n  | id         | The mail ID              |\n  | date       | The date the mail was sent |\n  | status     | The current mail status  |\n"
+      tags:
+      - mail
+      parameters:
+      - in: query
+        name: returnEntity
+        required: false
+        description: If true, includes the entity in the response body.
+        schema:
+          type: boolean
+      - in: query
+        name: with
+        required: false
+        description: Specifies additional fields to include in the response.
+        schema:
+          type: string
+      - in: query
+        name: mode
+        required: false
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - compact
+          - full_no_links
+          - full_with_links
+          - full
+      - in: query
+        name: senderId
+        required: false
+        description: Unique identifier of the user who sent the email.
+        schema:
+          type: string
+      - in: query
+        name: senderId:in
+        required: false
+        explode: true
+        style: form
+        description: Unique identifier of the user who sent the email. Search for results that match any of the specified values of this parameter. (Recommended request size <= 100)
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: isRecipient
+        required: false
+        description: Filter results to include only emails where the current user is a recipient.
+        schema:
+          type: boolean
+      - in: query
+        name: read
+        required: false
+        description: Filter results based on whether the email has been read by the current user.
+        schema:
+          type: boolean
+      - in: query
+        name: date
+        required: false
+        description: Filter results by the email creation date.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: date:gt
+        required: false
+        description: Filter emails created after the specified date.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: date:gte
+        required: false
+        description: Filter emails created on or after the specified date.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: date:lt
+        required: false
+        description: Filter emails created before the specified date.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: date:lte
+        required: false
+        description: Filter emails created on or before the specified date.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified_date
+        required: false
+        description: Filter emails by the last modified date of the email.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified_date:gt
+        required: false
+        description: Filter emails modified after the specified date.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified_date:gte
+        required: false
+        description: Filter emails modified on or after the specified date.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified_date:lt
+        required: false
+        description: Filter emails modified before the specified date.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified_date:lte
+        required: false
+        description: Filter emails modified on or before the specified date.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: deleted
+        required: false
+        description: Indicates whether the email has been deleted.
+        schema:
+          type: boolean
+      - in: query
+        name: emailPackageId
+        required: false
+        description: Filter results by the unique identifier of the email package.
+        schema:
+          type: string
+      - in: query
+        name: emailPackageId:in
+        required: false
+        explode: true
+        style: form
+        description: Filter results by email package identifiers. Matches any of the specified values.
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: templateId
+        required: false
+        description: Filter results by the unique identifier of the email template.
+        schema:
+          type: integer
+      - in: query
+        name: templateId:in
+        required: false
+        explode: true
+        style: form
+        description: Filter results by email template identifiers. Matches any of the specified values.
+        schema:
+          type: array
+          items:
+            type: integer
+      - in: query
+        name: status
+        required: false
+        explode: true
+        style: form
+        description: Filter results by email status. Accepts a comma-separated list of values.<br>`sent` – Successfully delivered to recipients.<br>`draft` – Saved but not yet sent.<br>`queued` – Waiting to be sent.<br>`error` – Failed to send.<br>`self_send` – Sent only to the sender (self-copy only).<br>`pending_review` – Awaiting DLP or admin approval.<br>`denied` – Rejected by a DLP or admin policy.
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - sent
+            - draft
+            - queued
+            - error
+            - self_send
+            - pending_review
+            - denied
+      - in: query
+        name: isPreview
+        required: false
+        description: Filter results to include only preview emails if set to true.
+        schema:
+          type: boolean
+      - in: query
+        name: isUserSent
+        required: false
+        description: Filter results to include only emails sent by the user if set to true.
+        schema:
+          type: boolean
+      - in: query
+        name: bucket
+        required: false
+        description: Filter results to emails in the specified mailbox bucket.<br>`inbox` – Received emails.<br>`draft` – Unsent draft emails.<br>`outgoing` – Emails queued or in progress.<br>`sent` – Successfully sent emails.<br>`trash` – Deleted emails.
+        schema:
+          type: string
+          enum:
+          - inbox
+          - draft
+          - outgoing
+          - sent
+          - trash
+      - in: query
+        name: returnCustomWebForm
+        required: false
+        description: Includes emails with custom web forms in the results.
+        schema:
+          type: boolean
+      - in: query
+        name: customWebFormOnly
+        required: false
+        description: Filter results to only include emails with custom web forms.
+        schema:
+          type: boolean
+      - in: query
+        name: trackingOnly
+        required: false
+        description: Filter results to only include emails with tracking access.
+        schema:
+          type: boolean
+      - in: query
+        name: approvalRequestOnly
+        required: false
+        description: Filter results to only include emails with approval requests.
+        schema:
+          type: boolean
+      - in: query
+        name: webFormId
+        required: false
+        description: Filter results by unique identifier of the email web form.
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: orderBy
+        required: false
+        description: 'Sort order for the results. Default is `id:asc`.<br>Allowed values: `id:asc`, `id:desc`, `date:asc`, `date:desc`, `status:asc`, `status:desc`.'
+        schema:
+          type: string
+          enum:
+          - id:asc
+          - id:desc
+          - date:asc
+          - date:desc
+          - status:asc
+          - status:desc
+      - in: query
+        name: sharedMailboxId
+        required: false
+        description: Unique identifier of the shared mailbox. Filters results to emails belonging to the shared mailbox.
+        schema:
+          type: string
+      - in: query
+        name: limit
+        required: false
+        description: Range limit.
+        schema:
+          type: integer
+          minimum: 1
+      - in: query
+        name: offset
+        required: false
+        description: Range offset.
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          description: Messages returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mails'
+        '490':
+          description: Request blocked by WAF
+    delete:
+      summary: Delete draft messages
+      description: "### Description:\n  Using email IDs, deletes up to 100 draft messages from the current user's Drafts folder.\n### Precondition:\n  None.\n### Response:\n  Deletes the specified draft messages from the Drafts folder.\n"
+      tags:
+      - mail
+      parameters:
+      - in: query
+        name: emailId:in
+        required: true
+        explode: true
+        style: form
+        description: Comma-separated list of email IDs to be processed.
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: partialSuccess
+        required: false
+        description: If set to `true`, the operation will continue for the valid items even if some items result in failure.
+        schema:
+          type: boolean
+      responses:
+        '204':
+          description: Email messages deleted successfully.
+        '207':
+          description: Some email messages were deleted successfully while others failed.
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_NOT_SENDER, ERR_ACCESS_USER, ERR_ENTITY_EMAIL_IS_SENT, ERR_PROFILE_MAIL_DISABLED, ERR_ENTITY_DELETED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_NOT_SENDER:
+                  summary: Authenticated user is not the sender of the specified email
+                  description: Authenticated user is not the sender of the specified email
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_NOT_SENDER
+                      message: Authenticated user is not the sender of the specified email
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_ENTITY_EMAIL_IS_SENT:
+                  summary: Email can no longer be deleted
+                  description: Email can no longer be deleted
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_EMAIL_IS_SENT
+                      message: Email can no longer be deleted
+                ERR_PROFILE_MAIL_DISABLED:
+                  summary: User's profile has no mail access
+                  description: User's profile has no mail access
+                  value:
+                    errors:
+                    - code: ERR_PROFILE_MAIL_DISABLED
+                      message: User's profile has no mail access
+                ERR_ENTITY_DELETED:
+                  summary: Entity is deleted
+                  description: Entity is deleted
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_DELETED
+                      message: Entity is deleted
+        '490':
+          description: Request blocked by WAF
+  /rest/mail/actions/counters:
+    get:
+      summary: Get message counts for mail folders
+      description: "### Description:\n  Gets the number of messages in each of the current user's mailbox folders: Inbox, Sent & Tracked, Drafts, Trash, and Outbox.\n### Precondition:\n  None.\n### Response:\n  Returns the message count for each mail folder.\n"
+      tags:
+      - mail
+      parameters:
+      - in: query
+        name: returnCustomWebForm
+        required: false
+        description: Indicates whether to include emails with custom web forms in the result.
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Message counts returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MailCounters'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '490':
+          description: Request blocked by WAF
+  /rest/mail/actions/deletePermanent:
+    patch:
+      summary: Permanently delete messages
+      description: "### Description:\n  Using email IDs, permanently deletes messages from the current user's Inbox and Sent folders. Depending on the system retention policy, messages may be recoverable until they are permanently purged by the system.\n### Preconditions:\n  Must be the sender or a recipient of the messages.\n### Response:\n  Returns a full or partial success response indicating which messages were permanently deleted.\n"
+      tags:
+      - mail
+      parameters:
+      - in: query
+        name: emailId:in
+        required: true
+        explode: true
+        style: form
+        description: Comma-separated list of email IDs to be processed.
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: partialSuccess
+        required: false
+        description: If set to `true`, the operation will continue for the valid items even if some items result in failure.
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Messages permanently deleted successfully.
+        '207':
+          description: Partially successful — some messages could not be permanently deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkOperationInteger'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_ENTITY_NOT_DELETED, ERR_ENTITY_EMAIL_IS_NOT_COMPLETED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_ENTITY_NOT_DELETED:
+                  summary: Entity is not deleted
+                  description: Entity is not deleted
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_NOT_DELETED
+                      message: Entity is not deleted
+                ERR_ENTITY_EMAIL_IS_NOT_COMPLETED:
+                  summary: Email is not completed
+                  description: Email is not completed
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_EMAIL_IS_NOT_COMPLETED
+                      message: Email is not completed
+        '410':
+          description: 'Gone<br /><br /><i>Possible error codes: </i>ERR_ENTITY_DELETED_PERMANENTLY'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ENTITY_DELETED_PERMANENTLY:
+                  summary: Entity is deleted permanently
+                  description: Entity is deleted permanently
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_DELETED_PERMANENTLY
+                      message: Entity is deleted permanently
+        '490':
+          description: Request blocked by WAF
+  /rest/mail/actions/distributionList:
+    get:
+      tags:
+      - mail
+      summary: Expand a distribution list
+      description: Resolves a distribution list email address and returns its members.
+      responses:
+        '200':
+          description: Returns the distribution list with its resolved member email addresses.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DistributionList'
+              examples:
+                DistributionListExpanded:
+                  summary: A resolved distribution list
+                  value:
+                    isDistributionList: true
+                    members:
+                    - engineering@example.com
+                    - design@example.com
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: email
+        description: The email address to check or expand.
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: expand
+        description: Indicates whether to include the email addresses of distribution list members.
+        schema:
+          type: boolean
+      - in: query
+        name: emailId
+        description: If provided, the distribution list will include only members who have received this specific email.
+        schema:
+          type: string
+  /rest/mail/actions/read:
+    patch:
+      summary: Mark messages as read
+      description: "### Description:\n  Using email IDs, marks the specified messages as read in the current user's Inbox.\n### Preconditions:\n  Must be the sender or a recipient of the messages.\n### Response:\n  Returns a full or partial success response indicating which messages were marked as read.\n"
+      tags:
+      - mail
+      parameters:
+      - in: query
+        name: emailId:in
+        required: true
+        explode: true
+        style: form
+        description: Comma-separated list of email IDs to be processed.
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: partialSuccess
+        required: false
+        description: If set to `true`, the operation will continue for the valid items even if some items result in failure.
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Email messages marked as read successfully.
+        '207':
+          description: Partially successful — some messages could not be marked as read.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkOperationInteger'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_ENTITY_DELETED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_ENTITY_DELETED:
+                  summary: Entity is deleted
+                  description: Entity is deleted
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_DELETED
+                      message: Entity is deleted
+        '490':
+          description: Request blocked by WAF
+  /rest/mail/actions/recover:
+    patch:
+      summary: Recover deleted messages
+      description: "### Description:\n  Using email IDs, recovers deleted messages from the current user's Trash folder and returns them to the Inbox.\n### Preconditions:\n  Must be the sender or a recipient of the messages.\n### Response:\n  Returns a full or partial success response indicating which messages were recovered to the Inbox.\n"
+      tags:
+      - mail
+      parameters:
+      - in: query
+        name: emailId:in
+        required: true
+        explode: true
+        style: form
+        description: Comma-separated list of email IDs to be processed.
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: partialSuccess
+        required: false
+        description: If set to `true`, the operation will continue for the valid items even if some items result in failure.
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Messages recovered successfully.
+        '207':
+          description: Partially successful — some messages could not be recovered.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkOperationInteger'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_ENTITY_NOT_DELETED, ERR_ENTITY_EMAIL_IS_NOT_COMPLETED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_ENTITY_NOT_DELETED:
+                  summary: Entity is not deleted
+                  description: Entity is not deleted
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_NOT_DELETED
+                      message: Entity is not deleted
+                ERR_ENTITY_EMAIL_IS_NOT_COMPLETED:
+                  summary: Email is not completed
+                  description: Email is not completed
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_EMAIL_IS_NOT_COMPLETED
+                      message: Email is not completed
+        '410':
+          description: 'Gone<br /><br /><i>Possible error codes: </i>ERR_ENTITY_DELETED_PERMANENTLY'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ENTITY_DELETED_PERMANENTLY:
+                  summary: Entity is deleted permanently
+                  description: Entity is deleted permanently
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_DELETED_PERMANENTLY
+                      message: Entity is deleted permanently
+        '490':
+          description: Request blocked by WAF
+  /rest/mail/actions/sendFile:
+    post:
+      summary: Send files
+      description: "### Description:\n  Creates an email message and sends the specified file attachments through Kiteworks.\n### Precondition:\n  Must be assigned a user profile with permission to send mail.\n### Response:\n  Returns the created email and sends the file attachments to the specified recipients.\n"
+      tags:
+      - mail
+      parameters:
+      - in: query
+        name: returnEntity
+        required: false
+        description: If true, includes the entity in the response body.
+        schema:
+          type: boolean
+      - in: query
+        name: with
+        required: false
+        description: Specifies additional fields to include in the response.
+        schema:
+          type: string
+      - in: query
+        name: mode
+        required: false
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - compact
+          - full_no_links
+          - full_with_links
+          - full
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BaseSendMailPostRequest'
+      responses:
+        '201':
+          description: Email created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mail'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_ENTITY_DELETED, ERR_ENTITY_IS_DELETED_ATTACHMENT, ERR_ENTITY_IS_SECURE_FOLDER, ERR_INPUT_EMAIL_WITH_NO_RECIPIENTS_NOT_ALLOWED, ERR_INPUT_SECURE_BODY_WITH_NO_AUTH_NOT_ALLOWED, ERR_PROFILE_INCLUDE_FINGERPRINT_DISABLED, ERR_PROFILE_INCLUDE_FINGERPRINT_ENABLED, ERR_PROFILE_RETURN_RECEIPT_DISABLED, ERR_PROFILE_RETURN_RECEIPT_ENABLED, ERR_PROFILE_SECURE_EMAIL_DISABLED, ERR_PROFILE_SELF_COPY_DISABLED, ERR_PROFILE_SELF_COPY_ENABLED, ERR_PROFILE_SEND_FILE_EXTERNAL_DISABLED, ERR_USER_HAS_NO_USER_TYPE, ERR_USER_TYPE_NO_ACCESS'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_ENTITY_DELETED:
+                  summary: Entity is deleted
+                  description: Entity is deleted
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_DELETED
+                      message: Entity is deleted
+                ERR_ENTITY_IS_DELETED_ATTACHMENT:
+                  summary: Requested Attachment(s) is deleted
+                  description: Requested Attachment(s) is deleted
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_IS_DELETED_ATTACHMENT
+                      message: Requested Attachment(s) is deleted
+                ERR_ENTITY_IS_SECURE_FOLDER:
+                  summary: Operation not permitted on restricted Folder.
+                  description: Operation not permitted on restricted Folder.
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_IS_SECURE_FOLDER
+                      message: Operation not permitted on restricted Folder.
+                ERR_INPUT_EMAIL_WITH_NO_RECIPIENTS_NOT_ALLOWED:
+                  summary: The mail cannot be sent without any recipients
+                  description: The mail cannot be sent without any recipients
+                  value:
+                    errors:
+                    - code: ERR_INPUT_EMAIL_WITH_NO_RECIPIENTS_NOT_ALLOWED
+                      message: The mail cannot be sent without any recipients
+                ERR_INPUT_SECURE_BODY_WITH_NO_AUTH_NOT_ALLOWED:
+                  summary: Email message body cannot be secured if email does not require authentication
+                  description: Email message body cannot be secured if email does not require authentication
+                  value:
+                    errors:
+                    - code: ERR_INPUT_SECURE_BODY_WITH_NO_AUTH_NOT_ALLOWED
+                      message: Email message body cannot be secured if email does not require authentication
+                ERR_PROFILE_INCLUDE_FINGERPRINT_DISABLED:
+                  summary: This profile is not allowed to include fingerprint with sent files
+                  description: This profile is not allowed to include fingerprint with sent files
+                  value:
+                    errors:
+                    - code: ERR_PROFILE_INCLUDE_FINGERPRINT_DISABLED
+                      message: This profile is not allowed to include fingerprint with sent files
+                ERR_PROFILE_INCLUDE_FINGERPRINT_ENABLED:
+                  summary: This profile cannot disable including fingerprint with sent files
+                  description: This profile cannot disable including fingerprint with sent files
+                  value:
+                    errors:
+                    - code: ERR_PROFILE_INCLUDE_FINGERPRINT_ENABLED
+                      message: This profile cannot disable including fingerprint with sent files
+                ERR_PROFILE_RETURN_RECEIPT_DISABLED:
+                  summary: This profile is not allowed to set receipt notification with sent files
+                  description: This profile is not allowed to set receipt notification with sent files
+                  value:
+                    errors:
+                    - code: ERR_PROFILE_RETURN_RECEIPT_DISABLED
+                      message: This profile is not allowed to set receipt notification with sent files
+                ERR_PROFILE_RETURN_RECEIPT_ENABLED:
+                  summary: This profile cannot disable return receipt notification with sent files
+                  description: This profile cannot disable return receipt notification with sent files
+                  value:
+                    errors:
+                    - code: ERR_PROFILE_RETURN_RECEIPT_ENABLED
+                      message: This profile cannot disable return receipt notification with sent files
+                ERR_PROFILE_SECURE_EMAIL_DISABLED:
+                  summary: This profile is not allowed to send secure emails
+                  description: This profile is not allowed to send secure emails
+                  value:
+                    errors:
+                    - code: ERR_PROFILE_SECURE_EMAIL_DISABLED
+                      message: This profile is not allowed to send secure emails
+                ERR_PROFILE_SELF_COPY_DISABLED:
+                  summary: This profile is not allowed to send copy to self
+                  description: This profile is not allowed to send copy to self
+                  value:
+                    errors:
+                    - code: ERR_PROFILE_SELF_COPY_DISABLED
+                      message: This profile is not allowed to send copy to self
+                ERR_PROFILE_SELF_COPY_ENABLED:
+                  summary: Cannot disable self copy for this profile
+                  description: Cannot disable self copy for this profile
+                  value:
+                    errors:
+                    - code: ERR_PROFILE_SELF_COPY_ENABLED
+                      message: Cannot disable self copy for this profile
+                ERR_PROFILE_SEND_FILE_EXTERNAL_DISABLED:
+                  summary: This profile is not allowed to send files to external users
+                  description: This profile is not allowed to send files to external users
+                  value:
+                    errors:
+                    - code: ERR_PROFILE_SEND_FILE_EXTERNAL_DISABLED
+                      message: This profile is not allowed to send files to external users
+                ERR_USER_HAS_NO_USER_TYPE:
+                  summary: User has no profile
+                  description: User has no profile
+                  value:
+                    errors:
+                    - code: ERR_USER_HAS_NO_USER_TYPE
+                      message: User has no profile
+                ERR_USER_TYPE_NO_ACCESS:
+                  summary: Permission denied
+                  description: Permission denied
+                  value:
+                    errors:
+                    - code: ERR_USER_TYPE_NO_ACCESS
+                      message: Permission denied
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_EXCEEDS_MAX_VALUE, ERR_INPUT_HYPERLINK, ERR_INPUT_INVALID_DATE, ERR_INPUT_PAST_DATE, ERR_INVALID_PARAMETER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_EXCEEDS_MAX_VALUE:
+                  summary: Field value exceeds maximum allowed value
+                  description: Field value exceeds maximum allowed value
+                  value:
+                    errors:
+                    - code: ERR_INPUT_EXCEEDS_MAX_VALUE
+                      message: Field value exceeds maximum allowed value
+                ERR_INPUT_HYPERLINK:
+                  summary: Not allowed hyperlink domain. Hyperlink domain should not different from anchored text domain.
+                  description: Not allowed hyperlink domain. Hyperlink domain should not different from anchored text domain.
+                  value:
+                    errors:
+                    - code: ERR_INPUT_HYPERLINK
+                      message: Not allowed hyperlink domain. Hyperlink domain should not different from anchored text domain.
+                ERR_INPUT_INVALID_DATE:
+                  summary: The input is not a valid date.
+                  description: The input is not a valid date.
+                  value:
+                    errors:
+                    - code: ERR_INPUT_INVALID_DATE
+                      message: The input is not a valid date.
+                ERR_INPUT_PAST_DATE:
+                  summary: Field value should be future date
+                  description: Field value should be future date
+                  value:
+                    errors:
+                    - code: ERR_INPUT_PAST_DATE
+                      message: Field value should be future date
+                ERR_INVALID_PARAMETER:
+                  summary: Invalid Parameter Exception
+                  description: Invalid Parameter Exception
+                  value:
+                    errors:
+                    - code: ERR_INVALID_PARAMETER
+                      message: Invalid Parameter Exception
+        '490':
+          description: Request blocked by WAF
+  /rest/mail/actions/trash:
+    patch:
+      summary: Move messages to Trash
+      description: "### Description:\n  Using email IDs, moves messages from the current user's Inbox and Sent folders to the Trash folder.\n### Preconditions:\n  Must be the sender or a recipient of the messages.\n### Response:\n  Returns a full or partial success response indicating which messages were moved to Trash.\n"
+      tags:
+      - mail
+      parameters:
+      - in: query
+        name: emailId:in
+        required: true
+        explode: true
+        style: form
+        description: Comma-separated list of email IDs to be processed.
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: partialSuccess
+        required: false
+        description: If set to `true`, the operation will continue for the valid items even if some items result in failure.
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Messages moved to Trash successfully.
+        '207':
+          description: Partially successful — some messages could not be moved to Trash.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkOperationInteger'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_ENTITY_DELETED, ERR_ENTITY_EMAIL_IS_NOT_COMPLETED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_ENTITY_DELETED:
+                  summary: Entity is deleted
+                  description: Entity is deleted
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_DELETED
+                      message: Entity is deleted
+                ERR_ENTITY_EMAIL_IS_NOT_COMPLETED:
+                  summary: Email is not completed
+                  description: Email is not completed
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_EMAIL_IS_NOT_COMPLETED
+                      message: Email is not completed
+        '490':
+          description: Request blocked by WAF
+  /rest/mail/actions/unread:
+    patch:
+      summary: Mark messages as unread
+      description: "### Description:\n  Using email IDs, marks the specified messages as unread in the current user's Inbox.\n### Preconditions:\n  Must be the sender or a recipient of the messages.\n### Response:\n  Returns a full or partial success response indicating which messages were marked as unread.\n"
+      tags:
+      - mail
+      parameters:
+      - in: query
+        name: emailId:in
+        required: true
+        explode: true
+        style: form
+        description: Comma-separated list of email IDs to be processed.
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: partialSuccess
+        required: false
+        description: If set to `true`, the operation will continue for the valid items even if some items result in failure.
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Email messages marked as unread successfully.
+        '207':
+          description: Partially successful — some messages could not be marked as unread.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkOperationInteger'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_ENTITY_DELETED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_ENTITY_DELETED:
+                  summary: Entity is deleted
+                  description: Entity is deleted
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_DELETED
+                      message: Entity is deleted
+        '490':
+          description: Request blocked by WAF
+  /rest/mail/{emailId}/attachments/actions/zip:
+    get:
+      tags:
+      - mail
+      summary: Download email attachments in ZIP format
+      description: Using email IDs, downloads a set of email attachments in ZIP format from your Inbox and Sent folders.
+      responses:
+        '200':
+          description: Returns the selected email attachments as a ZIP archive.
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: emailId
+        description: The unique identifier of the email for downloading attachments as a ZIP file.
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: attachmentId:in
+        description: The unique identifier of the attachment.. Search for results that match any of the specified values for this parameter.
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: name
+        description: The name of the ZIP file.
+        schema:
+          type: string
+      - in: query
+        name: ref
+        description: The reference ID of the email (Mandatory if the email can be accessed without authentication).
+        schema:
+          type: string
+      - in: query
+        name: username
+        description: The email address of the user requesting the file.
+        schema:
+          type: string
+      - in: query
+        name: utcOffset
+        description: The user's timezone offset in seconds. For example, UTC+08:00 = 28800 seconds.
+        schema:
+          type: integer
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+  /rest/mail/{emailId}/attachments/actions/zipStatus:
+    get:
+      tags:
+      - mail
+      summary: Get email attachment security status
+      description: Using email IDs, gets the security scan results of email attachments in your Inbox and Sent folders, prior to downloading in ZIP format.
+      responses:
+        '200':
+          description: All specified attachments passed security checks and are safe to download. No content is returned.
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: emailId
+        description: The unique identifier of the email.
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: attachmentId:in
+        description: The unique identifier of the attachment.. Search for results that match any of the specified values for this parameter.
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: ref
+        description: The reference ID of the email (Mandatory if the email can be accessed without authentication).
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+  /rest/mail/{emailId}/attachments/report:
+    get:
+      tags:
+      - mail
+      summary: Get email attachment download report
+      description: Returns a download tracking report for the specified email, listing all recorded download and interaction events for its attachments.
+      responses:
+        '200':
+          description: Returns the download tracking report for the specified email.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AttachmentDownloadReport'
+              examples:
+                AttachmentReport:
+                  summary: Report with one download event
+                  value:
+                    downloads:
+                    - created_time: 1720000000
+                      event_name: download_email
+                      username: recipient@example.com
+                      successful: true
+                      withdrawn: false
+                      file_id: att12345abc67890de
+                      file_name: Q2_Report.pdf
+                    sent_time: 1719900000
+                    subject: Q2 Reports
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: emailId
+        description: The unique identifier of the email.
+        required: true
+        schema:
+          type: string
+  /rest/mail/{emailId}/attachments/reportCsv:
+    get:
+      tags:
+      - mail
+      summary: Export email attachment download report as CSV
+      description: Generates a download tracking report for the specified email and returns it as a CSV file.
+      responses:
+        '200':
+          description: Returns the download tracking report as a CSV file attachment.
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: emailId
+        description: The unique identifier of the email.
+        required: true
+        schema:
+          type: string
+  /rest/mail/{emailId}/attachments/{id}/content:
+    get:
+      tags:
+      - mail
+      summary: Download email attachment
+      description: Downloads the specified file attached to a message.
+      responses:
+        '200':
+          description: Returns the binary content of the attachment file. Responds with HTTP 206 Partial Content when a Range header is included in the request.
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: emailId
+        description: The unique identifier of the email containing the attachment.
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: id
+        description: The unique identifier of the attachment.
+        required: true
+        schema:
+          type: string
+      - in: header
+        name: Range
+        description: Range of bytes to download. e.g. `bytes=0-1024`
+        schema:
+          type: string
+      - in: query
+        name: ref
+        description: The reference code for the email. Required if the email can be accessed without authentication.
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+  /rest/mail/{emailId}/attachments/{id}/preview:
+    get:
+      tags:
+      - mail
+      summary: Get email attachment preview metadata
+      description: Gets file preview metadata about an email attachment, such as the permalink for previewing the file and if the file contains a watermark. Must be assigned the `view` permission for the file.
+      responses:
+        '200':
+          description: Returns the preview metadata for the specified attachment, including the URL to render the preview.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Preview'
+              examples:
+                AttachmentPreview:
+                  summary: Attachment with an available preview
+                  value:
+                    link: /preview/abc12345def67890ab
+                    viewUrl: https://<YOUR_INSTANCE_DOMAIN>/viewer/abc12345def67890ab
+                    status: Preview
+                    watermark: null
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: emailId
+        description: The unique identifier of the email containing the attachment.
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: id
+        description: The unique identifier of the attachment.
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: ref
+        description: The reference code for the email. Required if the email can be accessed without authentication.
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+  /rest/mail/{id}:
+    get:
+      summary: Get email metadata
+      description: "### Description:\n  Gets the metadata for a specified email message, including subject, sender, recipients, sent date, and attachment details.\n### Preconditions:\n  None.\n### Response:\n  Returns the email metadata.\n"
+      tags:
+      - mail
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier (UUID) of the email.
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: returnEntity
+        required: false
+        description: If true, includes the entity in the response body.
+        schema:
+          type: boolean
+      - in: query
+        name: with
+        required: false
+        description: Specifies additional fields to include in the response.
+        schema:
+          type: string
+      - in: query
+        name: mode
+        required: false
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - compact
+          - full_no_links
+          - full_with_links
+          - full
+      - in: query
+        name: ref
+        required: false
+        description: The reference ID of the email (Mandatory if the email can be accessed without authentication).
+        schema:
+          type: string
+      - in: query
+        name: print_flag
+        required: false
+        description: Indicates whether the user clicked to print the email.
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Email metadata returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mail'
+        '490':
+          description: Request blocked by WAF
+    delete:
+      summary: Delete a draft message
+      description: "### Description:\n  Deletes a single message from the current user's Drafts folder.\n### Preconditions:\n  None.\n### Response:\n  Removes the draft message from the Drafts folder.\n"
+      tags:
+      - mail
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier (UUID) of the email.
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '204':
+          description: Draft email deleted successfully.
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_NOT_SENDER, ERR_ACCESS_USER, ERR_ENTITY_EMAIL_IS_SENT, ERR_PROFILE_MAIL_DISABLED, ERR_ENTITY_DELETED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_NOT_SENDER:
+                  summary: Authenticated user is not the sender of the specified email
+                  description: Authenticated user is not the sender of the specified email
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_NOT_SENDER
+                      message: Authenticated user is not the sender of the specified email
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_ENTITY_EMAIL_IS_SENT:
+                  summary: Email can no longer be deleted
+                  description: Email can no longer be deleted
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_EMAIL_IS_SENT
+                      message: Email can no longer be deleted
+                ERR_PROFILE_MAIL_DISABLED:
+                  summary: User's profile has no mail access
+                  description: User's profile has no mail access
+                  value:
+                    errors:
+                    - code: ERR_PROFILE_MAIL_DISABLED
+                      message: User's profile has no mail access
+                ERR_ENTITY_DELETED:
+                  summary: Entity is deleted
+                  description: Entity is deleted
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_DELETED
+                      message: Entity is deleted
+        '490':
+          description: Request blocked by WAF
+  /rest/mail/{id}/actions/sendFile:
+    put:
+      summary: Update and send a draft message
+      description: "### Description:\n  Updates the content of an existing draft message and sends it to its recipients.\n### Precondition:\n  Must be assigned a user profile with permission to send mail.\n### Response:\n  Returns the updated email and sends the message to the specified recipients.\n"
+      tags:
+      - mail
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier (UUID) of the email.
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: returnEntity
+        required: false
+        description: If true, includes the entity in the response body.
+        schema:
+          type: boolean
+      - in: query
+        name: with
+        required: false
+        description: Specifies additional fields to include in the response.
+        schema:
+          type: string
+      - in: query
+        name: mode
+        required: false
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - compact
+          - full_no_links
+          - full_with_links
+          - full
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BaseSendMailPostRequest'
+      responses:
+        '200':
+          description: Draft email updated and sent successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mail'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_NOT_SENDER, ERR_ACCESS_USER, ERR_ENTITY_DELETED, ERR_ENTITY_EMAIL_NOT_DRAFT, ERR_ENTITY_IS_DELETED_ATTACHMENT, ERR_ENTITY_IS_SECURE_FOLDER, ERR_INPUT_EMAIL_WITH_NO_RECIPIENTS_NOT_ALLOWED, ERR_INPUT_SECURE_BODY_WITH_NO_AUTH_NOT_ALLOWED, ERR_PROFILE_INCLUDE_FINGERPRINT_DISABLED, ERR_PROFILE_INCLUDE_FINGERPRINT_ENABLED, ERR_PROFILE_RETURN_RECEIPT_DISABLED, ERR_PROFILE_RETURN_RECEIPT_ENABLED, ERR_PROFILE_SECURE_EMAIL_DISABLED, ERR_PROFILE_SELF_COPY_DISABLED, ERR_PROFILE_SELF_COPY_ENABLED, ERR_PROFILE_SEND_FILE_EXTERNAL_DISABLED, ERR_USER_HAS_NO_USER_TYPE, ERR_USER_TYPE_NO_ACCESS'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_NOT_SENDER:
+                  summary: Authenticated user is not the sender of the specified email
+                  description: Authenticated user is not the sender of the specified email
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_NOT_SENDER
+                      message: Authenticated user is not the sender of the specified email
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_ENTITY_DELETED:
+                  summary: Entity is deleted
+                  description: Entity is deleted
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_DELETED
+                      message: Entity is deleted
+                ERR_ENTITY_EMAIL_NOT_DRAFT:
+                  summary: The specified email can no longer be updated.
+                  description: The specified email can no longer be updated.
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_EMAIL_NOT_DRAFT
+                      message: The specified email can no longer be updated.
+                ERR_ENTITY_IS_DELETED_ATTACHMENT:
+                  summary: Requested Attachment(s) is deleted
+                  description: Requested Attachment(s) is deleted
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_IS_DELETED_ATTACHMENT
+                      message: Requested Attachment(s) is deleted
+                ERR_ENTITY_IS_SECURE_FOLDER:
+                  summary: Operation not permitted on restricted Folder.
+                  description: Operation not permitted on restricted Folder.
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_IS_SECURE_FOLDER
+                      message: Operation not permitted on restricted Folder.
+                ERR_INPUT_EMAIL_WITH_NO_RECIPIENTS_NOT_ALLOWED:
+                  summary: The mail cannot be sent without any recipients
+                  description: The mail cannot be sent without any recipients
+                  value:
+                    errors:
+                    - code: ERR_INPUT_EMAIL_WITH_NO_RECIPIENTS_NOT_ALLOWED
+                      message: The mail cannot be sent without any recipients
+                ERR_INPUT_SECURE_BODY_WITH_NO_AUTH_NOT_ALLOWED:
+                  summary: Email message body cannot be secured if email does not require authentication
+                  description: Email message body cannot be secured if email does not require authentication
+                  value:
+                    errors:
+                    - code: ERR_INPUT_SECURE_BODY_WITH_NO_AUTH_NOT_ALLOWED
+                      message: Email message body cannot be secured if email does not require authentication
+                ERR_PROFILE_INCLUDE_FINGERPRINT_DISABLED:
+                  summary: This profile is not allowed to include fingerprint with sent files
+                  description: This profile is not allowed to include fingerprint with sent files
+                  value:
+                    errors:
+                    - code: ERR_PROFILE_INCLUDE_FINGERPRINT_DISABLED
+                      message: This profile is not allowed to include fingerprint with sent files
+                ERR_PROFILE_INCLUDE_FINGERPRINT_ENABLED:
+                  summary: This profile cannot disable including fingerprint with sent files
+                  description: This profile cannot disable including fingerprint with sent files
+                  value:
+                    errors:
+                    - code: ERR_PROFILE_INCLUDE_FINGERPRINT_ENABLED
+                      message: This profile cannot disable including fingerprint with sent files
+                ERR_PROFILE_RETURN_RECEIPT_DISABLED:
+                  summary: This profile is not allowed to set receipt notification with sent files
+                  description: This profile is not allowed to set receipt notification with sent files
+                  value:
+                    errors:
+                    - code: ERR_PROFILE_RETURN_RECEIPT_DISABLED
+                      message: This profile is not allowed to set receipt notification with sent files
+                ERR_PROFILE_RETURN_RECEIPT_ENABLED:
+                  summary: This profile cannot disable return receipt notification with sent files
+                  description: This profile cannot disable return receipt notification with sent files
+                  value:
+                    errors:
+                    - code: ERR_PROFILE_RETURN_RECEIPT_ENABLED
+                      message: This profile cannot disable return receipt notification with sent files
+                ERR_PROFILE_SECURE_EMAIL_DISABLED:
+                  summary: This profile is not allowed to send secure emails
+                  description: This profile is not allowed to send secure emails
+                  value:
+                    errors:
+                    - code: ERR_PROFILE_SECURE_EMAIL_DISABLED
+                      message: This profile is not allowed to send secure emails
+                ERR_PROFILE_SELF_COPY_DISABLED:
+                  summary: This profile is not allowed to send copy to self
+                  description: This profile is not allowed to send copy to self
+                  value:
+                    errors:
+                    - code: ERR_PROFILE_SELF_COPY_DISABLED
+                      message: This profile is not allowed to send copy to self
+                ERR_PROFILE_SELF_COPY_ENABLED:
+                  summary: Cannot disable self copy for this profile
+                  description: Cannot disable self copy for this profile
+                  value:
+                    errors:
+                    - code: ERR_PROFILE_SELF_COPY_ENABLED
+                      message: Cannot disable self copy for this profile
+                ERR_PROFILE_SEND_FILE_EXTERNAL_DISABLED:
+                  summary: This profile is not allowed to send files to external users
+                  description: This profile is not allowed to send files to external users
+                  value:
+                    errors:
+                    - code: ERR_PROFILE_SEND_FILE_EXTERNAL_DISABLED
+                      message: This profile is not allowed to send files to external users
+                ERR_USER_HAS_NO_USER_TYPE:
+                  summary: User has no profile
+                  description: User has no profile
+                  value:
+                    errors:
+                    - code: ERR_USER_HAS_NO_USER_TYPE
+                      message: User has no profile
+                ERR_USER_TYPE_NO_ACCESS:
+                  summary: Permission denied
+                  description: Permission denied
+                  value:
+                    errors:
+                    - code: ERR_USER_TYPE_NO_ACCESS
+                      message: Permission denied
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_EXCEEDS_MAX_VALUE, ERR_INPUT_HYPERLINK, ERR_INPUT_INVALID_DATE, ERR_INPUT_PAST_DATE, ERR_INVALID_PARAMETER, ERR_HEP_VALIDATION_BLOCK (raw validation service response when HEP policy blocks send)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_EXCEEDS_MAX_VALUE:
+                  summary: Field value exceeds maximum allowed value
+                  description: Field value exceeds maximum allowed value
+                  value:
+                    errors:
+                    - code: ERR_INPUT_EXCEEDS_MAX_VALUE
+                      message: Field value exceeds maximum allowed value
+                ERR_INPUT_HYPERLINK:
+                  summary: Not allowed hyperlink domain. Hyperlink domain should not different from anchored text domain.
+                  description: Not allowed hyperlink domain. Hyperlink domain should not different from anchored text domain.
+                  value:
+                    errors:
+                    - code: ERR_INPUT_HYPERLINK
+                      message: Not allowed hyperlink domain. Hyperlink domain should not different from anchored text domain.
+                ERR_INPUT_INVALID_DATE:
+                  summary: The input is not a valid date.
+                  description: The input is not a valid date.
+                  value:
+                    errors:
+                    - code: ERR_INPUT_INVALID_DATE
+                      message: The input is not a valid date.
+                ERR_INPUT_PAST_DATE:
+                  summary: Field value should be future date
+                  description: Field value should be future date
+                  value:
+                    errors:
+                    - code: ERR_INPUT_PAST_DATE
+                      message: Field value should be future date
+                ERR_INVALID_PARAMETER:
+                  summary: Invalid Parameter Exception
+                  description: Invalid Parameter Exception
+                  value:
+                    errors:
+                    - code: ERR_INVALID_PARAMETER
+                      message: Invalid Parameter Exception
+        '490':
+          description: Request blocked by WAF
+  /rest/mail/{id}/attachments:
+    get:
+      summary: Get attachments for an email message
+      description: "### Description:\n  Using an email ID, returns a paginated list of attachments for the specified message, including file metadata for each attachment.\n### Preconditions:\n  Must be the sender or a recipient of the message.\n### Response:\n  Returns the list of email attachments with metadata, including total count for pagination.\n"
+      tags:
+      - mail
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier (UUID) of the email.
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: limit
+        required: false
+        description: Maximum number of attachments to return.
+        schema:
+          type: integer
+      - in: query
+        name: offset
+        required: false
+        description: Number of attachments to skip before returning results, for pagination.
+        schema:
+          type: integer
+      - in: query
+        name: ref
+        required: false
+        description: The reference ID of the email (Mandatory if the email can be accessed without authentication).
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Email attachments returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attachments'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+  /rest/mail/{id}/attachments/{attachment_id}:
+    get:
+      summary: Get an email attachment by attachment ID
+      description: "### Description:\n  Using a file attachment ID, returns the name and metadata for the specified attachment on a given message.\n### Preconditions:\n  Must be the sender or a recipient of the message.\n### Response:\n  Returns the attachment filename and associated metadata.\n"
+      tags:
+      - mail
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier (UUID) of the email.
+        schema:
+          type: string
+          format: uuid
+      - in: path
+        name: attachment_id
+        required: true
+        description: The unique identifier (UUID) of the attachment.
+        schema:
+          type: string
+      - in: query
+        name: ref
+        required: false
+        description: The reference ID of the email (Mandatory if the email can be accessed without authentication).
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Email attachment returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attachment'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+  /rest/mail/{id}/packages:
+    get:
+      summary: Get the package associated with an email
+      description: "### Description:\n  Returns the package associated with the specified email message.\n### Preconditions:\n  Must have access to the specified email message.\n### Response:\n  Returns the email package details.\n"
+      tags:
+      - mail
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier (UUID) of the email.
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: ref
+        required: false
+        description: The reference ID of the email (Mandatory if the email can be accessed without authentication).
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Email package returned successfully.
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+  /rest/mail/{id}/recipients:
+    get:
+      summary: Get email recipients
+      description: "### Description:\n  Gets a paginated list of recipient email addresses for the specified message.\n### Preconditions:\n  Must be the sender or a recipient of the message.\n### Response:\n  Returns the recipient email addresses and pagination metadata.\n"
+      tags:
+      - mail
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier (UUID) of the email.
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: returnEntity
+        required: false
+        description: If true, includes the entity in the response body.
+        schema:
+          type: boolean
+      - in: query
+        name: with
+        required: false
+        description: Specifies additional fields to include in the response.
+        schema:
+          type: string
+      - in: query
+        name: mode
+        required: false
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - compact
+          - full_no_links
+          - full_with_links
+          - full
+      - in: query
+        name: ref
+        required: false
+        description: The reference ID of the email (Mandatory if the email can be accessed without authentication).
+        schema:
+          type: string
+      - in: query
+        name: orderBy
+        required: false
+        description: 'Sort order for the recipient list. Default is `type:asc`.<br>Allowed values: `id:asc`, `id:desc`, `type:asc`, `type:desc`.'
+        schema:
+          type: string
+          enum:
+          - id:asc
+          - id:desc
+          - type:asc
+          - type:desc
+      - in: query
+        name: type
+        required: false
+        explode: true
+        style: form
+        description: Filter recipients by type. Accepts a comma-separated list of integer values.<br>`0` – To.<br>`1` – CC.<br>`2` – BCC.
+        schema:
+          type: array
+          items:
+            type: integer
+            enum:
+            - 0
+            - 1
+            - 2
+      - in: query
+        name: limit
+        required: false
+        description: Range limit.
+        schema:
+          type: integer
+          minimum: 1
+      - in: query
+        name: offset
+        required: false
+        description: Range offset.
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          description: Email recipients returned successfully.
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+  /rest/mail/{id}/actions/withdrawFiles:
+    post:
+      summary: Withdraw files from a sent message
+      description: "### Description:\n  Using an email ID, withdraws the specified file attachments from a sent message.\n### Notes:\n  - The message itself is not withdrawn. Only the links to its file attachments are deactivated, making the files inaccessible to the original recipients. The files remain in the system until they expire.\n  - If a recipient forwarded the message before it was withdrawn, attachment links remain active for those recipients until the files expire.\n### Preconditions:\n  Must be the sender of the message.\n### Response:\n  Deactivates download links for the specified email attachments.\n"
+      tags:
+      - mail
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier (UUID) of the email.
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: id:in
+        required: true
+        explode: true
+        style: form
+        description: A comma-separated list of attachment IDs to be withdrawn.
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: sharedMailboxId
+        required: false
+        description: The unique identifier of the Shared Mailbox. If provided, the operation will be performed within the specified Shared Mailbox context.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Attachments withdrawn successfully.
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_NOT_SENDER, ERR_ACCESS_USER, ERR_ENTITY_DELETED, ERR_ENTITY_IS_DELETED_ATTACHMENT'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_NOT_SENDER:
+                  summary: Authenticated user is not the sender of the specified email
+                  description: Authenticated user is not the sender of the specified email
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_NOT_SENDER
+                      message: Authenticated user is not the sender of the specified email
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_ENTITY_DELETED:
+                  summary: Entity is deleted
+                  description: Entity is deleted
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_DELETED
+                      message: Entity is deleted
+                ERR_ENTITY_IS_DELETED_ATTACHMENT:
+                  summary: Requested Attachment(s) is deleted
+                  description: Requested Attachment(s) is deleted
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_IS_DELETED_ATTACHMENT
+                      message: Requested Attachment(s) is deleted
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INVALID_PARAMETER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INVALID_PARAMETER:
+                  summary: Invalid Parameter Exception
+                  description: Invalid Parameter Exception
+                  value:
+                    errors:
+                    - code: ERR_INVALID_PARAMETER
+                      message: Invalid Parameter Exception
+        '490':
+          description: Request blocked by WAF
+  /rest/mail/{id}/actions/copy:
+    post:
+      summary: Save email attachments to a Kiteworks folder
+      description: "### Description:\n  Saves one or more email attachments to a specified Kiteworks folder.\n### Preconditions:\n  Must have the `file_copy` permission for the files being copied and `file_add` permission for the destination folder.\n### Response:\n  Returns the saved files in the destination folder. If duplicate filenames exist, a number is appended to the saved file names to avoid conflicts.\n"
+      tags:
+      - mail
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier (UUID) of the email.
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: id:in
+        required: true
+        explode: true
+        style: form
+        schema:
+          type: array
+          description: ''
+          items:
+            type: string
+      - in: query
+        name: returnEntity
+        required: false
+        description: If true, includes the entity in the response body.
+        schema:
+          type: boolean
+      - in: query
+        name: with
+        required: false
+        description: Specifies additional fields to include in the response.
+        schema:
+          type: string
+      - in: query
+        name: mode
+        required: false
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - compact
+          - full_no_links
+          - full_with_links
+          - full
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DestinationFolderIdRequest'
+      responses:
+        '201':
+          description: Attachment files copied successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/File'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_NOT_SENDER, ERR_ACCESS_USER, ERR_ENTITY_DELETED, ERR_ENTITY_IS_BASE_DIR, ERR_ENTITY_IS_DELETED_ATTACHMENT, ERR_ENTITY_IS_MY_DIR, ERR_ENTITY_IS_SECURE_FOLDER, ERR_ENTITY_RESTRICTED_EXTENSION, ERR_ENTITY_RESTRICTED_TYPE'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_NOT_SENDER:
+                  summary: Authenticated user is not the sender of the specified email
+                  description: Authenticated user is not the sender of the specified email
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_NOT_SENDER
+                      message: Authenticated user is not the sender of the specified email
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_ENTITY_DELETED:
+                  summary: Entity is deleted
+                  description: Entity is deleted
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_DELETED
+                      message: Entity is deleted
+                ERR_ENTITY_IS_BASE_DIR:
+                  summary: Operation not permitted on Base Folder
+                  description: Operation not permitted on Base Folder
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_IS_BASE_DIR
+                      message: Operation not permitted on Base Folder
+                ERR_ENTITY_IS_DELETED_ATTACHMENT:
+                  summary: Requested Attachment(s) is deleted
+                  description: Requested Attachment(s) is deleted
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_IS_DELETED_ATTACHMENT
+                      message: Requested Attachment(s) is deleted
+                ERR_ENTITY_IS_MY_DIR:
+                  summary: Operation not permitted on Tray Folder
+                  description: Operation not permitted on Tray Folder
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_IS_MY_DIR
+                      message: Operation not permitted on Tray Folder
+                ERR_ENTITY_IS_SECURE_FOLDER:
+                  summary: Operation not permitted on restricted Folder.
+                  description: Operation not permitted on restricted Folder.
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_IS_SECURE_FOLDER
+                      message: Operation not permitted on restricted Folder.
+                ERR_ENTITY_RESTRICTED_EXTENSION:
+                  summary: File extension is in exclusion extensions list
+                  description: File extension is in exclusion extensions list
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_RESTRICTED_EXTENSION
+                      message: File extension is in exclusion extensions list
+                ERR_ENTITY_RESTRICTED_TYPE:
+                  summary: The specified entity mime type is not allowed.
+                  description: The specified entity mime type is not allowed.
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_RESTRICTED_TYPE
+                      message: The specified entity mime type is not allowed.
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INVALID_PARAMETER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INVALID_PARAMETER:
+                  summary: Invalid Parameter Exception
+                  description: Invalid Parameter Exception
+                  value:
+                    errors:
+                    - code: ERR_INVALID_PARAMETER
+                      message: Invalid Parameter Exception
+        '490':
+          description: Request blocked by WAF
+  /rest/mail/{id}/actions/sendTrackingReport:
+    post:
+      summary: Send tracked activity report for a sent message
+      description: "### Description:\n  Generates and emails a tracked activity report for a sent message to the current user's Inbox.\n### Preconditions:\n  Must be the sender of the message and have tracking access enabled.\n### Response:\n  Sends the tracking report to the current user's Inbox.\n"
+      tags:
+      - mail
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier (UUID) of the email.
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: returnEntity
+        required: false
+        description: If true, includes the entity in the response body.
+        schema:
+          type: boolean
+      - in: query
+        name: with
+        required: false
+        description: Specifies additional fields to include in the response.
+        schema:
+          type: string
+      - in: query
+        name: mode
+        required: false
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - compact
+          - full_no_links
+          - full_with_links
+          - full
+      responses:
+        '201':
+          description: Tracking report sent successfully.
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_NOT_SENDER, ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_NOT_SENDER:
+                  summary: Authenticated user is not the sender of the specified email
+                  description: Authenticated user is not the sender of the specified email
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_NOT_SENDER
+                      message: Authenticated user is not the sender of the specified email
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+  /rest/mail/attachments:
+    get:
+      summary: Get email attachments sent by the current user
+      description: "### Description:\n  Using an email ID, gets a list of files attached to messages in the current user's Inbox or Drafts folder, including file metadata.\n### Preconditions:\n  Messages must belong to the current user.\n### Response:\n  Returns the list of email attachments with associated metadata.\n### Sorting:\n  Sort string syntax `FIELD_NAME:ORDER`.\n\n  ORDER can be `asc` or `desc`.\n### Sorting options:\n  | FIELD_NAME    | Description                              |\n  |---------------|------------------------------------------|\n  | id            | The mail ID                              |\n  | subject       | The mail subject                         |\n  | sent_date     | The date the mail was sent               |\n  | modified_date | The date the mail was last modified      |\n  | type          | The mail type: `sent`, `draft`, or `request` |\n  | size          | The file size                            |\n"
+      tags:
+      - mail
+      parameters:
+      - in: query
+        name: limit
+        required: false
+        description: Range limit.
+        schema:
+          type: integer
+          minimum: 1
+      - in: query
+        name: offset
+        required: false
+        description: Range offset.
+        schema:
+          type: integer
+          minimum: 0
+      - in: query
+        name: bucket
+        required: false
+        description: Filters attachments to those belonging to emails in the specified bucket.<br>`inbox` – Received emails.<br>`draft` – Unsent draft emails.<br>`outgoing` – Emails queued or in progress.<br>`sent` – Successfully sent emails.<br>`trash` – Deleted emails.
+        schema:
+          type: string
+      - in: query
+        name: orderBy
+        required: false
+        description: 'Sort order for the results. Default is `id:desc`.<br>Allowed values: `id:asc`, `id:desc`, `subject:asc`, `subject:desc`, `sent_date:asc`, `sent_date:desc`, `modified_date:asc`, `modified_date:desc`, `type:asc`, `type:desc`, `size:asc`, `size:desc`.'
+        schema:
+          type: string
+          enum:
+          - id:asc
+          - id:desc
+          - subject:asc
+          - subject:desc
+          - sent_date:asc
+          - sent_date:desc
+          - modified_date:asc
+          - modified_date:desc
+          - type:asc
+          - type:desc
+          - size:asc
+          - size:desc
+      responses:
+        '200':
+          description: Email attachments returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MailAttachments'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '490':
+          description: Request blocked by WAF
+    delete:
+      summary: Withdraw multiple files from messages in Sent and Drafts folders
+      description: "### Description:\n  Using attachment IDs, withdraws the specified attachments from messages in the current user's Sent and Drafts folders.\n### Notes:\n  - The message itself is not withdrawn. Only the links to its file attachments are deactivated, making the files inaccessible to the original recipients. The files remain in the system until they expire.\n  - If a recipient forwarded the message before it was withdrawn, attachment links remain active for those recipients until the files expire.\n### Preconditions:\n  Must be the sender of the messages.\n### Response:\n  Deactivates download links for the specified attachments across all matching Sent and Draft messages.\n"
+      tags:
+      - mail
+      parameters:
+      - in: query
+        name: id:in
+        required: true
+        explode: true
+        style: form
+        schema:
+          type: array
+          description: ''
+          items:
+            type: string
+      responses:
+        '204':
+          description: Specified attachments withdrawn successfully.
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INVALID_PARAMETER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INVALID_PARAMETER:
+                  summary: Invalid Parameter Exception
+                  description: Invalid Parameter Exception
+                  value:
+                    errors:
+                    - code: ERR_INVALID_PARAMETER
+                      message: Invalid Parameter Exception
+        '490':
+          description: Request blocked by WAF
+  /rest/mail/actions/withdraw:
+    post:
+      summary: Withdraw messages from Sent and Drafts folders
+      description: "### Description:\n  Using email IDs, withdraws messages from the current user's Sent and Drafts folders.\n### Notes:\n  - The messages themselves are not withdrawn. Only the links to their file attachments are deactivated, making the files inaccessible to the original recipients. The files remain in the system until they expire.\n  - If a recipient forwarded a message before it was withdrawn, attachment links remain active for those recipients until the files expire.\n### Preconditions:\n  Must be the sender of the messages.\n### Response:\n  Deactivates download links for attachments in the specified messages.\n"
+      tags:
+      - mail
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MailWithdrawRequest'
+      responses:
+        '200':
+          description: Email messages withdrawn successfully.
+        '207':
+          description: Partially successful — some messages could not be withdrawn.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkOperationInteger'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_ENTITY_DELETED, ERR_ENTITY_EMAIL_IS_NOT_COMPLETED, ERR_ACCESS_NOT_SENDER, ERR_MAIL_BODY_UNSECURED, ERR_ENTITY_IS_EMAIL_CONTENT'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_ENTITY_DELETED:
+                  summary: Entity is deleted
+                  description: Entity is deleted
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_DELETED
+                      message: Entity is deleted
+                ERR_ENTITY_EMAIL_IS_NOT_COMPLETED:
+                  summary: Email is not completed
+                  description: Email is not completed
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_EMAIL_IS_NOT_COMPLETED
+                      message: Email is not completed
+                ERR_ACCESS_NOT_SENDER:
+                  summary: Authenticated user is not the sender of the specified email
+                  description: Authenticated user is not the sender of the specified email
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_NOT_SENDER
+                      message: Authenticated user is not the sender of the specified email
+                ERR_MAIL_BODY_UNSECURED:
+                  summary: Mail body is unsecured.
+                  description: Mail body is unsecured.
+                  value:
+                    errors:
+                    - code: ERR_MAIL_BODY_UNSECURED
+                      message: Mail body is unsecured.
+                ERR_ENTITY_IS_EMAIL_CONTENT:
+                  summary: Operation not permitted on email content
+                  description: Operation not permitted on email content
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_IS_EMAIL_CONTENT
+                      message: Operation not permitted on email content
+        '490':
+          description: Request blocked by WAF
+  /rest/mail/{id}/scanStatus:
+    get:
+      summary: Get email message security scan status
+      description: "### Description:\n  Gets the security scan results for a mail message. Depending on system scan policies, message content and attachments may be scanned for antivirus threats, data loss prevention (DLP) violations, and advanced threat protection (ATP).\n### Preconditions:\n  Must be the sender or a recipient of the message.\n### Response:\n  Returns the security scan status for the message and its attachments.\n"
+      tags:
+      - mail
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier (UUID) of the email.
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Message and attachments (if any) have passed all security scans successfully.
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_ENTITY_EMAIL_IS_DRAFT, ERR_ENTITY_EMAIL_SCANNING, ERR_ENTITY_EMAIL_SCANNING_DISALLOWED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_ENTITY_EMAIL_IS_DRAFT:
+                  summary: The action cannot be performed on draft.
+                  description: The action cannot be performed on draft.
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_EMAIL_IS_DRAFT
+                      message: The action cannot be performed on draft.
+                ERR_ENTITY_EMAIL_SCANNING:
+                  summary: One or more files, or the email, are undergoing security and privacy scans. Please try again later.
+                  description: One or more files, or the email, are undergoing security and privacy scans. Please try again later.
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_EMAIL_SCANNING
+                      message: One or more files, or the email, are undergoing security and privacy scans. Please try again later.
+                ERR_ENTITY_EMAIL_SCANNING_DISALLOWED:
+                  summary: One or more files, or the email, are blocked by system policy.
+                  description: One or more files, or the email, are blocked by system policy.
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_EMAIL_SCANNING_DISALLOWED
+                      message: One or more files, or the email, are blocked by system policy.
+        '490':
+          description: Request blocked by WAF
+  /rest/mail/{id}/trackings/me:
+    delete:
+      summary: Remove message tracking access
+      description: "### Description:\n  Removes the current user's access to tracking activity on a specified message.\n### Preconditions:\n  Must be a recipient of the email and have tracking access.\n### Response:\n  Revokes the current user's tracking access for the specified message.\n"
+      tags:
+      - mail
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier (UUID) of the email.
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Email tracking access removed successfully.
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_ENTITY_DELETED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_ENTITY_DELETED:
+                  summary: Entity is deleted
+                  description: Entity is deleted
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_DELETED
+                      message: Entity is deleted
+        '490':
+          description: Request blocked by WAF
+  /rest/mail/{id}/settings:
+    put:
+      summary: Update message tracking access
+      description: "### Description:\n  Updates the tracking access settings for a sent message, adding or removing tracking permissions for specified users.\n### Preconditions:\n  Must be the sender of the message and have tracking access enabled.\n### Response:\n  Returns a confirmation that tracking access has been updated for the specified users.\n"
+      tags:
+      - mail
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier (UUID) of the email.
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendMailSettingPutRequest'
+      responses:
+        '200':
+          description: Mail tracking settings updated successfully.
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_NOT_INTERNAL_DOMAIN, ERR_INSUFFICIENT_TRACKING_PERMISSIONS'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_NOT_INTERNAL_DOMAIN:
+                  summary: The email is not internal domain
+                  description: The email is not internal domain
+                  value:
+                    errors:
+                    - code: ERR_NOT_INTERNAL_DOMAIN
+                      message: The email is not internal domain
+                ERR_INSUFFICIENT_TRACKING_PERMISSIONS:
+                  summary: This profile is not allowed to give tracking access due to insufficient permissions
+                  description: This profile is not allowed to give tracking access due to insufficient permissions
+                  value:
+                    errors:
+                    - code: ERR_INSUFFICIENT_TRACKING_PERMISSIONS
+                      message: This profile is not allowed to give tracking access due to insufficient permissions
+        '490':
+          description: Request blocked by WAF
+components:
+  schemas:
+    MailWithdrawRequest:
+      type: object
+      properties:
+        ids:
+          type: array
+          description: List of email UUIDs to withdraw. Withdrawing an email revokes recipient access to its attachments.
+          items:
+            type: string
+      required:
+      - ids
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    PushedObject:
+      type: object
+      properties:
+        objectId:
+          type: string
+          description: Unique identifier (UUID) for the pushed object.
+        userId:
+          type: string
+          description: Unique identifier (UUID) for the user who pushed the object.
+        created:
+          type: string
+          format: date
+          description: The date and time when the object was pushed.
+        user:
+          description: Details of the user who pushed the object.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+    Tag:
+      type: object
+      properties:
+        guid:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) for the tag.
+        name:
+          type: string
+          description: Display name of the tag.
+        type:
+          type: string
+          description: Type category of the tag.
+    TrackingAccessRecipient:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: Unique identifier of the user associated with the recipient.
+        type:
+          type: integer
+          description: Recipient type.<br>`0` – To.<br>`1` – CC.<br>`2` – BCC.
+        email:
+          type: string
+          description: Email address of the recipient.
+        isDistributionList:
+          type: boolean
+          description: Indicates if the recipient is a distribution list rather than an individual user.
+        user:
+          description: Details of the user associated with the recipient.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        revoked:
+          type: boolean
+          description: Indicates whether the recipient's tracking access has been revoked.
+    Preview:
+      description: Class Preview
+      properties:
+        link:
+          description: Preview link for the file
+          type: string
+        pdf:
+          description: PDF file for the preview
+          type: string
+        viewUrl:
+          description: URL for viewing the preview
+          type: string
+        status:
+          description: 'Preview processing status. Accepted values: `processing`, `preview`, `failed`'
+          type: string
+        type:
+          description: Format of the generated preview, such as image or PDF
+          type: string
+        metadata:
+          description: Additional metadata about the preview, such as dimensions or page count
+          type: string
+        mime:
+          description: MIME type of the preview file
+          type: string
+        native:
+          description: Indicates whether the preview is a native render
+          type: boolean
+        watermark:
+          description: Watermark applied to the preview
+          type: string
+        tdfOriginalExtension:
+          description: Original file extension for TDF files
+          type: string
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
+    UserBasic:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier (UUID) for the user.
+        email:
+          type: string
+          description: Email address associated with the user.
+        name:
+          type: string
+          description: Full name of the user.
+        profileIcon:
+          type: string
+          description: URL or identifier for the user's profile icon.
+    AttachmentDownloadEvent:
+      description: Represents a single download or interaction event recorded for an email attachment.
+      properties:
+        created_time:
+          description: Unix timestamp of when the event occurred.
+          type: integer
+        event_name:
+          description: The name of the event action (e.g. download_email, view_file, copy_file, file_withdrawn).
+          type: string
+        username:
+          description: Email address of the user who performed the action.
+          type: string
+        successful:
+          description: Indicates whether the action was completed successfully.
+          type: boolean
+        withdrawn:
+          description: Indicates whether the attachment was withdrawn at the time of the event.
+          type: boolean
+        file_id:
+          description: The unique identifier of the attachment file. Present only when the event is associated with a specific file.
+          type: string
+        file_name:
+          description: The name of the attachment file. Present only when the event is associated with a specific file.
+          type: string
+        event_type:
+          description: A secondary classification of the event type. Present only when applicable.
+          type: string
+    Attachment:
+      type: object
+      properties:
+        emailPackageId:
+          type: string
+          format: uuid
+          description: Unique identifier for the email package containing the attachment.
+        attachmentId:
+          type: string
+          description: Unique identifier for the attachment.
+        withdrawn:
+          type: boolean
+          description: Indicates whether the attachment has been withdrawn.
+        drmFile:
+          description: Details of the DRM-protected file associated with the attachment.
+          allOf:
+          - $ref: '#/components/schemas/DrmFile'
+        accessType:
+          type: integer
+          description: Access type for the attachment (e.g., read-only, editable).
+        tags:
+          description: List of tags associated with the attachment.
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        permissions:
+          type: array
+          description: List of permissions associated with the attachment.
+          items:
+            $ref: '#/components/schemas/Permission'
+        objectId:
+          type: string
+          format: uuid
+          description: Unique identifier for the file associated with the attachment.
+        name:
+          type: string
+          description: Name of the attachment file.
+        size:
+          type: integer
+          description: Size of the attachment file in bytes.
+        mime:
+          type: string
+          description: The MIME type of the attachment file.
+        created:
+          type: string
+          format: date
+          description: Date when the attachment file was created.
+        deleted:
+          type: boolean
+          description: Indicates if the attachment has been deleted.
+        fingerprint:
+          type: string
+          description: A unique hash identifying the file version.
+        fingerprintAlgo:
+          type: string
+          description: The algorithm used for generating the file version fingerprint. (e.g., sha3-256, md5).
+        fingerprints:
+          description: List of alternative fingerprints for the attachment file.
+          type: array
+          items:
+            $ref: '#/components/schemas/Fingerprint'
+        adminQuarantineStatus:
+          type: string
+          description: Status of the attachment in the admin quarantine system.
+        avStatus:
+          type: string
+          description: Antivirus (AV) scan status of the attachment.
+        dlpStatus:
+          type: string
+          description: Data Loss Prevention (DLP) status of the attachment.
+    Recipient:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: Unique identifier of the user associated with the recipient.
+        type:
+          type: integer
+          description: Recipient type.<br>`0` – To.<br>`1` – CC.<br>`2` – BCC.
+        email:
+          type: string
+          description: Email address of the recipient.
+        isDistributionList:
+          type: boolean
+          description: Indicates if the recipient is a distribution list rather than an individual user.
+        user:
+          description: Details of the user associated with the recipient.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+    Mail:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the email.
+        senderId:
+          type: string
+          description: Unique identifier of the sender.
+        templateId:
+          type: integer
+          description: Unique identifier of the email template used.
+        status:
+          type: string
+          description: Current status of the email (e.g., sent, draft, error, etc.).
+        type:
+          type: string
+          description: Type of the email (e.g., original, reply, forward, etc.).
+        date:
+          type: string
+          format: date
+          description: Date the email was last modified or sent.
+        deleted:
+          type: boolean
+          description: Indicates if the email has been deleted.
+        withdrawnDate:
+          type: string
+          format: date
+          description: Date when the email was withdrawn, if applicable.
+        emailPackageId:
+          type: string
+          description: Unique identifier of the associated email package.
+        isPreview:
+          type: boolean
+          description: Indicates whether the email is a view-only version, typically used for previewing attachments without enabling downloading.
+        isUserSent:
+          type: boolean
+          description: Indicates whether the email was sent by the current user or another user.
+        watermark:
+          type: string
+          description: Text watermark applied to the email attachments (applicable only for view-only version).
+        variables:
+          description: List of dynamic variables used in the email.
+          type: array
+          items:
+            $ref: '#/components/schemas/Variables'
+        recipients:
+          description: List of recipients for the email.
+          type: array
+          items:
+            $ref: '#/components/schemas/Recipient'
+        secureBody:
+          type: boolean
+          description: Indicates if the email body is secured.
+        modifiedDate:
+          type: string
+          format: date
+          description: Date the email was last modified.
+        parentEmailId:
+          type: string
+          description: Unique identifier of the parent email, if applicable.
+        emailReturnReceipt:
+          description: List of recipients who requested return receipts.
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailReturnRecipient'
+        error:
+          type: string
+          description: Error message associated with the email, if any.
+        subject:
+          type: string
+          description: Subject line of the email.
+        attachmentCount:
+          type: integer
+          description: Number of attachments in the email.
+        expirationDate:
+          type: string
+          format: date
+          description: Expiration date of the email package, if applicable.
+        avStatus:
+          type: string
+          description: Antivirus (AV) scan status of the email.
+        dlpStatus:
+          type: string
+          description: Data Loss Prevention (DLP) scan status of the email.
+        hasTrackingAccess:
+          type: boolean
+          description: Indicates if tracking access is enabled for the email.
+        trackingAccess:
+          description: List of recipients with tracking access.
+          type: array
+          items:
+            $ref: '#/components/schemas/TrackingAccessRecipient'
+        policyDirective:
+          type: integer
+          description: Indicates the restriction type applied to the email
+        isRead:
+          type: boolean
+          description: Indicates if the email has been read.
+        bucket:
+          type: string
+          description: The bucket where the email is stored. (e.g. inbox, sent, trash)
+        body:
+          type: string
+          description: The body of the email.
+        package:
+          description: Details of the associated email package.
+          allOf:
+          - $ref: '#/components/schemas/Package'
+        rawBody:
+          type: string
+          description: Raw email body content without HTML markup.
+        headline:
+          type: string
+          description: Headline or main title of the email.
+        notice:
+          type: string
+          description: Notice part of the email.
+        fullHtmlBody:
+          type: string
+          description: Full HTML body of the email.
+        emailFrom:
+          type: string
+          description: The email address from which the email was sent.
+        templateBody:
+          type: string
+          description: Body content generated from the email template.
+        webFormId:
+          type: string
+          description: Unique identifier of the web form associated with the email.
+        webFormFields:
+          description: Fields included in the associated web form with the mail.
+        sender:
+          description: Details of the sender.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        sharedMailboxId:
+          type: string
+          description: Unique identifier of the shared mailbox, if applicable.
+        htmlBody:
+          type: string
+          description: HTML version of the email body.
+        actor:
+          description: The user responsible for sending the email, applicable when the email is sent on behalf of a shared mailbox.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        darkModeStyle:
+          type: string
+          description: CSS styles applied for dark mode.
+        exists:
+          type: boolean
+          description: Indicates whether the email already exists in the system.
+    DistributionList:
+      description: Class DistributionList
+      required:
+      - isDistributionList
+      properties:
+        isDistributionList:
+          description: Indicates whether the email belongs to a distribution list
+          type: boolean
+        members:
+          description: List of members in the distribution list
+          type: array
+          items:
+            type: string
+    DestinationFolderIdRequest:
+      type: object
+      properties:
+        destinationFolderId:
+          type: string
+          description: The ID of the destination folder where the item will be copied/moved.
+        addVersion:
+          type: boolean
+          description: If a file with the same name exists, create a new version instead of overwriting it. Default is True.
+      required:
+      - destinationFolderId
+    SendMailSettingPutRequest:
+      type: object
+      properties:
+        trackingAccess:
+          type: array
+          description: List of email addresses to grant access to the email's download tracking dashboard.
+          items:
+            type: string
+            format: email
+    UserAttachment:
+      type: object
+      properties:
+        emailId:
+          type: string
+        subject:
+          type: string
+          description: Subject line of the email containing this attachment.
+        size:
+          type: string
+          description: Size of the attachment in bytes.
+        name:
+          type: string
+          description: File name of the attachment.
+        sentDate:
+          type: string
+          format: date
+          description: Date and time when the email was sent.
+        modifiedDate:
+          type: string
+          format: date
+          description: Date and time when the attachment was last modified.
+        attachmentId:
+          type: string
+          description: Unique identifier (UUID) of the attachment.
+        mime:
+          type: string
+          description: MIME type of the attachment.
+        webFormId:
+          type: string
+          description: Identifier of the web form associated with the attachment, if any.
+        type:
+          type: string
+          description: Type of the attachment.
+    Permission:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the permission.
+        name:
+          type: string
+          description: Name of the permission.
+        allowed:
+          type: boolean
+          description: Indicates whether the permission is granted (True) or denied (False).
+    Folder:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) of the folder.
+        parentId:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) of the parent object.
+        name:
+          type: string
+          description: Name of the object.
+        type:
+          type: string
+          description: Type of the object.<br>`f` – File.<br>`d` – Folder.
+        userId:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) who created the folder.
+        creator:
+          description: Details of the user who created the object.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        created:
+          type: string
+          format: date
+          description: The date and time when the object was created.
+        modified:
+          type: string
+          format: date
+          description: The date and time when the object was last modified.
+        expire:
+          type: string
+          format: date
+          description: Expiration timestamp of the object, if applicable.
+        permissions:
+          description: List of permissions associated with the object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        deleted:
+          type: boolean
+          description: Indicates whether the object has been deleted.
+        permDeleted:
+          type: boolean
+          description: Indicates whether the object has been permanently deleted.
+        permalink:
+          type: string
+          description: Permanent URL link to access the object.
+        path:
+          type: string
+          description: Path to the folder in the hierarchy.
+        members:
+          description: List of members who have access to the object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Member'
+        vendorDocId:
+          type: string
+          description: Vendor document ID associated with the object.
+        vendorDocName:
+          type: string
+          description: Name of the vendor document associated with the object.
+        secure:
+          type: boolean
+          description: Indicates whether the folder or the parent folder containing the file is marked as secure.
+        source:
+          type: integer
+          description: ID representing the source of the object (1 - Salesforce, 2 - Teams).
+        isShared:
+          type: boolean
+          description: Indicates if the folder is shared with other users.
+        syncable:
+          type: boolean
+          description: Indicates if the folder can be synced by Desktop Sync Client.
+        fileLifetime:
+          type: integer
+          description: Time duration (in days) for which the files in this folder are kept after being added to the folder.
+        description:
+          type: string
+          description: The description of the folder.
+        isFavorite:
+          type: boolean
+          description: Indicates if the folder is marked as a favorite by the user.
+        pushedFilesCount:
+          type: integer
+          description: The number of files that have been pushed to mobile apps in this folder.
+        currentUserRole:
+          description: The role of the current user in this folder.
+          allOf:
+          - $ref: '#/components/schemas/Role'
+        avStatus:
+          type: string
+          description: The Antivirus (AV) status of the folder.
+        dlpStatus:
+          type: string
+          description: The Data Loss Prevention (DLP) status of the folder.
+        totalMembersCount:
+          type: integer
+          description: Total number of members who have access to this folder.
+        totalFoldersCount:
+          type: integer
+          description: Total number of subfolders within this folder.
+        totalFilesCount:
+          type: integer
+          description: Total number of files within this folder.
+        maxFolderExpiration:
+          type: string
+          format: date
+          description: The maximum expiration date allowed for files in this folder.
+        maxFileLifetime:
+          type: integer
+          description: The maximum duration (in days) that files in this folder can be kept after being added to the folder.
+        isLdapGroupMember:
+          type: boolean
+          description: Indicates if the folder is part of an LDAP group.
+        isUnderMyFolder:
+          type: boolean
+          description: Indicates if this folder is a subfolder of the user's "My Folder".
+        pathIds:
+          type: string
+          description: A list of IDs representing the path of the folder within the folder hierarchy.
+        isRoot:
+          type: boolean
+          description: Indicates if this folder is a root folder.
+        rootId:
+          type: string
+          format: uuid
+          description: The ID of the root folder if this is a subfolder.
+        useFolderQuota:
+          type: boolean
+          description: Indicates if a folder quota is applied to this folder.
+        quota:
+          type: integer
+          description: The storage quota for the folder (in bytes).
+        size:
+          type: integer
+          description: The total storage size used by the folder (in bytes).
+        freeSpace:
+          type: integer
+          description: The amount of free space available in the folder (in bytes).
+        inheritanceEnabled:
+          type: boolean
+          description: Indicates if a folder inherits permissions from the parent folder
+    ErrorInteger:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+        field:
+          type: string
+          description: Associated field, if applicable.
+        failedIds:
+          type: array
+          description: List of failed IDs.
+          items:
+            type: integer
+    MailCounters:
+      type: object
+      properties:
+        draft:
+          type: integer
+          description: Number of draft emails.
+        inbox:
+          type: integer
+          description: Number of emails in the inbox.
+        inboxUnread:
+          type: integer
+          description: Number of unread emails in the inbox.
+        outgoing:
+          type: integer
+          description: Number of outgoing emails.
+        outgoingError:
+          type: integer
+          description: Number of outgoing emails that encountered an error.
+        outgoingQueued:
+          type: integer
+          description: Number of outgoing emails queued for sending.
+        outgoingTransferring:
+          type: integer
+          description: Number of outgoing emails currently being transferred.
+        outgoingTransferringIds:
+          type: array
+          items:
+            type: string
+        trash:
+          type: integer
+          description: Number of emails in the trash.
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    Role:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Role ID
+        name:
+          type: string
+          description: Role name
+        rank:
+          type: integer
+          description: Role rank
+        type:
+          type: string
+          description: Role type
+    File:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) of the file.
+        parentId:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) of the parent folder.
+        name:
+          type: string
+          description: Name of the object.
+        type:
+          type: string
+          description: Type of the object.<br>`f` – File.<br>`d` – Folder.
+        userId:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) who created the file.
+        creator:
+          description: Details of the user who created the object.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        created:
+          type: string
+          format: date
+          description: The date and time when the object was created.
+        modified:
+          type: string
+          format: date
+          description: The date and time when the object was last modified.
+        expire:
+          type: string
+          format: date
+          description: Expiration timestamp of the object, if applicable.
+        permissions:
+          description: List of permissions associated with the object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        deleted:
+          type: boolean
+          description: Indicates whether the object has been deleted.
+        permDeleted:
+          type: boolean
+          description: Indicates whether the object has been permanently deleted.
+        permalink:
+          type: string
+          description: Permanent URL link to access the file.
+        path:
+          type: string
+          description: Path to the object in the hierarchy.
+        members:
+          description: List of members who have access to the object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Member'
+        vendorDocId:
+          type: string
+          description: Vendor document ID associated with the object.
+        vendorDocName:
+          type: string
+          description: Name of the vendor document associated with the object.
+        secure:
+          type: boolean
+          description: Indicates whether the folder or the parent folder containing the file is marked as secure.
+        source:
+          type: integer
+          description: ID representing the source of the object (1 - Salesforce, 2 - Teams).
+        modifier:
+          description: The user who last modified the file.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        size:
+          type: integer
+          description: The size of the file in bytes.
+        mime:
+          type: string
+          description: The MIME type of the file.
+        fingerprint:
+          type: string
+          description: A unique hash identifying the file.
+        fingerprints:
+          type: array
+          description: List of fingerprints associated with the file.
+          items:
+            $ref: '#/components/schemas/Fingerprint'
+        clientCreated:
+          type: string
+          format: date
+          description: The date and time when the file was created on the client side.
+        clientModified:
+          type: string
+          format: date
+          description: The date and time when the file was last modified on the client side.
+        overriddenExpire:
+          type: boolean
+          description: Indicates whether the expiration date for the file has been overridden.
+        sharedBy:
+          description: The user who shared the file.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        sharedTime:
+          type: string
+          format: date
+          description: The date and time when the file was shared.
+        parent:
+          description: The parent folder of the file.
+          allOf:
+          - $ref: '#/components/schemas/Folder'
+        originalFileId:
+          type: string
+          format: uuid
+          description: The ID of the original file if this one is a copy.
+        avStatus:
+          type: string
+          description: Indicates the file version's availability status based on Antivirus (AV) settings and whether it has been scanned or detected as infected.
+        dlpStatus:
+          type: string
+          description: Indicates the file version's availability status based on Data Loss Prevention (DLP) settings and whether it has been scanned or detected as infected.
+        adminQuarantineStatus:
+          type: string
+          description: Indicates the file version's availability status based on the administrator's quarantine status.
+        locked:
+          type: boolean
+          description: Indicates if the file is locked.
+        lockUser:
+          description: The user who locked the file.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        isShared:
+          type: boolean
+          description: Indicates if the file is shared with other users.
+        lastModifiedBy:
+          description: The user who last modified the file.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        pushedObject:
+          description: Details about the pushed object, if any.
+          allOf:
+          - $ref: '#/components/schemas/PushedObject'
+        pathIds:
+          type: string
+          format: uuid
+          description: A list of IDs representing the path of the file within the folder hierarchy.
+        wopiapp:
+          description: WOPI-related information for the file when used in a mobile app.
+          allOf:
+          - $ref: '#/components/schemas/MobileInfo'
+        pushed:
+          type: boolean
+          description: Indicates if the file has been pushed to a mobile app.
+        tags:
+          description: List of tags associated with the file.
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        safeEdit:
+          description: Information regarding the file's SafeEdit settings.
+          allOf:
+          - $ref: '#/components/schemas/SafeEdit'
+        versionsCount:
+          type: integer
+          description: The total number of versions for the file.
+        tracking_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: Tracking identifier associated with the file upload.
+    DrmFile:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the DRM-protected file.
+        size:
+          type: integer
+          description: Size of the DRM-protected file in bytes.
+    Mail1:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the email.
+        senderId:
+          type: string
+          description: Unique identifier of the sender.
+        templateId:
+          type: integer
+          description: Unique identifier of the email template used.
+        status:
+          type: string
+          description: Current status of the email (e.g., sent, draft, error, etc.).
+        type:
+          type: string
+          description: Type of the email (e.g., original, reply, forward, etc.).
+        date:
+          type: string
+          format: date
+          description: Date the email was last modified or sent.
+        deleted:
+          type: boolean
+          description: Indicates if the email has been deleted.
+        withdrawnDate:
+          type: string
+          format: date
+          description: Date when the email was withdrawn, if applicable.
+        emailPackageId:
+          type: string
+          description: Unique identifier of the associated email package.
+        isPreview:
+          type: boolean
+          description: Indicates whether the email is a view-only version, typically used for previewing attachments without enabling downloading.
+        isUserSent:
+          type: boolean
+          description: Indicates whether the email was sent by the current user or another user.
+        watermark:
+          type: string
+          description: Text watermark applied to the email attachments (applicable only for view-only version).
+        recipients:
+          description: List of recipients for the email.
+          type: array
+          items:
+            $ref: '#/components/schemas/Recipient'
+        secureBody:
+          type: boolean
+          description: Indicates if the email body is secured.
+        modifiedDate:
+          type: string
+          format: date
+          description: Date the email was last modified.
+        parentEmailId:
+          type: string
+          description: Unique identifier of the parent email, if applicable.
+        emailReturnReceipt:
+          description: List of recipients who requested return receipts.
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailReturnRecipient'
+        error:
+          type: string
+          description: Error message associated with the email, if any.
+        subject:
+          type: string
+          description: Subject line of the email.
+        attachmentCount:
+          type: integer
+          description: Number of attachments in the email.
+        expirationDate:
+          type: string
+          format: date
+          description: Expiration date of the email package, if applicable.
+        avStatus:
+          type: string
+          description: Antivirus (AV) scan status of the email.
+        dlpStatus:
+          type: string
+          description: Data Loss Prevention (DLP) scan status of the email.
+        hasTrackingAccess:
+          type: boolean
+          description: Indicates if tracking access is enabled for the email.
+        trackingAccess:
+          description: List of recipients with tracking access.
+          type: array
+          items:
+            $ref: '#/components/schemas/TrackingAccessRecipient'
+        policyDirective:
+          type: integer
+          description: Indicates the restriction type applied to the email
+        isRead:
+          type: boolean
+          description: Indicates if the email has been read.
+        bucket:
+          type: string
+          description: The bucket where the email is stored. (e.g. inbox, sent, trash)
+        body:
+          type: string
+          description: The body of the email.
+        package:
+          description: Details of the associated email package.
+          allOf:
+          - $ref: '#/components/schemas/Package'
+        rawBody:
+          type: string
+          description: Raw email body content without HTML markup.
+        headline:
+          type: string
+          description: Headline or main title of the email.
+        notice:
+          type: string
+          description: Notice part of the email.
+        fullHtmlBody:
+          type: string
+          description: Full HTML body of the email.
+        emailFrom:
+          type: string
+          description: The email address from which the email was sent.
+        templateBody:
+          type: string
+          description: Body content generated from the email template.
+        webFormId:
+          type: string
+          description: Unique identifier of the web form associated with the email.
+        webFormFields:
+          description: Fields included in the associated web form with the mail.
+        sender:
+          description: Details of the sender.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        sharedMailboxId:
+          type: string
+          description: Unique identifier of the shared mailbox, if applicable.
+        htmlBody:
+          type: string
+          description: HTML version of the email body.
+        actor:
+          description: The user responsible for sending the email, applicable when the email is sent on behalf of a shared mailbox.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        darkModeStyle:
+          type: string
+          description: CSS styles applied for dark mode.
+        exists:
+          type: boolean
+          description: Indicates whether the email already exists in the system.
+    MailAttachments:
+      type: object
+      properties:
+        data:
+          description: List of email attachments.
+          type: array
+          items:
+            $ref: '#/components/schemas/UserAttachment'
+        metadata:
+          description: Pagination metadata for the result set.
+          allOf:
+          - $ref: '#/components/schemas/MetaData'
+    MobileInfo:
+      type: object
+      properties:
+        wopiSrc:
+          type: string
+          description: The WOPI (Web Application Open Platform Interface) source URL for the mobile application.
+        userId:
+          type: string
+          description: Unique identifier of the user.
+        service:
+          type: string
+          description: The WOPI service ID.
+        scheme:
+          type: string
+          description: URI scheme used by the mobile application to handle the file.
+        schemeSupport:
+          type: string
+          description: Indicates the level of support the mobile app has for the URI scheme.
+    Fingerprint:
+      type: object
+      properties:
+        algo:
+          type: string
+          description: The algorithm used to generate the fingerprint (e.g., sha3-256, md5).
+        hash:
+          type: string
+          description: The resulting hash value representing the fingerprint of the file or object.
+    Attachments:
+      type: object
+      properties:
+        data:
+          description: List of attachments.
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+        metadata:
+          description: Pagination metadata for the result set.
+          allOf:
+          - $ref: '#/components/schemas/MetaData'
+    EmailReturnRecipient:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: Unique identifier of the user who requested the return receipt.
+        user:
+          description: Details of the user who requested the return receipt.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+    Member:
+      type: object
+      properties:
+        objectId:
+          type: string
+          description: Unique identifier (UUID) of the associated object (file or folder).
+        roleId:
+          type: integer
+          description: Role assigned to the member.
+        userId:
+          type: string
+          description: Unique identifier (UUID) of the user.
+        groupId:
+          type: integer
+          description: Unique identifier of the LDAP group.
+        user:
+          description: User details of the member.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        role:
+          description: Role details assigned to the member.
+          allOf:
+          - $ref: '#/components/schemas/Role'
+        group:
+          description: Group details if the member belongs to a group.
+          allOf:
+          - $ref: '#/components/schemas/Group'
+        sharedBy:
+          description: Details of the user who shared the file or folder.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        created:
+          type: string
+          format: date
+          description: Date when the file or folder was shared.
+        inheritRoleId:
+          type: integer
+          description: Inherited role ID from the parent folder, if applicable.
+        allowedFolderRoleId:
+          type: array
+          description: List of allowed folder role IDs.
+          items:
+            type: integer
+        email:
+          type: string
+          description: Email associated with the member.
+        rank:
+          type: integer
+          description: Rank of the member role.
+        originFolder:
+          readOnly: true
+    BulkOperationInteger:
+      type: object
+      properties:
+        errors:
+          description: List of errors
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorInteger'
+        successIds:
+          type: array
+          description: List of succeeded IDs.
+          items:
+            type: integer
+    AttachmentDownloadReport:
+      description: Represents the download tracking report for the attachments of a specific email.
+      properties:
+        downloads:
+          description: List of download and interaction events recorded for the email's attachments.
+          type: array
+          items:
+            $ref: '#/components/schemas/AttachmentDownloadEvent'
+        sent_time:
+          description: Unix timestamp of when the email was sent.
+          type: integer
+        subject:
+          description: Subject line of the email.
+          type: string
+    BaseSendMailPostRequest:
+      type: object
+      properties:
+        to:
+          type: array
+          description: List of recipients' email addresses (To field).
+          items:
+            type: string
+            format: email
+        cc:
+          type: array
+          description: List of recipients' email addresses (CC field).
+          items:
+            type: string
+            format: email
+        bcc:
+          type: array
+          description: List of recipients' email addresses (BCC field).
+          items:
+            type: string
+            format: email
+        files:
+          type: array
+          description: List of file UUIDs to attach to the email.
+          items:
+            type: string
+        acl:
+          type: string
+          enum:
+          - verify_recipient
+          - no_auth
+          - otp
+          - internal
+          - anyone_auth
+          - email_otp
+          description: Defines the access control level for the email.<br>`verify_recipient` – Accessible only to specified recipients.<br>`no_auth` – Public access, no authentication required.<br>`otp` – Accessible to recipients; allows one-time passcode (OTP) via SMS for authentication.<br>`internal` – Accessible to recipients and users within the organization.<br>`anyone_auth` – Accessible to recipients and any authenticated user.<br>`email_otp` – Accessible to recipients; allows one-time passcode (OTP) via email for authentication.
+        expire:
+          type: string
+          format: date
+          description: The expiration date of the email.
+        draft:
+          type: boolean
+          description: Indicates if the email is being saved as a draft.
+        preview:
+          type: boolean
+          description: Indicates if the email is a view-only version.
+        watermark:
+          type: string
+          description: Text watermark applied to the email attachments (only applicable when `preview` is enabled).
+        secureBody:
+          type: boolean
+          description: If true, the email body is hidden from the notification email and is only visible to authenticated recipients when they open the secure link.
+        selfCopy:
+          type: boolean
+          description: Indicates if the sender should receive a copy of the email.
+        includeFingerprint:
+          type: boolean
+          description: If true, a cryptographic hash (fingerprint) of each attached file is included in the notification email, allowing recipients to verify file integrity.
+        parentEmailId:
+          type: string
+          description: The parent email ID used for email threading. Applicable only for `forward` or `reply` types.
+        isSelfReturnReceipt:
+          type: boolean
+          description: (Deprecated) Send download notification to the sender. Use 'returnReceipts' instead.
+        returnReceipts:
+          type: array
+          description: List of recipients who should receive a download notification.
+          items:
+            type: string
+            format: email
+        type:
+          type: string
+          enum:
+          - original
+          - forward
+          - reply
+          - resend
+          description: The type of email. Defaults to `original`.<br>`original` – A new email.<br>`forward` – Forwarding an existing email to new recipients.<br>`reply` – A reply to an existing email.<br>`resend` – Resending a previously sent email.
+        uploading:
+          type: boolean
+          description: Indicates whether file upload is still in progress. Prevents sending if set to `true`.
+        body:
+          type: string
+          description: The body content of the email.
+        subject:
+          type: string
+          maxLength: 998
+          description: 'The subject of the email (maximum length: 998 characters).'
+        webFormId:
+          type: string
+          description: The web form ID associated with the email.
+        webFormFields:
+          type: object
+          description: Custom web form fields associated with the email.
+        notifyExpired:
+          type: boolean
+          description: Indicates whether to send a notification email to the sender when the email expires.
+        sharedMailboxId:
+          type: string
+          description: UUID of the shared mailbox to send from. When set, the email is sent on behalf of the shared mailbox rather than the individual user.
+        trackingAccess:
+          type: array
+          description: List of email addresses to grant access to the email's download tracking dashboard.
+          items:
+            type: string
+            format: email
+    SafeEdit:
+      type: object
+      properties:
+        safeEditLocked:
+          type: boolean
+          description: Indicates if the file is locked through a SafeEdit session.
+        user:
+          description: The user responsible for locking the file via SafeEdit.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+    Package:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of the email package.
+        selfCopy:
+          type: boolean
+          description: Indicates whether the package includes a copy for the sender.
+        includeFingerprint:
+          type: boolean
+          description: Indicates whether a fingerprint (hash) of the package should be included for verification.
+        expire:
+          type: integer
+          description: Expiration time of the package in seconds from creation.
+        fileCount:
+          readOnly: true
+          description: Count of the files attached to the package.
+        deleted:
+          type: boolean
+          description: Indicates whether the package has been marked as deleted.
+        acl:
+          type: string
+          description: Access control list (ACL) associated with the package, specifying who can access it.
+        attachments:
+          description: List of attachments included in the package.
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+        downloadLink:
+          type: string
+          description: Link for accessing the email.
+    Mails:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Mail1'
+        metadata:
+          $ref: '#/components/schemas/MetaData'
+    Variables:
+      type: object
+      properties:
+        variable:
+          type: string
+          description: The variable name
+        value:
+          description: The variable value
+    Group:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: LDAP Group ID
+        name:
+          type: string
+          description: LDAP Group name
+        dn:
+          type: string
+          description: LDAP Group domain name
+        email:
+          type: string
+          description: LDAP Group email
+        description:
+          type: string
+          description: LDAP Group description

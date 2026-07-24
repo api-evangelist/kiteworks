@@ -1,0 +1,1268 @@
+openapi: 3.0.2
+info:
+  version: '28'
+  title: Kiteworks API Documentation activities scim API
+tags:
+- name: scim
+paths:
+  /rest/scim/users:
+    post:
+      summary: Create a user
+      description: "### Description:\n  Creates a new SCIM user with the specified attributes.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The newly created user is returned.\n"
+      tags:
+      - scim
+      parameters:
+      - in: query
+        name: attributes
+        required: false
+        explode: true
+        style: form
+        description: Comma-separated list of attribute names to include in the response.
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - id
+            - meta
+            - userName
+            - displayName
+            - userType
+            - preferredLanguage
+            - active
+            - emails
+            - phoneNumbers
+            - photos
+            - roles
+            - meta.resourceType
+            - meta.created
+            - meta.location
+            - urn:ietf:params:scim:schemas:core:2.0:User:id
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta
+            - urn:ietf:params:scim:schemas:core:2.0:User:userName
+            - urn:ietf:params:scim:schemas:core:2.0:User:displayName
+            - urn:ietf:params:scim:schemas:core:2.0:User:userType
+            - urn:ietf:params:scim:schemas:core:2.0:User:preferredLanguage
+            - urn:ietf:params:scim:schemas:core:2.0:User:active
+            - urn:ietf:params:scim:schemas:core:2.0:User:emails
+            - urn:ietf:params:scim:schemas:core:2.0:User:phoneNumbers
+            - urn:ietf:params:scim:schemas:core:2.0:User:photos
+            - urn:ietf:params:scim:schemas:core:2.0:User:roles
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.resourceType
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.created
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.location
+      - in: query
+        name: excludedAttributes
+        required: false
+        explode: true
+        style: form
+        description: Comma-separated list of attribute names to exclude from the response.
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - meta
+            - userName
+            - displayName
+            - userType
+            - preferredLanguage
+            - active
+            - emails
+            - phoneNumbers
+            - photos
+            - roles
+            - meta.resourceType
+            - meta.created
+            - meta.location
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta
+            - urn:ietf:params:scim:schemas:core:2.0:User:userName
+            - urn:ietf:params:scim:schemas:core:2.0:User:displayName
+            - urn:ietf:params:scim:schemas:core:2.0:User:userType
+            - urn:ietf:params:scim:schemas:core:2.0:User:preferredLanguage
+            - urn:ietf:params:scim:schemas:core:2.0:User:active
+            - urn:ietf:params:scim:schemas:core:2.0:User:emails
+            - urn:ietf:params:scim:schemas:core:2.0:User:phoneNumbers
+            - urn:ietf:params:scim:schemas:core:2.0:User:photos
+            - urn:ietf:params:scim:schemas:core:2.0:User:roles
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.resourceType
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.created
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.location
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScimUsersPostRequest'
+      responses:
+        '201':
+          description: The user is created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScimUser'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '409':
+          description: Conflict.
+        '490':
+          description: Request blocked by WAF
+    get:
+      summary: Retrieve users
+      description: "### Description:\n  Returns a paginated list of SCIM users matching the specified filter criteria.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  A list of SCIM users is returned.\n"
+      tags:
+      - scim
+      parameters:
+      - in: query
+        name: attributes
+        required: false
+        explode: true
+        style: form
+        description: Comma-separated list of attribute names to include in the response.
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - id
+            - meta
+            - userName
+            - displayName
+            - userType
+            - preferredLanguage
+            - active
+            - emails
+            - phoneNumbers
+            - photos
+            - roles
+            - meta.resourceType
+            - meta.created
+            - meta.location
+            - urn:ietf:params:scim:schemas:core:2.0:User:id
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta
+            - urn:ietf:params:scim:schemas:core:2.0:User:userName
+            - urn:ietf:params:scim:schemas:core:2.0:User:displayName
+            - urn:ietf:params:scim:schemas:core:2.0:User:userType
+            - urn:ietf:params:scim:schemas:core:2.0:User:preferredLanguage
+            - urn:ietf:params:scim:schemas:core:2.0:User:active
+            - urn:ietf:params:scim:schemas:core:2.0:User:emails
+            - urn:ietf:params:scim:schemas:core:2.0:User:phoneNumbers
+            - urn:ietf:params:scim:schemas:core:2.0:User:photos
+            - urn:ietf:params:scim:schemas:core:2.0:User:roles
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.resourceType
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.created
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.location
+      - in: query
+        name: excludedAttributes
+        required: false
+        explode: true
+        style: form
+        description: Comma-separated list of attribute names to exclude from the response.
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - meta
+            - userName
+            - displayName
+            - userType
+            - preferredLanguage
+            - active
+            - emails
+            - phoneNumbers
+            - photos
+            - roles
+            - meta.resourceType
+            - meta.created
+            - meta.location
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta
+            - urn:ietf:params:scim:schemas:core:2.0:User:userName
+            - urn:ietf:params:scim:schemas:core:2.0:User:displayName
+            - urn:ietf:params:scim:schemas:core:2.0:User:userType
+            - urn:ietf:params:scim:schemas:core:2.0:User:preferredLanguage
+            - urn:ietf:params:scim:schemas:core:2.0:User:active
+            - urn:ietf:params:scim:schemas:core:2.0:User:emails
+            - urn:ietf:params:scim:schemas:core:2.0:User:phoneNumbers
+            - urn:ietf:params:scim:schemas:core:2.0:User:photos
+            - urn:ietf:params:scim:schemas:core:2.0:User:roles
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.resourceType
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.created
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.location
+      - in: query
+        name: filter
+        required: false
+        description: SCIM filter expression to narrow the list of returned users (e.g., `userName eq "user@example.com"`).
+        schema:
+          type: string
+      - in: query
+        name: sortBy
+        required: false
+        description: Attribute name to sort results by.
+        schema:
+          type: string
+          enum:
+          - meta.created
+          - meta.location
+          - userName
+          - displayName
+          - userType
+          - preferredLanguage
+          - emails
+          - emails.value
+          - phoneNumbers
+          - phoneNumbers.value
+          - roles
+          - roles.value
+          - active
+          - urn:ietf:params:scim:schemas:core:2.0:User:meta.created
+          - urn:ietf:params:scim:schemas:core:2.0:User:meta.location
+          - urn:ietf:params:scim:schemas:core:2.0:User:userName
+          - urn:ietf:params:scim:schemas:core:2.0:User:displayName
+          - urn:ietf:params:scim:schemas:core:2.0:User:userType
+          - urn:ietf:params:scim:schemas:core:2.0:User:preferredLanguage
+          - urn:ietf:params:scim:schemas:core:2.0:User:emails
+          - urn:ietf:params:scim:schemas:core:2.0:User:emails.value
+          - urn:ietf:params:scim:schemas:core:2.0:User:phoneNumbers
+          - urn:ietf:params:scim:schemas:core:2.0:User:phoneNumbers.value
+          - urn:ietf:params:scim:schemas:core:2.0:User:roles
+          - urn:ietf:params:scim:schemas:core:2.0:User:roles.value
+          - urn:ietf:params:scim:schemas:core:2.0:User:active
+      - in: query
+        name: sortOrder
+        required: false
+        description: Sort direction for the results.<br>`ascending` – Sort in ascending order.<br>`descending` – Sort in descending order.
+        schema:
+          type: string
+          enum:
+          - ascending
+          - descending
+      - in: query
+        name: startIndex
+        required: false
+        description: 1-based index of the first result to return, used for pagination.
+        schema:
+          type: integer
+      - in: query
+        name: count
+        required: false
+        description: 'Maximum number of results to return per page (maximum: 1,000,000).'
+        schema:
+          type: integer
+          maximum: 1000000
+      responses:
+        '200':
+          description: The users are returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScimUsers'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '490':
+          description: Request blocked by WAF
+  /rest/scim/Users:
+    post:
+      summary: Create a user
+      description: "### Description:\n  Creates a new SCIM user with the specified attributes.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The newly created user is returned.\n"
+      tags:
+      - scim
+      parameters:
+      - in: query
+        name: attributes
+        required: false
+        explode: true
+        style: form
+        description: Comma-separated list of attribute names to include in the response.
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - id
+            - meta
+            - userName
+            - displayName
+            - userType
+            - preferredLanguage
+            - active
+            - emails
+            - phoneNumbers
+            - photos
+            - roles
+            - meta.resourceType
+            - meta.created
+            - meta.location
+            - urn:ietf:params:scim:schemas:core:2.0:User:id
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta
+            - urn:ietf:params:scim:schemas:core:2.0:User:userName
+            - urn:ietf:params:scim:schemas:core:2.0:User:displayName
+            - urn:ietf:params:scim:schemas:core:2.0:User:userType
+            - urn:ietf:params:scim:schemas:core:2.0:User:preferredLanguage
+            - urn:ietf:params:scim:schemas:core:2.0:User:active
+            - urn:ietf:params:scim:schemas:core:2.0:User:emails
+            - urn:ietf:params:scim:schemas:core:2.0:User:phoneNumbers
+            - urn:ietf:params:scim:schemas:core:2.0:User:photos
+            - urn:ietf:params:scim:schemas:core:2.0:User:roles
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.resourceType
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.created
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.location
+      - in: query
+        name: excludedAttributes
+        required: false
+        explode: true
+        style: form
+        description: Comma-separated list of attribute names to exclude from the response.
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - meta
+            - userName
+            - displayName
+            - userType
+            - preferredLanguage
+            - active
+            - emails
+            - phoneNumbers
+            - photos
+            - roles
+            - meta.resourceType
+            - meta.created
+            - meta.location
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta
+            - urn:ietf:params:scim:schemas:core:2.0:User:userName
+            - urn:ietf:params:scim:schemas:core:2.0:User:displayName
+            - urn:ietf:params:scim:schemas:core:2.0:User:userType
+            - urn:ietf:params:scim:schemas:core:2.0:User:preferredLanguage
+            - urn:ietf:params:scim:schemas:core:2.0:User:active
+            - urn:ietf:params:scim:schemas:core:2.0:User:emails
+            - urn:ietf:params:scim:schemas:core:2.0:User:phoneNumbers
+            - urn:ietf:params:scim:schemas:core:2.0:User:photos
+            - urn:ietf:params:scim:schemas:core:2.0:User:roles
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.resourceType
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.created
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.location
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScimUsersPostRequest'
+      responses:
+        '201':
+          description: The user is created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScimUser'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '409':
+          description: Conflict.
+        '490':
+          description: Request blocked by WAF
+    get:
+      summary: Retrieve users
+      description: "### Description:\n  Returns a paginated list of SCIM users matching the specified filter criteria.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  A list of SCIM users is returned.\n"
+      tags:
+      - scim
+      parameters:
+      - in: query
+        name: attributes
+        required: false
+        explode: true
+        style: form
+        description: Comma-separated list of attribute names to include in the response.
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - id
+            - meta
+            - userName
+            - displayName
+            - userType
+            - preferredLanguage
+            - active
+            - emails
+            - phoneNumbers
+            - photos
+            - roles
+            - meta.resourceType
+            - meta.created
+            - meta.location
+            - urn:ietf:params:scim:schemas:core:2.0:User:id
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta
+            - urn:ietf:params:scim:schemas:core:2.0:User:userName
+            - urn:ietf:params:scim:schemas:core:2.0:User:displayName
+            - urn:ietf:params:scim:schemas:core:2.0:User:userType
+            - urn:ietf:params:scim:schemas:core:2.0:User:preferredLanguage
+            - urn:ietf:params:scim:schemas:core:2.0:User:active
+            - urn:ietf:params:scim:schemas:core:2.0:User:emails
+            - urn:ietf:params:scim:schemas:core:2.0:User:phoneNumbers
+            - urn:ietf:params:scim:schemas:core:2.0:User:photos
+            - urn:ietf:params:scim:schemas:core:2.0:User:roles
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.resourceType
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.created
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.location
+      - in: query
+        name: excludedAttributes
+        required: false
+        explode: true
+        style: form
+        description: Comma-separated list of attribute names to exclude from the response.
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - meta
+            - userName
+            - displayName
+            - userType
+            - preferredLanguage
+            - active
+            - emails
+            - phoneNumbers
+            - photos
+            - roles
+            - meta.resourceType
+            - meta.created
+            - meta.location
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta
+            - urn:ietf:params:scim:schemas:core:2.0:User:userName
+            - urn:ietf:params:scim:schemas:core:2.0:User:displayName
+            - urn:ietf:params:scim:schemas:core:2.0:User:userType
+            - urn:ietf:params:scim:schemas:core:2.0:User:preferredLanguage
+            - urn:ietf:params:scim:schemas:core:2.0:User:active
+            - urn:ietf:params:scim:schemas:core:2.0:User:emails
+            - urn:ietf:params:scim:schemas:core:2.0:User:phoneNumbers
+            - urn:ietf:params:scim:schemas:core:2.0:User:photos
+            - urn:ietf:params:scim:schemas:core:2.0:User:roles
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.resourceType
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.created
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.location
+      - in: query
+        name: filter
+        required: false
+        description: SCIM filter expression to narrow the list of returned users (e.g., `userName eq "user@example.com"`).
+        schema:
+          type: string
+      - in: query
+        name: sortBy
+        required: false
+        description: Attribute name to sort results by.
+        schema:
+          type: string
+          enum:
+          - meta.created
+          - meta.location
+          - userName
+          - displayName
+          - userType
+          - preferredLanguage
+          - emails
+          - emails.value
+          - phoneNumbers
+          - phoneNumbers.value
+          - roles
+          - roles.value
+          - active
+          - urn:ietf:params:scim:schemas:core:2.0:User:meta.created
+          - urn:ietf:params:scim:schemas:core:2.0:User:meta.location
+          - urn:ietf:params:scim:schemas:core:2.0:User:userName
+          - urn:ietf:params:scim:schemas:core:2.0:User:displayName
+          - urn:ietf:params:scim:schemas:core:2.0:User:userType
+          - urn:ietf:params:scim:schemas:core:2.0:User:preferredLanguage
+          - urn:ietf:params:scim:schemas:core:2.0:User:emails
+          - urn:ietf:params:scim:schemas:core:2.0:User:emails.value
+          - urn:ietf:params:scim:schemas:core:2.0:User:phoneNumbers
+          - urn:ietf:params:scim:schemas:core:2.0:User:phoneNumbers.value
+          - urn:ietf:params:scim:schemas:core:2.0:User:roles
+          - urn:ietf:params:scim:schemas:core:2.0:User:roles.value
+          - urn:ietf:params:scim:schemas:core:2.0:User:active
+      - in: query
+        name: sortOrder
+        required: false
+        description: Sort direction for the results.<br>`ascending` – Sort in ascending order.<br>`descending` – Sort in descending order.
+        schema:
+          type: string
+          enum:
+          - ascending
+          - descending
+      - in: query
+        name: startIndex
+        required: false
+        description: 1-based index of the first result to return, used for pagination.
+        schema:
+          type: integer
+      - in: query
+        name: count
+        required: false
+        description: 'Maximum number of results to return per page (maximum: 1,000,000).'
+        schema:
+          type: integer
+          maximum: 1000000
+      responses:
+        '200':
+          description: The users are returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScimUsers'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '490':
+          description: Request blocked by WAF
+  /rest/scim/users/{id}:
+    put:
+      summary: Update a user
+      description: "### Description:\n  Updates the SCIM user corresponding to the provided ID.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The updated user is returned.\n"
+      tags:
+      - scim
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier (UUID) of the entity.
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScimUsersPutRequest'
+      responses:
+        '200':
+          description: The user is updated and returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScimUser'
+        '401':
+          description: 'ERR_AUTH_INVALID_CSRF
+
+
+            ERR_AUTH_UNAUTHORIZED
+
+            '
+        '404':
+          description: ERR_ENTITY_NOT_FOUND
+        '490':
+          description: Request blocked by WAF
+    get:
+      summary: Return a user
+      description: "### Description:\n  Returns the SCIM user corresponding to the provided ID.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The user is returned.\n"
+      tags:
+      - scim
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier (UUID) of the entity.
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: attributes
+        required: false
+        explode: true
+        style: form
+        description: Comma-separated list of attribute names to include in the response.
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - id
+            - meta
+            - userName
+            - displayName
+            - userType
+            - preferredLanguage
+            - active
+            - emails
+            - phoneNumbers
+            - photos
+            - roles
+            - meta.resourceType
+            - meta.created
+            - meta.location
+            - urn:ietf:params:scim:schemas:core:2.0:User:id
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta
+            - urn:ietf:params:scim:schemas:core:2.0:User:userName
+            - urn:ietf:params:scim:schemas:core:2.0:User:displayName
+            - urn:ietf:params:scim:schemas:core:2.0:User:userType
+            - urn:ietf:params:scim:schemas:core:2.0:User:preferredLanguage
+            - urn:ietf:params:scim:schemas:core:2.0:User:active
+            - urn:ietf:params:scim:schemas:core:2.0:User:emails
+            - urn:ietf:params:scim:schemas:core:2.0:User:phoneNumbers
+            - urn:ietf:params:scim:schemas:core:2.0:User:photos
+            - urn:ietf:params:scim:schemas:core:2.0:User:roles
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.resourceType
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.created
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.location
+      - in: query
+        name: excludedAttributes
+        required: false
+        explode: true
+        style: form
+        description: Comma-separated list of attribute names to exclude from the response.
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - meta
+            - userName
+            - displayName
+            - userType
+            - preferredLanguage
+            - active
+            - emails
+            - phoneNumbers
+            - photos
+            - roles
+            - meta.resourceType
+            - meta.created
+            - meta.location
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta
+            - urn:ietf:params:scim:schemas:core:2.0:User:userName
+            - urn:ietf:params:scim:schemas:core:2.0:User:displayName
+            - urn:ietf:params:scim:schemas:core:2.0:User:userType
+            - urn:ietf:params:scim:schemas:core:2.0:User:preferredLanguage
+            - urn:ietf:params:scim:schemas:core:2.0:User:active
+            - urn:ietf:params:scim:schemas:core:2.0:User:emails
+            - urn:ietf:params:scim:schemas:core:2.0:User:phoneNumbers
+            - urn:ietf:params:scim:schemas:core:2.0:User:photos
+            - urn:ietf:params:scim:schemas:core:2.0:User:roles
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.resourceType
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.created
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.location
+      responses:
+        '200':
+          description: The user is returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScimUser'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '490':
+          description: Request blocked by WAF
+    delete:
+      summary: Delete a user
+      description: "### Description:\n  Deletes the SCIM user corresponding to the provided ID.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The user is deleted.\n"
+      tags:
+      - scim
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier (UUID) of the entity.
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: remoteWipe
+        required: false
+        description: If true, triggers a remote wipe of the user data from all registered devices.
+        schema:
+          type: boolean
+          default: false
+      - in: query
+        name: deleteUnsharedData
+        required: false
+        description: If true, permanently deletes data that is not shared with other users.
+        schema:
+          type: boolean
+          default: null
+          nullable: true
+      - in: query
+        name: retainData
+        required: false
+        description: If true, retains the user data after deletion.
+        schema:
+          type: boolean
+          default: null
+          nullable: true
+      - in: query
+        name: retainPermissionToSharedData
+        required: false
+        description: If true, the specified `retainToUser` will retain access to shared data.
+        schema:
+          type: boolean
+          default: false
+      - in: query
+        name: retainToUser
+        required: false
+        description: UUID of the user who will receive ownership of the deleted user data.
+        schema:
+          type: string
+          default: false
+      responses:
+        '204':
+          description: The user is deleted successfully.
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '490':
+          description: Request blocked by WAF
+  /rest/scim/Users/{id}:
+    put:
+      summary: Update a user
+      description: "### Description:\n  Updates the SCIM user corresponding to the provided ID.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The updated user is returned.\n"
+      tags:
+      - scim
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier (UUID) of the entity.
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScimUsersPutRequest'
+      responses:
+        '200':
+          description: The user is updated and returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScimUser'
+        '401':
+          description: 'ERR_AUTH_INVALID_CSRF
+
+
+            ERR_AUTH_UNAUTHORIZED
+
+            '
+        '404':
+          description: ERR_ENTITY_NOT_FOUND
+        '490':
+          description: Request blocked by WAF
+    get:
+      summary: Return a user
+      description: "### Description:\n  Returns the SCIM user corresponding to the provided ID.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The user is returned.\n"
+      tags:
+      - scim
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier (UUID) of the entity.
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: attributes
+        required: false
+        explode: true
+        style: form
+        description: Comma-separated list of attribute names to include in the response.
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - id
+            - meta
+            - userName
+            - displayName
+            - userType
+            - preferredLanguage
+            - active
+            - emails
+            - phoneNumbers
+            - photos
+            - roles
+            - meta.resourceType
+            - meta.created
+            - meta.location
+            - urn:ietf:params:scim:schemas:core:2.0:User:id
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta
+            - urn:ietf:params:scim:schemas:core:2.0:User:userName
+            - urn:ietf:params:scim:schemas:core:2.0:User:displayName
+            - urn:ietf:params:scim:schemas:core:2.0:User:userType
+            - urn:ietf:params:scim:schemas:core:2.0:User:preferredLanguage
+            - urn:ietf:params:scim:schemas:core:2.0:User:active
+            - urn:ietf:params:scim:schemas:core:2.0:User:emails
+            - urn:ietf:params:scim:schemas:core:2.0:User:phoneNumbers
+            - urn:ietf:params:scim:schemas:core:2.0:User:photos
+            - urn:ietf:params:scim:schemas:core:2.0:User:roles
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.resourceType
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.created
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.location
+      - in: query
+        name: excludedAttributes
+        required: false
+        explode: true
+        style: form
+        description: Comma-separated list of attribute names to exclude from the response.
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - meta
+            - userName
+            - displayName
+            - userType
+            - preferredLanguage
+            - active
+            - emails
+            - phoneNumbers
+            - photos
+            - roles
+            - meta.resourceType
+            - meta.created
+            - meta.location
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta
+            - urn:ietf:params:scim:schemas:core:2.0:User:userName
+            - urn:ietf:params:scim:schemas:core:2.0:User:displayName
+            - urn:ietf:params:scim:schemas:core:2.0:User:userType
+            - urn:ietf:params:scim:schemas:core:2.0:User:preferredLanguage
+            - urn:ietf:params:scim:schemas:core:2.0:User:active
+            - urn:ietf:params:scim:schemas:core:2.0:User:emails
+            - urn:ietf:params:scim:schemas:core:2.0:User:phoneNumbers
+            - urn:ietf:params:scim:schemas:core:2.0:User:photos
+            - urn:ietf:params:scim:schemas:core:2.0:User:roles
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.resourceType
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.created
+            - urn:ietf:params:scim:schemas:core:2.0:User:meta.location
+      responses:
+        '200':
+          description: The user is returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScimUser'
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '490':
+          description: Request blocked by WAF
+    delete:
+      summary: Delete a user
+      description: "### Description:\n  Deletes the SCIM user corresponding to the provided ID.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The user is deleted.\n"
+      tags:
+      - scim
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier (UUID) of the entity.
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: remoteWipe
+        required: false
+        description: If true, triggers a remote wipe of the user data from all registered devices.
+        schema:
+          type: boolean
+          default: false
+      - in: query
+        name: deleteUnsharedData
+        required: false
+        description: If true, permanently deletes data that is not shared with other users.
+        schema:
+          type: boolean
+          default: null
+          nullable: true
+      - in: query
+        name: retainData
+        required: false
+        description: If true, retains the user data after deletion.
+        schema:
+          type: boolean
+          default: null
+          nullable: true
+      - in: query
+        name: retainPermissionToSharedData
+        required: false
+        description: If true, the specified `retainToUser` will retain access to shared data.
+        schema:
+          type: boolean
+          default: false
+      - in: query
+        name: retainToUser
+        required: false
+        description: UUID of the user who will receive ownership of the deleted user data.
+        schema:
+          type: string
+          default: false
+      responses:
+        '204':
+          description: The user is deleted successfully.
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '490':
+          description: Request blocked by WAF
+  /rest/scim/ServiceProviderConfig:
+    get:
+      summary: Return SCIM service provider configuration
+      description: "### Description:\n  Returns the SCIM service provider configuration, including supported features and authentication schemes.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The service provider configuration is returned.\n"
+      tags:
+      - scim
+      responses:
+        '200':
+          description: The service provider configuration is returned successfully.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '490':
+          description: Request blocked by WAF
+  /rest/scim/Schemas:
+    get:
+      summary: Return SCIM schemas
+      description: "### Description:\n  Returns all supported SCIM schemas.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The supported SCIM schemas are returned.\n"
+      tags:
+      - scim
+      responses:
+        '200':
+          description: The supported SCIM schemas are returned successfully.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '490':
+          description: Request blocked by WAF
+  /rest/scim/Schemas/{id}:
+    get:
+      summary: Return a SCIM schema
+      description: "### Description:\n  Returns the SCIM schema corresponding to the provided ID.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The requested SCIM schema is returned if it exists.\n"
+      tags:
+      - scim
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The ID/URN of the schema
+        schema:
+          type: string
+          enum:
+          - User
+          - urn:ietf:params:scim:schemas:core:2.0:User
+      responses:
+        '200':
+          description: The requested SCIM schema is returned successfully.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '490':
+          description: Request blocked by WAF
+  /rest/scim/ResourceTypes:
+    get:
+      summary: Return SCIM resource types
+      description: "### Description:\n  Returns all supported SCIM resource types.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The supported SCIM resource types are returned.\n"
+      tags:
+      - scim
+      responses:
+        '200':
+          description: The supported SCIM resource types are returned successfully.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '490':
+          description: Request blocked by WAF
+  /rest/scim/ResourceTypes/{id}:
+    get:
+      summary: Return a SCIM resource type
+      description: "### Description:\n  Returns the SCIM resource type corresponding to the provided ID.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The requested SCIM resource type is returned if it exists.\n"
+      tags:
+      - scim
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The ID/URN of the schema
+        schema:
+          type: string
+          enum:
+          - User
+          - urn:ietf:params:scim:schemas:core:2.0:User
+      responses:
+        '200':
+          description: The requested SCIM resource type is returned successfully.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden.
+        '490':
+          description: Request blocked by WAF
+components:
+  schemas:
+    ScimMeta:
+      type: object
+      properties:
+        resourceType:
+          type: string
+          description: SCIM resource type (e.g., User).
+        created:
+          type: string
+          format: date
+          description: Date and time when the SCIM resource was created.
+        lastModified:
+          type: string
+          format: date
+          description: Date and time when the SCIM resource was last modified.
+        location:
+          type: string
+          description: URI of the SCIM resource.
+    ScimMultiValue1:
+      type: object
+      properties:
+        value:
+          type: string
+          description: Value of the multi-value attribute (e.g., email address or phone number).
+        type:
+          type: string
+          description: Type label for the value (e.g., work, home).
+        primary:
+          type: boolean
+          description: Indicates whether this is the primary value for the attribute.
+    DataRetentionOption:
+      type: object
+      properties:
+        remoteWipe:
+          type: boolean
+          default: false
+          description: If true, triggers a remote wipe of the user data from all registered devices.
+        deleteUnsharedData:
+          type: boolean
+          default: null
+          nullable: true
+          description: If true, permanently deletes data that is not shared with other users.
+        retainData:
+          type: boolean
+          default: null
+          nullable: true
+          description: If true, retains the user data after deletion.
+        retainPermissionToSharedData:
+          type: boolean
+          default: false
+          description: If true, the specified `retainToUser` will retain access to shared data.
+        retainToUser:
+          type: string
+          default: false
+          description: UUID of the user who will receive ownership of the deleted user data.
+    ScimMultiValueMobile:
+      type: object
+      properties:
+        primary:
+          type: boolean
+          description: If true, designates this entry as the primary value.
+        value:
+          type: string
+          description: The phone number value.
+        type:
+          type: string
+          description: The type of phone number (e.g., `mobile`, `work`, `home`).
+      required:
+      - type
+      - value
+    ScimUser:
+      type: object
+      properties:
+        schemas:
+          type: array
+          description: List of SCIM schema URIs applicable to this resource.
+          items:
+            type: string
+        id:
+          type: string
+          description: Unique identifier of the SCIM user (maps to the user GUID).
+        meta:
+          description: SCIM metadata for the user resource.
+          allOf:
+          - $ref: '#/components/schemas/ScimMeta'
+        userName:
+          type: string
+          description: Username of the SCIM user (maps to email address).
+        displayName:
+          type: string
+          description: Display name of the SCIM user.
+        userType:
+          type: string
+          description: User type based on the assigned profile name.
+        preferredLanguage:
+          type: string
+          description: Preferred language of the user.
+        active:
+          type: boolean
+          description: Indicates whether the user account is active.
+        emails:
+          description: List of email addresses for the user.
+          type: array
+          items:
+            $ref: '#/components/schemas/ScimMultiValue1'
+        phoneNumbers:
+          description: List of phone numbers for the user.
+          type: array
+          items:
+            $ref: '#/components/schemas/ScimMultiValue1'
+        photos:
+          description: List of photo URLs for the user.
+          type: array
+          items:
+            $ref: '#/components/schemas/ScimMultiValue1'
+        roles:
+          description: List of roles assigned to the user.
+          type: array
+          items:
+            $ref: '#/components/schemas/ScimMultiValue1'
+    ScimUsersPostRequest:
+      type: object
+      properties:
+        schemas:
+          type: array
+          minItems: 1
+          description: List of SCIM schema URNs applicable to this resource. Must include `urn:ietf:params:scim:schemas:core:2.0:User`.
+          items:
+            type: string
+        password:
+          type: string
+          description: The user's password.
+        displayName:
+          type: string
+          pattern: ^[^<>]+$
+          description: The user's display name. Must not contain `<` or `>` characters.
+        userType:
+          type: string
+          pattern: ^[A-Za-z0-9_-]+$
+          description: The user's type identifier (alphanumeric characters, underscores, and hyphens only).
+        phoneNumbers:
+          type: array
+          description: List of phone numbers associated with the user.
+          items:
+            $ref: '#/components/schemas/ScimMultiValueMobile'
+        roles:
+          type: array
+          maxItems: 1
+          description: List of roles assigned to the user. At most one role may be specified.
+          items:
+            $ref: '#/components/schemas/ScimMultiValue'
+        userName:
+          type: string
+          format: email
+          description: The user's email address, used as the unique username.
+        notify:
+          type: boolean
+          default: false
+          description: If true, sends a notification email to the user upon account creation.
+        userMustChange:
+          type: boolean
+          default: false
+          description: If true, requires the user to change their password on first login.
+      required:
+      - schemas
+      - userName
+    ScimUsers:
+      type: object
+      properties:
+        schemas:
+          type: array
+          description: List of SCIM schema URIs applicable to this response.
+          items:
+            type: string
+        totalResults:
+          type: integer
+          description: Total number of matching SCIM users.
+        itemsPerPage:
+          type: integer
+          description: Number of users returned per page.
+        startIndex:
+          type: integer
+          description: 1-based index of the first result in the current page.
+        Resources:
+          description: List of SCIM user resources.
+          type: array
+          items:
+            $ref: '#/components/schemas/ScimUser'
+    ScimMultiValue:
+      type: object
+      properties:
+        value:
+          type: string
+          pattern: ^[A-Za-z0-9 _-]+$
+          description: The value of the multi-valued attribute.
+    ScimUsersPutRequest:
+      type: object
+      properties:
+        schemas:
+          type: array
+          minItems: 1
+          description: List of SCIM schema URNs applicable to this resource. Must include `urn:ietf:params:scim:schemas:core:2.0:User`.
+          items:
+            type: string
+        password:
+          type: string
+          description: The user's password.
+        displayName:
+          type: string
+          pattern: ^[^<>]+$
+          description: The user's display name. Must not contain `<` or `>` characters.
+        userType:
+          type: string
+          pattern: ^[A-Za-z0-9_-]+$
+          description: The user's type identifier (alphanumeric characters, underscores, and hyphens only).
+        phoneNumbers:
+          type: array
+          description: List of phone numbers associated with the user.
+          items:
+            $ref: '#/components/schemas/ScimMultiValueMobile'
+        roles:
+          type: array
+          maxItems: 1
+          description: List of roles assigned to the user. At most one role may be specified.
+          items:
+            $ref: '#/components/schemas/ScimMultiValue'
+        active:
+          type: boolean
+          description: If true, activates the user account; if false, deactivates it.
+        userTypeDemotionOptions:
+          description: Data retention options to apply when the user type is demoted.
+          allOf:
+          - $ref: '#/components/schemas/DataRetentionOption'
+      required:
+      - schemas

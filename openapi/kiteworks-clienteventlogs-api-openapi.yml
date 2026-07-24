@@ -1,0 +1,142 @@
+openapi: 3.0.2
+info:
+  version: '28'
+  title: Kiteworks API Documentation activities clientEventLogs API
+tags:
+- name: clientEventLogs
+paths:
+  /rest/clients/action/eventLog:
+    post:
+      summary: Submit client event logs
+      description: "### Description:\n  Submits one or more event log entries from the client for recording on the server.\n### Precondition:\n  User must be authenticated.\n### Response:\n  Returns the created event log entries.\n"
+      tags:
+      - clientEventLogs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkClientEventLogsPostRequest'
+      responses:
+        '201':
+          description: The event logs have been successfully submitted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientCustomEventLog'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INVALID_PARAMETER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INVALID_PARAMETER:
+                  summary: Invalid Parameter Exception
+                  description: Invalid Parameter Exception
+                  value:
+                    errors:
+                    - code: ERR_INVALID_PARAMETER
+                      message: Invalid Parameter Exception
+        '490':
+          description: Request blocked by WAF
+components:
+  schemas:
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    BulkClientEventLogsPostRequest:
+      type: object
+      properties:
+        events:
+          type: array
+          description: List of client event log entries to submit.
+          items:
+            $ref: '#/components/schemas/ClientEventLogsPostRequest'
+    ClientEventLogsPostRequest:
+      type: object
+      properties:
+        created:
+          type: integer
+          description: Unix timestamp of when this event was created on the client.
+        eventName:
+          type: string
+          description: The name of the event being logged.
+        successful:
+          type: boolean
+          description: Indicates whether the event completed successfully.
+        eventId:
+          type: string
+          description: The unique identifier for this event on the client side.
+        data:
+          type: object
+          description: Additional event details as a key-value map.
+        singleLine:
+          type: string
+          description: A single-line summary of the event.
+      required:
+      - data
+      - eventId
+      - eventName
+      - singleLine
+      - successful
+    ClientCustomEventLog:
+      type: object
+      properties:
+        successIds:
+          type: array
+          description: List of event IDs successfully logged.
+          items:
+            type: string
+        failedIds:
+          type: array
+          description: List of event IDs that failed to log.
+          items:
+            type: string

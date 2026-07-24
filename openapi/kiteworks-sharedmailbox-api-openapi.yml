@@ -1,0 +1,1118 @@
+openapi: 3.0.2
+info:
+  version: '28'
+  title: Kiteworks API Documentation activities sharedMailbox API
+tags:
+- name: sharedMailbox
+paths:
+  /rest/sharedMailboxes:
+    patch:
+      summary: Update current user's shared mailbox active status
+      description: "### Description:\n  Updates the active status of one or more shared mailboxes for the current user.\n### Precondition:\n  The user must be authenticated and belong to an internal domain.\n### Response:\n  The updated list of shared mailboxes is returned.\n"
+      tags:
+      - sharedMailbox
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SharedMailboxStatusPatchRequest'
+      responses:
+        '200':
+          description: The shared mailbox status is updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SharedMailboxList'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_NOT_INTERNAL_DOMAIN'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_NOT_INTERNAL_DOMAIN:
+                  summary: The email is not internal domain
+                  description: The email is not internal domain
+                  value:
+                    errors:
+                    - code: ERR_NOT_INTERNAL_DOMAIN
+                      message: The email is not internal domain
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_MAX_ACTIVED_SHAREDMAILBOX'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_MAX_ACTIVED_SHAREDMAILBOX:
+                  summary: Maximum activated shared mailbox reached
+                  description: Maximum activated shared mailbox reached
+                  value:
+                    errors:
+                    - code: ERR_MAX_ACTIVED_SHAREDMAILBOX
+                      message: Maximum activated shared mailbox reached
+        '490':
+          description: Request blocked by WAF
+    get:
+      summary: Return current user's shared mailboxes
+      description: "### Description:\n  Returns a paginated list of shared mailboxes available to the current user.\n### Precondition:\n  The user must be authenticated and belong to an internal domain.\n### Response:\n  A list of shared mailboxes is returned.\n"
+      tags:
+      - sharedMailbox
+      parameters:
+      - in: query
+        name: orderBy
+        required: false
+        description: 'Sort order for the results.<br>Allowed values: `modified:asc`, `modified:desc`, `active:asc`, `active:desc`.'
+        schema:
+          type: string
+          enum:
+          - modified:asc
+          - modified:desc
+          - active:asc
+          - active:desc
+      - in: query
+        name: limit
+        required: false
+        description: Maximum number of results to return.
+        schema:
+          type: integer
+          minimum: 1
+      - in: query
+        name: offset
+        required: false
+        description: Number of items to skip before returning results, for pagination.
+        schema:
+          type: integer
+          minimum: 0
+      - in: query
+        name: active
+        required: false
+        description: Filter by active status. If true, returns only active shared mailboxes; if false, returns only inactive ones.
+        schema:
+          type: boolean
+      - in: query
+        name: id:in
+        required: false
+        explode: true
+        style: form
+        description: Comma-separated list of shared mailbox user IDs to filter by.  (Recommended request size <= 100)
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: The shared mailboxes are returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SharedMailboxList'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_NOT_INTERNAL_DOMAIN'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_NOT_INTERNAL_DOMAIN:
+                  summary: The email is not internal domain
+                  description: The email is not internal domain
+                  value:
+                    errors:
+                    - code: ERR_NOT_INTERNAL_DOMAIN
+                      message: The email is not internal domain
+        '490':
+          description: Request blocked by WAF
+  /rest/sharedMailboxes/mail/actions/counters:
+    get:
+      summary: Return current user's shared mailbox counters
+      description: "### Description:\n  Returns unread message counters for the current user's active shared mailboxes.\n### Precondition:\n  The user must be authenticated.\n### Response:\n  A list of mail counters for each active shared mailbox is returned.\n"
+      tags:
+      - sharedMailbox
+      parameters:
+      - in: query
+        name: id:in
+        required: false
+        explode: true
+        style: form
+        description: Comma-separated list of shared mailbox user IDs to filter by.  (Recommended request size <= 100)
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: The shared mailbox counters are returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MailCountersList'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+  /rest/sharedMailboxes/{id}/settings:
+    get:
+      summary: Return shared mailbox settings
+      description: "### Description:\n  Returns the application settings for the specified shared mailbox.\n### Precondition:\n  The user must be authenticated and the specified shared mailbox must be active.\n### Response:\n  The shared mailbox settings are returned.\n"
+      tags:
+      - sharedMailbox
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier (UUID) of the user.
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: The shared mailbox settings are returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SharedMailboxSetting'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+  /rest/sharedMailboxes/{id}/webForms:
+    get:
+      summary: List web forms available to a shared mailbox
+      description: "### Description:\n  Returns a list of web forms available to the specified shared mailbox.\n### Precondition:\n  The user must be authenticated and the specified shared mailbox must be active.\n### Response:\n  A list of web forms is returned.\n"
+      tags:
+      - sharedMailbox
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier (UUID) of the user.
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: returnEntity
+        required: false
+        description: If true, includes the entity in the response body.
+        schema:
+          type: boolean
+      - in: query
+        name: with
+        required: false
+        description: Specifies additional fields to include in the response.
+        schema:
+          type: string
+      - in: query
+        name: mode
+        required: false
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - compact
+          - full_no_links
+          - full_with_links
+          - full
+      responses:
+        '200':
+          description: The web forms are returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebFormList'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+  /rest/admin/sharedMailboxes:
+    post:
+      summary: Create a shared mailbox
+      description: "### Description:\n  Converts the specified user account into a shared mailbox and assigns the specified members.\n### Precondition:\n  Caller must have system, application, or helpdesk admin role.\n### Response:\n  The shared mailbox is created and its details are returned.\n"
+      tags:
+      - sharedMailbox
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SharedMailboxPostRequest'
+      responses:
+        '201':
+          description: The shared mailbox has been created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SharedMailbox'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_ADMIN, ERR_ACCESS_USER, ERR_ADMIN_ROLE_RANK_RESTRICTED, ERR_NOT_INTERNAL_DOMAIN'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_ADMIN:
+                  summary: Insufficient admin access permissions
+                  description: Insufficient admin access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_ADMIN
+                      message: Insufficient admin access permissions
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_ADMIN_ROLE_RANK_RESTRICTED:
+                  summary: Action is restricted due to admin role rank
+                  description: Action is restricted due to admin role rank
+                  value:
+                    errors:
+                    - code: ERR_ADMIN_ROLE_RANK_RESTRICTED
+                      message: Action is restricted due to admin role rank
+                ERR_NOT_INTERNAL_DOMAIN:
+                  summary: The email is not internal domain
+                  description: The email is not internal domain
+                  value:
+                    errors:
+                    - code: ERR_NOT_INTERNAL_DOMAIN
+                      message: The email is not internal domain
+        '413':
+          description: 'Content Too Large<br /><br /><i>Possible error codes: </i>ERR_SYSTEM_NO_STORAGE_AVAILABLE'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_SYSTEM_NO_STORAGE_AVAILABLE:
+                  summary: Folder owner's remaining storage quota does not permit for a file upload of this size.
+                  description: Folder owner's remaining storage quota does not permit for a file upload of this size.
+                  value:
+                    errors:
+                    - code: ERR_SYSTEM_NO_STORAGE_AVAILABLE
+                      message: Folder owner's remaining storage quota does not permit for a file upload of this size.
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INVALID_PARAMETER, ERR_CANNOT_RETAIN_DATA_TO_THE_SAME_USER, ERR_USER_IS_NOT_INTERNAL_DL_OR_INTERNAL_ACCOUNT, ERR_CANNOT_RETAIN_DATA_TO_UNVERIFIED_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INVALID_PARAMETER:
+                  summary: Invalid Parameter Exception
+                  description: Invalid Parameter Exception
+                  value:
+                    errors:
+                    - code: ERR_INVALID_PARAMETER
+                      message: Invalid Parameter Exception
+                ERR_CANNOT_RETAIN_DATA_TO_THE_SAME_USER:
+                  summary: 'Cannot retain data: selected user is being deleted/demoted. Please choose a different user.'
+                  description: 'Cannot retain data: selected user is being deleted/demoted. Please choose a different user.'
+                  value:
+                    errors:
+                    - code: ERR_CANNOT_RETAIN_DATA_TO_THE_SAME_USER
+                      message: 'Cannot retain data: selected user is being deleted/demoted. Please choose a different user.'
+                ERR_USER_IS_NOT_INTERNAL_DL_OR_INTERNAL_ACCOUNT:
+                  summary: User is not internal distribution list or internal domain
+                  description: User is not internal distribution list or internal domain
+                  value:
+                    errors:
+                    - code: ERR_USER_IS_NOT_INTERNAL_DL_OR_INTERNAL_ACCOUNT
+                      message: User is not internal distribution list or internal domain
+                ERR_CANNOT_RETAIN_DATA_TO_UNVERIFIED_USER:
+                  summary: 'Cannot retain data: selected user is unverified. Please select a verified user before proceeding.'
+                  description: 'Cannot retain data: selected user is unverified. Please select a verified user before proceeding.'
+                  value:
+                    errors:
+                    - code: ERR_CANNOT_RETAIN_DATA_TO_UNVERIFIED_USER
+                      message: 'Cannot retain data: selected user is unverified. Please select a verified user before proceeding.'
+        '490':
+          description: Request blocked by WAF
+    get:
+      summary: Return shared mailbox list
+      description: "### Description:\n  Returns a paginated list of shared mailboxes, optionally filtered by user IDs.\n### Precondition:\n  Caller must have system, application, or helpdesk admin role.\n### Response:\n  A list of shared mailboxes is returned.\n"
+      tags:
+      - sharedMailbox
+      parameters:
+      - in: query
+        name: orderBy
+        required: false
+        description: Sort order for the results.<br>`modified:asc` – Sort by last modified date, ascending.<br>`modified:desc` – Sort by last modified date, descending.<br>`active:asc` – Sort by active status, ascending.<br>`active:desc` – Sort by active status, descending.
+        schema:
+          type: string
+          enum:
+          - modified:asc
+          - modified:desc
+          - active:asc
+          - active:desc
+      - in: query
+        name: limit
+        required: false
+        description: Maximum number of results to return.
+        schema:
+          type: integer
+          minimum: 1
+      - in: query
+        name: offset
+        required: false
+        description: Number of results to skip before returning, for pagination.
+        schema:
+          type: integer
+          minimum: 0
+      - in: query
+        name: active
+        required: false
+        description: Filter by active status. If true, returns only active shared mailboxes; if false, returns only inactive ones.
+        schema:
+          type: boolean
+      - in: query
+        name: id:in
+        required: false
+        explode: true
+        style: form
+        description: Comma-separated list of shared mailbox user UUIDs to filter by.  (Recommended request size <= 100)
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: The shared mailboxes have been successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SharedMailboxList'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '490':
+          description: Request blocked by WAF
+    delete:
+      summary: Delete shared mailboxes
+      description: "### Description:\n  Deletes the specified shared mailboxes and restores the associated user accounts.\n### Precondition:\n  Caller must have system, application, or helpdesk admin role.\n### Response:\n  The shared mailboxes are deleted successfully.\n"
+      tags:
+      - sharedMailbox
+      parameters:
+      - in: query
+        name: id:in
+        required: false
+        explode: true
+        style: form
+        description: Comma-separated list of shared mailbox user UUIDs to delete.  (Recommended request size <= 100)
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '204':
+          description: The shared mailboxes have been deleted successfully.
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED, ERR_ENTITY_NOT_FOUND'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+                ERR_ENTITY_NOT_FOUND:
+                  summary: Entity does not exist
+                  description: Entity does not exist
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_NOT_FOUND
+                      message: Entity does not exist
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_ADMIN, ERR_ACCESS_USER, ERR_ADMIN_ROLE_RANK_RESTRICTED, ERR_LICENSE_MAX_USERS_COUNT_REACHED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_ADMIN:
+                  summary: Insufficient admin access permissions
+                  description: Insufficient admin access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_ADMIN
+                      message: Insufficient admin access permissions
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_ADMIN_ROLE_RANK_RESTRICTED:
+                  summary: Action is restricted due to admin role rank
+                  description: Action is restricted due to admin role rank
+                  value:
+                    errors:
+                    - code: ERR_ADMIN_ROLE_RANK_RESTRICTED
+                      message: Action is restricted due to admin role rank
+                ERR_LICENSE_MAX_USERS_COUNT_REACHED:
+                  summary: License count has been reached
+                  description: License count has been reached
+                  value:
+                    errors:
+                    - code: ERR_LICENSE_MAX_USERS_COUNT_REACHED
+                      message: License count has been reached
+        '490':
+          description: Request blocked by WAF
+  /rest/admin/sharedMailboxes/{id}:
+    patch:
+      summary: Update shared mailbox members
+      description: "### Description:\n  Updates the member list of the specified shared mailbox.\n### Precondition:\n  Caller must have system, application, or helpdesk admin role.\n### Response:\n  The shared mailbox is updated and its details are returned.\n"
+      tags:
+      - sharedMailbox
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier (UUID) of the user.
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SharedMailboxPatchRequest'
+      responses:
+        '200':
+          description: The shared mailbox has been updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SharedMailbox'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_ADMIN, ERR_ACCESS_USER, ERR_ADMIN_ROLE_RANK_RESTRICTED, ERR_NOT_INTERNAL_DOMAIN'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_ADMIN:
+                  summary: Insufficient admin access permissions
+                  description: Insufficient admin access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_ADMIN
+                      message: Insufficient admin access permissions
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_ADMIN_ROLE_RANK_RESTRICTED:
+                  summary: Action is restricted due to admin role rank
+                  description: Action is restricted due to admin role rank
+                  value:
+                    errors:
+                    - code: ERR_ADMIN_ROLE_RANK_RESTRICTED
+                      message: Action is restricted due to admin role rank
+                ERR_NOT_INTERNAL_DOMAIN:
+                  summary: The email is not internal domain
+                  description: The email is not internal domain
+                  value:
+                    errors:
+                    - code: ERR_NOT_INTERNAL_DOMAIN
+                      message: The email is not internal domain
+        '490':
+          description: Request blocked by WAF
+components:
+  schemas:
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    SharedMailboxSetting:
+      type: object
+      properties:
+        fileFilterExclusionGroups:
+          type: array
+          description: List of file type groups excluded from upload.
+          items:
+            type: string
+        sendOptionEnabled:
+          description: Send options available to users when composing emails.
+          allOf:
+          - $ref: '#/components/schemas/SendOption'
+        ACL:
+          type: array
+          description: List of access control levels available for the shared mailbox.
+          items:
+            type: string
+        maxLinkExpiration:
+          type: integer
+          description: Maximum link expiration period in days allowed by policy.
+        returnReceiptDefault:
+          type: boolean
+          description: Indicates whether return receipts are requested by default.
+        zipLimit:
+          type: integer
+          description: Maximum number of files that can be included in a single ZIP download.
+        sendFileLimit:
+          type: integer
+          description: Maximum number of files that can be sent in a single email.
+        selfCopy:
+          type: string
+          description: Policy for sending a copy of outgoing emails to the sender.
+        defaultLinkExpiry:
+          type: integer
+          description: Default link expiration period in days.
+        aclDefault:
+          type: string
+          description: Default access control level applied to new files.
+        fileFilterCustomFileTypes:
+          type: array
+          description: List of custom file extensions excluded from upload.
+          items:
+            type: string
+        watermarkEnabled:
+          type: boolean
+          description: Indicates whether document watermarking is enabled.
+        returnReceipt:
+          type: string
+          description: Policy for requesting read receipts on sent emails.
+        mailExpirationNotification:
+          type: string
+          description: Policy for sending email expiration notifications.
+        includeFingerprintDefault:
+          type: boolean
+          description: Indicates whether fingerprint inclusion is enabled by default.
+        includeFingerprint:
+          type: string
+          description: Policy for including a digital fingerprint in sent emails.
+        secureMessageBody:
+          type: string
+          description: Policy for securing the message body in outgoing emails.
+        selfCopyDefault:
+          type: boolean
+          description: Indicates whether self-copy is enabled by default.
+        allowedFileExtensions:
+          type: array
+          description: List of file extensions explicitly allowed for upload.
+          items:
+            type: string
+        excludedFileExtensions:
+          type: array
+          description: List of file extensions blocked from upload.
+          items:
+            type: string
+        secureMessageBodyDefault:
+          type: boolean
+          description: Indicates whether secure message body is enabled by default.
+        watermarkPreview:
+          type: string
+          description: Watermark text or template applied to file previews.
+        sendExternal:
+          type: boolean
+          description: Indicates whether users can send files to external recipients.
+        defaultForm:
+          type: string
+          description: Identifier of the default web form associated with the shared mailbox.
+        defaultCountryCode:
+          type: string
+          description: Default country code used for phone number formatting.
+    WebForm:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the web form.
+        lastModified:
+          type: string
+          format: date
+          description: Date and time when the web form was last modified.
+        name:
+          type: string
+          description: Display name of the web form.
+        description:
+          type: string
+          description: Description of the web form.
+        url:
+          type: string
+          description: URL where the web form is accessible.
+        enabled:
+          type: boolean
+          description: Indicates whether the web form is active.
+        authRequired:
+          type: boolean
+          description: Indicates whether authentication is required to submit the web form.
+        embedded:
+          type: boolean
+          description: Indicates whether the web form can be embedded in external pages.
+        standalone:
+          type: boolean
+          description: Indicates whether the web form can be used as a standalone page.
+        profiles:
+          description: List of user profiles that have access to this web form.
+          type: array
+          items:
+            $ref: '#/components/schemas/WebFormProfile'
+        fields:
+          description: List of fields in the web form.
+          type: array
+          items:
+            $ref: '#/components/schemas/WebFormField'
+    SharedMailboxMemberStatusPatchRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The UUID of the shared mailbox user.
+        active:
+          type: boolean
+          description: The new active status for the shared mailbox.
+      required:
+      - active
+      - id
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
+    WebFormProfile:
+      type: object
+      properties:
+        webFormId:
+          type: string
+          description: Unique identifier of the web form.
+        profileId:
+          type: integer
+          description: Unique identifier of the user profile associated with the web form.
+    UserBasic:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier (UUID) for the user.
+        email:
+          type: string
+          description: Email address associated with the user.
+        name:
+          type: string
+          description: Full name of the user.
+        profileIcon:
+          type: string
+          description: URL or identifier for the user's profile icon.
+    SharedMailboxStatusPatchRequest:
+      type: object
+      properties:
+        data:
+          description: List of shared mailbox status updates to apply.
+          type: array
+          items:
+            $ref: '#/components/schemas/SharedMailboxMemberStatusPatchRequest'
+      required:
+      - data
+    WebFormField:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the web form field.
+        sequence:
+          type: integer
+          description: Display order of the field within the form.
+        label:
+          type: string
+          description: Display label of the field.
+        type:
+          type: string
+          description: Input type of the field (e.g., text, select, checkbox).
+        specialType:
+          type: string
+          description: Special processing type for the field, if applicable.
+        placeholder:
+          type: string
+          description: Placeholder text shown in the field before input.
+        defaultValue:
+          type: string
+          description: Default value pre-populated in the field.
+        optionValues:
+          type: string
+          description: Available option values for select-type fields.
+        mandatory:
+          type: boolean
+          description: Indicates whether the field is required.
+        editable:
+          type: boolean
+          description: Indicates whether the field can be edited by the user.
+    MailIdCounters:
+      type: object
+      properties:
+        id:
+          type: string
+        counters:
+          description: Email counters for this mail entity.
+          allOf:
+          - $ref: '#/components/schemas/MailCounters'
+    SharedMailboxList:
+      type: object
+      properties:
+        data:
+          description: List of shared mailboxes.
+          type: array
+          items:
+            $ref: '#/components/schemas/SharedMailbox'
+        metadata:
+          description: Pagination metadata for the result set.
+          allOf:
+          - $ref: '#/components/schemas/MetaData'
+    SendOption:
+      type: object
+      properties:
+        linkExpiry:
+          type: boolean
+          description: Indicates whether link expiry is enabled for sent files.
+        ACL:
+          type: integer
+          description: Access control level applied to sent files.
+    MailCountersList:
+      type: object
+      properties:
+        data:
+          description: List of mail counter entries.
+          type: array
+          items:
+            $ref: '#/components/schemas/MailIdCounters'
+    SharedMailbox:
+      type: object
+      properties:
+        id:
+          type: string
+        active:
+          type: boolean
+          description: Indicates whether the shared mailbox is active.
+        user:
+          description: Details of the shared mailbox user account.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        members:
+          description: List of users who are members of the shared mailbox.
+          type: array
+          items:
+            $ref: '#/components/schemas/UserBasic'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    MailCounters:
+      type: object
+      properties:
+        draft:
+          type: integer
+          description: Number of draft emails.
+        inbox:
+          type: integer
+          description: Number of emails in the inbox.
+        inboxUnread:
+          type: integer
+          description: Number of unread emails in the inbox.
+        outgoing:
+          type: integer
+          description: Number of outgoing emails.
+        outgoingError:
+          type: integer
+          description: Number of outgoing emails that encountered an error.
+        outgoingQueued:
+          type: integer
+          description: Number of outgoing emails queued for sending.
+        outgoingTransferring:
+          type: integer
+          description: Number of outgoing emails currently being transferred.
+        outgoingTransferringIds:
+          type: array
+          items:
+            type: string
+        trash:
+          type: integer
+          description: Number of emails in the trash.
+    WebFormList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebForm'
+    SharedMailboxPostRequest:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: The UUID of the user to convert into a shared mailbox.
+        memberIds:
+          type: array
+          description: List of member UUIDs to add to the shared mailbox.  (Recommended request size <= 100)
+          items:
+            type: string
+        remoteWipe:
+          type: boolean
+          description: If true, remotely wipes all devices associated with the user being converted.
+        deleteUnsharedData:
+          type: boolean
+          description: If true, deletes any data that is not shared with other users after conversion.
+        retainData:
+          type: boolean
+          description: If true, retains the user's data and transfers it to the specified `retainToUser`.
+        retainToUser:
+          type: string
+          description: The UUID of the user who will receive the retained data.
+        retainPermissionToSharedData:
+          type: boolean
+          description: If true, the `retainToUser` will also receive permissions to the shared data.
+        retainToAdvancedFormUser:
+          type: string
+          description: The UUID of an alternate user for advanced data retention scenarios.
+      required:
+      - memberIds
+      - userId
+    SharedMailboxPatchRequest:
+      type: object
+      properties:
+        memberIds:
+          type: array
+          description: List of member ids  (Recommended request size <= 100)
+          items:
+            type: string
+      required:
+      - memberIds

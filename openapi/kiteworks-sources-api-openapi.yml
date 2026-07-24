@@ -1,0 +1,1932 @@
+openapi: 3.0.2
+info:
+  version: '28'
+  title: Kiteworks API Documentation activities sources API
+tags:
+- name: sources
+paths:
+  /rest/sources:
+    post:
+      tags:
+      - sources
+      summary: Add user ECM source
+      description: Creates a new ECM source for the current user with the provided name, URL, and source type. Returns 422 if a source with the same name or URL already exists for this user.
+      responses:
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_REQUIRED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_REQUIRED:
+                  summary: Field is required
+                  description: Field is required
+                  value:
+                    errors:
+                      code: ERR_INPUT_REQUIRED
+                      message: Field is required
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: returnEntity
+        description: If set to `true`, returns information about the newly created entity.
+        schema:
+          type: boolean
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Source.Post'
+    get:
+      summary: Return user's sources
+      description: "### Description:\n  Returns a list of sources available to the current user, such as external cloud storage or SharePoint connections.\n### Precondition:\n  User must be authenticated and have access to at least one source.\n### Response:\n  A list of the user's sources is returned.\n"
+      tags:
+      - sources
+      parameters:
+      - in: query
+        name: include_kw
+        required: false
+        description: If true, includes Kiteworks native sources in the results.
+        schema:
+          type: boolean
+      - in: query
+        name: include_container
+        required: false
+        description: If true, includes container-type sources (e.g. SharePoint document libraries) in the results.
+        schema:
+          type: boolean
+      - in: query
+        name: limit
+        required: false
+        description: Maximum number of results to return.
+        schema:
+          type: integer
+      - in: query
+        name: offset
+        required: false
+        description: Number of results to skip before returning results, for pagination.
+        schema:
+          type: integer
+      - in: query
+        name: query
+        required: false
+        description: Search query string to filter sources or sites by name.
+        schema:
+          type: string
+      - in: query
+        name: search_type
+        required: false
+        description: Type of search to perform against the source.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The user's sources have been successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sources'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_DENIED, ERR_ENTITY_USER_HAS_INSUFFICIENT_PERMISSIONS'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_DENIED:
+                  summary: Your access is denied.
+                  description: Your access is denied.
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_DENIED
+                      message: Your access is denied.
+                      redirectUrl: /login?code=3317
+                ERR_ENTITY_USER_HAS_INSUFFICIENT_PERMISSIONS:
+                  summary: Target user has insufficient access permissions
+                  description: Target user has insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_USER_HAS_INSUFFICIENT_PERMISSIONS
+                      message: Target user has insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+  /rest/sources/actions/lock:
+    patch:
+      tags:
+      - sources
+      summary: Lock Repositories Gateway files
+      description: Locks one or more Repositories Gateway files. Supports partial success — if some files cannot be locked, the operation continues for the remaining files.
+      responses:
+        '200':
+          description: Files locked successfully.
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: id:in
+        description: A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of unique identifiers for the entities to be processed.
+        required: true
+        schema:
+          type: integer
+      - in: query
+        name: partialSuccess
+        description: If set to `true`, the operation will continue for the valid items even if some items result in failure.
+        schema:
+          type: boolean
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+  /rest/sources/actions/unlock:
+    patch:
+      tags:
+      - sources
+      summary: Unlock Repositories Gateway files
+      description: Unlocks one or more Repositories Gateway files. Supports partial success — if some files cannot be unlocked, the operation continues for the remaining files.
+      responses:
+        '200':
+          description: Files unlocked successfully.
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: id:in
+        description: A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of unique identifiers for the entities to be processed.
+        required: true
+        schema:
+          type: integer
+      - in: query
+        name: partialSuccess
+        description: If set to `true`, the operation will continue for the valid items even if some items result in failure.
+        schema:
+          type: boolean
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+  /rest/sources/auth:
+    post:
+      tags:
+      - sources
+      summary: Login to cloud source
+      description: Completes the cloud ECM authentication flow by submitting the code and state values returned by the ECM provider's redirect URL. Returns 200 on success or an error if the credentials are invalid.
+      responses:
+        '200':
+          description: Cloud ECM authentication completed successfully.
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_REQUIRED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_REQUIRED:
+                  summary: Field is required
+                  description: Field is required
+                  value:
+                    errors:
+                      code: ERR_INPUT_REQUIRED
+                      message: Field is required
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloudSourceLogin.Post'
+  /rest/sources/files/actions/transferStatus:
+    get:
+      tags:
+      - sources
+      summary: Get kp transfer status.
+      description: Returns the status of one or more file transfer operations to Repositories Gateway, including transaction ID, file name, user ID, error code, transfer status, and AV/DLP scan results.
+      responses:
+        '200':
+          description: Transfer status records retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/KPTransferStatus'
+              examples:
+                TransferStatusList:
+                  summary: Transfer status for one or more files
+                  value:
+                    data:
+                    - id: 1
+                      transactionId: txn-001
+                      kpObjectId: e0000001
+                      fileName: contract.docx
+                      userId: 42
+                      errorCode: null
+                      status: completed
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: transactionId
+        description: Transaction ID of download
+        schema:
+          type: integer
+      - in: query
+        name: transactionId:in
+        description: Transaction ID of download. Search for results that match any of the specified values for this parameter.
+        schema:
+          type: integer
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+  /rest/sources/files/{id}:
+    get:
+      tags:
+      - sources
+      summary: Get info of an Repositories Gateway file.
+      description: Returns the details of the specified Repositories Gateway file, including its name, parent ID, type, timestamps, and the current user's permissions on it.
+      responses:
+        '200':
+          description: Repositories Gateway file details retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceFile'
+              examples:
+                SourceFileInfo:
+                  summary: Details of a Repositories Gateway file
+                  value:
+                    id: e0000001
+                    name: contract-2024.docx
+                    parentId: f0000001
+                    type: file
+                    created: '2024-02-15T10:00:00+00:00'
+                    modified: '2024-03-05T08:00:00+00:00'
+                    deleted: false
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of Repositories Gateway file
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+          - compact
+    delete:
+      tags:
+      - sources
+      summary: Delete an Repositories Gateway file.
+      description: Permanently deletes the specified Repositories Gateway file. When the `forceDelete` query parameter is set to true, the file can be deleted even if it is currently in use by the requesting user. Deleting a file in use by another user is not permitted.
+      responses:
+        '200':
+          description: Repositories Gateway file deleted successfully.
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_FILE_IS_IN_USE_BY_OTHER_USER, ERR_FILE_IS_IN_USE_BY_CURRENT_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_FILE_IS_IN_USE_BY_OTHER_USER:
+                  summary: Repositories Gateway file is used by other user
+                  description: Repositories Gateway file is used by other user
+                  value:
+                    errors:
+                      code: ERR_FILE_IS_IN_USE_BY_OTHER_USER
+                      message: Repositories Gateway file is used by other user
+                ERR_FILE_IS_IN_USE_BY_CURRENT_USER:
+                  summary: Repositories Gateway file is used by you
+                  description: Repositories Gateway file is used by you
+                  value:
+                    errors:
+                      code: ERR_FILE_IS_IN_USE_BY_CURRENT_USER
+                      message: Repositories Gateway file is used by you
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of Repositories Gateway file
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: forceDelete
+        description: If set to true, allows the user to delete a file that is only in their own use.
+        schema:
+          type: boolean
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+  /rest/sources/folders/{id}:
+    get:
+      tags:
+      - sources
+      summary: Get info of an Repositories Gateway folder.
+      description: Returns the details of the specified Repositories Gateway folder, including its name, parent, type, timestamps, and child counts.
+      responses:
+        '200':
+          description: Repositories Gateway folder details retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceFolder'
+              examples:
+                SourceFolderInfo:
+                  summary: Details of a Repositories Gateway folder
+                  value:
+                    id: f0000001
+                    name: Contracts
+                    parentId: s0000001
+                    type: directory
+                    created: '2024-01-10T09:00:00+00:00'
+                    modified: '2024-03-01T14:30:00+00:00'
+                    totalFilesCount: 5
+                    totalFoldersCount: 2
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of Repositories Gateway folder
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+          - compact
+    delete:
+      tags:
+      - sources
+      summary: Delete an Repositories Gateway folder.
+      description: Permanently deletes the specified Repositories Gateway folder.
+      responses:
+        '200':
+          description: Repositories Gateway folder deleted successfully.
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of Repositories Gateway folder
+        required: true
+        schema:
+          type: string
+  /rest/sources/{id}:
+    get:
+      tags:
+      - sources
+      summary: Returns requested ECM source
+      description: Returns the details of the specified ECM source, including its name, description, URL, source type, pinned status, and the current user's permissions on it.
+      responses:
+        '200':
+          description: ECM source details retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Source'
+              examples:
+                SourceInfo:
+                  summary: Details of a single ECM source
+                  value:
+                    id: s0000001
+                    name: SharePoint Docs
+                    description: Corporate SharePoint
+                    sourceUrl: https://sharepoint.example.com
+                    sourceTypeId: 2
+                    pinned: false
+                    pinnedTime: null
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the source to be retrieved
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+          - compact
+    delete:
+      tags:
+      - sources
+      summary: Deletes specified source
+      description: Removes the specified ECM source from the current user's source list.
+      responses:
+        '204':
+          description: ECM source deleted successfully.
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the source to be deleted.
+        required: true
+        schema:
+          type: string
+  /rest/sources/{id}/auth:
+    get:
+      tags:
+      - sources
+      summary: Get url with redirect to cloud ECM auth
+      description: Returns the authentication redirect URL and client ID for the specified cloud ECM source. The caller should redirect the user to the returned URL to complete the authentication flow with the ECM provider.
+      responses:
+        '200':
+          description: Cloud ECM authentication URL retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EcmAuth'
+              examples:
+                EcmAuthRedirect:
+                  summary: Authentication redirect URL for a cloud ECM source
+                  value:
+                    redirect: https://ecm.example.com/auth/login
+                    clientId: abc123
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: The source ID
+        required: true
+        schema:
+          type: integer
+    post:
+      tags:
+      - sources
+      summary: Login to on-premise source
+      description: Authenticates the current user to the specified on-premise ECM source using a login and password. Returns 200 on success or an error if the credentials are invalid.
+      responses:
+        '200':
+          description: On-premise ECM authentication completed successfully.
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_REQUIRED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_REQUIRED:
+                  summary: Field is required
+                  description: Field is required
+                  value:
+                    errors:
+                      code: ERR_INPUT_REQUIRED
+                      message: Field is required
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: The source ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OnPremiseSourceLogin.Post'
+  /rest/sources/{id}/authStatus:
+    get:
+      tags:
+      - sources
+      summary: Get cloud ECM auth status
+      description: Checks whether the current user is authenticated to the specified cloud ECM source by attempting to list its contents. Returns HTTP 200 if authenticated, or an error if authentication is required.
+      responses:
+        '200':
+          description: User is authenticated to the cloud ECM source.
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: The source ID
+        required: true
+        schema:
+          type: integer
+  /rest/sources/{id}/children:
+    get:
+      tags:
+      - sources
+      summary: Returns the content of the specified ECM source
+      description: Returns a paginated list of both files and subfolders within the specified ECM source folder, including each item's name, parent ID, type, timestamps, and permissions.
+      responses:
+        '200':
+          description: ECM source folder contents retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SourceContent'
+                  metadata:
+                    $ref: '#/components/schemas/MetaData'
+              examples:
+                ChildrenList:
+                  summary: Files and folders within an ECM source
+                  value:
+                    data:
+                    - id: f0000001
+                      name: Contracts
+                      parentId: s0000001
+                      type: directory
+                    - id: e0000001
+                      name: overview.pdf
+                      parentId: s0000001
+                      type: file
+                    metadata:
+                      total: 2
+                      limit: 50
+                      offset: 0
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the source folder to be retrieved
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: name
+        description: Object name
+        schema:
+          type: string
+      - in: query
+        name: name:contains
+        description: Object name. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: description
+        description: Object description
+        schema:
+          type: string
+      - in: query
+        name: description:contains
+        description: Object description. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: created
+        description: Object creation date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:gt
+        description: Object creation date. Search for results where this parameter value is greater than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:gte
+        description: Object creation date. Search for results where this parameter value is greater than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:lt
+        description: Object creation date. Search for results where this parameter value is less than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:lte
+        description: Object creation date. Search for results where this parameter value is less than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified
+        description: Object modification date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified:gt
+        description: Object modification date. Search for results where this parameter value is greater than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified:gte
+        description: Object modification date. Search for results where this parameter value is greater than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified:lt
+        description: Object modification date. Search for results where this parameter value is less than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified:lte
+        description: Object modification date. Search for results where this parameter value is less than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: deleted
+        description: Indicates that object is deleted
+        schema:
+          type: boolean
+      - in: query
+        name: type
+        description: 'Filter by object type. Accepted values: `f`, `d`.'
+        schema:
+          type: string
+          enum:
+          - f
+          - d
+      - in: query
+        name: orderBy
+        description: Sorting options
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - id:asc
+          - id:desc
+          - name:asc
+          - name:desc
+          - created:asc
+          - created:desc
+          - modified:asc
+          - modified:desc
+          - size:asc
+          - size:desc
+      - in: query
+        name: offset
+        description: Offset
+        schema:
+          type: integer
+      - in: query
+        name: limit
+        description: Limit
+        schema:
+          type: integer
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+          - compact
+  /rest/sources/{id}/externalEdit:
+    get:
+      tags:
+      - sources
+      summary: Get access token for external file edit.
+      description: Returns a short-lived refresh token (expires after 300 seconds) scoped to the specified Repositories Gateway file, enabling an external editor to download and re-upload the file.
+      responses:
+        '200':
+          description: Refresh token for external file edit returned successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RefreshToken'
+                  metadata:
+                    $ref: '#/components/schemas/MetaData'
+              examples:
+                RefreshTokenList:
+                  summary: Refresh token for external edit
+                  value:
+                    data:
+                    - refreshToken: abc123def456
+                      scope: POST/sources/actions/files/e0000001 GET/sources/files/e0000001
+                      expires: '2024-03-20T12:05:00+00:00'
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the file
+        required: true
+        schema:
+          type: integer
+      - in: query
+        name: name
+        description: Object name
+        schema:
+          type: string
+      - in: query
+        name: name:contains
+        description: Object name. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: userId
+        description: Unique identifier of Object creator
+        schema:
+          type: string
+      - in: query
+        name: userId:in
+        description: Unique identifier of Object creator. Search for results that match any of the specified values for this parameter.
+        schema:
+          type: string
+      - in: query
+        name: created
+        description: Object creation date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:gt
+        description: Object creation date. Search for results where this parameter value is greater than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:gte
+        description: Object creation date. Search for results where this parameter value is greater than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:lt
+        description: Object creation date. Search for results where this parameter value is less than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:lte
+        description: Object creation date. Search for results where this parameter value is less than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified
+        description: Object modification date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified:gt
+        description: Object modification date. Search for results where this parameter value is greater than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified:gte
+        description: Object modification date. Search for results where this parameter value is greater than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified:lt
+        description: Object modification date. Search for results where this parameter value is less than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified:lte
+        description: Object modification date. Search for results where this parameter value is less than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: deleted
+        description: Indicates whether the object is deleted.
+        schema:
+          type: boolean
+      - in: query
+        name: expire
+        description: Expiration date
+        schema:
+          type: integer
+      - in: query
+        name: expire:gt
+        description: Expiration date. Search for results where this parameter value is greater than the specified value.
+        schema:
+          type: integer
+      - in: query
+        name: expire:gte
+        description: Expiration date. Search for results where this parameter value is greater than or equal to the specified value.
+        schema:
+          type: integer
+      - in: query
+        name: expire:lt
+        description: Expiration date. Search for results where this parameter value is less than the specified value.
+        schema:
+          type: integer
+      - in: query
+        name: expire:lte
+        description: Expiration date. Search for results where this parameter value is less than or equal to the specified value.
+        schema:
+          type: integer
+      - in: query
+        name: isPushed
+        description: Whether the file is pushed
+        schema:
+          type: boolean
+      - in: query
+        name: orderBy
+        description: Sorting options
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - name:asc
+          - name:desc
+          - created:asc
+          - created:desc
+          - modified:asc
+          - modified:desc
+          - files.size:asc
+          - files.size:desc
+      - in: query
+        name: offset
+        description: Offset
+        schema:
+          type: integer
+      - in: query
+        name: limit
+        description: Limit
+        schema:
+          type: integer
+      - in: query
+        name: locate_id
+        description: "If specified, \"offset\" parameter will be ignored\n                                            and the page containing entity with this Id will be returned."
+        schema:
+          type: integer
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+          - compact
+  /rest/sources/{id}/folders:
+    get:
+      tags:
+      - sources
+      summary: Returns the list of folders of the specified ECM folder
+      description: Returns a paginated list of subfolders within the specified ECM source folder, including each folder's name, parent ID, type, timestamps, and permissions.
+      responses:
+        '200':
+          description: ECM folder contents retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SourceContent'
+                  metadata:
+                    $ref: '#/components/schemas/MetaData'
+              examples:
+                FolderList:
+                  summary: Subfolders within an ECM source folder
+                  value:
+                    data:
+                    - id: f0000001
+                      name: Contracts
+                      parentId: s0000001
+                      type: directory
+                      created: '2024-01-10T09:00:00+00:00'
+                      modified: '2024-03-01T14:30:00+00:00'
+                    metadata:
+                      total: 1
+                      limit: 50
+                      offset: 0
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the source folder to be retrieved
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: name
+        description: Object name
+        schema:
+          type: string
+      - in: query
+        name: name:contains
+        description: Object name. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: description
+        description: Object description
+        schema:
+          type: string
+      - in: query
+        name: description:contains
+        description: Object description. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: created
+        description: Object creation date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:gt
+        description: Object creation date. Search for results where this parameter value is greater than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:gte
+        description: Object creation date. Search for results where this parameter value is greater than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:lt
+        description: Object creation date. Search for results where this parameter value is less than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:lte
+        description: Object creation date. Search for results where this parameter value is less than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified
+        description: Object modification date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified:gt
+        description: Object modification date. Search for results where this parameter value is greater than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified:gte
+        description: Object modification date. Search for results where this parameter value is greater than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified:lt
+        description: Object modification date. Search for results where this parameter value is less than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified:lte
+        description: Object modification date. Search for results where this parameter value is less than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: deleted
+        description: Indicates that object is deleted
+        schema:
+          type: boolean
+      - in: query
+        name: orderBy
+        description: Sorting options
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - id:asc
+          - id:desc
+          - name:asc
+          - name:desc
+          - created:asc
+          - created:desc
+          - modified:asc
+          - modified:desc
+          - size:asc
+          - size:desc
+      - in: query
+        name: offset
+        description: Offset
+        schema:
+          type: integer
+      - in: query
+        name: limit
+        description: Limit
+        schema:
+          type: integer
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+          - compact
+  /rest/sources/{id}/preview:
+    get:
+      tags:
+      - sources
+      summary: Get file preview metadata for a file in Repositories Gateway source
+      description: "Gets the current preview generation status for the specified file in a Repositories Gateway\n                       source. When the preview is ready, the response includes the MIME type and a link to retrieve\n                       it. If the file is empty, infected, or DLP-locked, an appropriate error status is returned\n                       instead.\\n\\n**Requires `view` permission on the file.**"
+      responses:
+        '200':
+          description: Returns the current preview status for the file. When `status` is `ready`, the `mime` and `link` fields are populated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourcePreviewStatus'
+              examples:
+                PreviewReady:
+                  summary: Preview is available
+                  value:
+                    status: ready
+                    mime: application/pdf
+                    link: /preview/file/kp-42
+                PreviewProcessing:
+                  summary: Preview is still being generated
+                  value:
+                    status: processing
+                    mime: null
+                    link: null
+                PreviewFailed:
+                  summary: Preview generation failed
+                  value:
+                    status: failed
+                    mime: null
+                    link: null
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: The unique identifier of the file from Repositories Gateway Source.
+        required: true
+        schema:
+          type: integer
+  /rest/sources/{parent}/files:
+    get:
+      tags:
+      - sources
+      summary: Returns the list of files of the specified ECM folder
+      description: Returns a paginated list of files within the specified ECM source folder, including each file's name, parent ID, type, timestamps, and permissions.
+      responses:
+        '200':
+          description: ECM folder file listing retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SourceContent'
+                  metadata:
+                    $ref: '#/components/schemas/MetaData'
+              examples:
+                FileList:
+                  summary: Files within an ECM source folder
+                  value:
+                    data:
+                    - id: e0000001
+                      name: contract-2024.docx
+                      parentId: f0000001
+                      type: file
+                      created: '2024-02-15T10:00:00+00:00'
+                      modified: '2024-03-05T08:00:00+00:00'
+                    metadata:
+                      total: 1
+                      limit: 50
+                      offset: 0
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: parent
+        description: ID of the source folder to be retrieved
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: name
+        description: Object name
+        schema:
+          type: string
+      - in: query
+        name: name:contains
+        description: Object name. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: description
+        description: Object description
+        schema:
+          type: string
+      - in: query
+        name: description:contains
+        description: Object description. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: created
+        description: Object creation date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:gt
+        description: Object creation date. Search for results where this parameter value is greater than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:gte
+        description: Object creation date. Search for results where this parameter value is greater than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:lt
+        description: Object creation date. Search for results where this parameter value is less than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:lte
+        description: Object creation date. Search for results where this parameter value is less than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified
+        description: Object modification date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified:gt
+        description: Object modification date. Search for results where this parameter value is greater than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified:gte
+        description: Object modification date. Search for results where this parameter value is greater than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified:lt
+        description: Object modification date. Search for results where this parameter value is less than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified:lte
+        description: Object modification date. Search for results where this parameter value is less than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: deleted
+        description: Indicates that object is deleted
+        schema:
+          type: boolean
+      - in: query
+        name: orderBy
+        description: Sorting options
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - id:asc
+          - id:desc
+          - name:asc
+          - name:desc
+          - created:asc
+          - created:desc
+          - modified:asc
+          - modified:desc
+          - size:asc
+          - size:desc
+      - in: query
+        name: offset
+        description: Offset
+        schema:
+          type: integer
+      - in: query
+        name: limit
+        description: Limit
+        schema:
+          type: integer
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+          - compact
+components:
+  schemas:
+    UserBasicInfo:
+      required:
+      - email
+      - id
+      - name
+      properties:
+        id:
+          description: The unique identifier of the user
+          type: string
+        name:
+          description: The name of the user
+          type: string
+        email:
+          description: The user's email
+          type: string
+        profileIcon:
+          description: URL to the user's profile icon image
+          type: string
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    Source:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the external content source.
+        name:
+          type: string
+          description: Display name of the external content source.
+        description:
+          type: string
+          description: Description of the external content source.
+        sourceUrl:
+          type: string
+          description: URL of the external content source.
+        sourceTypeId:
+          type: integer
+          description: Numeric identifier of the source type.
+        sourceByUser:
+          type: boolean
+          description: Indicates whether this source was added by the user.
+        pinned:
+          type: boolean
+          description: Indicates whether the source is pinned.
+        pinnedTime:
+          type: string
+          format: date
+          description: Date and time when the source was pinned.
+    RefreshToken:
+      description: Class RefreshToken
+      required:
+      - refreshToken
+      - scope
+      properties:
+        userId:
+          description: Unique identifier of the user to whom the refresh token belongs
+          type: integer
+        expire:
+          description: Date and time after which the refresh token is no longer valid
+          type: string
+          format: date-time
+        scope:
+          description: OAuth scope of the refresh token
+          type: string
+        refreshToken:
+          description: Refresh token value
+          type: string
+    OnPremiseSourceLogin.Post:
+      description: Class OnPremiseSourceLogin
+      required:
+      - login
+      - password
+      properties:
+        login:
+          description: Login
+          type: string
+        password:
+          description: Password
+          type: string
+    EcmAuth:
+      description: Class EcmAuth
+      properties:
+        redirect:
+          description: OAuth redirect URL for the cloud source
+          type: string
+        clientId:
+          description: Cloud source OAuth client unique identifier
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    Sources:
+      type: object
+      properties:
+        data:
+          description: List of external content sources.
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+    SourceFolder:
+      required:
+      - id
+      - name
+      - parentId
+      - type
+      - wopiapp
+      properties:
+        id:
+          description: Unique SourceContent identifier
+          type: string
+        name:
+          description: Display name of the source content item
+          type: string
+        parentId:
+          description: Parent source content unique identifier
+          type: string
+        type:
+          description: 'Source content type. Accepted values: \`d\` (folder), \`f\` (file)'
+          type: string
+        created:
+          description: Creation timestamp of the source content in UTC
+          type: string
+          format: date
+        modified:
+          description: Last modification timestamp of the source content in UTC
+          type: string
+          format: date
+        status:
+          description: Current availability status of the source content item
+          type: string
+        deleted:
+          description: Indicates whether the source content is deleted
+          type: boolean
+        path:
+          description: Full path of the source content
+          type: string
+        userRoleId:
+          description: Current user role id (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: integer
+        creator:
+          description: File's creator (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/UserBasicInfo'
+        permissions:
+          description: Current user's permissions (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        wopiapp:
+          description: WOPI info for iOS app
+          type: boolean
+        rootId:
+          description: Unique identifier of the root-level source content ancestor (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        pathIds:
+          description: Ordered list of ancestor identifiers representing the full path from root to this source content item (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        sourceTypeId:
+          description: Unique identifier of the ECM source type this content belongs to (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        totalFilesCount:
+          description: Total number of files in the source content (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        totalFoldersCount:
+          description: Total number of folders in the source content (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        parent:
+          description: Parent source content item (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/SourceContent'
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+        isFavorite:
+          description: Indicates that Folder is marked as favorite for current user
+          type: boolean
+    KPTransferStatus:
+      description: Class KPTransferStatus
+      required:
+      - errCode
+      - fileHandle
+      - id
+      - kPObjectId
+      - transactionId
+      - userId
+      properties:
+        id:
+          description: KP transfer status unique identifier
+          type: string
+        transactionId:
+          description: Unique transaction identifier for tracking the Repositories Gateway file transfer
+          type: string
+        kPObjectId:
+          description: Unique identifier of the Repositories Gateway object being transferred
+          type: string
+        fileHandle:
+          description: File handle used to reference the temporary file during the transfer process
+          type: string
+        userId:
+          description: The unique identifier of the user.
+          type: string
+        errCode:
+          description: Numeric error code returned when the file transfer fails
+          type: string
+        status:
+          description: 'Current status of the Repositories Gateway file transfer. Accepted values: `0` (received request), `1` (in progress), `2` (completed successfully), `99` (transfer failed)'
+          type: string
+        avStatus:
+          description: 'AV scan status. Accepted values: `allowed`, `disallowed`, `scanning`'
+          type: string
+        dlpStatus:
+          description: 'DLP scan status. Accepted values: `allowed`, `disallowed`, `scanning`'
+          type: string
+    CloudSourceLogin.Post:
+      description: Class CloudSourceLogin
+      required:
+      - code
+      - state
+      properties:
+        client:
+          description: ID of the client, from redirect url
+          type: string
+        code:
+          description: Code from redirect url
+          type: string
+        state:
+          description: Anti-CSRF state token returned by the OAuth provider in the redirect URL
+          type: string
+        sessionState:
+          description: Optional field needed for SharePoint Online and OneDrive
+          type: string
+    SourceContent:
+      description: Class SourceContent - if you need true EAPI entity use App\Entity\ECObject
+      required:
+      - id
+      - name
+      - parentId
+      - type
+      - wopiapp
+      properties:
+        id:
+          description: Unique SourceContent identifier
+          type: string
+        name:
+          description: Display name of the source content item
+          type: string
+        parentId:
+          description: Parent source content unique identifier
+          type: string
+        type:
+          description: 'Source content type. Accepted values: \`d\` (folder), \`f\` (file)'
+          type: string
+        created:
+          description: Creation timestamp of the source content in UTC
+          type: string
+          format: date
+        modified:
+          description: Last modification timestamp of the source content in UTC
+          type: string
+          format: date
+        status:
+          description: Current availability status of the source content item
+          type: string
+        deleted:
+          description: Indicates whether the source content is deleted
+          type: boolean
+        path:
+          description: Full path of the source content
+          type: string
+        userRoleId:
+          description: Current user role id (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: integer
+        creator:
+          description: File's creator (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/UserBasicInfo'
+        permissions:
+          description: Current user's permissions (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        wopiapp:
+          description: WOPI info for iOS app
+          type: boolean
+        rootId:
+          description: Unique identifier of the root-level source content ancestor (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        pathIds:
+          description: Ordered list of ancestor identifiers representing the full path from root to this source content item (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        sourceTypeId:
+          description: Unique identifier of the ECM source type this content belongs to (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        totalFilesCount:
+          description: Total number of files in the source content (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        totalFoldersCount:
+          description: Total number of folders in the source content (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        parent:
+          description: Parent source content item (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/SourceContent'
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+    SourcePreviewStatus:
+      description: Represents the preview generation status for a file in a Repositories Gateway source. Returned by the GET /sources/{id}/preview endpoint (v15+).
+      properties:
+        status:
+          description: 'The current preview generation status. Possible values: `ready`, `processing`, `failed`, `transfer_failed`, `not_supported_empty`.'
+          type: string
+        mime:
+          description: The MIME type of the preview file. Populated only when status is `ready`; otherwise null.
+          type: string
+        link:
+          description: The URL path to retrieve the preview file. Populated only when status is `ready`; otherwise null.
+          type: string
+    SourceFile:
+      required:
+      - id
+      - name
+      - parentId
+      - type
+      - wopiapp
+      properties:
+        id:
+          description: Unique SourceContent identifier
+          type: string
+        name:
+          description: Display name of the source content item
+          type: string
+        parentId:
+          description: Parent source content unique identifier
+          type: string
+        type:
+          description: 'Source content type. Accepted values: \`d\` (folder), \`f\` (file)'
+          type: string
+        created:
+          description: Creation timestamp of the source content in UTC
+          type: string
+          format: date
+        modified:
+          description: Last modification timestamp of the source content in UTC
+          type: string
+          format: date
+        status:
+          description: Current availability status of the source content item
+          type: string
+        deleted:
+          description: Indicates whether the source content is deleted
+          type: boolean
+        path:
+          description: Full path of the source content
+          type: string
+        userRoleId:
+          description: Current user role id (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: integer
+        creator:
+          description: File's creator (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/UserBasicInfo'
+        permissions:
+          description: Current user's permissions (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        wopiapp:
+          description: WOPI info for iOS app
+          type: boolean
+        rootId:
+          description: Unique identifier of the root-level source content ancestor (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        pathIds:
+          description: Ordered list of ancestor identifiers representing the full path from root to this source content item (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        sourceTypeId:
+          description: Unique identifier of the ECM source type this content belongs to (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        totalFilesCount:
+          description: Total number of files in the source content (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        totalFoldersCount:
+          description: Total number of folders in the source content (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        parent:
+          description: Parent source content item (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/SourceContent'
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+        locked:
+          description: Indicates whether the file is locked
+          type: boolean
+        size:
+          description: Size of the source file in bytes
+          type: integer
+        fingerprint:
+          description: File content fingerprint
+          type: string
+        expire:
+          description: Date and time after which the source file expires and becomes unavailable
+          type: string
+        mime:
+          description: File MIME type
+          type: string
+        avStatus:
+          description: Check file availability status according to AV settings and file scanned/infected status
+          type: string
+        dlpStatus:
+          description: Check file availability status according to DLP settings and file scanned/infected status
+          type: string
+        lockedUserName:
+          description: Username/email of user who locked the file
+          type: string
+        lockUser:
+          description: User who locked the file
+          $ref: '#/components/schemas/UserBasicInfo'
+    Source.Post:
+      description: Class Source
+      required:
+      - name
+      - sourceUrl
+      - sourceTypeId
+      properties:
+        name:
+          description: Display name of the source
+          type: string
+        description:
+          description: Optional description of the source providing additional context about its contents or purpose
+          type: string
+        sourceUrl:
+          description: URL of the external source system to connect to
+          type: string
+        sourceTypeId:
+          description: Unique identifier of source type
+          type: string
+        username:
+          description: Username for authenticating with the external source system
+          type: string
+        password:
+          description: Password for authenticating with the external source system
+          type: string
+        repository:
+          description: Name of the repository within the external source system to connect to
+          type: string
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
+    Permission:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the permission.
+        name:
+          type: string
+          description: Name of the permission.
+        allowed:
+          type: boolean
+          description: Indicates whether the permission is granted (True) or denied (False).
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.

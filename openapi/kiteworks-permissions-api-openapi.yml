@@ -1,0 +1,353 @@
+openapi: 3.0.2
+info:
+  version: '28'
+  title: Kiteworks API Documentation activities permissions API
+tags:
+- name: permissions
+paths:
+  /rest/permissions/comment/{comment_id}:
+    get:
+      tags:
+      - permissions
+      summary: Return the list of permissions available on a comment
+      description: Returns the list of actions the current user is allowed to perform on the specified comment, such as editing or deleting it.
+      responses:
+        '200':
+          description: Comment permissions retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Permission'
+              examples:
+                CommentPermissions:
+                  summary: Permissions available on a comment
+                  value:
+                    data:
+                    - id: COMMENT_EDIT
+                      name: Edit Comment
+                      allowed: true
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: comment_id
+        description: ID of the comment
+        required: true
+        schema:
+          type: integer
+      - in: query
+        name: id
+        description: Unique action identifier
+        schema:
+          type: integer
+      - in: query
+        name: id:in
+        description: Unique action identifier. Search for results that match any of the specified values for this parameter.
+        schema:
+          type: integer
+      - in: query
+        name: name
+        description: Action name
+        schema:
+          type: string
+      - in: query
+        name: name:contains
+        description: Action name. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: allowed
+        description: Determines if one has permissions to perform action
+        schema:
+          type: boolean
+      - in: query
+        name: enabled
+        description: Determines if the given action is available considering the current object state (locked, deleted, etc.).
+        schema:
+          type: boolean
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+          - compact
+  /rest/permissions/file/{file_id}:
+    get:
+      tags:
+      - permissions
+      summary: Get file permissions
+      description: Returns the list of actions the current user is allowed to perform on the specified file, such as downloading, editing, or commenting.
+      responses:
+        '200':
+          description: File permissions retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Permission'
+              examples:
+                FilePermissions:
+                  summary: Permissions available on a file
+                  value:
+                    data:
+                    - id: DOWNLOAD
+                      name: Download
+                      allowed: true
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: file_id
+        description: ID of the file
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: id
+        description: Unique action identifier
+        schema:
+          type: integer
+      - in: query
+        name: id:in
+        description: Unique action identifier. Search for results that match any of the specified values for this parameter.
+        schema:
+          type: integer
+      - in: query
+        name: name
+        description: Action name
+        schema:
+          type: string
+      - in: query
+        name: name:contains
+        description: Action name. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: allowed
+        description: Determines if one has permissions to perform action
+        schema:
+          type: boolean
+      - in: query
+        name: enabled
+        description: Determines if the given action is available considering the current object state (locked, deleted, etc.).
+        schema:
+          type: boolean
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+          - compact
+  /rest/permissions/files:
+    get:
+      tags:
+      - permissions
+      summary: Get file permissions for a set of files
+      description: Returns the current user's allowed actions for each of the specified files. File IDs are passed as request parameters. Returns 400 if no file IDs are provided.
+      responses:
+        '200':
+          description: File permissions retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FilePermissions'
+              examples:
+                BulkFilePermissions:
+                  summary: Permissions for a set of files
+                  value:
+                    data:
+                    - fileId: f1a2b3c4-d5e6-7890-abcd-ef1234567890
+                      permissions:
+                      - id: DOWNLOAD
+                        name: Download
+                        allowed: true
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: id:in
+        description: Unique identifier of the file.. Search for results that match any of the specified values for this parameter.
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: name
+        description: Action name
+        schema:
+          type: string
+      - in: query
+        name: name:contains
+        description: Action name. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: allowed
+        description: Determines if one has permissions to perform action
+        schema:
+          type: boolean
+      - in: query
+        name: enabled
+        description: Determines if the given action is available considering the current object state (locked, deleted, etc.).
+        schema:
+          type: boolean
+      - in: query
+        name: action_id
+        description: Unique action identifier
+        schema:
+          type: integer
+      - in: query
+        name: action_id:in
+        description: Unique action identifier. Search for results that match any of the specified values for this parameter.
+        schema:
+          type: integer
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+          - compact
+  /rest/permissions/task/{task_id}:
+    get:
+      tags:
+      - permissions
+      summary: Return the list of permissions available on a task
+      description: Returns the list of actions the current user is allowed to perform on the specified task, such as completing or deleting it.
+      responses:
+        '200':
+          description: Task permissions retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Permission'
+              examples:
+                TaskPermissions:
+                  summary: Permissions available on a task
+                  value:
+                    data:
+                    - id: TASK_COMPLETE
+                      name: Complete Task
+                      allowed: true
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: task_id
+        description: ID of the task
+        required: true
+        schema:
+          type: integer
+      - in: query
+        name: id
+        description: Unique action identifier
+        schema:
+          type: integer
+      - in: query
+        name: id:in
+        description: Unique action identifier. Search for results that match any of the specified values for this parameter.
+        schema:
+          type: integer
+      - in: query
+        name: name
+        description: Action name
+        schema:
+          type: string
+      - in: query
+        name: name:contains
+        description: Action name. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: allowed
+        description: Determines if one has permissions to perform action
+        schema:
+          type: boolean
+      - in: query
+        name: enabled
+        description: Determines if the given action is available considering the current object state (locked, deleted, etc.).
+        schema:
+          type: boolean
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+          - compact
+components:
+  schemas:
+    FilePermissions:
+      description: Class FilePermissions
+      properties:
+        fileId:
+          description: Id of file
+          type: string
+        permissions:
+          type: array
+          items:
+            type: string
+    Permission:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the permission.
+        name:
+          type: string
+          description: Name of the permission.
+        allowed:
+          type: boolean
+          description: Indicates whether the permission is granted (True) or denied (False).

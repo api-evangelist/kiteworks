@@ -1,0 +1,361 @@
+openapi: 3.0.2
+info:
+  version: '28'
+  title: Kiteworks API Documentation activities ldapGroups API
+tags:
+- name: ldapGroups
+paths:
+  /rest/ldapGroups:
+    get:
+      tags:
+      - ldapGroups
+      summary: Returns a list of LDAP groups.
+      description: Returns a list of LDAP groups that have been enabled through the kiteworks admin.
+      responses:
+        '200':
+          description: List of LDAP groups retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LdapGroup'
+                  metadata:
+                    $ref: '#/components/schemas/MetaData'
+              examples:
+                LdapGroupList:
+                  summary: Paginated list of LDAP groups
+                  value:
+                    data:
+                    - id: 1
+                      name: Engineering
+                      email: engineering@example.com
+                      description: Engineering team LDAP group
+                    metadata:
+                      total: 1
+                      limit: 50
+                      offset: 0
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: name
+        description: LDAP group name
+        schema:
+          type: string
+      - in: query
+        name: name:contains
+        description: LDAP group name. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: email
+        description: LDAP group email.
+        schema:
+          type: string
+      - in: query
+        name: email:contains
+        description: LDAP group email.. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: orderBy
+        description: Sorting options
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - id:asc
+          - id:desc
+          - name:asc
+          - name:desc
+          - dn:asc
+          - dn:desc
+          - email:asc
+          - email:desc
+      - in: query
+        name: offset
+        description: Offset
+        schema:
+          type: integer
+      - in: query
+        name: limit
+        description: Limit
+        schema:
+          type: integer
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+          - compact
+    post:
+      tags:
+      - ldapGroups
+      summary: Create an LDAP group
+      description: Creates a new LDAP group by looking up the provided distinguished name (DN) in the directory. Returns 422 if the DN is invalid or not found.
+      responses:
+        '200':
+          description: LDAP group created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LdapGroup'
+              examples:
+                LdapGroupCreated:
+                  summary: A newly created LDAP group
+                  value:
+                    id: 5
+                    name: Engineering
+                    email: engineering@example.com
+                    description: Engineering team LDAP group
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_REQUIRED, ERR_INPUT_INVALID_EMAIL'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_REQUIRED:
+                  summary: Field is required
+                  description: Field is required
+                  value:
+                    errors:
+                      code: ERR_INPUT_REQUIRED
+                      message: Field is required
+                ERR_INPUT_INVALID_EMAIL:
+                  summary: Input is not a valid email
+                  description: Input is not a valid email
+                  value:
+                    errors:
+                      code: ERR_INPUT_INVALID_EMAIL
+                      message: Input is not a valid email
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: returnEntity
+        description: If set to `true`, returns information about the newly created entity.
+        schema:
+          type: boolean
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LdapGroup.Post'
+  /rest/ldapGroups/{id}:
+    get:
+      tags:
+      - ldapGroups
+      summary: Gets an LDAP group
+      description: Returns the details of the specified LDAP group, including its name, email address, and description.
+      responses:
+        '200':
+          description: LDAP group details retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LdapGroup'
+              examples:
+                LdapGroupInfo:
+                  summary: Details of a single LDAP group
+                  value:
+                    id: 1
+                    name: Engineering
+                    email: engineering@example.com
+                    description: Engineering team LDAP group
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the LDAP group to be retrieved
+        required: true
+        schema:
+          type: integer
+    put:
+      tags:
+      - ldapGroups
+      summary: Updates an LDAP group
+      description: Updates the settings of the specified LDAP group.
+      responses:
+        '200':
+          description: LDAP group updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LdapGroup'
+              examples:
+                LdapGroupUpdated:
+                  summary: The LDAP group after update
+                  value:
+                    id: 1
+                    name: Engineering
+                    email: eng-updated@example.com
+                    description: Updated engineering team LDAP group
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the LDAP to update
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LdapGroup.Put'
+    delete:
+      tags:
+      - ldapGroups
+      summary: Deletes an LDAP group
+      description: Permanently deletes the specified LDAP group.
+      responses:
+        '204':
+          description: LDAP group deleted successfully.
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the LDAP group to delete
+        required: true
+        schema:
+          type: integer
+components:
+  schemas:
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    LdapGroup.Post:
+      description: Class LdapGroup
+      required:
+      - dn
+      properties:
+        dn:
+          description: LDAP distinguished name (DN)
+          type: string
+        email:
+          description: LDAP group email address
+          type: string
+        description:
+          description: LDAP group description
+          type: string
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
+    LdapGroup.Put:
+      description: Class LdapGroup
+      properties:
+        email:
+          description: LDAP group email address
+          type: string
+        description:
+          description: LDAP group description
+          type: string
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
+    LdapGroup:
+      description: Class LdapGroup
+      required:
+      - id
+      - name
+      properties:
+        id:
+          description: LDAP group unique identifier
+          type: integer
+        name:
+          description: Display name of the LDAP group
+          type: string
+        email:
+          description: LDAP group email address
+          type: string
+        description:
+          description: LDAP group description
+          type: string
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.

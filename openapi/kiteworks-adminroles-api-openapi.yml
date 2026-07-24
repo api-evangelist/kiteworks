@@ -1,0 +1,578 @@
+openapi: 3.0.2
+info:
+  version: '28'
+  title: Kiteworks API Documentation activities adminRoles API
+tags:
+- name: adminRoles
+paths:
+  /rest/adminRoles:
+    get:
+      tags:
+      - adminRoles
+      summary: List admin roles
+      description: Returns a list of admin roles available in Kiteworks (e.g. System Admin, Application Admin).
+      responses:
+        '200':
+          description: Returns a list of admin role records.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AdminRole'
+              examples:
+                Admin role list:
+                  summary: All available admin roles
+                  value:
+                  - id: 1
+                    name: System Admin
+                    guid: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                  - id: 2
+                    name: Application Admin
+                    guid: b2c3d4e5-f6a7-8901-bcde-f12345678901
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: orderBy
+        description: Sorting options
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - id:asc
+          - id:desc
+          - name:asc
+          - name:desc
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+          - compact
+  /rest/adminRoles/{id}:
+    get:
+      tags:
+      - adminRoles
+      summary: Get an admin role
+      description: Returns the details of the specified admin role.
+      responses:
+        '200':
+          description: Returns the admin role record.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminRole'
+              examples:
+                Admin role:
+                  summary: A single admin role record
+                  value:
+                    id: 2
+                    name: Application Admin
+                    guid: b2c3d4e5-f6a7-8901-bcde-f12345678901
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: The unique identifier of the admin role.
+        required: true
+        schema:
+          type: integer
+  /rest/adminRoles/{id}/users:
+    get:
+      tags:
+      - adminRoles
+      summary: List users with an admin role
+      description: Returns the list of users who have been assigned the specified admin role.
+      responses:
+        '200':
+          description: Returns a list of user records assigned to the specified admin role.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+                  metadata:
+                    $ref: '#/components/schemas/MetaData'
+              examples:
+                Users with admin role:
+                  summary: Users assigned to Application Admin
+                  value:
+                    data:
+                    - id: 10
+                      name: Alice Johnson
+                      email: alice@example.com
+                      username: alice.johnson
+                    - id: 11
+                      name: Bob Smith
+                      email: bob@example.com
+                      username: bob.smith
+                    total: 2
+                    page: 1
+                    pageSize: 20
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: The unique identifier of the admin role.
+        required: true
+        schema:
+          type: integer
+      - in: query
+        name: email
+        description: Filter users based on their email address.
+        schema:
+          type: string
+      - in: query
+        name: email:contains
+        description: Filter users based on their email address.. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: name
+        description: Filter users based on their full name.
+        schema:
+          type: string
+      - in: query
+        name: name:contains
+        description: Filter users based on their full name.. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: metadata
+        description: Filter users based on their metadata information.
+        schema:
+          type: string
+      - in: query
+        name: metadataContains
+        description: Filter users whose metadata contains the specified characters.
+        schema:
+          type: string
+      - in: query
+        name: deleted
+        description: Filter users based on whether they have been deleted.
+        schema:
+          type: boolean
+      - in: query
+        name: active
+        description: Filter users based on whether they are active in the system.
+        schema:
+          type: boolean
+      - in: query
+        name: verified
+        description: Filter users based on their verification status.
+        schema:
+          type: boolean
+      - in: query
+        name: suspended
+        description: Filter users based on whether they are suspended.
+        schema:
+          type: boolean
+      - in: query
+        name: isRecipient
+        description: Filter users who are recipients of specific items.
+        schema:
+          type: boolean
+      - in: query
+        name: allowsCollaboration
+        description: Filter users whose profiles allow collaboration access.
+        schema:
+          type: boolean
+      - in: query
+        name: created
+        description: Filter users based on the creation date of their account.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:gt
+        description: Filter users based on the creation date of their account.. Search for results where this parameter value is greater than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:gte
+        description: Filter users based on the creation date of their account.. Search for results where this parameter value is greater than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:lt
+        description: Filter users based on the creation date of their account.. Search for results where this parameter value is less than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:lte
+        description: Filter users based on the creation date of their account.. Search for results where this parameter value is less than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: orderBy
+        description: Sorting options
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - id:asc
+          - id:desc
+          - created:asc
+          - created:desc
+          - email:asc
+          - email:desc
+          - name:asc
+          - name:desc
+      - in: query
+        name: offset
+        description: Offset
+        schema:
+          type: integer
+      - in: query
+        name: limit
+        description: Limit
+        schema:
+          type: integer
+      - in: query
+        name: locate_id
+        description: "If specified, \"offset\" parameter will be ignored\n                                            and the page containing entity with this Id will be returned."
+        schema:
+          type: integer
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+          - compact
+  /rest/adminRoles/{id}/users/{user_id}:
+    put:
+      tags:
+      - adminRoles
+      summary: Assign an admin role to a user
+      description: Assigns the specified admin role to a user, replacing any previously assigned role. If the user's current role has advanced form access and the new role does not, you must specify how to handle the advanced form data via `deleteAdvancedFormData` and optionally `retainToAdvancedFormUser`.
+      responses:
+        '200':
+          description: Returns the newly created admin role assignment.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UserAdminRole'
+                  metadata:
+                    $ref: '#/components/schemas/MetaData'
+              examples:
+                Role assigned:
+                  summary: User assigned to Application Admin
+                  value:
+                  - user_id: 10
+                    admin_role: 2
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_SYSTEM_ADMIN, ERR_LICENSE_DLI, ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_SYSTEM_ADMIN:
+                  summary: Authenticated user is not a System Admin
+                  description: Authenticated user is not a System Admin
+                  value:
+                    errors:
+                      code: ERR_ACCESS_SYSTEM_ADMIN
+                      message: Authenticated user is not a System Admin
+                ERR_LICENSE_DLI:
+                  summary: Feature DLI is not enabled by license
+                  description: Feature DLI is not enabled by license
+                  value:
+                    errors:
+                      code: ERR_LICENSE_DLI
+                      message: Feature DLI is not enabled by license
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the Admin role
+        required: true
+        schema:
+          type: integer
+      - in: path
+        name: user_id
+        description: ID of user to promote admin role
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: deleteAdvancedFormData
+        description: Whether to delete advanced form data when changing to role without advanced form access. Required when current role has advanced form access and new role does not.
+        schema:
+          type: boolean
+      - in: query
+        name: retainToAdvancedFormUser
+        description: User ID to retain advanced form data to when deleteAdvancedFormData is false. Required when deleteAdvancedFormData is false.
+        schema:
+          type: string
+    delete:
+      tags:
+      - adminRoles
+      summary: Remove an admin role from a user
+      description: Removes the specified admin role from a user. The user account itself is not deleted. If the role being removed has advanced form access, you must specify how to handle the advanced form data via `deleteAdvancedFormData` and optionally `retainToAdvancedFormUser`.
+      responses:
+        '204':
+          description: The admin role was successfully removed from the user. Returns no content.
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_SYSTEM_ADMIN, ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_SYSTEM_ADMIN:
+                  summary: Authenticated user is not a System Admin
+                  description: Authenticated user is not a System Admin
+                  value:
+                    errors:
+                      code: ERR_ACCESS_SYSTEM_ADMIN
+                      message: Authenticated user is not a System Admin
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: The unique identifier of the admin role to remove from the user.
+        required: true
+        schema:
+          type: integer
+      - in: path
+        name: user_id
+        description: The unique identifier (UUID) of the user.
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: deleteAdvancedFormData
+        description: Whether to delete advanced form data when removing role with advanced form access. Required when role has advanced form access.
+        schema:
+          type: boolean
+      - in: query
+        name: retainToAdvancedFormUser
+        description: User ID to retain advanced form data to when deleteAdvancedFormData is false. Required when deleteAdvancedFormData is false.
+        schema:
+          type: string
+components:
+  schemas:
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    UserMetadata:
+      description: Class UserMetadata
+      properties:
+        name:
+          description: Key name of the custom metadata attribute associated with the user
+          type: string
+        value:
+          description: Value assigned to the custom metadata attribute for the user
+          type: string
+    User:
+      description: Class User
+      required:
+      - basedirId
+      - email
+      - id
+      - mydirId
+      - name
+      - syncdirId
+      properties:
+        id:
+          description: The unique identifier of the user
+          type: string
+        basedirId:
+          description: The unique identifier of the user's root Kiteworks directory.
+          type: string
+        created:
+          description: Date and time the user account was created
+          type: string
+          format: date
+        email:
+          description: The user's email
+          type: string
+        mydirId:
+          description: The unique identifier of the user's mydir system directory.
+          type: string
+        name:
+          description: The name of the user
+          type: string
+        syncdirId:
+          description: The unique identifier of the user's 'My Folder'.
+          type: string
+        userTypeId:
+          description: The unique identifier of the user type (profile).
+          type: integer
+        internal:
+          description: Indicates whether the user is an internal user
+          type: boolean
+        profileIcon:
+          description: URL to the user's profile icon image
+          type: string
+        extDL:
+          description: Indicates whether the user is an External Distribution List
+          type: boolean
+        metadata:
+          description: List of user's metadata
+          type: array
+          items:
+            $ref: '#/components/schemas/UserMetadata'
+        adminRoleId:
+          description: The ID of the admin role assigned to the user.
+          type: integer
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+        active:
+          description: Indicates whether the user is an actual kitework user
+          type: boolean
+        suspended:
+          description: Indicates whether the user is suspended
+          type: boolean
+        deleted:
+          description: Indicates whether the user has been deleted
+          type: boolean
+        flags:
+          description: "Authentication type.\n     *                  0: No authentication,\n     *                  1: Authentication by kiteworks,\n     *                  2: Authentication by LDAP,\n     *                  4: Authentication by SSO"
+          type: integer
+        verified:
+          description: Indicates whether the user is verified
+          type: boolean
+        deactivated:
+          description: Indicates whether the user has been deactivated
+          type: boolean
+        lastActivityDateTime:
+          description: User's last activity datetime
+          type: string
+          format: date
+        passwordExpirationDateTime:
+          description: The exact timestamp when the user's password will expire
+          type: string
+          format: date
+    UserAdminRole:
+      description: Class UserAdminRole
+      required:
+      - userId
+      properties:
+        userId:
+          description: User unique identifier
+          type: string
+        adminRole:
+          description: 'Admin role unique identifier. Possible values are: 1: System admin, 2: Application admin'
+          type: string
+    AdminRole:
+      description: Class AdminRole
+      required:
+      - id
+      - name
+      properties:
+        id:
+          description: Admin role unique identifier
+          type: integer
+        name:
+          description: Display name of the admin role
+          type: string
+        guid:
+          description: Admin role globally unique identifier
+          type: string
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.

@@ -1,0 +1,1273 @@
+openapi: 3.0.2
+info:
+  version: '28'
+  title: Kiteworks API Documentation activities mobileSync API
+tags:
+- name: mobileSync
+paths:
+  /rest/files/actions/mobileSyncItems:
+    post:
+      tags:
+      - mobileSync
+      summary: Add multiple files to mobile sync list
+      description: "Adds multiple files to the current user's mobile sync list in a single request. Supports partial success, meaning valid items are processed even if some fail. This operation will not return location headers for each entity created, if the inserted records are\n        required, returnEntity should be set to true."
+      responses:
+        '200':
+          description: Mobile sync items created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/MobileSync'
+                  metadata:
+                    $ref: '#/components/schemas/MetaData'
+              examples:
+                BulkMobileSyncCreated:
+                  summary: Newly created mobile sync items
+                  value:
+                    data:
+                    - id: 10
+                      fileId: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                      userId: u1a2b3c4-d5e6-7890-abcd-ef1234567890
+                      created: '2024-04-01T09:00:00Z'
+                    - id: 11
+                      fileId: b2c3d4e5-f6a7-8901-bcde-f12345678901
+                      userId: u1a2b3c4-d5e6-7890-abcd-ef1234567890
+                      created: '2024-04-01T09:00:00Z'
+                    metadata:
+                      total: 2
+                      limit: 50
+                      offset: 0
+        '409':
+          description: 'Conflict<br /><br /><i>Possible error codes: </i>ERR_ENTITY_EXISTS'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ENTITY_EXISTS:
+                  summary: Entity exists
+                  description: Entity exists
+                  value:
+                    errors:
+                      code: ERR_ENTITY_EXISTS
+                      message: Entity exists
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: id:in
+        description: A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of unique identifiers for the entities to be processed.
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: partialSuccess
+        description: If set to `true`, the operation will continue for the valid items even if some items result in failure.
+        schema:
+          type: boolean
+      - in: query
+        name: returnEntity
+        description: If set to `true`, returns information about the newly created entity.
+        schema:
+          type: boolean
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+    delete:
+      tags:
+      - mobileSync
+      summary: Delete multiple files from user mobile sync list
+      description: Removes multiple files from the current user's mobile sync list in a single request. Supports partial success, meaning valid items are processed even if some fail.
+      responses:
+        '204':
+          description: Mobile sync items removed successfully.
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: id:in
+        description: A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of unique identifiers for the entities to be processed.
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: partialSuccess
+        description: If set to `true`, the operation will continue for the valid items even if some items result in failure.
+        schema:
+          type: boolean
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+  /rest/files/actions/push:
+    post:
+      tags:
+      - mobileSync
+      summary: Push files list to mobile sync list
+      description: "Adds multiple files to the mobile sync list for all members of the files' parent folder. Requires mobile sync to be enabled. Supports partial success, meaning valid items are processed even if some fail. This operation will not return location headers for each entity created, if the inserted records are\n        required, returnEntity should be set to true."
+      responses:
+        '200':
+          description: Files pushed to mobile sync list successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/MobileSync'
+                  metadata:
+                    $ref: '#/components/schemas/MetaData'
+              examples:
+                BulkPushCreated:
+                  summary: Mobile sync items created for all folder members
+                  value:
+                    data:
+                    - id: 20
+                      fileId: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                      userId: u1a2b3c4-d5e6-7890-abcd-ef1234567890
+                      pushUserId: u9z8y7x6-w5v4-3210-uvwx-yz1234567890
+                      created: '2024-04-01T10:00:00Z'
+                    metadata:
+                      total: 1
+                      limit: 50
+                      offset: 0
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: id:in
+        description: A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of unique identifiers for the entities to be processed.
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: partialSuccess
+        description: If set to `true`, the operation will continue for the valid items even if some items result in failure.
+        schema:
+          type: boolean
+      - in: query
+        name: returnEntity
+        description: If set to `true`, returns information about the newly created entity.
+        schema:
+          type: boolean
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+    delete:
+      tags:
+      - mobileSync
+      summary: Un-Push multiple files
+      description: Removes multiple files from all folder members' mobile sync list in a single request. Requires mobile sync to be enabled. Supports partial success, meaning valid items are processed even if some fail.
+      responses:
+        '204':
+          description: Files removed from all folder members' mobile sync list successfully.
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: id:in
+        description: A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of unique identifiers for the entities to be processed.
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: partialSuccess
+        description: If set to `true`, the operation will continue for the valid items even if some items result in failure.
+        schema:
+          type: boolean
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+  /rest/files/{id}/actions/push:
+    post:
+      tags:
+      - mobileSync
+      summary: Push file to mobile sync list
+      description: Adds the specified file to the mobile sync list for all members of the file's parent folder. Requires mobile sync to be enabled.
+      responses:
+        '200':
+          description: File pushed to mobile sync list successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/MobileSync'
+                  metadata:
+                    $ref: '#/components/schemas/MetaData'
+              examples:
+                PushCreated:
+                  summary: Mobile sync items created for all folder members
+                  value:
+                    data:
+                    - id: 20
+                      fileId: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                      userId: u1a2b3c4-d5e6-7890-abcd-ef1234567890
+                      pushUserId: u9z8y7x6-w5v4-3210-uvwx-yz1234567890
+                      created: '2024-04-01T10:00:00Z'
+                    metadata:
+                      total: 1
+                      limit: 50
+                      offset: 0
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: The unique identifier of the file
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: returnEntity
+        description: If set to `true`, returns information about the newly created entity.
+        schema:
+          type: boolean
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+    delete:
+      tags:
+      - mobileSync
+      summary: Un-Push file from mobile sync list
+      description: Removes the specified file from all folder members' mobile sync list. Requires mobile sync to be enabled.
+      responses:
+        '204':
+          description: File removed from all folder members' mobile sync list successfully.
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: The unique identifer (UUID) of the file
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: returnEntity
+        description: If set to `true`, returns information about the newly created entity.
+        schema:
+          type: boolean
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+  /rest/mobileSyncItems:
+    post:
+      tags:
+      - mobileSync
+      summary: Set file as a mobile sync item
+      description: Adds the specified file to the current user's mobile sync list.
+      responses:
+        '200':
+          description: Mobile sync item created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MobileSync'
+              examples:
+                MobileSyncCreated:
+                  summary: A newly created mobile sync item
+                  value:
+                    id: 10
+                    fileId: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                    userId: u1a2b3c4-d5e6-7890-abcd-ef1234567890
+                    pushUserId: u1a2b3c4-d5e6-7890-abcd-ef1234567890
+                    created: '2024-04-01T09:00:00Z'
+                    fingerprint: abc123def456
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_REQUIRED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_REQUIRED:
+                  summary: Field is required
+                  description: Field is required
+                  value:
+                    errors:
+                      code: ERR_INPUT_REQUIRED
+                      message: Field is required
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: returnEntity
+        description: If set to `true`, returns information about the newly created entity.
+        schema:
+          type: boolean
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MobileSync.Post'
+    get:
+      summary: List mobile sync items for the current user
+      description: "### Description:\n  Returns a paginated list of mobile sync items belonging to the current user.\n### Precondition:\n  User must be authenticated. The tenant must not be suspended and the license must not be expired.\n### Response:\n  Returns a list of mobile sync items for the current user.\n"
+      tags:
+      - mobileSync
+      parameters:
+      - in: query
+        name: returnEntity
+        required: false
+        description: If true, includes the entity in the response body.
+        schema:
+          type: boolean
+      - in: query
+        name: with
+        required: false
+        description: Specifies additional fields to include in the response.
+        schema:
+          type: string
+      - in: query
+        name: mode
+        required: false
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - compact
+          - full_no_links
+          - full_with_links
+          - full
+      - in: query
+        name: avStatus
+        required: false
+        description: 'Filter results by antivirus scan status. Accepted values: `allowed`, `disallowed`, `scanning`.'
+        schema:
+          type: string
+          enum:
+          - allowed
+          - disallowed
+          - scanning
+      - in: query
+        name: dlpStatus
+        required: false
+        description: 'Filter results by DLP scan status. Accepted values: `allowed`, `disallowed`, `scanning`.'
+        schema:
+          type: string
+          enum:
+          - allowed
+          - disallowed
+          - scanning
+      - in: query
+        name: orderBy
+        required: false
+        description: 'Sort order for the results. Default is `created:desc`.<br>Allowed values: `created:asc`, `created:desc`.'
+        schema:
+          type: string
+          enum:
+          - created:asc
+          - created:desc
+      - in: query
+        name: limit
+        required: false
+        description: Range limit.
+        schema:
+          type: integer
+          minimum: 1
+      - in: query
+        name: offset
+        required: false
+        description: Range offset.
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          description: The list of mobile sync items has been successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MobileSyncList'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_SYSTEM_TENANT_SUSPENDED, ERR_ACCESS_USER, ERR_ENTITY_DELETED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_SYSTEM_TENANT_SUSPENDED:
+                  summary: Access to the service is restricted by the service provider. Contact your administrator for updates on restoring normal access.
+                  description: Access to the service is restricted by the service provider. Contact your administrator for updates on restoring normal access.
+                  value:
+                    errors:
+                    - code: ERR_SYSTEM_TENANT_SUSPENDED
+                      message: Access to the service is restricted by the service provider. Contact your administrator for updates on restoring normal access.
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_ENTITY_DELETED:
+                  summary: Entity is deleted
+                  description: Entity is deleted
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_DELETED
+                      message: Entity is deleted
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_LICENSE_EXPIRED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_LICENSE_EXPIRED:
+                  summary: License has expired
+                  description: License has expired
+                  value:
+                    errors:
+                    - code: ERR_LICENSE_EXPIRED
+                      message: License has expired
+        '490':
+          description: Request blocked by WAF
+  /rest/mobileSyncItems/{id}:
+    delete:
+      tags:
+      - mobileSync
+      summary: Remove mobile sync item
+      description: Removes the specified item from the current user's mobile sync list.
+      responses:
+        '204':
+          description: Mobile sync item removed successfully.
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the mobile sync item to be removed
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Return a mobile sync item
+      description: "### Description:\n  Returns information about the specified mobile sync item belonging to the current user.\n### Precondition:\n  User must be authenticated and must own the specified mobile sync item. The tenant must not be suspended and the license must not be expired.\n### Response:\n  Returns the specified mobile sync item.\n"
+      tags:
+      - mobileSync
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier of the entity.
+        schema:
+          type: integer
+      - in: query
+        name: returnEntity
+        required: false
+        description: If true, includes the entity in the response body.
+        schema:
+          type: boolean
+      - in: query
+        name: with
+        required: false
+        description: Specifies additional fields to include in the response.
+        schema:
+          type: string
+      - in: query
+        name: mode
+        required: false
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - compact
+          - full_no_links
+          - full_with_links
+          - full
+      responses:
+        '200':
+          description: The mobile sync item has been successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MobileSync'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_SYSTEM_TENANT_SUSPENDED, ERR_ACCESS_USER, ERR_ENTITY_DELETED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_SYSTEM_TENANT_SUSPENDED:
+                  summary: Access to the service is restricted by the service provider. Contact your administrator for updates on restoring normal access.
+                  description: Access to the service is restricted by the service provider. Contact your administrator for updates on restoring normal access.
+                  value:
+                    errors:
+                    - code: ERR_SYSTEM_TENANT_SUSPENDED
+                      message: Access to the service is restricted by the service provider. Contact your administrator for updates on restoring normal access.
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_ENTITY_DELETED:
+                  summary: Entity is deleted
+                  description: Entity is deleted
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_DELETED
+                      message: Entity is deleted
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_LICENSE_EXPIRED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_LICENSE_EXPIRED:
+                  summary: License has expired
+                  description: License has expired
+                  value:
+                    errors:
+                    - code: ERR_LICENSE_EXPIRED
+                      message: License has expired
+        '490':
+          description: Request blocked by WAF
+components:
+  schemas:
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    PushedObject:
+      type: object
+      properties:
+        objectId:
+          type: string
+          description: Unique identifier (UUID) for the pushed object.
+        userId:
+          type: string
+          description: Unique identifier (UUID) for the user who pushed the object.
+        created:
+          type: string
+          format: date
+          description: The date and time when the object was pushed.
+        user:
+          description: Details of the user who pushed the object.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+    Tag:
+      type: object
+      properties:
+        guid:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) for the tag.
+        name:
+          type: string
+          description: Display name of the tag.
+        type:
+          type: string
+          description: Type category of the tag.
+    MobileSync:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of MobileSync
+        fileId:
+          type: string
+          description: Unique identifier (UUID) of the synced file.
+        userId:
+          type: string
+        pushUserId:
+          type: string
+        created:
+          type: string
+          format: date
+          description: Mobile sync item creation date
+        fingerprint:
+          type: string
+          description: MD5 file fingerprint
+        fingerprints:
+          type: array
+          description: List of all file fingerprints
+          items:
+            $ref: '#/components/schemas/Fingerprint'
+        secure:
+          type: boolean
+          description: Indicates that File is in secure Folder
+        toBeNotified:
+          type: boolean
+          description: Indicates that Email notification for this item was sent
+        pushedObject:
+          description: Details of the push operation for this sync item, if applicable.
+          allOf:
+          - $ref: '#/components/schemas/PushedObject'
+        syncedObject:
+          description: Details of the sync operation for this item, if applicable.
+          allOf:
+          - $ref: '#/components/schemas/SyncedObject'
+        pushUser:
+          description: Details of the user who added this file to the sync list.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        avStatus:
+          type: string
+          description: Antivirus (AV) scan status of the synced file.
+        dlpStatus:
+          type: string
+          description: Data Loss Prevention (DLP) scan status of the synced file.
+        file:
+          description: Details of the synced file.
+          allOf:
+          - $ref: '#/components/schemas/File'
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
+    MobileSync.Post:
+      description: Class MobileSync
+      required:
+      - fileId
+      properties:
+        fileId:
+          description: Unique identifier of File
+          type: integer
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
+    UserBasic:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier (UUID) for the user.
+        email:
+          type: string
+          description: Email address associated with the user.
+        name:
+          type: string
+          description: Full name of the user.
+        profileIcon:
+          type: string
+          description: URL or identifier for the user's profile icon.
+    Permission:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the permission.
+        name:
+          type: string
+          description: Name of the permission.
+        allowed:
+          type: boolean
+          description: Indicates whether the permission is granted (True) or denied (False).
+    Folder:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) of the folder.
+        parentId:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) of the parent object.
+        name:
+          type: string
+          description: Name of the object.
+        type:
+          type: string
+          description: Type of the object.<br>`f` – File.<br>`d` – Folder.
+        userId:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) who created the folder.
+        creator:
+          description: Details of the user who created the object.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        created:
+          type: string
+          format: date
+          description: The date and time when the object was created.
+        modified:
+          type: string
+          format: date
+          description: The date and time when the object was last modified.
+        expire:
+          type: string
+          format: date
+          description: Expiration timestamp of the object, if applicable.
+        permissions:
+          description: List of permissions associated with the object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        deleted:
+          type: boolean
+          description: Indicates whether the object has been deleted.
+        permDeleted:
+          type: boolean
+          description: Indicates whether the object has been permanently deleted.
+        permalink:
+          type: string
+          description: Permanent URL link to access the object.
+        path:
+          type: string
+          description: Path to the folder in the hierarchy.
+        members:
+          description: List of members who have access to the object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Member'
+        vendorDocId:
+          type: string
+          description: Vendor document ID associated with the object.
+        vendorDocName:
+          type: string
+          description: Name of the vendor document associated with the object.
+        secure:
+          type: boolean
+          description: Indicates whether the folder or the parent folder containing the file is marked as secure.
+        source:
+          type: integer
+          description: ID representing the source of the object (1 - Salesforce, 2 - Teams).
+        isShared:
+          type: boolean
+          description: Indicates if the folder is shared with other users.
+        syncable:
+          type: boolean
+          description: Indicates if the folder can be synced by Desktop Sync Client.
+        fileLifetime:
+          type: integer
+          description: Time duration (in days) for which the files in this folder are kept after being added to the folder.
+        description:
+          type: string
+          description: The description of the folder.
+        isFavorite:
+          type: boolean
+          description: Indicates if the folder is marked as a favorite by the user.
+        pushedFilesCount:
+          type: integer
+          description: The number of files that have been pushed to mobile apps in this folder.
+        currentUserRole:
+          description: The role of the current user in this folder.
+          allOf:
+          - $ref: '#/components/schemas/Role'
+        avStatus:
+          type: string
+          description: The Antivirus (AV) status of the folder.
+        dlpStatus:
+          type: string
+          description: The Data Loss Prevention (DLP) status of the folder.
+        totalMembersCount:
+          type: integer
+          description: Total number of members who have access to this folder.
+        totalFoldersCount:
+          type: integer
+          description: Total number of subfolders within this folder.
+        totalFilesCount:
+          type: integer
+          description: Total number of files within this folder.
+        maxFolderExpiration:
+          type: string
+          format: date
+          description: The maximum expiration date allowed for files in this folder.
+        maxFileLifetime:
+          type: integer
+          description: The maximum duration (in days) that files in this folder can be kept after being added to the folder.
+        isLdapGroupMember:
+          type: boolean
+          description: Indicates if the folder is part of an LDAP group.
+        isUnderMyFolder:
+          type: boolean
+          description: Indicates if this folder is a subfolder of the user's "My Folder".
+        pathIds:
+          type: string
+          description: A list of IDs representing the path of the folder within the folder hierarchy.
+        isRoot:
+          type: boolean
+          description: Indicates if this folder is a root folder.
+        rootId:
+          type: string
+          format: uuid
+          description: The ID of the root folder if this is a subfolder.
+        useFolderQuota:
+          type: boolean
+          description: Indicates if a folder quota is applied to this folder.
+        quota:
+          type: integer
+          description: The storage quota for the folder (in bytes).
+        size:
+          type: integer
+          description: The total storage size used by the folder (in bytes).
+        freeSpace:
+          type: integer
+          description: The amount of free space available in the folder (in bytes).
+        inheritanceEnabled:
+          type: boolean
+          description: Indicates if a folder inherits permissions from the parent folder
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    Role:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Role ID
+        name:
+          type: string
+          description: Role name
+        rank:
+          type: integer
+          description: Role rank
+        type:
+          type: string
+          description: Role type
+    File:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) of the file.
+        parentId:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) of the parent folder.
+        name:
+          type: string
+          description: Name of the object.
+        type:
+          type: string
+          description: Type of the object.<br>`f` – File.<br>`d` – Folder.
+        userId:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) who created the file.
+        creator:
+          description: Details of the user who created the object.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        created:
+          type: string
+          format: date
+          description: The date and time when the object was created.
+        modified:
+          type: string
+          format: date
+          description: The date and time when the object was last modified.
+        expire:
+          type: string
+          format: date
+          description: Expiration timestamp of the object, if applicable.
+        permissions:
+          description: List of permissions associated with the object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        deleted:
+          type: boolean
+          description: Indicates whether the object has been deleted.
+        permDeleted:
+          type: boolean
+          description: Indicates whether the object has been permanently deleted.
+        permalink:
+          type: string
+          description: Permanent URL link to access the file.
+        path:
+          type: string
+          description: Path to the object in the hierarchy.
+        members:
+          description: List of members who have access to the object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Member'
+        vendorDocId:
+          type: string
+          description: Vendor document ID associated with the object.
+        vendorDocName:
+          type: string
+          description: Name of the vendor document associated with the object.
+        secure:
+          type: boolean
+          description: Indicates whether the folder or the parent folder containing the file is marked as secure.
+        source:
+          type: integer
+          description: ID representing the source of the object (1 - Salesforce, 2 - Teams).
+        modifier:
+          description: The user who last modified the file.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        size:
+          type: integer
+          description: The size of the file in bytes.
+        mime:
+          type: string
+          description: The MIME type of the file.
+        fingerprint:
+          type: string
+          description: A unique hash identifying the file.
+        fingerprints:
+          type: array
+          description: List of fingerprints associated with the file.
+          items:
+            $ref: '#/components/schemas/Fingerprint'
+        clientCreated:
+          type: string
+          format: date
+          description: The date and time when the file was created on the client side.
+        clientModified:
+          type: string
+          format: date
+          description: The date and time when the file was last modified on the client side.
+        overriddenExpire:
+          type: boolean
+          description: Indicates whether the expiration date for the file has been overridden.
+        sharedBy:
+          description: The user who shared the file.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        sharedTime:
+          type: string
+          format: date
+          description: The date and time when the file was shared.
+        parent:
+          description: The parent folder of the file.
+          allOf:
+          - $ref: '#/components/schemas/Folder'
+        originalFileId:
+          type: string
+          format: uuid
+          description: The ID of the original file if this one is a copy.
+        avStatus:
+          type: string
+          description: Indicates the file version's availability status based on Antivirus (AV) settings and whether it has been scanned or detected as infected.
+        dlpStatus:
+          type: string
+          description: Indicates the file version's availability status based on Data Loss Prevention (DLP) settings and whether it has been scanned or detected as infected.
+        adminQuarantineStatus:
+          type: string
+          description: Indicates the file version's availability status based on the administrator's quarantine status.
+        locked:
+          type: boolean
+          description: Indicates if the file is locked.
+        lockUser:
+          description: The user who locked the file.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        isShared:
+          type: boolean
+          description: Indicates if the file is shared with other users.
+        lastModifiedBy:
+          description: The user who last modified the file.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        pushedObject:
+          description: Details about the pushed object, if any.
+          allOf:
+          - $ref: '#/components/schemas/PushedObject'
+        pathIds:
+          type: string
+          format: uuid
+          description: A list of IDs representing the path of the file within the folder hierarchy.
+        wopiapp:
+          description: WOPI-related information for the file when used in a mobile app.
+          allOf:
+          - $ref: '#/components/schemas/MobileInfo'
+        pushed:
+          type: boolean
+          description: Indicates if the file has been pushed to a mobile app.
+        tags:
+          description: List of tags associated with the file.
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        safeEdit:
+          description: Information regarding the file's SafeEdit settings.
+          allOf:
+          - $ref: '#/components/schemas/SafeEdit'
+        versionsCount:
+          type: integer
+          description: The total number of versions for the file.
+        tracking_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: Tracking identifier associated with the file upload.
+    MobileInfo:
+      type: object
+      properties:
+        wopiSrc:
+          type: string
+          description: The WOPI (Web Application Open Platform Interface) source URL for the mobile application.
+        userId:
+          type: string
+          description: Unique identifier of the user.
+        service:
+          type: string
+          description: The WOPI service ID.
+        scheme:
+          type: string
+          description: URI scheme used by the mobile application to handle the file.
+        schemeSupport:
+          type: string
+          description: Indicates the level of support the mobile app has for the URI scheme.
+    Fingerprint:
+      type: object
+      properties:
+        algo:
+          type: string
+          description: The algorithm used to generate the fingerprint (e.g., sha3-256, md5).
+        hash:
+          type: string
+          description: The resulting hash value representing the fingerprint of the file or object.
+    SyncedObject:
+      type: object
+      properties:
+        objectId:
+          type: string
+          description: Unique identifier (UUID) for the synced object.
+        userId:
+          type: string
+          description: Unique identifier (UUID) for the user who synced the object.
+        created:
+          type: string
+          format: date
+          description: The date and time when the object was pushed.
+        user:
+          description: Details of the user who pushed the object.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+    MobileSyncList:
+      type: object
+      properties:
+        data:
+          description: List of mobile sync items.
+          type: array
+          items:
+            $ref: '#/components/schemas/MobileSync'
+        metadata:
+          description: Pagination metadata for the result set.
+          allOf:
+          - $ref: '#/components/schemas/MetaData'
+    Member:
+      type: object
+      properties:
+        objectId:
+          type: string
+          description: Unique identifier (UUID) of the associated object (file or folder).
+        roleId:
+          type: integer
+          description: Role assigned to the member.
+        userId:
+          type: string
+          description: Unique identifier (UUID) of the user.
+        groupId:
+          type: integer
+          description: Unique identifier of the LDAP group.
+        user:
+          description: User details of the member.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        role:
+          description: Role details assigned to the member.
+          allOf:
+          - $ref: '#/components/schemas/Role'
+        group:
+          description: Group details if the member belongs to a group.
+          allOf:
+          - $ref: '#/components/schemas/Group'
+        sharedBy:
+          description: Details of the user who shared the file or folder.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        created:
+          type: string
+          format: date
+          description: Date when the file or folder was shared.
+        inheritRoleId:
+          type: integer
+          description: Inherited role ID from the parent folder, if applicable.
+        allowedFolderRoleId:
+          type: array
+          description: List of allowed folder role IDs.
+          items:
+            type: integer
+        email:
+          type: string
+          description: Email associated with the member.
+        rank:
+          type: integer
+          description: Rank of the member role.
+        originFolder:
+          readOnly: true
+    SafeEdit:
+      type: object
+      properties:
+        safeEditLocked:
+          type: boolean
+          description: Indicates if the file is locked through a SafeEdit session.
+        user:
+          description: The user responsible for locking the file via SafeEdit.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+    Group:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: LDAP Group ID
+        name:
+          type: string
+          description: LDAP Group name
+        dn:
+          type: string
+          description: LDAP Group domain name
+        email:
+          type: string
+          description: LDAP Group email
+        description:
+          type: string
+          description: LDAP Group description

@@ -1,0 +1,141 @@
+openapi: 3.0.2
+info:
+  version: '28'
+  title: Kiteworks API Documentation activities roles API
+tags:
+- name: roles
+paths:
+  /rest/roles:
+    get:
+      tags:
+      - roles
+      summary: List user roles
+      description: Returns a list of available user roles (e.g., Manager, Collaborator, Downloader, Viewer, Uploader), including each role's name, rank, and type.
+      responses:
+        '200':
+          description: List of user roles retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Role'
+              examples:
+                RoleList:
+                  summary: List of available user roles
+                  value:
+                    data:
+                    - id: 1
+                      name: Manager
+                      rank: 1
+                      type: d
+                    - id: 2
+                      name: Collaborator
+                      rank: 2
+                      type: d
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: name
+        description: Role name
+        schema:
+          type: string
+      - in: query
+        name: name:contains
+        description: Role name. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: disabled
+        description: Whether Role is disabled
+        schema:
+          type: boolean
+      - in: query
+        name: type
+        description: 'Filter roles by type. Accepted values: `d`, `f`.'
+        schema:
+          type: string
+          enum:
+          - d
+          - f
+      - in: query
+        name: orderBy
+        description: Sorting options
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - id:asc
+          - id:desc
+          - name:asc
+          - name:desc
+          - rank:asc
+          - rank:desc
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+          - compact
+  /rest/roles/{id}:
+    get:
+      tags:
+      - roles
+      summary: Get a role
+      description: Returns the details of the specified role, including its name, rank, and type.
+      responses:
+        '200':
+          description: Role details retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+              examples:
+                RoleInfo:
+                  summary: Details of a single role
+                  value:
+                    id: 1
+                    name: Manager
+                    rank: 1
+                    type: d
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the role to be retrieved
+        required: true
+        schema:
+          type: integer
+components:
+  schemas:
+    Role:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Role ID
+        name:
+          type: string
+          description: Role name
+        rank:
+          type: integer
+          description: Role rank
+        type:
+          type: string
+          description: Role type

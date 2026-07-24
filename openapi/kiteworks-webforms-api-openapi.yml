@@ -1,0 +1,242 @@
+openapi: 3.0.2
+info:
+  version: '28'
+  title: Kiteworks API Documentation activities webForms API
+tags:
+- name: webForms
+paths:
+  /rest/webForms:
+    get:
+      tags:
+      - webForms
+      summary: List web forms
+      description: Returns a list of web forms available to the authenticated user's profile, including each form's name, URL, authentication requirement, and enabled state.
+      responses:
+        '200':
+          description: List of web forms retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/WebForm'
+              examples:
+                WebFormList:
+                  summary: List of web forms
+                  value:
+                    data:
+                    - id: wf-001
+                      name: Contact Form
+                      description: General contact form
+                      url: https://example.com/forms/contact
+                      authRequired: false
+                      enabled: true
+                      embedded: false
+                      standalone: true
+                      lastModified: '2024-03-01T10:00:00+00:00'
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: name
+        description: Web form name
+        schema:
+          type: string
+      - in: query
+        name: name:contains
+        description: Web form name. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: orderBy
+        description: Sorting options
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - name:asc
+          - name:desc
+          - last_modified:asc
+          - last_modified:desc
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+  /rest/webForms/{id}:
+    get:
+      tags:
+      - webForms
+      summary: Get a web form
+      description: Returns the details of the specified web form, including its name, URL, authentication requirement, enabled state, and associated fields. Accessible by both authenticated and unauthenticated users, subject to the form's access rules.
+      responses:
+        '200':
+          description: Web form details retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebForm'
+              examples:
+                WebFormInfo:
+                  summary: Details of a single web form
+                  value:
+                    id: wf-001
+                    name: Contact Form
+                    description: General contact form
+                    url: https://example.com/forms/contact
+                    authRequired: false
+                    enabled: true
+                    embedded: false
+                    standalone: true
+                    lastModified: '2024-03-01T10:00:00+00:00'
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the web form to be retrieved
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+components:
+  schemas:
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    WebFormField:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the web form field.
+        sequence:
+          type: integer
+          description: Display order of the field within the form.
+        label:
+          type: string
+          description: Display label of the field.
+        type:
+          type: string
+          description: Input type of the field (e.g., text, select, checkbox).
+        specialType:
+          type: string
+          description: Special processing type for the field, if applicable.
+        placeholder:
+          type: string
+          description: Placeholder text shown in the field before input.
+        defaultValue:
+          type: string
+          description: Default value pre-populated in the field.
+        optionValues:
+          type: string
+          description: Available option values for select-type fields.
+        mandatory:
+          type: boolean
+          description: Indicates whether the field is required.
+        editable:
+          type: boolean
+          description: Indicates whether the field can be edited by the user.
+    WebForm:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the web form.
+        lastModified:
+          type: string
+          format: date
+          description: Date and time when the web form was last modified.
+        name:
+          type: string
+          description: Display name of the web form.
+        description:
+          type: string
+          description: Description of the web form.
+        url:
+          type: string
+          description: URL where the web form is accessible.
+        enabled:
+          type: boolean
+          description: Indicates whether the web form is active.
+        authRequired:
+          type: boolean
+          description: Indicates whether authentication is required to submit the web form.
+        embedded:
+          type: boolean
+          description: Indicates whether the web form can be embedded in external pages.
+        standalone:
+          type: boolean
+          description: Indicates whether the web form can be used as a standalone page.
+        profiles:
+          description: List of user profiles that have access to this web form.
+          type: array
+          items:
+            $ref: '#/components/schemas/WebFormProfile'
+        fields:
+          description: List of fields in the web form.
+          type: array
+          items:
+            $ref: '#/components/schemas/WebFormField'
+    WebFormProfile:
+      type: object
+      properties:
+        webFormId:
+          type: string
+          description: Unique identifier of the web form.
+        profileId:
+          type: integer
+          description: Unique identifier of the user profile associated with the web form.

@@ -1,0 +1,399 @@
+openapi: 3.0.2
+info:
+  version: '28'
+  title: Kiteworks API Documentation activities cards API
+tags:
+- name: cards
+paths:
+  /rest/admin/cards:
+    get:
+      summary: Get list of cards
+      description: "### Description:\n  Returns the list of admin dashboard cards filtered by the specified card types.\n### Precondition:\n  The user must be an administrator.\n### Response:\n  Returns the list of cards matching the specified types.\n"
+      tags:
+      - cards
+      parameters:
+      - in: query
+        name: type:in
+        required: true
+        explode: true
+        style: form
+        description: Comma-separated list of card types to retrieve.<br>`content_encryption` – Content encryption card.<br>`email_json_migration` – Email JSON migration card.<br>`system_security_scanning` – System security scanning card.<br>`events_table_monitor` – Events table monitor card.<br>`appadmin_db` – Application admin database card.<br>`sysadmin_db` – System admin database card.<br>`sysadmin_hosts` – System admin hosts card.<br>`epg_warnings` – EPG warnings card.<br>`safe_edit_server_health` – Safe edit server health card.
+        schema:
+          type: array
+          enum:
+          - content_encryption
+          - email_json_migration
+          - system_security_scanning
+          - events_table_monitor
+          - appadmin_db
+          - sysadmin_db
+          - sysadmin_hosts
+          - epg_warnings
+          - safe_edit_server_health
+          items:
+            type: string
+      responses:
+        '200':
+          description: The list of cards has been successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Card'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INVALID_PARAMETER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INVALID_PARAMETER:
+                  summary: Invalid Parameter Exception
+                  description: Invalid Parameter Exception
+                  value:
+                    errors:
+                    - code: ERR_INVALID_PARAMETER
+                      message: Invalid Parameter Exception
+        '490':
+          description: Request blocked by WAF
+  /rest/admin/cards/details:
+    get:
+      summary: Get card details
+      description: "### Description:\n  Returns the detailed information for a specific admin dashboard card.\n### Precondition:\n  The user must be an administrator with System or Application role.\n### Response:\n  Returns the details of the specified card.\n"
+      tags:
+      - cards
+      parameters:
+      - in: query
+        name: type
+        required: true
+        description: The type of card to retrieve details for.<br>`content_encryption` – Content encryption card.<br>`email_json_migration` – Email JSON migration card.<br>`system_security_scanning` – System security scanning card.<br>`events_table_monitor` – Events table monitor card.<br>`appadmin_db` – Application admin database card.<br>`sysadmin_db` – System admin database card.<br>`sysadmin_hosts` – System admin hosts card.<br>`epg_warnings` – EPG warnings card.<br>`safe_edit_server_health` – Safe edit server health card.
+        schema:
+          type: string
+          enum:
+          - content_encryption
+          - email_json_migration
+          - system_security_scanning
+          - events_table_monitor
+          - appadmin_db
+          - sysadmin_db
+          - sysadmin_hosts
+          - epg_warnings
+          - safe_edit_server_health
+      - in: query
+        name: hostId
+        required: false
+        description: The unique identifier of the host to filter card data by.
+        schema:
+          type: string
+      - in: query
+        name: volume
+        required: false
+        description: Filter results to a specific storage volume.
+        schema:
+          type: string
+      - in: query
+        name: storageType
+        required: false
+        description: Filter results by storage type.<br>`user_files` – User file storage.<br>`replication_files` – Replication file storage.
+        schema:
+          type: string
+      - in: query
+        name: limit
+        required: false
+        description: Maximum number of error detail records to return. Error details are not returned if not set or set to 0.
+        schema:
+          type: integer
+      - in: query
+        name: offset
+        required: false
+        description: Number of error detail records to skip before returning results, for pagination.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: The card details have been successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Card'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INVALID_PARAMETER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INVALID_PARAMETER:
+                  summary: Invalid Parameter Exception
+                  description: Invalid Parameter Exception
+                  value:
+                    errors:
+                    - code: ERR_INVALID_PARAMETER
+                      message: Invalid Parameter Exception
+        '490':
+          description: Request blocked by WAF
+  /rest/admin/cards/actions:
+    post:
+      summary: Perform an action on a card
+      description: "### Description:\n  Submits an action to perform on a specific admin dashboard card.\n### Precondition:\n  The user must be an administrator with System or Application role.\n### Response:\n  The action has been accepted and will be processed.\n"
+      tags:
+      - cards
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CardActionPostRequest'
+      responses:
+        '202':
+          description: The action has been accepted and is being processed.
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '404':
+          description: 'Not Found<br /><br /><i>Possible error codes: </i>ERR_ENTITY_NOT_FOUND'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ENTITY_NOT_FOUND:
+                  summary: Entity does not exist
+                  description: Entity does not exist
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_NOT_FOUND
+                      message: Entity does not exist
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INVALID_PARAMETER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INVALID_PARAMETER:
+                  summary: Invalid Parameter Exception
+                  description: Invalid Parameter Exception
+                  value:
+                    errors:
+                    - code: ERR_INVALID_PARAMETER
+                      message: Invalid Parameter Exception
+        '490':
+          description: Request blocked by WAF
+components:
+  schemas:
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    CardActionPostRequest:
+      type: object
+      properties:
+        action:
+          type: string
+          enum:
+          - retry
+          - delete
+          description: The action to perform on the card.<br>`retry` – Retry the failed operation.<br>`delete` – Delete the card or related records.
+        type:
+          type: string
+          enum:
+          - content_encryption
+          - email_json_migration
+          - system_security_scanning
+          - events_table_monitor
+          - appadmin_db
+          - sysadmin_db
+          - sysadmin_hosts
+          - epg_warnings
+          - safe_edit_server_health
+          description: The type of card to perform the action on.<br>`content_encryption` – Content encryption card.<br>`email_json_migration` – Email JSON migration card.<br>`system_security_scanning` – System security scanning card.<br>`events_table_monitor` – Events table monitor card.<br>`appadmin_db` – Application admin database card.<br>`sysadmin_db` – System admin database card.<br>`sysadmin_hosts` – System admin hosts card.<br>`epg_warnings` – EPG warnings card.<br>`safe_edit_server_health` – Safe edit server health card.
+        hostId:
+          type: string
+          description: The unique identifier of the host associated with the card.
+        storageType:
+          type: string
+          description: The storage type for the files to process.<br>`user_files` – User file storage.<br>`replication_files` – Replication file storage.
+        volume:
+          type: string
+          description: The storage volume containing the files to process.
+        fileId:
+          type: array
+          description: List of file IDs to retry content encryption for.
+          items:
+            type: integer
+        emailId:
+          type: array
+          description: List of email IDs to retry migrating to JSON format.
+          items:
+            type: integer
+      required:
+      - action
+      - type
+    CardHost:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the card host.
+        name:
+          type: string
+          description: Display name of the card host.
+      required:
+      - id
+      - name
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    Card:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Main message text of the card.
+        description:
+          type: string
+          description: Descriptive text providing additional detail for the card.
+        severity:
+          type: string
+          description: Severity level of the card.
+        actions:
+          description: List of actions available on the card.
+          type: array
+          items:
+            $ref: '#/components/schemas/CardAction'
+        type:
+          type: string
+          description: Type of the card.
+        host:
+          description: Host information associated with the card.
+          allOf:
+          - $ref: '#/components/schemas/CardHost'
+        data:
+          type: object
+          description: Additional structured data associated with the card.
+      required:
+      - description
+      - message
+      - severity
+      - type
+    CardAction:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of card action.
+        url:
+          type: string
+          description: URL the card action links to.
+      required:
+      - type

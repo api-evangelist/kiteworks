@@ -1,0 +1,663 @@
+openapi: 3.0.2
+info:
+  version: '28'
+  title: Kiteworks API Documentation activities clients API
+tags:
+- name: clients
+paths:
+  /rest/clients:
+    get:
+      tags:
+      - clients
+      summary: List clients
+      description: Returns a list of registered OAuth clients. Hidden clients are excluded from the results.
+      responses:
+        '200':
+          description: Returns a paginated list of OAuth client records.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Client'
+                  metadata:
+                    $ref: '#/components/schemas/MetaData'
+              examples:
+                Client list:
+                  summary: A paginated list of two clients
+                  value:
+                    data:
+                    - id: mobile_app_ios
+                      name: iOS Mobile App
+                      description: Company iOS mobile client
+                      redirect_uri: https://example.com/callback
+                      scope: '*'
+                      flag: 0
+                      flow: 1
+                      access_token_lifetime: 24
+                      refresh_token_lifetime: 720
+                      type: 2
+                      touch_id: true
+                      min_version: 28
+                    - id: custom_integration
+                      name: Custom Integration
+                      description: Third-party integration client
+                      redirect_uri: https://integration.example.com/callback
+                      scope: files folders
+                      flag: 0
+                      flow: 1
+                      access_token_lifetime: 8
+                      refresh_token_lifetime: 168
+                      type: 0
+                      touch_id: false
+                      min_version: 28
+                    total: 2
+                    page: 1
+                    pageSize: 20
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: name
+        description: Client name
+        schema:
+          type: string
+      - in: query
+        name: name:contains
+        description: Client name. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: description:contains
+        description: Client description. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: orderBy
+        description: Sorting options
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - client_id:asc
+          - client_id:desc
+          - name:asc
+          - name:desc
+      - in: query
+        name: offset
+        description: Offset
+        schema:
+          type: integer
+      - in: query
+        name: limit
+        description: Limit
+        schema:
+          type: integer
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+          - compact
+    post:
+      tags:
+      - clients
+      summary: Create a client
+      description: Creates a new OAuth client (e.g. a custom mobile app). The response includes the plain-text `client_secret`, which is only returned once at creation time and cannot be retrieved again.
+      responses:
+        '200':
+          description: Returns the newly created client record, including the plain-text `client_secret`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientNew'
+              examples:
+                Client created:
+                  summary: A newly created custom OAuth client
+                  value:
+                    id: custom_integration
+                    client_secret: p1a2i3n4t5e6x7t8s9e0c
+                    name: Custom Integration
+                    description: Third-party integration client
+                    redirect_uri: https://integration.example.com/callback
+                    scope: files folders
+                    flag: 0
+                    flow: 1
+                    access_token_lifetime: 8
+                    refresh_token_lifetime: 168
+                    type: 0
+                    touch_id: false
+                    min_version: 28
+        '409':
+          description: 'Conflict<br /><br /><i>Possible error codes: </i>ERR_ENTITY_EXISTS'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ENTITY_EXISTS:
+                  summary: Entity exists
+                  description: Entity exists
+                  value:
+                    errors:
+                      code: ERR_ENTITY_EXISTS
+                      message: Entity exists
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_REQUIRED, ERR_INPUT_NOT_INTEGER, ERR_INPUT_MIN_VALUE'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_REQUIRED:
+                  summary: Field is required
+                  description: Field is required
+                  value:
+                    errors:
+                      code: ERR_INPUT_REQUIRED
+                      message: Field is required
+                ERR_INPUT_NOT_INTEGER:
+                  summary: Input is not a valid integer
+                  description: Input is not a valid integer
+                  value:
+                    errors:
+                      code: ERR_INPUT_NOT_INTEGER
+                      message: Input is not a valid integer
+                ERR_INPUT_MIN_VALUE:
+                  summary: The specified input below the minimum allowed value.
+                  description: The specified input below the minimum allowed value.
+                  value:
+                    errors:
+                      code: ERR_INPUT_MIN_VALUE
+                      message: The specified input below the minimum allowed value.
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: returnEntity
+        description: If set to `true`, returns information about the newly created entity.
+        schema:
+          type: boolean
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Client.Post'
+  /rest/clients/me:
+    get:
+      tags:
+      - clients
+      summary: Get current client
+      description: Returns the settings of the OAuth client used to make the current request (e.g. pin timeout, token lifetime).
+      responses:
+        '200':
+          description: Returns the OAuth client record for the client making the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+              examples:
+                Current client settings:
+                  summary: Settings for the calling OAuth client
+                  value:
+                    id: mobile_app_ios
+                    name: iOS Mobile App
+                    description: Company iOS mobile client
+                    redirect_uri: https://example.com/callback
+                    scope: '*'
+                    flag: 0
+                    flow: 1
+                    access_token_lifetime: 24
+                    refresh_token_lifetime: 720
+                    ask_pin: 1
+                    pin_timeout: 5
+                    max_pin_attempts: 5
+                    type: 2
+                    touch_id: true
+                    min_version: 28
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+  /rest/clients/{id}:
+    get:
+      tags:
+      - clients
+      summary: Get a client
+      description: Returns the settings for the specified OAuth client (e.g. an iOS mobile app), including token lifetimes, PIN policy, scope, and OAuth flow configuration.
+      responses:
+        '200':
+          description: Returns the OAuth client record.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+              examples:
+                Client settings:
+                  summary: Settings for a custom OAuth client
+                  value:
+                    id: custom_integration
+                    name: Custom Integration
+                    description: Third-party integration client
+                    redirect_uri: https://integration.example.com/callback
+                    scope: files folders
+                    flag: 0
+                    flow: 1
+                    access_token_lifetime: 8
+                    refresh_token_lifetime: 168
+                    type: 0
+                    touch_id: false
+                    min_version: 28
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: The unique identifier of the client.
+        required: true
+        schema:
+          type: string
+    put:
+      tags:
+      - clients
+      summary: Update a client
+      description: 'Updates the settings for the specified OAuth client. The fields available for update depend on the client type: custom clients support `name`, `description`, `redirectUri`, `accessTokenLifetime`, `refreshTokenLifetime`, `scope`, and `signatureKey`; built-in clients support only `accessTokenLifetime` and `refreshTokenLifetime`.'
+      responses:
+        '200':
+          description: Returns the updated OAuth client record.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+              examples:
+                Client updated:
+                  summary: Updated settings for a custom OAuth client
+                  value:
+                    id: custom_integration
+                    name: Custom Integration v2
+                    description: Updated third-party integration client
+                    redirect_uri: https://integration.example.com/callback
+                    scope: files folders
+                    flag: 0
+                    flow: 1
+                    access_token_lifetime: 12
+                    refresh_token_lifetime: 336
+                    type: 0
+                    touch_id: false
+                    min_version: 28
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the client to be updated
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Client.Put'
+    delete:
+      tags:
+      - clients
+      summary: Delete a client
+      description: Deletes the specified OAuth client. Built-in system clients cannot be deleted.
+      responses:
+        '204':
+          description: The client was successfully deleted. Returns no content.
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the client to be deleted
+        required: true
+        schema:
+          type: string
+  /rest/clients/{id}/scopes:
+    get:
+      tags:
+      - clients
+      summary: List scopes of a client
+      description: Returns the list of API resource scopes the specified client is authorized to access, such as folders, files, members, and comments.
+      responses:
+        '200':
+          description: Client scopes retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientScopesResponse'
+              examples:
+                ClientScopes:
+                  summary: Scopes authorized for a client
+                  value:
+                    data:
+                    - folders/*
+                    - files/*
+                    - members/*
+                    - comments/*
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the client whose scopes to be retrieved
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+components:
+  schemas:
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    ClientScopesResponse:
+      description: Represents the success response for the client scopes endpoint.
+      properties:
+        data:
+          description: List of API resource scope strings the client is authorized to access (e.g. 'folders/*', 'files/*').
+          type: array
+          items:
+            type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    Client:
+      description: Class Client
+      required:
+      - id
+      - name
+      properties:
+        id:
+          description: Unique Client identifier
+          type: string
+        name:
+          description: Display name of the client application
+          type: string
+        description:
+          description: Human-readable description of the client application and its purpose
+          type: string
+        redirectUri:
+          description: Redirect URL of this client
+          type: string
+        scope:
+          description: API entities which this client can access
+          type: string
+        flag:
+          description: Flags for Client. e.g. NO_CONSENT:1, DISABLED:2, HIDDEN:4, NO_EXPIRY_TOKEN :8
+          type: integer
+        flow:
+          description: "Oauth flow for this client.\n                        e.g. AUTH_CODE:1, CLIENT_CREDENTIAL:2, SIGNATURE:4, REFRESH_TOKEN:8"
+          type: integer
+        signatureKey:
+          description: Secret key used to sign requests made by this client
+          type: string
+        accessTokenLifetime:
+          description: Life time for access token of client in hours. e.g. 5=5 hours
+          type: integer
+        refreshTokenLifetime:
+          description: Life time for refresh token of client in hours
+          type: integer
+        whiteList:
+          description: List of applications on the device that the client can call out to
+          type: string
+        askPin:
+          description: Indicates whether a PIN should be requested of the user using this client
+          type: integer
+        pinTimeout:
+          description: Time out for pin of client in minutes
+          type: integer
+        maxPinAttempts:
+          description: Max attempts that user can try to enter PIN before wipe occurs
+          type: integer
+        type:
+          description: Client Type. e.g. ACCELLION:1, MOBILE:2, OUTLOOK:4, SYNC:8, IMPORTED:32
+          type: integer
+        touchId:
+          description: Indicates whether touch Id is enabled
+          type: boolean
+        clipboardEnabled:
+          description: Indicates whether clipboard is enabled
+          type: boolean
+        autoUpdate:
+          description: Indicates whether auto update is enabled
+          type: boolean
+        installer:
+          description: Installer information for the client
+          type: string
+        emailMatch:
+          description: Indicates whether the external email matches a Kiteworks email
+          type: boolean
+        minVersion:
+          description: Minimum API version required by this client to operate correctly
+          type: integer
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+    ClientNew:
+      description: Class ClientNew
+      required:
+      - id
+      - name
+      properties:
+        id:
+          description: Unique Client identifier
+          type: string
+        name:
+          description: Display name of the client application
+          type: string
+        description:
+          description: Human-readable description of the client application and its purpose
+          type: string
+        redirectUri:
+          description: Redirect URL of this client
+          type: string
+        scope:
+          description: API entities which this client can access
+          type: string
+        flag:
+          description: Flags for Client. e.g. NO_CONSENT:1, DISABLED:2, HIDDEN:4, NO_EXPIRY_TOKEN :8
+          type: integer
+        flow:
+          description: "Oauth flow for this client.\n                        e.g. AUTH_CODE:1, CLIENT_CREDENTIAL:2, SIGNATURE:4, REFRESH_TOKEN:8"
+          type: integer
+        signatureKey:
+          description: Secret key used to sign requests made by this client
+          type: string
+        accessTokenLifetime:
+          description: Life time for access token of client in hours. e.g. 5=5 hours
+          type: integer
+        refreshTokenLifetime:
+          description: Life time for refresh token of client in hours
+          type: integer
+        whiteList:
+          description: List of applications on the device that the client can call out to
+          type: string
+        askPin:
+          description: Indicates whether a PIN should be requested of the user using this client
+          type: integer
+        pinTimeout:
+          description: Time out for pin of client in minutes
+          type: integer
+        maxPinAttempts:
+          description: Max attempts that user can try to enter PIN before wipe occurs
+          type: integer
+        type:
+          description: Client Type. e.g. ACCELLION:1, MOBILE:2, OUTLOOK:4, SYNC:8, IMPORTED:32
+          type: integer
+        touchId:
+          description: Indicates whether touch Id is enabled
+          type: boolean
+        clipboardEnabled:
+          description: Indicates whether clipboard is enabled
+          type: boolean
+        autoUpdate:
+          description: Indicates whether auto update is enabled
+          type: boolean
+        installer:
+          description: Installer information for the client
+          type: string
+        emailMatch:
+          description: Indicates whether the external email matches a Kiteworks email
+          type: boolean
+        minVersion:
+          description: Minimum API version required by this client to operate correctly
+          type: integer
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+        clientSecret:
+          description: Plain-text client secret returned only at creation time
+          type: string
+    Client.Put:
+      description: Class Client
+      required:
+      - name
+      - description
+      - redirectUri
+      - scope
+      properties:
+        name:
+          description: Display name of the client application
+          type: string
+        description:
+          description: Human-readable description of the client application and its purpose
+          type: string
+        redirectUri:
+          description: "Where the server send the code that client can redeem access token.\n                        e.g. https://HOST/rest/callback.html"
+          type: string
+        scope:
+          description: API entities which this client can access
+          type: string
+        signatureKey:
+          description: Secret key used to sign requests made by this client
+          type: string
+        accessTokenLifetime:
+          description: Life time for access token of client in hours. e.g. 5=5 hours
+          type: integer
+        refreshTokenLifetime:
+          description: Life time for refresh token of client in hours
+          type: integer
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
+    Client.Post:
+      description: Class Client
+      required:
+      - name
+      - description
+      - redirectUri
+      - scope
+      properties:
+        name:
+          description: Display name of the client application
+          type: string
+        description:
+          description: Human-readable description of the client application and its purpose
+          type: string
+        redirectUri:
+          description: "Where the server send the code that client can redeem access token.\n                        e.g. https://HOST/rest/callback.html"
+          type: string
+        scope:
+          description: API entities which this client can access
+          type: string
+        signatureKey:
+          description: Secret key used to sign requests made by this client
+          type: string
+        accessTokenLifetime:
+          description: Life time for access token of client in hours. e.g. 5=5 hours
+          type: integer
+        refreshTokenLifetime:
+          description: Life time for refresh token of client in hours
+          type: integer
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.

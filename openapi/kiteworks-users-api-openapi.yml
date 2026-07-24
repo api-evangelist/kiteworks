@@ -1,0 +1,3007 @@
+openapi: 3.0.2
+info:
+  version: '28'
+  title: Kiteworks API Documentation activities users API
+tags:
+- name: users
+paths:
+  /rest/users:
+    delete:
+      tags:
+      - users
+      summary: Deletes Users
+      description: Mark the specified users as deleted. The size of request User UUID is limited (recommend <= 100)
+      responses:
+        '204':
+          description: Specified users marked as deleted.
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_NOT_BOOLEAN, ERR_INPUT_ATTRIBUTE_FORBIDDEN, ERR_INPUT_REQUIRED, ERR_INPUT_NOT_STRING'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_NOT_BOOLEAN:
+                  summary: Input is not a valid boolean
+                  description: Input is not a valid boolean
+                  value:
+                    errors:
+                      code: ERR_INPUT_NOT_BOOLEAN
+                      message: Input is not a valid boolean
+                ERR_INPUT_REQUIRED:
+                  summary: Field is required
+                  description: Field is required
+                  value:
+                    errors:
+                      code: ERR_INPUT_REQUIRED
+                      message: Field is required
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: id:in
+        description: List of user IDs to delete.
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: retainToUser
+        description: The ID of the new owner to whom the data will be transferred, applicable when `retainData` and/or `retainPermissionToSharedData` are set to true.
+        schema:
+          type: string
+      - in: query
+        name: retainToAdvancedFormUser
+        description: The ID of the user to whom the advanced form data will be transferred, similar to retainToUser but specifically for advanced form components.
+        schema:
+          type: string
+      - in: query
+        name: remoteWipe
+        description: Indicates whether to remotely wipe data from both desktop and mobile devices.
+        schema:
+          type: boolean
+      - in: query
+        name: deleteUnsharedData
+        description: Indicates whether data owned by the user should be deleted. This is required and must be set to True if `retainData` is False, and vice versa.
+        schema:
+          type: boolean
+      - in: query
+        name: retainData
+        description: Indicates whether data should be retained and transferred to another user. This is required and must be True if `deleteUnsharedData` is False, and vice versa.
+        schema:
+          type: boolean
+      - in: query
+        name: retainPermissionToSharedData
+        description: Indicates whether permissions to shared folders should be retained.
+        schema:
+          type: boolean
+      - in: query
+        name: withdrawFileLinks
+        description: Indicates whether files sent by deleted or demoted users should be withdrawn.
+        schema:
+          type: boolean
+      - in: query
+        name: withdrawRequestFiles
+        description: Indicates whether request files sent by deleted or demoted users should be withdrawn.
+        schema:
+          type: boolean
+      - in: query
+        name: partialSuccess
+        description: If set to `true`, the operation will continue for the valid items even if some items result in failure.
+        schema:
+          type: boolean
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+  /rest/users/actions/login:
+    post:
+      tags:
+      - users
+      summary: User login
+      description: Handles user login by accepting the user credentials (username and password).
+      responses:
+        '200':
+          description: Login successful. Returns a redirect URL and success status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+              examples:
+                LoginSuccess:
+                  summary: Standard login - no TFA required
+                  value:
+                    success: true
+                    redirectUrl: https://<YOUR_INSTANCE_DOMAIN>/auth/callback
+                LoginWithTFA:
+                  summary: TFA step required before login is complete
+                  value:
+                    success: false
+                    redirectUrl: https://<YOUR_INSTANCE_DOMAIN>/auth/tfa
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_REQUIRED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_REQUIRED:
+                  summary: Field is required
+                  description: Field is required
+                  value:
+                    errors:
+                      code: ERR_INPUT_REQUIRED
+                      message: Field is required
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLogin.Post'
+  /rest/users/aliveToken:
+    put:
+      tags:
+      - users
+      summary: Updates token state
+      description: Updates current session state to be not outdated any more
+      responses:
+        '200':
+          description: Token state updated successfully
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+  /rest/users/ldapSearch:
+    get:
+      tags:
+      - users
+      summary: Find users in LDAP by input supplied
+      description: Searches the configured LDAP directory for users matching the supplied search criteria.
+      responses:
+        '200':
+          description: Returns users found in LDAP matching the supplied search criteria.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LdapSearchResults'
+              examples:
+                LdapMatches:
+                  summary: LDAP users matching the search
+                  value:
+                    matches:
+                    - email: jane.doe@example.com
+                      displayName: Jane Doe
+                    - email: john.smith@example.com
+                      displayName: John Smith
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: value
+        description: The user's email or name
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+          - compact
+  /rest/users/me:
+    put:
+      tags:
+      - users
+      summary: Update the current user's details
+      description: Updates the details of the currently authenticated user. For example, change their name or password.
+      responses:
+        '200':
+          description: Currently authenticated user details updated successfully. Returns the updated user object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserMe'
+              examples:
+                UpdatedMe:
+                  summary: Current user after update
+                  value:
+                    id: abc12345def67890ab
+                    name: Jane Doe
+                    email: jane.doe@example.com
+                    active: true
+                    verified: true
+                    suspended: false
+                    deleted: false
+                    deactivated: false
+                    flags: 1
+                    userTypeId: 5
+                    serviceName: kiteworks
+                    created: 2024-01-15T10:30:00+0000
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_PASSWORD_COMPLEXITY_ERROR'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_PASSWORD_COMPLEXITY_ERROR:
+                  summary: Password does not meet complexity requirements
+                  description: Password does not meet complexity requirements
+                  value:
+                    errors:
+                      code: ERR_INPUT_PASSWORD_COMPLEXITY_ERROR
+                      message: Password does not meet complexity requirements
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserNamePassword.Put'
+    get:
+      tags:
+      - users
+      summary: Retrieve details of the currently logged-in user
+      description: Fetches the details of the currently authenticated user, including their email address and name.
+      responses:
+        '200':
+          description: Returns the details of the currently authenticated user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserMe'
+              examples:
+                CurrentUser:
+                  summary: Authenticated user's details
+                  value:
+                    id: abc12345def67890ab
+                    name: Jane Doe
+                    email: jane.doe@example.com
+                    active: true
+                    verified: true
+                    suspended: false
+                    deleted: false
+                    deactivated: false
+                    flags: 1
+                    userTypeId: 5
+                    serviceName: kiteworks
+                    created: 2024-01-15T10:30:00+0000
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+  /rest/users/me/forcedPasswordChange:
+    post:
+      tags:
+      - users
+      summary: Change the password for current user after expired
+      description: Change the password for current user after password expired
+      responses:
+        '200':
+          description: Password changed successfully. Returns a redirect URL for the next step in the authentication flow.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthRedirectResponse'
+              examples:
+                PasswordChanged:
+                  summary: Password changed, proceed to next login step
+                  value:
+                    redirectUrl: https://<YOUR_INSTANCE_DOMAIN>/auth/callback
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_PASSWORD_COMPLEXITY_ERROR, ERR_INPUT_REQUIRED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_PASSWORD_COMPLEXITY_ERROR:
+                  summary: Password does not meet complexity requirements
+                  description: Password does not meet complexity requirements
+                  value:
+                    errors:
+                      code: ERR_INPUT_PASSWORD_COMPLEXITY_ERROR
+                      message: Password does not meet complexity requirements
+                ERR_INPUT_REQUIRED:
+                  summary: Field is required
+                  description: Field is required
+                  value:
+                    errors:
+                      code: ERR_INPUT_REQUIRED
+                      message: Field is required
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserForcedPasswordChange.Put'
+  /rest/users/me/mobileNumber:
+    put:
+      tags:
+      - users
+      summary: Update mobile number of the current user
+      description: Updates the mobile number used for two-factor authentication for the current user. Requires the user's current password for verification. When the test-only flag is set, sends a test SMS to the provided number without saving it and returns an empty 200 response.
+      responses:
+        '200':
+          description: Mobile number updated successfully. Returns the updated user settings.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settings'
+              examples:
+                MobileNumberUpdated:
+                  summary: Settings after mobile number update
+                  value:
+                    languageId: 1
+                    locationId: 2
+                    signature: ''
+                    storageUsed: 1048576
+                    storageQuota: 10737418240
+                    mobileNumber: '+14155550199'
+                    mobileNumberVerified: false
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_REQUIRED, ERR_INPUT_INVALID_FORMAT'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_REQUIRED:
+                  summary: Field is required
+                  description: Field is required
+                  value:
+                    errors:
+                      code: ERR_INPUT_REQUIRED
+                      message: Field is required
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserMobileNumberPassword.Put'
+  /rest/users/me/quota:
+    get:
+      summary: Retrieve user quota
+      description: "### Description:\n  Retrieves the current user's quota details, including send quota and folder storage quota.\n### Precondition:\n  The user profile must have \"Collaboration Allowed\" enabled or have mail access.\n### Response:\n  Returns the user's quota information.\n"
+      tags:
+      - users
+      parameters:
+      - in: query
+        name: filter
+        required: false
+        description: Limit the quota response to a specific quota type.<br>`send` – Returns send quota usage only.<br>`folder` – Returns folder storage quota only.<br>If omitted, both send and folder quota details are returned.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The user quota is successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserQuota'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '404':
+          description: 'Not Found<br /><br /><i>Possible error codes: </i>ERR_ENTITY_NOT_FOUND'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ENTITY_NOT_FOUND:
+                  summary: Entity does not exist
+                  description: Entity does not exist
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_NOT_FOUND
+                      message: Entity does not exist
+        '490':
+          description: Request blocked by WAF
+  /rest/users/me/tfa/auth:
+    post:
+      tags:
+      - users
+      summary: Two Factor Authentication
+      description: Submits the user's Two-Factor Authentication (TFA) passcode to complete the TFA step of the login flow. Returns a redirect URL on success, or a new challenge message if the TFA module requires an additional round of authentication.
+      responses:
+        '200':
+          description: Two Factor Authentication completed. Returns either a redirectUrl string on success or a challengeMsg string if an additional challenge is required.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TfaChallengeResponse'
+              examples:
+                TfaAccepted:
+                  summary: Passcode accepted — login complete
+                  value:
+                    redirectUrl: https://<YOUR_INSTANCE_DOMAIN>/auth/callback
+                TfaRechallenge:
+                  summary: Additional challenge required
+                  value:
+                    challengeMsg: Incorrect passcode. Please try again.
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_REQUIRED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_REQUIRED:
+                  summary: Field is required
+                  description: Field is required
+                  value:
+                    errors:
+                      code: ERR_INPUT_REQUIRED
+                      message: Field is required
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserTfa.Post'
+  /rest/users/me/tfa/challenge:
+    post:
+      tags:
+      - users
+      summary: Two Factor Authentication
+      description: Initiates a Two-Factor Authentication (TFA) challenge for the current login session. For challenge-response modules, triggers passcode delivery (for example, via SMS or push notification) and returns a challenge message. If the TFA module accepts immediately, returns a redirect URL to advance the login flow.
+      responses:
+        '200':
+          description: Two Factor Authentication challenge initiated successfully. Returns either a challengeMsg string or a redirectUrl string depending on the authentication flow.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TfaChallengeResponse'
+              examples:
+                ChallengeInitiated:
+                  summary: Passcode delivered — waiting for user input
+                  value:
+                    challengeMsg: A passcode has been sent to your mobile device.
+                ChallengeAccepted:
+                  summary: Module accepted immediately — login complete
+                  value:
+                    redirectUrl: https://<YOUR_INSTANCE_DOMAIN>/auth/callback
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: referral
+        description: Referral URL
+        schema:
+          type: string
+  /rest/users/me/tfa/config:
+    get:
+      tags:
+      - users
+      summary: Two Factor Authentication
+      description: Returns the Two-Factor Authentication (TFA) configuration for the current login session, including the module name, passcode field labels, and device-remembering settings. For SMSOTP modules, also includes the user's registered mobile number and whether the number can be changed.
+      responses:
+        '200':
+          description: Two Factor Authentication configuration retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TfaConfigResponse'
+              examples:
+                TfaConfigSms:
+                  summary: SMSOTP module with configurable mobile number
+                  value:
+                    module: SMSOTP
+                    passcodeLabel: Enter passcode
+                    passcodeDescription: Enter the code sent to your mobile phone.
+                    rechallengeLabel: Resend code
+                    challengeShouldSendPassword: false
+                    challengeWaitMessage: Sending code...
+                    rechallengeMessage: Resend the passcode
+                    rememberDeviceEnabled: true
+                    passcodeMask: false
+                    mobileNumber: +1-555****1234
+                    allowNumberChange: true
+                TfaConfigTotp:
+                  summary: TOTP module (no SMSOTP-specific fields)
+                  value:
+                    module: TOTP
+                    passcodeLabel: Authenticator code
+                    passcodeDescription: Enter the 6-digit code from your authenticator app.
+                    rechallengeLabel: ''
+                    challengeShouldSendPassword: false
+                    challengeWaitMessage: ''
+                    rechallengeMessage: ''
+                    rememberDeviceEnabled: true
+                    passcodeMask: false
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+  /rest/users/me/tfa/resetTotpSecret:
+    post:
+      tags:
+      - users
+      summary: Reset secret key for time-based OTP of the current user
+      description: Resets the TOTP secret key for the current user. Requires the user's current password. When called without an OTP, generates a new secret and returns setup details including a QR code. When called with an OTP, verifies the new secret and completes the reset.
+      responses:
+        '200':
+          description: Returns TOTP setup details when initiating the reset, or a verification result when confirming with an OTP.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TotpSetupResponse'
+              examples:
+                TotpSetupInitiated:
+                  summary: New TOTP secret generated for setup
+                  value:
+                    username: alice@example.com
+                    issuer: kiteworks
+                    secret: JBSWY3DPEHPK3PXP
+                    image: data:image/png;base64,iVBOR...
+                TotpSetupVerified:
+                  summary: TOTP secret verified successfully
+                  value:
+                    code: 1
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_PASSWORD_COMPLEXITY_ERROR, ERR_INPUT_REQUIRED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_PASSWORD_COMPLEXITY_ERROR:
+                  summary: Password does not meet complexity requirements
+                  description: Password does not meet complexity requirements
+                  value:
+                    errors:
+                      code: ERR_INPUT_PASSWORD_COMPLEXITY_ERROR
+                      message: Password does not meet complexity requirements
+                ERR_INPUT_REQUIRED:
+                  summary: Field is required
+                  description: Field is required
+                  value:
+                    errors:
+                      code: ERR_INPUT_REQUIRED
+                      message: Field is required
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserTfaTotpResetSecret.Post'
+  /rest/users/me/tfa/setupTotpSecret:
+    get:
+      tags:
+      - users
+      summary: Setup secret key for Time-based OTP of the current user
+      description: Generates a new Time-based One-Time Password (TOTP) secret for the current user and returns the secret key along with a QR code for scanning with an authenticator app. Only available during the TFA setup login state and only if the user does not already have a TOTP secret registered.
+      responses:
+        '200':
+          description: TOTP secret setup initiated successfully. Returns the username, issuer, secret key, QR code image, and optional setup instructions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TotpSetupResponse'
+              examples:
+                TotpSetup:
+                  summary: New TOTP secret ready to scan
+                  value:
+                    username: jane.doe@example.com
+                    issuer: Kiteworks
+                    secret: JBSWY3DPEHPK3PXP
+                    image: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgA...
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+  /rest/users/me/tfa/verifyTotpSecret:
+    post:
+      tags:
+      - users
+      summary: Verify code for finalising secret key for Time-based OTP
+      description: Verifies the one-time passcode generated by the user's authenticator app to confirm that the new TOTP secret was registered correctly. On success, advances the session to the next step in the authentication flow, skipping a redundant TFA step if one is pending.
+      responses:
+        '200':
+          description: TOTP secret verified successfully. Returns a redirectUrl string for the next step in the authentication flow.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthRedirectResponse'
+              examples:
+                TotpVerified:
+                  summary: TOTP secret confirmed — proceed to next login step
+                  value:
+                    redirectUrl: https://<YOUR_INSTANCE_DOMAIN>/auth/callback
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_REQUIRED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_REQUIRED:
+                  summary: Field is required
+                  description: Field is required
+                  value:
+                    errors:
+                      code: ERR_INPUT_REQUIRED
+                      message: Field is required
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserTfaTotpVerifySecret.Post'
+  /rest/users/me/tfaSetup:
+    put:
+      tags:
+      - users
+      summary: Setup 2FA settings
+      description: Sets the mobile number for the current user's two-factor authentication setup. Only valid when the user's login state is TFA setup. Returns a redirect URL pointing to the next step in the authentication flow.
+      responses:
+        '200':
+          description: 2FA settings updated successfully. Returns a redirect URL for the next step in the authentication flow.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthRedirectResponse'
+              examples:
+                TfaSetup:
+                  summary: Redirect URL after 2FA setup
+                  value:
+                    redirectUrl: /rest/auth/login
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserTfa.Put'
+  /rest/users/me/tos:
+    get:
+      tags:
+      - users
+      summary: Terms of Service
+      description: Returns the Terms of Service configuration for the currently authenticated user's profile, including the TOS content, acceptance text, and whether acceptance is required.
+      responses:
+        '200':
+          description: Terms of Service retrieved successfully. Returns the TOS type, content, acceptance text, occurrence, and whether acceptance is required.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TosResponse'
+              examples:
+                TosData:
+                  summary: TOS requiring acceptance on every login
+                  value:
+                    type: html
+                    data: <p>By using this service you agree to our terms.</p>
+                    acceptanceText: I agree to the Terms of Service
+                    occurance: always
+                    isRequired: true
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+    post:
+      tags:
+      - users
+      summary: Terms of Service
+      description: Records the current user's acceptance or rejection of the Terms of Service. In the standard login flow, advances the session to the next authentication step and returns a redirect URL. In OTP login mode, returns an empty 200 response.
+      responses:
+        '200':
+          description: Terms of Service acceptance recorded successfully. Returns a redirectUrl string for the next step in the authentication flow. In OTP login mode, returns an empty response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthRedirectResponse'
+              examples:
+                TosAccepted:
+                  summary: TOS accepted — proceed to next login step
+                  value:
+                    redirectUrl: https://<YOUR_INSTANCE_DOMAIN>/auth/callback
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_REQUIRED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_REQUIRED:
+                  summary: Field is required
+                  description: Field is required
+                  value:
+                    errors:
+                      code: ERR_INPUT_REQUIRED
+                      message: Field is required
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserTos.Post'
+  /rest/users/preauth:
+    post:
+      tags:
+      - users
+      summary: User login preauth
+      description: User login preauth.
+      responses:
+        '200':
+          description: Pre-authentication check completed successfully. Returns the next step in the login flow, either a redirect URL or a signal to show a password field.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreauthResponse'
+              examples:
+                ShowPasswordField:
+                  summary: User exists — show password field
+                  value:
+                    username: jane.doe@example.com
+                    redirectUrl: null
+                    type: password
+                    otp: false
+                SsoRedirect:
+                  summary: SSO domain — redirect to identity provider
+                  value:
+                    username: jane.doe@corp.com
+                    redirectUrl: https://<YOUR_INSTANCE_DOMAIN>/sso/login?idp=corp
+                    type: redirect
+                    otp: false
+                OtpRequired:
+                  summary: OTP package link — password field with OTP flag
+                  value:
+                    username: jane.doe@example.com
+                    redirectUrl: null
+                    type: password
+                    otp: true
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_REQUIRED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_REQUIRED:
+                  summary: Field is required
+                  description: Field is required
+                  value:
+                    errors:
+                      code: ERR_INPUT_REQUIRED
+                      message: Field is required
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserPreauth.Post'
+  /rest/users/register:
+    post:
+      tags:
+      - users
+      summary: Register a User
+      description: Registers a new User in the system by specifying an email address and password.
+      responses:
+        '204':
+          description: Registration initiated successfully. A notification email has been sent to the user depending on their account state.
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_INVALID_EMAIL, ERR_INPUT_REQUIRED, ERR_INPUT_PASSWORD_COMPLEXITY_ERROR'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_INVALID_EMAIL:
+                  summary: Input is not a valid email
+                  description: Input is not a valid email
+                  value:
+                    errors:
+                      code: ERR_INPUT_INVALID_EMAIL
+                      message: Input is not a valid email
+                ERR_INPUT_REQUIRED:
+                  summary: Field is required
+                  description: Field is required
+                  value:
+                    errors:
+                      code: ERR_INPUT_REQUIRED
+                      message: Field is required
+                ERR_INPUT_PASSWORD_COMPLEXITY_ERROR:
+                  summary: Password does not meet complexity requirements
+                  description: Password does not meet complexity requirements
+                  value:
+                    errors:
+                      code: ERR_INPUT_PASSWORD_COMPLEXITY_ERROR
+                      message: Password does not meet complexity requirements
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegister.Post'
+  /rest/users/requestPasswordReset:
+    post:
+      tags:
+      - users
+      summary: Request for password reset
+      description: Request for password reset of existing user
+      responses:
+        '204':
+          description: Password reset request processed. A notification email may have been sent depending on the account state. Always returns 204 regardless of whether the email address exists.
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_INVALID_EMAIL, ERR_INPUT_REQUIRED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_INVALID_EMAIL:
+                  summary: Input is not a valid email
+                  description: Input is not a valid email
+                  value:
+                    errors:
+                      code: ERR_INPUT_INVALID_EMAIL
+                      message: Input is not a valid email
+                ERR_INPUT_REQUIRED:
+                  summary: Field is required
+                  description: Field is required
+                  value:
+                    errors:
+                      code: ERR_INPUT_REQUIRED
+                      message: Field is required
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequestPasswordReset.Post'
+  /rest/users/resetPassword:
+    post:
+      tags:
+      - users
+      summary: Reset password
+      description: Reset password of an existing user
+      responses:
+        '204':
+          description: Password reset request processed. A notification email may have been sent depending on the account state.
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_REQUIRED, ERR_INPUT_PASSWORD_COMPLEXITY_ERROR'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_REQUIRED:
+                  summary: Field is required
+                  description: Field is required
+                  value:
+                    errors:
+                      code: ERR_INPUT_REQUIRED
+                      message: Field is required
+                ERR_INPUT_PASSWORD_COMPLEXITY_ERROR:
+                  summary: Password does not meet complexity requirements
+                  description: Password does not meet complexity requirements
+                  value:
+                    errors:
+                      code: ERR_INPUT_PASSWORD_COMPLEXITY_ERROR
+                      message: Password does not meet complexity requirements
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserResetPassword.Post'
+  /rest/users/{id}/profileImage:
+    post:
+      tags:
+      - users
+      summary: Uploads a profile image
+      description: Uploads an image file to use as profile image
+      responses:
+        '200':
+          description: Profile image uploaded successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settings'
+              examples:
+                SettingsAfterUpload:
+                  summary: User settings after profile image upload
+                  value:
+                    id: 42
+                    userId: 101
+                    languageId: 1
+                    storageUsed: 204800
+                    storageQuota: 1073741824
+                    profileIconId: 55
+                    mobileNumber: +1-5551234567
+                    mobileNumberVerified: false
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: The unique identifier of the user.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                body:
+                  description: The binary content of the file.
+                  type: string
+                  format: binary
+              required:
+              - body
+    delete:
+      tags:
+      - users
+      summary: Deletes a profile image
+      description: Deletes the user's current profile image.
+      responses:
+        '200':
+          description: Profile image deleted successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settings'
+              examples:
+                SettingsAfterDelete:
+                  summary: User settings after profile image deletion
+                  value:
+                    id: 42
+                    userId: 101
+                    languageId: 1
+                    storageUsed: 204800
+                    storageQuota: 1073741824
+                    profileIconId: null
+                    mobileNumber: +1-5551234567
+                    mobileNumberVerified: false
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: The unique identifier of the user.
+        required: true
+        schema:
+          type: string
+  /rest/users/{id}/settings:
+    get:
+      tags:
+      - users
+      summary: Get User Settings
+      description: Returns the settings for the specified user, including language preference, location, email signature, storage usage, and mobile number. Users can only retrieve their own settings.
+      responses:
+        '200':
+          description: User settings returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settings'
+              examples:
+                UserSettings:
+                  summary: Settings for a user
+                  value:
+                    languageId: 1
+                    locationId: 2
+                    signature: <p>Best regards</p>
+                    storageUsed: 1048576
+                    storageQuota: 10737418240
+                    mobileNumber: '+14155550100'
+                    mobileNumberVerified: true
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the user to retrieve settings for
+        required: true
+        schema:
+          type: string
+    put:
+      tags:
+      - users
+      summary: Update User Settings
+      description: Updates the settings for the specified user, including language preference, location, email signature, and timezone. Users can only update their own settings. Returns 400 if the location cannot be changed because it is managed by an LDAP/SSO mapping.
+      responses:
+        '200':
+          description: User settings updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settings'
+              examples:
+                SettingsUpdated:
+                  summary: Settings after update
+                  value:
+                    languageId: 2
+                    locationId: 3
+                    signature: <p>Regards</p>
+                    storageUsed: 2097152
+                    storageQuota: 10737418240
+                    mobileNumber: '+14155550100'
+                    mobileNumberVerified: true
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the user to update settings for
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Settings.Put'
+  /rest/users/me/recent:
+    post:
+      summary: Add objects to user's recent items
+      description: "### Description:\n  Records one or more files or folders as recently accessed for the current user.\n### Precondition:\n  User must be authenticated.\n### Response:\n  The provided objects are added to the user's recent items list.\n"
+      tags:
+      - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecentObjectsPostRequest'
+      responses:
+        '201':
+          description: All recent items were successfully recorded.
+        '207':
+          description: Some recent items were recorded successfully while others failed.
+        '400':
+          description: 'Bad Request<br /><br /><i>Possible error codes: </i>ERR_REQUEST_INVALID_JSON'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_REQUEST_INVALID_JSON:
+                  summary: Invalid json provided
+                  description: Invalid json provided
+                  value:
+                    errors:
+                    - code: ERR_REQUEST_INVALID_JSON
+                      message: Invalid json provided
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INVALID_PARAMETER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INVALID_PARAMETER:
+                  summary: Invalid Parameter Exception
+                  description: Invalid Parameter Exception
+                  value:
+                    errors:
+                    - code: ERR_INVALID_PARAMETER
+                      message: Invalid Parameter Exception
+        '490':
+          description: Request blocked by WAF
+    get:
+      summary: Return user's recent items
+      description: "### Description:\n  Retrieves the current user's recently accessed files and folders.\n### Precondition:\n  The user profile must have \"Collaboration Allowed\" enabled.\n### Response:\n  Returns the list of the user's recently accessed items.\n"
+      tags:
+      - users
+      parameters:
+      - in: query
+        name: returnEntity
+        required: false
+        description: If true, includes the entity in the response body.
+        schema:
+          type: boolean
+      - in: query
+        name: with
+        required: false
+        description: Specifies additional fields to include in the response.
+        schema:
+          type: string
+      - in: query
+        name: mode
+        required: false
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - compact
+          - full_no_links
+          - full_with_links
+          - full
+      - in: query
+        name: type
+        required: false
+        explode: true
+        style: form
+        description: Filter recent items by object type. Accepts a list of type values.<br>`d` – Directories (folders) only.<br>`f` – Files only.<br>If omitted, both files and folders are returned.
+        schema:
+          type: array
+          enum:
+          - d
+          - f
+          items:
+            type: string
+      responses:
+        '200':
+          description: Request successfully processed and recent items returned.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  oneOf:
+                  - $ref: '#/components/schemas/Folder'
+                  - $ref: '#/components/schemas/File'
+                  discriminator:
+                    propertyName: type
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '490':
+          description: Request blocked by WAF
+  /rest/users/me/recent/{id}:
+    delete:
+      summary: Delete a user's recent item
+      description: "### Description:\n  Removes the specified object from the current user's recent items list.\n### Precondition:\n  User must be authenticated.\n### Response:\n  The item is removed from the user's recent items.\n"
+      tags:
+      - users
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier of the entity.
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: The recent item was successfully removed.
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '490':
+          description: Request blocked by WAF
+  /rest/users/me/pins:
+    post:
+      summary: Pin items for the current user
+      description: "### Description:\n  Pins the specified entities to the current user's pinned list.\n### Precondition:\n  User must be authenticated.\n### Response:\n  The specified items are pinned.\n"
+      tags:
+      - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserMePinsPostRequest'
+      responses:
+        '204':
+          description: The items were successfully pinned.
+        '400':
+          description: 'Bad Request<br /><br /><i>Possible error codes: </i>ERR_REQUEST_INVALID_JSON'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_REQUEST_INVALID_JSON:
+                  summary: Invalid json provided
+                  description: Invalid json provided
+                  value:
+                    errors:
+                    - code: ERR_REQUEST_INVALID_JSON
+                      message: Invalid json provided
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INVALID_PARAMETER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INVALID_PARAMETER:
+                  summary: Invalid Parameter Exception
+                  description: Invalid Parameter Exception
+                  value:
+                    errors:
+                    - code: ERR_INVALID_PARAMETER
+                      message: Invalid Parameter Exception
+        '490':
+          description: Request blocked by WAF
+    delete:
+      summary: Unpin items for the current user
+      description: "### Description:\n  Removes the specified entities from the current user's pinned list.\n### Precondition:\n  User must be authenticated.\n### Response:\n  The specified items are unpinned.\n"
+      tags:
+      - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserMePinsPostRequest'
+      responses:
+        '204':
+          description: The items were successfully unpinned.
+        '400':
+          description: 'Bad Request<br /><br /><i>Possible error codes: </i>ERR_REQUEST_INVALID_JSON'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_REQUEST_INVALID_JSON:
+                  summary: Invalid json provided
+                  description: Invalid json provided
+                  value:
+                    errors:
+                    - code: ERR_REQUEST_INVALID_JSON
+                      message: Invalid json provided
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INVALID_PARAMETER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INVALID_PARAMETER:
+                  summary: Invalid Parameter Exception
+                  description: Invalid Parameter Exception
+                  value:
+                    errors:
+                    - code: ERR_INVALID_PARAMETER
+                      message: Invalid Parameter Exception
+        '490':
+          description: Request blocked by WAF
+  /rest/users/actions/getDistributionList:
+    get:
+      summary: Check emails for LDAP distribution list status
+      description: "### Description:\n  Checks whether the provided email addresses correspond to LDAP distribution lists rather than individual users.\n### Precondition:\n  User must be authenticated.\n### Response:\n  Returns each email address along with a flag indicating whether it is an LDAP distribution list.\n"
+      tags:
+      - users
+      parameters:
+      - in: query
+        name: email:in
+        required: true
+        explode: true
+        style: form
+        description: Comma-separated list of email addresses to check for LDAP distribution list status.
+        schema:
+          type: array
+          items:
+            type: string
+            format: email
+      responses:
+        '200':
+          description: The distribution list status for each email has been successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDistributionLists'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_DENIED, ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_DENIED:
+                  summary: Your access is denied.
+                  description: Your access is denied.
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_DENIED
+                      message: Your access is denied.
+                      redirectUrl: /login?code=3317
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+  /rest/users/me/concurrent/challenge:
+    get:
+      summary: Get concurrent session challenge
+      description: "### Description:\n  Returns information about the existing concurrent session that must be resolved before the current login can proceed.\n### Precondition:\n  User must be in the `concurrent` login state.\n### Response:\n  Returns the concurrent session details required to complete the challenge.\n"
+      tags:
+      - users
+      responses:
+        '200':
+          description: The concurrent session challenge details have been successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserMeConcurrentChallenge'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_AUTH_WRONG_LOGIN_STATE, ERR_CONCURRENT_NOT_FOUND'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_WRONG_LOGIN_STATE:
+                  summary: Wrong login state
+                  description: Wrong login state
+                  value:
+                    errors:
+                    - code: ERR_AUTH_WRONG_LOGIN_STATE
+                      message: Wrong login state
+                ERR_CONCURRENT_NOT_FOUND:
+                  summary: Concurrent session does not exist
+                  description: Concurrent session does not exist
+                  value:
+                    errors:
+                    - code: ERR_CONCURRENT_NOT_FOUND
+                      message: Concurrent session does not exist
+        '490':
+          description: Request blocked by WAF
+  /rest/users/me/concurrent/auth:
+    post:
+      summary: Resolve a concurrent session challenge
+      description: "### Description:\n  Resolves a concurrent login challenge by either terminating the existing session or cancelling the current login attempt.\n### Precondition:\n  User must be in the `concurrent` login state.\n### Response:\n  Returns the login result after the concurrent session challenge is resolved.\n"
+      tags:
+      - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserMeConcurrentAuthPostRequest'
+      responses:
+        '200':
+          description: The concurrent session challenge was successfully resolved.
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_AUTH_WRONG_LOGIN_STATE'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_WRONG_LOGIN_STATE:
+                  summary: Wrong login state
+                  description: Wrong login state
+                  value:
+                    errors:
+                    - code: ERR_AUTH_WRONG_LOGIN_STATE
+                      message: Wrong login state
+        '490':
+          description: Request blocked by WAF
+  /rest/admin/users/actions/import:
+    post:
+      summary: Bulk import users via CSV file
+      description: "### Overview:\n  Import users in bulk using a CSV file.\n### Precondition:\n  The user must be an administrator with access to `User Management`.\n### Response:\n  The users will be either created or updated.\n"
+      tags:
+      - users
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                  format: binary
+                  description: The CSV file containing the users to be imported.
+                updateIfExists:
+                  type: boolean
+                  description: If true, existing users will be updated with the new settings.
+                sendNotification:
+                  type: boolean
+                  description: If true, a notification email will be sent to each newly created user.
+                partialSuccess:
+                  type: boolean
+                  description: If true, only validated users will be imported, while others will be rejected.
+              required:
+              - content
+      responses:
+        '200':
+          description: Users have been successfully imported.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminUserImport'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_ADMIN'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_ADMIN:
+                  summary: Insufficient admin access permissions
+                  description: Insufficient admin access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_ADMIN
+                      message: Insufficient admin access permissions
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_INVALID_FORMAT, ERR_INVALID_ARGUMENT'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_INVALID_FORMAT:
+                  summary: The input is invalid.
+                  description: The input is invalid.
+                  value:
+                    errors:
+                    - code: ERR_INPUT_INVALID_FORMAT
+                      message: The input is invalid.
+                ERR_INVALID_ARGUMENT:
+                  summary: Invalid Argument
+                  description: Invalid Argument
+                  value:
+                    errors:
+                    - code: ERR_INVALID_ARGUMENT
+                      message: Invalid Argument
+        '490':
+          description: Request blocked by WAF
+  /rest/admin/users/actions/deleteTotpSecret:
+    post:
+      summary: Delete TOTP secrets for users
+      description: "### Description:\n  Deletes the TOTP (Time-based One-Time Password) secret for the specified users.\n### Precondition:\n  The user must be an administrator. The caller's admin role rank must be sufficient to manage the target users.\n### Response:\n  The TOTP secrets for the specified users are deleted successfully.\n"
+      tags:
+      - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminDeleteTOTPSecretRequest'
+      responses:
+        '200':
+          description: The TOTP secrets were deleted successfully.
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_ADMIN, ERR_ACCESS_USER, ERR_ADMIN_ROLE_RANK_RESTRICTED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_ADMIN:
+                  summary: Insufficient admin access permissions
+                  description: Insufficient admin access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_ADMIN
+                      message: Insufficient admin access permissions
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_ADMIN_ROLE_RANK_RESTRICTED:
+                  summary: Action is restricted due to admin role rank
+                  description: Action is restricted due to admin role rank
+                  value:
+                    errors:
+                    - code: ERR_ADMIN_ROLE_RANK_RESTRICTED
+                      message: Action is restricted due to admin role rank
+        '404':
+          description: 'Not Found<br /><br /><i>Possible error codes: </i>ERR_ENTITY_NOT_FOUND'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ENTITY_NOT_FOUND:
+                  summary: Entity does not exist
+                  description: Entity does not exist
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_NOT_FOUND
+                      message: Entity does not exist
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_INVALID_FORMAT'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_INVALID_FORMAT:
+                  summary: The input is invalid.
+                  description: The input is invalid.
+                  value:
+                    errors:
+                    - code: ERR_INPUT_INVALID_FORMAT
+                      message: The input is invalid.
+        '490':
+          description: Request blocked by WAF
+components:
+  schemas:
+    UserMobileNumberPassword.Put:
+      description: Class UserPassword
+      required:
+      - password
+      - mobileNumber
+      properties:
+        password:
+          description: The current password of the user
+          type: string
+        mobileNumber:
+          description: The user's new mobile number
+          type: string
+        testOnly:
+          description: If true, a short message will be sent to the number, and the number will not be saved
+          type: boolean
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    Settings:
+      description: Class Settings
+      properties:
+        languageId:
+          description: Language identifier of the user the settings represent
+          type: integer
+        locationId:
+          description: Location identifier for user settings. User's personal default location for file send and uploads
+          type: integer
+        signature:
+          description: Email message signature
+          type: string
+        storageUsed:
+          description: Storage used by the user across the folders they own
+          type: integer
+        storageQuota:
+          description: Storage quota allocated to the user across all the folders they own
+          type: integer
+        mobileKeyStore:
+          description: Encrypted key store data used by the mobile client for secure operations
+          type: string
+        mobileNumber:
+          description: User's mobile number
+          type: string
+        mobileNumberVerified:
+          description: Indicates whether the mobile number is verified
+          type: boolean
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+    RecentObject:
+      type: object
+      properties:
+        id:
+          type: string
+          description: UUID of the recently accessed file or folder.
+        lastAccessed:
+          type: string
+          format: date
+          description: Timestamp of when the object was last accessed by the user.
+      required:
+      - id
+      - lastAccessed
+    PushedObject:
+      type: object
+      properties:
+        objectId:
+          type: string
+          description: Unique identifier (UUID) for the pushed object.
+        userId:
+          type: string
+          description: Unique identifier (UUID) for the user who pushed the object.
+        created:
+          type: string
+          format: date
+          description: The date and time when the object was pushed.
+        user:
+          description: Details of the user who pushed the object.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+    UserTfaTotpVerifySecret.Post:
+      description: Class UserTfaTotpVerifySecret
+      required:
+      - otp
+      properties:
+        otp:
+          description: OTP
+          type: string
+        referral:
+          description: referral
+          type: string
+    Tag:
+      type: object
+      properties:
+        guid:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) for the tag.
+        name:
+          type: string
+          description: Display name of the tag.
+        type:
+          type: string
+          description: Type category of the tag.
+    AdminDeleteTOTPSecretRequest:
+      type: object
+      properties:
+        ids:
+          type: array
+          minItems: 1
+          maxItems: 100
+          description: List of user UUIDs whose TOTP secrets should be deleted. Must contain between 1 and 100 IDs.
+          items:
+            type: string
+      required:
+      - ids
+    UserMe:
+      description: Class UserMe
+      required:
+      - basedirId
+      - email
+      - id
+      - mydirId
+      - name
+      - syncdirId
+      properties:
+        id:
+          description: The unique identifier of the user
+          type: string
+        basedirId:
+          description: The unique identifier of the user's root Kiteworks directory.
+          type: string
+        created:
+          description: Date and time the user account was created
+          type: string
+          format: date
+        email:
+          description: The user's email
+          type: string
+        mydirId:
+          description: The unique identifier of the user's mydir system directory.
+          type: string
+        name:
+          description: The name of the user
+          type: string
+        syncdirId:
+          description: The unique identifier of the user's 'My Folder'.
+          type: string
+        userTypeId:
+          description: The unique identifier of the user type (profile).
+          type: integer
+        internal:
+          description: Indicates whether the user is an internal user
+          type: boolean
+        profileIcon:
+          description: URL to the user's profile icon image
+          type: string
+        extDL:
+          description: Indicates whether the user is an External Distribution List
+          type: boolean
+        metadata:
+          description: List of user's metadata
+          type: array
+          items:
+            $ref: '#/components/schemas/UserMetadata'
+        adminRoleId:
+          description: The ID of the admin role assigned to the user.
+          type: integer
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+        serviceName:
+          description: Name of the Kiteworks service instance the user is connected to
+          type: string
+    AdminUserImportError:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the error.
+        message:
+          type: string
+          description: Description of the error.
+    Settings.Put:
+      description: Class Settings
+      properties:
+        languageId:
+          description: Language identifier for user settings
+          type: integer
+        locationId:
+          description: Location identifier for user settings. User's personal default location for file send and uploads
+          type: integer
+        signature:
+          description: Email message signature
+          type: string
+        mobileKeyStore:
+          description: Encrypted key store data used by the mobile client for secure operations
+          type: string
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
+    UserBasic:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier (UUID) for the user.
+        email:
+          type: string
+          description: Email address associated with the user.
+        name:
+          type: string
+          description: Full name of the user.
+        profileIcon:
+          type: string
+          description: URL or identifier for the user's profile icon.
+    AuthRedirectResponse:
+      description: Represents the success response for authentication flow endpoints that advance the user to the next step.
+      properties:
+        redirectUrl:
+          description: The URL to redirect to for the next step in the flow.
+          type: string
+    UserMetadata:
+      description: Class UserMetadata
+      properties:
+        name:
+          description: Key name of the custom metadata attribute associated with the user
+          type: string
+        value:
+          description: Value assigned to the custom metadata attribute for the user
+          type: string
+    UserTfaTotpResetSecret.Post:
+      description: Class UserTfaTotpResetSecret
+      required:
+      - password
+      properties:
+        password:
+          description: The user's password
+          type: string
+        otp:
+          description: OTP to verify the new secret
+          type: string
+    UserNamePassword.Put:
+      description: Class UserNamePassword
+      properties:
+        password:
+          description: The user's password
+          type: string
+        previousPassword:
+          description: The user's previous password
+          type: string
+        name:
+          description: The user's name
+          type: string
+    UserRegister.Post:
+      description: Class UserRegister
+      required:
+      - email
+      - password
+      properties:
+        email:
+          description: User's email
+          type: string
+        password:
+          description: Password
+          type: string
+        link:
+          description: Ref link
+          type: string
+        activationCode:
+          description: activation code
+          type: string
+        redirect:
+          description: Special handling for redirect (sharedfiles)
+          type: string
+    TosResponse:
+      description: Represents the Terms of Service content returned for the current user.
+      properties:
+        type:
+          description: The type of Terms of Service.
+          type: string
+        data:
+          description: The full Terms of Service content.
+          type: string
+        acceptanceText:
+          description: The text to display on the acceptance button or checkbox.
+          type: string
+        occurrence:
+          description: How often the Terms of Service is shown to the user.
+          type: string
+        isRequired:
+          description: Indicates whether the user is required to accept the Terms of Service.
+          type: boolean
+    SystemFolders:
+      type: object
+      properties:
+        current_num_sys_folders:
+          type: integer
+          description: Current number of system folders.
+        max_num_sys_folders:
+          type: integer
+          description: Maximum allowed number of system folders.
+        per_folder_quota_options:
+          type: array
+          description: List of available quota options per folder.
+          items:
+            type: integer
+        per_folder_default_quota:
+          type: integer
+          description: Default quota assigned to each folder.
+    UserMePinsPostRequest:
+      type: object
+      properties:
+        ids:
+          type: array
+          description: List of entity IDs to pin or unpin.
+          items:
+            type: string
+        type:
+          type: string
+          description: The type of entity being pinned or unpinned.<br>`source` – An external content source.
+      required:
+      - ids
+      - type
+    UserTos.Post:
+      description: Class UserTos
+      required:
+      - accept
+      properties:
+        accept:
+          description: accept
+          type: boolean
+        referral:
+          description: referral
+          type: string
+    LdapSearchResults:
+      description: Class LdapSearchResults
+      required:
+      - matches
+      properties:
+        matches:
+          description: Search matches
+          type: array
+          items:
+            $ref: '#/components/schemas/LdapSearchResultUser'
+    Permission:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the permission.
+        name:
+          type: string
+          description: Name of the permission.
+        allowed:
+          type: boolean
+          description: Indicates whether the permission is granted (True) or denied (False).
+    LdapSearchResultUser:
+      description: Class LdapSearchResultUser
+      properties:
+        email:
+          description: User's email
+          type: string
+        displayName:
+          description: Users's display name
+          type: string
+    Folder:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) of the folder.
+        parentId:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) of the parent object.
+        name:
+          type: string
+          description: Name of the object.
+        type:
+          type: string
+          description: Type of the object.<br>`f` – File.<br>`d` – Folder.
+        userId:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) who created the folder.
+        creator:
+          description: Details of the user who created the object.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        created:
+          type: string
+          format: date
+          description: The date and time when the object was created.
+        modified:
+          type: string
+          format: date
+          description: The date and time when the object was last modified.
+        expire:
+          type: string
+          format: date
+          description: Expiration timestamp of the object, if applicable.
+        permissions:
+          description: List of permissions associated with the object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        deleted:
+          type: boolean
+          description: Indicates whether the object has been deleted.
+        permDeleted:
+          type: boolean
+          description: Indicates whether the object has been permanently deleted.
+        permalink:
+          type: string
+          description: Permanent URL link to access the object.
+        path:
+          type: string
+          description: Path to the folder in the hierarchy.
+        members:
+          description: List of members who have access to the object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Member'
+        vendorDocId:
+          type: string
+          description: Vendor document ID associated with the object.
+        vendorDocName:
+          type: string
+          description: Name of the vendor document associated with the object.
+        secure:
+          type: boolean
+          description: Indicates whether the folder or the parent folder containing the file is marked as secure.
+        source:
+          type: integer
+          description: ID representing the source of the object (1 - Salesforce, 2 - Teams).
+        isShared:
+          type: boolean
+          description: Indicates if the folder is shared with other users.
+        syncable:
+          type: boolean
+          description: Indicates if the folder can be synced by Desktop Sync Client.
+        fileLifetime:
+          type: integer
+          description: Time duration (in days) for which the files in this folder are kept after being added to the folder.
+        description:
+          type: string
+          description: The description of the folder.
+        isFavorite:
+          type: boolean
+          description: Indicates if the folder is marked as a favorite by the user.
+        pushedFilesCount:
+          type: integer
+          description: The number of files that have been pushed to mobile apps in this folder.
+        currentUserRole:
+          description: The role of the current user in this folder.
+          allOf:
+          - $ref: '#/components/schemas/Role'
+        avStatus:
+          type: string
+          description: The Antivirus (AV) status of the folder.
+        dlpStatus:
+          type: string
+          description: The Data Loss Prevention (DLP) status of the folder.
+        totalMembersCount:
+          type: integer
+          description: Total number of members who have access to this folder.
+        totalFoldersCount:
+          type: integer
+          description: Total number of subfolders within this folder.
+        totalFilesCount:
+          type: integer
+          description: Total number of files within this folder.
+        maxFolderExpiration:
+          type: string
+          format: date
+          description: The maximum expiration date allowed for files in this folder.
+        maxFileLifetime:
+          type: integer
+          description: The maximum duration (in days) that files in this folder can be kept after being added to the folder.
+        isLdapGroupMember:
+          type: boolean
+          description: Indicates if the folder is part of an LDAP group.
+        isUnderMyFolder:
+          type: boolean
+          description: Indicates if this folder is a subfolder of the user's "My Folder".
+        pathIds:
+          type: string
+          description: A list of IDs representing the path of the folder within the folder hierarchy.
+        isRoot:
+          type: boolean
+          description: Indicates if this folder is a root folder.
+        rootId:
+          type: string
+          format: uuid
+          description: The ID of the root folder if this is a subfolder.
+        useFolderQuota:
+          type: boolean
+          description: Indicates if a folder quota is applied to this folder.
+        quota:
+          type: integer
+          description: The storage quota for the folder (in bytes).
+        size:
+          type: integer
+          description: The total storage size used by the folder (in bytes).
+        freeSpace:
+          type: integer
+          description: The amount of free space available in the folder (in bytes).
+        inheritanceEnabled:
+          type: boolean
+          description: Indicates if a folder inherits permissions from the parent folder
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    Role:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Role ID
+        name:
+          type: string
+          description: Role name
+        rank:
+          type: integer
+          description: Role rank
+        type:
+          type: string
+          description: Role type
+    File:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) of the file.
+        parentId:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) of the parent folder.
+        name:
+          type: string
+          description: Name of the object.
+        type:
+          type: string
+          description: Type of the object.<br>`f` – File.<br>`d` – Folder.
+        userId:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) who created the file.
+        creator:
+          description: Details of the user who created the object.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        created:
+          type: string
+          format: date
+          description: The date and time when the object was created.
+        modified:
+          type: string
+          format: date
+          description: The date and time when the object was last modified.
+        expire:
+          type: string
+          format: date
+          description: Expiration timestamp of the object, if applicable.
+        permissions:
+          description: List of permissions associated with the object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        deleted:
+          type: boolean
+          description: Indicates whether the object has been deleted.
+        permDeleted:
+          type: boolean
+          description: Indicates whether the object has been permanently deleted.
+        permalink:
+          type: string
+          description: Permanent URL link to access the file.
+        path:
+          type: string
+          description: Path to the object in the hierarchy.
+        members:
+          description: List of members who have access to the object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Member'
+        vendorDocId:
+          type: string
+          description: Vendor document ID associated with the object.
+        vendorDocName:
+          type: string
+          description: Name of the vendor document associated with the object.
+        secure:
+          type: boolean
+          description: Indicates whether the folder or the parent folder containing the file is marked as secure.
+        source:
+          type: integer
+          description: ID representing the source of the object (1 - Salesforce, 2 - Teams).
+        modifier:
+          description: The user who last modified the file.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        size:
+          type: integer
+          description: The size of the file in bytes.
+        mime:
+          type: string
+          description: The MIME type of the file.
+        fingerprint:
+          type: string
+          description: A unique hash identifying the file.
+        fingerprints:
+          type: array
+          description: List of fingerprints associated with the file.
+          items:
+            $ref: '#/components/schemas/Fingerprint'
+        clientCreated:
+          type: string
+          format: date
+          description: The date and time when the file was created on the client side.
+        clientModified:
+          type: string
+          format: date
+          description: The date and time when the file was last modified on the client side.
+        overriddenExpire:
+          type: boolean
+          description: Indicates whether the expiration date for the file has been overridden.
+        sharedBy:
+          description: The user who shared the file.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        sharedTime:
+          type: string
+          format: date
+          description: The date and time when the file was shared.
+        parent:
+          description: The parent folder of the file.
+          allOf:
+          - $ref: '#/components/schemas/Folder'
+        originalFileId:
+          type: string
+          format: uuid
+          description: The ID of the original file if this one is a copy.
+        avStatus:
+          type: string
+          description: Indicates the file version's availability status based on Antivirus (AV) settings and whether it has been scanned or detected as infected.
+        dlpStatus:
+          type: string
+          description: Indicates the file version's availability status based on Data Loss Prevention (DLP) settings and whether it has been scanned or detected as infected.
+        adminQuarantineStatus:
+          type: string
+          description: Indicates the file version's availability status based on the administrator's quarantine status.
+        locked:
+          type: boolean
+          description: Indicates if the file is locked.
+        lockUser:
+          description: The user who locked the file.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        isShared:
+          type: boolean
+          description: Indicates if the file is shared with other users.
+        lastModifiedBy:
+          description: The user who last modified the file.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        pushedObject:
+          description: Details about the pushed object, if any.
+          allOf:
+          - $ref: '#/components/schemas/PushedObject'
+        pathIds:
+          type: string
+          format: uuid
+          description: A list of IDs representing the path of the file within the folder hierarchy.
+        wopiapp:
+          description: WOPI-related information for the file when used in a mobile app.
+          allOf:
+          - $ref: '#/components/schemas/MobileInfo'
+        pushed:
+          type: boolean
+          description: Indicates if the file has been pushed to a mobile app.
+        tags:
+          description: List of tags associated with the file.
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        safeEdit:
+          description: Information regarding the file's SafeEdit settings.
+          allOf:
+          - $ref: '#/components/schemas/SafeEdit'
+        versionsCount:
+          type: integer
+          description: The total number of versions for the file.
+        tracking_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: Tracking identifier associated with the file upload.
+    AdminUserImport:
+      type: object
+      properties:
+        added_users:
+          type: integer
+          description: Number of users successfully added.
+        updated_users:
+          type: integer
+          description: Number of users successfully updated.
+        failed_ids:
+          type: array
+          description: List of user emails that failed during import.
+          items:
+            type: string
+        errors:
+          description: List of error details encountered during import.
+          type: array
+          items:
+            $ref: '#/components/schemas/AdminUserImportError'
+    UserResetPassword.Post:
+      description: Class UserResetPassword
+      required:
+      - link
+      - password
+      properties:
+        link:
+          description: The password reset link
+          type: string
+        password:
+          description: Password
+          type: string
+    TfaConfigResponse:
+      description: Represents the Two-Factor Authentication configuration for the current user.
+      properties:
+        module:
+          description: The name of the active Two-Factor Authentication (TFA) module.
+          type: string
+        passcodeLabel:
+          description: The label to display for the passcode input field.
+          type: string
+        passcodeDescription:
+          description: A description of the passcode input field.
+          type: string
+        rechallengeLabel:
+          description: The label for the rechallenge action.
+          type: string
+        challengeShouldSendPassword:
+          description: Indicates whether the password should be sent along with the challenge request.
+          type: boolean
+        challengeWaitMessage:
+          description: A message to display to the user while waiting for the challenge response.
+          type: string
+        rechallengeMessage:
+          description: A message to display when prompting the user to rechallenge.
+          type: string
+        rememberDeviceEnabled:
+          description: Indicates whether the remember device feature is enabled for this user.
+          type: boolean
+        passcodeMask:
+          description: Indicates whether the passcode input should be masked.
+          type: boolean
+        mobileNumber:
+          description: The user's mobile number. Present only when the TFA module is SMSOTP.
+          type: string
+        allowNumberChange:
+          description: Indicates whether the user is allowed to change their mobile number. Present only when the TFA module is SMSOTP.
+          type: boolean
+    TfaChallengeResponse:
+      description: Represents the success response for TFA challenge and auth endpoints. Exactly one of the two properties is present in any given response.
+      properties:
+        redirectUrl:
+          description: The URL to redirect to for the next step in the authentication flow. Present when TFA is accepted; mutually exclusive with challengeMsg.
+          type: string
+        challengeMsg:
+          description: A message from the TFA module to display to the user (for example, instructions to check their phone). Present when a challenge is in progress; mutually exclusive with redirectUrl.
+          type: string
+    Fingerprint:
+      type: object
+      properties:
+        algo:
+          type: string
+          description: The algorithm used to generate the fingerprint (e.g., sha3-256, md5).
+        hash:
+          type: string
+          description: The resulting hash value representing the fingerprint of the file or object.
+    MobileInfo:
+      type: object
+      properties:
+        wopiSrc:
+          type: string
+          description: The WOPI (Web Application Open Platform Interface) source URL for the mobile application.
+        userId:
+          type: string
+          description: Unique identifier of the user.
+        service:
+          type: string
+          description: The WOPI service ID.
+        scheme:
+          type: string
+          description: URI scheme used by the mobile application to handle the file.
+        schemeSupport:
+          type: string
+          description: Indicates the level of support the mobile app has for the URI scheme.
+    PreauthResponse:
+      description: Represents the success response for the preauth endpoint.
+      properties:
+        username:
+          description: The username used for preauth.
+          type: string
+        redirectUrl:
+          description: The URL to redirect to. Present when type is `redirect`, null when type is `password`.
+          type: string
+        type:
+          description: 'The next step in the login flow. Accepted values: `password` (show a password field), `redirect` (redirect the user to redirectUrl).'
+          type: string
+        otp:
+          description: Whether the login flow requires OTP authentication.
+          type: boolean
+    UserMeConcurrentAuthPostRequest:
+      type: object
+      properties:
+        terminate:
+          type: boolean
+          description: If true, terminates the existing concurrent session and proceeds with the current login. If false, cancels the current login attempt.
+        referral:
+          type: string
+          description: The referral token from the concurrent session challenge, used to identify the session to terminate.
+      required:
+      - referral
+      - terminate
+    UserDistributionList:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Email address of the distribution list or individual contact.
+        isDl:
+          type: boolean
+          description: Indicates whether the entry is a distribution list.
+    UserQuota:
+      type: object
+      properties:
+        send_quota_allowed:
+          type: integer
+          description: The allowed send quota for the user.
+        send_quota_used:
+          type: integer
+          description: The amount of send quota used by the user.
+        folder_quota_allowed:
+          type: integer
+          description: The allowed folder quota for the user.
+        folder_quota_used:
+          type: integer
+          description: The amount of folder quota used by the user.
+        sys_folders:
+          description: Details of the system folders quota.
+          allOf:
+          - $ref: '#/components/schemas/SystemFolders'
+    UserDistributionLists:
+      type: object
+      properties:
+        data:
+          description: List of distribution list entries.
+          type: array
+          items:
+            $ref: '#/components/schemas/UserDistributionList'
+    RecentObjectsPostRequest:
+      type: object
+      properties:
+        objects:
+          type: array
+          description: List of recently accessed objects to record, each containing an object UUID and last-accessed timestamp.
+          items:
+            $ref: '#/components/schemas/RecentObject'
+      required:
+      - objects
+    Member:
+      type: object
+      properties:
+        objectId:
+          type: string
+          description: Unique identifier (UUID) of the associated object (file or folder).
+        roleId:
+          type: integer
+          description: Role assigned to the member.
+        userId:
+          type: string
+          description: Unique identifier (UUID) of the user.
+        groupId:
+          type: integer
+          description: Unique identifier of the LDAP group.
+        user:
+          description: User details of the member.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        role:
+          description: Role details assigned to the member.
+          allOf:
+          - $ref: '#/components/schemas/Role'
+        group:
+          description: Group details if the member belongs to a group.
+          allOf:
+          - $ref: '#/components/schemas/Group'
+        sharedBy:
+          description: Details of the user who shared the file or folder.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        created:
+          type: string
+          format: date
+          description: Date when the file or folder was shared.
+        inheritRoleId:
+          type: integer
+          description: Inherited role ID from the parent folder, if applicable.
+        allowedFolderRoleId:
+          type: array
+          description: List of allowed folder role IDs.
+          items:
+            type: integer
+        email:
+          type: string
+          description: Email associated with the member.
+        rank:
+          type: integer
+          description: Rank of the member role.
+        originFolder:
+          readOnly: true
+    SafeEdit:
+      type: object
+      properties:
+        safeEditLocked:
+          type: boolean
+          description: Indicates if the file is locked through a SafeEdit session.
+        user:
+          description: The user responsible for locking the file via SafeEdit.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+    UserMeConcurrentChallenge:
+      type: object
+      properties:
+        created:
+          type: string
+          format: date
+        userAgent:
+          type: string
+        location:
+          type: string
+    UserTfa.Post:
+      description: Class UserTfa
+      required:
+      - otp
+      properties:
+        otp:
+          description: OTP
+          type: string
+        referral:
+          description: referral
+          type: string
+        rememberDevice:
+          description: remember device
+          type: boolean
+    UserForcedPasswordChange.Put:
+      description: Class UserForcedPasswordChange
+      properties:
+        password:
+          description: The user's password
+          type: string
+        previousPassword:
+          description: The user's previous password
+          type: string
+        referral:
+          description: referral
+          type: string
+    UserRequestPasswordReset.Post:
+      description: Class UserRequestPasswordReset
+      required:
+      - email
+      properties:
+        email:
+          description: User's email
+          type: string
+    UserPreauth.Post:
+      description: Class UserPreauth
+      required:
+      - username
+      properties:
+        username:
+          description: username
+          type: string
+        referral:
+          description: referral
+          type: string
+    Group:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: LDAP Group ID
+        name:
+          type: string
+          description: LDAP Group name
+        dn:
+          type: string
+          description: LDAP Group domain name
+        email:
+          type: string
+          description: LDAP Group email
+        description:
+          type: string
+          description: LDAP Group description
+    TotpSetupResponse:
+      description: Represents the success response when initiating a TOTP secret setup.
+      properties:
+        username:
+          description: The username associated with the TOTP secret.
+          type: string
+        issuer:
+          description: The issuer name used in the TOTP URI, typically the server hostname.
+          type: string
+        secret:
+          description: The base32-encoded TOTP secret key to be stored in the authenticator app.
+          type: string
+        image:
+          description: A base64-encoded QR code image encoding the TOTP URI for scanning with an authenticator app.
+          type: string
+        setup_instruction_1:
+          description: Optional first setup instruction. Only present when provided by the authentication backend.
+          type: string
+        setup_instruction_2:
+          description: Optional second setup instruction. Only present when provided by the authentication backend.
+          type: string
+    UserLogin.Post:
+      description: Class UserLogin
+      required:
+      - username
+      - password
+      properties:
+        username:
+          description: The username of the user attempting to log in.
+          type: string
+        password:
+          description: The password of the user. It must be kept confidential and securely stored.
+          type: string
+        referral:
+          description: The URL that referred the user to this login action.
+          type: string
+    LoginResponse:
+      description: Represents the success response for the login endpoint.
+      properties:
+        success:
+          description: Indicates whether the login was successful. Always true on a successful response.
+          type: boolean
+        redirectUrl:
+          description: The URL to redirect to for the next step in the authentication flow.
+          type: string
+    UserTfa.Put:
+      description: Class UserTfa
+      required:
+      - otp
+      properties:
+        otp:
+          description: OTP
+          type: string
+        referral:
+          description: referral
+          type: string
+        rememberDevice:
+          description: remember device
+          type: boolean

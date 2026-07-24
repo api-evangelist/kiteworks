@@ -1,0 +1,125 @@
+openapi: 3.0.2
+info:
+  version: '28'
+  title: Kiteworks API Documentation activities settings API
+tags:
+- name: settings
+paths:
+  /rest/settings/passwordPolicy:
+    get:
+      tags:
+      - settings
+      summary: Get Password Policy
+      description: Returns the system's password policy settings, including minimum length, required character types, and whether the policy is enabled.
+      responses:
+        '200':
+          description: Password policy retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PasswordPolicy'
+              examples:
+                PasswordPolicy:
+                  summary: System password policy
+                  value:
+                    enabled: true
+                    minLength: 8
+                    minNumeric: 1
+                    minLower: 1
+                    minUpper: 1
+                    minSpecial: 1
+                    allowBrowserAutofill: false
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+  /rest/settings/system:
+    get:
+      tags:
+      - settings
+      summary: Get system settings
+      description: Returns the system-level settings, including language, location, storage quota, and mobile number configuration as configured by the system administrator.
+      responses:
+        '200':
+          description: System settings retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Settings'
+              examples:
+                SystemSettings:
+                  summary: System-level settings
+                  value:
+                    languageId: 1
+                    locationId: 1
+                    storageQuota: 10737418240
+                    mobileNumber: null
+                    mobileNumberVerified: false
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+components:
+  schemas:
+    PasswordPolicy:
+      description: Class PasswordPolicy
+      required:
+      - allowAutoFill
+      - enabled
+      - minCharacters
+      - minDigits
+      - minLowerCharacters
+      - minSpecialCharacters
+      - minUpperCharacters
+      properties:
+        allowAutoFill:
+          description: Indicates whether browsers are allowed to fill in the password automatically
+          type: boolean
+        enabled:
+          description: Indicates whether the password policy is enabled
+          type: boolean
+        minCharacters:
+          description: Minimum length of the password
+          type: integer
+        minDigits:
+          description: Minimum number of numeric characters required in the password
+          type: integer
+        minLowerCharacters:
+          description: Minimum number of lowercase characters required in the password
+          type: integer
+        minSpecialCharacters:
+          description: Minimum number of special characters required in the password
+          type: integer
+        minUpperCharacters:
+          description: Minimum number of uppercase characters required in the password
+          type: integer
+    Settings:
+      description: Class Settings
+      properties:
+        languageId:
+          description: Language identifier of the user the settings represent
+          type: integer
+        locationId:
+          description: Location identifier for user settings. User's personal default location for file send and uploads
+          type: integer
+        signature:
+          description: Email message signature
+          type: string
+        storageUsed:
+          description: Storage used by the user across the folders they own
+          type: integer
+        storageQuota:
+          description: Storage quota allocated to the user across all the folders they own
+          type: integer
+        mobileKeyStore:
+          description: Encrypted key store data used by the mobile client for secure operations
+          type: string
+        mobileNumber:
+          description: User's mobile number
+          type: string
+        mobileNumberVerified:
+          description: Indicates whether the mobile number is verified
+          type: boolean
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string

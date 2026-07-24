@@ -1,0 +1,3410 @@
+openapi: 3.0.2
+info:
+  version: '28'
+  title: Kiteworks API Documentation activities admin API
+tags:
+- name: admin
+paths:
+  /rest/admin/hostnames:
+    get:
+      tags:
+      - admin
+      summary: List hostnames
+      description: Returns a paginated list of all alias hostnames, including their hostname, disabled state, and deletion status.
+      responses:
+        '200':
+          description: List of hostnames retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Hostname'
+                  metadata:
+                    $ref: '#/components/schemas/MetaData'
+              examples:
+                HostnameList:
+                  summary: Paginated list of hostnames
+                  value:
+                    data:
+                    - id: 1
+                      hostname: alias.example.com
+                      deleted: false
+                      disabled: false
+                    metadata:
+                      total: 1
+                      limit: 50
+                      offset: 0
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: alias_name
+        description: Alias name
+        schema:
+          type: string
+      - in: query
+        name: alias_name:contains
+        description: Alias name. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: tenant_id
+        description: Tenant ID
+        schema:
+          type: integer
+      - in: query
+        name: tenant_id:gt
+        description: Tenant ID. Search for results where this parameter value is greater than the specified value.
+        schema:
+          type: integer
+      - in: query
+        name: tenant_id:gte
+        description: Tenant ID. Search for results where this parameter value is greater than or equal to the specified value.
+        schema:
+          type: integer
+      - in: query
+        name: tenant_id:lt
+        description: Tenant ID. Search for results where this parameter value is less than the specified value.
+        schema:
+          type: integer
+      - in: query
+        name: tenant_id:lte
+        description: Tenant ID. Search for results where this parameter value is less than or equal to the specified value.
+        schema:
+          type: integer
+      - in: query
+        name: deleted
+        description: Filter by whether the hostname is deleted.
+        schema:
+          type: boolean
+      - in: query
+        name: disabled
+        description: Filter by whether the hostname is disabled.
+        schema:
+          type: boolean
+      - in: query
+        name: orderBy
+        description: Sorting options
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - id:asc
+          - id:desc
+          - alias_name:asc
+          - alias_name:desc
+          - tenant_id:asc
+          - tenant_id:desc
+          - deleted:asc
+          - deleted:desc
+          - disabled:asc
+          - disabled:desc
+      - in: query
+        name: offset
+        description: Offset
+        schema:
+          type: integer
+      - in: query
+        name: limit
+        description: Limit
+        schema:
+          type: integer
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+          - compact
+    delete:
+      tags:
+      - admin
+      summary: Deletes list of hostnames
+      description: Soft-deletes a list of hostnames in a single request. Supports partial success, meaning valid items are processed even if some fail.
+      responses:
+        '204':
+          description: Hostnames deleted successfully.
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: id:in
+        description: A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of unique identifiers for the entities to be processed.
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: partialSuccess
+        description: If set to `true`, the operation will continue for the valid items even if some items result in failure.
+        schema:
+          type: boolean
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+    post:
+      tags:
+      - admin
+      summary: Create an alias hostname
+      description: Creates a new alias hostname for the current tenant. The hostname must be a valid subdomain of the configured site domain and must not already exist.
+      responses:
+        '200':
+          description: Hostname created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hostname'
+              examples:
+                HostnameCreated:
+                  summary: A newly created hostname
+                  value:
+                    id: 2
+                    hostname: newteam.example.com
+                    deleted: false
+                    disabled: false
+        '409':
+          description: 'Conflict<br /><br /><i>Possible error codes: </i>ERR_ENTITY_EXISTS'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ENTITY_EXISTS:
+                  summary: Entity exists
+                  description: Entity exists
+                  value:
+                    errors:
+                      code: ERR_ENTITY_EXISTS
+                      message: Entity exists
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_REQUIRED, ERR_INPUT_NOT_BOOLEAN'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_REQUIRED:
+                  summary: Field is required
+                  description: Field is required
+                  value:
+                    errors:
+                      code: ERR_INPUT_REQUIRED
+                      message: Field is required
+                ERR_INPUT_NOT_BOOLEAN:
+                  summary: Input is not a valid boolean
+                  description: Input is not a valid boolean
+                  value:
+                    errors:
+                      code: ERR_INPUT_NOT_BOOLEAN
+                      message: Input is not a valid boolean
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: returnEntity
+        description: If set to `true`, returns information about the newly created entity.
+        schema:
+          type: boolean
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Hostname.Post'
+  /rest/admin/hostnames/{id}:
+    get:
+      tags:
+      - admin
+      summary: Returns the details of hostname of the specified ID.
+      description: Returns the hostname record identified by the given ID, including its hostname value, disabled state, and deletion status.
+      responses:
+        '200':
+          description: Hostname details retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hostname'
+              examples:
+                HostnameInfo:
+                  summary: Details of a single hostname record
+                  value:
+                    id: 1
+                    hostname: alias.example.com
+                    deleted: false
+                    disabled: false
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the hostname to be retrieved
+        required: true
+        schema:
+          type: integer
+    put:
+      tags:
+      - admin
+      summary: Disable / enable alias hostname
+      description: Updates the disabled state of the specified hostname, allowing it to be enabled or disabled.
+      responses:
+        '200':
+          description: Hostname updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hostname'
+              examples:
+                HostnameDisabled:
+                  summary: Hostname after being disabled
+                  value:
+                    id: 1
+                    hostname: alias.example.com
+                    deleted: false
+                    disabled: true
+                HostnameEnabled:
+                  summary: Hostname after being re-enabled
+                  value:
+                    id: 1
+                    hostname: alias.example.com
+                    deleted: false
+                    disabled: false
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the hostname to disable
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Hostname.Put'
+    delete:
+      tags:
+      - admin
+      summary: Mark specified hostname as deleted.
+      description: Soft-deletes the specified hostname by marking it as deleted. The record is retained but treated as inactive.
+      responses:
+        '204':
+          description: Hostname marked as deleted successfully.
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the hostname
+        required: true
+        schema:
+          type: integer
+  /rest/admin/mail:
+    get:
+      tags:
+      - admin
+      summary: List emails
+      description: Returns a list of emails for any user in the system. This includes sent emails, received emails, draft emails, and request a file emails. Requires admin privileges.
+      responses:
+        '200':
+          description: Returns a paginated list of emails matching the specified filters.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Email'
+                  metadata:
+                    $ref: '#/components/schemas/MetaData'
+              examples:
+                AdminEmailList:
+                  summary: A page of emails
+                  value:
+                  - id: eml12345abc67890de
+                    senderId: usr98765cba43210fe
+                    templateId: 1
+                    status: sent
+                    type: sendfile
+                    date: '2024-06-15'
+                    deleted: false
+                    emailPackageId: pkg12345abc67890de
+                    isRead: true
+                    bucket: inbox
+                    subject: Q2 Reports
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: senderId
+        description: Unique identifier of User who sent Email
+        schema:
+          type: string
+      - in: query
+        name: senderId:in
+        description: Unique identifier of User who sent Email. Search for results that match any of the specified values for this parameter.
+        schema:
+          type: string
+      - in: query
+        name: date
+        description: Email creation date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: date:gt
+        description: Email creation date. Search for results where this parameter value is greater than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: date:gte
+        description: Email creation date. Search for results where this parameter value is greater than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: date:lt
+        description: Email creation date. Search for results where this parameter value is less than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: date:lte
+        description: Email creation date. Search for results where this parameter value is less than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified_date
+        description: Email modification date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified_date:gt
+        description: Email modification date. Search for results where this parameter value is greater than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified_date:gte
+        description: Email modification date. Search for results where this parameter value is greater than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified_date:lt
+        description: Email modification date. Search for results where this parameter value is less than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified_date:lte
+        description: Email modification date. Search for results where this parameter value is less than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: deleted
+        description: Filter emails based on whether they have been deleted.
+        schema:
+          type: boolean
+      - in: query
+        name: emailPackageId
+        description: Email Package unique identifier
+        schema:
+          type: string
+      - in: query
+        name: emailPackageId:in
+        description: Email Package unique identifier. Search for results that match any of the specified values for this parameter.
+        schema:
+          type: string
+      - in: query
+        name: templateId
+        description: Email Template unique identifier
+        schema:
+          type: integer
+      - in: query
+        name: templateId:in
+        description: Email Template unique identifier. Search for results that match any of the specified values for this parameter.
+        schema:
+          type: integer
+      - in: query
+        name: status
+        description: 'Filter emails by status. Accepted values: `sent`, `draft`, `queued`, `error`, `self_send`, `transferring`.'
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - sent
+          - draft
+          - queued
+          - error
+          - self_send
+          - transferring
+      - in: query
+        name: isPreview
+        description: Whether the email is a preview email
+        schema:
+          type: boolean
+      - in: query
+        name: isUserSent
+        description: Whether the email was sent by some user
+        schema:
+          type: boolean
+      - in: query
+        name: webFormId
+        description: Email web form ID
+        schema:
+          type: string
+      - in: query
+        name: webFormId:contains
+        description: Email web form ID. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: orderBy
+        description: Sorting options
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - id:asc
+          - id:desc
+          - date:asc
+          - date:desc
+          - status:asc
+          - status:desc
+      - in: query
+        name: offset
+        description: Offset
+        schema:
+          type: integer
+      - in: query
+        name: limit
+        description: Limit
+        schema:
+          type: integer
+  /rest/admin/mail/actions/withdrawFiles/users/{userId}:
+    delete:
+      tags:
+      - admin
+      summary: Withdraw all files from the emails of deleted or demoted users
+      description: Withdraws all files from the emails of users who have been deleted or demoted.
+      responses:
+        '204':
+          description: The files were successfully withdrawn from the specified emails. No content is returned.
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: userId
+        description: The unique identifier of the user from whom to withdraw files.
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: emailId:in
+        description: A list of email IDs to be processed.
+        schema:
+          type: string
+      - in: query
+        name: partialSuccess
+        description: If set to `true`, the operation will continue for the valid items even if some items result in failure.
+        schema:
+          type: boolean
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+  /rest/admin/profiles:
+    get:
+      tags:
+      - admin
+      summary: List user types (profiles)
+      description: Returns a paginated list of user type profiles configured in the system (e.g., Standard and Restricted), including each profile's name, built-in status, and cloneability.
+      responses:
+        '200':
+          description: List of user type profiles retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Profile'
+                  metadata:
+                    $ref: '#/components/schemas/MetaData'
+              examples:
+                ProfileList:
+                  summary: Paginated list of user type profiles
+                  value:
+                    data:
+                    - id: 1
+                      name: Standard
+                      builtIn: 1
+                      cloneable: 1
+                    metadata:
+                      total: 2
+                      limit: 50
+                      offset: 0
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: name
+        description: Profile name
+        schema:
+          type: string
+      - in: query
+        name: name:contains
+        description: Profile name. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: orderBy
+        description: Sorting options
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - id:asc
+          - id:desc
+          - name:asc
+          - name:desc
+      - in: query
+        name: offset
+        description: Offset
+        schema:
+          type: integer
+      - in: query
+        name: limit
+        description: Limit
+        schema:
+          type: integer
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+          - compact
+  /rest/admin/profiles/mappingOrder:
+    get:
+      tags:
+      - admin
+      summary: Get profile mapping order
+      description: Returns the current ordering of user type profiles used to determine which profile is applied to a user on login when multiple mapping rules match.
+      responses:
+        '200':
+          description: Profile mapping order retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileMappingOrder'
+              examples:
+                MappingOrder:
+                  summary: Current profile mapping order
+                  value:
+                    order:
+                    - 1
+                    - 3
+                    - 2
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+    put:
+      tags:
+      - admin
+      summary: Update profile mapping order
+      description: Updates the ordering of user type profiles used to determine which profile is applied to a user on login when multiple mapping rules match. When the peek parameter is set, returns the projected impact without applying changes.
+      responses:
+        '200':
+          description: Profile mapping order updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileMappingOrder'
+              examples:
+                MappingOrderUpdated:
+                  summary: Profile mapping order after update
+                  value:
+                    order:
+                    - 3
+                    - 1
+                    - 2
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_NOT_BOOLEAN, ERR_INPUT_NOT_ARRAY_OF_INTEGERS, ERR_INPUT_REQUIRED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_NOT_BOOLEAN:
+                  summary: Input is not a valid boolean
+                  description: Input is not a valid boolean
+                  value:
+                    errors:
+                      code: ERR_INPUT_NOT_BOOLEAN
+                      message: Input is not a valid boolean
+                ERR_INPUT_REQUIRED:
+                  summary: Field is required
+                  description: Field is required
+                  value:
+                    errors:
+                      code: ERR_INPUT_REQUIRED
+                      message: Field is required
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+          - compact
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfileMappingOrder.Put'
+  /rest/admin/profiles/mappings:
+    get:
+      tags:
+      - admin
+      summary: Get profile mapping results for user
+      description: Simulates profile mapping evaluation for the specified user and returns which profile mapping rules would match, without applying any changes.
+      responses:
+        '200':
+          description: Profile mapping test results retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileMappingsTest'
+              examples:
+                MappingTestResult:
+                  summary: Profile mapping evaluation for a user
+                  value:
+                    result:
+                    - id: ldap1
+                      name: Engineering LDAP
+                      filter: (memberOf=cn=Engineering)
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: user
+        description: Username or email of the user to test mappings for
+        required: true
+        schema:
+          type: string
+  /rest/admin/profiles/{id}:
+    get:
+      tags:
+      - admin
+      summary: Return a user type
+      description: Returns the details of the specified user type profile, including its name, built-in status, and cloneability.
+      responses:
+        '200':
+          description: User type profile details retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+              examples:
+                ProfileInfo:
+                  summary: Details of a single user type profile
+                  value:
+                    id: 1
+                    name: Standard
+                    builtIn: 1
+                    cloneable: 1
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the user type (profile) to be retrieved
+        required: true
+        schema:
+          type: integer
+  /rest/admin/profiles/{id}/mappings:
+    get:
+      tags:
+      - admin
+      summary: Get profile mapping details
+      description: Returns the identity provider mapping rules configured for the specified profile, including LDAP, SSO, and kiteworks-based filter policies.
+      responses:
+        '200':
+          description: Profile mapping details retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileMappings'
+              examples:
+                ProfileMappings:
+                  summary: Mapping rules for a profile
+                  value:
+                    ldap:
+                    - id: ldap1
+                      name: Corp LDAP
+                      filter: (memberOf=cn=Engineering)
+                    sso: []
+                    kiteworks:
+                    - id: kiteworks
+                      filter: example.com
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the profile to get mapping details for
+        required: true
+        schema:
+          type: integer
+    put:
+      tags:
+      - admin
+      summary: Update profile mapping details
+      description: Updates the identity provider mapping rules for the specified profile. When the peek parameter is set, returns the projected impact of the changes without applying them.
+      responses:
+        '200':
+          description: Profile mapping details updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileMappingChanges'
+              examples:
+                ProfileMappingUpdated:
+                  summary: Profile mapping after update
+                  value:
+                    impact: []
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_NOT_BOOLEAN'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_NOT_BOOLEAN:
+                  summary: Input is not a valid boolean
+                  description: Input is not a valid boolean
+                  value:
+                    errors:
+                      code: ERR_INPUT_NOT_BOOLEAN
+                      message: Input is not a valid boolean
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the profile to update mapping details for
+        required: true
+        schema:
+          type: integer
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+          - compact
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfileMappingChanges.Put'
+  /rest/admin/profiles/{id}/users:
+    get:
+      tags:
+      - admin
+      summary: Return list of users with the specified types
+      description: Returns a paginated list of users assigned to the specified user type profile (e.g., all Restricted users), including their names and email addresses.
+      responses:
+        '200':
+          description: List of users with the specified profile retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+                  metadata:
+                    $ref: '#/components/schemas/MetaData'
+              examples:
+                ProfileUserList:
+                  summary: Users assigned to a profile
+                  value:
+                    data:
+                    - id: 42
+                      name: Jane Doe
+                      email: jane.doe@example.com
+                    metadata:
+                      total: 1
+                      limit: 50
+                      offset: 0
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the user type (profile) to retrieve users for
+        required: true
+        schema:
+          type: integer
+      - in: query
+        name: email
+        description: Filter users based on their email address.
+        schema:
+          type: string
+      - in: query
+        name: email:contains
+        description: Filter users based on their email address.. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: name
+        description: Filter users based on their full name.
+        schema:
+          type: string
+      - in: query
+        name: name:contains
+        description: Filter users based on their full name.. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: metadata
+        description: Filter users based on their metadata information.
+        schema:
+          type: string
+      - in: query
+        name: metadataContains
+        description: Filter users whose metadata contains the specified characters.
+        schema:
+          type: string
+      - in: query
+        name: deleted
+        description: Filter users based on whether they have been deleted.
+        schema:
+          type: boolean
+      - in: query
+        name: active
+        description: Filter users based on whether they are active in the system.
+        schema:
+          type: boolean
+      - in: query
+        name: verified
+        description: Filter users based on their verification status.
+        schema:
+          type: boolean
+      - in: query
+        name: suspended
+        description: Filter users based on whether they are suspended.
+        schema:
+          type: boolean
+      - in: query
+        name: isRecipient
+        description: Filter users who are recipients of specific items.
+        schema:
+          type: boolean
+      - in: query
+        name: allowsCollaboration
+        description: Filter users whose profiles allow collaboration access.
+        schema:
+          type: boolean
+      - in: query
+        name: created
+        description: Filter users based on the creation date of their account.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:gt
+        description: Filter users based on the creation date of their account.. Search for results where this parameter value is greater than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:gte
+        description: Filter users based on the creation date of their account.. Search for results where this parameter value is greater than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:lt
+        description: Filter users based on the creation date of their account.. Search for results where this parameter value is less than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:lte
+        description: Filter users based on the creation date of their account.. Search for results where this parameter value is less than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: orderBy
+        description: Sorting options
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - id:asc
+          - id:desc
+          - created:asc
+          - created:desc
+          - email:asc
+          - email:desc
+          - name:asc
+          - name:desc
+      - in: query
+        name: offset
+        description: Offset
+        schema:
+          type: integer
+      - in: query
+        name: limit
+        description: Limit
+        schema:
+          type: integer
+      - in: query
+        name: locate_id
+        description: "If specified, \"offset\" parameter will be ignored\n                                            and the page containing entity with this Id will be returned."
+        schema:
+          type: integer
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+          - compact
+    put:
+      tags:
+      - admin
+      summary: Bulk update user types (profiles)
+      description: Reassigns multiple users to the specified user type profile. When demoting users to a Restricted or Recipient profile, optional demotion settings control how existing data is handled (retained, deleted, or transferred to another user).
+      responses:
+        '200':
+          description: User profiles updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+                  metadata:
+                    $ref: '#/components/schemas/MetaData'
+              examples:
+                BulkProfileUpdate:
+                  summary: Users after profile update
+                  value:
+                    data:
+                    - id: 42
+                      name: Jane Doe
+                      email: jane.doe@example.com
+                    metadata:
+                      total: 1
+                      limit: 50
+                      offset: 0
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_NOT_BOOLEAN, ERR_INPUT_ATTRIBUTE_FORBIDDEN, ERR_INPUT_REQUIRED, ERR_INPUT_NOT_STRING'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_NOT_BOOLEAN:
+                  summary: Input is not a valid boolean
+                  description: Input is not a valid boolean
+                  value:
+                    errors:
+                      code: ERR_INPUT_NOT_BOOLEAN
+                      message: Input is not a valid boolean
+                ERR_INPUT_REQUIRED:
+                  summary: Field is required
+                  description: Field is required
+                  value:
+                    errors:
+                      code: ERR_INPUT_REQUIRED
+                      message: Field is required
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the user type (profile).
+        required: true
+        schema:
+          type: integer
+      - in: query
+        name: id:in
+        description: A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of user IDs to be assigned to the user type (profile).
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDemoteOptions.Post'
+  /rest/admin/users:
+    get:
+      tags:
+      - admin
+      summary: Get a list of Users
+      description: Returns a list of Users in the system. The user must be an administrator with access to User Management.
+      responses:
+        '200':
+          description: Returns a paginated list of users.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+                  metadata:
+                    $ref: '#/components/schemas/MetaData'
+              examples:
+                UserList:
+                  summary: A page of users
+                  value:
+                  - id: abc12345def67890ab
+                    name: Jane Doe
+                    email: jane.doe@example.com
+                    active: true
+                    verified: true
+                    suspended: false
+                    deleted: false
+                    deactivated: false
+                    flags: 1
+                    userTypeId: 5
+                    created: 2024-01-15T10:30:00+0000
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: email
+        description: Filter users based on their email address.
+        schema:
+          type: string
+      - in: query
+        name: email:contains
+        description: Filter users based on their email address.. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: name
+        description: Filter users based on their full name.
+        schema:
+          type: string
+      - in: query
+        name: name:contains
+        description: Filter users based on their full name.. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: metadata
+        description: Filter users based on their metadata information.
+        schema:
+          type: string
+      - in: query
+        name: metadataContains
+        description: Filter users whose metadata contains the specified characters.
+        schema:
+          type: string
+      - in: query
+        name: deleted
+        description: Filter users based on whether they have been deleted.
+        schema:
+          type: boolean
+      - in: query
+        name: active
+        description: Filter users based on whether they are active in the system.
+        schema:
+          type: boolean
+      - in: query
+        name: verified
+        description: Filter users based on their verification status.
+        schema:
+          type: boolean
+      - in: query
+        name: suspended
+        description: Filter users based on whether they are suspended.
+        schema:
+          type: boolean
+      - in: query
+        name: isRecipient
+        description: Filter users who are recipients of specific items.
+        schema:
+          type: boolean
+      - in: query
+        name: allowsCollaboration
+        description: Filter users whose profiles allow collaboration access.
+        schema:
+          type: boolean
+      - in: query
+        name: created
+        description: Filter users based on the creation date of their account.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:gt
+        description: Filter users based on the creation date of their account.. Search for results where this parameter value is greater than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:gte
+        description: Filter users based on the creation date of their account.. Search for results where this parameter value is greater than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:lt
+        description: Filter users based on the creation date of their account.. Search for results where this parameter value is less than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:lte
+        description: Filter users based on the creation date of their account.. Search for results where this parameter value is less than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: orderBy
+        description: Sorting options
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - id:asc
+          - id:desc
+          - created:asc
+          - created:desc
+          - email:asc
+          - email:desc
+          - name:asc
+          - name:desc
+      - in: query
+        name: offset
+        description: Offset
+        schema:
+          type: integer
+      - in: query
+        name: limit
+        description: Limit
+        schema:
+          type: integer
+      - in: query
+        name: locate_id
+        description: "If specified, \"offset\" parameter will be ignored\n                                            and the page containing entity with this Id will be returned."
+        schema:
+          type: integer
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+          - compact
+    post:
+      tags:
+      - admin
+      summary: Create a User
+      description: Creates a new User in the system by specifying an email address and name.
+      responses:
+        '200':
+          description: User created successfully. Returns the newly created user object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                CreatedUser:
+                  summary: Newly created user
+                  value:
+                    id: abc12345def67890ab
+                    name: Jane Doe
+                    email: jane.doe@example.com
+                    active: true
+                    verified: false
+                    suspended: false
+                    deleted: false
+                    deactivated: false
+                    flags: 1
+                    userTypeId: 5
+                    created: 2024-01-15T10:30:00+0000
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_INVALID_EMAIL, ERR_INPUT_REQUIRED, ERR_INPUT_PASSWORD_COMPLEXITY_ERROR, ERR_INPUT_NOT_NUMERIC, ERR_INPUT_MIN_VALUE'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_INVALID_EMAIL:
+                  summary: Input is not a valid email
+                  description: Input is not a valid email
+                  value:
+                    errors:
+                      code: ERR_INPUT_INVALID_EMAIL
+                      message: Input is not a valid email
+                ERR_INPUT_REQUIRED:
+                  summary: Field is required
+                  description: Field is required
+                  value:
+                    errors:
+                      code: ERR_INPUT_REQUIRED
+                      message: Field is required
+                ERR_INPUT_PASSWORD_COMPLEXITY_ERROR:
+                  summary: Password does not meet complexity requirements
+                  description: Password does not meet complexity requirements
+                  value:
+                    errors:
+                      code: ERR_INPUT_PASSWORD_COMPLEXITY_ERROR
+                      message: Password does not meet complexity requirements
+                ERR_INPUT_MIN_VALUE:
+                  summary: The specified input below the minimum allowed value.
+                  description: The specified input below the minimum allowed value.
+                  value:
+                    errors:
+                      code: ERR_INPUT_MIN_VALUE
+                      message: The specified input below the minimum allowed value.
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: returnEntity
+        description: If set to `true`, returns information about the newly created entity.
+        schema:
+          type: boolean
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User.Post'
+  /rest/admin/users/migrateEmails:
+    post:
+      tags:
+      - admin
+      summary: Bulk update user emails
+      description: Bulk update user emails by migrating old email addresses to new ones. Accepts an array of objects containing old and new email pairs.
+      responses:
+        '200':
+          description: Email migration completed successfully. Returns the list of updated user objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+                  metadata:
+                    $ref: '#/components/schemas/MetaData'
+              examples:
+                MigratedUsers:
+                  summary: Users after email migration
+                  value:
+                  - id: abc12345def67890ab
+                    name: Jane Doe
+                    email: jane.new@example.com
+                    active: true
+                    verified: true
+                    suspended: false
+                    deleted: false
+                    deactivated: false
+                    flags: 1
+                    userTypeId: 5
+                    created: 2024-01-15T10:30:00+0000
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_INVALID_EMAIL, ERR_INPUT_REQUIRED, ERR_INPUT_PASSWORD_COMPLEXITY_ERROR'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_INVALID_EMAIL:
+                  summary: Input is not a valid email
+                  description: Input is not a valid email
+                  value:
+                    errors:
+                      code: ERR_INPUT_INVALID_EMAIL
+                      message: Input is not a valid email
+                ERR_INPUT_REQUIRED:
+                  summary: Field is required
+                  description: Field is required
+                  value:
+                    errors:
+                      code: ERR_INPUT_REQUIRED
+                      message: Field is required
+                ERR_INPUT_PASSWORD_COMPLEXITY_ERROR:
+                  summary: Password does not meet complexity requirements
+                  description: Password does not meet complexity requirements
+                  value:
+                    errors:
+                      code: ERR_INPUT_PASSWORD_COMPLEXITY_ERROR
+                      message: Password does not meet complexity requirements
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: returnEntity
+        description: If set to `true`, returns information about the newly created entity.
+        schema:
+          type: boolean
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsersEmailMigration.Post'
+  /rest/admin/users/migrateEmailsCsv:
+    post:
+      tags:
+      - admin
+      summary: Bulk update user emails via CSV file
+      description: Bulk update user emails by migrating old email addresses to new ones using a CSV file.
+      responses:
+        '200':
+          description: Email migration completed successfully. Returns the list of updated user objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+                  metadata:
+                    $ref: '#/components/schemas/MetaData'
+              examples:
+                MigratedUsers:
+                  summary: Users after CSV email migration
+                  value:
+                  - id: abc12345def67890ab
+                    name: Jane Doe
+                    email: jane.new@example.com
+                    active: true
+                    verified: true
+                    suspended: false
+                    deleted: false
+                    deactivated: false
+                    flags: 1
+                    userTypeId: 5
+                    created: 2024-01-15T10:30:00+0000
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_NOT_BOOLEAN'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_NOT_BOOLEAN:
+                  summary: Input is not a valid boolean
+                  description: Input is not a valid boolean
+                  value:
+                    errors:
+                      code: ERR_INPUT_NOT_BOOLEAN
+                      message: Input is not a valid boolean
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: returnEntity
+        description: If set to `true`, returns information about the newly created entity.
+        schema:
+          type: boolean
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                body:
+                  description: CSV file containing old and new email pairs.
+                  type: string
+                  format: binary
+                deleteIfExists:
+                  description: Indicates whether to delete users whose emails match any in the newEmail field.
+                  type: boolean
+              required:
+              - body
+  /rest/admin/users/{id}:
+    get:
+      tags:
+      - admin
+      summary: Get User
+      description: Returns the details of the specified user, including their name, email address, and account status.
+      responses:
+        '200':
+          description: Returns the requested user's details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                ActiveUser:
+                  summary: An active, verified user
+                  value:
+                    id: abc12345def67890ab
+                    name: Jane Doe
+                    email: jane.doe@example.com
+                    active: true
+                    verified: true
+                    suspended: false
+                    deleted: false
+                    deactivated: false
+                    flags: 1
+                    userTypeId: 5
+                    created: 2024-01-15T10:30:00+0000
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the user to retrieve
+        required: true
+        schema:
+          type: string
+    put:
+      tags:
+      - admin
+      summary: Update User
+      description: Updates the details of a user, such as changing their name, setting them as deleted, or updating their active/inactive status.
+      responses:
+        '200':
+          description: User updated successfully. Returns the updated user object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                UpdatedUser:
+                  summary: User after update
+                  value:
+                    id: abc12345def67890ab
+                    name: Jane Doe
+                    email: jane.doe@example.com
+                    active: true
+                    verified: true
+                    suspended: false
+                    deleted: false
+                    deactivated: false
+                    flags: 1
+                    userTypeId: 5
+                    created: 2024-01-15T10:30:00+0000
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the user to be updated
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User.Put'
+    delete:
+      tags:
+      - admin
+      summary: Deletes a User
+      description: Mark the specified user as deleted. This user will still be returned in the GET Users query.
+      responses:
+        '204':
+          description: User marked as deleted successfully.
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_NOT_BOOLEAN, ERR_INPUT_ATTRIBUTE_FORBIDDEN, ERR_INPUT_REQUIRED, ERR_INPUT_NOT_STRING'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_NOT_BOOLEAN:
+                  summary: Input is not a valid boolean
+                  description: Input is not a valid boolean
+                  value:
+                    errors:
+                      code: ERR_INPUT_NOT_BOOLEAN
+                      message: Input is not a valid boolean
+                ERR_INPUT_REQUIRED:
+                  summary: Field is required
+                  description: Field is required
+                  value:
+                    errors:
+                      code: ERR_INPUT_REQUIRED
+                      message: Field is required
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the user to delete
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: retainToUser
+        description: The ID of the new owner to whom the data will be transferred, applicable when `retainData` and/or `retainPermissionToSharedData` are set to true.
+        schema:
+          type: string
+      - in: query
+        name: retainToAdvancedFormUser
+        description: The ID of the user to whom the advanced form data will be transferred, similar to retainToUser but specifically for advanced form components.
+        schema:
+          type: string
+      - in: query
+        name: remoteWipe
+        description: Indicates whether to remotely wipe data from both desktop and mobile devices.
+        schema:
+          type: boolean
+      - in: query
+        name: deleteUnsharedData
+        description: Indicates whether data owned by the user should be deleted. This is required and must be set to True if `retainData` is False, and vice versa.
+        schema:
+          type: boolean
+      - in: query
+        name: retainData
+        description: Indicates whether data should be retained and transferred to another user. This is required and must be True if `deleteUnsharedData` is False, and vice versa.
+        schema:
+          type: boolean
+      - in: query
+        name: retainPermissionToSharedData
+        description: Indicates whether permissions to shared folders should be retained.
+        schema:
+          type: boolean
+      - in: query
+        name: withdrawFileLinks
+        description: Indicates whether files sent by deleted or demoted users should be withdrawn.
+        schema:
+          type: boolean
+      - in: query
+        name: withdrawRequestFiles
+        description: Indicates whether request files sent by deleted or demoted users should be withdrawn.
+        schema:
+          type: boolean
+      - in: query
+        name: partialSuccess
+        description: If set to `true`, the operation will continue for the valid items even if some items result in failure.
+        schema:
+          type: boolean
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+  /rest/admin/users/{id}/adminRoles:
+    get:
+      tags:
+      - admin
+      summary: Return admin roles of the specified user id.
+      description: Returns all admin roles assigned to the specified user. The user may be active or deleted.
+      responses:
+        '200':
+          description: Returns the list of admin roles assigned to the specified user.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AdminRole'
+              examples:
+                AdminRoles:
+                  summary: User with one admin role
+                  value:
+                  - id: 2
+                    name: Site Admin
+                    guid: abc12345def67890ab
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the user to retrieve admin role
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: orderBy
+        description: Sorting options
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - id:asc
+          - id:desc
+          - name:asc
+          - name:desc
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+          - compact
+  /rest/admin/users/{id}/devices:
+    get:
+      tags:
+      - admin
+      summary: List devices for a user
+      description: Returns a list of devices registered to the specified user.
+      responses:
+        '200':
+          description: Returns a paginated list of device records for the specified user.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Device'
+                  metadata:
+                    $ref: '#/components/schemas/MetaData'
+              examples:
+                User device list:
+                  summary: Devices registered to a user
+                  value:
+                    data:
+                    - id: 101
+                      client_id: mobile_app_ios
+                      user_id: 5
+                      install_tag_id: ABC123DEF456
+                      install_name: Work iPhone
+                      wipe_flag: 0
+                      mobile_key_store: null
+                    total: 1
+                    page: 1
+                    pageSize: 20
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the user whose devices to be retrieved
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: installTagId
+        description: Unique identifier of install tag for this Device
+        schema:
+          type: string
+      - in: query
+        name: installTagId:contains
+        description: Unique identifier of install tag for this Device. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: userId
+        description: Unique identifier of user for this Device
+        schema:
+          type: string
+      - in: query
+        name: userId:in
+        description: Unique identifier of user for this Device. Search for results that match any of the specified values for this parameter.
+        schema:
+          type: string
+      - in: query
+        name: clientId
+        description: Unique identifier of client for this Device
+        schema:
+          type: string
+      - in: query
+        name: clientId:contains
+        description: Unique identifier of client for this Device. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: orderBy
+        description: Sorting options
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - id:asc
+          - id:desc
+          - installTagId:asc
+          - installTagId:desc
+          - userId:asc
+          - userId:desc
+          - clientId:asc
+          - clientId:desc
+      - in: query
+        name: offset
+        description: Offset
+        schema:
+          type: integer
+      - in: query
+        name: limit
+        description: Limit
+        schema:
+          type: integer
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+          - compact
+  /rest/admin/activities:
+    get:
+      summary: Get admin activities list
+      description: "### Description:\n  Retrieves the list of admin activities.\n### Precondition:\n  The user must be an administrator with access to `Activity Log`.\n### Response:\n  Returns the list of activities performed by the admin.\n### Sorting:\n  Sort string syntax `FIELD_NAME:ORDER`.\n\n  ORDER can be `asc` or `desc`.\n### Sorting options:\n  | FIELD_NAME | Description |\n  |------------|-------------|\n  | created    | The creation date and time of the activity |\n  | client     | The client name |\n  | username   | The username associated with the activity |\n  | ip_address | The client IP address |\n"
+      tags:
+      - admin
+      parameters:
+      - in: query
+        name: startDateTime
+        required: true
+        description: The start date and time for the activity range.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: endDateTime
+        required: true
+        description: The end date and time for the activity range.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: eventFilters:in
+        required: false
+        explode: true
+        style: form
+        description: Comma-separated list of event filters to filter the activities.
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: objectIds:in
+        required: false
+        explode: true
+        style: form
+        description: Comma-separated list of object IDs to filter the activities.
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: userId
+        required: false
+        description: User ID to filter activities by a specific user.
+        schema:
+          type: string
+      - in: query
+        name: maxPages
+        required: false
+        description: Maximum number of pages to retrieve.
+        schema:
+          type: integer
+          minimum: -1
+      - in: query
+        name: orderBy
+        required: false
+        description: 'Sort order for the results. Default is `created:desc`.<br>Allowed values: `created:asc`, `created:desc`, `client:asc`, `client:desc`, `username:asc`, `username:desc`, `ip_address:asc`, `ip_address:desc`.'
+        schema:
+          type: string
+          enum:
+          - created:asc
+          - created:desc
+          - client:asc
+          - client:desc
+          - username:asc
+          - username:desc
+          - ip_address:asc
+          - ip_address:desc
+      - in: query
+        name: compact
+        required: false
+        description: If true, returns a more compact response.
+        schema:
+          type: boolean
+      - in: query
+        name: limit
+        required: false
+        description: Maximum number of items to return.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 10000
+      - in: query
+        name: offset
+        required: false
+        description: Number of items to skip before returning results, for pagination.
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          description: The admin activities list is successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivityList'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INVALID_PARAMETER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INVALID_PARAMETER:
+                  summary: Invalid Parameter Exception
+                  description: Invalid Parameter Exception
+                  value:
+                    errors:
+                    - code: ERR_INVALID_PARAMETER
+                      message: Invalid Parameter Exception
+        '490':
+          description: Request blocked by WAF
+  /rest/admin/activities/{id}:
+    get:
+      summary: Get admin activity detail
+      description: "### Description:\n  Retrieves detailed information about a specific activity.\n### Precondition:\n  The user must be an administrator with access to `Activity Log`.\n### Response:\n  Returns the full details of the specified activity.\n"
+      tags:
+      - admin
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier (UUID) of the entity.
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Successfully retrieved the activity details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivityList'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INVALID_PARAMETER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INVALID_PARAMETER:
+                  summary: Invalid Parameter Exception
+                  description: Invalid Parameter Exception
+                  value:
+                    errors:
+                    - code: ERR_INVALID_PARAMETER
+                      message: Invalid Parameter Exception
+        '490':
+          description: Request blocked by WAF
+  /rest/admin/activities/actions/exportCSV:
+    get:
+      summary: Export admin activities list
+      description: "### Description:\n  Exports the list of admin activities based on the provided filters.\n### Precondition:\n  The user must be an administrator with access to `Activity Log`.\n### Response:\n  The admin activities list is generated and sent via email to the requesting user.\n### Sorting:\n  Sort string syntax `FIELD_NAME:ORDER`.\n\n  ORDER can be `asc` or `desc`.\n### Sorting options:\n  | FIELD_NAME | Description |\n  |------------|-------------|\n  | created    | The creation date and time of the activity |\n  | client     | The client name |\n  | username   | The username associated with the activity |\n  | ip_address | The client IP address |\n"
+      tags:
+      - admin
+      parameters:
+      - in: query
+        name: startDateTime
+        required: true
+        description: The start date and time for the activity range.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: endDateTime
+        required: true
+        description: The end date and time for the activity range.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: eventFilters:in
+        required: false
+        explode: true
+        style: form
+        description: Comma-separated list of event filters to filter the activities.
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: objectIds:in
+        required: false
+        explode: true
+        style: form
+        description: Comma-separated list of object IDs to filter the activities.
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: userId
+        required: false
+        description: User ID to filter activities by a specific user.
+        schema:
+          type: string
+      - in: query
+        name: maxPages
+        required: false
+        description: Maximum number of pages to retrieve.
+        schema:
+          type: integer
+          minimum: -1
+      - in: query
+        name: orderBy
+        required: false
+        description: 'Sort order for the results. Default is `created:desc`.<br>Allowed values: `created:asc`, `created:desc`, `client:asc`, `client:desc`, `username:asc`, `username:desc`, `ip_address:asc`, `ip_address:desc`.'
+        schema:
+          type: string
+          enum:
+          - created:asc
+          - created:desc
+          - client:asc
+          - client:desc
+          - username:asc
+          - username:desc
+          - ip_address:asc
+          - ip_address:desc
+      - in: query
+        name: compact
+        required: false
+        description: If true, returns a more compact response.
+        schema:
+          type: boolean
+      - in: query
+        name: limit
+        required: false
+        description: Maximum number of items to return.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 10000
+      - in: query
+        name: offset
+        required: false
+        description: Number of items to skip before returning results, for pagination.
+        schema:
+          type: integer
+          minimum: 0
+      responses:
+        '200':
+          description: The admin activities list is being processed and will be sent via email.
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INVALID_PARAMETER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INVALID_PARAMETER:
+                  summary: Invalid Parameter Exception
+                  description: Invalid Parameter Exception
+                  value:
+                    errors:
+                    - code: ERR_INVALID_PARAMETER
+                      message: Invalid Parameter Exception
+        '490':
+          description: Request blocked by WAF
+components:
+  schemas:
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    FeaturesList:
+      description: Class FeaturesList
+      required:
+      - allowedFolderRoles
+      - folderCreate
+      - storageQuota
+      - sysFolderCreate
+      - sysFolderDefaultQuota
+      - sysFolderMaxCount
+      - sysFolderMaxQuota
+      properties:
+        allowSftp:
+          description: Indicates whether SFTP access is allowed
+          type: boolean
+        maxStorage:
+          description: Max storage in bytes
+          type: integer
+        linkExpiration:
+          description: Link expiration date in days
+          type: integer
+        maxLinkExpiration:
+          description: Max time period of link expiration in hours
+          type: integer
+        setExpirationLower:
+          description: Enable user to set expiration date of the file they are sending
+          type: boolean
+        sendExternal:
+          description: Allow user to send files to external users
+          type: boolean
+        acNoAuth:
+          description: Allow user to send file to a user without their having to authenticate
+          type: boolean
+        folderCreate:
+          description: Indicates whether the user is permitted to create top-level folders
+          type: integer
+        allowedFolderRoles:
+          description: Role options allowed for user profile
+          type: array
+          items:
+            type: string
+        sysFolderCreate:
+          description: Indicates whether the user is permitted to create system quota folders
+          type: integer
+        sysFolderMaxQuota:
+          description: Max quota for a system quota folder
+          type: integer
+        sysFolderMaxCount:
+          description: Maximum number of system quota folder
+          type: integer
+        sysFolderDefaultQuota:
+          description: Default quota for a system quota folder
+          type: integer
+        storageQuota:
+          description: Maximum storage space allocated to the user, in bytes
+          type: integer
+        ldapMapping:
+          description: LDAP Mapping value to determine the user profile type
+          type: string
+        acVerifyRecipient:
+          description: Who can download file via the secure link
+          type: boolean
+        acl:
+          description: List of access control levels permitted for this user profile
+          type: array
+          items:
+            type: string
+        defaultAcl:
+          description: Default access control level applied when sending files for this user profile
+          type: string
+        mobileSyncItemsLimit:
+          description: Maximum files amount allowed to keep in mobile sync list
+          type: integer
+        personalFolder:
+          description: User can have personal folder
+          type: boolean
+        requireScanZipContentDefault:
+          description: Indicates whether scanning compressed file content is required by default
+          type: boolean
+        blockNewFileTypesDefault:
+          description: Indicates whether new or unspecified file types are blocked by default
+          type: boolean
+        excludedFileExtensions:
+          description: Get list of excluded file extensions
+          type: array
+          items:
+            type: string
+        fileFilterExclusionGroups:
+          description: Get list of excluded file groups
+          type: array
+          items:
+            type: string
+        fileFilterCustomFileTypes:
+          description: Get list of custom file types
+          type: array
+          items:
+            type: string
+        secureMessageBody:
+          type: string
+        secureMessageBodyDefault:
+          type: boolean
+        secureContainerRequired:
+          type: boolean
+        returnReceipt:
+          type: string
+        returnReceiptDefault:
+          type: boolean
+        selfCopy:
+          type: string
+        selfCopyDefault:
+          type: boolean
+        includeFingerprint:
+          type: string
+        includeFingerprintDefault:
+          type: boolean
+        requestFile:
+          type: boolean
+        requestFileAllowViewableFile:
+          type: boolean
+        requestFileUploadAuth:
+          type: string
+        requestFileAuthDefault:
+          type: string
+        requestFileExpiration:
+          type: integer
+        requestFileExpirationUserDecide:
+          type: boolean
+        requestFileExpirationMax:
+          type: integer
+        requestFileUploadLimit:
+          type: integer
+        requestFileUploadLimitUserDecide:
+          type: boolean
+        requestFileUploadsMax:
+          type: integer
+        twoFactorAuth:
+          type: string
+        inactiveExpiration:
+          type: integer
+        userCanReactivate:
+          type: string
+        cleanupInactiveAccount:
+          type: boolean
+        withdrawInactiveAccountFileLinks:
+          type: boolean
+        allowCollaboration:
+          description: Indicates whether Collaboration and Shared Folders are allowed
+          type: boolean
+        allowLeavingSharedFolder:
+          description: Indicates whether Collaboration and Shared Folders are allowed
+          type: boolean
+        sendFileLimit:
+          description: Upper limit allowed for number of attachments per mail.
+          type: integer
+        remoteWipe:
+          type: boolean
+        deleteUnsharedData:
+          type: boolean
+        retainData:
+          type: boolean
+        retainPermissionToSharedData:
+          type: boolean
+        folderExpirationLimit:
+          description: Get profile max folder expiration
+          type: integer
+        fileLifetime:
+          description: Get profile max file lifetime
+          type: integer
+    Tag:
+      type: object
+      properties:
+        guid:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) for the tag.
+        name:
+          type: string
+          description: Display name of the tag.
+        type:
+          type: string
+          description: Type category of the tag.
+    ProfileMappings:
+      description: Class ProfileMappings
+      properties:
+        ldap:
+          description: Get the ldap policy filters for the user profile
+          type: array
+          items:
+            $ref: '#/components/schemas/ProfileMapping'
+        kiteworks:
+          description: Get the kiteworks policy filters for the user profile
+          type: array
+          items:
+            $ref: '#/components/schemas/ProfileMapping'
+        sso:
+          description: Get the ldap policy filters for the user profile
+          type: array
+          items:
+            $ref: '#/components/schemas/ProfileMapping'
+    UserEmail.Post:
+      description: Class UserEmail
+      required:
+      - oldEmail
+      - newEmail
+      properties:
+        oldEmail:
+          description: Email that the user currently has.
+          type: string
+        newEmail:
+          description: Email that the user should have after migration.
+          type: string
+    ProfileMappingOrder:
+      description: Class ProfileMappingOrder
+      required:
+      - impact
+      - order
+      properties:
+        order:
+          description: Get the User Profile mapping order
+          type: array
+          items:
+            type: integer
+        impact:
+          description: Get the User Profile mapping order
+          type: array
+          items:
+            type: string
+    Hostname:
+      description: Class Hostname
+      required:
+      - id
+      properties:
+        id:
+          description: Hostname unique identifier
+          type: integer
+        hostname:
+          description: Hostname
+          type: string
+        deleted:
+          description: Indicates whether the hostname is deleted
+          type: boolean
+        disabled:
+          description: Indicates whether the hostname is disabled
+          type: boolean
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
+    ProfileMapping:
+      description: Class ProfileMapping
+      required:
+      - impact
+      properties:
+        impact:
+          description: Get the User Profile mapping order
+          type: array
+          items:
+            type: string
+        id:
+          description: Get the id of the target authentication source
+          type: string
+        name:
+          description: Get the name of the target authentication source
+          type: string
+        filter:
+          description: Get the filter of the target authentication source
+          type: string
+    UsersEmailMigration.Post:
+      description: Class UsersEmailMigration
+      properties:
+        users:
+          description: Array of user objects, each containing old and new email values.
+          type: array
+          items:
+            $ref: '#/components/schemas/UserEmail.Post'
+        deleteIfExists:
+          description: Indicates whether to delete users whose emails match any in the newEmail field.
+          type: boolean
+    ProfileMappingsTest:
+      description: Class ProfileMappingsTest
+      properties:
+        result:
+          description: Get profile mapping test results
+          type: array
+          items:
+            $ref: '#/components/schemas/ProfileMapping'
+    UserBasic:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier (UUID) for the user.
+        email:
+          type: string
+          description: Email address associated with the user.
+        name:
+          type: string
+          description: Full name of the user.
+        profileIcon:
+          type: string
+          description: URL or identifier for the user's profile icon.
+    ProfileMappingChanges.Put:
+      description: Class ProfileMappingChanges
+      properties:
+        peek:
+          description: Set if we are peeking into the impact
+          type: boolean
+        changes:
+          description: policy changes to be tested/applied
+          type: array
+          items:
+            $ref: '#/components/schemas/ProfileMapping'
+    Attachment:
+      type: object
+      properties:
+        emailPackageId:
+          type: string
+          format: uuid
+          description: Unique identifier for the email package containing the attachment.
+        attachmentId:
+          type: string
+          description: Unique identifier for the attachment.
+        withdrawn:
+          type: boolean
+          description: Indicates whether the attachment has been withdrawn.
+        drmFile:
+          description: Details of the DRM-protected file associated with the attachment.
+          allOf:
+          - $ref: '#/components/schemas/DrmFile'
+        accessType:
+          type: integer
+          description: Access type for the attachment (e.g., read-only, editable).
+        tags:
+          description: List of tags associated with the attachment.
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        permissions:
+          type: array
+          description: List of permissions associated with the attachment.
+          items:
+            $ref: '#/components/schemas/Permission'
+        objectId:
+          type: string
+          format: uuid
+          description: Unique identifier for the file associated with the attachment.
+        name:
+          type: string
+          description: Name of the attachment file.
+        size:
+          type: integer
+          description: Size of the attachment file in bytes.
+        mime:
+          type: string
+          description: The MIME type of the attachment file.
+        created:
+          type: string
+          format: date
+          description: Date when the attachment file was created.
+        deleted:
+          type: boolean
+          description: Indicates if the attachment has been deleted.
+        fingerprint:
+          type: string
+          description: A unique hash identifying the file version.
+        fingerprintAlgo:
+          type: string
+          description: The algorithm used for generating the file version fingerprint. (e.g., sha3-256, md5).
+        fingerprints:
+          description: List of alternative fingerprints for the attachment file.
+          type: array
+          items:
+            $ref: '#/components/schemas/Fingerprint'
+        adminQuarantineStatus:
+          type: string
+          description: Status of the attachment in the admin quarantine system.
+        avStatus:
+          type: string
+          description: Antivirus (AV) scan status of the attachment.
+        dlpStatus:
+          type: string
+          description: Data Loss Prevention (DLP) status of the attachment.
+    Recipient:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: Unique identifier of the user associated with the recipient.
+        type:
+          type: integer
+          description: Recipient type.<br>`0` – To.<br>`1` – CC.<br>`2` – BCC.
+        email:
+          type: string
+          description: Email address of the recipient.
+        isDistributionList:
+          type: boolean
+          description: Indicates if the recipient is a distribution list rather than an individual user.
+        user:
+          description: Details of the user associated with the recipient.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+    UserMetadata:
+      description: Class UserMetadata
+      properties:
+        name:
+          description: Key name of the custom metadata attribute associated with the user
+          type: string
+        value:
+          description: Value assigned to the custom metadata attribute for the user
+          type: string
+    User.Post:
+      description: Class User
+      required:
+      - email
+      properties:
+        email:
+          description: The user's email
+          type: string
+        name:
+          description: The name of the user
+          type: string
+        password:
+          description: The user's password
+          type: string
+        userTypeId:
+          description: The unique identifier of the user type
+          type: integer
+        verified:
+          description: Indicates whether the user is verified
+          type: boolean
+        sendNotification:
+          description: Indicates whether a notification is sent to the user
+          type: boolean
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
+    Profile:
+      description: Class Profile
+      required:
+      - builtIn
+      - cloneable
+      - id
+      - name
+      - prototype
+      properties:
+        id:
+          description: Unique Profile identifier
+          type: integer
+        name:
+          description: Display name of the profile
+          type: string
+        prototype:
+          description: Prototype Profile identifier
+          type: integer
+        builtIn:
+          description: Indicates whether the profile is a built-in profile
+          type: integer
+        cloneable:
+          description: Indicates whether the profile can be used as a prototype for new custom profiles
+          type: integer
+        features:
+          description: List of feature settings and their enabled state for the profile
+          type: array
+          items:
+            $ref: '#/components/schemas/FeaturesList'
+    Email:
+      description: Class Email
+      required:
+      - date
+      - emailPackageId
+      - id
+      - modifiedDate
+      - parentEmailId
+      - recipients
+      - senderId
+      - status
+      - subject
+      - type
+      properties:
+        id:
+          description: Email unique identifier
+          type: string
+        senderId:
+          description: Unique identifier of User who sent Email
+          type: string
+        templateId:
+          description: Email template unique identifier
+          type: integer
+        status:
+          description: 'Email status. Accepted values: `sent`, `draft`, `queued`, `transferring`, `error`, `self_send`'
+          type: string
+        type:
+          description: 'Email type. Accepted values: `original`, `resend`, `forward`, `reply`'
+          type: string
+        date:
+          description: Date and time the email was created
+          type: string
+          format: date
+        deleted:
+          description: Indicates whether the email is deleted
+          type: boolean
+        emailPackageId:
+          description: Email Package unique identifier
+          type: string
+        isPreview:
+          description: Indicates whether the email is a preview email
+          type: boolean
+        isUserSent:
+          description: Indicates whether the email was sent by a user
+          type: boolean
+        watermark:
+          description: The watermark on the preview email
+          type: string
+        package:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/Package'
+        expirationDate:
+          description: Email package expiration date
+          type: string
+          format: date-time
+        attachmentCount:
+          description: Number of attachments in the email package
+          type: integer
+        sender:
+          description: Sender's basic information (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/UserBasicInfo'
+        recipients:
+          type: array
+          items:
+            $ref: '#/components/schemas/Recipient'
+        variables:
+          type: array
+          items:
+            type: string
+        secureBody:
+          description: Indicates whether the email body is secured
+          type: boolean
+        modifiedDate:
+          description: Date and time the email was last modified
+          type: string
+          format: date
+        parentEmailId:
+          description: Unique identifier of the original email this email was forwarded or replied from
+          type: string
+        emailReturnReceipt:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailReturnReceipt'
+        error:
+          description: Error message when the email status is error
+          type: string
+        subject:
+          description: Subject line of the email as shown to recipients
+          type: string
+        body:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        rawBody:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        headline:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        notice:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        htmlBody:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        fullHtmlBody:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        emailFrom:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        isRead:
+          description: Indicates whether the email has been read by the current user
+          type: boolean
+        bucket:
+          description: 'Mailbox bucket the email belongs to. Accepted values: `inbox`, `sent`, `draft`, `outgoing`, `trash`'
+          type: string
+        templateBody:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        webFormId:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        webFormFields:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: array
+          items:
+            type: string
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+    Permission:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the permission.
+        name:
+          type: string
+          description: Name of the permission.
+        allowed:
+          type: boolean
+          description: Indicates whether the permission is granted (True) or denied (False).
+    UserBasicInfo:
+      required:
+      - email
+      - id
+      - name
+      properties:
+        id:
+          description: The unique identifier of the user
+          type: string
+        name:
+          description: The name of the user
+          type: string
+        email:
+          description: The user's email
+          type: string
+        profileIcon:
+          description: URL to the user's profile icon image
+          type: string
+    User.Put:
+      description: Class User
+      properties:
+        suspended:
+          description: Indicates whether the user is suspended. Set to true to suspend the user.
+          type: boolean
+        name:
+          description: The name of the user
+          type: string
+        password:
+          description: The user's password
+          type: string
+        verified:
+          description: Indicates whether the user is verified
+          type: boolean
+        deactivated:
+          description: Indicates whether the user is deactivated. Set to true to deactivate the user.
+          type: boolean
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    ActivityUser:
+      type: object
+      properties:
+        userId:
+          type: string
+        name:
+          type: string
+          description: Full name of the user.
+        email:
+          type: string
+          description: Email address associated with the user.
+        profileIcon:
+          type: string
+          description: URL or identifier for the user's profile icon.
+    Hostname.Put:
+      description: Class Hostname
+      properties:
+        disabled:
+          description: Disable hostname
+          type: boolean
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
+    DrmFile:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the DRM-protected file.
+        size:
+          type: integer
+          description: Size of the DRM-protected file in bytes.
+    Fingerprint:
+      type: object
+      properties:
+        algo:
+          type: string
+          description: The algorithm used to generate the fingerprint (e.g., sha3-256, md5).
+        hash:
+          type: string
+          description: The resulting hash value representing the fingerprint of the file or object.
+    User:
+      description: Class User
+      required:
+      - basedirId
+      - email
+      - id
+      - mydirId
+      - name
+      - syncdirId
+      properties:
+        id:
+          description: The unique identifier of the user
+          type: string
+        basedirId:
+          description: The unique identifier of the user's root Kiteworks directory.
+          type: string
+        created:
+          description: Date and time the user account was created
+          type: string
+          format: date
+        email:
+          description: The user's email
+          type: string
+        mydirId:
+          description: The unique identifier of the user's mydir system directory.
+          type: string
+        name:
+          description: The name of the user
+          type: string
+        syncdirId:
+          description: The unique identifier of the user's 'My Folder'.
+          type: string
+        userTypeId:
+          description: The unique identifier of the user type (profile).
+          type: integer
+        internal:
+          description: Indicates whether the user is an internal user
+          type: boolean
+        profileIcon:
+          description: URL to the user's profile icon image
+          type: string
+        extDL:
+          description: Indicates whether the user is an External Distribution List
+          type: boolean
+        metadata:
+          description: List of user's metadata
+          type: array
+          items:
+            $ref: '#/components/schemas/UserMetadata'
+        adminRoleId:
+          description: The ID of the admin role assigned to the user.
+          type: integer
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+        active:
+          description: Indicates whether the user is an actual kitework user
+          type: boolean
+        suspended:
+          description: Indicates whether the user is suspended
+          type: boolean
+        deleted:
+          description: Indicates whether the user has been deleted
+          type: boolean
+        flags:
+          description: "Authentication type.\n     *                  0: No authentication,\n     *                  1: Authentication by kiteworks,\n     *                  2: Authentication by LDAP,\n     *                  4: Authentication by SSO"
+          type: integer
+        verified:
+          description: Indicates whether the user is verified
+          type: boolean
+        deactivated:
+          description: Indicates whether the user has been deactivated
+          type: boolean
+        lastActivityDateTime:
+          description: User's last activity datetime
+          type: string
+          format: date
+        passwordExpirationDateTime:
+          description: The exact timestamp when the user's password will expire
+          type: string
+          format: date
+    ProfileMappingChanges:
+      description: Class ProfileMappingChanges
+      required:
+      - impact
+      properties:
+        impact:
+          description: Get the User Profile mapping order
+          type: array
+          items:
+            type: string
+    AdminRole:
+      description: Class AdminRole
+      required:
+      - id
+      - name
+      properties:
+        id:
+          description: Admin role unique identifier
+          type: integer
+        name:
+          description: Display name of the admin role
+          type: string
+        guid:
+          description: Admin role globally unique identifier
+          type: string
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+    ActivityList:
+      type: object
+      properties:
+        data:
+          type: array
+          description: List of activity events.
+          items:
+            $ref: '#/components/schemas/Activity'
+    ProfileMappingOrder.Put:
+      description: Class ProfileMappingOrder
+      required:
+      - order
+      properties:
+        peek:
+          description: Set if we are peeking into the impact
+          type: boolean
+        order:
+          description: Set the User Profile mapping order
+          type: array
+          items:
+            type: integer
+    UserDemoteOptions.Post:
+      description: Class UserDemoteOptions
+      properties:
+        remoteWipe:
+          description: Indicates whether to remotely wipe data from both desktop and mobile devices.
+          type: boolean
+        deleteUnsharedData:
+          description: Indicates whether data owned by the user should be deleted. This is required and must be set to True if `retainData` is False, and vice versa.
+          type: boolean
+        retainData:
+          description: Indicates whether data should be retained and transferred to another user. This is required and must be True if `deleteUnsharedData` is False, and vice versa.
+          type: boolean
+        retainToUser:
+          description: The ID of the new owner to whom the data will be transferred, applicable when `retainData` and/or `retainPermissionToSharedData` are set to true.
+          type: string
+        retainToAdvancedFormUser:
+          description: The ID of the user to whom the advanced form data will be transferred, similar to retainToUser but specifically for advanced form components.
+          type: string
+        retainPermissionToSharedData:
+          description: Indicates whether permissions to shared folder should be retained.
+          type: boolean
+        withdrawRequestFiles:
+          description: Indicates whether request files should be withdrawn.
+          type: boolean
+        withdrawFileLinks:
+          description: Indicates whether sent files should be withdrawn.
+          type: boolean
+    EmailReturnReceipt:
+      description: Class Recipient
+      required:
+      - mailId
+      - userId
+      properties:
+        mailId:
+          description: Email unique identifier for return receipt
+          type: integer
+        user:
+          description: User who is associated with this return receipt record
+          $ref: '#/components/schemas/UserBasicInfo'
+        userId:
+          description: User ID for Return Receipt
+          type: string
+    Package:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of the email package.
+        selfCopy:
+          type: boolean
+          description: Indicates whether the package includes a copy for the sender.
+        includeFingerprint:
+          type: boolean
+          description: Indicates whether a fingerprint (hash) of the package should be included for verification.
+        expire:
+          type: integer
+          description: Expiration time of the package in seconds from creation.
+        fileCount:
+          readOnly: true
+          description: Count of the files attached to the package.
+        deleted:
+          type: boolean
+          description: Indicates whether the package has been marked as deleted.
+        acl:
+          type: string
+          description: Access control list (ACL) associated with the package, specifying who can access it.
+        attachments:
+          description: List of attachments included in the package.
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+        downloadLink:
+          type: string
+          description: Link for accessing the email.
+    Activity:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the activity event.
+        created:
+          type: string
+          format: date
+          description: Date and time when the activity event was recorded.
+        event:
+          type: string
+          description: Name of the activity event.
+        message:
+          type: string
+          description: Human-readable summary of the activity event.
+        type:
+          type: string
+          description: Type category of the activity event.
+        successful:
+          type: boolean
+          description: Indicates whether the activity completed successfully.
+        user:
+          description: Details of the user who performed the activity.
+          allOf:
+          - $ref: '#/components/schemas/ActivityUser'
+        permissions:
+          type: array
+          description: List of permissions required for the activity.
+          items:
+            type: string
+        data:
+          readOnly: true
+          description: Additional event-specific data associated with the activity.
+    Hostname.Post:
+      description: Class Hostname
+      required:
+      - hostname
+      properties:
+        hostname:
+          description: Hostname
+          type: string
+        disabled:
+          description: Disable hostname
+          type: boolean
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
+    Device:
+      description: Class Device
+      required:
+      - clientId
+      - id
+      - installName
+      - userId
+      properties:
+        id:
+          description: Unique identifier of Device
+          type: integer
+        clientId:
+          description: Unique identifier of client for this Device
+          type: string
+        userId:
+          description: Unique identifier of user for this Device
+          type: string
+        installTagId:
+          description: Unique identifier of the install tag for this device. Usually the serial number of the device
+          type: string
+        installName:
+          description: Install Tag name for this Device. e.g. Someone's IPhone
+          type: string
+        wipeFlag:
+          description: "Flag that tells the device to remote wipe itself.\n     *                   0 = not set, 1 = set, 2 = device has been notified, 3 = wipe is completed"
+          type: string
+        mobileKeyStore:
+          description: Key to encrypt files on this device
+          type: string
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string

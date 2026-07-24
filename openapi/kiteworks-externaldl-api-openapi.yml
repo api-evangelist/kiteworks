@@ -1,0 +1,239 @@
+openapi: 3.0.2
+info:
+  version: '28'
+  title: Kiteworks API Documentation activities externalDL API
+tags:
+- name: externalDL
+paths:
+  /rest/externalDL:
+    post:
+      summary: Add external distribution lists
+      description: "### Description:\n  Adds one or more email addresses to the current user's external distribution lists.\n### Precondition:\n  User must be authenticated.\n### Response:\n  The external distribution lists are created and returned.\n"
+      tags:
+      - externalDL
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExternalDLUpdateRequest'
+      responses:
+        '201':
+          description: The external distribution lists have been successfully added.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExternalDLs'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_DENIED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_DENIED:
+                  summary: Your access is denied.
+                  description: Your access is denied.
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_DENIED
+                      message: Your access is denied.
+                      redirectUrl: /login?code=3317
+        '490':
+          description: Request blocked by WAF
+    get:
+      summary: List external distribution lists
+      description: "### Description:\n  Returns the list of external distribution lists for the current user.\n### Precondition:\n  User must be authenticated.\n### Response:\n  The list of external distribution lists is returned.\n"
+      tags:
+      - externalDL
+      parameters:
+      - in: query
+        name: search
+        required: false
+        description: Search term to filter external distribution lists by email address.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The external distribution lists have been successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExternalDLs'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_DENIED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_DENIED:
+                  summary: Your access is denied.
+                  description: Your access is denied.
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_DENIED
+                      message: Your access is denied.
+                      redirectUrl: /login?code=3317
+        '490':
+          description: Request blocked by WAF
+    delete:
+      summary: Delete external distribution lists
+      description: "### Description:\n  Removes one or more email addresses from the current user's external distribution lists.\n### Precondition:\n  User must be authenticated.\n### Response:\n  The specified external distribution lists are deleted.\n"
+      tags:
+      - externalDL
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExternalDLUpdateRequest'
+      responses:
+        '200':
+          description: The external distribution lists have been successfully deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExternalDLs'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_DENIED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_DENIED:
+                  summary: Your access is denied.
+                  description: Your access is denied.
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_DENIED
+                      message: Your access is denied.
+                      redirectUrl: /login?code=3317
+        '490':
+          description: Request blocked by WAF
+components:
+  schemas:
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    ExternalDLUpdateRequest:
+      type: object
+      properties:
+        emails:
+          type: array
+          description: List of email addresses to add or remove from the external distribution lists.
+          items:
+            type: string
+            format: email
+      required:
+      - emails
+    ExternalDL:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Email address of the external distribution list entry.
+    ExternalDLs:
+      type: object
+      properties:
+        data:
+          description: List of external distribution list entries.
+          type: array
+          items:
+            $ref: '#/components/schemas/ExternalDL'

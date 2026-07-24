@@ -1,0 +1,2010 @@
+openapi: 3.0.2
+info:
+  version: '28'
+  title: Kiteworks API Documentation activities search API
+tags:
+- name: search
+paths:
+  /rest/search:
+    get:
+      tags:
+      - search
+      summary: Return lists of files/folders/emails from search results
+      description: Searches across files, folders, and emails using the provided query. Returns matching results grouped by type, along with total counts and a flag indicating whether full-text search is enabled.
+      responses:
+        '200':
+          description: Search results retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Search'
+              examples:
+                SearchResults:
+                  summary: Search results grouped by type
+                  value:
+                    id: contract
+                    fullTextSearch: true
+                    files:
+                    - id: 7
+                      name: contract-2024.pdf
+                    folders: []
+                    emails: []
+                    metadata:
+                      files: 1
+                      folders: 0
+                      emails: 0
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: objectId
+        description: Id of folder to search
+        schema:
+          type: string
+      - in: query
+        name: content
+        description: Search by content
+        schema:
+          type: string
+      - in: query
+        name: content:contains
+        description: Search by content. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: content:startswith
+        description: ''
+        schema:
+          type: string
+      - in: query
+        name: description
+        description: Search by description
+        schema:
+          type: string
+      - in: query
+        name: description:contains
+        description: Search by description. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: description:startswith
+        description: ''
+        schema:
+          type: string
+      - in: query
+        name: user
+        description: Search by user
+        schema:
+          type: string
+      - in: query
+        name: modified
+        description: Search by modified date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified:gt
+        description: Search by modified date. Search for results where this parameter value is greater than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified:gte
+        description: Search by modified date. Search for results where this parameter value is greater than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified:lt
+        description: Search by modified date. Search for results where this parameter value is less than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified:lte
+        description: Search by modified date. Search for results where this parameter value is less than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created
+        description: Search by created date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:gt
+        description: Search by created date. Search for results where this parameter value is greater than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:gte
+        description: Search by created date. Search for results where this parameter value is greater than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:lt
+        description: Search by created date. Search for results where this parameter value is less than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:lte
+        description: Search by created date. Search for results where this parameter value is less than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: locked
+        description: Search by lock status
+        schema:
+          type: integer
+      - in: query
+        name: locked:gt
+        description: Search by lock status. Search for results where this parameter value is greater than the specified value.
+        schema:
+          type: integer
+      - in: query
+        name: locked:gte
+        description: Search by lock status. Search for results where this parameter value is greater than or equal to the specified value.
+        schema:
+          type: integer
+      - in: query
+        name: locked:lt
+        description: Search by lock status. Search for results where this parameter value is less than the specified value.
+        schema:
+          type: integer
+      - in: query
+        name: locked:lte
+        description: Search by lock status. Search for results where this parameter value is less than or equal to the specified value.
+        schema:
+          type: integer
+      - in: query
+        name: filesize
+        description: Search by file size
+        schema:
+          type: integer
+      - in: query
+        name: filesize:gt
+        description: Search by file size. Search for results where this parameter value is greater than the specified value.
+        schema:
+          type: integer
+      - in: query
+        name: filesize:gte
+        description: Search by file size. Search for results where this parameter value is greater than or equal to the specified value.
+        schema:
+          type: integer
+      - in: query
+        name: filesize:lt
+        description: Search by file size. Search for results where this parameter value is less than the specified value.
+        schema:
+          type: integer
+      - in: query
+        name: filesize:lte
+        description: Search by file size. Search for results where this parameter value is less than or equal to the specified value.
+        schema:
+          type: integer
+      - in: query
+        name: file_type
+        description: 'Search by file type. Accepted values: `Documents`, `Spreadsheets`, `Presentations`, `Images`, `PDF`, `Multimedia`, `Text`.'
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - Documents
+          - Spreadsheets
+          - Presentations
+          - Images
+          - PDF
+          - Multimedia
+          - Text
+      - in: query
+        name: email_type
+        description: 'Search by email type. Accepted values: `Inbox`, `Draft`, `Sent`.'
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - Inbox
+          - Draft
+          - Sent
+      - in: query
+        name: tracking_id
+        description: Search files by tracking ID (UUID)
+        schema:
+          type: string
+      - in: query
+        name: tracking_id:eq
+        description: ''
+        schema:
+          type: string
+      - in: query
+        name: path
+        description: Search files/folders by path. If this is specified, other search criteria is no longer valid.
+        schema:
+          type: string
+      - in: query
+        name: path:contains
+        description: Search files/folders by path. If this is specified, other search criteria is no longer valid.. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: searchType
+        description: 'Search by object type. Accepted values: `f`, `d`, `m`, `k`.'
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - f
+          - d
+          - m
+          - k
+      - in: query
+        name: searchFilter
+        description: 'Scope of the search. Accepted values: `all`, `shared`.'
+        schema:
+          type: string
+          enum:
+          - all
+          - shared
+      - in: query
+        name: fls_only
+        description: Search only files shared to me.
+        schema:
+          type: boolean
+      - in: query
+        name: sharedMailboxId
+        description: Id of shared mailbox to search
+        schema:
+          type: integer
+      - in: query
+        name: orderBy
+        description: Sorting options
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - name:asc
+          - name:desc
+          - created:asc
+          - created:desc
+          - modified:asc
+          - modified:desc
+          - score:asc
+          - score:desc
+      - in: query
+        name: offset
+        description: Offset
+        schema:
+          type: integer
+      - in: query
+        name: limit
+        description: Limit
+        schema:
+          type: integer
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+          - compact
+  /rest/sources/{id}/query:
+    get:
+      summary: Search SharePoint sites
+      description: "### Description:\n  Searches for SharePoint sites accessible through the specified source connection.\n### Precondition:\n  User must have a valid SharePoint Online source connection configured.\n### Response:\n  Returns a list of matching SharePoint sites.\n"
+      tags:
+      - search
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier of the entity.
+        schema:
+          type: integer
+      - in: query
+        name: include_kw
+        required: false
+        description: If true, includes Kiteworks native sources in the results.
+        schema:
+          type: boolean
+      - in: query
+        name: include_container
+        required: false
+        description: If true, includes container-type sources (e.g. SharePoint document libraries) in the results.
+        schema:
+          type: boolean
+      - in: query
+        name: limit
+        required: false
+        description: Maximum number of results to return.
+        schema:
+          type: integer
+      - in: query
+        name: offset
+        required: false
+        description: Number of results to skip before returning results, for pagination.
+        schema:
+          type: integer
+      - in: query
+        name: query
+        required: false
+        description: Search query string to filter sources or sites by name.
+        schema:
+          type: string
+      - in: query
+        name: search_type
+        required: false
+        description: Type of search to perform against the source.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: SharePoint sites have been successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchSharePointSitesResult'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_AUTH_EC_UPDATE_TOKEN, ERR_SPO_SEARCH'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_EC_UPDATE_TOKEN:
+                  summary: Token update/receive required
+                  description: Token update/receive required
+                  value:
+                    errors:
+                    - code: ERR_AUTH_EC_UPDATE_TOKEN
+                      message: Token update/receive required
+                ERR_SPO_SEARCH:
+                  summary: Unable to call SPO Search API
+                  description: Unable to call SPO Search API
+                  value:
+                    errors:
+                    - code: ERR_SPO_SEARCH
+                      message: Unable to call SPO Search API
+        '490':
+          description: Request blocked by WAF
+  /rest/query:
+    get:
+      summary: Perform a search query
+      description: "### Description:\n  Searches for files, folders, or emails based on the provided query parameters.\n### Precondition:\n  The user must be authenticated.\n### Response:\n  Returns a list of matching files, folders, or emails.\n### Sorting:\n  Sorting can be applied using two query parameters: `orderBy` for the field name,\n  and `orderType` for the sort order, which can be either `asc` or `desc`.\n### Sorting options:\n  | FIELD_NAME | Description |\n  |------------|-------------|\n  | score      | The search relevance score |\n  | name       | The name of the folder or file |\n  | created    | The creation datetime of the folder or file |\n  | modified   | The last modified datetime of the folder or file |\n"
+      tags:
+      - search
+      parameters:
+      - in: query
+        name: limit
+        required: false
+        description: Range limit.
+        schema:
+          type: integer
+          minimum: 1
+      - in: query
+        name: offset
+        required: false
+        description: Range offset.
+        schema:
+          type: integer
+          minimum: 0
+      - in: query
+        name: includeContent
+        required: true
+        description: Indicates whether it is a full-text search or a database search.
+        schema:
+          type: boolean
+      - in: query
+        name: searchType
+        required: true
+        explode: true
+        style: form
+        description: Comma-separated list of object types to search.<br>`f` – Files.<br>`d` – Folders.<br>`e` – Emails.
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: query
+        required: false
+        description: Search query string.
+        schema:
+          type: string
+      - in: query
+        name: objectId
+        required: false
+        description: Search within a specific folder ID.
+        schema:
+          type: string
+      - in: query
+        name: created
+        required: false
+        description: Exact creation date.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:gt
+        required: false
+        description: Created after the specified date.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:gte
+        required: false
+        description: Created on or after the specified date.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:lt
+        required: false
+        description: Created before the specified date.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:lte
+        required: false
+        description: Created on or before the specified date.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified
+        required: false
+        description: Exact modified date.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified:gt
+        required: false
+        description: Modified after the specified date.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified:gte
+        required: false
+        description: Modified on or after the specified date.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified:lt
+        required: false
+        description: Modified before the specified date.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified:lte
+        required: false
+        description: Modified on or before the specified date.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: fileSize
+        required: false
+        description: Exact file size in bytes.
+        schema:
+          type: integer
+      - in: query
+        name: fileSize:gt
+        required: false
+        description: File size greater than the specified value.
+        schema:
+          type: integer
+      - in: query
+        name: fileSize:gte
+        required: false
+        description: File size greater than or equal to the specified value.
+        schema:
+          type: integer
+      - in: query
+        name: fileSize:lt
+        required: false
+        description: File size less than the specified value.
+        schema:
+          type: integer
+      - in: query
+        name: fileSize:lte
+        required: false
+        description: File size less than or equal to the specified value.
+        schema:
+          type: integer
+      - in: query
+        name: user
+        required: false
+        description: User email of the folder creator.
+        schema:
+          type: string
+      - in: query
+        name: fileType
+        required: false
+        explode: true
+        style: form
+        description: List of comma-separated file types to filter search results.
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: flsOnly
+        required: false
+        description: If true, only includes files shared with the user.
+        schema:
+          type: boolean
+      - in: query
+        name: sharedMailboxId
+        required: false
+        description: Shared mailbox ID.
+        schema:
+          type: string
+      - in: query
+        name: orderBy
+        required: false
+        description: 'Field to sort results by.<br>Allowed values: `score`, `name`, `created`, `modified`.'
+        schema:
+          type: string
+          enum:
+          - score
+          - name
+          - created
+          - modified
+      - in: query
+        name: orderType
+        required: false
+        description: Sort direction for the results.<br>`asc` – Ascending order.<br>`desc` – Descending order.
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+      - in: query
+        name: nameOnly
+        required: false
+        description: If true, searches only for file/folder names.
+        schema:
+          type: boolean
+      - in: query
+        name: subject
+        required: false
+        description: Email subject filter.
+        schema:
+          type: string
+          maxLength: 998
+      - in: query
+        name: senderId
+        required: false
+        description: Sender ID.
+        schema:
+          type: string
+      - in: query
+        name: recipientId
+        required: false
+        description: Recipient ID.
+        schema:
+          type: string
+      - in: query
+        name: fileName
+        required: false
+        description: File name filter.
+        schema:
+          type: string
+          maxLength: 255
+      - in: query
+        name: folderName
+        required: false
+        description: Folder name filter.
+        schema:
+          type: string
+          maxLength: 255
+      - in: query
+        name: fileContent
+        required: false
+        description: Search within file content.
+        schema:
+          type: string
+      - in: query
+        name: spellCheck
+        required: false
+        description: If true, provides spelling suggestions for the search query.
+        schema:
+          type: boolean
+      - in: query
+        name: bucket
+        required: false
+        description: Filter email search results by mailbox folder.<br>`inbox` – Search in the inbox.<br>`sent` – Search in sent items.
+        schema:
+          type: string
+          enum:
+          - inbox
+          - sent
+      - in: query
+        name: path
+        required: false
+        description: Search within a specific folder path.
+        schema:
+          type: string
+      - in: query
+        name: tracking_id
+        required: false
+        description: Filter files by their tracking ID (UUID).
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: extensions
+        required: false
+        explode: true
+        style: form
+        description: Comma-separated file extensions to filter (e.g., "pdf,form" or ".pdf,.form").
+        schema:
+          type: array
+          items:
+            type: string
+            minLength: 1
+      responses:
+        '200':
+          description: Search completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResult'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_PROFILE_COLLABORATION_DISABLED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_PROFILE_COLLABORATION_DISABLED:
+                  summary: User's profile has no collaboration access
+                  description: User's profile has no collaboration access
+                  value:
+                    errors:
+                    - code: ERR_PROFILE_COLLABORATION_DISABLED
+                      message: User's profile has no collaboration access
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INVALID_PARAMETER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INVALID_PARAMETER:
+                  summary: Invalid Parameter Exception
+                  description: Invalid Parameter Exception
+                  value:
+                    errors:
+                    - code: ERR_INVALID_PARAMETER
+                      message: Invalid Parameter Exception
+        '490':
+          description: Request blocked by WAF
+components:
+  schemas:
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    PushedObject:
+      type: object
+      properties:
+        objectId:
+          type: string
+          description: Unique identifier (UUID) for the pushed object.
+        userId:
+          type: string
+          description: Unique identifier (UUID) for the user who pushed the object.
+        created:
+          type: string
+          format: date
+          description: The date and time when the object was pushed.
+        user:
+          description: Details of the user who pushed the object.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+    Tag:
+      type: object
+      properties:
+        guid:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) for the tag.
+        name:
+          type: string
+          description: Display name of the tag.
+        type:
+          type: string
+          description: Type category of the tag.
+    TrackingAccessRecipient:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: Unique identifier of the user associated with the recipient.
+        type:
+          type: integer
+          description: Recipient type.<br>`0` – To.<br>`1` – CC.<br>`2` – BCC.
+        email:
+          type: string
+          description: Email address of the recipient.
+        isDistributionList:
+          type: boolean
+          description: Indicates if the recipient is a distribution list rather than an individual user.
+        user:
+          description: Details of the user associated with the recipient.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        revoked:
+          type: boolean
+          description: Indicates whether the recipient's tracking access has been revoked.
+    SearchSharePointSitesResult:
+      type: object
+      properties:
+        sites:
+          type: array
+          description: List of SharePoint sites matching the search query.
+          items:
+            $ref: '#/components/schemas/Site'
+    Folder1:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) of the folder.
+        parentId:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) of the parent object.
+        name:
+          type: string
+          description: Name of the object.
+        type:
+          type: string
+          description: Type of the object.<br>`f` – File.<br>`d` – Folder.
+        userId:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) who created the folder.
+        creator:
+          description: Details of the user who created the object.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        created:
+          type: string
+          format: date
+          description: The date and time when the object was created.
+        modified:
+          type: string
+          format: date
+          description: The date and time when the object was last modified.
+        expire:
+          type: string
+          format: date
+          description: Expiration timestamp of the object, if applicable.
+        permissions:
+          description: List of permissions associated with the object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        deleted:
+          type: boolean
+          description: Indicates whether the object has been deleted.
+        permDeleted:
+          type: boolean
+          description: Indicates whether the object has been permanently deleted.
+        permalink:
+          type: string
+          description: Permanent URL link to access the object.
+        path:
+          type: string
+          description: Path to the folder in the hierarchy.
+        members:
+          description: List of members who have access to the object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Member'
+        vendorDocId:
+          type: string
+          description: Vendor document ID associated with the object.
+        vendorDocName:
+          type: string
+          description: Name of the vendor document associated with the object.
+        secure:
+          type: boolean
+          description: Indicates whether the folder or the parent folder containing the file is marked as secure.
+        source:
+          type: integer
+          description: ID representing the source of the object (1 - Salesforce, 2 - Teams).
+        isShared:
+          type: boolean
+          description: Indicates if the folder is shared with other users.
+        syncable:
+          type: boolean
+          description: Indicates if the folder can be synced by Desktop Sync Client.
+        fileLifetime:
+          type: integer
+          description: Time duration (in days) for which the files in this folder are kept after being added to the folder.
+        description:
+          type: string
+          description: The description of the folder.
+        parent:
+          description: The parent folder of the current folder.
+          allOf:
+          - $ref: '#/components/schemas/Folder'
+        isFavorite:
+          type: boolean
+          description: Indicates if the folder is marked as a favorite by the user.
+        pushedFilesCount:
+          type: integer
+          description: The number of files that have been pushed to mobile apps in this folder.
+        currentUserRole:
+          description: The role of the current user in this folder.
+          allOf:
+          - $ref: '#/components/schemas/Role'
+        avStatus:
+          type: string
+          description: The Antivirus (AV) status of the folder.
+        dlpStatus:
+          type: string
+          description: The Data Loss Prevention (DLP) status of the folder.
+        totalMembersCount:
+          type: integer
+          description: Total number of members who have access to this folder.
+        totalFoldersCount:
+          type: integer
+          description: Total number of subfolders within this folder.
+        totalFilesCount:
+          type: integer
+          description: Total number of files within this folder.
+        maxFolderExpiration:
+          type: string
+          format: date
+          description: The maximum expiration date allowed for files in this folder.
+        maxFileLifetime:
+          type: integer
+          description: The maximum duration (in days) that files in this folder can be kept after being added to the folder.
+        isLdapGroupMember:
+          type: boolean
+          description: Indicates if the folder is part of an LDAP group.
+        isUnderMyFolder:
+          type: boolean
+          description: Indicates if this folder is a subfolder of the user's "My Folder".
+        pathIds:
+          type: string
+          description: A list of IDs representing the path of the folder within the folder hierarchy.
+        isRoot:
+          type: boolean
+          description: Indicates if this folder is a root folder.
+        rootId:
+          type: string
+          format: uuid
+          description: The ID of the root folder if this is a subfolder.
+        useFolderQuota:
+          type: boolean
+          description: Indicates if a folder quota is applied to this folder.
+        quota:
+          type: integer
+          description: The storage quota for the folder (in bytes).
+        size:
+          type: integer
+          description: The total storage size used by the folder (in bytes).
+        freeSpace:
+          type: integer
+          description: The amount of free space available in the folder (in bytes).
+        inheritanceEnabled:
+          type: boolean
+          description: Indicates if a folder inherits permissions from the parent folder
+    UserBasic:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier (UUID) for the user.
+        email:
+          type: string
+          description: Email address associated with the user.
+        name:
+          type: string
+          description: Full name of the user.
+        profileIcon:
+          type: string
+          description: URL or identifier for the user's profile icon.
+    Attachment:
+      type: object
+      properties:
+        emailPackageId:
+          type: string
+          format: uuid
+          description: Unique identifier for the email package containing the attachment.
+        attachmentId:
+          type: string
+          description: Unique identifier for the attachment.
+        withdrawn:
+          type: boolean
+          description: Indicates whether the attachment has been withdrawn.
+        drmFile:
+          description: Details of the DRM-protected file associated with the attachment.
+          allOf:
+          - $ref: '#/components/schemas/DrmFile'
+        accessType:
+          type: integer
+          description: Access type for the attachment (e.g., read-only, editable).
+        tags:
+          description: List of tags associated with the attachment.
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        permissions:
+          type: array
+          description: List of permissions associated with the attachment.
+          items:
+            $ref: '#/components/schemas/Permission'
+        objectId:
+          type: string
+          format: uuid
+          description: Unique identifier for the file associated with the attachment.
+        name:
+          type: string
+          description: Name of the attachment file.
+        size:
+          type: integer
+          description: Size of the attachment file in bytes.
+        mime:
+          type: string
+          description: The MIME type of the attachment file.
+        created:
+          type: string
+          format: date
+          description: Date when the attachment file was created.
+        deleted:
+          type: boolean
+          description: Indicates if the attachment has been deleted.
+        fingerprint:
+          type: string
+          description: A unique hash identifying the file version.
+        fingerprintAlgo:
+          type: string
+          description: The algorithm used for generating the file version fingerprint. (e.g., sha3-256, md5).
+        fingerprints:
+          description: List of alternative fingerprints for the attachment file.
+          type: array
+          items:
+            $ref: '#/components/schemas/Fingerprint'
+        adminQuarantineStatus:
+          type: string
+          description: Status of the attachment in the admin quarantine system.
+        avStatus:
+          type: string
+          description: Antivirus (AV) scan status of the attachment.
+        dlpStatus:
+          type: string
+          description: Data Loss Prevention (DLP) status of the attachment.
+    Recipient:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: Unique identifier of the user associated with the recipient.
+        type:
+          type: integer
+          description: Recipient type.<br>`0` – To.<br>`1` – CC.<br>`2` – BCC.
+        email:
+          type: string
+          description: Email address of the recipient.
+        isDistributionList:
+          type: boolean
+          description: Indicates if the recipient is a distribution list rather than an individual user.
+        user:
+          description: Details of the user associated with the recipient.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+    Mail:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the email.
+        senderId:
+          type: string
+          description: Unique identifier of the sender.
+        templateId:
+          type: integer
+          description: Unique identifier of the email template used.
+        status:
+          type: string
+          description: Current status of the email (e.g., sent, draft, error, etc.).
+        type:
+          type: string
+          description: Type of the email (e.g., original, reply, forward, etc.).
+        date:
+          type: string
+          format: date
+          description: Date the email was last modified or sent.
+        deleted:
+          type: boolean
+          description: Indicates if the email has been deleted.
+        withdrawnDate:
+          type: string
+          format: date
+          description: Date when the email was withdrawn, if applicable.
+        emailPackageId:
+          type: string
+          description: Unique identifier of the associated email package.
+        isPreview:
+          type: boolean
+          description: Indicates whether the email is a view-only version, typically used for previewing attachments without enabling downloading.
+        isUserSent:
+          type: boolean
+          description: Indicates whether the email was sent by the current user or another user.
+        watermark:
+          type: string
+          description: Text watermark applied to the email attachments (applicable only for view-only version).
+        variables:
+          description: List of dynamic variables used in the email.
+          type: array
+          items:
+            $ref: '#/components/schemas/Variables'
+        recipients:
+          description: List of recipients for the email.
+          type: array
+          items:
+            $ref: '#/components/schemas/Recipient'
+        secureBody:
+          type: boolean
+          description: Indicates if the email body is secured.
+        modifiedDate:
+          type: string
+          format: date
+          description: Date the email was last modified.
+        parentEmailId:
+          type: string
+          description: Unique identifier of the parent email, if applicable.
+        emailReturnReceipt:
+          description: List of recipients who requested return receipts.
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailReturnRecipient'
+        error:
+          type: string
+          description: Error message associated with the email, if any.
+        subject:
+          type: string
+          description: Subject line of the email.
+        attachmentCount:
+          type: integer
+          description: Number of attachments in the email.
+        expirationDate:
+          type: string
+          format: date
+          description: Expiration date of the email package, if applicable.
+        avStatus:
+          type: string
+          description: Antivirus (AV) scan status of the email.
+        dlpStatus:
+          type: string
+          description: Data Loss Prevention (DLP) scan status of the email.
+        hasTrackingAccess:
+          type: boolean
+          description: Indicates if tracking access is enabled for the email.
+        trackingAccess:
+          description: List of recipients with tracking access.
+          type: array
+          items:
+            $ref: '#/components/schemas/TrackingAccessRecipient'
+        policyDirective:
+          type: integer
+          description: Indicates the restriction type applied to the email
+        isRead:
+          type: boolean
+          description: Indicates if the email has been read.
+        bucket:
+          type: string
+          description: The bucket where the email is stored. (e.g. inbox, sent, trash)
+        body:
+          type: string
+          description: The body of the email.
+        package:
+          description: Details of the associated email package.
+          allOf:
+          - $ref: '#/components/schemas/Package'
+        rawBody:
+          type: string
+          description: Raw email body content without HTML markup.
+        headline:
+          type: string
+          description: Headline or main title of the email.
+        notice:
+          type: string
+          description: Notice part of the email.
+        fullHtmlBody:
+          type: string
+          description: Full HTML body of the email.
+        emailFrom:
+          type: string
+          description: The email address from which the email was sent.
+        templateBody:
+          type: string
+          description: Body content generated from the email template.
+        webFormId:
+          type: string
+          description: Unique identifier of the web form associated with the email.
+        webFormFields:
+          description: Fields included in the associated web form with the mail.
+        sender:
+          description: Details of the sender.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        sharedMailboxId:
+          type: string
+          description: Unique identifier of the shared mailbox, if applicable.
+        htmlBody:
+          type: string
+          description: HTML version of the email body.
+        actor:
+          description: The user responsible for sending the email, applicable when the email is sent on behalf of a shared mailbox.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        darkModeStyle:
+          type: string
+          description: CSS styles applied for dark mode.
+        exists:
+          type: boolean
+          description: Indicates whether the email already exists in the system.
+    SearchResult:
+      type: object
+      properties:
+        folders:
+          type: array
+          description: List of folders matching the search query.
+          items:
+            $ref: '#/components/schemas/Folder1'
+        files:
+          type: array
+          description: List of files matching the search query.
+          items:
+            $ref: '#/components/schemas/File'
+        emails:
+          type: array
+          description: List of emails matching the search query.
+          items:
+            $ref: '#/components/schemas/Mail'
+        totalFiles:
+          type: integer
+          description: Total number of matching files.
+        totalFolders:
+          type: integer
+          description: Total number of matching folders.
+        totalEmails:
+          type: integer
+          description: Total number of matching emails.
+        emailSuggestions:
+          type: array
+          description: List of email address suggestions related to the search query.
+          items:
+            type: string
+        fileSuggestions:
+          type: array
+          description: List of file name suggestions related to the search query.
+          items:
+            type: string
+        fileHighlightings:
+          type: object
+          description: Dictionary of file IDs to highlighted text snippets from full-text search.
+    Email:
+      description: Class Email
+      required:
+      - date
+      - emailPackageId
+      - id
+      - modifiedDate
+      - parentEmailId
+      - recipients
+      - senderId
+      - status
+      - subject
+      - type
+      properties:
+        id:
+          description: Email unique identifier
+          type: string
+        senderId:
+          description: Unique identifier of User who sent Email
+          type: string
+        templateId:
+          description: Email template unique identifier
+          type: integer
+        status:
+          description: 'Email status. Accepted values: `sent`, `draft`, `queued`, `transferring`, `error`, `self_send`'
+          type: string
+        type:
+          description: 'Email type. Accepted values: `original`, `resend`, `forward`, `reply`'
+          type: string
+        date:
+          description: Date and time the email was created
+          type: string
+          format: date
+        deleted:
+          description: Indicates whether the email is deleted
+          type: boolean
+        emailPackageId:
+          description: Email Package unique identifier
+          type: string
+        isPreview:
+          description: Indicates whether the email is a preview email
+          type: boolean
+        isUserSent:
+          description: Indicates whether the email was sent by a user
+          type: boolean
+        watermark:
+          description: The watermark on the preview email
+          type: string
+        package:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/Package'
+        expirationDate:
+          description: Email package expiration date
+          type: string
+          format: date-time
+        attachmentCount:
+          description: Number of attachments in the email package
+          type: integer
+        sender:
+          description: Sender's basic information (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/UserBasicInfo'
+        recipients:
+          type: array
+          items:
+            $ref: '#/components/schemas/Recipient'
+        variables:
+          type: array
+          items:
+            type: string
+        secureBody:
+          description: Indicates whether the email body is secured
+          type: boolean
+        modifiedDate:
+          description: Date and time the email was last modified
+          type: string
+          format: date
+        parentEmailId:
+          description: Unique identifier of the original email this email was forwarded or replied from
+          type: string
+        emailReturnReceipt:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailReturnReceipt'
+        error:
+          description: Error message when the email status is error
+          type: string
+        subject:
+          description: Subject line of the email as shown to recipients
+          type: string
+        body:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        rawBody:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        headline:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        notice:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        htmlBody:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        fullHtmlBody:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        emailFrom:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        isRead:
+          description: Indicates whether the email has been read by the current user
+          type: boolean
+        bucket:
+          description: 'Mailbox bucket the email belongs to. Accepted values: `inbox`, `sent`, `draft`, `outgoing`, `trash`'
+          type: string
+        templateBody:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        webFormId:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        webFormFields:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: array
+          items:
+            type: string
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+    Permission:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the permission.
+        name:
+          type: string
+          description: Name of the permission.
+        allowed:
+          type: boolean
+          description: Indicates whether the permission is granted (True) or denied (False).
+    UserBasicInfo:
+      required:
+      - email
+      - id
+      - name
+      properties:
+        id:
+          description: The unique identifier of the user
+          type: string
+        name:
+          description: The name of the user
+          type: string
+        email:
+          description: The user's email
+          type: string
+        profileIcon:
+          description: URL to the user's profile icon image
+          type: string
+    Folder:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) of the folder.
+        parentId:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) of the parent object.
+        name:
+          type: string
+          description: Name of the object.
+        type:
+          type: string
+          description: Type of the object.<br>`f` – File.<br>`d` – Folder.
+        userId:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) who created the folder.
+        creator:
+          description: Details of the user who created the object.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        created:
+          type: string
+          format: date
+          description: The date and time when the object was created.
+        modified:
+          type: string
+          format: date
+          description: The date and time when the object was last modified.
+        expire:
+          type: string
+          format: date
+          description: Expiration timestamp of the object, if applicable.
+        permissions:
+          description: List of permissions associated with the object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        deleted:
+          type: boolean
+          description: Indicates whether the object has been deleted.
+        permDeleted:
+          type: boolean
+          description: Indicates whether the object has been permanently deleted.
+        permalink:
+          type: string
+          description: Permanent URL link to access the object.
+        path:
+          type: string
+          description: Path to the folder in the hierarchy.
+        members:
+          description: List of members who have access to the object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Member'
+        vendorDocId:
+          type: string
+          description: Vendor document ID associated with the object.
+        vendorDocName:
+          type: string
+          description: Name of the vendor document associated with the object.
+        secure:
+          type: boolean
+          description: Indicates whether the folder or the parent folder containing the file is marked as secure.
+        source:
+          type: integer
+          description: ID representing the source of the object (1 - Salesforce, 2 - Teams).
+        isShared:
+          type: boolean
+          description: Indicates if the folder is shared with other users.
+        syncable:
+          type: boolean
+          description: Indicates if the folder can be synced by Desktop Sync Client.
+        fileLifetime:
+          type: integer
+          description: Time duration (in days) for which the files in this folder are kept after being added to the folder.
+        description:
+          type: string
+          description: The description of the folder.
+        isFavorite:
+          type: boolean
+          description: Indicates if the folder is marked as a favorite by the user.
+        pushedFilesCount:
+          type: integer
+          description: The number of files that have been pushed to mobile apps in this folder.
+        currentUserRole:
+          description: The role of the current user in this folder.
+          allOf:
+          - $ref: '#/components/schemas/Role'
+        avStatus:
+          type: string
+          description: The Antivirus (AV) status of the folder.
+        dlpStatus:
+          type: string
+          description: The Data Loss Prevention (DLP) status of the folder.
+        totalMembersCount:
+          type: integer
+          description: Total number of members who have access to this folder.
+        totalFoldersCount:
+          type: integer
+          description: Total number of subfolders within this folder.
+        totalFilesCount:
+          type: integer
+          description: Total number of files within this folder.
+        maxFolderExpiration:
+          type: string
+          format: date
+          description: The maximum expiration date allowed for files in this folder.
+        maxFileLifetime:
+          type: integer
+          description: The maximum duration (in days) that files in this folder can be kept after being added to the folder.
+        isLdapGroupMember:
+          type: boolean
+          description: Indicates if the folder is part of an LDAP group.
+        isUnderMyFolder:
+          type: boolean
+          description: Indicates if this folder is a subfolder of the user's "My Folder".
+        pathIds:
+          type: string
+          description: A list of IDs representing the path of the folder within the folder hierarchy.
+        isRoot:
+          type: boolean
+          description: Indicates if this folder is a root folder.
+        rootId:
+          type: string
+          format: uuid
+          description: The ID of the root folder if this is a subfolder.
+        useFolderQuota:
+          type: boolean
+          description: Indicates if a folder quota is applied to this folder.
+        quota:
+          type: integer
+          description: The storage quota for the folder (in bytes).
+        size:
+          type: integer
+          description: The total storage size used by the folder (in bytes).
+        freeSpace:
+          type: integer
+          description: The amount of free space available in the folder (in bytes).
+        inheritanceEnabled:
+          type: boolean
+          description: Indicates if a folder inherits permissions from the parent folder
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    Role:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Role ID
+        name:
+          type: string
+          description: Role name
+        rank:
+          type: integer
+          description: Role rank
+        type:
+          type: string
+          description: Role type
+    File:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) of the file.
+        parentId:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) of the parent folder.
+        name:
+          type: string
+          description: Name of the object.
+        type:
+          type: string
+          description: Type of the object.<br>`f` – File.<br>`d` – Folder.
+        userId:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) who created the file.
+        creator:
+          description: Details of the user who created the object.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        created:
+          type: string
+          format: date
+          description: The date and time when the object was created.
+        modified:
+          type: string
+          format: date
+          description: The date and time when the object was last modified.
+        expire:
+          type: string
+          format: date
+          description: Expiration timestamp of the object, if applicable.
+        permissions:
+          description: List of permissions associated with the object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        deleted:
+          type: boolean
+          description: Indicates whether the object has been deleted.
+        permDeleted:
+          type: boolean
+          description: Indicates whether the object has been permanently deleted.
+        permalink:
+          type: string
+          description: Permanent URL link to access the file.
+        path:
+          type: string
+          description: Path to the object in the hierarchy.
+        members:
+          description: List of members who have access to the object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Member'
+        vendorDocId:
+          type: string
+          description: Vendor document ID associated with the object.
+        vendorDocName:
+          type: string
+          description: Name of the vendor document associated with the object.
+        secure:
+          type: boolean
+          description: Indicates whether the folder or the parent folder containing the file is marked as secure.
+        source:
+          type: integer
+          description: ID representing the source of the object (1 - Salesforce, 2 - Teams).
+        modifier:
+          description: The user who last modified the file.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        size:
+          type: integer
+          description: The size of the file in bytes.
+        mime:
+          type: string
+          description: The MIME type of the file.
+        fingerprint:
+          type: string
+          description: A unique hash identifying the file.
+        fingerprints:
+          type: array
+          description: List of fingerprints associated with the file.
+          items:
+            $ref: '#/components/schemas/Fingerprint'
+        clientCreated:
+          type: string
+          format: date
+          description: The date and time when the file was created on the client side.
+        clientModified:
+          type: string
+          format: date
+          description: The date and time when the file was last modified on the client side.
+        overriddenExpire:
+          type: boolean
+          description: Indicates whether the expiration date for the file has been overridden.
+        sharedBy:
+          description: The user who shared the file.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        sharedTime:
+          type: string
+          format: date
+          description: The date and time when the file was shared.
+        parent:
+          description: The parent folder of the file.
+          allOf:
+          - $ref: '#/components/schemas/Folder'
+        originalFileId:
+          type: string
+          format: uuid
+          description: The ID of the original file if this one is a copy.
+        avStatus:
+          type: string
+          description: Indicates the file version's availability status based on Antivirus (AV) settings and whether it has been scanned or detected as infected.
+        dlpStatus:
+          type: string
+          description: Indicates the file version's availability status based on Data Loss Prevention (DLP) settings and whether it has been scanned or detected as infected.
+        adminQuarantineStatus:
+          type: string
+          description: Indicates the file version's availability status based on the administrator's quarantine status.
+        locked:
+          type: boolean
+          description: Indicates if the file is locked.
+        lockUser:
+          description: The user who locked the file.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        isShared:
+          type: boolean
+          description: Indicates if the file is shared with other users.
+        lastModifiedBy:
+          description: The user who last modified the file.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        pushedObject:
+          description: Details about the pushed object, if any.
+          allOf:
+          - $ref: '#/components/schemas/PushedObject'
+        pathIds:
+          type: string
+          format: uuid
+          description: A list of IDs representing the path of the file within the folder hierarchy.
+        wopiapp:
+          description: WOPI-related information for the file when used in a mobile app.
+          allOf:
+          - $ref: '#/components/schemas/MobileInfo'
+        pushed:
+          type: boolean
+          description: Indicates if the file has been pushed to a mobile app.
+        tags:
+          description: List of tags associated with the file.
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        safeEdit:
+          description: Information regarding the file's SafeEdit settings.
+          allOf:
+          - $ref: '#/components/schemas/SafeEdit'
+        versionsCount:
+          type: integer
+          description: The total number of versions for the file.
+        tracking_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: Tracking identifier associated with the file upload.
+    DrmFile:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the DRM-protected file.
+        size:
+          type: integer
+          description: Size of the DRM-protected file in bytes.
+    MobileInfo:
+      type: object
+      properties:
+        wopiSrc:
+          type: string
+          description: The WOPI (Web Application Open Platform Interface) source URL for the mobile application.
+        userId:
+          type: string
+          description: Unique identifier of the user.
+        service:
+          type: string
+          description: The WOPI service ID.
+        scheme:
+          type: string
+          description: URI scheme used by the mobile application to handle the file.
+        schemeSupport:
+          type: string
+          description: Indicates the level of support the mobile app has for the URI scheme.
+    Fingerprint:
+      type: object
+      properties:
+        algo:
+          type: string
+          description: The algorithm used to generate the fingerprint (e.g., sha3-256, md5).
+        hash:
+          type: string
+          description: The resulting hash value representing the fingerprint of the file or object.
+    EmailReturnRecipient:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: Unique identifier of the user who requested the return receipt.
+        user:
+          description: Details of the user who requested the return receipt.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+    Member:
+      type: object
+      properties:
+        objectId:
+          type: string
+          description: Unique identifier (UUID) of the associated object (file or folder).
+        roleId:
+          type: integer
+          description: Role assigned to the member.
+        userId:
+          type: string
+          description: Unique identifier (UUID) of the user.
+        groupId:
+          type: integer
+          description: Unique identifier of the LDAP group.
+        user:
+          description: User details of the member.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        role:
+          description: Role details assigned to the member.
+          allOf:
+          - $ref: '#/components/schemas/Role'
+        group:
+          description: Group details if the member belongs to a group.
+          allOf:
+          - $ref: '#/components/schemas/Group'
+        sharedBy:
+          description: Details of the user who shared the file or folder.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        created:
+          type: string
+          format: date
+          description: Date when the file or folder was shared.
+        inheritRoleId:
+          type: integer
+          description: Inherited role ID from the parent folder, if applicable.
+        allowedFolderRoleId:
+          type: array
+          description: List of allowed folder role IDs.
+          items:
+            type: integer
+        email:
+          type: string
+          description: Email associated with the member.
+        rank:
+          type: integer
+          description: Rank of the member role.
+        originFolder:
+          readOnly: true
+    SafeEdit:
+      type: object
+      properties:
+        safeEditLocked:
+          type: boolean
+          description: Indicates if the file is locked through a SafeEdit session.
+        user:
+          description: The user responsible for locking the file via SafeEdit.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+    EmailReturnReceipt:
+      description: Class Recipient
+      required:
+      - mailId
+      - userId
+      properties:
+        mailId:
+          description: Email unique identifier for return receipt
+          type: integer
+        user:
+          description: User who is associated with this return receipt record
+          $ref: '#/components/schemas/UserBasicInfo'
+        userId:
+          description: User ID for Return Receipt
+          type: string
+    Package:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of the email package.
+        selfCopy:
+          type: boolean
+          description: Indicates whether the package includes a copy for the sender.
+        includeFingerprint:
+          type: boolean
+          description: Indicates whether a fingerprint (hash) of the package should be included for verification.
+        expire:
+          type: integer
+          description: Expiration time of the package in seconds from creation.
+        fileCount:
+          readOnly: true
+          description: Count of the files attached to the package.
+        deleted:
+          type: boolean
+          description: Indicates whether the package has been marked as deleted.
+        acl:
+          type: string
+          description: Access control list (ACL) associated with the package, specifying who can access it.
+        attachments:
+          description: List of attachments included in the package.
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+        downloadLink:
+          type: string
+          description: Link for accessing the email.
+    Site:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Display name of the SharePoint site.
+        isAdded:
+          type: boolean
+          description: Indicates whether the site has already been added as an external content source.
+        url:
+          type: string
+          description: URL of the SharePoint site.
+        ecmTypeId:
+          type: string
+          description: External content management type identifier.
+        repository:
+          type: string
+          description: Repository identifier within the SharePoint site.
+        id:
+          type: string
+          description: Unique identifier of the SharePoint site.
+    Search:
+      description: Class Search
+      required:
+      - emails
+      - files
+      - folders
+      - id
+      properties:
+        files:
+          description: List of files
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+        folders:
+          description: List of folders
+          type: array
+          items:
+            $ref: '#/components/schemas/Folder'
+        emails:
+          description: List of emails
+          type: array
+          items:
+            $ref: '#/components/schemas/Email'
+        metadata:
+          description: Total files, folders, and emails count
+          $ref: '#/components/schemas/SearchMetadata'
+        id:
+          description: Search unique identifier
+          type: string
+        fullTextSearch:
+          description: Indicates whether full text search is enabled
+          type: boolean
+    Variables:
+      type: object
+      properties:
+        variable:
+          type: string
+          description: The variable name
+        value:
+          description: The variable value
+    Group:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: LDAP Group ID
+        name:
+          type: string
+          description: LDAP Group name
+        dn:
+          type: string
+          description: LDAP Group domain name
+        email:
+          type: string
+          description: LDAP Group email
+        description:
+          type: string
+          description: LDAP Group description
+    SearchMetadata:
+      properties:
+        total:
+          description: Total items count
+          type: integer
+        totalFilesCount:
+          description: Total files count
+          type: integer
+        totalFoldersCount:
+          description: Total folders count
+          type: integer
+        totalEmailsCount:
+          description: Total emails count
+          type: integer

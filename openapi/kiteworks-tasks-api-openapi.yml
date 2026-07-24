@@ -1,0 +1,1360 @@
+openapi: 3.0.2
+info:
+  version: '28'
+  title: Kiteworks API Documentation activities tasks API
+tags:
+- name: tasks
+paths:
+  /rest/files/{id}/tasks:
+    get:
+      tags:
+      - tasks
+      summary: Get file tasks
+      description: Gets a list of tasks assigned to the specified file. **Requires `task_view` permission on the file's parent folder.**
+      responses:
+        '200':
+          description: Returns a paginated list of tasks associated with the specified file.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Task'
+                  metadata:
+                    $ref: '#/components/schemas/MetaData'
+              examples:
+                File task list:
+                  summary: A paginated list of tasks for a file
+                  value:
+                    data:
+                    - id: 15
+                      object_id: 7
+                      parent_id: 0
+                      user_id: 3
+                      assignee_id: 5
+                      contents: Review the quarterly report for accuracy.
+                      status: P
+                      due: '2024-04-01T00:00:00+00:00'
+                      created: '2024-03-15T10:00:00+00:00'
+                      modified: '2024-03-16T08:30:00+00:00'
+                      deleted: false
+                      folder_id: 3
+                    total: 1
+                    page: 1
+                    pageSize: 20
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: The unique identifier (UUID) of the file.
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: assigneeId
+        description: Assigned User unique identifier
+        schema:
+          type: string
+      - in: query
+        name: assigneeId:in
+        description: Assigned User unique identifier. Search for results that match any of the specified values for this parameter.
+        schema:
+          type: string
+      - in: query
+        name: due
+        description: Task due date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: due:gt
+        description: Task due date. Search for results where this parameter value is greater than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: due:gte
+        description: Task due date. Search for results where this parameter value is greater than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: due:lt
+        description: Task due date. Search for results where this parameter value is less than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: due:lte
+        description: Task due date. Search for results where this parameter value is less than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: parentId
+        description: Parent Comment identifier
+        schema:
+          type: integer
+      - in: query
+        name: parentId:in
+        description: Parent Comment identifier. Search for results that match any of the specified values for this parameter.
+        schema:
+          type: integer
+      - in: query
+        name: userId
+        description: Identifier of User who created a Task
+        schema:
+          type: string
+      - in: query
+        name: userId:in
+        description: Identifier of User who created a Task. Search for results that match any of the specified values for this parameter.
+        schema:
+          type: string
+      - in: query
+        name: created
+        description: Task creation date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:gt
+        description: Task creation date. Search for results where this parameter value is greater than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:gte
+        description: Task creation date. Search for results where this parameter value is greater than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:lt
+        description: Task creation date. Search for results where this parameter value is less than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:lte
+        description: Task creation date. Search for results where this parameter value is less than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified
+        description: Task modification date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified:gt
+        description: Task modification date. Search for results where this parameter value is greater than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified:gte
+        description: Task modification date. Search for results where this parameter value is greater than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified:lt
+        description: Task modification date. Search for results where this parameter value is less than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified:lte
+        description: Task modification date. Search for results where this parameter value is less than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: contents:contains
+        description: Task content. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: status
+        description: 'Filter tasks by status. Accepted values: `D`, `P`, `C`.'
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - D
+          - P
+          - C
+      - in: query
+        name: deleted
+        description: Whether the task has been deleted
+        schema:
+          type: boolean
+      - in: query
+        name: orderBy
+        description: Sorting options
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - id:asc
+          - id:desc
+          - due:asc
+          - due:desc
+          - created:asc
+          - created:desc
+          - modified:asc
+          - modified:desc
+      - in: query
+        name: offset
+        description: Offset
+        schema:
+          type: integer
+      - in: query
+        name: limit
+        description: Limit
+        schema:
+          type: integer
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+          - compact
+    post:
+      tags:
+      - tasks
+      summary: Create file task
+      description: Creates a task for the specified file and assigns it to a user. The assignee must have at least `properties_view` permission on the file's parent folder. **Requires `task_add` permission on the file's parent folder.**
+      responses:
+        '200':
+          description: Returns the newly created task record.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+              examples:
+                Task created:
+                  summary: A newly created task assigned to a user
+                  value:
+                    id: 15
+                    object_id: 7
+                    parent_id: 0
+                    user_id: 3
+                    assignee_id: 5
+                    contents: Review the quarterly report for accuracy.
+                    status: D
+                    due: '2024-04-01T00:00:00+00:00'
+                    created: '2024-03-15T10:00:00+00:00'
+                    modified: '2024-03-15T10:00:00+00:00'
+                    deleted: false
+                    folder_id: 3
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_REQUIRED, ERR_INPUT_DATE_NOT_AFTER, ERR_INPUT_HTML_TAGS_INVALID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_REQUIRED:
+                  summary: Field is required
+                  description: Field is required
+                  value:
+                    errors:
+                      code: ERR_INPUT_REQUIRED
+                      message: Field is required
+                ERR_INPUT_HTML_TAGS_INVALID:
+                  summary: Cannot contain HTML tags other than B, I, or U
+                  description: Cannot contain HTML tags other than B, I, or U
+                  value:
+                    errors:
+                      code: ERR_INPUT_HTML_TAGS_INVALID
+                      message: Cannot contain HTML tags other than B, I, or U
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: Object ID of the file task is created on
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: returnEntity
+        description: If set to `true`, returns information about the newly created entity.
+        schema:
+          type: boolean
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task.Post'
+  /rest/folders/{id}/tasks:
+    get:
+      tags:
+      - tasks
+      summary: Get tasks for a folder
+      description: Gets a list of tasks associated with all files in the specified folder. **Requires `task_view` permission on the folder.**
+      responses:
+        '200':
+          description: Returns a paginated list of tasks for all files within the specified folder.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Task'
+                  metadata:
+                    $ref: '#/components/schemas/MetaData'
+              examples:
+                Folder task list:
+                  summary: A paginated list of tasks across files in a folder
+                  value:
+                    data:
+                    - id: 15
+                      object_id: 7
+                      parent_id: 0
+                      user_id: 3
+                      assignee_id: 5
+                      contents: Review the quarterly report for accuracy.
+                      status: P
+                      due: '2024-04-01T00:00:00+00:00'
+                      created: '2024-03-15T10:00:00+00:00'
+                      modified: '2024-03-16T08:30:00+00:00'
+                      deleted: false
+                      folder_id: 3
+                    - id: 16
+                      object_id: 8
+                      parent_id: 0
+                      user_id: 3
+                      assignee_id: 3
+                      contents: Update the budget spreadsheet with Q1 actuals.
+                      status: D
+                      due: '2024-04-15T00:00:00+00:00'
+                      created: '2024-03-16T09:00:00+00:00'
+                      modified: '2024-03-16T09:00:00+00:00'
+                      deleted: false
+                      folder_id: 3
+                    total: 2
+                    page: 1
+                    pageSize: 20
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: The unique identifier (UUID) of the folder.
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: assigneeId
+        description: Assigned User unique identifier
+        schema:
+          type: string
+      - in: query
+        name: assigneeId:in
+        description: Assigned User unique identifier. Search for results that match any of the specified values for this parameter.
+        schema:
+          type: string
+      - in: query
+        name: due
+        description: Task due date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: due:gt
+        description: Task due date. Search for results where this parameter value is greater than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: due:gte
+        description: Task due date. Search for results where this parameter value is greater than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: due:lt
+        description: Task due date. Search for results where this parameter value is less than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: due:lte
+        description: Task due date. Search for results where this parameter value is less than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: parentId
+        description: Parent Comment identifier
+        schema:
+          type: integer
+      - in: query
+        name: parentId:in
+        description: Parent Comment identifier. Search for results that match any of the specified values for this parameter.
+        schema:
+          type: integer
+      - in: query
+        name: userId
+        description: Identifier of User who created a Task
+        schema:
+          type: string
+      - in: query
+        name: userId:in
+        description: Identifier of User who created a Task. Search for results that match any of the specified values for this parameter.
+        schema:
+          type: string
+      - in: query
+        name: created
+        description: Task creation date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:gt
+        description: Task creation date. Search for results where this parameter value is greater than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:gte
+        description: Task creation date. Search for results where this parameter value is greater than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:lt
+        description: Task creation date. Search for results where this parameter value is less than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: created:lte
+        description: Task creation date. Search for results where this parameter value is less than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified
+        description: Task modification date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified:gt
+        description: Task modification date. Search for results where this parameter value is greater than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified:gte
+        description: Task modification date. Search for results where this parameter value is greater than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified:lt
+        description: Task modification date. Search for results where this parameter value is less than the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: modified:lte
+        description: Task modification date. Search for results where this parameter value is less than or equal to the specified value.
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: contents:contains
+        description: Task content. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: status
+        description: 'Filter tasks by status. Accepted values: `D`, `P`, `C`.'
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - D
+          - P
+          - C
+      - in: query
+        name: deleted
+        description: Whether the task has been deleted
+        schema:
+          type: boolean
+      - in: query
+        name: orderBy
+        description: Sorting options
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - id:asc
+          - id:desc
+          - due:asc
+          - due:desc
+          - created:asc
+          - created:desc
+          - modified:asc
+          - modified:desc
+      - in: query
+        name: offset
+        description: Offset
+        schema:
+          type: integer
+      - in: query
+        name: limit
+        description: Limit
+        schema:
+          type: integer
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+          - compact
+  /rest/permissions/task/{task_id}:
+    get:
+      tags:
+      - tasks
+      summary: Return the list of permissions available on a task
+      description: Returns the list of actions the current user is allowed to perform on the specified task, such as completing or deleting it.
+      responses:
+        '200':
+          description: Task permissions retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Permission'
+              examples:
+                TaskPermissions:
+                  summary: Permissions available on a task
+                  value:
+                    data:
+                    - id: TASK_COMPLETE
+                      name: Complete Task
+                      allowed: true
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: task_id
+        description: ID of the task
+        required: true
+        schema:
+          type: integer
+      - in: query
+        name: id
+        description: Unique action identifier
+        schema:
+          type: integer
+      - in: query
+        name: id:in
+        description: Unique action identifier. Search for results that match any of the specified values for this parameter.
+        schema:
+          type: integer
+      - in: query
+        name: name
+        description: Action name
+        schema:
+          type: string
+      - in: query
+        name: name:contains
+        description: Action name. Search for results that contain the specified characters in this parameter.
+        schema:
+          type: string
+      - in: query
+        name: allowed
+        description: Determines if one has permissions to perform action
+        schema:
+          type: boolean
+      - in: query
+        name: enabled
+        description: Determines if the given action is available considering the current object state (locked, deleted, etc.).
+        schema:
+          type: boolean
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+          - compact
+components:
+  schemas:
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    PushedObject:
+      type: object
+      properties:
+        objectId:
+          type: string
+          description: Unique identifier (UUID) for the pushed object.
+        userId:
+          type: string
+          description: Unique identifier (UUID) for the user who pushed the object.
+        created:
+          type: string
+          format: date
+          description: The date and time when the object was pushed.
+        user:
+          description: Details of the user who pushed the object.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+    Tag:
+      type: object
+      properties:
+        guid:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) for the tag.
+        name:
+          type: string
+          description: Display name of the tag.
+        type:
+          type: string
+          description: Type category of the tag.
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
+    UserBasic:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier (UUID) for the user.
+        email:
+          type: string
+          description: Email address associated with the user.
+        name:
+          type: string
+          description: Full name of the user.
+        profileIcon:
+          type: string
+          description: URL or identifier for the user's profile icon.
+    UserMetadata:
+      description: Class UserMetadata
+      properties:
+        name:
+          description: Key name of the custom metadata attribute associated with the user
+          type: string
+        value:
+          description: Value assigned to the custom metadata attribute for the user
+          type: string
+    Task:
+      description: Class Task
+      required:
+      - assigneeId
+      - created
+      - due
+      - id
+      - status
+      - userId
+      properties:
+        id:
+          description: Task unique identifier
+          type: integer
+        assigneeId:
+          description: Assigned User unique identifier
+          type: string
+        assignee:
+          description: User assigned to complete the task (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/User'
+        due:
+          description: Date and time by which the task must be completed
+          type: string
+          format: date
+        parentId:
+          description: Parent Comment identifier
+          type: integer
+        objectId:
+          description: Object identifier Task belongs to
+          type: string
+        userId:
+          description: Identifier of User who created a Task
+          type: string
+        user:
+          description: User who created the task (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/User'
+        created:
+          description: Date and time the task was created
+          type: string
+          format: date
+        modified:
+          description: Date and time the task was last modified
+          type: string
+          format: date
+        contents:
+          description: Body text of the task
+          type: string
+        deleted:
+          description: Indicates whether the task is deleted
+          type: boolean
+        folderId:
+          description: Identifier of Object's parent Folder
+          type: string
+        status:
+          description: 'Task status. Accepted values: `D` (Defined), `P` (In Progress), `C` (Completed)'
+          type: string
+        file:
+          description: File the task is tied to (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/File'
+        permissions:
+          description: Current user's permissions (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+    Permission:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the permission.
+        name:
+          type: string
+          description: Name of the permission.
+        allowed:
+          type: boolean
+          description: Indicates whether the permission is granted (True) or denied (False).
+    Folder:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) of the folder.
+        parentId:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) of the parent object.
+        name:
+          type: string
+          description: Name of the object.
+        type:
+          type: string
+          description: Type of the object.<br>`f` – File.<br>`d` – Folder.
+        userId:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) who created the folder.
+        creator:
+          description: Details of the user who created the object.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        created:
+          type: string
+          format: date
+          description: The date and time when the object was created.
+        modified:
+          type: string
+          format: date
+          description: The date and time when the object was last modified.
+        expire:
+          type: string
+          format: date
+          description: Expiration timestamp of the object, if applicable.
+        permissions:
+          description: List of permissions associated with the object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        deleted:
+          type: boolean
+          description: Indicates whether the object has been deleted.
+        permDeleted:
+          type: boolean
+          description: Indicates whether the object has been permanently deleted.
+        permalink:
+          type: string
+          description: Permanent URL link to access the object.
+        path:
+          type: string
+          description: Path to the folder in the hierarchy.
+        members:
+          description: List of members who have access to the object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Member'
+        vendorDocId:
+          type: string
+          description: Vendor document ID associated with the object.
+        vendorDocName:
+          type: string
+          description: Name of the vendor document associated with the object.
+        secure:
+          type: boolean
+          description: Indicates whether the folder or the parent folder containing the file is marked as secure.
+        source:
+          type: integer
+          description: ID representing the source of the object (1 - Salesforce, 2 - Teams).
+        isShared:
+          type: boolean
+          description: Indicates if the folder is shared with other users.
+        syncable:
+          type: boolean
+          description: Indicates if the folder can be synced by Desktop Sync Client.
+        fileLifetime:
+          type: integer
+          description: Time duration (in days) for which the files in this folder are kept after being added to the folder.
+        description:
+          type: string
+          description: The description of the folder.
+        isFavorite:
+          type: boolean
+          description: Indicates if the folder is marked as a favorite by the user.
+        pushedFilesCount:
+          type: integer
+          description: The number of files that have been pushed to mobile apps in this folder.
+        currentUserRole:
+          description: The role of the current user in this folder.
+          allOf:
+          - $ref: '#/components/schemas/Role'
+        avStatus:
+          type: string
+          description: The Antivirus (AV) status of the folder.
+        dlpStatus:
+          type: string
+          description: The Data Loss Prevention (DLP) status of the folder.
+        totalMembersCount:
+          type: integer
+          description: Total number of members who have access to this folder.
+        totalFoldersCount:
+          type: integer
+          description: Total number of subfolders within this folder.
+        totalFilesCount:
+          type: integer
+          description: Total number of files within this folder.
+        maxFolderExpiration:
+          type: string
+          format: date
+          description: The maximum expiration date allowed for files in this folder.
+        maxFileLifetime:
+          type: integer
+          description: The maximum duration (in days) that files in this folder can be kept after being added to the folder.
+        isLdapGroupMember:
+          type: boolean
+          description: Indicates if the folder is part of an LDAP group.
+        isUnderMyFolder:
+          type: boolean
+          description: Indicates if this folder is a subfolder of the user's "My Folder".
+        pathIds:
+          type: string
+          description: A list of IDs representing the path of the folder within the folder hierarchy.
+        isRoot:
+          type: boolean
+          description: Indicates if this folder is a root folder.
+        rootId:
+          type: string
+          format: uuid
+          description: The ID of the root folder if this is a subfolder.
+        useFolderQuota:
+          type: boolean
+          description: Indicates if a folder quota is applied to this folder.
+        quota:
+          type: integer
+          description: The storage quota for the folder (in bytes).
+        size:
+          type: integer
+          description: The total storage size used by the folder (in bytes).
+        freeSpace:
+          type: integer
+          description: The amount of free space available in the folder (in bytes).
+        inheritanceEnabled:
+          type: boolean
+          description: Indicates if a folder inherits permissions from the parent folder
+    Task.Post:
+      description: Class Task
+      required:
+      - assigneeId
+      - due
+      - contents
+      properties:
+        assigneeId:
+          description: Assignee user unique identifier
+          type: integer
+        due:
+          description: Date and time by which the task must be completed
+          type: string
+          format: date
+        parentId:
+          description: Parent Comment identifier
+          type: integer
+        contents:
+          description: Body text of the task
+          type: string
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    Role:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Role ID
+        name:
+          type: string
+          description: Role name
+        rank:
+          type: integer
+          description: Role rank
+        type:
+          type: string
+          description: Role type
+    File:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) of the file.
+        parentId:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) of the parent folder.
+        name:
+          type: string
+          description: Name of the object.
+        type:
+          type: string
+          description: Type of the object.<br>`f` – File.<br>`d` – Folder.
+        userId:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) who created the file.
+        creator:
+          description: Details of the user who created the object.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        created:
+          type: string
+          format: date
+          description: The date and time when the object was created.
+        modified:
+          type: string
+          format: date
+          description: The date and time when the object was last modified.
+        expire:
+          type: string
+          format: date
+          description: Expiration timestamp of the object, if applicable.
+        permissions:
+          description: List of permissions associated with the object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        deleted:
+          type: boolean
+          description: Indicates whether the object has been deleted.
+        permDeleted:
+          type: boolean
+          description: Indicates whether the object has been permanently deleted.
+        permalink:
+          type: string
+          description: Permanent URL link to access the file.
+        path:
+          type: string
+          description: Path to the object in the hierarchy.
+        members:
+          description: List of members who have access to the object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Member'
+        vendorDocId:
+          type: string
+          description: Vendor document ID associated with the object.
+        vendorDocName:
+          type: string
+          description: Name of the vendor document associated with the object.
+        secure:
+          type: boolean
+          description: Indicates whether the folder or the parent folder containing the file is marked as secure.
+        source:
+          type: integer
+          description: ID representing the source of the object (1 - Salesforce, 2 - Teams).
+        modifier:
+          description: The user who last modified the file.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        size:
+          type: integer
+          description: The size of the file in bytes.
+        mime:
+          type: string
+          description: The MIME type of the file.
+        fingerprint:
+          type: string
+          description: A unique hash identifying the file.
+        fingerprints:
+          type: array
+          description: List of fingerprints associated with the file.
+          items:
+            $ref: '#/components/schemas/Fingerprint'
+        clientCreated:
+          type: string
+          format: date
+          description: The date and time when the file was created on the client side.
+        clientModified:
+          type: string
+          format: date
+          description: The date and time when the file was last modified on the client side.
+        overriddenExpire:
+          type: boolean
+          description: Indicates whether the expiration date for the file has been overridden.
+        sharedBy:
+          description: The user who shared the file.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        sharedTime:
+          type: string
+          format: date
+          description: The date and time when the file was shared.
+        parent:
+          description: The parent folder of the file.
+          allOf:
+          - $ref: '#/components/schemas/Folder'
+        originalFileId:
+          type: string
+          format: uuid
+          description: The ID of the original file if this one is a copy.
+        avStatus:
+          type: string
+          description: Indicates the file version's availability status based on Antivirus (AV) settings and whether it has been scanned or detected as infected.
+        dlpStatus:
+          type: string
+          description: Indicates the file version's availability status based on Data Loss Prevention (DLP) settings and whether it has been scanned or detected as infected.
+        adminQuarantineStatus:
+          type: string
+          description: Indicates the file version's availability status based on the administrator's quarantine status.
+        locked:
+          type: boolean
+          description: Indicates if the file is locked.
+        lockUser:
+          description: The user who locked the file.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        isShared:
+          type: boolean
+          description: Indicates if the file is shared with other users.
+        lastModifiedBy:
+          description: The user who last modified the file.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        pushedObject:
+          description: Details about the pushed object, if any.
+          allOf:
+          - $ref: '#/components/schemas/PushedObject'
+        pathIds:
+          type: string
+          format: uuid
+          description: A list of IDs representing the path of the file within the folder hierarchy.
+        wopiapp:
+          description: WOPI-related information for the file when used in a mobile app.
+          allOf:
+          - $ref: '#/components/schemas/MobileInfo'
+        pushed:
+          type: boolean
+          description: Indicates if the file has been pushed to a mobile app.
+        tags:
+          description: List of tags associated with the file.
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        safeEdit:
+          description: Information regarding the file's SafeEdit settings.
+          allOf:
+          - $ref: '#/components/schemas/SafeEdit'
+        versionsCount:
+          type: integer
+          description: The total number of versions for the file.
+        tracking_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: Tracking identifier associated with the file upload.
+    MobileInfo:
+      type: object
+      properties:
+        wopiSrc:
+          type: string
+          description: The WOPI (Web Application Open Platform Interface) source URL for the mobile application.
+        userId:
+          type: string
+          description: Unique identifier of the user.
+        service:
+          type: string
+          description: The WOPI service ID.
+        scheme:
+          type: string
+          description: URI scheme used by the mobile application to handle the file.
+        schemeSupport:
+          type: string
+          description: Indicates the level of support the mobile app has for the URI scheme.
+    Fingerprint:
+      type: object
+      properties:
+        algo:
+          type: string
+          description: The algorithm used to generate the fingerprint (e.g., sha3-256, md5).
+        hash:
+          type: string
+          description: The resulting hash value representing the fingerprint of the file or object.
+    User:
+      description: Class User
+      required:
+      - basedirId
+      - email
+      - id
+      - mydirId
+      - name
+      - syncdirId
+      properties:
+        id:
+          description: The unique identifier of the user
+          type: string
+        basedirId:
+          description: The unique identifier of the user's root Kiteworks directory.
+          type: string
+        created:
+          description: Date and time the user account was created
+          type: string
+          format: date
+        email:
+          description: The user's email
+          type: string
+        mydirId:
+          description: The unique identifier of the user's mydir system directory.
+          type: string
+        name:
+          description: The name of the user
+          type: string
+        syncdirId:
+          description: The unique identifier of the user's 'My Folder'.
+          type: string
+        userTypeId:
+          description: The unique identifier of the user type (profile).
+          type: integer
+        internal:
+          description: Indicates whether the user is an internal user
+          type: boolean
+        profileIcon:
+          description: URL to the user's profile icon image
+          type: string
+        extDL:
+          description: Indicates whether the user is an External Distribution List
+          type: boolean
+        metadata:
+          description: List of user's metadata
+          type: array
+          items:
+            $ref: '#/components/schemas/UserMetadata'
+        adminRoleId:
+          description: The ID of the admin role assigned to the user.
+          type: integer
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+        active:
+          description: Indicates whether the user is an actual kitework user
+          type: boolean
+        suspended:
+          description: Indicates whether the user is suspended
+          type: boolean
+        deleted:
+          description: Indicates whether the user has been deleted
+          type: boolean
+        flags:
+          description: "Authentication type.\n     *                  0: No authentication,\n     *                  1: Authentication by kiteworks,\n     *                  2: Authentication by LDAP,\n     *                  4: Authentication by SSO"
+          type: integer
+        verified:
+          description: Indicates whether the user is verified
+          type: boolean
+        deactivated:
+          description: Indicates whether the user has been deactivated
+          type: boolean
+        lastActivityDateTime:
+          description: User's last activity datetime
+          type: string
+          format: date
+        passwordExpirationDateTime:
+          description: The exact timestamp when the user's password will expire
+          type: string
+          format: date
+    Member:
+      type: object
+      properties:
+        objectId:
+          type: string
+          description: Unique identifier (UUID) of the associated object (file or folder).
+        roleId:
+          type: integer
+          description: Role assigned to the member.
+        userId:
+          type: string
+          description: Unique identifier (UUID) of the user.
+        groupId:
+          type: integer
+          description: Unique identifier of the LDAP group.
+        user:
+          description: User details of the member.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        role:
+          description: Role details assigned to the member.
+          allOf:
+          - $ref: '#/components/schemas/Role'
+        group:
+          description: Group details if the member belongs to a group.
+          allOf:
+          - $ref: '#/components/schemas/Group'
+        sharedBy:
+          description: Details of the user who shared the file or folder.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        created:
+          type: string
+          format: date
+          description: Date when the file or folder was shared.
+        inheritRoleId:
+          type: integer
+          description: Inherited role ID from the parent folder, if applicable.
+        allowedFolderRoleId:
+          type: array
+          description: List of allowed folder role IDs.
+          items:
+            type: integer
+        email:
+          type: string
+          description: Email associated with the member.
+        rank:
+          type: integer
+          description: Rank of the member role.
+        originFolder:
+          readOnly: true
+    SafeEdit:
+      type: object
+      properties:
+        safeEditLocked:
+          type: boolean
+          description: Indicates if the file is locked through a SafeEdit session.
+        user:
+          description: The user responsible for locking the file via SafeEdit.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+    Group:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: LDAP Group ID
+        name:
+          type: string
+          description: LDAP Group name
+        dn:
+          type: string
+          description: LDAP Group domain name
+        email:
+          type: string
+          description: LDAP Group email
+        description:
+          type: string
+          description: LDAP Group description

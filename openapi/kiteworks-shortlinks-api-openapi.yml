@@ -1,0 +1,69 @@
+openapi: 3.0.2
+info:
+  version: '28'
+  title: Kiteworks API Documentation activities shortLinks API
+tags:
+- name: shortLinks
+paths:
+  /rest/shortLinks/{ref}:
+    get:
+      tags:
+      - shortLinks
+      summary: Short Link
+      description: Returns the properties of the specified short link, including the associated entity ID, entity type, and expiration date. Access to email-package short links is allowed without authentication when the package access control is set to no-auth.
+      responses:
+        '200':
+          description: Short link details retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shortlink'
+              examples:
+                ShortlinkInfo:
+                  summary: Details of a short link
+                  value:
+                    entityTypeId: 1
+                    entityId: a1b2c3d4-e5f6-4789-abcd-ef1234567890
+                    entityTypeName: object
+                    expire: null
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: ref
+        description: The ref value of the short link
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+components:
+  schemas:
+    Shortlink:
+      description: Class Shortlink
+      properties:
+        expire:
+          description: Date and time after which the shortlink becomes invalid and can no longer be used
+          type: string
+          format: date
+        entityTypeId:
+          description: Unique identifier of the entity type this shortlink is associated with
+          type: integer
+        entityId:
+          description: Unique identifier of the entity this shortlink points to, returned as a GUID from version 19 onwards
+          type: string
+        entityTypeName:
+          description: Human-readable name of the entity type this shortlink is associated with
+          type: string
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string

@@ -1,0 +1,337 @@
+openapi: 3.0.2
+info:
+  version: '28'
+  title: Kiteworks API Documentation activities API
+tags:
+- name: activities
+paths:
+  /rest/activities:
+    get:
+      tags:
+      - activities
+      summary: Get all activities
+      description: Returns the activity log for the authenticated user across all files and folders they have access to.
+      responses:
+        '200':
+          description: Returns a list of activity records for the authenticated user.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Activity'
+              examples:
+                User activity list:
+                  summary: Recent activities for the authenticated user
+                  value:
+                  - id: 1002
+                    event: upload
+                    message: User uploaded budget-2024.xlsx
+                    type: f
+                    created: '2024-03-16T08:00:00+00:00'
+                    successful: 1
+                    user:
+                      id: 5
+                      name: Jane Smith
+                    data:
+                      file:
+                        id: 8
+                        name: budget-2024.xlsx
+                  - id: 1001
+                    event: download
+                    message: User downloaded quarterly-report.pdf
+                    type: f
+                    created: '2024-03-15T10:30:00+00:00'
+                    successful: 1
+                    user:
+                      id: 5
+                      name: Jane Smith
+                    data:
+                      file:
+                        id: 7
+                        name: quarterly-report.pdf
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: noDayBack
+        description: Number of days back to search
+        schema:
+          type: integer
+      - in: query
+        name: startDate
+        description: Start date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: endDate
+        description: End date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: filter
+        description: 'Filter activities by scope. Accepted values: `all`, `my`.'
+        schema:
+          type: string
+          enum:
+          - all
+          - my
+      - in: query
+        name: search
+        description: Search by mail body, subject and sender/recipients
+        schema:
+          type: string
+      - in: query
+        name: type
+        description: 'Filter activities by type. Accepted values: `all`, `folder_changes`, `file_changes`, `user_preferences`, `mail`, `tasks`, `comments`, `kitepoint`.'
+        schema:
+          type: string
+          enum:
+          - all
+          - folder_changes
+          - file_changes
+          - user_preferences
+          - mail
+          - tasks
+          - comments
+          - kitepoint
+      - in: query
+        name: transactionId
+        description: Transaction ID associated with the activities
+        schema:
+          type: string
+      - in: query
+        name: orderBy
+        description: Sorting options
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - created:asc
+          - created:desc
+          - name:asc
+          - name:desc
+      - in: query
+        name: offset
+        description: Offset
+        schema:
+          type: integer
+      - in: query
+        name: limit
+        description: Limit
+        schema:
+          type: integer
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+          - compact
+  /rest/files/{file_id}/activities:
+    get:
+      tags:
+      - activities
+      summary: Get file activities
+      description: Returns the activity log for the specified file, scoped to the authenticated user. **Requires `user_view` permission on the file.** For Repositories Gateway source files, `view` permission is required instead.
+      responses:
+        '200':
+          description: Returns a list of activity records for the specified file.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Activity'
+              examples:
+                File activity list:
+                  summary: Recent activities on a file
+                  value:
+                  - id: 1001
+                    event: download
+                    message: User downloaded quarterly-report.pdf
+                    type: f
+                    created: '2024-03-15T10:30:00+00:00'
+                    successful: 1
+                    user:
+                      id: 5
+                      name: Jane Smith
+                    data:
+                      file:
+                        id: 7
+                        name: quarterly-report.pdf
+                  - id: 1000
+                    event: view
+                    message: User viewed quarterly-report.pdf
+                    type: f
+                    created: '2024-03-15T09:00:00+00:00'
+                    successful: 1
+                    user:
+                      id: 5
+                      name: Jane Smith
+                    data:
+                      file:
+                        id: 7
+                        name: quarterly-report.pdf
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: file_id
+        description: The unique identifier (UUID) of the file
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: noDayBack
+        description: Number of days back to search
+        schema:
+          type: integer
+      - in: query
+        name: startDate
+        description: Start date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: endDate
+        description: End date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: filter
+        description: 'Filter activities by scope. Accepted values: `all`, `my`.'
+        schema:
+          type: string
+          enum:
+          - all
+          - my
+      - in: query
+        name: search
+        description: Search by mail body, subject and sender/recipients
+        schema:
+          type: string
+      - in: query
+        name: type
+        description: 'Filter activities by type. Accepted values: `all`, `folder_changes`, `file_changes`, `user_preferences`, `mail`, `tasks`, `comments`, `kitepoint`.'
+        schema:
+          type: string
+          enum:
+          - all
+          - folder_changes
+          - file_changes
+          - user_preferences
+          - mail
+          - tasks
+          - comments
+          - kitepoint
+      - in: query
+        name: transactionId
+        description: Transaction ID associated with the activities
+        schema:
+          type: string
+      - in: query
+        name: orderBy
+        description: Sorting options
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - created:asc
+          - created:desc
+          - name:asc
+          - name:desc
+      - in: query
+        name: offset
+        description: Offset
+        schema:
+          type: integer
+      - in: query
+        name: limit
+        description: Limit
+        schema:
+          type: integer
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+          - compact
+components:
+  schemas:
+    ActivityUser:
+      type: object
+      properties:
+        userId:
+          type: string
+        name:
+          type: string
+          description: Full name of the user.
+        email:
+          type: string
+          description: Email address associated with the user.
+        profileIcon:
+          type: string
+          description: URL or identifier for the user's profile icon.
+    Activity:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the activity event.
+        created:
+          type: string
+          format: date
+          description: Date and time when the activity event was recorded.
+        event:
+          type: string
+          description: Name of the activity event.
+        message:
+          type: string
+          description: Human-readable summary of the activity event.
+        type:
+          type: string
+          description: Type category of the activity event.
+        successful:
+          type: boolean
+          description: Indicates whether the activity completed successfully.
+        user:
+          description: Details of the user who performed the activity.
+          allOf:
+          - $ref: '#/components/schemas/ActivityUser'
+        permissions:
+          type: array
+          description: List of permissions required for the activity.
+          items:
+            type: string
+        data:
+          readOnly: true
+          description: Additional event-specific data associated with the activity.

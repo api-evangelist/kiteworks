@@ -1,0 +1,304 @@
+openapi: 3.0.2
+info:
+  version: '28'
+  title: Kiteworks API Documentation activities locations API
+tags:
+- name: locations
+paths:
+  /rest/locations:
+    post:
+      tags:
+      - locations
+      summary: Create a location entry.
+      description: Creates a new location entry with a name and optional domain. Requires system admin privileges.
+      responses:
+        '200':
+          description: Location created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+              examples:
+                LocationCreated:
+                  summary: A newly created location
+                  value:
+                    id: 3
+                    name: EU Central
+                    dns: eucentral.example.com
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_SYSTEM_ADMIN'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_SYSTEM_ADMIN:
+                  summary: Authenticated user is not a System Admin
+                  description: Authenticated user is not a System Admin
+                  value:
+                    errors:
+                      code: ERR_ACCESS_SYSTEM_ADMIN
+                      message: Authenticated user is not a System Admin
+        '409':
+          description: 'Conflict<br /><br /><i>Possible error codes: </i>ERR_ENTITY_EXISTS'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ENTITY_EXISTS:
+                  summary: Entity exists
+                  description: Entity exists
+                  value:
+                    errors:
+                      code: ERR_ENTITY_EXISTS
+                      message: Entity exists
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_INVALID_FORMAT, ERR_INPUT_REQUIRED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_REQUIRED:
+                  summary: Field is required
+                  description: Field is required
+                  value:
+                    errors:
+                      code: ERR_INPUT_REQUIRED
+                      message: Field is required
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: returnEntity
+        description: If set to `true`, returns information about the newly created entity.
+        schema:
+          type: boolean
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location.Post'
+    get:
+      summary: Get locations
+      description: "### Description:\n  Returns a paginated list of available locations.\n### Precondition:\n  User must be authenticated.\n### Response:\n  Returns the list of locations.\n"
+      tags:
+      - locations
+      parameters:
+      - in: query
+        name: limit
+        required: false
+        description: Maximum number of locations to return. Must be between 1 and 10000.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 10000
+      - in: query
+        name: offset
+        required: false
+        description: Number of locations to skip before returning results, for pagination.
+        schema:
+          type: integer
+          minimum: 0
+      - in: query
+        name: orderBy
+        required: false
+        description: 'Sort order for the results. Default is `name:asc`.<br>Allowed values: `name`, `name:asc`, `name:desc`.'
+        schema:
+          type: string
+          enum:
+          - name
+          - name:asc
+          - name:desc
+      responses:
+        '200':
+          description: The locations have been successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationList'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_INVALID_FORMAT'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_INVALID_FORMAT:
+                  summary: The input is invalid.
+                  description: The input is invalid.
+                  value:
+                    errors:
+                    - code: ERR_INPUT_INVALID_FORMAT
+                      message: The input is invalid.
+        '490':
+          description: Request blocked by WAF
+  /rest/locations/{id}:
+    get:
+      tags:
+      - locations
+      summary: Return location name.
+      description: Returns the details of the specified location, including its name and DNS URL.
+      responses:
+        '200':
+          description: Location details retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+              examples:
+                LocationInfo:
+                  summary: Details of a single location
+                  value:
+                    id: 1
+                    name: US West
+                    dns: uswest.example.com
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the location to be retrieved
+        required: true
+        schema:
+          type: integer
+    delete:
+      tags:
+      - locations
+      summary: Delete a location.
+      description: Permanently deletes the specified location. Requires system admin privileges.
+      responses:
+        '204':
+          description: Location deleted successfully.
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_SYSTEM_ADMIN, ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_SYSTEM_ADMIN:
+                  summary: Authenticated user is not a System Admin
+                  description: Authenticated user is not a System Admin
+                  value:
+                    errors:
+                      code: ERR_ACCESS_SYSTEM_ADMIN
+                      message: Authenticated user is not a System Admin
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the location to remove from
+        required: true
+        schema:
+          type: integer
+components:
+  schemas:
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    Location.Post:
+      description: Class Location
+      required:
+      - name
+      - domain
+      properties:
+        name:
+          description: Location name. Ask administrator for location names for your server
+          type: string
+        domain:
+          description: "A URL domain that can be used to access the servers in this location,\n                                 e.g. location.domain.com.\n                                    The domain should be registered in a DNS to point to the servers."
+          type: string
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    LocationList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Location'
+        metadata:
+          $ref: '#/components/schemas/MetaData'
+    Location:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Location ID
+        name:
+          type: string
+          description: Location name
+        dns:
+          type: string
+          description: Location DNS
+        tenantId:
+          type: integer
+          description: Tenant ID
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.

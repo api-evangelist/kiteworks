@@ -1,0 +1,160 @@
+openapi: 3.0.2
+info:
+  version: '28'
+  title: Kiteworks API Documentation activities advancedForms API
+tags:
+- name: advancedForms
+paths:
+  /rest/advancedForms/{id}/submissions:
+    post:
+      summary: Create an upload link for an Advanced Form submission
+      description: "### Description:\n  Creates a subfolder under the form owner's folder for the submission, then returns an upload link that the Advanced Form client can use to upload the submitted files.\n### Precondition:\n  Caller must be an Advanced Forms client.\n  The authenticated user must be the form owner.\n### Response:\n  Returns an upload link pointing to the newly created submission subfolder.\n"
+      tags:
+      - advancedForms
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier (UUID) of the entity.
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmissionRequest'
+      responses:
+        '201':
+          description: The submission subfolder and upload link have been successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadLink'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_ACCESS_CLIENT'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_ACCESS_CLIENT:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_CLIENT
+                      message: Insufficient access permissions
+        '404':
+          description: 'Not Found<br /><br /><i>Possible error codes: </i>ERR_ENTITY_NOT_FOUND'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ENTITY_NOT_FOUND:
+                  summary: Entity does not exist
+                  description: Entity does not exist
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_NOT_FOUND
+                      message: Entity does not exist
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_INVALID_FORMAT'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_INVALID_FORMAT:
+                  summary: The input is invalid.
+                  description: The input is invalid.
+                  value:
+                    errors:
+                    - code: ERR_INPUT_INVALID_FORMAT
+                      message: The input is invalid.
+        '490':
+          description: Request blocked by WAF
+components:
+  schemas:
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    UploadLink:
+      type: object
+      properties:
+        ref:
+          type: string
+          format: uuid
+          description: Upload ref
+        created:
+          type: string
+          format: date
+          description: Date and time when the upload link was created.
+        parentId:
+          type: integer
+          description: Unique identifier of the parent folder where files will be uploaded.
+        totalSize:
+          type: integer
+          description: Total size of the upload in bytes.
+        uri:
+          type: string
+          description: Relative URI of the upload link.
+        uploadUrl:
+          type: string
+          description: The complete URL for the upload link.
+    SubmissionRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the subfolder to create under the form owner's folder for this submission.
+        submitter:
+          type: string
+          format: email
+          nullable: true
+          description: Email address of the user submitting the form. Pass `null` to create an anonymous submission.
+      required:
+      - name
+      - submitter
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message

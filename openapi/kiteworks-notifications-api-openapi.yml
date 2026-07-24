@@ -1,0 +1,284 @@
+openapi: 3.0.2
+info:
+  version: '28'
+  title: Kiteworks API Documentation activities notifications API
+tags:
+- name: notifications
+paths:
+  /rest/folders/{id}/actions/setNotifications:
+    put:
+      tags:
+      - notifications
+      summary: Set/Update notifications
+      description: Creates or updates the current user's notification subscription for the specified folder. Optionally applies the same settings to all nested subfolders. Returns HTTP 201 if a new subscription was created, or HTTP 200 if an existing one was updated.
+      responses:
+        '200':
+          description: Notification subscription set successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserNotification'
+              examples:
+                NotificationSet:
+                  summary: Notification subscription after create or update
+                  value:
+                    objectId: f0e1d2c3-b4a5-6789-0fed-cba987654321
+                    userId: u1a2b3c4-d5e6-7890-abcd-ef1234567890
+                    fileAdded: 1
+                    commentAdded: 1
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_NOT_INTEGER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_NOT_INTEGER:
+                  summary: Input is not a valid integer
+                  description: Input is not a valid integer
+                  value:
+                    errors:
+                      code: ERR_INPUT_NOT_INTEGER
+                      message: Input is not a valid integer
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: The unique identifier of the folder.
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: includeNested
+        description: Set notification for nested folders as well
+        schema:
+          type: boolean
+      - in: query
+        name: offset
+        description: Offset
+        schema:
+          type: integer
+      - in: query
+        name: limit
+        description: Limit
+        schema:
+          type: integer
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserNotification.Post'
+  /rest/notifications:
+    get:
+      tags:
+      - notifications
+      summary: List notifications
+      description: Returns a paginated list of notification subscriptions for the current user, including the folder each subscription is for and the enabled notification types.
+      responses:
+        '200':
+          description: List of notification subscriptions retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UserNotification'
+                  metadata:
+                    $ref: '#/components/schemas/MetaData'
+              examples:
+                NotificationList:
+                  summary: Paginated list of notification subscriptions
+                  value:
+                    data:
+                    - objectId: f0e1d2c3-b4a5-6789-0fed-cba987654321
+                      userId: u1a2b3c4-d5e6-7890-abcd-ef1234567890
+                      fileAdded: 1
+                      commentAdded: 0
+                    metadata:
+                      total: 1
+                      limit: 50
+                      offset: 0
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: userId
+        description: Filter notifications by the ID of the user who receives them.
+        schema:
+          type: string
+      - in: query
+        name: userId:in
+        description: Filter notifications by the ID of the user who receives them.. Search for results that match any of the specified values for this parameter.
+        schema:
+          type: string
+      - in: query
+        name: objectId
+        description: Filter notifications by the ID of the folder they are associated with.
+        schema:
+          type: string
+      - in: query
+        name: objectId:in
+        description: Filter notifications by the ID of the folder they are associated with.. Search for results that match any of the specified values for this parameter.
+        schema:
+          type: string
+      - in: query
+        name: fileAdded
+        description: Filter notifications triggered when a file is added.
+        schema:
+          type: boolean
+      - in: query
+        name: commentAdded
+        description: Filter notifications triggered when a comment is added.
+        schema:
+          type: boolean
+      - in: query
+        name: orderBy
+        description: Sorting options
+        schema:
+          type: array
+          items:
+            type: string
+          enum:
+          - userId:asc
+          - userId:desc
+          - objectId:asc
+          - objectId:desc
+          - fileAdded:asc
+          - fileAdded:desc
+          - commentAdded:asc
+          - commentAdded:desc
+      - in: query
+        name: offset
+        description: Offset
+        schema:
+          type: integer
+      - in: query
+        name: limit
+        description: Limit
+        schema:
+          type: integer
+      - in: query
+        name: with
+        description: With parameters
+        schema:
+          type: string
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+          - compact
+  /rest/notifications/{object_id}:
+    delete:
+      tags:
+      - notifications
+      summary: Remove notification options
+      description: Unsubscribes the current user from all notifications for the specified folder.
+      responses:
+        '204':
+          description: Notification subscription removed successfully.
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: object_id
+        description: Object ID of the folder to remove notification options
+        required: true
+        schema:
+          type: integer
+components:
+  schemas:
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    UserNotification:
+      description: Class Notification
+      required:
+      - userId
+      properties:
+        objectId:
+          description: Unique identifier of the folder included in the notification
+          type: string
+        fileAdded:
+          description: Number of files added to the notification
+          type: integer
+        commentAdded:
+          description: Number of comments added to the notification
+          type: integer
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+        userId:
+          description: Unique identifier of the user who receives the notification
+          type: string
+    UserNotification.Post:
+      description: Class Notification
+      properties:
+        fileAdded:
+          description: Number of files added to the notification
+          type: integer
+        commentAdded:
+          description: Number of comments added to the notification
+          type: integer
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.

@@ -1,0 +1,657 @@
+openapi: 3.0.2
+info:
+  version: '28'
+  title: Kiteworks API Documentation activities profiles API
+tags:
+- name: profiles
+paths:
+  /rest/profiles:
+    post:
+      tags:
+      - profiles
+      summary: Add custom profile
+      description: Creates a new custom user type profile cloned from an existing built-in profile (e.g., Standard). The new profile's name must be unique. Returns 404 if the specified prototype profile does not exist.
+      responses:
+        '200':
+          description: Custom profile created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+              examples:
+                CustomProfileCreated:
+                  summary: A newly created custom profile
+                  value:
+                    id: 5
+                    name: Custom Standard
+                    builtIn: 0
+                    cloneable: 0
+                    prototype: 1
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '409':
+          description: 'Conflict<br /><br /><i>Possible error codes: </i>ERR_ENTITY_EXISTS'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ENTITY_EXISTS:
+                  summary: Entity exists
+                  description: Entity exists
+                  value:
+                    errors:
+                      code: ERR_ENTITY_EXISTS
+                      message: Entity exists
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_NOT_IN_RANGE, ERR_INPUT_NOT_ALPHA_DASH, ERR_INPUT_REQUIRED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_REQUIRED:
+                  summary: Field is required
+                  description: Field is required
+                  value:
+                    errors:
+                      code: ERR_INPUT_REQUIRED
+                      message: Field is required
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: query
+        name: returnEntity
+        description: If set to `true`, returns information about the newly created entity.
+        schema:
+          type: boolean
+      - in: query
+        name: mode
+        description: Determines the detail level of the response body.
+        schema:
+          type: string
+          enum:
+          - full_with_links
+          - full
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Profile.Post'
+  /rest/profiles/{id}:
+    get:
+      tags:
+      - profiles
+      summary: Return user type (profile) details
+      description: Returns the details of the current user's own type profile, including its name, built-in status, and cloneability. Returns 403 if the requested profile does not belong to the current user.
+      responses:
+        '200':
+          description: User type profile details retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+              examples:
+                ProfileInfo:
+                  summary: Details of the current user's type profile
+                  value:
+                    id: 2
+                    name: Restricted
+                    builtIn: 1
+                    cloneable: 0
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the user type (profile) to be retrieved
+        required: true
+        schema:
+          type: integer
+    put:
+      tags:
+      - profiles
+      summary: Update profile
+      description: Updates the feature settings of the specified user type profile. When disabling collaboration access, optional demotion settings control how existing user data is handled (retained, deleted, or transferred to another user).
+      responses:
+        '200':
+          description: Profile updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+              examples:
+                ProfileUpdated:
+                  summary: The profile after update
+                  value:
+                    id: 1
+                    name: Standard
+                    builtIn: 1
+                    cloneable: 1
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_NOT_BOOLEAN, ERR_INPUT_ATTRIBUTE_FORBIDDEN, ERR_INPUT_REQUIRED, ERR_INPUT_NOT_STRING, ERR_INPUT_NOT_INTEGER, ERR_INPUT_MIN_VALUE, ERR_INPUT_NOT_IN_LIST, ERR_INPUT_MAX_VALUE, ERR_INPUT_NOT_LESS_THEN, ERR_INPUT_NOT_ALLOWED, ERR_INPUT_INVALID, ERR_INPUT_NOT_ARRAY'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_NOT_BOOLEAN:
+                  summary: Input is not a valid boolean
+                  description: Input is not a valid boolean
+                  value:
+                    errors:
+                      code: ERR_INPUT_NOT_BOOLEAN
+                      message: Input is not a valid boolean
+                ERR_INPUT_REQUIRED:
+                  summary: Field is required
+                  description: Field is required
+                  value:
+                    errors:
+                      code: ERR_INPUT_REQUIRED
+                      message: Field is required
+                ERR_INPUT_NOT_INTEGER:
+                  summary: Input is not a valid integer
+                  description: Input is not a valid integer
+                  value:
+                    errors:
+                      code: ERR_INPUT_NOT_INTEGER
+                      message: Input is not a valid integer
+                ERR_INPUT_MIN_VALUE:
+                  summary: The specified input below the minimum allowed value.
+                  description: The specified input below the minimum allowed value.
+                  value:
+                    errors:
+                      code: ERR_INPUT_MIN_VALUE
+                      message: The specified input below the minimum allowed value.
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the profile to be modified
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FeaturesList.Put'
+  /rest/profiles/{id}/replace/{new_profile}:
+    delete:
+      tags:
+      - profiles
+      summary: Delete custom profile and set new profile instead of deleted profile
+      description: Permanently deletes the specified custom profile and reassigns all affected users to the specified replacement profile. Optional demotion settings control how existing user data is handled during the transition.
+      responses:
+        '204':
+          description: Custom profile deleted successfully.
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                      code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_NOT_BOOLEAN, ERR_INPUT_ATTRIBUTE_FORBIDDEN, ERR_INPUT_REQUIRED, ERR_INPUT_NOT_STRING'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INPUT_NOT_BOOLEAN:
+                  summary: Input is not a valid boolean
+                  description: Input is not a valid boolean
+                  value:
+                    errors:
+                      code: ERR_INPUT_NOT_BOOLEAN
+                      message: Input is not a valid boolean
+                ERR_INPUT_REQUIRED:
+                  summary: Field is required
+                  description: Field is required
+                  value:
+                    errors:
+                      code: ERR_INPUT_REQUIRED
+                      message: Field is required
+        '490':
+          description: Request blocked by WAF
+      deprecated: false
+      parameters:
+      - in: path
+        name: id
+        description: ID of the custom profile to be deleted
+        required: true
+        schema:
+          type: integer
+      - in: path
+        name: new_profile
+        description: ID of the replacement profile to assign to affected users
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDemoteOptions.Post'
+components:
+  schemas:
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    FeaturesList.Put:
+      description: Class FeaturesList
+      properties:
+        allowSftp:
+          description: Indicates whether SFTP access is allowed
+          type: boolean
+        maxStorage:
+          description: Max storage in bytes
+          type: integer
+        storageQuota:
+          description: Maximum storage space that user is entitled to
+          type: integer
+        setExpirationLower:
+          description: Allow to modify file secure link expiration
+          type: boolean
+        sendExternal:
+          description: Allow sending files to external users
+          type: integer
+        linkExpiration:
+          description: Link expiration date in days
+          type: integer
+        ldapMapping:
+          description: LDAP Mapping value to determine the user profile type
+          type: string
+        folderCreate:
+          description: Allow to create top level folders
+          type: integer
+        sysFolderCreate:
+          description: Allow to create system quota folders
+          type: integer
+        sysFolderMaxQuota:
+          description: Set the maximum quota for a system folder
+          type: integer
+        sysFolderMaxCount:
+          description: Set the maximum number of system folders
+          type: integer
+        sysFolderDefaultQuota:
+          description: Set the default quota for a system folder
+          type: integer
+        maxLinkExpiration:
+          description: Upper limit allowed for secure link expiration
+          type: integer
+        acNoAuth:
+          description: Who can download file via the secure link
+          type: boolean
+        acVerifyRecipient:
+          description: Who can download file via the secure link
+          type: boolean
+        excludedFileExtensions:
+          description: Set excluded file extensions
+          type: array
+          items:
+            type: string
+        fileFilterExclusionGroups:
+          description: Set excluded file groups
+          type: array
+          items:
+            type: string
+        fileFilterCustomFileTypes:
+          description: Set custom file types
+          type: array
+          items:
+            type: string
+        secureMessageBody:
+          type: string
+        secureMessageBodyDefault:
+          type: boolean
+        secureContainerRequired:
+          type: boolean
+        returnReceipt:
+          type: string
+        returnReceiptDefault:
+          type: boolean
+        selfCopy:
+          type: string
+        selfCopyDefault:
+          type: boolean
+        includeFingerprint:
+          type: string
+        includeFingerprintDefault:
+          type: boolean
+        requestFile:
+          type: boolean
+        requestFileAllowViewableFile:
+          type: boolean
+        requestFileUploadAuth:
+          type: string
+        requestFileAuthDefault:
+          type: string
+        requestFileExpiration:
+          type: integer
+        requestFileExpirationUserDecide:
+          type: boolean
+        requestFileExpirationMax:
+          type: integer
+        requestFileUploadLimit:
+          type: integer
+        requestFileUploadLimitUserDecide:
+          type: boolean
+        requestFileUploadsMax:
+          type: integer
+        twoFactorAuth:
+          type: string
+        inactiveExpiration:
+          type: integer
+        userCanReactivate:
+          type: string
+        cleanupInactiveAccount:
+          type: boolean
+        withdrawInactiveAccountFileLinks:
+          type: boolean
+        allowCollaboration:
+          description: Indicates whether Collaboration and Shared Folders are allowed
+          type: boolean
+        sendFileLimit:
+          description: Upper limit allowed for number of attachments per mail.
+          type: integer
+        remoteWipe:
+          description: 'Disallow Collaboration: Wipe remote devices'
+          type: boolean
+        deleteUnsharedData:
+          description: 'Disallow Collaboration: Delete all data owned by the user'
+          type: boolean
+        retainData:
+          description: 'Disallow Collaboration: retain the data owned by the user'
+          type: boolean
+        retainToUser:
+          description: 'Disallow Collaboration: re-assign the data to the following user'
+          type: string
+        retainPermissionToSharedData:
+          description: 'Disallow Collaboration: retain all permission to shared data'
+          type: boolean
+    UserDemoteOptions.Post:
+      description: Class UserDemoteOptions
+      properties:
+        remoteWipe:
+          description: Indicates whether to remotely wipe data from both desktop and mobile devices.
+          type: boolean
+        deleteUnsharedData:
+          description: Indicates whether data owned by the user should be deleted. This is required and must be set to True if `retainData` is False, and vice versa.
+          type: boolean
+        retainData:
+          description: Indicates whether data should be retained and transferred to another user. This is required and must be True if `deleteUnsharedData` is False, and vice versa.
+          type: boolean
+        retainToUser:
+          description: The ID of the new owner to whom the data will be transferred, applicable when `retainData` and/or `retainPermissionToSharedData` are set to true.
+          type: string
+        retainToAdvancedFormUser:
+          description: The ID of the user to whom the advanced form data will be transferred, similar to retainToUser but specifically for advanced form components.
+          type: string
+        retainPermissionToSharedData:
+          description: Indicates whether permissions to shared folder should be retained.
+          type: boolean
+        withdrawRequestFiles:
+          description: Indicates whether request files should be withdrawn.
+          type: boolean
+        withdrawFileLinks:
+          description: Indicates whether sent files should be withdrawn.
+          type: boolean
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    FeaturesList:
+      description: Class FeaturesList
+      required:
+      - allowedFolderRoles
+      - folderCreate
+      - storageQuota
+      - sysFolderCreate
+      - sysFolderDefaultQuota
+      - sysFolderMaxCount
+      - sysFolderMaxQuota
+      properties:
+        allowSftp:
+          description: Indicates whether SFTP access is allowed
+          type: boolean
+        maxStorage:
+          description: Max storage in bytes
+          type: integer
+        linkExpiration:
+          description: Link expiration date in days
+          type: integer
+        maxLinkExpiration:
+          description: Max time period of link expiration in hours
+          type: integer
+        setExpirationLower:
+          description: Enable user to set expiration date of the file they are sending
+          type: boolean
+        sendExternal:
+          description: Allow user to send files to external users
+          type: boolean
+        acNoAuth:
+          description: Allow user to send file to a user without their having to authenticate
+          type: boolean
+        folderCreate:
+          description: Indicates whether the user is permitted to create top-level folders
+          type: integer
+        allowedFolderRoles:
+          description: Role options allowed for user profile
+          type: array
+          items:
+            type: string
+        sysFolderCreate:
+          description: Indicates whether the user is permitted to create system quota folders
+          type: integer
+        sysFolderMaxQuota:
+          description: Max quota for a system quota folder
+          type: integer
+        sysFolderMaxCount:
+          description: Maximum number of system quota folder
+          type: integer
+        sysFolderDefaultQuota:
+          description: Default quota for a system quota folder
+          type: integer
+        storageQuota:
+          description: Maximum storage space allocated to the user, in bytes
+          type: integer
+        ldapMapping:
+          description: LDAP Mapping value to determine the user profile type
+          type: string
+        acVerifyRecipient:
+          description: Who can download file via the secure link
+          type: boolean
+        acl:
+          description: List of access control levels permitted for this user profile
+          type: array
+          items:
+            type: string
+        defaultAcl:
+          description: Default access control level applied when sending files for this user profile
+          type: string
+        mobileSyncItemsLimit:
+          description: Maximum files amount allowed to keep in mobile sync list
+          type: integer
+        personalFolder:
+          description: User can have personal folder
+          type: boolean
+        requireScanZipContentDefault:
+          description: Indicates whether scanning compressed file content is required by default
+          type: boolean
+        blockNewFileTypesDefault:
+          description: Indicates whether new or unspecified file types are blocked by default
+          type: boolean
+        excludedFileExtensions:
+          description: Get list of excluded file extensions
+          type: array
+          items:
+            type: string
+        fileFilterExclusionGroups:
+          description: Get list of excluded file groups
+          type: array
+          items:
+            type: string
+        fileFilterCustomFileTypes:
+          description: Get list of custom file types
+          type: array
+          items:
+            type: string
+        secureMessageBody:
+          type: string
+        secureMessageBodyDefault:
+          type: boolean
+        secureContainerRequired:
+          type: boolean
+        returnReceipt:
+          type: string
+        returnReceiptDefault:
+          type: boolean
+        selfCopy:
+          type: string
+        selfCopyDefault:
+          type: boolean
+        includeFingerprint:
+          type: string
+        includeFingerprintDefault:
+          type: boolean
+        requestFile:
+          type: boolean
+        requestFileAllowViewableFile:
+          type: boolean
+        requestFileUploadAuth:
+          type: string
+        requestFileAuthDefault:
+          type: string
+        requestFileExpiration:
+          type: integer
+        requestFileExpirationUserDecide:
+          type: boolean
+        requestFileExpirationMax:
+          type: integer
+        requestFileUploadLimit:
+          type: integer
+        requestFileUploadLimitUserDecide:
+          type: boolean
+        requestFileUploadsMax:
+          type: integer
+        twoFactorAuth:
+          type: string
+        inactiveExpiration:
+          type: integer
+        userCanReactivate:
+          type: string
+        cleanupInactiveAccount:
+          type: boolean
+        withdrawInactiveAccountFileLinks:
+          type: boolean
+        allowCollaboration:
+          description: Indicates whether Collaboration and Shared Folders are allowed
+          type: boolean
+        allowLeavingSharedFolder:
+          description: Indicates whether Collaboration and Shared Folders are allowed
+          type: boolean
+        sendFileLimit:
+          description: Upper limit allowed for number of attachments per mail.
+          type: integer
+        remoteWipe:
+          type: boolean
+        deleteUnsharedData:
+          type: boolean
+        retainData:
+          type: boolean
+        retainPermissionToSharedData:
+          type: boolean
+        folderExpirationLimit:
+          description: Get profile max folder expiration
+          type: integer
+        fileLifetime:
+          description: Get profile max file lifetime
+          type: integer
+    Profile:
+      description: Class Profile
+      required:
+      - builtIn
+      - cloneable
+      - id
+      - name
+      - prototype
+      properties:
+        id:
+          description: Unique Profile identifier
+          type: integer
+        name:
+          description: Display name of the profile
+          type: string
+        prototype:
+          description: Prototype Profile identifier
+          type: integer
+        builtIn:
+          description: Indicates whether the profile is a built-in profile
+          type: integer
+        cloneable:
+          description: Indicates whether the profile can be used as a prototype for new custom profiles
+          type: integer
+        features:
+          description: List of feature settings and their enabled state for the profile
+          type: array
+          items:
+            $ref: '#/components/schemas/FeaturesList'
+    Profile.Post:
+      description: Class Profile
+      required:
+      - name
+      properties:
+        name:
+          description: Display name of the profile
+          type: string
+        prototype:
+          description: Id of the prototype profile to be cloned. If not passed, the Standard profile will be used
+          type: integer

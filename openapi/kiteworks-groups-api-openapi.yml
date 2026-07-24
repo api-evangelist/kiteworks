@@ -1,0 +1,470 @@
+openapi: 3.0.2
+info:
+  version: '28'
+  title: Kiteworks API Documentation activities groups API
+tags:
+- name: groups
+paths:
+  /rest/groups:
+    post:
+      summary: Create a group entry
+      description: "### Description:\n  Creates a new Kiteworks group of users.\n### Precondition:\n  User must be authenticated.\n### Response:\n  Returns the newly created group.\n"
+      tags:
+      - groups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupCreate'
+      responses:
+        '201':
+          description: The group has been successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '409':
+          description: 'Conflict<br /><br /><i>Possible error codes: </i>ERR_ENTITY_EXISTS'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ENTITY_EXISTS:
+                  summary: Entity exists
+                  description: Entity exists
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_EXISTS
+                      message: Entity exists
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INVALID_PARAMETER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INVALID_PARAMETER:
+                  summary: Invalid Parameter Exception
+                  description: Invalid Parameter Exception
+                  value:
+                    errors:
+                    - code: ERR_INVALID_PARAMETER
+                      message: Invalid Parameter Exception
+        '490':
+          description: Request blocked by WAF
+    get:
+      summary: List Kiteworks groups
+      description: "### Description:\n  Returns the list of Kiteworks groups for the current user, including the email address of each member in the group.\n### Precondition:\n  User must be authenticated.\n### Response:\n  Returns the list of groups.\n"
+      tags:
+      - groups
+      parameters:
+      - in: query
+        name: name
+        required: false
+        description: Filter results by the exact group name.
+        schema:
+          type: string
+      - in: query
+        name: name:contains
+        required: false
+        description: Filter results to groups whose names contain the specified characters.
+        schema:
+          type: string
+      - in: query
+        name: orderBy
+        required: false
+        description: 'Sort order for the results. Default is `name:asc`.<br>Allowed values: `id:asc`, `id:desc`, `name:asc`, `name:desc`.'
+        schema:
+          type: string
+          enum:
+          - id:asc
+          - id:desc
+          - name:asc
+          - name:desc
+      - in: query
+        name: limit
+        required: false
+        description: Maximum number of groups to return.
+        schema:
+          type: integer
+      - in: query
+        name: offset
+        required: false
+        description: Number of groups to skip before returning results, for pagination.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: The groups list has been successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactList'
+        '400':
+          description: 'Bad Request<br /><br /><i>Possible error codes: </i>ERR_REQUEST_INVALID_FILTER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_REQUEST_INVALID_FILTER:
+                  summary: Filter validation failed
+                  description: Filter validation failed
+                  value:
+                    errors:
+                    - code: ERR_REQUEST_INVALID_FILTER
+                      message: Filter validation failed
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '490':
+          description: Request blocked by WAF
+  /rest/groups/{id}:
+    put:
+      summary: Update a group entry
+      description: "### Description:\n  Updates the specified group's name and members.\n### Precondition:\n  User must be the owner of the group.\n### Response:\n  The group is updated.\n"
+      tags:
+      - groups
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier of the entity.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: The group has been successfully updated.
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '409':
+          description: 'Conflict<br /><br /><i>Possible error codes: </i>ERR_ENTITY_EXISTS'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ENTITY_EXISTS:
+                  summary: Entity exists
+                  description: Entity exists
+                  value:
+                    errors:
+                    - code: ERR_ENTITY_EXISTS
+                      message: Entity exists
+        '422':
+          description: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INVALID_PARAMETER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_INVALID_PARAMETER:
+                  summary: Invalid Parameter Exception
+                  description: Invalid Parameter Exception
+                  value:
+                    errors:
+                    - code: ERR_INVALID_PARAMETER
+                      message: Invalid Parameter Exception
+        '490':
+          description: Request blocked by WAF
+    get:
+      summary: Return users for the specified group
+      description: "### Description:\n  Returns the list of users for the specified group.\n### Precondition:\n  User must be authenticated.\n### Response:\n  Returns the group details including its members.\n"
+      tags:
+      - groups
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier of the entity.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: The group has been successfully returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+    delete:
+      summary: Delete a group entry
+      description: "### Description:\n  Deletes the specified group.\n### Precondition:\n  User must be the owner of the group.\n### Response:\n  The group is deleted.\n"
+      tags:
+      - groups
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: The unique identifier of the entity.
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: The group has been successfully deleted.
+        '401':
+          description: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_AUTH_INVALID_CSRF:
+                  summary: Invalid CSRF Authentication
+                  description: Invalid CSRF Authentication
+                  value:
+                    errors:
+                    - code: ERR_AUTH_INVALID_CSRF
+                      message: Invalid CSRF Authentication
+                ERR_AUTH_UNAUTHORIZED:
+                  summary: Unauthorized
+                  description: Unauthorized
+                  value:
+                    errors:
+                    - code: ERR_AUTH_UNAUTHORIZED
+                      message: Unauthorized
+        '403':
+          description: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+              examples:
+                ERR_ACCESS_USER:
+                  summary: Insufficient access permissions
+                  description: Insufficient access permissions
+                  value:
+                    errors:
+                    - code: ERR_ACCESS_USER
+                      message: Insufficient access permissions
+        '490':
+          description: Request blocked by WAF
+components:
+  schemas:
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    ContactList:
+      type: object
+      properties:
+        metadata:
+          description: Pagination metadata for the result set.
+          allOf:
+          - $ref: '#/components/schemas/MetaData'
+        data:
+          type: array
+          description: List of contacts.
+          items:
+            $ref: '#/components/schemas/Contact'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    GroupEmail:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          description: Email address of the group member.
+      required:
+      - email
+    ContactItem:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Email address of the contact.
+        isDistributionList:
+          type: boolean
+          description: Indicates whether the contact is a distribution list.
+        profileIcon:
+          type: string
+          description: URL or identifier of the contact's profile icon.
+    Contact:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the contact.
+        userId:
+          type: string
+        name:
+          type: string
+          description: Display name of the contact.
+        created:
+          type: string
+          format: date
+          description: Date and time when the contact was created.
+        modified:
+          type: string
+          format: date
+          description: Date and time when the contact was last modified.
+        lastContactDate:
+          type: string
+          format: date
+          description: Date and time of the most recent interaction with this contact.
+        items:
+          type: array
+          description: List of email addresses or distribution lists for this contact.
+          items:
+            $ref: '#/components/schemas/ContactItem'
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
+    GroupCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the group.
+        items:
+          type: array
+          minItems: 1
+          description: List of group members, each specified by their email address. At least one member is required.
+          items:
+            $ref: '#/components/schemas/GroupEmail'
+      required:
+      - items
+      - name
