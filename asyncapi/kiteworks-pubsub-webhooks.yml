@@ -1,0 +1,90 @@
+generated: '2026-07-19'
+method: searched
+spec_type: Webhooks
+source:
+- https://developer.kiteworks.com/pubsub-quick-start.html
+- openapi/kiteworks-pubsub-openapi-original.yml
+note: 'Kiteworks publishes no AsyncAPI document. Its event surface is the PubSub service: a NATS-backed
+  publish/subscribe bus fronted by an OpenAPI-described webhook registration API. This artifact captures
+  the webhook catalog; the registration API itself is at openapi/kiteworks-pubsub-openapi-original.yml.'
+transport:
+  delivery: HTTP POST to a registered HTTPS endpoint
+  base_path: /pubsub-ext/webhooks
+  subject_syntax: Dot-separated NATS subject filters. "*" matches a single segment; ">" matches all remaining
+    trailing segments.
+  subject_charset: letters, numbers, dot, asterisk, underscore, hyphen; may optionally end with ">"
+security:
+  signature_header: X-KW-Signature
+  algorithm: HMAC-SHA256
+  secret: Shared secret supplied at registration time and used to sign each delivery.
+  outbound_auth: Optional `token` field on the registration, sent as an outbound authorization header.
+  endpoint_requirement: Webhook URL must be HTTPS.
+registration:
+  admin_ui: Admin Portal -> Application Setup -> Event Subscriptions
+  api: /pubsub-ext/webhooks
+  required_fields:
+  - url
+  - secret
+  - subscriptions
+  optional_fields:
+  - token
+  - enabled
+  operations:
+  - method: GET
+    path: /webhooks
+    summary: Get all webhooks
+  - method: POST
+    path: /webhooks
+    summary: Create a new webhook
+  - method: GET
+    path: /webhooks/{id}
+    summary: Get a specific webhook
+  - method: PUT
+    path: /webhooks/{id}
+    summary: Update a webhook
+  - method: PATCH
+    path: /webhooks/{id}
+    summary: Partially update a webhook
+  - method: DELETE
+    path: /webhooks/{id}
+    summary: Delete a webhook
+envelope:
+  fields:
+  - name: tenantId
+    description: Internal use only.
+  - name: webhookId
+    description: UUID of the webhook registration that triggered this delivery.
+  - name: payload
+    description: The Kiteworks event itself.
+  payload_fields:
+  - event_name
+  - user_id
+  - username
+  - ip_address
+  - created
+  - successful
+  - guid
+events:
+  note: Kiteworks does not publish an exhaustive event catalog. The subjects below are the ones documented
+    verbatim in the quick start and the PubSub OpenAPI examples; the subject space is broader and is filtered
+    with wildcard patterns.
+  documented:
+  - subject: events.user.login
+    description: A user signed in.
+    source: pubsub-quick-start.html
+  - subject: events.user.logout
+    description: A user signed out.
+    source: pubsub-quick-start.html
+  - subject: events.filesystem.upload
+    description: A file was uploaded.
+    source: pubsub-quick-start.html
+  - subject: filesystem.file.create
+    description: A file was created.
+    source: openapi/kiteworks-pubsub-openapi-original.yml (WebhookRequest example)
+  - subject: filesystem.>
+    description: Wildcard subscription to all filesystem events.
+    source: openapi/kiteworks-pubsub-openapi-original.yml (WebhookRequest example)
+  families:
+  - events.user.*
+  - events.filesystem.*
+  - filesystem.*

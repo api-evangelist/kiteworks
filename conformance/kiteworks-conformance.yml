@@ -1,0 +1,115 @@
+generated: '2026-07-19'
+method: searched
+source:
+- https://developer.kiteworks.com/authentication.html
+- https://www.kiteworks.com/platform/compliance/
+- openapi/kiteworks-core-openapi-original.json
+- https://github.com/kiteworks/mcp
+standards:
+- id: oauth2
+  conforms: true
+  evidence: Authorization code (with PKCE) and JWT bearer (RFC 7523) grants documented at developer.kiteworks.com/authentication.html.
+- id: oauth2.1
+  conforms: true
+  evidence: Kiteworks MCP Server remote HTTPS mode uses OAuth 2.1 with Dynamic Client Registration and
+    PKCE.
+- id: rfc7519-jwt
+  conforms: true
+  evidence: JWT bearer assertions with iss/sub/aud/iat/nbf/exp/jti claims, RS256 signing.
+- id: rfc7636-pkce
+  conforms: true
+  evidence: PKCE required for public clients.
+- id: scim2
+  conforms: true
+  evidence: 15 operations tagged "scim" in the v28 OpenAPI expose SCIM 2.0 user/group provisioning.
+- id: openapi3
+  conforms: true
+  evidence: Core API published as OpenAPI 3.0.2; PubSub API as OpenAPI 3.0.3.
+- id: rfc9116-security-txt
+  conforms: true
+  evidence: PGP-signed security.txt served at https://www.kiteworks.com/.well-known/security.txt.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors use a proprietary {code, message, field} JSON envelope, not application/problem+json.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No Sunset/Deprecation header support documented.
+- id: idempotency
+  conforms: false
+  evidence: No idempotency key contract in the docs or either OpenAPI definition.
+- id: asyncapi
+  conforms: false
+  evidence: Event surface exists (PubSub webhooks) but is described with OpenAPI, not AsyncAPI.
+- id: mcp
+  conforms: true
+  evidence: Official Apache-2.0 Model Context Protocol server at github.com/kiteworks/mcp with 20 published
+    tools.
+- id: fips-140-3
+  conforms: true
+  evidence: MCP server supports strict FIPS 140-3 mode (GODEBUG=fips140=only); developer portal cites
+    FIPS 140-3 certified security. FIPS listed on the Kiteworks compliance page.
+- id: fips-203-ml-kem
+  conforms: true
+  evidence: Hybrid X25519+ML-KEM-768 key exchange for TLS in the MCP server.
+- id: json-api
+  conforms: false
+  evidence: Plain JSON resources; no JSON:API media type or document structure.
+- id: odata
+  conforms: false
+- id: fhir-r4
+  conforms: false
+- id: fapi
+  conforms: false
+compliance_programs:
+  source: https://www.kiteworks.com/platform/compliance/
+  note: Frameworks Kiteworks names on its published compliance page, grouped by region as presented there.
+    Listed as claimed coverage; the page does not state authorization levels for most entries.
+  global:
+  - SOC 2
+  - ISO 27001
+  - ISO 27017
+  - ISO 27018
+  - PCI DSS
+  - GxP
+  - Data Sovereignty
+  - eDiscovery
+  north_america:
+  - FedRAMP
+  - CMMC
+  - FIPS
+  - HIPAA
+  - ITAR
+  - NIST 800-171
+  - NIST CSF 2.0
+  - CJIS
+  - COPPA
+  - CPCSC
+  - Canada ITSG
+  - NYDFS
+  - NSA ZT Maturity for Data Pillars
+  - US State Privacy Laws
+  emea:
+  - GDPR
+  - NIS 2
+  - DORA
+  - TISAX
+  - BSI C5
+  - Cyber Essentials Plus
+  - EU AI Act
+  - EU Data Act
+  - EU Data Governance Act (DGA)
+  - EU-US Data Privacy Framework
+  - European Health Data Space
+  - FINMA Circular 2023/1
+  - France Data Protection Act
+  - German Federal Data Protection Act
+  - ADHICS
+  - Oman Circular E/1/2022
+  - Qatar PDPPL
+  - Saudi Arabia NDMO Standards
+  - Saudi NCA DCC
+  - Saudi PDPL
+  apac:
+  - IRAP
+  - Essential Eight
+  - CPS 234

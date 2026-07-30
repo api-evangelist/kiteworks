@@ -1,0 +1,25 @@
+generated: '2026-07-19'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.kiteworks.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Feb 20 23:59:59 2027 GMT
+  hsts: true
+  hsts_max_age: 31536000
+- host: developer.kiteworks.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Feb 20 23:59:59 2027 GMT
+  hsts: true
+  hsts_max_age: 31536000
+domains:
+- domain: kiteworks.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: reject
+note: baseURL hosts are per-tenant (Kiteworks is a self-hosted/private-cloud appliance);
+  the template placeholder host your.kiteworks.domain was excluded from probing.

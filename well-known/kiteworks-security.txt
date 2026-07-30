@@ -1,0 +1,41 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
+
+# Welcome to Kiteworks' security.txt file
+
+# Contact us
+Contact: https://security.kiteworks.com
+
+# This file will become stale at:
+Expires: 2026-12-31T22:59:00.000Z
+
+# This is our public PGP key for security communication:
+Encryption: https://www.kiteworks.com/.well-known/vulnerability@kiteworks.com.asc
+
+# We speak English:
+Preferred-Languages: en
+
+# The file you are reading right now is signed with the PGP key above and can be found at:
+Canonical: https://www.kiteworks.com/.well-known/security.txt
+
+# This is our policy on responsible disclosure
+Policy: https://security.kiteworks.com
+
+# We are hiring:
+Hiring: https://www.kiteworks.com/company/careers/
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEEe3N1lthuPeBsF/7PLOcHKQSfncsFAmlfzyUACgkQLOcHKQSf
+ncslWxAAhyOoarFGv7VLly4nZBW0KSQSG8xZhBmnRYZ003hM4oQjczwIjiQxx9Df
+JWarhmQoUvis2xI6yL3u5WGMD35fDH/8KyUHPoWkIAgtGnILEeQbeApTW1JlATHU
+cBPmkpyq/uwimq1a+k24dgDIP0+Lb8u+RThk+idvhPcjHSBGEbVI0bCjNilwKQC7
+zWnC9BXba6l/LJNVteViHFDm4xRnalIgB4f4j9MtPAetUhs6EeMuqo1vIHV4izHx
+G+ta+JuaNfDAeO+Ui1P+emp4kdkN3kWBqsBTmsCZtA5f0qgAexYvY/8iGPRCJ4Wi
+AGb/EWVrid8V5qQH+Q0/6G9MToG83NAsEahRqGdurtWpmTiPRlt/30t4VSQdyFel
+UGUfEK2fcumLOGAxj0P8ipHg05z0kih1kO2e1t5OxG4+5/HBLIi8NppTKGcnDSGd
+5T3O17sWaMaNDClc/EiGWeV8C55FuvLgCbJfuSZj07+Fmjn5aAcdAsYaebyPBg7X
+XkxFVPgWkLCQuk0Drs9q566KpyKWyzzQC9YeRiD8cIS5xI+HhyRFqTu1SsnFbEgr
+FHduocmJe+EDX6THKiOQ9481y5pOtiNbdRBfe8UaqALTkApKpYkW8WcfdTo3mXqu
+LrKz8wG61GSpzpMLS0zjhXOT7ndQeDptbEFiMAeqQw55XwbvFKE=
+=vh8L
+-----END PGP SIGNATURE-----

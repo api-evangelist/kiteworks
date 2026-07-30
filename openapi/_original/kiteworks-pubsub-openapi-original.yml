@@ -1,0 +1,548 @@
+openapi: 3.0.3
+info:
+  title: PubSub Consumer API
+  description: This is the API documentation for the PubSub consumer service.
+  version: "1.0.0"
+  contact:
+    name: Blue Light Team
+    email: team.blue.light.germany@kiteworks.com
+  license:
+    name: Kiteworks
+    url: https://www.kiteworks.com/legal/
+
+servers:
+  - url: http://localhost:8080/pubsub-ext
+    description: Local development server
+
+paths:
+  /webhooks:
+    get:
+      summary: Get all webhooks
+      description: Retrieves a list of all webhooks with optional pagination
+      tags:
+        - webhook
+      security:
+        - {}
+      parameters:
+        - name: offset
+          in: query
+          description: Offset value (must be 0 or a positive integer)
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+        - name: limit
+          in: query
+          description: Limit count (must be 0 or a positive integer)
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+      responses:
+        '200':
+          description: Webhooks retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookList'
+        '400':
+          description: Invalid pagination parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 400
+                message: "[Bad Request] invalid parameter, details:[0-limit must be integer]"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 500
+                message: "[Internal Server Error] could not get webhooks"
+    post:
+      summary: Create a new webhook
+      description: Creates a new webhook based on the body content
+      tags:
+        - webhook
+      security:
+        - {}
+      requestBody:
+        required: true
+        description: Webhook payload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookRequest'
+      responses:
+        '201':
+          description: Webhook created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookResponse'
+        '400':
+          description: Invalid input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                parse_error:
+                  summary: JSON parse error
+                  value:
+                    code: 400
+                    message: "[Bad Request] could not parse json"
+                validation_error:
+                  summary: Validation error
+                  value:
+                    code: 400
+                    message: "[Bad Request] invalid webhook request, details:[0-webhook.url must be provided]"
+                subscription_overlap:
+                  summary: Subscription key overlap
+                  value:
+                    code: 400
+                    message: "[Bad Request] subscription keys cannot overlap"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 500
+                message: "[Internal Server Error] could not create webhook"
+
+  /webhooks/{id}:
+    get:
+      summary: Get a specific webhook
+      description: Retrieves a specific webhook by its ID
+      tags:
+        - webhook
+      security:
+        - {}
+      parameters:
+        - name: id
+          in: path
+          description: ID of the webhook
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Webhook retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookResponse'
+        '400':
+          description: Invalid input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                id_required:
+                  summary: Missing ID
+                  value:
+                    code: 400
+                    message: "[Bad Request] id is required"
+                invalid_uuid:
+                  summary: Invalid UUID format
+                  value:
+                    code: 400
+                    message: "[Bad Request] invalid uuid format"
+        '404':
+          description: Webhook is not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: "[Not Found] webhook is not found"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 500
+                message: "[Internal Server Error] could not get webhook"
+    put:
+      summary: Update a webhook
+      description: Updates an existing webhook
+      tags:
+        - webhook
+      security:
+        - {}
+      parameters:
+        - name: id
+          in: path
+          description: ID of the webhook
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        description: Updated webhook payload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookRequest'
+      responses:
+        '200':
+          description: Webhook updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookResponse'
+        '400':
+          description: Invalid input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                id_required:
+                  summary: Missing ID
+                  value:
+                    code: 400
+                    message: "[Bad Request] id is required"
+                invalid_uuid:
+                  summary: Invalid UUID format
+                  value:
+                    code: 400
+                    message: "[Bad Request] invalid uuid format"
+                parse_error:
+                  summary: JSON parse error
+                  value:
+                    code: 400
+                    message: "[Bad Request] could not parse json"
+                validation_error:
+                  summary: Validation error
+                  value:
+                    code: 400
+                    message: "[Bad Request] invalid webhook request, details:[0-webhook.url must be provided]"
+                subscription_overlap:
+                  summary: Subscription key overlap
+                  value:
+                    code: 400
+                    message: "[Bad Request] subscription keys cannot overlap"
+        '404':
+          description: Not found - webhook with Id could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: "[Not Found] webhook is not found"
+        '409':
+          description: Conflict - webhook instance is modified since operation started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 409
+                message: "[Conflict] webhook instance has been changed since update"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 500
+                message: "[Internal Server Error] could not update webhook"
+    patch:
+      summary: Partially update a webhook
+      description: Updates specific fields of an existing webhook without requiring all fields to be present
+      tags:
+        - webhook
+      security:
+        - {}
+      parameters:
+        - name: id
+          in: path
+          description: ID of the webhook
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        description: Partial webhook payload with only the fields to update
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookPatchRequest'
+      responses:
+        '200':
+          description: Webhook updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookResponse'
+        '400':
+          description: Invalid input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                id_required:
+                  summary: Missing ID
+                  value:
+                    code: 400
+                    message: "[Bad Request] id is required"
+                invalid_uuid:
+                  summary: Invalid UUID format
+                  value:
+                    code: 400
+                    message: "[Bad Request] invalid uuid format"
+                parse_error:
+                  summary: JSON parse error
+                  value:
+                    code: 400
+                    message: "[Bad Request] could not parse json"
+                validation_error:
+                  summary: Validation error
+                  value:
+                    code: 400
+                    message: "[Bad Request] invalid webhook request, details:[0-webhook.url must be provided]"
+                subscription_overlap:
+                  summary: Subscription key overlap
+                  value:
+                    code: 400
+                    message: "[Bad Request] subscription keys cannot overlap"
+        '404':
+          description: Not found - webhook with Id could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: "[Not Found] webhook is not found"
+        '409':
+          description: Conflict - webhook instance is modified since operation started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 409
+                message: "[Conflict] webhook instance has been changed since update"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 500
+                message: "[Internal Server Error] could not patch webhook"
+    delete:
+      summary: Delete a webhook
+      description: Deletes an existing webhook by its ID
+      tags:
+        - webhook
+      security:
+        - {}
+      parameters:
+        - name: id
+          in: path
+          description: ID of the webhook
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Webhook deleted successfully
+        '400':
+          description: Invalid input data (missing or invalid ID)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                id_required:
+                  summary: Missing ID
+                  value:
+                    code: 400
+                    message: "[Bad Request] id is required"
+                invalid_uuid:
+                  summary: Invalid UUID format
+                  value:
+                    code: 400
+                    message: "[Bad Request] invalid uuid format"
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: "[Not Found] webhook is not found"
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 500
+                message: "[Internal Server Error] could not delete webhook"
+
+components:
+  schemas:
+    WebhookList:
+      type: object
+      required:
+        - items
+        - totalItems
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookResponse'
+          description: Items is the list of webhook items in the current set
+        totalItems:
+          type: integer
+          description: TotalItems is the total number of items across all sets
+          example: 150
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Code is the HTTP status code returned by the API.
+        message:
+          type: string
+          description: Message is a human-readable message in the format "[StatusText] detail" explaining the result.
+    WebhookRequest:
+      type: object
+      required:
+        - url
+        - secret
+        - subscriptions
+      properties:
+        url:
+          type: string
+          description: URL contains the webhook URL
+          example: "https://example.com/webhook"
+        token:
+          type: string
+          description: Token contains the webhook Token (optional; if provided must not be empty or whitespace-only)
+          example: "my-token"
+        secret:
+          type: string
+          description: Secret contains the webhook Secret
+          example: "my-secret"
+        enabled:
+          type: boolean
+          description: Enabled is the value of the webhook enable/disable (default is true when omitted)
+          example: true
+        subscriptions:
+          type: array
+          items:
+            type: string
+          description: Subscriptions is a list of NATS subject filter patterns associated with the webhook. Each entry must be non-empty and contain only letters, numbers, dot, asterisk, underscore, hyphen, and optionally end with >.
+          example: ["filesystem.file.create", "filesystem.>"]
+    WebhookPatchRequest:
+      type: object
+      description: Partial webhook payload — all fields are optional; only provided fields are updated
+      properties:
+        url:
+          type: string
+          description: URL contains the webhook URL
+          example: "https://example.com/webhook"
+        token:
+          type: string
+          description: Token contains the webhook Token (if provided must not be empty or whitespace-only)
+          example: "my-token"
+        secret:
+          type: string
+          description: Secret contains the webhook Secret
+          example: "my-secret"
+        enabled:
+          type: boolean
+          description: Enabled is the value of the webhook enable/disable
+          example: true
+        subscriptions:
+          type: array
+          items:
+            type: string
+          description: Subscriptions is a list of NATS subject filter patterns associated with the webhook.
+          example: ["filesystem.file.create", "filesystem.>"]
+    WebhookResponse:
+      type: object
+      required:
+        - id
+        - url
+        - enabled
+        - createdAt
+        - updatedAt
+        - subscriptions
+        - status
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Id is the unique identifier for the webhook.
+          example: "1a51a2bf-86e8-40e8-a53b-4edc6936db46"
+        url:
+          type: string
+          description: URL contains the webhook URL
+          example: "https://example.com/webhook"
+        enabled:
+          type: boolean
+          description: Enabled is the value of the webhook enable/disable
+          example: true
+        createdAt:
+          type: string
+          format: date-time
+          description: CreatedAt is the timestamp when the webhook was created.
+          example: "2024-05-07T15:04:05Z"
+        updatedAt:
+          type: string
+          format: date-time
+          description: UpdatedAt is the timestamp when the webhook was last updated.
+          example: "2024-05-07T15:04:05Z"
+        subscriptions:
+          type: array
+          items:
+            type: string
+          description: Subscriptions is a list of NATS subject filter patterns associated with the webhook.
+          example: ["filesystem.file.create", "filesystem.>"]
+        status:
+          $ref: '#/components/schemas/Status'
+          description: Status is a status data associated with the webhook.
+    Status:
+      type: object
+      required:
+        - status
+        - description
+      properties:
+        status:
+          type: string
+          description: Status value
+          enum:
+            - UNKNOWN
+            - SUCCESS
+            - ERROR
+          example: "UNKNOWN"
+        description:
+          type: string
+          description: Status description
+          example: "unknown"

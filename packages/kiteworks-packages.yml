@@ -1,0 +1,80 @@
+generated: '2026-07-19'
+method: searched
+source: https://github.com/kiteworks/mcp/releases
+note: Kiteworks publishes no first-party client SDKs on npm, PyPI, Maven Central, NuGet, pkg.go.dev, RubyGems,
+  Packagist or crates.io (all probed, no first-party results). The distributed artifacts are the official
+  MCP server binaries and container image.
+packages:
+- language: go
+  registry: ghcr
+  name: kiteworks/kiteworks-mcp
+  url: https://github.com/kiteworks/mcp/pkgs/container/kiteworks-mcp
+  install: docker pull ghcr.io/kiteworks/kiteworks-mcp:0.9.4
+  official: true
+  kind: mcp-server-container
+- language: go
+  registry: github-releases
+  name: kiteworks-mcp (linux-x86_64)
+  url: https://github.com/kiteworks/mcp/releases/latest
+  install: Download kiteworks-mcp_0.9.4_linux-x86_64.tar.gz
+  official: true
+  kind: mcp-server-binary
+- language: go
+  registry: github-releases
+  name: kiteworks-mcp (linux-arm64)
+  url: https://github.com/kiteworks/mcp/releases/latest
+  install: Download kiteworks-mcp_0.9.4_linux-arm64.tar.gz
+  official: true
+  kind: mcp-server-binary
+- language: go
+  registry: github-releases
+  name: kiteworks-mcp (macos-arm64)
+  url: https://github.com/kiteworks/mcp/releases/latest
+  install: Download kiteworks-mcp_0.9.4_macos-arm64.zip
+  official: true
+  kind: mcp-server-binary
+- language: go
+  registry: github-releases
+  name: kiteworks-mcp (macos-x86_64)
+  url: https://github.com/kiteworks/mcp/releases/latest
+  install: Download kiteworks-mcp_0.9.4_macos-x86_64.zip
+  official: true
+  kind: mcp-server-binary
+- language: go
+  registry: github-releases
+  name: kiteworks-mcp (windows-x86_64)
+  url: https://github.com/kiteworks/mcp/releases/latest
+  install: Download kiteworks-mcp_0.9.4_windows-x86_64.zip
+  official: true
+  kind: mcp-server-binary
+- language: go
+  registry: github-releases
+  name: kiteworks-mcp (windows-arm64)
+  url: https://github.com/kiteworks/mcp/releases/latest
+  install: Download kiteworks-mcp_0.9.4_windows-arm64.zip
+  official: true
+  kind: mcp-server-binary
+- language: n/a
+  registry: github-releases
+  name: kiteworks-mcp .mcpb (Claude Desktop extension)
+  url: https://github.com/kiteworks/mcp/releases/latest
+  install: Install kiteworks-mcp_0.9.4.mcpb via Claude Desktop Settings -> Extensions
+  official: true
+  kind: mcp-desktop-extension
+- language: python
+  registry: github
+  name: kiteworks/diodb
+  url: https://github.com/kiteworks/diodb
+  official: true
+  kind: tool
+  note: Kiteworks-published Python project; not a client SDK for the REST API.
+registries_probed:
+- registry: npm
+  query: kiteworks
+  results: 0
+- registry: pypi
+  query: kiteworks / kiteworks-sdk / accellion
+  results: 0
+- registry: ghcr
+  query: kiteworks/kiteworks-mcp
+  results: 1

@@ -1,0 +1,73 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Kiteworks Core API
+  version: 1.0.0
+extends: openapi/kiteworks-core-openapi-original.json
+actions:
+- target: $.info
+  description: Record provenance and the API Evangelist artifact set.
+  update:
+    x-apievangelist-source: https://developer.kiteworks.com/api-specs.html
+    x-apievangelist-harvested: '2026-07-19'
+    x-apievangelist-artifacts:
+    - authentication/kiteworks-authentication.yml
+    - scopes/kiteworks-scopes.yml
+    - conventions/kiteworks-conventions.yml
+    - errors/kiteworks-problem-types.yml
+    - rate-limits/kiteworks-rate-limits.yml
+    - data-model/kiteworks-data-model.yml
+    - mcp/kiteworks-mcp.yml
+    - skills/_index.yml
+- target: $
+  description: The published spec omits servers[]. Kiteworks is a per-tenant appliance, so the base URL
+    is templated on the customer instance host.
+  update:
+    servers:
+    - url: https://{instance}/rest
+      description: Customer Kiteworks appliance
+      variables:
+        instance:
+          default: your.kiteworks.domain
+          description: Hostname of your Kiteworks instance
+- target: $.components
+  description: The published spec declares no securitySchemes; the developer portal documents OAuth 2.0
+    authorization-code (PKCE) and JWT bearer.
+  update:
+    securitySchemes:
+      kiteworksOAuth:
+        type: oauth2
+        description: Kiteworks OAuth 2.0. Scopes are pattern-based ({METHOD}/{resource}/{qualifier}) and
+          whitelisted per custom application in the Admin console.
+        flows:
+          authorizationCode:
+            authorizationUrl: https://{instance}/oauth/authorize
+            tokenUrl: https://{instance}/oauth/token
+            scopes: {}
+- target: $.paths..responses['490']
+  description: Clarify the non-standard 490 status Kiteworks returns on every operation.
+  update:
+    x-apievangelist-note: 490 is a non-standard Kiteworks status meaning the request was blocked by the
+      Web Application Firewall, not an application-level failure.
+- target: $.info
+  description: Document the error envelope, which is proprietary rather than RFC 9457.
+  update:
+    x-apievangelist-error-envelope:
+      media_type: application/json
+      format: proprietary
+      fields:
+      - code
+      - message
+      - field (422 only)
+- target: $.info
+  description: Document rate limiting, which the spec does not signal in headers.
+  update:
+    x-apievangelist-rate-limits:
+      standard: 30 req/s per IP, queue depth 40
+      mft: 300 req/s per IP
+      signal: 429 + Retry-After
+- target: $.info
+  description: Record the absence of an idempotency contract so agents do not blind-retry writes.
+  update:
+    x-apievangelist-idempotency:
+      supported: false
+      note: No idempotency key is published; non-GET requests must not be blindly retried.

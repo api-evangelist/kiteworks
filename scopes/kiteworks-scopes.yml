@@ -1,0 +1,78 @@
+generated: '2026-07-19'
+method: searched
+source: https://developer.kiteworks.com/authentication.html
+docs: https://developer.kiteworks.com/authentication.html
+note: 'Kiteworks does not publish a fixed enumerated scope list. Scopes are configured per custom application
+  in the Admin console and requested as a space-separated list. The scope grammar is hierarchical and
+  pattern-based: {HTTP_METHOD}/{resource}/{qualifier}, where * is a wildcard in any position. The derive-oauth-scopes.py
+  baseline returns nothing because the published v28 OpenAPI declares no securitySchemes.'
+schemes:
+- name: OAuth2
+  source: https://developer.kiteworks.com/authentication.html
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://{kiteworks_server}/oauth/authorize
+    tokenUrl: https://{kiteworks_server}/oauth/token
+  - flow: jwt-bearer
+    tokenUrl: https://{kiteworks_server}/oauth/token
+grammar:
+  pattern: '{METHOD}/{resource}/{qualifier}'
+  delimiter: space-separated list
+  wildcards: '* matches any value in a position'
+  methods:
+  - GET
+  - POST
+  - PUT
+  - DELETE
+  - '*'
+  configuration: Permitted scopes are whitelisted per custom application in the Kiteworks Admin console.
+documented_examples:
+- scope: GET/users/*
+  description: Read access across the users resource family.
+  source: authentication.html Python sample
+- scope: '*/files/*'
+  description: All methods across the files resource family.
+  source: authentication.html Python sample
+resource_families:
+  note: Scope resource segments correspond to the OpenAPI tags in openapi/kiteworks-core-openapi-original.json.
+  derived_from_spec_tags:
+  - activities
+  - admin
+  - adminRoles
+  - advancedForms
+  - cards
+  - clientEventLogs
+  - clients
+  - comments
+  - contacts
+  - devices
+  - dli
+  - externalDL
+  - favorites
+  - files
+  - folders
+  - groups
+  - internal
+  - languages
+  - ldapGroups
+  - locations
+  - mail
+  - mobileSync
+  - notifications
+  - permissions
+  - profiles
+  - requestFile
+  - roles
+  - scim
+  - search
+  - settings
+  - sharedMailbox
+  - shortLinks
+  - sourceTypes
+  - sources
+  - system
+  - tasks
+  - uploads
+  - userSshPublicKeys
+  - users
+  - webForms

@@ -1,0 +1,43 @@
+generated: '2026-07-19'
+method: searched
+probe: true
+url: https://trust.kiteworks.com/
+platform: UpGuard Trust Center
+note: trust.kiteworks.com returns HTTP 200 and serves an UpGuard-hosted Trust Center, but the page is
+  a client-side React application so no certification names are present in the served HTML. The certification
+  list below is taken from the server-rendered Kiteworks compliance page instead.
+certifications:
+- SOC 2
+- ISO 27001
+- ISO 27017
+- ISO 27018
+- PCI DSS
+- FedRAMP
+- CMMC
+- FIPS
+- HIPAA
+- NIST 800-171
+- NIST CSF 2.0
+- GDPR
+- NIS 2
+- DORA
+- TISAX
+- BSI C5
+- Cyber Essentials Plus
+- IRAP
+- Essential Eight
+- CPS 234
+- ITAR
+- CJIS
+certifications_source: https://www.kiteworks.com/platform/compliance/
+security_page: https://security.kiteworks.com
+evidence:
+- source: https://trust.kiteworks.com/
+  status: 200
+  kind: trust center (UpGuard, JS-rendered)
+- source: https://www.kiteworks.com/platform/compliance/
+  status: 200
+  kind: compliance framework listing
+see:
+- conformance/kiteworks-conformance.yml
+- security/kiteworks-vulnerability-disclosure.yml

@@ -1,0 +1,23 @@
+generated: '2026-07-19'
+method: searched
+source: https://developer.kiteworks.com/api-concepts.html
+signal:
+  status_code: 429
+  retry_header: Retry-After
+  guidance: Docs recommend exponential backoff on 429 responses, starting at 1 second and doubling on
+    each retry.
+rate_limits:
+- tier: standard
+  limit_count: 30
+  interval: second
+  scope: per IP
+  queue_depth: 40
+  description: 'Standard Kiteworks account: 30 requests per second per IP address with a queue depth of
+    40.'
+- tier: mft-application
+  limit_count: 300
+  interval: second
+  scope: per IP
+  description: 'MFT (Managed File Transfer) application accounts: 300 requests per second per IP address.'
+note: The published OpenAPI declares no X-RateLimit-* response headers; 429 + Retry-After is the documented
+  signal.

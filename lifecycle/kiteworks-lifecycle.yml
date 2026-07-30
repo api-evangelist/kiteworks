@@ -1,0 +1,35 @@
+generated: '2026-07-19'
+method: searched
+source: https://developer.kiteworks.com/api-specs.html
+versioning:
+  scheme: whole-API integer version
+  current: '28'
+  evidence: OpenAPI info.version = "28"; spec published as Kiteworks-APIs-V28.json.
+  docs: https://developer.kiteworks.com/api-specs.html
+  note: The API version tracks the Kiteworks appliance release; because Kiteworks is deployed as a per-tenant
+    virtual appliance, the version a caller sees is the version their instance runs.
+pubsub_versioning:
+  scheme: semver
+  current: 1.0.0
+  source: openapi/kiteworks-pubsub-openapi-original.yml
+mcp_versioning:
+  scheme: semver
+  current: 0.9.4
+  released: '2026-06-29'
+  compatibility: Kiteworks 9.3.1 and later
+  source: https://github.com/kiteworks/mcp/releases
+deprecation:
+  policy_url: null
+  sunset_header: false
+  evidence: 'No deprecation or sunset policy is published on the developer portal, and no operation in
+    the v28 OpenAPI carries deprecated: true.'
+deprecated_operations: []
+sla:
+  url: null
+  uptime_target: null
+  evidence: No public SLA document found; Kiteworks is customer-hosted (private cloud / on-prem virtual
+    appliance) so availability is tenant-operated.
+status_page: null
+status_page_evidence: status.kiteworks.com does not resolve; no public status page found. Consistent with
+  a self-hosted appliance model where uptime is the customer tenant responsibility.
+support: https://www.kiteworks.com/support/

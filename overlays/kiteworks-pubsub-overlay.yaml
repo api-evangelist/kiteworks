@@ -1,0 +1,55 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Kiteworks PubSub Consumer API
+  version: 1.0.0
+extends: openapi/kiteworks-pubsub-openapi-original.yml
+actions:
+- target: $.info
+  description: Record provenance and cross-link the webhook catalog.
+  update:
+    x-apievangelist-source: https://developer.kiteworks.com/api-specs.html
+    x-apievangelist-harvested: '2026-07-19'
+    x-apievangelist-artifacts:
+    - asyncapi/kiteworks-pubsub-webhooks.yml
+    - conventions/kiteworks-conventions.yml
+- target: $
+  description: The published spec ships only a localhost development server; replace it with the per-tenant
+    production form.
+  update:
+    servers:
+    - url: https://{instance}/pubsub-ext
+      description: Customer Kiteworks appliance
+      variables:
+        instance:
+          default: your.kiteworks.domain
+          description: Hostname of your Kiteworks instance
+- target: $.info
+  description: Document delivery signing, which the registration spec does not describe.
+  update:
+    x-apievangelist-webhook-signature:
+      header: X-KW-Signature
+      algorithm: HMAC-SHA256
+      secret: The `secret` supplied at registration time.
+      verification: Recompute over the raw body and compare in constant time before parsing.
+- target: $.info
+  description: Document the delivery envelope and the documented subject space.
+  update:
+    x-apievangelist-event-envelope:
+      fields:
+      - tenantId
+      - webhookId
+      - payload
+      payload_fields:
+      - event_name
+      - user_id
+      - username
+      - ip_address
+      - created
+      - successful
+      - guid
+      documented_subjects:
+      - events.user.login
+      - events.user.logout
+      - events.filesystem.upload
+      - filesystem.file.create
+      - filesystem.>

@@ -1,0 +1,21 @@
+{
+  "repo": "kiteworks",
+  "feeds": [
+    {
+      "source": "https://www.kiteworks.com/feed/",
+      "feed_url": "https://www.kiteworks.com/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://www.kiteworks.com/support/",
+      "feed_url": "https://www.kiteworks.com/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
+    }
+  ],
+  "post_count": 21,
+  "fetched": "2026-07-25T15:00:33Z"
+}

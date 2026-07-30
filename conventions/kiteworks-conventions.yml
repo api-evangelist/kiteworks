@@ -1,0 +1,74 @@
+generated: '2026-07-19'
+method: searched
+source: https://developer.kiteworks.com/api-concepts.html
+docs: https://developer.kiteworks.com/api-concepts.html
+authentication:
+  style: oauth2-bearer
+  header: 'Authorization: Bearer <access_token>'
+  flows:
+  - authorization_code (with PKCE)
+  - urn:ietf:params:oauth:grant-type:jwt-bearer
+  see: authentication/kiteworks-authentication.yml
+idempotency:
+  supported: false
+  evidence: No idempotency key header, parameter or documented retry-safety contract appears in api-concepts.html
+    or in either OpenAPI definition (grep for "idempoten" returns 0 matches across both specs).
+pagination:
+  style: offset
+  params:
+  - name: limit
+    in: query
+    default: 25
+    description: Maximum number of results per response.
+  - name: offset
+    in: query
+    description: Number of records to skip before results begin.
+  termination: Continue paging until fewer records than the requested limit are returned.
+sorting:
+  param: orderBy
+  syntax: orderBy={fieldName}:{direction}
+  directions:
+  - asc
+  - desc
+  encoding: The colon must be URL-encoded as %3A.
+  common_fields:
+  - name
+  - created
+  - modified
+  - size
+field_expansion:
+  supported: false
+  evidence: No sparse-fieldset or expansion mechanism documented in api-concepts.html.
+request_tracing:
+  supported: false
+  evidence: No request-id correlation header documented.
+versioning:
+  scheme: whole-API integer version
+  current: '28'
+  evidence: OpenAPI info.version = "28"; the spec download is published as Kiteworks-APIs-V28.json.
+  see: lifecycle/kiteworks-lifecycle.yml
+error_envelope:
+  media_type: application/json
+  format: proprietary (not RFC 9457)
+  fields:
+  - name: code
+    required: true
+    description: Machine-readable identifier for programmatic handling.
+  - name: message
+    required: true
+    description: Human-readable description.
+  - name: field
+    required: false
+    description: Parameter name causing the error (422 responses only).
+  see: errors/kiteworks-problem-types.yml
+rate_limiting:
+  status_code: 429
+  retry_header: Retry-After
+  see: rate-limits/kiteworks-rate-limits.yml
+transport:
+  body_format: JSON
+  uploads: Multipart MIME for file uploads with metadata
+webhooks:
+  signature_header: X-KW-Signature
+  algorithm: HMAC-SHA256
+  see: asyncapi/kiteworks-pubsub-webhooks.yml

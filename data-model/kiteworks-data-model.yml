@@ -1,0 +1,2854 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/kiteworks-core-openapi-original.json
+note: Entity-relationship graph derived from components.schemas in the Kiteworks v28 OpenAPI. Kiteworks
+  models most resources as a base schema plus .Post/.Put request variants; the base name is the entity
+  and the variants are recorded. Relationships come from $ref links inside properties (array $ref -> has_many,
+  scalar $ref -> has_one).
+entity_count: 344
+schema_count: 604
+entities:
+- name: File
+  variants:
+  - File
+  - File.Post
+  - File.Put
+  field_count: 46
+  relationships:
+  - type: has_one
+    target: UserBasic
+    via: creator
+  - type: has_many
+    target: Permission
+    via: permissions
+  - type: has_many
+    target: Member
+    via: members
+  - type: has_one
+    target: UserBasic
+    via: modifier
+  - type: has_many
+    target: Fingerprint
+    via: fingerprints
+  - type: has_one
+    target: UserBasic
+    via: sharedBy
+  - type: has_one
+    target: Folder
+    via: parent
+  - type: has_one
+    target: UserBasic
+    via: lockUser
+  - type: has_one
+    target: UserBasic
+    via: lastModifiedBy
+  - type: has_one
+    target: PushedObject
+    via: pushedObject
+  - type: has_one
+    target: MobileInfo
+    via: wopiapp
+  - type: has_many
+    target: Tag
+    via: tags
+  - type: has_one
+    target: SafeEdit
+    via: safeEdit
+- name: FeaturesList
+  variants:
+  - FeaturesList
+  - FeaturesList.Post
+  - FeaturesList.Put
+  field_count: 58
+  relationships: []
+- name: Mail
+  variants:
+  - Mail
+  field_count: 45
+  relationships:
+  - type: has_many
+    target: Variables
+    via: variables
+  - type: has_many
+    target: Recipient
+    via: recipients
+  - type: has_many
+    target: EmailReturnRecipient
+    via: emailReturnReceipt
+  - type: has_many
+    target: TrackingAccessRecipient
+    via: trackingAccess
+  - type: has_one
+    target: Package
+    via: package
+  - type: has_one
+    target: UserBasic
+    via: sender
+  - type: has_one
+    target: UserBasic
+    via: actor
+- name: Mail1
+  variants:
+  - Mail1
+  field_count: 44
+  relationships:
+  - type: has_many
+    target: Recipient
+    via: recipients
+  - type: has_many
+    target: EmailReturnRecipient
+    via: emailReturnReceipt
+  - type: has_many
+    target: TrackingAccessRecipient
+    via: trackingAccess
+  - type: has_one
+    target: Package
+    via: package
+  - type: has_one
+    target: UserBasic
+    via: sender
+  - type: has_one
+    target: UserBasic
+    via: actor
+- name: Folder1
+  variants:
+  - Folder1
+  field_count: 44
+  relationships:
+  - type: has_one
+    target: UserBasic
+    via: creator
+  - type: has_many
+    target: Permission
+    via: permissions
+  - type: has_many
+    target: Member
+    via: members
+  - type: has_one
+    target: Folder
+    via: parent
+  - type: has_one
+    target: Role
+    via: currentUserRole
+- name: Content
+  variants:
+  - Content
+  - Content.Post
+  - Content.Put
+  field_count: 40
+  relationships:
+  - type: has_one
+    target: Folder
+    via: parent
+  - type: has_one
+    target: UserBasicInfo
+    via: creator
+  - type: has_many
+    target: Permission
+    via: permissions
+  - type: has_one
+    target: User
+    via: lockUser
+  - type: has_many
+    target: Member
+    via: members
+  - type: has_one
+    target: PushedObject
+    via: pushedObject
+  - type: has_one
+    target: User
+    via: lastModifiedBy
+  - type: has_many
+    target: Tag
+    via: tags
+- name: DliFile
+  variants:
+  - DliFile
+  - DliFile.Post
+  - DliFile.Put
+  field_count: 40
+  relationships:
+  - type: has_one
+    target: Folder
+    via: parent
+  - type: has_one
+    target: UserBasicInfo
+    via: creator
+  - type: has_many
+    target: Permission
+    via: permissions
+  - type: has_one
+    target: User
+    via: lockUser
+  - type: has_many
+    target: Member
+    via: members
+  - type: has_one
+    target: PushedObject
+    via: pushedObject
+  - type: has_one
+    target: User
+    via: lastModifiedBy
+  - type: has_many
+    target: Tag
+    via: tags
+- name: EmailFile
+  variants:
+  - EmailFile
+  - EmailFile.Post
+  - EmailFile.Put
+  field_count: 40
+  relationships:
+  - type: has_one
+    target: Folder
+    via: parent
+  - type: has_one
+    target: UserBasicInfo
+    via: creator
+  - type: has_many
+    target: Permission
+    via: permissions
+  - type: has_one
+    target: User
+    via: lockUser
+  - type: has_many
+    target: Member
+    via: members
+  - type: has_one
+    target: PushedObject
+    via: pushedObject
+  - type: has_one
+    target: User
+    via: lastModifiedBy
+  - type: has_many
+    target: Tag
+    via: tags
+- name: EmailFormFile
+  variants:
+  - EmailFormFile
+  - EmailFormFile.Post
+  - EmailFormFile.Put
+  field_count: 40
+  relationships:
+  - type: has_one
+    target: Folder
+    via: parent
+  - type: has_one
+    target: UserBasicInfo
+    via: creator
+  - type: has_many
+    target: Permission
+    via: permissions
+  - type: has_one
+    target: User
+    via: lockUser
+  - type: has_many
+    target: Member
+    via: members
+  - type: has_one
+    target: PushedObject
+    via: pushedObject
+  - type: has_one
+    target: User
+    via: lastModifiedBy
+  - type: has_many
+    target: Tag
+    via: tags
+- name: KitepointFile
+  variants:
+  - KitepointFile
+  - KitepointFile.Post
+  - KitepointFile.Put
+  field_count: 40
+  relationships:
+  - type: has_one
+    target: Folder
+    via: parent
+  - type: has_one
+    target: UserBasicInfo
+    via: creator
+  - type: has_many
+    target: Permission
+    via: permissions
+  - type: has_one
+    target: User
+    via: lockUser
+  - type: has_many
+    target: Member
+    via: members
+  - type: has_one
+    target: PushedObject
+    via: pushedObject
+  - type: has_one
+    target: User
+    via: lastModifiedBy
+  - type: has_many
+    target: Tag
+    via: tags
+- name: NoteFile
+  variants:
+  - NoteFile
+  - NoteFile.Post
+  - NoteFile.Put
+  field_count: 40
+  relationships:
+  - type: has_one
+    target: Folder
+    via: parent
+  - type: has_one
+    target: UserBasicInfo
+    via: creator
+  - type: has_many
+    target: Permission
+    via: permissions
+  - type: has_one
+    target: User
+    via: lockUser
+  - type: has_many
+    target: Member
+    via: members
+  - type: has_one
+    target: PushedObject
+    via: pushedObject
+  - type: has_one
+    target: User
+    via: lastModifiedBy
+  - type: has_many
+    target: Tag
+    via: tags
+- name: RiskPolicyFormFile
+  variants:
+  - RiskPolicyFormFile
+  - RiskPolicyFormFile.Post
+  - RiskPolicyFormFile.Put
+  field_count: 40
+  relationships:
+  - type: has_one
+    target: Folder
+    via: parent
+  - type: has_one
+    target: UserBasicInfo
+    via: creator
+  - type: has_many
+    target: Permission
+    via: permissions
+  - type: has_one
+    target: User
+    via: lockUser
+  - type: has_many
+    target: Member
+    via: members
+  - type: has_one
+    target: PushedObject
+    via: pushedObject
+  - type: has_one
+    target: User
+    via: lastModifiedBy
+  - type: has_many
+    target: Tag
+    via: tags
+- name: RiskPolicyReportFile
+  variants:
+  - RiskPolicyReportFile
+  - RiskPolicyReportFile.Post
+  - RiskPolicyReportFile.Put
+  field_count: 40
+  relationships:
+  - type: has_one
+    target: Folder
+    via: parent
+  - type: has_one
+    target: UserBasicInfo
+    via: creator
+  - type: has_many
+    target: Permission
+    via: permissions
+  - type: has_one
+    target: User
+    via: lockUser
+  - type: has_many
+    target: Member
+    via: members
+  - type: has_one
+    target: PushedObject
+    via: pushedObject
+  - type: has_one
+    target: User
+    via: lastModifiedBy
+  - type: has_many
+    target: Tag
+    via: tags
+- name: Folder
+  variants:
+  - Folder
+  - Folder.Post
+  - Folder.Put
+  field_count: 43
+  relationships:
+  - type: has_one
+    target: UserBasic
+    via: creator
+  - type: has_many
+    target: Permission
+    via: permissions
+  - type: has_many
+    target: Member
+    via: members
+  - type: has_one
+    target: Role
+    via: currentUserRole
+- name: DliFolder
+  variants:
+  - DliFolder
+  - DliFolder.Post
+  - DliFolder.Put
+  field_count: 37
+  relationships:
+  - type: has_one
+    target: Folder
+    via: parent
+  - type: has_one
+    target: UserBasicInfo
+    via: creator
+  - type: has_many
+    target: Permission
+    via: permissions
+  - type: has_many
+    target: MemberBase
+    via: members
+  - type: has_one
+    target: Role
+    via: currentUserRole
+- name: Email
+  variants:
+  - Email
+  - Email.Post
+  - Email.Put
+  field_count: 36
+  relationships:
+  - type: has_one
+    target: Package
+    via: package
+  - type: has_one
+    target: UserBasicInfo
+    via: sender
+  - type: has_many
+    target: Recipient
+    via: recipients
+  - type: has_many
+    target: EmailReturnReceipt
+    via: emailReturnReceipt
+- name: SourceFile
+  variants:
+  - SourceFile
+  - SourceFile.Post
+  - SourceFile.Put
+  field_count: 29
+  relationships:
+  - type: has_one
+    target: UserBasicInfo
+    via: creator
+  - type: has_many
+    target: Permission
+    via: permissions
+  - type: has_one
+    target: SourceContent
+    via: parent
+  - type: has_one
+    target: UserBasicInfo
+    via: lockUser
+- name: Kitepoint
+  variants:
+  - Kitepoint
+  - Kitepoint.Post
+  - Kitepoint.Put
+  field_count: 24
+  relationships:
+  - type: has_one
+    target: Folder
+    via: parent
+  - type: has_one
+    target: UserBasicInfo
+    via: creator
+  - type: has_many
+    target: Permission
+    via: permissions
+  - type: has_one
+    target: ECObject
+    via: eCObject
+- name: KitepointDirectory
+  variants:
+  - KitepointDirectory
+  - KitepointDirectory.Post
+  - KitepointDirectory.Put
+  field_count: 22
+  relationships:
+  - type: has_one
+    target: Folder
+    via: parent
+  - type: has_one
+    target: UserBasicInfo
+    via: creator
+  - type: has_many
+    target: Permission
+    via: permissions
+  - type: has_one
+    target: ECObject
+    via: eCObject
+- name: Requirement
+  variants:
+  - Requirement
+  field_count: 22
+  relationships:
+  - type: has_one
+    target: UserBasic
+    via: creator
+  - type: has_many
+    target: Permission
+    via: permissions
+  - type: has_many
+    target: Member
+    via: members
+  - type: has_one
+    target: RiskPolicy
+    via: asset_class
+- name: SharedMailboxSetting
+  variants:
+  - SharedMailboxSetting
+  field_count: 25
+  relationships:
+  - type: has_one
+    target: SendOption
+    via: sendOptionEnabled
+- name: AccessVerificationApproval
+  variants:
+  - AccessVerificationApproval
+  field_count: 20
+  relationships:
+  - type: has_one
+    target: UserBasic
+    via: creator
+  - type: has_many
+    target: Permission
+    via: permissions
+  - type: has_many
+    target: Member
+    via: members
+  - type: has_many
+    target: Requirement
+    via: requirements
+- name: BaseFile
+  variants:
+  - BaseFile
+  - BaseFile.Post
+  - BaseFile.Put
+  field_count: 21
+  relationships:
+  - type: has_one
+    target: Folder
+    via: parent
+  - type: has_one
+    target: UserBasicInfo
+    via: creator
+  - type: has_many
+    target: Permission
+    via: permissions
+- name: BaseSendMailPostRequest
+  variants:
+  - BaseSendMailPostRequest
+  field_count: 24
+  relationships: []
+- name: SourceFolder
+  variants:
+  - SourceFolder
+  - SourceFolder.Post
+  - SourceFolder.Put
+  field_count: 21
+  relationships:
+  - type: has_one
+    target: UserBasicInfo
+    via: creator
+  - type: has_many
+    target: Permission
+    via: permissions
+  - type: has_one
+    target: SourceContent
+    via: parent
+- name: Version
+  variants:
+  - Version
+  - Version.Post
+  - Version.Put
+  field_count: 22
+  relationships:
+  - type: has_one
+    target: UserBasicInfo
+    via: creator
+  - type: has_many
+    target: Tag
+    via: tags
+- name: Attachment
+  variants:
+  - Attachment
+  - Attachment.Post
+  - Attachment.Put
+  field_count: 19
+  relationships:
+  - type: has_one
+    target: DrmFile
+    via: drmFile
+  - type: has_many
+    target: Tag
+    via: tags
+  - type: has_many
+    target: Permission
+    via: permissions
+  - type: has_many
+    target: Fingerprint
+    via: fingerprints
+- name: ClientNew
+  variants:
+  - ClientNew
+  - ClientNew.Post
+  - ClientNew.Put
+  field_count: 23
+  relationships: []
+- name: RiskPolicy
+  variants:
+  - RiskPolicy
+  field_count: 20
+  relationships:
+  - type: has_one
+    target: UserBasic
+    via: creator
+  - type: has_many
+    target: Permission
+    via: permissions
+  - type: has_many
+    target: Member
+    via: members
+- name: Upload
+  variants:
+  - Upload
+  - Upload.Post
+  - Upload.Put
+  field_count: 23
+  relationships: []
+- name: User
+  variants:
+  - User
+  - User.Post
+  - User.Put
+  field_count: 22
+  relationships:
+  - type: has_many
+    target: UserMetadata
+    via: metadata
+- name: Client
+  variants:
+  - Client
+  - Client.Post
+  - Client.Put
+  field_count: 22
+  relationships: []
+- name: SourceContent
+  variants:
+  - SourceContent
+  - SourceContent.Post
+  - SourceContent.Put
+  field_count: 20
+  relationships:
+  - type: has_one
+    target: UserBasicInfo
+    via: creator
+  - type: has_many
+    target: Permission
+    via: permissions
+- name: Sendfile
+  variants:
+  - Sendfile.Post
+  - Sendfile.Put
+  field_count: 21
+  relationships: []
+- name: Task
+  variants:
+  - Task
+  - Task.Post
+  - Task.Put
+  field_count: 17
+  relationships:
+  - type: has_one
+    target: User
+    via: assignee
+  - type: has_one
+    target: User
+    via: user
+  - type: has_one
+    target: File
+    via: file
+  - type: has_many
+    target: Permission
+    via: permissions
+- name: BaseFolder
+  variants:
+  - BaseFolder
+  - BaseFolder.Post
+  - BaseFolder.Put
+  field_count: 17
+  relationships:
+  - type: has_one
+    target: Folder
+    via: parent
+  - type: has_one
+    target: UserBasicInfo
+    via: creator
+  - type: has_many
+    target: Permission
+    via: permissions
+- name: BaseObject
+  variants:
+  - BaseObject
+  - BaseObject.Post
+  - BaseObject.Put
+  field_count: 17
+  relationships:
+  - type: has_one
+    target: Folder
+    via: parent
+  - type: has_one
+    target: UserBasicInfo
+    via: creator
+  - type: has_many
+    target: Permission
+    via: permissions
+- name: MobileSync
+  variants:
+  - MobileSync
+  - MobileSync.Post
+  - MobileSync.Put
+  field_count: 15
+  relationships:
+  - type: has_many
+    target: Fingerprint
+    via: fingerprints
+  - type: has_one
+    target: PushedObject
+    via: pushedObject
+  - type: has_one
+    target: SyncedObject
+    via: syncedObject
+  - type: has_one
+    target: UserBasic
+    via: pushUser
+  - type: has_one
+    target: File
+    via: file
+- name: SendfileExternal
+  variants:
+  - SendfileExternal.Post
+  - SendfileExternal.Put
+  field_count: 19
+  relationships: []
+- name: Comment
+  variants:
+  - Comment
+  - Comment.Post
+  - Comment.Put
+  field_count: 15
+  relationships:
+  - type: has_one
+    target: BaseObject
+    via: object
+  - type: has_one
+    target: UserBasicInfo
+    via: author
+  - type: has_many
+    target: Permission
+    via: permissions
+- name: Member
+  variants:
+  - Member
+  - Member.Post
+  - Member.Put
+  field_count: 14
+  relationships:
+  - type: has_one
+    target: UserBasic
+    via: user
+  - type: has_one
+    target: Role
+    via: role
+  - type: has_one
+    target: Group
+    via: group
+  - type: has_one
+    target: UserBasic
+    via: sharedBy
+- name: RequestFile
+  variants:
+  - RequestFile
+  - RequestFile.Post
+  - RequestFile.Put
+  field_count: 13
+  relationships:
+  - type: has_one
+    target: UserBasic1
+    via: requestor
+  - type: has_one
+    target: UserBasic1
+    via: recipient
+  - type: has_one
+    target: Mail2
+    via: email
+  - type: has_one
+    target: RequestFileConfig
+    via: config
+- name: ScimUser
+  variants:
+  - ScimUser
+  field_count: 12
+  relationships:
+  - type: has_one
+    target: ScimMeta
+    via: meta
+  - type: has_many
+    target: ScimMultiValue1
+    via: emails
+  - type: has_many
+    target: ScimMultiValue1
+    via: phoneNumbers
+  - type: has_many
+    target: ScimMultiValue1
+    via: photos
+  - type: has_many
+    target: ScimMultiValue1
+    via: roles
+- name: UserMe
+  variants:
+  - UserMe
+  - UserMe.Post
+  - UserMe.Put
+  field_count: 15
+  relationships:
+  - type: has_many
+    target: UserMetadata
+    via: metadata
+- name: FolderCreatePostRequest
+  variants:
+  - FolderCreatePostRequest
+  field_count: 14
+  relationships: []
+- name: FolderUpdatePutRequest
+  variants:
+  - FolderUpdatePutRequest
+  field_count: 14
+  relationships: []
+- name: Tenant
+  variants:
+  - Tenant
+  - Tenant.Post
+  - Tenant.Put
+  field_count: 13
+  relationships: []
+- name: WebForm
+  variants:
+  - WebForm
+  - WebForm.Post
+  - WebForm.Put
+  field_count: 11
+  relationships:
+  - type: has_many
+    target: WebFormProfile
+    via: profiles
+  - type: has_many
+    target: WebFormField
+    via: fields
+- name: ActivityAdmin
+  variants:
+  - ActivityAdmin
+  field_count: 12
+  relationships: []
+- name: MemberGroup
+  variants:
+  - MemberGroup
+  - MemberGroup.Post
+  - MemberGroup.Put
+  field_count: 9
+  relationships:
+  - type: has_one
+    target: LdapGroup
+    via: group
+  - type: has_one
+    target: Role
+    via: role
+  - type: has_one
+    target: User
+    via: user
+- name: SearchResult
+  variants:
+  - SearchResult
+  field_count: 9
+  relationships:
+  - type: has_many
+    target: Folder1
+    via: folders
+  - type: has_many
+    target: File
+    via: files
+  - type: has_many
+    target: Mail
+    via: emails
+- name: MemberBase
+  variants:
+  - MemberBase
+  - MemberBase.Post
+  - MemberBase.Put
+  field_count: 8
+  relationships:
+  - type: has_one
+    target: User
+    via: user
+  - type: has_one
+    target: LdapGroup
+    via: group
+  - type: has_one
+    target: Role
+    via: role
+- name: ScimUsersPostRequest
+  variants:
+  - ScimUsersPostRequest
+  field_count: 9
+  relationships:
+  - type: has_many
+    target: ScimMultiValueMobile
+    via: phoneNumbers
+  - type: has_many
+    target: ScimMultiValue
+    via: roles
+- name: ScimUsersPutRequest
+  variants:
+  - ScimUsersPutRequest
+  field_count: 8
+  relationships:
+  - type: has_many
+    target: ScimMultiValueMobile
+    via: phoneNumbers
+  - type: has_many
+    target: ScimMultiValue
+    via: roles
+  - type: has_one
+    target: DataRetentionOption
+    via: userTypeDemotionOptions
+- name: TfaConfigResponse
+  variants:
+  - TfaConfigResponse
+  - TfaConfigResponse.Post
+  - TfaConfigResponse.Put
+  field_count: 11
+  relationships: []
+- name: Activity
+  variants:
+  - Activity
+  field_count: 9
+  relationships:
+  - type: has_one
+    target: ActivityUser
+    via: user
+- name: Export
+  variants:
+  - Export
+  - Export.Post
+  - Export.Put
+  field_count: 10
+  relationships: []
+- name: NodeHealthMetricResponse
+  variants:
+  - NodeHealthMetricResponse
+  field_count: 5
+  relationships:
+  - type: has_one
+    target: KwDatabaseMetric
+    via: kw_database
+  - type: has_one
+    target: WebRequestsMetric
+    via: web_requests
+  - type: has_one
+    target: JobQueuedMetric
+    via: jobqueued
+  - type: has_one
+    target: SftpMetric
+    via: sftp
+  - type: has_one
+    target: SystemResourcesMetric
+    via: system_resources
+- name: Package
+  variants:
+  - Package
+  - Package.Post
+  - Package.Put
+  field_count: 9
+  relationships:
+  - type: has_many
+    target: Attachment
+    via: attachments
+- name: Preview
+  variants:
+  - Preview
+  field_count: 10
+  relationships: []
+- name: Search
+  variants:
+  - Search
+  field_count: 6
+  relationships:
+  - type: has_many
+    target: File
+    via: files
+  - type: has_many
+    target: Folder
+    via: folders
+  - type: has_many
+    target: Email
+    via: emails
+  - type: has_one
+    target: SearchMetadata
+    via: metadata
+- name: UserAttachment
+  variants:
+  - UserAttachment
+  field_count: 10
+  relationships: []
+- name: WebFormField
+  variants:
+  - WebFormField
+  field_count: 10
+  relationships: []
+- name: Card
+  variants:
+  - Card
+  field_count: 7
+  relationships:
+  - type: has_many
+    target: CardAction
+    via: actions
+  - type: has_one
+    target: CardHost
+    via: host
+- name: FolderCreate
+  variants:
+  - FolderCreate.Post
+  - FolderCreate.Put
+  field_count: 9
+  relationships: []
+- name: InitiateUploadZipPostRequest
+  variants:
+  - InitiateUploadZipPostRequest
+  field_count: 9
+  relationships: []
+- name: KPTransferStatus
+  variants:
+  - KPTransferStatus
+  field_count: 9
+  relationships: []
+- name: KwDatabaseMetric
+  variants:
+  - KwDatabaseMetric
+  field_count: 9
+  relationships: []
+- name: MailCounters
+  variants:
+  - MailCounters
+  field_count: 9
+  relationships: []
+- name: RequestFileToFolderPostRequest
+  variants:
+  - RequestFileToFolderPostRequest
+  field_count: 9
+  relationships: []
+- name: Settings
+  variants:
+  - Settings
+  - Settings.Post
+  - Settings.Put
+  field_count: 9
+  relationships: []
+- name: AttachmentDownloadEvent
+  variants:
+  - AttachmentDownloadEvent
+  - AttachmentDownloadEvent.Post
+  - AttachmentDownloadEvent.Put
+  field_count: 8
+  relationships: []
+- name: Contact
+  variants:
+  - Contact
+  - Contact.Post
+  - Contact.Put
+  field_count: 7
+  relationships:
+  - type: has_many
+    target: ContactItem
+    via: items
+- name: ContactBase
+  variants:
+  - ContactBase
+  - ContactBase.Post
+  - ContactBase.Put
+  field_count: 7
+  relationships:
+  - type: has_many
+    target: ContactItem
+    via: items
+- name: Device
+  variants:
+  - Device
+  - Device.Post
+  - Device.Put
+  field_count: 8
+  relationships: []
+- name: EmailCounters
+  variants:
+  - EmailCounters
+  field_count: 8
+  relationships: []
+- name: Favorite
+  variants:
+  - Favorite
+  - Favorite.Post
+  - Favorite.Put
+  field_count: 6
+  relationships:
+  - type: has_one
+    target: UserBasicInfo
+    via: creator
+  - type: has_one
+    target: Folder
+    via: object
+- name: InitiateUploadPostRequest
+  variants:
+  - InitiateUploadPostRequest
+  field_count: 8
+  relationships: []
+- name: JobQueuedMetric
+  variants:
+  - JobQueuedMetric
+  field_count: 8
+  relationships: []
+- name: Mail2
+  variants:
+  - Mail2
+  field_count: 8
+  relationships: []
+- name: OtpRecipient
+  variants:
+  - OtpRecipient
+  - OtpRecipient.Post
+  - OtpRecipient.Put
+  field_count: 7
+  relationships:
+  - type: has_one
+    target: UserBasicInfo
+    via: user
+- name: RequestFileToInboxPostRequest
+  variants:
+  - RequestFileToInboxPostRequest
+  field_count: 8
+  relationships: []
+- name: SharedMailboxPostRequest
+  variants:
+  - SharedMailboxPostRequest
+  field_count: 8
+  relationships: []
+- name: Source
+  variants:
+  - Source
+  - Source.Post
+  - Source.Put
+  field_count: 8
+  relationships: []
+- name: UserDeleteOptions
+  variants:
+  - UserDeleteOptions.Post
+  - UserDeleteOptions.Put
+  field_count: 8
+  relationships: []
+- name: UserDemoteOptions
+  variants:
+  - UserDemoteOptions.Post
+  - UserDemoteOptions.Put
+  field_count: 8
+  relationships: []
+- name: UserDemoteToRecipient
+  variants:
+  - UserDemoteToRecipient.Post
+  - UserDemoteToRecipient.Put
+  field_count: 8
+  relationships: []
+- name: UserDemoteToRestricted
+  variants:
+  - UserDemoteToRestricted.Post
+  - UserDemoteToRestricted.Put
+  field_count: 8
+  relationships: []
+- name: AcfsConfig
+  variants:
+  - AcfsConfig
+  field_count: 7
+  relationships: []
+- name: CardActionPostRequest
+  variants:
+  - CardActionPostRequest
+  field_count: 7
+  relationships: []
+- name: ErrorStringSchemaAccessVerifications
+  variants:
+  - ErrorStringSchemaAccessVerifications
+  field_count: 6
+  relationships:
+  - type: has_one
+    target: AccessVerificationApproval
+    via: accessVerification
+- name: PasswordPolicy
+  variants:
+  - PasswordPolicy
+  field_count: 7
+  relationships: []
+- name: Profile
+  variants:
+  - Profile
+  - Profile.Post
+  - Profile.Put
+  field_count: 6
+  relationships:
+  - type: has_many
+    target: FeaturesList
+    via: features
+- name: Template
+  variants:
+  - Template
+  - Template.Post
+  - Template.Put
+  field_count: 7
+  relationships: []
+- name: TrackingAccessRecipient
+  variants:
+  - TrackingAccessRecipient
+  field_count: 6
+  relationships:
+  - type: has_one
+    target: UserBasic
+    via: user
+- name: UserSshPublicKey1
+  variants:
+  - UserSshPublicKey1
+  field_count: 7
+  relationships: []
+- name: BaseChunkUploadRequest
+  variants:
+  - BaseChunkUploadRequest
+  field_count: 6
+  relationships: []
+- name: ClientEventLogsPostRequest
+  variants:
+  - ClientEventLogsPostRequest
+  field_count: 6
+  relationships: []
+- name: ECObject
+  variants:
+  - ECObject
+  field_count: 6
+  relationships: []
+- name: FileMembersPostRequest
+  variants:
+  - FileMembersPostRequest
+  field_count: 6
+  relationships: []
+- name: FileType
+  variants:
+  - FileType
+  - FileType.Post
+  - FileType.Put
+  field_count: 5
+  relationships:
+  - type: has_many
+    target: MediaTypeItem
+    via: mediaTypes
+- name: FolderMemberPostRequest
+  variants:
+  - FolderMemberPostRequest
+  field_count: 6
+  relationships: []
+- name: FolderQuota
+  variants:
+  - FolderQuota
+  field_count: 6
+  relationships: []
+- name: FolderSendMessageRequest
+  variants:
+  - FolderSendMessageRequest
+  field_count: 6
+  relationships: []
+- name: MemberBulk
+  variants:
+  - MemberBulk.Post
+  - MemberBulk.Put
+  field_count: 6
+  relationships: []
+- name: ProfileMappings
+  variants:
+  - ProfileMappings
+  field_count: 3
+  relationships:
+  - type: has_many
+    target: ProfileMapping
+    via: ldap
+  - type: has_many
+    target: ProfileMapping
+    via: kiteworks
+  - type: has_many
+    target: ProfileMapping
+    via: sso
+- name: Recipient
+  variants:
+  - Recipient
+  - Recipient.Post
+  - Recipient.Put
+  field_count: 5
+  relationships:
+  - type: has_one
+    target: UserBasic
+    via: user
+- name: ScimUsers
+  variants:
+  - ScimUsers
+  field_count: 5
+  relationships:
+  - type: has_many
+    target: ScimUser
+    via: Resources
+- name: SendMessage
+  variants:
+  - SendMessage.Post
+  - SendMessage.Put
+  field_count: 6
+  relationships: []
+- name: SharedMailbox
+  variants:
+  - SharedMailbox
+  field_count: 4
+  relationships:
+  - type: has_one
+    target: UserBasic
+    via: user
+  - type: has_many
+    target: UserBasic
+    via: members
+- name: Site
+  variants:
+  - Site
+  field_count: 6
+  relationships: []
+- name: SystemResourcesMetric
+  variants:
+  - SystemResourcesMetric
+  field_count: 6
+  relationships: []
+- name: TotpSetupResponse
+  variants:
+  - TotpSetupResponse
+  - TotpSetupResponse.Post
+  - TotpSetupResponse.Put
+  field_count: 6
+  relationships: []
+- name: Tray
+  variants:
+  - Tray
+  - Tray.Post
+  - Tray.Put
+  field_count: 5
+  relationships:
+  - type: has_one
+    target: File
+    via: object
+- name: UploadChunk
+  variants:
+  - UploadChunk.Post
+  - UploadChunk.Put
+  field_count: 6
+  relationships: []
+- name: UploadLink
+  variants:
+  - UploadLink
+  field_count: 6
+  relationships: []
+- name: UserQuota
+  variants:
+  - UserQuota
+  field_count: 5
+  relationships:
+  - type: has_one
+    target: SystemFolders
+    via: sys_folders
+- name: UserSshPublicKey
+  variants:
+  - UserSshPublicKey
+  field_count: 6
+  relationships: []
+- name: WebRequestsMetric
+  variants:
+  - WebRequestsMetric
+  field_count: 6
+  relationships: []
+- name: AdminFolderPutRequest
+  variants:
+  - AdminFolderPutRequest
+  field_count: 5
+  relationships: []
+- name: AdminRoleGroupPolicy
+  variants:
+  - AdminRoleGroupPolicy
+  - AdminRoleGroupPolicy.Post
+  - AdminRoleGroupPolicy.Put
+  field_count: 5
+  relationships: []
+- name: AdminUserImport
+  variants:
+  - AdminUserImport
+  field_count: 4
+  relationships:
+  - type: has_many
+    target: AdminUserImportError
+    via: errors
+- name: ApprovalRequestLink
+  variants:
+  - ApprovalRequestLink
+  - ApprovalRequestLink.Post
+  - ApprovalRequestLink.Put
+  field_count: 5
+  relationships: []
+- name: BulkOperationLockFile
+  variants:
+  - BulkOperationLockFile
+  field_count: 3
+  relationships:
+  - type: has_many
+    target: ErrorString
+    via: errors
+  - type: has_many
+    target: File
+    via: data
+- name: BulkOperationMoveFolders
+  variants:
+  - BulkOperationMoveFolders
+  field_count: 3
+  relationships:
+  - type: has_many
+    target: ErrorString
+    via: errors
+  - type: has_many
+    target: Folder1
+    via: data
+- name: CommentLink
+  variants:
+  - CommentLink
+  - CommentLink.Post
+  - CommentLink.Put
+  field_count: 5
+  relationships: []
+- name: ConnectorOAuthLink
+  variants:
+  - ConnectorOAuthLink
+  - ConnectorOAuthLink.Post
+  - ConnectorOAuthLink.Put
+  field_count: 5
+  relationships: []
+- name: DataRetentionOption
+  variants:
+  - DataRetentionOption
+  field_count: 5
+  relationships: []
+- name: EmailPreviewLink
+  variants:
+  - EmailPreviewLink
+  - EmailPreviewLink.Post
+  - EmailPreviewLink.Put
+  field_count: 5
+  relationships: []
+- name: EventLink
+  variants:
+  - EventLink
+  - EventLink.Post
+  - EventLink.Put
+  field_count: 5
+  relationships: []
+- name: FavoriteOpenAPI2
+  variants:
+  - FavoriteOpenAPI2
+  field_count: 4
+  relationships:
+  - type: has_one
+    target: Folder1
+    via: object
+- name: FolderFileAddMembers
+  variants:
+  - FolderFileAddMembers
+  field_count: 3
+  relationships:
+  - type: has_many
+    target: ErrorStringSchemaAccessVerifications
+    via: errors
+  - type: has_many
+    target: Member
+    via: data
+- name: FoldersMetaData
+  variants:
+  - FoldersMetaData
+  field_count: 5
+  relationships: []
+- name: GDriveOAuthLink
+  variants:
+  - GDriveOAuthLink
+  - GDriveOAuthLink.Post
+  - GDriveOAuthLink.Put
+  field_count: 5
+  relationships: []
+- name: Group
+  variants:
+  - Group
+  - Group.Post
+  - Group.Put
+  field_count: 5
+  relationships: []
+- name: Hostname
+  variants:
+  - Hostname
+  - Hostname.Post
+  - Hostname.Put
+  field_count: 5
+  relationships: []
+- name: Language
+  variants:
+  - Language
+  - Language.Post
+  - Language.Put
+  field_count: 5
+  relationships: []
+- name: LdapGroup
+  variants:
+  - LdapGroup
+  - LdapGroup.Post
+  - LdapGroup.Put
+  field_count: 5
+  relationships: []
+- name: MailLink
+  variants:
+  - MailLink
+  - MailLink.Post
+  - MailLink.Put
+  field_count: 5
+  relationships: []
+- name: MobileInfo
+  variants:
+  - MobileInfo
+  field_count: 5
+  relationships: []
+- name: MobileSyncLink
+  variants:
+  - MobileSyncLink
+  - MobileSyncLink.Post
+  - MobileSyncLink.Put
+  field_count: 5
+  relationships: []
+- name: Notification
+  variants:
+  - Notification
+  - Notification.Post
+  - Notification.Put
+  field_count: 5
+  relationships: []
+- name: PasswordResetLink
+  variants:
+  - PasswordResetLink
+  - PasswordResetLink.Post
+  - PasswordResetLink.Put
+  field_count: 5
+  relationships: []
+- name: PasswordSetLink
+  variants:
+  - PasswordSetLink
+  - PasswordSetLink.Post
+  - PasswordSetLink.Put
+  field_count: 5
+  relationships: []
+- name: PushedObject
+  variants:
+  - PushedObject
+  field_count: 4
+  relationships:
+  - type: has_one
+    target: UserBasic
+    via: user
+- name: RequestFileLink
+  variants:
+  - RequestFileLink
+  - RequestFileLink.Post
+  - RequestFileLink.Put
+  field_count: 5
+  relationships: []
+- name: RequestFileSource
+  variants:
+  - RequestFileSource
+  field_count: 4
+  relationships:
+  - type: has_many
+    target: RequestFilePermission
+    via: permissions
+- name: Shortlink
+  variants:
+  - Shortlink
+  - Shortlink.Post
+  - Shortlink.Put
+  field_count: 5
+  relationships: []
+- name: SyncedObject
+  variants:
+  - SyncedObject
+  field_count: 4
+  relationships:
+  - type: has_one
+    target: UserBasic
+    via: user
+- name: TaskLink
+  variants:
+  - TaskLink
+  - TaskLink.Post
+  - TaskLink.Put
+  field_count: 5
+  relationships: []
+- name: Timezone
+  variants:
+  - Timezone
+  - Timezone.Post
+  - Timezone.Put
+  field_count: 5
+  relationships: []
+- name: TosResponse
+  variants:
+  - TosResponse
+  - TosResponse.Post
+  - TosResponse.Put
+  field_count: 5
+  relationships: []
+- name: UserNotification
+  variants:
+  - UserNotification
+  - UserNotification.Post
+  - UserNotification.Put
+  field_count: 5
+  relationships: []
+- name: UserRegister
+  variants:
+  - UserRegister.Post
+  - UserRegister.Put
+  field_count: 5
+  relationships: []
+- name: VerificationCodeLink
+  variants:
+  - VerificationCodeLink
+  - VerificationCodeLink.Post
+  - VerificationCodeLink.Put
+  field_count: 5
+  relationships: []
+- name: ActivitiesWithdrawUserFilesJob
+  variants:
+  - ActivitiesWithdrawUserFilesJob
+  field_count: 4
+  relationships: []
+- name: ActivityUser
+  variants:
+  - ActivityUser
+  field_count: 4
+  relationships: []
+- name: AdminRole
+  variants:
+  - AdminRole
+  - AdminRole.Post
+  - AdminRole.Put
+  field_count: 4
+  relationships: []
+- name: AttachmentDownloadReport
+  variants:
+  - AttachmentDownloadReport
+  - AttachmentDownloadReport.Post
+  - AttachmentDownloadReport.Put
+  field_count: 3
+  relationships:
+  - type: has_many
+    target: AttachmentDownloadEvent
+    via: downloads
+- name: Attachments
+  variants:
+  - Attachments
+  field_count: 2
+  relationships:
+  - type: has_many
+    target: Attachment
+    via: data
+  - type: has_one
+    target: MetaData
+    via: metadata
+- name: BaseNotification
+  variants:
+  - BaseNotification
+  - BaseNotification.Post
+  - BaseNotification.Put
+  field_count: 4
+  relationships: []
+- name: CloudSourceLogin
+  variants:
+  - CloudSourceLogin.Post
+  - CloudSourceLogin.Put
+  field_count: 4
+  relationships: []
+- name: ContactList
+  variants:
+  - ContactList
+  field_count: 2
+  relationships:
+  - type: has_one
+    target: MetaData
+    via: metadata
+  - type: has_many
+    target: Contact
+    via: data
+- name: CopyEcItemJob
+  variants:
+  - CopyEcItemJob
+  field_count: 4
+  relationships: []
+- name: CopyToEcJob
+  variants:
+  - CopyToEcJob
+  field_count: 4
+  relationships: []
+- name: ECSource
+  variants:
+  - ECSource
+  field_count: 4
+  relationships: []
+- name: ECUserSource
+  variants:
+  - ECUserSource
+  field_count: 4
+  relationships: []
+- name: EmailAccountLockedJob
+  variants:
+  - EmailAccountLockedJob
+  field_count: 4
+  relationships: []
+- name: EmailEcItemJob
+  variants:
+  - EmailEcItemJob
+  field_count: 4
+  relationships: []
+- name: EmailReturnReceipt
+  variants:
+  - EmailReturnReceipt
+  - EmailReturnReceipt.Post
+  - EmailReturnReceipt.Put
+  field_count: 3
+  relationships:
+  - type: has_one
+    target: UserBasicInfo
+    via: user
+- name: ErrorInteger
+  variants:
+  - ErrorInteger
+  field_count: 4
+  relationships: []
+- name: ErrorString
+  variants:
+  - ErrorString
+  field_count: 4
+  relationships: []
+- name: FavoriteListOpenAPI2
+  variants:
+  - FavoriteListOpenAPI2
+  field_count: 2
+  relationships:
+  - type: has_many
+    target: FavoriteOpenAPI2
+    via: data
+  - type: has_one
+    target: MetaData
+    via: metadata
+- name: FileAddedNotificationJob
+  variants:
+  - FileAddedNotificationJob
+  field_count: 4
+  relationships: []
+- name: FileCopyPostBodyRequest
+  variants:
+  - FileCopyPostBodyRequest
+  field_count: 4
+  relationships: []
+- name: FilePathResponse
+  variants:
+  - FilePathResponse
+  - FilePathResponse.Post
+  - FilePathResponse.Put
+  field_count: 2
+  relationships:
+  - type: has_many
+    target: FolderTreeItem
+    via: data
+  - type: has_many
+    target: HateoasLink
+    via: links
+- name: FolderChildrenFiles
+  variants:
+  - FolderChildrenFiles
+  field_count: 2
+  relationships:
+  - type: has_many
+    target: File
+    via: data
+  - type: has_one
+    target: MetaData
+    via: metadata
+- name: Folders
+  variants:
+  - Folders
+  field_count: 2
+  relationships:
+  - type: has_many
+    target: Folder1
+    via: data
+  - type: has_one
+    target: FoldersMetaData
+    via: metadata
+- name: GroupNotification
+  variants:
+  - GroupNotification
+  - GroupNotification.Post
+  - GroupNotification.Put
+  field_count: 4
+  relationships: []
+- name: Job
+  variants:
+  - Job
+  field_count: 4
+  relationships: []
+- name: KitepointPreview
+  variants:
+  - KitepointPreview
+  field_count: 4
+  relationships: []
+- name: Link
+  variants:
+  - Link
+  field_count: 4
+  relationships: []
+- name: Location
+  variants:
+  - Location
+  - Location.Post
+  - Location.Put
+  field_count: 4
+  relationships: []
+- name: LocationList
+  variants:
+  - LocationList
+  field_count: 2
+  relationships:
+  - type: has_many
+    target: Location
+    via: data
+  - type: has_one
+    target: MetaData
+    via: metadata
+- name: MailAttachments
+  variants:
+  - MailAttachments
+  field_count: 2
+  relationships:
+  - type: has_many
+    target: UserAttachment
+    via: data
+  - type: has_one
+    target: MetaData
+    via: metadata
+- name: Mails
+  variants:
+  - Mails
+  field_count: 2
+  relationships:
+  - type: has_many
+    target: Mail1
+    via: data
+  - type: has_one
+    target: MetaData
+    via: metadata
+- name: Members
+  variants:
+  - Members
+  field_count: 2
+  relationships:
+  - type: has_many
+    target: Member
+    via: data
+  - type: has_one
+    target: MetaData
+    via: metadata
+- name: MobileSyncList
+  variants:
+  - MobileSyncList
+  field_count: 2
+  relationships:
+  - type: has_many
+    target: MobileSync
+    via: data
+  - type: has_one
+    target: MetaData
+    via: metadata
+- name: MoveEcItemJob
+  variants:
+  - MoveEcItemJob
+  field_count: 4
+  relationships: []
+- name: PopulateSftpUsernamesJob
+  variants:
+  - PopulateSftpUsernamesJob
+  field_count: 4
+  relationships: []
+- name: PostFileZipStatusBodyRequest
+  variants:
+  - PostFileZipStatusBodyRequest
+  field_count: 4
+  relationships: []
+- name: PreauthResponse
+  variants:
+  - PreauthResponse
+  - PreauthResponse.Post
+  - PreauthResponse.Put
+  field_count: 4
+  relationships: []
+- name: ProfileMapping
+  variants:
+  - ProfileMapping
+  - ProfileMapping.Post
+  - ProfileMapping.Put
+  field_count: 4
+  relationships: []
+- name: RefreshToken
+  variants:
+  - RefreshToken
+  field_count: 4
+  relationships: []
+- name: Role
+  variants:
+  - Role
+  - Role.Post
+  - Role.Put
+  field_count: 4
+  relationships: []
+- name: ScimMeta
+  variants:
+  - ScimMeta
+  field_count: 4
+  relationships: []
+- name: SearchMetadata
+  variants:
+  - SearchMetadata
+  field_count: 4
+  relationships: []
+- name: SharedMailboxList
+  variants:
+  - SharedMailboxList
+  field_count: 2
+  relationships:
+  - type: has_many
+    target: SharedMailbox
+    via: data
+  - type: has_one
+    target: MetaData
+    via: metadata
+- name: SourceType
+  variants:
+  - SourceType
+  - SourceType.Post
+  - SourceType.Put
+  field_count: 4
+  relationships: []
+- name: SystemFolders
+  variants:
+  - SystemFolders
+  field_count: 4
+  relationships: []
+- name: UserBasic
+  variants:
+  - UserBasic
+  field_count: 4
+  relationships: []
+- name: UserBasicInfo
+  variants:
+  - UserBasicInfo
+  - UserBasicInfo.Post
+  - UserBasicInfo.Put
+  field_count: 4
+  relationships: []
+- name: ActivationCode
+  variants:
+  - ActivationCode.Post
+  - ActivationCode.Put
+  field_count: 3
+  relationships: []
+- name: ActivationCodeSend
+  variants:
+  - ActivationCodeSend.Post
+  - ActivationCodeSend.Put
+  field_count: 3
+  relationships: []
+- name: Bandwidth
+  variants:
+  - Bandwidth
+  field_count: 3
+  relationships: []
+- name: BulkOperationInteger
+  variants:
+  - BulkOperationInteger
+  field_count: 2
+  relationships:
+  - type: has_many
+    target: ErrorInteger
+    via: errors
+- name: ContactCreate
+  variants:
+  - ContactCreate
+  field_count: 2
+  relationships:
+  - type: has_many
+    target: ContactEmail
+    via: items
+- name: ContactItem
+  variants:
+  - ContactItem
+  - ContactItem.Post
+  - ContactItem.Put
+  field_count: 3
+  relationships: []
+- name: DailyBandwidth
+  variants:
+  - DailyBandwidth
+  field_count: 3
+  relationships: []
+- name: EmailReturnRecipient
+  variants:
+  - EmailReturnRecipient
+  field_count: 2
+  relationships:
+  - type: has_one
+    target: UserBasic
+    via: user
+- name: EncryptUsername
+  variants:
+  - EncryptUsername.Post
+  - EncryptUsername.Put
+  field_count: 3
+  relationships: []
+- name: FileInput
+  variants:
+  - FileInput.Post
+  field_count: 3
+  relationships: []
+- name: FileMovePostBodyRequest
+  variants:
+  - FileMovePostBodyRequest
+  field_count: 3
+  relationships: []
+- name: FileTypeGroup
+  variants:
+  - FileTypeGroup
+  - FileTypeGroup.Post
+  - FileTypeGroup.Put
+  field_count: 3
+  relationships: []
+- name: FileUpdateRequest
+  variants:
+  - FileUpdateRequest
+  field_count: 3
+  relationships: []
+- name: GroupCreate
+  variants:
+  - GroupCreate
+  field_count: 2
+  relationships:
+  - type: has_many
+    target: GroupEmail
+    via: items
+- name: MailIdCounters
+  variants:
+  - MailIdCounters
+  field_count: 2
+  relationships:
+  - type: has_one
+    target: MailCounters
+    via: counters
+- name: MediaType
+  variants:
+  - MediaType
+  - MediaType.Post
+  - MediaType.Put
+  field_count: 3
+  relationships: []
+- name: MediaTypeItem
+  variants:
+  - MediaTypeItem
+  - MediaTypeItem.Post
+  - MediaTypeItem.Put
+  field_count: 3
+  relationships: []
+- name: MetaData
+  variants:
+  - MetaData
+  field_count: 3
+  relationships: []
+- name: MonthlyBandwidth
+  variants:
+  - MonthlyBandwidth
+  field_count: 3
+  relationships: []
+- name: Permission
+  variants:
+  - Permission
+  field_count: 3
+  relationships: []
+- name: RemoteWipe
+  variants:
+  - RemoteWipe.Post
+  - RemoteWipe.Put
+  field_count: 3
+  relationships: []
+- name: SafeEdit
+  variants:
+  - SafeEdit
+  field_count: 2
+  relationships:
+  - type: has_one
+    target: UserBasic
+    via: user
+- name: ScimMultiValue1
+  variants:
+  - ScimMultiValue1
+  field_count: 3
+  relationships: []
+- name: ScimMultiValueMobile
+  variants:
+  - ScimMultiValueMobile
+  field_count: 3
+  relationships: []
+- name: SendRequestFile
+  variants:
+  - SendRequestFile.Post
+  - SendRequestFile.Put
+  field_count: 3
+  relationships: []
+- name: SiteConfiguration
+  variants:
+  - SiteConfiguration
+  field_count: 3
+  relationships: []
+- name: SourcePreviewStatus
+  variants:
+  - SourcePreviewStatus
+  - SourcePreviewStatus.Post
+  - SourcePreviewStatus.Put
+  field_count: 3
+  relationships: []
+- name: Tag
+  variants:
+  - Tag
+  - Tag.Post
+  - Tag.Put
+  field_count: 3
+  relationships: []
+- name: Transaction
+  variants:
+  - Transaction
+  - Transaction.Post
+  - Transaction.Put
+  field_count: 3
+  relationships: []
+- name: UserForcedPasswordChange
+  variants:
+  - UserForcedPasswordChange.Post
+  - UserForcedPasswordChange.Put
+  field_count: 3
+  relationships: []
+- name: UserLogin
+  variants:
+  - UserLogin.Post
+  - UserLogin.Put
+  field_count: 3
+  relationships: []
+- name: UserMeConcurrentChallenge
+  variants:
+  - UserMeConcurrentChallenge
+  field_count: 3
+  relationships: []
+- name: UserMobileNumberPassword
+  variants:
+  - UserMobileNumberPassword.Post
+  - UserMobileNumberPassword.Put
+  field_count: 3
+  relationships: []
+- name: UserNamePassword
+  variants:
+  - UserNamePassword.Post
+  - UserNamePassword.Put
+  field_count: 3
+  relationships: []
+- name: UserOtpAuth
+  variants:
+  - UserOtpAuth.Post
+  - UserOtpAuth.Put
+  field_count: 3
+  relationships: []
+- name: UserTfa
+  variants:
+  - UserTfa.Post
+  - UserTfa.Put
+  field_count: 3
+  relationships: []
+- name: UsersEmailMigration
+  variants:
+  - UsersEmailMigration.Post
+  - UsersEmailMigration.Put
+  field_count: 2
+  relationships:
+  - type: has_many
+    target: UserEmail
+    via: users
+- name: ActivityList
+  variants:
+  - ActivityList
+  field_count: 1
+  relationships:
+  - type: has_many
+    target: Activity
+    via: data
+- name: AdminFilePutRequest
+  variants:
+  - AdminFilePutRequest
+  field_count: 2
+  relationships: []
+- name: AdminRoleGroupPolicyChanges
+  variants:
+  - AdminRoleGroupPolicyChanges.Post
+  - AdminRoleGroupPolicyChanges.Put
+  field_count: 1
+  relationships:
+  - type: has_many
+    target: AdminRoleGroupPolicy
+    via: changes
+- name: AdminUserImportError
+  variants:
+  - AdminUserImportError
+  field_count: 2
+  relationships: []
+- name: AdminUserSshPublicKeyList
+  variants:
+  - AdminUserSshPublicKeyList
+  field_count: 1
+  relationships:
+  - type: has_many
+    target: UserSshPublicKey1
+    via: data
+- name: AvailableLdapGroup
+  variants:
+  - AvailableLdapGroup
+  field_count: 2
+  relationships: []
+- name: BulkClientEventLogsPostRequest
+  variants:
+  - BulkClientEventLogsPostRequest
+  field_count: 1
+  relationships:
+  - type: has_many
+    target: ClientEventLogsPostRequest
+    via: events
+- name: CardAction
+  variants:
+  - CardAction
+  field_count: 2
+  relationships: []
+- name: CardHost
+  variants:
+  - CardHost
+  field_count: 2
+  relationships: []
+- name: ClientCustomEventLog
+  variants:
+  - ClientCustomEventLog
+  field_count: 2
+  relationships: []
+- name: DailyStorage
+  variants:
+  - DailyStorage
+  field_count: 2
+  relationships: []
+- name: DestinationFolderIdRequest
+  variants:
+  - DestinationFolderIdRequest
+  field_count: 2
+  relationships: []
+- name: DistributionList
+  variants:
+  - DistributionList
+  field_count: 2
+  relationships: []
+- name: DrmFile
+  variants:
+  - DrmFile
+  field_count: 2
+  relationships: []
+- name: ECPreviewStatus
+  variants:
+  - ECPreviewStatus
+  field_count: 2
+  relationships: []
+- name: EcmAuth
+  variants:
+  - EcmAuth
+  field_count: 2
+  relationships: []
+- name: Error
+  variants:
+  - Error
+  field_count: 2
+  relationships: []
+- name: Errors
+  variants:
+  - Errors
+  field_count: 1
+  relationships:
+  - type: has_many
+    target: Error
+    via: error
+- name: ExternalDLs
+  variants:
+  - ExternalDLs
+  field_count: 1
+  relationships:
+  - type: has_many
+    target: ExternalDL
+    via: data
+- name: FileCopyMove
+  variants:
+  - FileCopyMove.Post
+  - FileCopyMove.Put
+  field_count: 2
+  relationships: []
+- name: FileNameRequest
+  variants:
+  - FileNameRequest.Post
+  - FileNameRequest.Put
+  field_count: 2
+  relationships: []
+- name: FilePermissions
+  variants:
+  - FilePermissions
+  - FilePermissions.Post
+  - FilePermissions.Put
+  field_count: 2
+  relationships: []
+- name: FileZip
+  variants:
+  - FileZip.Post
+  - FileZip.Put
+  field_count: 2
+  relationships: []
+- name: Files
+  variants:
+  - Files
+  field_count: 1
+  relationships:
+  - type: has_many
+    target: File
+    via: data
+- name: Fingerprint
+  variants:
+  - Fingerprint
+  field_count: 2
+  relationships: []
+- name: FolderPermissions
+  variants:
+  - FolderPermissions
+  field_count: 1
+  relationships:
+  - type: has_many
+    target: Permission
+    via: data
+- name: FolderTreeItem
+  variants:
+  - FolderTreeItem
+  - FolderTreeItem.Post
+  - FolderTreeItem.Put
+  field_count: 2
+  relationships: []
+- name: HateoasLink
+  variants:
+  - HateoasLink
+  - HateoasLink.Post
+  - HateoasLink.Put
+  field_count: 2
+  relationships: []
+- name: LdapSearchResultUser
+  variants:
+  - LdapSearchResultUser
+  field_count: 2
+  relationships: []
+- name: LdapSearchResults
+  variants:
+  - LdapSearchResults
+  field_count: 1
+  relationships:
+  - type: has_many
+    target: LdapSearchResultUser
+    via: matches
+- name: LoginResponse
+  variants:
+  - LoginResponse
+  - LoginResponse.Post
+  - LoginResponse.Put
+  field_count: 2
+  relationships: []
+- name: MailCountersList
+  variants:
+  - MailCountersList
+  field_count: 1
+  relationships:
+  - type: has_many
+    target: MailIdCounters
+    via: data
+- name: MonthlyStorage
+  variants:
+  - MonthlyStorage
+  field_count: 2
+  relationships: []
+- name: MultipleFolderIdRequest
+  variants:
+  - MultipleFolderIdRequest
+  field_count: 2
+  relationships: []
+- name: OnPremiseSourceLogin
+  variants:
+  - OnPremiseSourceLogin.Post
+  - OnPremiseSourceLogin.Put
+  field_count: 2
+  relationships: []
+- name: OtpRecipientModel
+  variants:
+  - OtpRecipientModel
+  - OtpRecipientModel.Post
+  - OtpRecipientModel.Put
+  field_count: 2
+  relationships: []
+- name: ProfileMappingOrder
+  variants:
+  - ProfileMappingOrder
+  - ProfileMappingOrder.Post
+  - ProfileMappingOrder.Put
+  field_count: 2
+  relationships: []
+- name: ProfileMappingsTest
+  variants:
+  - ProfileMappingsTest
+  field_count: 1
+  relationships:
+  - type: has_many
+    target: ProfileMapping
+    via: result
+- name: RecentObject
+  variants:
+  - RecentObject
+  field_count: 2
+  relationships: []
+- name: RecentObjectsPostRequest
+  variants:
+  - RecentObjectsPostRequest
+  field_count: 1
+  relationships:
+  - type: has_many
+    target: RecentObject
+    via: objects
+- name: RequestFilePermission
+  variants:
+  - RequestFilePermission
+  field_count: 2
+  relationships: []
+- name: RequestFileUpload
+  variants:
+  - RequestFileUpload
+  field_count: 2
+  relationships: []
+- name: SearchSharePointSitesResult
+  variants:
+  - SearchSharePointSitesResult
+  field_count: 1
+  relationships:
+  - type: has_many
+    target: Site
+    via: sites
+- name: SendOption
+  variants:
+  - SendOption
+  field_count: 2
+  relationships: []
+- name: SftpMetric
+  variants:
+  - SftpMetric
+  field_count: 2
+  relationships: []
+- name: SharedMailboxMemberStatusPatchRequest
+  variants:
+  - SharedMailboxMemberStatusPatchRequest
+  field_count: 2
+  relationships: []
+- name: SharedMailboxStatusPatchRequest
+  variants:
+  - SharedMailboxStatusPatchRequest
+  field_count: 1
+  relationships:
+  - type: has_many
+    target: SharedMailboxMemberStatusPatchRequest
+    via: data
+- name: Sources
+  variants:
+  - Sources
+  field_count: 1
+  relationships:
+  - type: has_many
+    target: Source
+    via: data
+- name: Storage
+  variants:
+  - Storage
+  field_count: 2
+  relationships: []
+- name: SubmissionRequest
+  variants:
+  - SubmissionRequest
+  field_count: 2
+  relationships: []
+- name: TfaChallengeResponse
+  variants:
+  - TfaChallengeResponse
+  - TfaChallengeResponse.Post
+  - TfaChallengeResponse.Put
+  field_count: 2
+  relationships: []
+- name: UserAdminRole
+  variants:
+  - UserAdminRole
+  - UserAdminRole.Post
+  - UserAdminRole.Put
+  field_count: 2
+  relationships: []
+- name: UserBasic1
+  variants:
+  - UserBasic1
+  field_count: 2
+  relationships: []
+- name: UserDistributionList
+  variants:
+  - UserDistributionList
+  field_count: 2
+  relationships: []
+- name: UserDistributionLists
+  variants:
+  - UserDistributionLists
+  field_count: 1
+  relationships:
+  - type: has_many
+    target: UserDistributionList
+    via: data
+- name: UserEmail
+  variants:
+  - UserEmail.Post
+  - UserEmail.Put
+  field_count: 2
+  relationships: []
+- name: UserGeneratedSshPublicKeyKey
+  variants:
+  - UserGeneratedSshPublicKeyKey
+  field_count: 2
+  relationships: []
+- name: UserMeConcurrentAuthPostRequest
+  variants:
+  - UserMeConcurrentAuthPostRequest
+  field_count: 2
+  relationships: []
+- name: UserMePinsPostRequest
+  variants:
+  - UserMePinsPostRequest
+  field_count: 2
+  relationships: []
+- name: UserMetadata
+  variants:
+  - UserMetadata
+  field_count: 2
+  relationships: []
+- name: UserOtp
+  variants:
+  - UserOtp.Post
+  - UserOtp.Put
+  field_count: 2
+  relationships: []
+- name: UserPassword
+  variants:
+  - UserPassword.Post
+  - UserPassword.Put
+  field_count: 2
+  relationships: []
+- name: UserPreauth
+  variants:
+  - UserPreauth.Post
+  - UserPreauth.Put
+  field_count: 2
+  relationships: []
+- name: UserResetPassword
+  variants:
+  - UserResetPassword.Post
+  - UserResetPassword.Put
+  field_count: 2
+  relationships: []
+- name: UserSshPublicKeyList
+  variants:
+  - UserSshPublicKeyList
+  field_count: 1
+  relationships:
+  - type: has_many
+    target: UserSshPublicKey
+    via: data
+- name: UserSshPublicKeysPostCreateRequest
+  variants:
+  - UserSshPublicKeysPostCreateRequest
+  field_count: 2
+  relationships: []
+- name: UserSshPublicKeysPostGenerateRequest
+  variants:
+  - UserSshPublicKeysPostGenerateRequest
+  field_count: 2
+  relationships: []
+- name: UserTfaTotpResetSecret
+  variants:
+  - UserTfaTotpResetSecret.Post
+  - UserTfaTotpResetSecret.Put
+  field_count: 2
+  relationships: []
+- name: UserTfaTotpVerifySecret
+  variants:
+  - UserTfaTotpVerifySecret.Post
+  - UserTfaTotpVerifySecret.Put
+  field_count: 2
+  relationships: []
+- name: UserTos
+  variants:
+  - UserTos.Post
+  - UserTos.Put
+  field_count: 2
+  relationships: []
+- name: Variables
+  variants:
+  - Variables
+  field_count: 2
+  relationships: []
+- name: WebFormList
+  variants:
+  - WebFormList
+  field_count: 1
+  relationships:
+  - type: has_many
+    target: WebForm
+    via: data
+- name: WebFormProfile
+  variants:
+  - WebFormProfile
+  field_count: 2
+  relationships: []
+- name: WopiAccessToken
+  variants:
+  - WopiAccessToken
+  field_count: 2
+  relationships: []
+- name: AdminDeleteTOTPSecretRequest
+  variants:
+  - AdminDeleteTOTPSecretRequest
+  field_count: 1
+  relationships: []
+- name: AdminFileRescan
+  variants:
+  - AdminFileRescan
+  field_count: 1
+  relationships: []
+- name: AuthRedirectResponse
+  variants:
+  - AuthRedirectResponse
+  - AuthRedirectResponse.Post
+  - AuthRedirectResponse.Put
+  field_count: 1
+  relationships: []
+- name: BaseError
+  variants:
+  - BaseError
+  field_count: 1
+  relationships: []
+- name: ClientScopesResponse
+  variants:
+  - ClientScopesResponse
+  - ClientScopesResponse.Post
+  - ClientScopesResponse.Put
+  field_count: 1
+  relationships: []
+- name: ContactEmail
+  variants:
+  - ContactEmail
+  field_count: 1
+  relationships: []
+- name: DownloadLink
+  variants:
+  - DownloadLink
+  field_count: 1
+  relationships: []
+- name: EpgdbImportPost
+  variants:
+  - EpgdbImportPost
+  field_count: 1
+  relationships: []
+- name: EpgdbImportRequest
+  variants:
+  - EpgdbImportRequest
+  field_count: 1
+  relationships: []
+- name: ExternalDL
+  variants:
+  - ExternalDL
+  field_count: 1
+  relationships: []
+- name: ExternalDLUpdateRequest
+  variants:
+  - ExternalDLUpdateRequest
+  field_count: 1
+  relationships: []
+- name: FileLockPostRequest
+  variants:
+  - FileLockPostRequest
+  field_count: 1
+  relationships: []
+- name: FilePreviewSupport
+  variants:
+  - FilePreviewSupport
+  field_count: 1
+  relationships: []
+- name: FolderCopy
+  variants:
+  - FolderCopy.Post
+  - FolderCopy.Put
+  field_count: 1
+  relationships: []
+- name: FolderMove
+  variants:
+  - FolderMove.Post
+  - FolderMove.Put
+  field_count: 1
+  relationships: []
+- name: GroupEmail
+  variants:
+  - GroupEmail
+  field_count: 1
+  relationships: []
+- name: Logout
+  variants:
+  - Logout
+  field_count: 1
+  relationships: []
+- name: MailWithdrawRequest
+  variants:
+  - MailWithdrawRequest
+  field_count: 1
+  relationships: []
+- name: MigrateUsersCsv
+  variants:
+  - MigrateUsersCsv.Post
+  - MigrateUsersCsv.Put
+  field_count: 1
+  relationships: []
+- name: NodeHealthStatusResponse
+  variants:
+  - NodeHealthStatusResponse
+  field_count: 1
+  relationships: []
+- name: OtpRecipientChanges
+  variants:
+  - OtpRecipientChanges
+  - OtpRecipientChanges.Post
+  - OtpRecipientChanges.Put
+  field_count: 1
+  relationships: []
+- name: ProfileMappingChanges
+  variants:
+  - ProfileMappingChanges
+  - ProfileMappingChanges.Post
+  - ProfileMappingChanges.Put
+  field_count: 1
+  relationships: []
+- name: RequestFileConfig
+  variants:
+  - RequestFileConfig
+  field_count: 1
+  relationships: []
+- name: RequestFileReplyPostRequest
+  variants:
+  - RequestFileReplyPostRequest
+  field_count: 1
+  relationships: []
+- name: ScimMultiValue
+  variants:
+  - ScimMultiValue
+  field_count: 1
+  relationships: []
+- name: SendMailSettingPutRequest
+  variants:
+  - SendMailSettingPutRequest
+  field_count: 1
+  relationships: []
+- name: SharedMailboxPatchRequest
+  variants:
+  - SharedMailboxPatchRequest
+  field_count: 1
+  relationships: []
+- name: TenantSuspend
+  variants:
+  - TenantSuspend.Post
+  - TenantSuspend.Put
+  field_count: 1
+  relationships: []
+- name: TokenExchange
+  variants:
+  - TokenExchange.Post
+  - TokenExchange.Put
+  field_count: 1
+  relationships: []
+- name: UserAuthCode
+  variants:
+  - UserAuthCode.Post
+  - UserAuthCode.Put
+  field_count: 1
+  relationships: []
+- name: UserRequestPasswordReset
+  variants:
+  - UserRequestPasswordReset.Post
+  - UserRequestPasswordReset.Put
+  field_count: 1
+  relationships: []

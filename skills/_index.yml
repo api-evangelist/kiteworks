@@ -1,0 +1,63 @@
+generated: '2026-07-19'
+method: generated
+source:
+- openapi/kiteworks-core-openapi-original.json
+- openapi/kiteworks-pubsub-openapi-original.yml
+- conventions/kiteworks-conventions.yml
+- errors/kiteworks-problem-types.yml
+- authentication/kiteworks-authentication.yml
+note: Kiteworks publishes no Agent Skills or AGENTS.md of its own (github.com/kiteworks checked). These
+  are generated from the published v28 OpenAPI. The Kiteworks specs declare no operationIds, so every
+  step is grounded in a verified METHOD + path pair that exists verbatim in the referenced spec.
+skills:
+- file: kiteworks-authenticate.md
+  name: Authenticate to the Kiteworks REST API
+  api: openapi/kiteworks-core-openapi-original.json
+  operations:
+  - GET /rest/users/me
+  - GET /rest/users/me/quota
+- file: kiteworks-upload-and-share-file.md
+  name: Upload a file to a Kiteworks folder and share it by secure mail
+  api: openapi/kiteworks-core-openapi-original.json
+  operations:
+  - GET /rest/folders/top
+  - GET /rest/folders/{id}/folders
+  - POST /rest/folders/{id}/actions/initiateUpload
+  - GET /rest/uploads/config
+  - GET /rest/uploads/{id}
+  - POST /rest/mail/actions/sendFile
+  - GET /rest/mail/{id}/recipients
+- file: kiteworks-request-files-from-external-party.md
+  name: Request files from an external party and collect the uploads
+  api: openapi/kiteworks-core-openapi-original.json
+  operations:
+  - POST /rest/folders/{id}/actions/requestFile
+  - POST /rest/mail/actions/requestFile
+  - GET /rest/requestFile/{ref}
+  - GET /rest/requestFile/{ref}/uploads
+  - GET /rest/requestFile/{ref}/sources
+  - GET /rest/requestFile/{ref}/sources/{object_id}/content
+  - POST /rest/requestFile/{ref}/reply
+  - DELETE /rest/requestFile/{ref}
+- file: kiteworks-provision-users-scim.md
+  name: Provision and deprovision Kiteworks users over SCIM 2.0
+  api: openapi/kiteworks-core-openapi-original.json
+  operations:
+  - GET /rest/scim/ServiceProviderConfig
+  - GET /rest/scim/Schemas
+  - GET /rest/scim/ResourceTypes
+  - GET /rest/scim/Users
+  - POST /rest/scim/Users
+  - GET /rest/scim/Users/{id}
+  - PUT /rest/scim/Users/{id}
+  - DELETE /rest/scim/Users/{id}
+- file: kiteworks-subscribe-to-events.md
+  name: Subscribe to Kiteworks platform events with PubSub webhooks
+  api: openapi/kiteworks-pubsub-openapi-original.yml
+  operations:
+  - GET /webhooks
+  - POST /webhooks
+  - GET /webhooks/{id}
+  - PUT /webhooks/{id}
+  - PATCH /webhooks/{id}
+  - DELETE /webhooks/{id}

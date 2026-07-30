@@ -1,0 +1,162 @@
+generated: '2026-07-19'
+method: searched
+status: published
+source: https://github.com/kiteworks/mcp
+docs: https://developer.kiteworks.com/mcp-overview.html
+server:
+  name: kiteworks
+  description: Official Kiteworks MCP Server (Apache-2.0) letting LLM applications operate on Kiteworks
+    files, folders, forms and user info.
+  repository: https://github.com/kiteworks/mcp
+  license: Apache-2.0
+  latest_version: 0.9.4
+  released: '2026-06-29'
+  compatibility: Kiteworks 9.3.1 and later
+  transports:
+  - transport: stdio
+    mode: Local STDIO Server
+    description: Single-user local deployment; native binaries for Windows, Linux and macOS. Provides
+      a data channel so file transfers stay out of the LLM context.
+  - transport: http
+    mode: Remote HTTPS Server
+    description: Multi-user centralized server with OAuth 2.1, deployable as Docker container or systemd
+      service.
+    container: ghcr.io/kiteworks/kiteworks-mcp:0.9.4
+  - transport: stdio
+    mode: Claude Desktop extension
+    description: Native .mcpb extension package installable from Claude Desktop settings.
+    asset: kiteworks-mcp_0.9.4.mcpb
+  auth:
+    type: oauth2.1
+    flows:
+    - authorization_code
+    pkce: true
+    dynamic_client_registration: true
+    notes: JWT access + refresh tokens with automatic refresh. Credentials are stored in the OS keychain
+      and never exposed to the LLM context.
+  security:
+    fips_140_3_mode: true
+    fips_env: GODEBUG=fips140=only
+    crypto:
+    - AES-256-GCM
+    - RSA + SHA-256
+    - TLS 1.3 with NIST-approved curves
+    - Hybrid X25519+ML-KEM-768 key exchange (FIPS 203)
+    tls_validation: Validates the TLS certificate of the remote Kiteworks server; aborts on failure.
+    destructive_tools_default: disabled (enable with --enable-destructive-tools)
+    path_access_default: relative paths only (enable with --insecure-absolute-paths)
+    rate_limiting: Configurable at global, per-user and per-session levels
+install:
+- client: claude-code
+  command: claude mcp add --transport stdio kiteworks /path/to/kiteworks-mcp start https://your.kiteworks.domain
+- client: claude-desktop
+  command: Install the kiteworks-mcp_0.9.4.mcpb extension via Settings -> Extensions -> Advanced Settings
+    -> Install Extension
+- client: docker
+  command: docker pull ghcr.io/kiteworks/kiteworks-mcp:0.9.4
+tools_source: https://github.com/kiteworks/mcp/blob/main/docs/AVAILABLE_TOOLS.md
+tools:
+- name: download_file_to_path
+  description: Download a file from Kiteworks to local filesystem by file ID
+  group: File Operations - Path-Based
+  modes:
+  - stdio
+- name: upload_file_from_path
+  description: Upload a file from local filesystem to a Kiteworks folder
+  group: File Operations - Path-Based
+  modes:
+  - stdio
+- name: read_file_contents
+  description: Read text file contents into conversation context as UTF8 (not for local download)
+  group: File Operations - Content-Based
+  modes:
+  - all
+- name: create_file_from_content
+  description: Create a file in Kiteworks from content in conversation context (not for local upload)
+  group: File Operations - Content-Based
+  modes:
+  - all
+- name: get_file_metadata
+  description: Retrieve file metadata by ID
+  group: File Operations - Metadata
+  modes:
+  - all
+- name: rename_file
+  description: Rename a file by ID
+  group: File Operations - Metadata
+  modes:
+  - all
+- name: move_file
+  description: Move one or more files to a different folder
+  group: File Operations - Metadata
+  modes:
+  - all
+  destructive: true
+- name: delete_file
+  description: Delete one or more files (with confirmation)
+  group: File Operations - Metadata
+  modes:
+  - all
+  destructive: true
+- name: get_top_folders
+  description: Fetch top-level folders with optional filtering
+  group: Folder Operations
+  modes:
+  - all
+- name: get_folder_children
+  description: Fetch folder contents by parent ID with filtering
+  group: Folder Operations
+  modes:
+  - all
+- name: create_folder
+  description: Create a new folder with specified options
+  group: Folder Operations
+  modes:
+  - all
+- name: rename_folder
+  description: Rename a folder by ID
+  group: Folder Operations
+  modes:
+  - all
+- name: move_folder
+  description: Move a folder to a different parent folder
+  group: Folder Operations
+  modes:
+  - all
+  destructive: true
+- name: delete_folder
+  description: Delete one or more folders and their contents (with confirmation)
+  group: Folder Operations
+  modes:
+  - all
+  destructive: true
+- name: search
+  description: Search folders and/or files by name
+  group: Search Operations
+  modes:
+  - all
+- name: search_folders
+  description: Search folders only by name
+  group: Search Operations
+  modes:
+  - all
+- name: search_files
+  description: Search files only by name or content
+  group: Search Operations
+  modes:
+  - all
+- name: create_form
+  description: Generate Kiteworks Secure Data Forms from templates with preview links
+  group: Forms
+  modes:
+  - all
+- name: get_create_form_schema
+  description: Retrieve the JSON schema for form creation
+  group: Forms
+  modes:
+  - all
+- name: get_user_info_whoami
+  description: Get current Kiteworks user information
+  group: User Operations
+  modes:
+  - all

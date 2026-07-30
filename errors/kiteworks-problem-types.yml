@@ -1,0 +1,117 @@
+generated: '2026-07-19'
+method: derived
+format: proprietary
+source: openapi/kiteworks-core-openapi-original.json
+docs: https://developer.kiteworks.com/api-concepts.html
+note: Kiteworks does not use RFC 9457 problem+json. All errors return a JSON object with `code` (machine-readable),
+  `message` (human-readable) and, on 422 only, `field` (the offending parameter). Status frequencies below
+  are derived from the 394 operations in the v28 OpenAPI; the meanings are taken from the published API
+  Concepts page.
+envelope:
+  media_type: application/json
+  fields:
+  - name: code
+    required: true
+    description: Machine-readable identifier for programmatic handling.
+  - name: message
+    required: true
+    description: Human-readable description.
+  - name: field
+    required: false
+    description: Parameter name causing the error (422 responses only).
+problems:
+- status: 400
+  title: 'Bad Request<br /><br /><i>Possible error codes: </i>ERR_REQUEST_INVALID_JSON'
+  meaning: Bad Request — malformed syntax or invalid parameters.
+  operation_count: 37
+  example_operations:
+  - POST /rest/files/actions/copy
+  - POST /rest/files/actions/move
+  - GET /rest/files/actions/zipStatus
+- status: 401
+  title: 'Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED'
+  meaning: Unauthorized — missing, expired or invalid OAuth access token.
+  operation_count: 156
+  example_operations:
+  - GET /rest/favorites
+  - POST /rest/files/actions/copy
+  - PATCH /rest/files/actions/lock
+- status: 403
+  title: 'Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER'
+  meaning: Forbidden — the authenticated user or the OAuth scope does not permit this operation.
+  operation_count: 237
+  example_operations:
+  - DELETE /rest/admin/hostnames
+  - PUT /rest/admin/hostnames/{id}
+  - DELETE /rest/admin/hostnames/{id}
+- status: 404
+  title: 'Not Found<br /><br /><i>Possible error codes: </i>ERR_ENTITY_NOT_FOUND'
+  meaning: Not Found — the referenced resource does not exist or is not visible to the caller.
+  operation_count: 8
+  example_operations:
+  - GET /rest/users/me/quota
+  - PUT /rest/scim/users/{id}
+  - PUT /rest/scim/Users/{id}
+- status: 409
+  title: 'Conflict<br /><br /><i>Possible error codes: </i>ERR_ENTITY_EXISTS'
+  meaning: Conflict — the request conflicts with current resource state (for example a duplicate name).
+  operation_count: 25
+  example_operations:
+  - POST /rest/admin/hostnames
+  - POST /rest/clients
+  - POST /rest/devices
+- status: 410
+  title: 'Gone<br /><br /><i>Possible error codes: </i>ERR_ENTITY_DELETED_PERMANENTLY'
+  meaning: Gone — the resource has been permanently removed.
+  operation_count: 2
+  example_operations:
+  - PATCH /rest/mail/actions/deletePermanent
+  - PATCH /rest/mail/actions/recover
+- status: 413
+  title: 'Content Too Large<br /><br /><i>Possible error codes: </i>ERR_SYSTEM_NO_STORAGE_AVAILABLE'
+  meaning: Payload Too Large — the uploaded content exceeds the configured size limit.
+  operation_count: 10
+  example_operations:
+  - POST /rest/files/actions/copy
+  - POST /rest/files/actions/move
+  - POST /rest/folders/{id}/actions/move
+- status: 422
+  title: 'Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INVALID_PARAMETER'
+  meaning: Unprocessable Entity — validation failed; the response `field` names the offending parameter.
+  operation_count: 119
+  example_operations:
+  - POST /rest/admin/hostnames
+  - PUT /rest/admin/profiles/mappingOrder
+  - PUT /rest/admin/profiles/{id}/mappings
+- status: 490
+  title: Request blocked by WAF
+  meaning: Request blocked by the Kiteworks Web Application Firewall (WAF). Non-standard Kiteworks-specific
+    status returned on every operation.
+  operation_count: 394
+  example_operations:
+  - GET /rest/activities
+  - GET /rest/admin/hostnames
+  - DELETE /rest/admin/hostnames
+- status: 500
+  title: ERR_INTERNAL_SERVER_ERROR
+  meaning: Internal Server Error.
+  operation_count: 2
+  example_operations:
+  - GET /rest/nodeHealth/status
+  - GET /rest/nodeHealth/{node_id}/metrics/{metric_name}
+- status: 503
+  title: 'Service Unavailable<br /><br /><i>Possible error codes: </i>ERR_SESSION_LIMIT_REACHED, ERR_UPLOAD_CHUNK_FAILED'
+  meaning: Service Unavailable — the appliance is unavailable or in maintenance.
+  operation_count: 3
+  example_operations:
+  - GET /rest/nodeHealth/status
+  - POST /rest/system/epgdb/import/{id}
+  - POST /rest/system/epgdb/import
+- status: 507
+  title: 'Insufficient Storage<br /><br /><i>Possible error codes: </i>ERR_INSUFFICIENT_DISK_SPACE'
+  meaning: Insufficient Storage — the target storage quota is exhausted.
+  operation_count: 3
+  example_operations:
+  - POST /rest/system/epgdb/import/{id}
+  - POST /rest/system/epgdb/import
+  - POST /rest/system/epgdb/export
