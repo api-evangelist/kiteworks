@@ -1,25 +1,782 @@
 aid: kiteworks
 name: Kiteworks
-description: Kiteworks is a company surfaced as a portfolio company of insight-partners and added to the
-  API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: Kiteworks operates a Private Data Network (PDN) that unifies secure email, secure file
+  sharing, secure web forms, managed file transfer (MFT), and SFTP behind a single hardened virtual
+  appliance with a common governance, encryption, and audit layer. The platform targets regulated
+  industries — government, defense, healthcare, financial services, legal, manufacturing, and higher
+  education — where sensitive content leaving the organization must be tracked and provably compliant
+  with regimes such as CMMC 2.0, FedRAMP, HIPAA, GDPR, and NIST 800-171. Kiteworks exposes its platform
+  through a versioned REST API (currently v28) covering files, folders, mail, web forms, users, admin,
+  SCIM provisioning, and search across roughly 400 endpoints, plus a PubSub webhook service for
+  real-time event delivery and an Apache-2.0 licensed Model Context Protocol (MCP) server that lets AI
+  assistants operate on Kiteworks content under OAuth 2.1. The company was formerly known as Accellion.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://www.kiteworks.com/wp-content/uploads/2026/07/kiteworks-logo-1.svg
 url: https://raw.githubusercontent.com/api-evangelist/kiteworks/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - insight-partners
-x-tier: stub
-x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
 tags:
 - Company
-apis: []
+- Secure File Sharing
+- Managed File Transfer
+- Secure Email
+- Data Governance
+- Regulatory Compliance
+- Content Security
+- Private Data Network
+- CMMC
+- SCIM
+apis:
+- aid: kiteworks:kiteworks-activities-api
+  name: Kiteworks activities API
+  description: The activities API from Kiteworks — 2 operation(s) for activities.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - activities
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-activities-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-admin-api
+  name: Kiteworks admin API
+  description: The admin API from Kiteworks — 19 operation(s) for admin.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - admin
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-admin-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-adminroles-api
+  name: Kiteworks adminRoles API
+  description: The adminRoles API from Kiteworks — 4 operation(s) for adminroles.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - adminRoles
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-adminroles-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-advancedforms-api
+  name: Kiteworks advancedForms API
+  description: The advancedForms API from Kiteworks — 1 operation(s) for advancedforms.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - advancedForms
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-advancedforms-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-cards-api
+  name: Kiteworks cards API
+  description: The cards API from Kiteworks — 3 operation(s) for cards.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - cards
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-cards-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-clienteventlogs-api
+  name: Kiteworks clientEventLogs API
+  description: The clientEventLogs API from Kiteworks — 1 operation(s) for clienteventlogs.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - clientEventLogs
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-clienteventlogs-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-clients-api
+  name: Kiteworks clients API
+  description: The clients API from Kiteworks — 4 operation(s) for clients.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - clients
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-clients-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-comments-api
+  name: Kiteworks comments API
+  description: The comments API from Kiteworks — 4 operation(s) for comments.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - comments
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-comments-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-contacts-api
+  name: Kiteworks contacts API
+  description: The contacts API from Kiteworks — 2 operation(s) for contacts.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - contacts
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-contacts-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-devices-api
+  name: Kiteworks devices API
+  description: The devices API from Kiteworks — 6 operation(s) for devices.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - devices
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-devices-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-dli-api
+  name: Kiteworks dli API
+  description: The dli API from Kiteworks — 18 operation(s) for dli.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - dli
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-dli-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-externaldl-api
+  name: Kiteworks externalDL API
+  description: The externalDL API from Kiteworks — 1 operation(s) for externaldl.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - externalDL
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-externaldl-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-favorites-api
+  name: Kiteworks favorites API
+  description: The favorites API from Kiteworks — 3 operation(s) for favorites.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - favorites
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-favorites-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-files-api
+  name: Kiteworks files API
+  description: The files API from Kiteworks — 61 operation(s) for files.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - files
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-files-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-folders-api
+  name: Kiteworks folders API
+  description: The folders API from Kiteworks — 30 operation(s) for folders.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - folders
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-folders-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-groups-api
+  name: Kiteworks groups API
+  description: The groups API from Kiteworks — 2 operation(s) for groups.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - groups
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-groups-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-internal-api
+  name: Kiteworks internal API
+  description: The internal API from Kiteworks — 1 operation(s) for internal.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - internal
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-internal-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-languages-api
+  name: Kiteworks languages API
+  description: The languages API from Kiteworks — 2 operation(s) for languages.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - languages
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-languages-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-ldapgroups-api
+  name: Kiteworks ldapGroups API
+  description: The ldapGroups API from Kiteworks — 2 operation(s) for ldapgroups.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - ldapGroups
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-ldapgroups-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-locations-api
+  name: Kiteworks locations API
+  description: The locations API from Kiteworks — 2 operation(s) for locations.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - locations
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-locations-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-mail-api
+  name: Kiteworks mail API
+  description: The mail API from Kiteworks — 29 operation(s) for mail.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - mail
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-mail-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-mobilesync-api
+  name: Kiteworks mobileSync API
+  description: The mobileSync API from Kiteworks — 5 operation(s) for mobilesync.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - mobileSync
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-mobilesync-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-notifications-api
+  name: Kiteworks notifications API
+  description: The notifications API from Kiteworks — 3 operation(s) for notifications.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-notifications-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-permissions-api
+  name: Kiteworks permissions API
+  description: The permissions API from Kiteworks — 4 operation(s) for permissions.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - permissions
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-permissions-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-profiles-api
+  name: Kiteworks profiles API
+  description: The profiles API from Kiteworks — 3 operation(s) for profiles.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - profiles
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-profiles-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-requestfile-api
+  name: Kiteworks requestFile API
+  description: The requestFile API from Kiteworks — 13 operation(s) for requestfile.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - requestFile
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-requestfile-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-roles-api
+  name: Kiteworks roles API
+  description: The roles API from Kiteworks — 2 operation(s) for roles.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - roles
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-roles-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-scim-api
+  name: Kiteworks scim API
+  description: The scim API from Kiteworks — 9 operation(s) for scim.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - scim
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-scim-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-search-api
+  name: Kiteworks search API
+  description: The search API from Kiteworks — 3 operation(s) for search.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - search
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-search-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-settings-api
+  name: Kiteworks settings API
+  description: The settings API from Kiteworks — 2 operation(s) for settings.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - settings
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-settings-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-sharedmailbox-api
+  name: Kiteworks sharedMailbox API
+  description: The sharedMailbox API from Kiteworks — 6 operation(s) for sharedmailbox.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - sharedMailbox
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-sharedmailbox-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-shortlinks-api
+  name: Kiteworks shortLinks API
+  description: The shortLinks API from Kiteworks — 1 operation(s) for shortlinks.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - shortLinks
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-shortlinks-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-sources-api
+  name: Kiteworks sources API
+  description: The sources API from Kiteworks — 15 operation(s) for sources.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - sources
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-sources-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-sourcetypes-api
+  name: Kiteworks sourceTypes API
+  description: The sourceTypes API from Kiteworks — 2 operation(s) for sourcetypes.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - sourceTypes
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-sourcetypes-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-system-api
+  name: Kiteworks system API
+  description: The system API from Kiteworks — 6 operation(s) for system.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - system
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-system-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-tasks-api
+  name: Kiteworks tasks API
+  description: The tasks API from Kiteworks — 3 operation(s) for tasks.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-tasks-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-uploads-api
+  name: Kiteworks uploads API
+  description: The uploads API from Kiteworks — 10 operation(s) for uploads.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - uploads
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-uploads-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-users-api
+  name: Kiteworks users API
+  description: The users API from Kiteworks — 30 operation(s) for users.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - users
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-users-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-usersshpublickeys-api
+  name: Kiteworks userSshPublicKeys API
+  description: The userSshPublicKeys API from Kiteworks — 7 operation(s) for usersshpublickeys.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - userSshPublicKeys
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-usersshpublickeys-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-webforms-api
+  name: Kiteworks webForms API
+  description: The webForms API from Kiteworks — 2 operation(s) for webforms.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - webForms
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-webforms-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-webhook-api
+  name: Kiteworks webhook API
+  description: The webhook API from Kiteworks — 2 operation(s) for webhook.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - webhook
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-webhook-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: AgenticAccess
+  url: agentic-access/kiteworks-agentic-access.yml
 - type: Website
   url: https://www.kiteworks.com/
+- type: DeveloperPortal
+  url: https://developer.kiteworks.com/
+- type: Documentation
+  url: https://developer.kiteworks.com/api-concepts.html
+- type: APIReference
+  url: https://developer.kiteworks.com/api-reference.html
+- type: GettingStarted
+  url: https://developer.kiteworks.com/quick-start.html
+- type: Support
+  url: https://www.kiteworks.com/support/
+- type: Blog
+  url: https://www.kiteworks.com/blog/
+- type: GitHubOrganization
+  url: https://github.com/kiteworks
+- type: Pricing
+  url: https://www.kiteworks.com/pricing/
+- type: SignUp
+  url: https://info.kiteworks.com/demo-request
+- type: TermsOfService
+  url: https://www.kiteworks.com/legal/
+- type: PrivacyPolicy
+  url: https://www.kiteworks.com/privacy-policy/
+- type: Sandbox
+  url: https://developer.kiteworks.com/api-playground.html
+- type: Authentication
+  url: authentication/kiteworks-authentication.yml
+- type: OAuthScopes
+  url: scopes/kiteworks-scopes.yml
+- type: Conventions
+  url: conventions/kiteworks-conventions.yml
+- type: RateLimits
+  url: rate-limits/kiteworks-rate-limits.yml
+- type: ErrorCatalog
+  url: errors/kiteworks-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/kiteworks-lifecycle.yml
+- type: DataModel
+  url: data-model/kiteworks-data-model.yml
+- type: Conformance
+  url: conformance/kiteworks-conformance.yml
+- type: Compliance
+  url: https://www.kiteworks.com/platform/compliance/
+- type: Packages
+  url: packages/kiteworks-packages.yml
+- type: MCPServer
+  url: mcp/kiteworks-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Webhooks
+  url: asyncapi/kiteworks-pubsub-webhooks.yml
+- type: WellKnown
+  url: well-known/kiteworks-well-known.yml
+- type: SecurityTxt
+  url: well-known/kiteworks-security.txt
+- type: Security
+  url: https://security.kiteworks.com
+- type: VulnerabilityDisclosure
+  url: security/kiteworks-vulnerability-disclosure.yml
+- type: TrustCenter
+  url: security/kiteworks-trust-center.yml
+- type: DomainSecurity
+  url: security/kiteworks-domain-security.yml
+- type: ChangeLog
+  url: changelog/kiteworks-changelog.yml
+- type: LLMsTxt
+  url: llms/kiteworks-llms.txt
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence
