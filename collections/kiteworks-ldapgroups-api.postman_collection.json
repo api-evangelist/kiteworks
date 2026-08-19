@@ -1,0 +1,981 @@
+{
+  "item": [
+    {
+      "id": "2a82b787-6897-415c-8c84-d887c1482f76",
+      "name": "ldapGroups",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "47e31baa-da41-4e25-a13a-363984ff1e7f",
+          "name": "Returns a list of LDAP groups.",
+          "request": {
+            "name": "Returns a list of LDAP groups.",
+            "description": {
+              "content": "Returns a list of LDAP groups that have been enabled through the kiteworks admin.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "ldapGroups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "LDAP group name"
+                },
+                {
+                  "disabled": false,
+                  "key": "name:contains",
+                  "value": "<string>",
+                  "description": "LDAP group name. Search for results that contain the specified characters in this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<string>",
+                  "description": "LDAP group email."
+                },
+                {
+                  "disabled": false,
+                  "key": "email:contains",
+                  "value": "<string>",
+                  "description": "LDAP group email.. Search for results that contain the specified characters in this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "id:asc",
+                  "description": "Sorting options"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit"
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "With parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a392a3b1-a589-46ae-ae39-2494b8349572",
+              "name": "List of LDAP groups retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "ldapGroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "email:desc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 1,\n      \"name\": \"Engineering\",\n      \"email\": \"engineering@example.com\",\n      \"description\": \"Engineering team LDAP group\"\n    }\n  ],\n  \"metadata\": {\n    \"total\": 1,\n    \"limit\": 50,\n    \"offset\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6460fc4b-e8c9-4410-b459-db240ef17b9e",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "ldapGroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "email:desc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "97a001de-0105-4f0a-9447-74e204350e36",
+          "name": "Create an LDAP group",
+          "request": {
+            "name": "Create an LDAP group",
+            "description": {
+              "content": "Creates a new LDAP group by looking up the provided distinguished name (DN) in the directory. Returns 422 if the DN is invalid or not found.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "ldapGroups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "returnEntity",
+                  "value": "<boolean>",
+                  "description": "If set to `true`, returns information about the newly created entity."
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dn\": \"<string>\",\n  \"email\": \"<string>\",\n  \"description\": \"<string>\",\n  \"addLinks\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4e204d8e-0b73-42f4-8e5c-e18ea55d6ae8",
+              "name": "LDAP group created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "ldapGroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dn\": \"<string>\",\n  \"email\": \"<string>\",\n  \"description\": \"<string>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 5,\n  \"name\": \"Engineering\",\n  \"email\": \"engineering@example.com\",\n  \"description\": \"Engineering team LDAP group\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca791b2b-2980-436e-b5cf-78760938af5b",
+              "name": "Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_REQUIRED, ERR_INPUT_INVALID_EMAIL",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "ldapGroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dn\": \"<string>\",\n  \"email\": \"<string>\",\n  \"description\": \"<string>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_INPUT_REQUIRED\",\n    \"message\": \"Field is required\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56b06fe3-2a68-47fb-ae1c-3eb17f5b2af6",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "ldapGroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dn\": \"<string>\",\n  \"email\": \"<string>\",\n  \"description\": \"<string>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5adebec3-ef4d-478d-838f-a22558935898",
+          "name": "Gets an LDAP group",
+          "request": {
+            "name": "Gets an LDAP group",
+            "description": {
+              "content": "Returns the details of the specified LDAP group, including its name, email address, and description.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "ldapGroups",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) ID of the LDAP group to be retrieved"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fb3eaecf-de5d-44b1-8170-172761e94fb1",
+              "name": "LDAP group details retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "ldapGroups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the LDAP group to be retrieved"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"name\": \"Engineering\",\n  \"email\": \"engineering@example.com\",\n  \"description\": \"Engineering team LDAP group\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59471407-fd60-495f-ad87-3dfc00133b5b",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "ldapGroups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the LDAP group to be retrieved"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e4d02a94-2b8b-4b89-a897-cca1ed1291da",
+          "name": "Updates an LDAP group",
+          "request": {
+            "name": "Updates an LDAP group",
+            "description": {
+              "content": "Updates the settings of the specified LDAP group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "ldapGroups",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) ID of the LDAP to update"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<string>\",\n  \"description\": \"<string>\",\n  \"addLinks\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7d6cfa55-e97b-49ab-8653-112532276d29",
+              "name": "LDAP group updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "ldapGroups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the LDAP to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<string>\",\n  \"description\": \"<string>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"name\": \"Engineering\",\n  \"email\": \"eng-updated@example.com\",\n  \"description\": \"Updated engineering team LDAP group\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a4e3716a-c58d-43e7-90f3-4f6cf25ec916",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "ldapGroups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the LDAP to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<string>\",\n  \"description\": \"<string>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_ACCESS_USER\",\n    \"message\": \"Insufficient access permissions\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8bcfabd-f4ad-438c-82ec-d111c02bb858",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "ldapGroups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the LDAP to update"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<string>\",\n  \"description\": \"<string>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d6844256-7ead-414d-90c9-338bb13f8696",
+          "name": "Deletes an LDAP group",
+          "request": {
+            "name": "Deletes an LDAP group",
+            "description": {
+              "content": "Permanently deletes the specified LDAP group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "ldapGroups",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) ID of the LDAP group to delete"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0f831a40-71d8-4a22-a35e-322366c0cd15",
+              "name": "LDAP group deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "ldapGroups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the LDAP group to delete"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cff9ea58-3ba2-4777-bffd-eec5f5bf0c20",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "ldapGroups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the LDAP group to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_ACCESS_USER\",\n    \"message\": \"Insufficient access permissions\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a6fae56-5c79-40a3-9ef2-34b9c43c3170",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "ldapGroups",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the LDAP group to delete"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a2e2ce90-0e6f-4395-98a2-8672ec4bdc66",
+    "name": "Kiteworks API Documentation activities ldapGroups API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

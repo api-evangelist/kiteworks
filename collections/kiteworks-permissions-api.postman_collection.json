@@ -1,0 +1,1003 @@
+{
+  "item": [
+    {
+      "id": "53a101f2-76c8-4b09-8af8-f0c94b4b51e1",
+      "name": "permissions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dbf36919-dda8-4d6b-bce7-735170136f72",
+          "name": "Return the list of permissions available on a comment",
+          "request": {
+            "name": "Return the list of permissions available on a comment",
+            "description": {
+              "content": "Returns the list of actions the current user is allowed to perform on the specified comment, such as editing or deleting it.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "permissions",
+                "comment",
+                ":comment_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<integer>",
+                  "description": "Unique action identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "id:in",
+                  "value": "<integer>",
+                  "description": "Unique action identifier. Search for results that match any of the specified values for this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Action name"
+                },
+                {
+                  "disabled": false,
+                  "key": "name:contains",
+                  "value": "<string>",
+                  "description": "Action name. Search for results that contain the specified characters in this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "allowed",
+                  "value": "<boolean>",
+                  "description": "Determines if one has permissions to perform action"
+                },
+                {
+                  "disabled": false,
+                  "key": "enabled",
+                  "value": "<boolean>",
+                  "description": "Determines if the given action is available considering the current object state (locked, deleted, etc.)."
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "With parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "comment_id",
+                  "description": "(Required) ID of the comment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8230a801-e710-4258-95ca-f6e239d62abf",
+              "name": "Comment permissions retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "permissions",
+                    "comment",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "id:in",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "allowed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "enabled",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "comment_id",
+                      "description": "(Required) ID of the comment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"COMMENT_EDIT\",\n      \"name\": \"Edit Comment\",\n      \"allowed\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d44d05e6-dd8f-418f-9919-0c2068028832",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "permissions",
+                    "comment",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "id:in",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "allowed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "enabled",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "comment_id",
+                      "description": "(Required) ID of the comment"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cf1d6782-5be8-44f5-a33f-2f7d810e77df",
+          "name": "Get file permissions",
+          "request": {
+            "name": "Get file permissions",
+            "description": {
+              "content": "Returns the list of actions the current user is allowed to perform on the specified file, such as downloading, editing, or commenting.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "permissions",
+                "file",
+                ":file_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<integer>",
+                  "description": "Unique action identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "id:in",
+                  "value": "<integer>",
+                  "description": "Unique action identifier. Search for results that match any of the specified values for this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Action name"
+                },
+                {
+                  "disabled": false,
+                  "key": "name:contains",
+                  "value": "<string>",
+                  "description": "Action name. Search for results that contain the specified characters in this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "allowed",
+                  "value": "<boolean>",
+                  "description": "Determines if one has permissions to perform action"
+                },
+                {
+                  "disabled": false,
+                  "key": "enabled",
+                  "value": "<boolean>",
+                  "description": "Determines if the given action is available considering the current object state (locked, deleted, etc.)."
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "With parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "file_id",
+                  "description": "(Required) ID of the file"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c8798cc5-2989-4c7d-a96b-b3df3426b338",
+              "name": "File permissions retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "permissions",
+                    "file",
+                    ":file_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "id:in",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "allowed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "enabled",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "file_id",
+                      "description": "(Required) ID of the file"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"DOWNLOAD\",\n      \"name\": \"Download\",\n      \"allowed\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "75449459-3eda-426d-b810-ccea2ecc5b50",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "permissions",
+                    "file",
+                    ":file_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "id:in",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "allowed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "enabled",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "file_id",
+                      "description": "(Required) ID of the file"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "85c1495e-316b-4ff2-a269-3b9ded51b729",
+          "name": "Get file permissions for a set of files",
+          "request": {
+            "name": "Get file permissions for a set of files",
+            "description": {
+              "content": "Returns the current user's allowed actions for each of the specified files. File IDs are passed as request parameters. Returns 400 if no file IDs are provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "permissions",
+                "files"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id:in",
+                  "value": "<string>",
+                  "description": "(Required) Unique identifier of the file.. Search for results that match any of the specified values for this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Action name"
+                },
+                {
+                  "disabled": false,
+                  "key": "name:contains",
+                  "value": "<string>",
+                  "description": "Action name. Search for results that contain the specified characters in this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "allowed",
+                  "value": "<boolean>",
+                  "description": "Determines if one has permissions to perform action"
+                },
+                {
+                  "disabled": false,
+                  "key": "enabled",
+                  "value": "<boolean>",
+                  "description": "Determines if the given action is available considering the current object state (locked, deleted, etc.)."
+                },
+                {
+                  "disabled": false,
+                  "key": "action_id",
+                  "value": "<integer>",
+                  "description": "Unique action identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "action_id:in",
+                  "value": "<integer>",
+                  "description": "Unique action identifier. Search for results that match any of the specified values for this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "With parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b190c14d-8f5a-448e-adb2-01f201db7e2e",
+              "name": "File permissions retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "permissions",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "allowed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "enabled",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "action_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "action_id:in",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"fileId\": \"f1a2b3c4-d5e6-7890-abcd-ef1234567890\",\n      \"permissions\": [\n        {\n          \"id\": \"DOWNLOAD\",\n          \"name\": \"Download\",\n          \"allowed\": true\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1399e0e2-e7bf-46fb-bc17-403988d4c6e2",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "permissions",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "allowed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "enabled",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "action_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "action_id:in",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "617ebc50-6b41-4e05-a9fd-bbd06b1a8b4b",
+          "name": "Return the list of permissions available on a task",
+          "request": {
+            "name": "Return the list of permissions available on a task",
+            "description": {
+              "content": "Returns the list of actions the current user is allowed to perform on the specified task, such as completing or deleting it.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "permissions",
+                "task",
+                ":task_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<integer>",
+                  "description": "Unique action identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "id:in",
+                  "value": "<integer>",
+                  "description": "Unique action identifier. Search for results that match any of the specified values for this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Action name"
+                },
+                {
+                  "disabled": false,
+                  "key": "name:contains",
+                  "value": "<string>",
+                  "description": "Action name. Search for results that contain the specified characters in this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "allowed",
+                  "value": "<boolean>",
+                  "description": "Determines if one has permissions to perform action"
+                },
+                {
+                  "disabled": false,
+                  "key": "enabled",
+                  "value": "<boolean>",
+                  "description": "Determines if the given action is available considering the current object state (locked, deleted, etc.)."
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "With parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "task_id",
+                  "description": "(Required) ID of the task"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d5d8855f-f46a-419d-9304-ad7291ece5b2",
+              "name": "Task permissions retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "permissions",
+                    "task",
+                    ":task_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "id:in",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "allowed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "enabled",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "task_id",
+                      "description": "(Required) ID of the task"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"TASK_COMPLETE\",\n      \"name\": \"Complete Task\",\n      \"allowed\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae0fe1e2-154f-48dc-98e2-416e3fa19c72",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "permissions",
+                    "task",
+                    ":task_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "id:in",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "allowed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "enabled",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "task_id",
+                      "description": "(Required) ID of the task"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a3871f67-10f0-423d-9c48-41418724dad1",
+    "name": "Kiteworks API Documentation activities permissions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

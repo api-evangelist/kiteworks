@@ -1,0 +1,151 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities userSshPublicKeys API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "userSshPublicKeys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Register an SSH public key for the current user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/userSshPublicKeys/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Registers an existing SSH public key for the current user.\n### Precondition:\n  SFTP access must be enabled for the user's profile and role.\n### Response:\n  The SSH public key is registered.\n"
+        },
+        {
+          "info": {
+            "name": "Generate a new SSH public/private key pair",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/userSshPublicKeys/generate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Generates a new SSH public/private key pair for the current user and registers the public key.\n### Precondition:\n  SFTP access must be enabled for the user's profile and role.\n### Response:\n  The generated SSH public/private key pair is returned.\n"
+        },
+        {
+          "info": {
+            "name": "Delete an SSH public key",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/userSshPublicKeys/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the entity."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Deletes the specified SSH public key belonging to the current user.\n### Precondition:\n  SFTP access must be enabled for the user's profile and role.\n### Response:\n  The SSH public key is deleted.\n"
+        },
+        {
+          "info": {
+            "name": "List the current user's SSH public keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/userSshPublicKeys",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of SSH public keys to return."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Returns the list of SSH public keys registered for the current user.\n### Precondition:\n  SFTP access must be enabled for the user's profile and role.\n### Response:\n  A list of SSH public key records is returned.\n"
+        },
+        {
+          "info": {
+            "name": "List SSH public keys for a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/admin/users/:id/userSshPublicKeys",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Returns all SSH public keys associated with the specified user.\n### Precondition:\n  The user must be an administrator. SFTP must be enabled for the user's profile and system role.\n### Response:\n  A list of SSH public keys for the specified user is returned.\n"
+        },
+        {
+          "info": {
+            "name": "Create an SSH public key for a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/admin/users/:id/userSshPublicKeys/create",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Creates a new SSH public key record for the specified user using a provided public key string.\n### Precondition:\n  The user must be an administrator. SFTP must be enabled for the user's profile and system role.\n### Response:\n  The SSH public key record is created successfully.\n"
+        },
+        {
+          "info": {
+            "name": "Generate an SSH key pair for a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/admin/users/:id/userSshPublicKeys/generate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Generates a new SSH public/private key pair for the specified user and stores the public key.\n### Precondition:\n  The user must be an administrator. SFTP must be enabled for the user's profile and system role.\n### Response:\n  The newly generated public/private key pair is returned.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,703 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities users API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Deletes Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/users",
+            "params": [
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "List of user IDs to delete."
+              },
+              {
+                "name": "retainToUser",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the new owner to whom the data will be transferred, applicable when `retainData` and/or `retainPermissionToSharedData` are set to true."
+              },
+              {
+                "name": "retainToAdvancedFormUser",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the user to whom the advanced form data will be transferred, similar to retainToUser but specifically for advanced form components."
+              },
+              {
+                "name": "remoteWipe",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to remotely wipe data from both desktop and mobile devices."
+              },
+              {
+                "name": "deleteUnsharedData",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether data owned by the user should be deleted. This is required and must be set to True if `retainData` is False, and vice versa."
+              },
+              {
+                "name": "retainData",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether data should be retained and transferred to another user. This is required and must be True if `deleteUnsharedData` is False, and vice versa."
+              },
+              {
+                "name": "retainPermissionToSharedData",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether permissions to shared folders should be retained."
+              },
+              {
+                "name": "withdrawFileLinks",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether files sent by deleted or demoted users should be withdrawn."
+              },
+              {
+                "name": "withdrawRequestFiles",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether request files sent by deleted or demoted users should be withdrawn."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Mark the specified users as deleted. The size of request User UUID is limited (recommend <= 100)"
+        },
+        {
+          "info": {
+            "name": "User login",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/users/actions/login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Handles user login by accepting the user credentials (username and password)."
+        },
+        {
+          "info": {
+            "name": "Updates token state",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/rest/users/aliveToken"
+          },
+          "docs": "Updates current session state to be not outdated any more"
+        },
+        {
+          "info": {
+            "name": "Find users in LDAP by input supplied",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/users/ldapSearch",
+            "params": [
+              {
+                "name": "value",
+                "value": "",
+                "type": "query",
+                "description": "The user's email or name"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Searches the configured LDAP directory for users matching the supplied search criteria."
+        },
+        {
+          "info": {
+            "name": "Retrieve details of the currently logged-in user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/users/me"
+          },
+          "docs": "Fetches the details of the currently authenticated user, including their email address and name."
+        },
+        {
+          "info": {
+            "name": "Update the current user's details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/rest/users/me",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the details of the currently authenticated user. For example, change their name or password."
+        },
+        {
+          "info": {
+            "name": "Change the password for current user after expired",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/users/me/forcedPasswordChange",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Change the password for current user after password expired"
+        },
+        {
+          "info": {
+            "name": "Update mobile number of the current user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/rest/users/me/mobileNumber",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the mobile number used for two-factor authentication for the current user. Requires the user's current password for verification. When the test-only flag is set, sends a test SMS to the provided number without saving it and returns an empty 200 response."
+        },
+        {
+          "info": {
+            "name": "Retrieve user quota",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/users/me/quota",
+            "params": [
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Limit the quota response to a specific quota type.<br>`send` – Returns send quota usage only.<br>`folder` – Returns folder storage quota only.<br>If omitted, both send and folder quota details are returned."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Retrieves the current user's quota details, including send quota and folder storage quota.\n### Precondition:\n  The user profile must have \"Collaboration Allowed\" enabled or have mail access.\n### Response:\n  Returns the user's quota information.\n"
+        },
+        {
+          "info": {
+            "name": "Two Factor Authentication",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/users/me/tfa/auth",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits the user's Two-Factor Authentication (TFA) passcode to complete the TFA step of the login flow. Returns a redirect URL on success, or a new challenge message if the TFA module requires an additional round of authentication."
+        },
+        {
+          "info": {
+            "name": "Two Factor Authentication",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/users/me/tfa/challenge",
+            "params": [
+              {
+                "name": "referral",
+                "value": "",
+                "type": "query",
+                "description": "Referral URL"
+              }
+            ]
+          },
+          "docs": "Initiates a Two-Factor Authentication (TFA) challenge for the current login session. For challenge-response modules, triggers passcode delivery (for example, via SMS or push notification) and returns a challenge message. If the TFA module accepts immediately, returns a redirect URL to advance the login flow."
+        },
+        {
+          "info": {
+            "name": "Two Factor Authentication",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/users/me/tfa/config"
+          },
+          "docs": "Returns the Two-Factor Authentication (TFA) configuration for the current login session, including the module name, passcode field labels, and device-remembering settings. For SMSOTP modules, also includes the user's registered mobile number and whether the number can be changed."
+        },
+        {
+          "info": {
+            "name": "Reset secret key for time-based OTP of the current user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/users/me/tfa/resetTotpSecret",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Resets the TOTP secret key for the current user. Requires the user's current password. When called without an OTP, generates a new secret and returns setup details including a QR code. When called with an OTP, verifies the new secret and completes the reset."
+        },
+        {
+          "info": {
+            "name": "Setup secret key for Time-based OTP of the current user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/users/me/tfa/setupTotpSecret"
+          },
+          "docs": "Generates a new Time-based One-Time Password (TOTP) secret for the current user and returns the secret key along with a QR code for scanning with an authenticator app. Only available during the TFA setup login state and only if the user does not already have a TOTP secret registered."
+        },
+        {
+          "info": {
+            "name": "Verify code for finalising secret key for Time-based OTP",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/users/me/tfa/verifyTotpSecret",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Verifies the one-time passcode generated by the user's authenticator app to confirm that the new TOTP secret was registered correctly. On success, advances the session to the next step in the authentication flow, skipping a redundant TFA step if one is pending."
+        },
+        {
+          "info": {
+            "name": "Setup 2FA settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/rest/users/me/tfaSetup",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the mobile number for the current user's two-factor authentication setup. Only valid when the user's login state is TFA setup. Returns a redirect URL pointing to the next step in the authentication flow."
+        },
+        {
+          "info": {
+            "name": "Terms of Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/users/me/tos"
+          },
+          "docs": "Returns the Terms of Service configuration for the currently authenticated user's profile, including the TOS content, acceptance text, and whether acceptance is required."
+        },
+        {
+          "info": {
+            "name": "Terms of Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/users/me/tos",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Records the current user's acceptance or rejection of the Terms of Service. In the standard login flow, advances the session to the next authentication step and returns a redirect URL. In OTP login mode, returns an empty 200 response."
+        },
+        {
+          "info": {
+            "name": "User login preauth",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/users/preauth",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "User login preauth."
+        },
+        {
+          "info": {
+            "name": "Register a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/users/register",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Registers a new User in the system by specifying an email address and password."
+        },
+        {
+          "info": {
+            "name": "Request for password reset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/users/requestPasswordReset",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Request for password reset of existing user"
+        },
+        {
+          "info": {
+            "name": "Reset password",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/users/resetPassword",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reset password of an existing user"
+        },
+        {
+          "info": {
+            "name": "Uploads a profile image",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/users/:id/profileImage",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the user."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "body",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Uploads an image file to use as profile image"
+        },
+        {
+          "info": {
+            "name": "Deletes a profile image",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/users/:id/profileImage",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the user."
+              }
+            ]
+          },
+          "docs": "Deletes the user's current profile image."
+        },
+        {
+          "info": {
+            "name": "Get User Settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/users/:id/settings",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the user to retrieve settings for"
+              }
+            ]
+          },
+          "docs": "Returns the settings for the specified user, including language preference, location, email signature, storage usage, and mobile number. Users can only retrieve their own settings."
+        },
+        {
+          "info": {
+            "name": "Update User Settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/rest/users/:id/settings",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the user to update settings for"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the settings for the specified user, including language preference, location, email signature, and timezone. Users can only update their own settings. Returns 400 if the location cannot be changed because it is managed by an LDAP/SSO mapping."
+        },
+        {
+          "info": {
+            "name": "Return user's recent items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/users/me/recent",
+            "params": [
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes the entity in the response body."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter recent items by object type. Accepts a list of type values.<br>`d` – Directories (folders) only.<br>`f` – Files only.<br>If omitted, both files and folders are returned."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Retrieves the current user's recently accessed files and folders.\n### Precondition:\n  The user profile must have \"Collaboration Allowed\" enabled.\n### Response:\n  Returns the list of the user's recently accessed items.\n"
+        },
+        {
+          "info": {
+            "name": "Add objects to user's recent items",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/users/me/recent",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Records one or more files or folders as recently accessed for the current user.\n### Precondition:\n  User must be authenticated.\n### Response:\n  The provided objects are added to the user's recent items list.\n"
+        },
+        {
+          "info": {
+            "name": "Delete a user's recent item",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/users/me/recent/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the entity."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Removes the specified object from the current user's recent items list.\n### Precondition:\n  User must be authenticated.\n### Response:\n  The item is removed from the user's recent items.\n"
+        },
+        {
+          "info": {
+            "name": "Pin items for the current user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/users/me/pins",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Pins the specified entities to the current user's pinned list.\n### Precondition:\n  User must be authenticated.\n### Response:\n  The specified items are pinned.\n"
+        },
+        {
+          "info": {
+            "name": "Unpin items for the current user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/users/me/pins",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Removes the specified entities from the current user's pinned list.\n### Precondition:\n  User must be authenticated.\n### Response:\n  The specified items are unpinned.\n"
+        },
+        {
+          "info": {
+            "name": "Check emails for LDAP distribution list status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/users/actions/getDistributionList",
+            "params": [
+              {
+                "name": "email:in",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of email addresses to check for LDAP distribution list status."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Checks whether the provided email addresses correspond to LDAP distribution lists rather than individual users.\n### Precondition:\n  User must be authenticated.\n### Response:\n  Returns each email address along with a flag indicating whether it is an LDAP distribution list.\n"
+        },
+        {
+          "info": {
+            "name": "Get concurrent session challenge",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/users/me/concurrent/challenge"
+          },
+          "docs": "### Description:\n  Returns information about the existing concurrent session that must be resolved before the current login can proceed.\n### Precondition:\n  User must be in the `concurrent` login state.\n### Response:\n  Returns the concurrent session details required to complete the challenge.\n"
+        },
+        {
+          "info": {
+            "name": "Resolve a concurrent session challenge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/users/me/concurrent/auth",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Resolves a concurrent login challenge by either terminating the existing session or cancelling the current login attempt.\n### Precondition:\n  User must be in the `concurrent` login state.\n### Response:\n  Returns the login result after the concurrent session challenge is resolved.\n"
+        },
+        {
+          "info": {
+            "name": "Bulk import users via CSV file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/admin/users/actions/import",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "content",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "updateIfExists",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "sendNotification",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "partialSuccess",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "### Overview:\n  Import users in bulk using a CSV file.\n### Precondition:\n  The user must be an administrator with access to `User Management`.\n### Response:\n  The users will be either created or updated.\n"
+        },
+        {
+          "info": {
+            "name": "Delete TOTP secrets for users",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/admin/users/actions/deleteTotpSecret",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Deletes the TOTP (Time-based One-Time Password) secret for the specified users.\n### Precondition:\n  The user must be an administrator. The caller's admin role rank must be sufficient to manage the target users.\n### Response:\n  The TOTP secrets for the specified users are deleted successfully.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

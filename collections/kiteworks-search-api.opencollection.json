@@ -1,0 +1,588 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities search API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Return lists of files/folders/emails from search results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/search",
+            "params": [
+              {
+                "name": "objectId",
+                "value": "",
+                "type": "query",
+                "description": "Id of folder to search"
+              },
+              {
+                "name": "content",
+                "value": "",
+                "type": "query",
+                "description": "Search by content"
+              },
+              {
+                "name": "content:contains",
+                "value": "",
+                "type": "query",
+                "description": "Search by content. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "content:startswith",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "description",
+                "value": "",
+                "type": "query",
+                "description": "Search by description"
+              },
+              {
+                "name": "description:contains",
+                "value": "",
+                "type": "query",
+                "description": "Search by description. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "description:startswith",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "user",
+                "value": "",
+                "type": "query",
+                "description": "Search by user"
+              },
+              {
+                "name": "modified",
+                "value": "",
+                "type": "query",
+                "description": "Search by modified date"
+              },
+              {
+                "name": "modified:gt",
+                "value": "",
+                "type": "query",
+                "description": "Search by modified date. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "modified:gte",
+                "value": "",
+                "type": "query",
+                "description": "Search by modified date. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "modified:lt",
+                "value": "",
+                "type": "query",
+                "description": "Search by modified date. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "modified:lte",
+                "value": "",
+                "type": "query",
+                "description": "Search by modified date. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "created",
+                "value": "",
+                "type": "query",
+                "description": "Search by created date"
+              },
+              {
+                "name": "created:gt",
+                "value": "",
+                "type": "query",
+                "description": "Search by created date. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "created:gte",
+                "value": "",
+                "type": "query",
+                "description": "Search by created date. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "created:lt",
+                "value": "",
+                "type": "query",
+                "description": "Search by created date. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "created:lte",
+                "value": "",
+                "type": "query",
+                "description": "Search by created date. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "locked",
+                "value": "",
+                "type": "query",
+                "description": "Search by lock status"
+              },
+              {
+                "name": "locked:gt",
+                "value": "",
+                "type": "query",
+                "description": "Search by lock status. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "locked:gte",
+                "value": "",
+                "type": "query",
+                "description": "Search by lock status. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "locked:lt",
+                "value": "",
+                "type": "query",
+                "description": "Search by lock status. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "locked:lte",
+                "value": "",
+                "type": "query",
+                "description": "Search by lock status. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "filesize",
+                "value": "",
+                "type": "query",
+                "description": "Search by file size"
+              },
+              {
+                "name": "filesize:gt",
+                "value": "",
+                "type": "query",
+                "description": "Search by file size. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "filesize:gte",
+                "value": "",
+                "type": "query",
+                "description": "Search by file size. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "filesize:lt",
+                "value": "",
+                "type": "query",
+                "description": "Search by file size. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "filesize:lte",
+                "value": "",
+                "type": "query",
+                "description": "Search by file size. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "file_type",
+                "value": "",
+                "type": "query",
+                "description": "Search by file type. Accepted values: `Documents`, `Spreadsheets`, `Presentations`, `Images`, `PDF`, `Multimedia`, `Text`."
+              },
+              {
+                "name": "email_type",
+                "value": "",
+                "type": "query",
+                "description": "Search by email type. Accepted values: `Inbox`, `Draft`, `Sent`."
+              },
+              {
+                "name": "tracking_id",
+                "value": "",
+                "type": "query",
+                "description": "Search files by tracking ID (UUID)"
+              },
+              {
+                "name": "tracking_id:eq",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "Search files/folders by path. If this is specified, other search criteria is no longer valid."
+              },
+              {
+                "name": "path:contains",
+                "value": "",
+                "type": "query",
+                "description": "Search files/folders by path. If this is specified, other search criteria is no longer valid.. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "searchType",
+                "value": "",
+                "type": "query",
+                "description": "Search by object type. Accepted values: `f`, `d`, `m`, `k`."
+              },
+              {
+                "name": "searchFilter",
+                "value": "",
+                "type": "query",
+                "description": "Scope of the search. Accepted values: `all`, `shared`."
+              },
+              {
+                "name": "fls_only",
+                "value": "",
+                "type": "query",
+                "description": "Search only files shared to me."
+              },
+              {
+                "name": "sharedMailboxId",
+                "value": "",
+                "type": "query",
+                "description": "Id of shared mailbox to search"
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Searches across files, folders, and emails using the provided query. Returns matching results grouped by type, along with total counts and a flag indicating whether full-text search is enabled."
+        },
+        {
+          "info": {
+            "name": "Search SharePoint sites",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/sources/:id/query",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the entity."
+              },
+              {
+                "name": "include_kw",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes Kiteworks native sources in the results."
+              },
+              {
+                "name": "include_container",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes container-type sources (e.g. SharePoint document libraries) in the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip before returning results, for pagination."
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Search query string to filter sources or sites by name."
+              },
+              {
+                "name": "search_type",
+                "value": "",
+                "type": "query",
+                "description": "Type of search to perform against the source."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Searches for SharePoint sites accessible through the specified source connection.\n### Precondition:\n  User must have a valid SharePoint Online source connection configured.\n### Response:\n  Returns a list of matching SharePoint sites.\n"
+        },
+        {
+          "info": {
+            "name": "Perform a search query",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/query",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Range limit."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Range offset."
+              },
+              {
+                "name": "includeContent",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether it is a full-text search or a database search."
+              },
+              {
+                "name": "searchType",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of object types to search.<br>`f` – Files.<br>`d` – Folders.<br>`e` – Emails."
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Search query string."
+              },
+              {
+                "name": "objectId",
+                "value": "",
+                "type": "query",
+                "description": "Search within a specific folder ID."
+              },
+              {
+                "name": "created",
+                "value": "",
+                "type": "query",
+                "description": "Exact creation date."
+              },
+              {
+                "name": "created:gt",
+                "value": "",
+                "type": "query",
+                "description": "Created after the specified date."
+              },
+              {
+                "name": "created:gte",
+                "value": "",
+                "type": "query",
+                "description": "Created on or after the specified date."
+              },
+              {
+                "name": "created:lt",
+                "value": "",
+                "type": "query",
+                "description": "Created before the specified date."
+              },
+              {
+                "name": "created:lte",
+                "value": "",
+                "type": "query",
+                "description": "Created on or before the specified date."
+              },
+              {
+                "name": "modified",
+                "value": "",
+                "type": "query",
+                "description": "Exact modified date."
+              },
+              {
+                "name": "modified:gt",
+                "value": "",
+                "type": "query",
+                "description": "Modified after the specified date."
+              },
+              {
+                "name": "modified:gte",
+                "value": "",
+                "type": "query",
+                "description": "Modified on or after the specified date."
+              },
+              {
+                "name": "modified:lt",
+                "value": "",
+                "type": "query",
+                "description": "Modified before the specified date."
+              },
+              {
+                "name": "modified:lte",
+                "value": "",
+                "type": "query",
+                "description": "Modified on or before the specified date."
+              },
+              {
+                "name": "fileSize",
+                "value": "",
+                "type": "query",
+                "description": "Exact file size in bytes."
+              },
+              {
+                "name": "fileSize:gt",
+                "value": "",
+                "type": "query",
+                "description": "File size greater than the specified value."
+              },
+              {
+                "name": "fileSize:gte",
+                "value": "",
+                "type": "query",
+                "description": "File size greater than or equal to the specified value."
+              },
+              {
+                "name": "fileSize:lt",
+                "value": "",
+                "type": "query",
+                "description": "File size less than the specified value."
+              },
+              {
+                "name": "fileSize:lte",
+                "value": "",
+                "type": "query",
+                "description": "File size less than or equal to the specified value."
+              },
+              {
+                "name": "user",
+                "value": "",
+                "type": "query",
+                "description": "User email of the folder creator."
+              },
+              {
+                "name": "fileType",
+                "value": "",
+                "type": "query",
+                "description": "List of comma-separated file types to filter search results."
+              },
+              {
+                "name": "flsOnly",
+                "value": "",
+                "type": "query",
+                "description": "If true, only includes files shared with the user."
+              },
+              {
+                "name": "sharedMailboxId",
+                "value": "",
+                "type": "query",
+                "description": "Shared mailbox ID."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort results by.<br>Allowed values: `score`, `name`, `created`, `modified`."
+              },
+              {
+                "name": "orderType",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction for the results.<br>`asc` – Ascending order.<br>`desc` – Descending order."
+              },
+              {
+                "name": "nameOnly",
+                "value": "",
+                "type": "query",
+                "description": "If true, searches only for file/folder names."
+              },
+              {
+                "name": "subject",
+                "value": "",
+                "type": "query",
+                "description": "Email subject filter."
+              },
+              {
+                "name": "senderId",
+                "value": "",
+                "type": "query",
+                "description": "Sender ID."
+              },
+              {
+                "name": "recipientId",
+                "value": "",
+                "type": "query",
+                "description": "Recipient ID."
+              },
+              {
+                "name": "fileName",
+                "value": "",
+                "type": "query",
+                "description": "File name filter."
+              },
+              {
+                "name": "folderName",
+                "value": "",
+                "type": "query",
+                "description": "Folder name filter."
+              },
+              {
+                "name": "fileContent",
+                "value": "",
+                "type": "query",
+                "description": "Search within file content."
+              },
+              {
+                "name": "spellCheck",
+                "value": "",
+                "type": "query",
+                "description": "If true, provides spelling suggestions for the search query."
+              },
+              {
+                "name": "bucket",
+                "value": "",
+                "type": "query",
+                "description": "Filter email search results by mailbox folder.<br>`inbox` – Search in the inbox.<br>`sent` – Search in sent items."
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "Search within a specific folder path."
+              },
+              {
+                "name": "tracking_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter files by their tracking ID (UUID)."
+              },
+              {
+                "name": "extensions",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated file extensions to filter (e.g., \"pdf,form\" or \".pdf,.form\")."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Searches for files, folders, or emails based on the provided query parameters.\n### Precondition:\n  The user must be authenticated.\n### Response:\n  Returns a list of matching files, folders, or emails.\n### Sorting:\n  Sorting can be applied using two query parameters: `orderBy` for the field name,\n  and `orderType` for the sort order, which can be either `asc` or `desc`.\n### Sorting options:\n  | FIELD_NAME | Description |\n  |------------|-------------|\n  | score      | The searc"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

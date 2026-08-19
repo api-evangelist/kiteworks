@@ -1,0 +1,2402 @@
+{
+  "item": [
+    {
+      "id": "d0c3311a-4fc1-43be-b817-e4b66509664b",
+      "name": "search",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d94610c9-651e-4612-8da5-0c0474c66631",
+          "name": "Return lists of files/folders/emails from search results",
+          "request": {
+            "name": "Return lists of files/folders/emails from search results",
+            "description": {
+              "content": "Searches across files, folders, and emails using the provided query. Returns matching results grouped by type, along with total counts and a flag indicating whether full-text search is enabled.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "objectId",
+                  "value": "<string>",
+                  "description": "Id of folder to search"
+                },
+                {
+                  "disabled": false,
+                  "key": "content",
+                  "value": "<string>",
+                  "description": "Search by content"
+                },
+                {
+                  "disabled": false,
+                  "key": "content:contains",
+                  "value": "<string>",
+                  "description": "Search by content. Search for results that contain the specified characters in this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "content:startswith",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>",
+                  "description": "Search by description"
+                },
+                {
+                  "disabled": false,
+                  "key": "description:contains",
+                  "value": "<string>",
+                  "description": "Search by description. Search for results that contain the specified characters in this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "description:startswith",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "user",
+                  "value": "<string>",
+                  "description": "Search by user"
+                },
+                {
+                  "disabled": false,
+                  "key": "modified",
+                  "value": "<date>",
+                  "description": "Search by modified date"
+                },
+                {
+                  "disabled": false,
+                  "key": "modified:gt",
+                  "value": "<date>",
+                  "description": "Search by modified date. Search for results where this parameter value is greater than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified:gte",
+                  "value": "<date>",
+                  "description": "Search by modified date. Search for results where this parameter value is greater than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified:lt",
+                  "value": "<date>",
+                  "description": "Search by modified date. Search for results where this parameter value is less than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified:lte",
+                  "value": "<date>",
+                  "description": "Search by modified date. Search for results where this parameter value is less than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "created",
+                  "value": "<date>",
+                  "description": "Search by created date"
+                },
+                {
+                  "disabled": false,
+                  "key": "created:gt",
+                  "value": "<date>",
+                  "description": "Search by created date. Search for results where this parameter value is greater than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "created:gte",
+                  "value": "<date>",
+                  "description": "Search by created date. Search for results where this parameter value is greater than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "created:lt",
+                  "value": "<date>",
+                  "description": "Search by created date. Search for results where this parameter value is less than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "created:lte",
+                  "value": "<date>",
+                  "description": "Search by created date. Search for results where this parameter value is less than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "locked",
+                  "value": "<integer>",
+                  "description": "Search by lock status"
+                },
+                {
+                  "disabled": false,
+                  "key": "locked:gt",
+                  "value": "<integer>",
+                  "description": "Search by lock status. Search for results where this parameter value is greater than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "locked:gte",
+                  "value": "<integer>",
+                  "description": "Search by lock status. Search for results where this parameter value is greater than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "locked:lt",
+                  "value": "<integer>",
+                  "description": "Search by lock status. Search for results where this parameter value is less than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "locked:lte",
+                  "value": "<integer>",
+                  "description": "Search by lock status. Search for results where this parameter value is less than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "filesize",
+                  "value": "<integer>",
+                  "description": "Search by file size"
+                },
+                {
+                  "disabled": false,
+                  "key": "filesize:gt",
+                  "value": "<integer>",
+                  "description": "Search by file size. Search for results where this parameter value is greater than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "filesize:gte",
+                  "value": "<integer>",
+                  "description": "Search by file size. Search for results where this parameter value is greater than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "filesize:lt",
+                  "value": "<integer>",
+                  "description": "Search by file size. Search for results where this parameter value is less than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "filesize:lte",
+                  "value": "<integer>",
+                  "description": "Search by file size. Search for results where this parameter value is less than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "file_type",
+                  "value": "Text",
+                  "description": "Search by file type. Accepted values: `Documents`, `Spreadsheets`, `Presentations`, `Images`, `PDF`, `Multimedia`, `Text`."
+                },
+                {
+                  "disabled": false,
+                  "key": "email_type",
+                  "value": "Sent",
+                  "description": "Search by email type. Accepted values: `Inbox`, `Draft`, `Sent`."
+                },
+                {
+                  "disabled": false,
+                  "key": "tracking_id",
+                  "value": "<string>",
+                  "description": "Search files by tracking ID (UUID)"
+                },
+                {
+                  "disabled": false,
+                  "key": "tracking_id:eq",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "path",
+                  "value": "<string>",
+                  "description": "Search files/folders by path. If this is specified, other search criteria is no longer valid."
+                },
+                {
+                  "disabled": false,
+                  "key": "path:contains",
+                  "value": "<string>",
+                  "description": "Search files/folders by path. If this is specified, other search criteria is no longer valid.. Search for results that contain the specified characters in this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "searchType",
+                  "value": "f",
+                  "description": "Search by object type. Accepted values: `f`, `d`, `m`, `k`."
+                },
+                {
+                  "disabled": false,
+                  "key": "searchFilter",
+                  "value": "<string>",
+                  "description": "Scope of the search. Accepted values: `all`, `shared`."
+                },
+                {
+                  "disabled": false,
+                  "key": "fls_only",
+                  "value": "<boolean>",
+                  "description": "Search only files shared to me."
+                },
+                {
+                  "disabled": false,
+                  "key": "sharedMailboxId",
+                  "value": "<integer>",
+                  "description": "Id of shared mailbox to search"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "name:desc",
+                  "description": "Sorting options"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit"
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "With parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2c107eae-262a-4c1a-9f68-f8d1b4e1aa3c",
+              "name": "Search results retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "objectId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "content",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "content:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "content:startswith",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "description:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "description:startswith",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "modified",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "locked",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locked:gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locked:gte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locked:lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locked:lte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filesize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filesize:gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filesize:gte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filesize:lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filesize:lte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "file_type",
+                      "value": "Spreadsheets"
+                    },
+                    {
+                      "key": "email_type",
+                      "value": "Inbox"
+                    },
+                    {
+                      "key": "tracking_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tracking_id:eq",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "path:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "searchType",
+                      "value": "f"
+                    },
+                    {
+                      "key": "searchFilter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fls_only",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "sharedMailboxId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "created:desc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"contract\",\n  \"fullTextSearch\": true,\n  \"files\": [\n    {\n      \"id\": 7,\n      \"name\": \"contract-2024.pdf\"\n    }\n  ],\n  \"folders\": [],\n  \"emails\": [],\n  \"metadata\": {\n    \"files\": 1,\n    \"folders\": 0,\n    \"emails\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "642b43a3-a1f0-4627-9ca0-9800e8b3bf9c",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "objectId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "content",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "content:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "content:startswith",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "description:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "description:startswith",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "modified",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "locked",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locked:gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locked:gte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locked:lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locked:lte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filesize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filesize:gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filesize:gte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filesize:lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filesize:lte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "file_type",
+                      "value": "Spreadsheets"
+                    },
+                    {
+                      "key": "email_type",
+                      "value": "Inbox"
+                    },
+                    {
+                      "key": "tracking_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tracking_id:eq",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "path:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "searchType",
+                      "value": "f"
+                    },
+                    {
+                      "key": "searchFilter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fls_only",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "sharedMailboxId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "created:desc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ac584cd2-6d6e-4a4c-a35d-2409f529799f",
+          "name": "Search SharePoint sites",
+          "request": {
+            "name": "Search SharePoint sites",
+            "description": {
+              "content": "### Description:\n  Searches for SharePoint sites accessible through the specified source connection.\n### Precondition:\n  User must have a valid SharePoint Online source connection configured.\n### Response:\n  Returns a list of matching SharePoint sites.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "sources",
+                ":id",
+                "query"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include_kw",
+                  "value": "<boolean>",
+                  "description": "If true, includes Kiteworks native sources in the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "include_container",
+                  "value": "<boolean>",
+                  "description": "If true, includes container-type sources (e.g. SharePoint document libraries) in the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of results to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Number of results to skip before returning results, for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "Search query string to filter sources or sites by name."
+                },
+                {
+                  "disabled": false,
+                  "key": "search_type",
+                  "value": "<string>",
+                  "description": "Type of search to perform against the source."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the entity."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dfe94a58-0f6e-4ffc-85a3-30760c747dea",
+              "name": "SharePoint sites have been successfully returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "sources",
+                    ":id",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_kw",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "include_container",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sites\": [\n    {\n      \"name\": \"string\",\n      \"isAdded\": false,\n      \"url\": \"string\",\n      \"ecmTypeId\": \"string\",\n      \"repository\": \"string\",\n      \"id\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"isAdded\": false,\n      \"url\": \"string\",\n      \"ecmTypeId\": \"string\",\n      \"repository\": \"string\",\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4961757-c31b-4e43-b60e-4bf604158a10",
+              "name": "Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "sources",
+                    ":id",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_kw",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "include_container",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_AUTH_INVALID_CSRF\",\n      \"message\": \"Invalid CSRF Authentication\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "831e6c70-1afd-444f-a0dc-6b7ba3fc7e2a",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_AUTH_EC_UPDATE_TOKEN, ERR_SPO_SEARCH",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "sources",
+                    ":id",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_kw",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "include_container",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_AUTH_EC_UPDATE_TOKEN\",\n      \"message\": \"Token update/receive required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b95f72ad-e398-41f7-8f8e-803eee74da11",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "sources",
+                    ":id",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_kw",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "include_container",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the entity."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fe992992-3b3d-4db9-81e2-f78c7f5dfac7",
+          "name": "Perform a search query",
+          "request": {
+            "name": "Perform a search query",
+            "description": {
+              "content": "### Description:\n  Searches for files, folders, or emails based on the provided query parameters.\n### Precondition:\n  The user must be authenticated.\n### Response:\n  Returns a list of matching files, folders, or emails.\n### Sorting:\n  Sorting can be applied using two query parameters: `orderBy` for the field name,\n  and `orderType` for the sort order, which can be either `asc` or `desc`.\n### Sorting options:\n  | FIELD_NAME | Description |\n  |------------|-------------|\n  | score      | The search relevance score |\n  | name       | The name of the folder or file |\n  | created    | The creation datetime of the folder or file |\n  | modified   | The last modified datetime of the folder or file |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "query"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Range limit."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Range offset."
+                },
+                {
+                  "disabled": false,
+                  "key": "includeContent",
+                  "value": "<boolean>",
+                  "description": "(Required) Indicates whether it is a full-text search or a database search."
+                },
+                {
+                  "disabled": false,
+                  "key": "searchType",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated list of object types to search.<br>`f` – Files.<br>`d` – Folders.<br>`e` – Emails."
+                },
+                {
+                  "disabled": false,
+                  "key": "searchType",
+                  "value": "<string>",
+                  "description": "(Required) Comma-separated list of object types to search.<br>`f` – Files.<br>`d` – Folders.<br>`e` – Emails."
+                },
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "Search query string."
+                },
+                {
+                  "disabled": false,
+                  "key": "objectId",
+                  "value": "<string>",
+                  "description": "Search within a specific folder ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "created",
+                  "value": "<date>",
+                  "description": "Exact creation date."
+                },
+                {
+                  "disabled": false,
+                  "key": "created:gt",
+                  "value": "<date>",
+                  "description": "Created after the specified date."
+                },
+                {
+                  "disabled": false,
+                  "key": "created:gte",
+                  "value": "<date>",
+                  "description": "Created on or after the specified date."
+                },
+                {
+                  "disabled": false,
+                  "key": "created:lt",
+                  "value": "<date>",
+                  "description": "Created before the specified date."
+                },
+                {
+                  "disabled": false,
+                  "key": "created:lte",
+                  "value": "<date>",
+                  "description": "Created on or before the specified date."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified",
+                  "value": "<date>",
+                  "description": "Exact modified date."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified:gt",
+                  "value": "<date>",
+                  "description": "Modified after the specified date."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified:gte",
+                  "value": "<date>",
+                  "description": "Modified on or after the specified date."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified:lt",
+                  "value": "<date>",
+                  "description": "Modified before the specified date."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified:lte",
+                  "value": "<date>",
+                  "description": "Modified on or before the specified date."
+                },
+                {
+                  "disabled": false,
+                  "key": "fileSize",
+                  "value": "<integer>",
+                  "description": "Exact file size in bytes."
+                },
+                {
+                  "disabled": false,
+                  "key": "fileSize:gt",
+                  "value": "<integer>",
+                  "description": "File size greater than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "fileSize:gte",
+                  "value": "<integer>",
+                  "description": "File size greater than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "fileSize:lt",
+                  "value": "<integer>",
+                  "description": "File size less than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "fileSize:lte",
+                  "value": "<integer>",
+                  "description": "File size less than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "user",
+                  "value": "<string>",
+                  "description": "User email of the folder creator."
+                },
+                {
+                  "disabled": false,
+                  "key": "fileType",
+                  "value": "<string>",
+                  "description": "List of comma-separated file types to filter search results."
+                },
+                {
+                  "disabled": false,
+                  "key": "fileType",
+                  "value": "<string>",
+                  "description": "List of comma-separated file types to filter search results."
+                },
+                {
+                  "disabled": false,
+                  "key": "flsOnly",
+                  "value": "<boolean>",
+                  "description": "If true, only includes files shared with the user."
+                },
+                {
+                  "disabled": false,
+                  "key": "sharedMailboxId",
+                  "value": "<string>",
+                  "description": "Shared mailbox ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "<string>",
+                  "description": "Field to sort results by.<br>Allowed values: `score`, `name`, `created`, `modified`."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderType",
+                  "value": "<string>",
+                  "description": "Sort direction for the results.<br>`asc` – Ascending order.<br>`desc` – Descending order."
+                },
+                {
+                  "disabled": false,
+                  "key": "nameOnly",
+                  "value": "<boolean>",
+                  "description": "If true, searches only for file/folder names."
+                },
+                {
+                  "disabled": false,
+                  "key": "subject",
+                  "value": "<string>",
+                  "description": "Email subject filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "senderId",
+                  "value": "<string>",
+                  "description": "Sender ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "recipientId",
+                  "value": "<string>",
+                  "description": "Recipient ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "fileName",
+                  "value": "<string>",
+                  "description": "File name filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "folderName",
+                  "value": "<string>",
+                  "description": "Folder name filter."
+                },
+                {
+                  "disabled": false,
+                  "key": "fileContent",
+                  "value": "<string>",
+                  "description": "Search within file content."
+                },
+                {
+                  "disabled": false,
+                  "key": "spellCheck",
+                  "value": "<boolean>",
+                  "description": "If true, provides spelling suggestions for the search query."
+                },
+                {
+                  "disabled": false,
+                  "key": "bucket",
+                  "value": "<string>",
+                  "description": "Filter email search results by mailbox folder.<br>`inbox` – Search in the inbox.<br>`sent` – Search in sent items."
+                },
+                {
+                  "disabled": false,
+                  "key": "path",
+                  "value": "<string>",
+                  "description": "Search within a specific folder path."
+                },
+                {
+                  "disabled": false,
+                  "key": "tracking_id",
+                  "value": "<uuid>",
+                  "description": "Filter files by their tracking ID (UUID)."
+                },
+                {
+                  "disabled": false,
+                  "key": "extensions",
+                  "value": "<string>",
+                  "description": "Comma-separated file extensions to filter (e.g., \"pdf,form\" or \".pdf,.form\")."
+                },
+                {
+                  "disabled": false,
+                  "key": "extensions",
+                  "value": "<string>",
+                  "description": "Comma-separated file extensions to filter (e.g., \"pdf,form\" or \".pdf,.form\")."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "97a3539f-4c91-43a6-9716-70aa47e79e79",
+              "name": "Search completed successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "includeContent",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "searchType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "searchType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "objectId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "fileSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "fileSize:gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "fileSize:gte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "fileSize:lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "fileSize:lte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "user",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fileType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fileType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "flsOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "sharedMailboxId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nameOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "subject",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "senderId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "recipientId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fileName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "folderName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fileContent",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "spellCheck",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "bucket",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tracking_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "extensions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extensions",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"folders\": [\n    {\n      \"id\": \"d1dac2eb-ea56-a003-cc27-6054b6b8b846\",\n      \"parentId\": \"bae9dc1a-733c-4d51-790f-28b50967cf71\",\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"userId\": \"d02e812d-678c-abae-a3f8-fd6150ed7139\",\n      \"creator\": {\n        \"id\": \"string\",\n        \"email\": \"string\",\n        \"name\": \"string\",\n        \"profileIcon\": \"string\"\n      },\n      \"created\": \"1980-04-22\",\n      \"modified\": \"1954-10-13\",\n      \"expire\": \"1994-06-06\",\n      \"permissions\": [\n        {\n          \"id\": 9685,\n          \"name\": \"string\",\n          \"allowed\": true\n        },\n        {\n          \"id\": 6946,\n          \"name\": \"string\",\n          \"allowed\": false\n        }\n      ],\n      \"deleted\": true,\n      \"permDeleted\": false,\n      \"permalink\": \"string\",\n      \"path\": \"string\",\n      \"members\": [\n        {\n          \"objectId\": \"string\",\n          \"roleId\": 4231,\n          \"userId\": \"string\",\n          \"groupId\": 9656,\n          \"user\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profileIcon\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"role\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rank\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"group\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"dn\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"sharedBy\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profileIcon\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"created\": \"1990-11-06\",\n          \"inheritRoleId\": 9577,\n          \"allowedFolderRoleId\": [\n            2223,\n            4101\n          ],\n          \"email\": \"string\",\n          \"rank\": 994,\n          \"originFolder\": {}\n        },\n        {\n          \"objectId\": \"string\",\n          \"roleId\": 5430,\n          \"userId\": \"string\",\n          \"groupId\": 3748,\n          \"user\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profileIcon\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"role\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rank\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"group\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"dn\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"sharedBy\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profileIcon\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"created\": \"1959-07-15\",\n          \"inheritRoleId\": 3050,\n          \"allowedFolderRoleId\": [\n            7449,\n            2693\n          ],\n          \"email\": \"string\",\n          \"rank\": 6178,\n          \"originFolder\": {}\n        }\n      ],\n      \"vendorDocId\": \"string\",\n      \"vendorDocName\": \"string\",\n      \"secure\": true,\n      \"source\": 6980,\n      \"isShared\": true,\n      \"syncable\": false,\n      \"fileLifetime\": 9950,\n      \"description\": \"string\",\n      \"parent\": {\n        \"id\": \"35f35561-0336-54dd-2a9a-26c39d4b8da0\",\n        \"parentId\": \"4842e543-54ac-93a5-9032-66cbcfada086\",\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"userId\": \"0a7bbfbe-755c-e25c-bca1-ae7774adf84c\",\n        \"creator\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"profileIcon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"created\": \"1981-09-23\",\n        \"modified\": \"1950-04-02\",\n        \"expire\": \"1989-10-25\",\n        \"permissions\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"allowed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"allowed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"deleted\": false,\n        \"permDeleted\": false,\n        \"permalink\": \"string\",\n        \"path\": \"string\",\n        \"members\": [\n          {\n            \"objectId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"roleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"userId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"groupId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"user\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"role\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"group\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sharedBy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"created\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"inheritRoleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"allowedFolderRoleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rank\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"originFolder\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"objectId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"roleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"userId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"groupId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"user\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"role\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"group\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sharedBy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"created\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"inheritRoleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"allowedFolderRoleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rank\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"originFolder\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"vendorDocId\": \"string\",\n        \"vendorDocName\": \"string\",\n        \"secure\": false,\n        \"source\": 9297,\n        \"isShared\": false,\n        \"syncable\": false,\n        \"fileLifetime\": 596,\n        \"description\": \"string\",\n        \"isFavorite\": false,\n        \"pushedFilesCount\": 408,\n        \"currentUserRole\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"rank\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"avStatus\": \"string\",\n        \"dlpStatus\": \"string\",\n        \"totalMembersCount\": 2466,\n        \"totalFoldersCount\": 8346,\n        \"totalFilesCount\": 6463,\n        \"maxFolderExpiration\": \"2008-07-01\",\n        \"maxFileLifetime\": 319,\n        \"isLdapGroupMember\": true,\n        \"isUnderMyFolder\": false,\n        \"pathIds\": \"string\",\n        \"isRoot\": true,\n        \"rootId\": \"feb4375e-a31b-c20a-037e-8ccb130f8fb6\",\n        \"useFolderQuota\": true,\n        \"quota\": 6317,\n        \"size\": 4643,\n        \"freeSpace\": 1043,\n        \"inheritanceEnabled\": true\n      },\n      \"isFavorite\": true,\n      \"pushedFilesCount\": 9263,\n      \"currentUserRole\": {\n        \"id\": 961,\n        \"name\": \"string\",\n        \"rank\": 7741,\n        \"type\": \"string\"\n      },\n      \"avStatus\": \"string\",\n      \"dlpStatus\": \"string\",\n      \"totalMembersCount\": 2302,\n      \"totalFoldersCount\": 6918,\n      \"totalFilesCount\": 6627,\n      \"maxFolderExpiration\": \"1969-10-11\",\n      \"maxFileLifetime\": 2943,\n      \"isLdapGroupMember\": true,\n      \"isUnderMyFolder\": false,\n      \"pathIds\": \"string\",\n      \"isRoot\": false,\n      \"rootId\": \"10b9d468-99e1-aae0-4714-beb86f14196b\",\n      \"useFolderQuota\": true,\n      \"quota\": 5657,\n      \"size\": 5764,\n      \"freeSpace\": 910,\n      \"inheritanceEnabled\": true\n    },\n    {\n      \"id\": \"e50b4e65-5183-2b51-3672-dce0bfb7677e\",\n      \"parentId\": \"89e9ca11-c1a0-3128-8210-f2e0d3a1eeb3\",\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"userId\": \"d671d1eb-2906-2bba-e498-7301374af02c\",\n      \"creator\": {\n        \"id\": \"string\",\n        \"email\": \"string\",\n        \"name\": \"string\",\n        \"profileIcon\": \"string\"\n      },\n      \"created\": \"1971-05-07\",\n      \"modified\": \"1976-12-07\",\n      \"expire\": \"2019-07-01\",\n      \"permissions\": [\n        {\n          \"id\": 5515,\n          \"name\": \"string\",\n          \"allowed\": true\n        },\n        {\n          \"id\": 2752,\n          \"name\": \"string\",\n          \"allowed\": false\n        }\n      ],\n      \"deleted\": true,\n      \"permDeleted\": false,\n      \"permalink\": \"string\",\n      \"path\": \"string\",\n      \"members\": [\n        {\n          \"objectId\": \"string\",\n          \"roleId\": 4069,\n          \"userId\": \"string\",\n          \"groupId\": 9971,\n          \"user\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profileIcon\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"role\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rank\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"group\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"dn\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"sharedBy\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profileIcon\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"created\": \"1973-08-12\",\n          \"inheritRoleId\": 4599,\n          \"allowedFolderRoleId\": [\n            1953,\n            1725\n          ],\n          \"email\": \"string\",\n          \"rank\": 1578,\n          \"originFolder\": {}\n        },\n        {\n          \"objectId\": \"string\",\n          \"roleId\": 5375,\n          \"userId\": \"string\",\n          \"groupId\": 6272,\n          \"user\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profileIcon\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"role\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rank\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"group\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"dn\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"sharedBy\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profileIcon\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"created\": \"2001-01-06\",\n          \"inheritRoleId\": 8971,\n          \"allowedFolderRoleId\": [\n            2970,\n            7913\n          ],\n          \"email\": \"string\",\n          \"rank\": 9015,\n          \"originFolder\": {}\n        }\n      ],\n      \"vendorDocId\": \"string\",\n      \"vendorDocName\": \"string\",\n      \"secure\": true,\n      \"source\": 1641,\n      \"isShared\": true,\n      \"syncable\": false,\n      \"fileLifetime\": 9734,\n      \"description\": \"string\",\n      \"parent\": {\n        \"id\": \"3aed79ec-5b42-fbd5-b4fb-88415f91f7af\",\n        \"parentId\": \"c3007ecc-202f-be35-0e8b-9d38d38f3486\",\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"userId\": \"1ab09af1-a170-1370-9800-8c098689da0a\",\n        \"creator\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"profileIcon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"created\": \"2012-07-19\",\n        \"modified\": \"1966-09-13\",\n        \"expire\": \"2013-01-05\",\n        \"permissions\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"allowed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"allowed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"deleted\": true,\n        \"permDeleted\": true,\n        \"permalink\": \"string\",\n        \"path\": \"string\",\n        \"members\": [\n          {\n            \"objectId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"roleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"userId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"groupId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"user\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"role\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"group\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sharedBy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"created\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"inheritRoleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"allowedFolderRoleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rank\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"originFolder\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"objectId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"roleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"userId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"groupId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"user\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"role\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"group\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sharedBy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"created\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"inheritRoleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"allowedFolderRoleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rank\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"originFolder\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"vendorDocId\": \"string\",\n        \"vendorDocName\": \"string\",\n        \"secure\": false,\n        \"source\": 7046,\n        \"isShared\": false,\n        \"syncable\": true,\n        \"fileLifetime\": 9006,\n        \"description\": \"string\",\n        \"isFavorite\": true,\n        \"pushedFilesCount\": 8778,\n        \"currentUserRole\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"rank\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"avStatus\": \"string\",\n        \"dlpStatus\": \"string\",\n        \"totalMembersCount\": 5460,\n        \"totalFoldersCount\": 4098,\n        \"totalFilesCount\": 1597,\n        \"maxFolderExpiration\": \"1982-03-03\",\n        \"maxFileLifetime\": 6764,\n        \"isLdapGroupMember\": false,\n        \"isUnderMyFolder\": false,\n        \"pathIds\": \"string\",\n        \"isRoot\": true,\n        \"rootId\": \"9f6530f9-8e45-2f67-591d-4d283c3d915f\",\n        \"useFolderQuota\": false,\n        \"quota\": 9069,\n        \"size\": 8986,\n        \"freeSpace\": 4899,\n        \"inheritanceEnabled\": true\n      },\n      \"isFavorite\": false,\n      \"pushedFilesCount\": 6512,\n      \"currentUserRole\": {\n        \"id\": 2881,\n        \"name\": \"string\",\n        \"rank\": 7401,\n        \"type\": \"string\"\n      },\n      \"avStatus\": \"string\",\n      \"dlpStatus\": \"string\",\n      \"totalMembersCount\": 2525,\n      \"totalFoldersCount\": 1251,\n      \"totalFilesCount\": 9069,\n      \"maxFolderExpiration\": \"1974-09-15\",\n      \"maxFileLifetime\": 9616,\n      \"isLdapGroupMember\": true,\n      \"isUnderMyFolder\": true,\n      \"pathIds\": \"string\",\n      \"isRoot\": false,\n      \"rootId\": \"dd589ae2-985a-3868-1721-ac8f217c6a7f\",\n      \"useFolderQuota\": true,\n      \"quota\": 3871,\n      \"size\": 6618,\n      \"freeSpace\": 5082,\n      \"inheritanceEnabled\": true\n    }\n  ],\n  \"files\": [\n    {\n      \"id\": \"3c938d14-c92b-6335-40c2-7d087e0dd94f\",\n      \"parentId\": \"93ef6c16-e907-1838-1ca2-23fad3398df8\",\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"userId\": \"004e8600-df27-435d-508f-44a48ab936ac\",\n      \"creator\": {\n        \"id\": \"string\",\n        \"email\": \"string\",\n        \"name\": \"string\",\n        \"profileIcon\": \"string\"\n      },\n      \"created\": \"1955-07-20\",\n      \"modified\": \"1999-07-07\",\n      \"expire\": \"1991-04-11\",\n      \"permissions\": [\n        {\n          \"id\": 199,\n          \"name\": \"string\",\n          \"allowed\": true\n        },\n        {\n          \"id\": 2455,\n          \"name\": \"string\",\n          \"allowed\": false\n        }\n      ],\n      \"deleted\": true,\n      \"permDeleted\": true,\n      \"permalink\": \"string\",\n      \"path\": \"string\",\n      \"members\": [\n        {\n          \"objectId\": \"string\",\n          \"roleId\": 9287,\n          \"userId\": \"string\",\n          \"groupId\": 8374,\n          \"user\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profileIcon\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"role\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rank\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"group\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"dn\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"sharedBy\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profileIcon\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"created\": \"1973-10-02\",\n          \"inheritRoleId\": 872,\n          \"allowedFolderRoleId\": [\n            7266,\n            6548\n          ],\n          \"email\": \"string\",\n          \"rank\": 9418,\n          \"originFolder\": {}\n        },\n        {\n          \"objectId\": \"string\",\n          \"roleId\": 4679,\n          \"userId\": \"string\",\n          \"groupId\": 614,\n          \"user\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profileIcon\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"role\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rank\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"group\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"dn\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"sharedBy\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profileIcon\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"created\": \"1981-05-10\",\n          \"inheritRoleId\": 9445,\n          \"allowedFolderRoleId\": [\n            1391,\n            326\n          ],\n          \"email\": \"string\",\n          \"rank\": 9935,\n          \"originFolder\": {}\n        }\n      ],\n      \"vendorDocId\": \"string\",\n      \"vendorDocName\": \"string\",\n      \"secure\": true,\n      \"source\": 9882,\n      \"modifier\": {\n        \"id\": \"string\",\n        \"email\": \"string\",\n        \"name\": \"string\",\n        \"profileIcon\": \"string\"\n      },\n      \"size\": 4716,\n      \"mime\": \"string\",\n      \"fingerprint\": \"string\",\n      \"fingerprints\": [\n        {\n          \"algo\": \"string\",\n          \"hash\": \"string\"\n        },\n        {\n          \"algo\": \"string\",\n          \"hash\": \"string\"\n        }\n      ],\n      \"clientCreated\": \"2000-12-16\",\n      \"clientModified\": \"1995-05-29\",\n      \"overriddenExpire\": true,\n      \"sharedBy\": {\n        \"id\": \"string\",\n        \"email\": \"string\",\n        \"name\": \"string\",\n        \"profileIcon\": \"string\"\n      },\n      \"sharedTime\": \"1952-01-06\",\n      \"parent\": {\n        \"id\": \"315b65b8-554d-b781-8ae7-83a27157da9e\",\n        \"parentId\": \"33e2def8-07ac-98c5-8a1b-287e192a9b8b\",\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"userId\": \"8884e1c5-c406-f24a-2b83-1629d11b7e1b\",\n        \"creator\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"profileIcon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"created\": \"1969-05-11\",\n        \"modified\": \"1982-10-18\",\n        \"expire\": \"1946-11-13\",\n        \"permissions\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"allowed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"allowed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"deleted\": false,\n        \"permDeleted\": true,\n        \"permalink\": \"string\",\n        \"path\": \"string\",\n        \"members\": [\n          {\n            \"objectId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"roleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"userId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"groupId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"user\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"role\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"group\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sharedBy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"created\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"inheritRoleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"allowedFolderRoleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rank\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"originFolder\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"objectId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"roleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"userId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"groupId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"user\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"role\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"group\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sharedBy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"created\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"inheritRoleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"allowedFolderRoleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rank\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"originFolder\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"vendorDocId\": \"string\",\n        \"vendorDocName\": \"string\",\n        \"secure\": false,\n        \"source\": 3957,\n        \"isShared\": false,\n        \"syncable\": false,\n        \"fileLifetime\": 384,\n        \"description\": \"string\",\n        \"isFavorite\": false,\n        \"pushedFilesCount\": 6574,\n        \"currentUserRole\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"rank\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"avStatus\": \"string\",\n        \"dlpStatus\": \"string\",\n        \"totalMembersCount\": 9908,\n        \"totalFoldersCount\": 5526,\n        \"totalFilesCount\": 8101,\n        \"maxFolderExpiration\": \"2003-01-05\",\n        \"maxFileLifetime\": 3092,\n        \"isLdapGroupMember\": false,\n        \"isUnderMyFolder\": true,\n        \"pathIds\": \"string\",\n        \"isRoot\": true,\n        \"rootId\": \"6d5e587c-c181-88ca-4cd3-7b74cb04606b\",\n        \"useFolderQuota\": false,\n        \"quota\": 4736,\n        \"size\": 1017,\n        \"freeSpace\": 1990,\n        \"inheritanceEnabled\": false\n      },\n      \"originalFileId\": \"83ec0cc9-7043-ef91-1347-e174d6a8d76b\",\n      \"avStatus\": \"string\",\n      \"dlpStatus\": \"string\",\n      \"adminQuarantineStatus\": \"string\",\n      \"locked\": true,\n      \"lockUser\": {\n        \"id\": \"string\",\n        \"email\": \"string\",\n        \"name\": \"string\",\n        \"profileIcon\": \"string\"\n      },\n      \"isShared\": true,\n      \"lastModifiedBy\": {\n        \"id\": \"string\",\n        \"email\": \"string\",\n        \"name\": \"string\",\n        \"profileIcon\": \"string\"\n      },\n      \"pushedObject\": {\n        \"objectId\": \"string\",\n        \"userId\": \"string\",\n        \"created\": \"1951-03-05\",\n        \"user\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"profileIcon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"pathIds\": \"a37b15a9-9477-0ff5-9588-867ad25a9e58\",\n      \"wopiapp\": {\n        \"wopiSrc\": \"string\",\n        \"userId\": \"string\",\n        \"service\": \"string\",\n        \"scheme\": \"string\",\n        \"schemeSupport\": \"string\"\n      },\n      \"pushed\": false,\n      \"tags\": [\n        {\n          \"guid\": \"a454314f-1bcd-bb56-7c1d-854a74394438\",\n          \"name\": \"string\",\n          \"type\": \"string\"\n        },\n        {\n          \"guid\": \"cf421e43-8ace-d15d-fa85-5ba5242f908f\",\n          \"name\": \"string\",\n          \"type\": \"string\"\n        }\n      ],\n      \"safeEdit\": {\n        \"safeEditLocked\": true,\n        \"user\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"profileIcon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"versionsCount\": 191,\n      \"tracking_id\": \"a48de701-0516-d3f1-7b13-cb46fe3a3636\"\n    },\n    {\n      \"id\": \"81c9da0e-29c6-d861-2bf2-37d3f6013b99\",\n      \"parentId\": \"e5e3f9d8-bce8-518a-f43a-8ec41282502f\",\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"userId\": \"bac3655e-ad6e-e63e-fced-2772c28dbe72\",\n      \"creator\": {\n        \"id\": \"string\",\n        \"email\": \"string\",\n        \"name\": \"string\",\n        \"profileIcon\": \"string\"\n      },\n      \"created\": \"1995-01-22\",\n      \"modified\": \"1997-01-09\",\n      \"expire\": \"1962-02-16\",\n      \"permissions\": [\n        {\n          \"id\": 2598,\n          \"name\": \"string\",\n          \"allowed\": false\n        },\n        {\n          \"id\": 5782,\n          \"name\": \"string\",\n          \"allowed\": false\n        }\n      ],\n      \"deleted\": true,\n      \"permDeleted\": false,\n      \"permalink\": \"string\",\n      \"path\": \"string\",\n      \"members\": [\n        {\n          \"objectId\": \"string\",\n          \"roleId\": 8569,\n          \"userId\": \"string\",\n          \"groupId\": 7480,\n          \"user\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profileIcon\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"role\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rank\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"group\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"dn\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"sharedBy\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profileIcon\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"created\": \"2023-06-10\",\n          \"inheritRoleId\": 8581,\n          \"allowedFolderRoleId\": [\n            283,\n            962\n          ],\n          \"email\": \"string\",\n          \"rank\": 9087,\n          \"originFolder\": {}\n        },\n        {\n          \"objectId\": \"string\",\n          \"roleId\": 8636,\n          \"userId\": \"string\",\n          \"groupId\": 6620,\n          \"user\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profileIcon\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"role\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rank\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"group\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"dn\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"sharedBy\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profileIcon\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"created\": \"1953-10-11\",\n          \"inheritRoleId\": 8598,\n          \"allowedFolderRoleId\": [\n            9738,\n            90\n          ],\n          \"email\": \"string\",\n          \"rank\": 8321,\n          \"originFolder\": {}\n        }\n      ],\n      \"vendorDocId\": \"string\",\n      \"vendorDocName\": \"string\",\n      \"secure\": false,\n      \"source\": 3622,\n      \"modifier\": {\n        \"id\": \"string\",\n        \"email\": \"string\",\n        \"name\": \"string\",\n        \"profileIcon\": \"string\"\n      },\n      \"size\": 4041,\n      \"mime\": \"string\",\n      \"fingerprint\": \"string\",\n      \"fingerprints\": [\n        {\n          \"algo\": \"string\",\n          \"hash\": \"string\"\n        },\n        {\n          \"algo\": \"string\",\n          \"hash\": \"string\"\n        }\n      ],\n      \"clientCreated\": \"2025-01-31\",\n      \"clientModified\": \"1969-07-10\",\n      \"overriddenExpire\": true,\n      \"sharedBy\": {\n        \"id\": \"string\",\n        \"email\": \"string\",\n        \"name\": \"string\",\n        \"profileIcon\": \"string\"\n      },\n      \"sharedTime\": \"1946-11-17\",\n      \"parent\": {\n        \"id\": \"3a4055ee-e023-f223-c4b8-51c0f9ca6b97\",\n        \"parentId\": \"8ee29d0d-f3af-da08-f4ca-9a65a2d0c038\",\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"userId\": \"72864528-7109-e65a-65e0-3d61615e3d92\",\n        \"creator\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"profileIcon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"created\": \"1974-05-21\",\n        \"modified\": \"1964-09-01\",\n        \"expire\": \"1994-11-13\",\n        \"permissions\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"allowed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"allowed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"deleted\": true,\n        \"permDeleted\": true,\n        \"permalink\": \"string\",\n        \"path\": \"string\",\n        \"members\": [\n          {\n            \"objectId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"roleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"userId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"groupId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"user\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"role\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"group\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sharedBy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"created\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"inheritRoleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"allowedFolderRoleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rank\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"originFolder\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"objectId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"roleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"userId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"groupId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"user\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"role\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"group\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sharedBy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"created\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"inheritRoleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"allowedFolderRoleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rank\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"originFolder\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"vendorDocId\": \"string\",\n        \"vendorDocName\": \"string\",\n        \"secure\": true,\n        \"source\": 4602,\n        \"isShared\": false,\n        \"syncable\": true,\n        \"fileLifetime\": 3299,\n        \"description\": \"string\",\n        \"isFavorite\": false,\n        \"pushedFilesCount\": 9426,\n        \"currentUserRole\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"rank\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"avStatus\": \"string\",\n        \"dlpStatus\": \"string\",\n        \"totalMembersCount\": 9778,\n        \"totalFoldersCount\": 6890,\n        \"totalFilesCount\": 9871,\n        \"maxFolderExpiration\": \"1980-01-30\",\n        \"maxFileLifetime\": 4021,\n        \"isLdapGroupMember\": true,\n        \"isUnderMyFolder\": false,\n        \"pathIds\": \"string\",\n        \"isRoot\": false,\n        \"rootId\": \"0a1af468-4b55-713c-e56b-e29bcbf71282\",\n        \"useFolderQuota\": false,\n        \"quota\": 7770,\n        \"size\": 4648,\n        \"freeSpace\": 816,\n        \"inheritanceEnabled\": true\n      },\n      \"originalFileId\": \"f6f935e7-08d6-5844-1e45-5b6030f710f8\",\n      \"avStatus\": \"string\",\n      \"dlpStatus\": \"string\",\n      \"adminQuarantineStatus\": \"string\",\n      \"locked\": true,\n      \"lockUser\": {\n        \"id\": \"string\",\n        \"email\": \"string\",\n        \"name\": \"string\",\n        \"profileIcon\": \"string\"\n      },\n      \"isShared\": true,\n      \"lastModifiedBy\": {\n        \"id\": \"string\",\n        \"email\": \"string\",\n        \"name\": \"string\",\n        \"profileIcon\": \"string\"\n      },\n      \"pushedObject\": {\n        \"objectId\": \"string\",\n        \"userId\": \"string\",\n        \"created\": \"1991-03-30\",\n        \"user\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"profileIcon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"pathIds\": \"2d65191c-4557-ab93-38ac-1324a8bea1e1\",\n      \"wopiapp\": {\n        \"wopiSrc\": \"string\",\n        \"userId\": \"string\",\n        \"service\": \"string\",\n        \"scheme\": \"string\",\n        \"schemeSupport\": \"string\"\n      },\n      \"pushed\": false,\n      \"tags\": [\n        {\n          \"guid\": \"e7021626-ce85-620e-4c0f-caddb7b4a5a7\",\n          \"name\": \"string\",\n          \"type\": \"string\"\n        },\n        {\n          \"guid\": \"6b43628c-742c-1a5d-da27-b67f8dcb83bd\",\n          \"name\": \"string\",\n          \"type\": \"string\"\n        }\n      ],\n      \"safeEdit\": {\n        \"safeEditLocked\": false,\n        \"user\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"profileIcon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"versionsCount\": 6581,\n      \"tracking_id\": \"03056d77-37bc-fae5-d00c-87d1fd9b4ddd\"\n    }\n  ],\n  \"emails\": [\n    {\n      \"id\": \"string\",\n      \"senderId\": \"string\",\n      \"templateId\": 8709,\n      \"status\": \"string\",\n      \"type\": \"string\",\n      \"date\": \"1984-05-19\",\n      \"deleted\": false,\n      \"withdrawnDate\": \"2015-08-17\",\n      \"emailPackageId\": \"string\",\n      \"isPreview\": false,\n      \"isUserSent\": false,\n      \"watermark\": \"string\",\n      \"variables\": [\n        {\n          \"variable\": \"string\",\n          \"value\": {}\n        },\n        {\n          \"variable\": \"string\",\n          \"value\": {}\n        }\n      ],\n      \"recipients\": [\n        {\n          \"userId\": \"string\",\n          \"type\": 5779,\n          \"email\": \"string\",\n          \"isDistributionList\": false,\n          \"user\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profileIcon\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"userId\": \"string\",\n          \"type\": 9414,\n          \"email\": \"string\",\n          \"isDistributionList\": false,\n          \"user\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profileIcon\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"secureBody\": false,\n      \"modifiedDate\": \"2005-03-28\",\n      \"parentEmailId\": \"string\",\n      \"emailReturnReceipt\": [\n        {\n          \"userId\": \"string\",\n          \"user\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profileIcon\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"userId\": \"string\",\n          \"user\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profileIcon\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"error\": \"string\",\n      \"subject\": \"string\",\n      \"attachmentCount\": 3892,\n      \"expirationDate\": \"1948-03-04\",\n      \"avStatus\": \"string\",\n      \"dlpStatus\": \"string\",\n      \"hasTrackingAccess\": true,\n      \"trackingAccess\": [\n        {\n          \"userId\": \"string\",\n          \"type\": 7115,\n          \"email\": \"string\",\n          \"isDistributionList\": false,\n          \"user\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profileIcon\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"revoked\": false\n        },\n        {\n          \"userId\": \"string\",\n          \"type\": 7422,\n          \"email\": \"string\",\n          \"isDistributionList\": false,\n          \"user\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profileIcon\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"revoked\": true\n        }\n      ],\n      \"policyDirective\": 3896,\n      \"isRead\": true,\n      \"bucket\": \"string\",\n      \"body\": \"string\",\n      \"package\": {\n        \"id\": \"4848db83-13fd-2b09-c00f-274dda4d4cad\",\n        \"selfCopy\": true,\n        \"includeFingerprint\": true,\n        \"expire\": 6909,\n        \"fileCount\": {},\n        \"deleted\": true,\n        \"acl\": \"string\",\n        \"attachments\": [\n          {\n            \"emailPackageId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"attachmentId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"withdrawn\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"drmFile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"accessType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tags\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"permissions\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"objectId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"size\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mime\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"created\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deleted\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fingerprint\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fingerprintAlgo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fingerprints\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"adminQuarantineStatus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"avStatus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"dlpStatus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"emailPackageId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"attachmentId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"withdrawn\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"drmFile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"accessType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tags\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"permissions\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"objectId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"size\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mime\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"created\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deleted\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fingerprint\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fingerprintAlgo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fingerprints\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"adminQuarantineStatus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"avStatus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"dlpStatus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"downloadLink\": \"string\"\n      },\n      \"rawBody\": \"string\",\n      \"headline\": \"string\",\n      \"notice\": \"string\",\n      \"fullHtmlBody\": \"string\",\n      \"emailFrom\": \"string\",\n      \"templateBody\": \"string\",\n      \"webFormId\": \"string\",\n      \"webFormFields\": {},\n      \"sender\": {\n        \"id\": \"string\",\n        \"email\": \"string\",\n        \"name\": \"string\",\n        \"profileIcon\": \"string\"\n      },\n      \"sharedMailboxId\": \"string\",\n      \"htmlBody\": \"string\",\n      \"actor\": {\n        \"id\": \"string\",\n        \"email\": \"string\",\n        \"name\": \"string\",\n        \"profileIcon\": \"string\"\n      },\n      \"darkModeStyle\": \"string\",\n      \"exists\": true\n    },\n    {\n      \"id\": \"string\",\n      \"senderId\": \"string\",\n      \"templateId\": 9646,\n      \"status\": \"string\",\n      \"type\": \"string\",\n      \"date\": \"1993-01-02\",\n      \"deleted\": true,\n      \"withdrawnDate\": \"2007-04-13\",\n      \"emailPackageId\": \"string\",\n      \"isPreview\": false,\n      \"isUserSent\": false,\n      \"watermark\": \"string\",\n      \"variables\": [\n        {\n          \"variable\": \"string\",\n          \"value\": {}\n        },\n        {\n          \"variable\": \"string\",\n          \"value\": {}\n        }\n      ],\n      \"recipients\": [\n        {\n          \"userId\": \"string\",\n          \"type\": 873,\n          \"email\": \"string\",\n          \"isDistributionList\": false,\n          \"user\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profileIcon\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"userId\": \"string\",\n          \"type\": 4194,\n          \"email\": \"string\",\n          \"isDistributionList\": true,\n          \"user\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profileIcon\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"secureBody\": false,\n      \"modifiedDate\": \"1977-06-08\",\n      \"parentEmailId\": \"string\",\n      \"emailReturnReceipt\": [\n        {\n          \"userId\": \"string\",\n          \"user\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profileIcon\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"userId\": \"string\",\n          \"user\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profileIcon\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"error\": \"string\",\n      \"subject\": \"string\",\n      \"attachmentCount\": 2346,\n      \"expirationDate\": \"2005-12-07\",\n      \"avStatus\": \"string\",\n      \"dlpStatus\": \"string\",\n      \"hasTrackingAccess\": false,\n      \"trackingAccess\": [\n        {\n          \"userId\": \"string\",\n          \"type\": 2446,\n          \"email\": \"string\",\n          \"isDistributionList\": true,\n          \"user\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profileIcon\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"revoked\": false\n        },\n        {\n          \"userId\": \"string\",\n          \"type\": 4408,\n          \"email\": \"string\",\n          \"isDistributionList\": false,\n          \"user\": {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"profileIcon\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"revoked\": false\n        }\n      ],\n      \"policyDirective\": 6781,\n      \"isRead\": false,\n      \"bucket\": \"string\",\n      \"body\": \"string\",\n      \"package\": {\n        \"id\": \"c51b3fa5-8dbb-308f-bb24-7bffcf334b43\",\n        \"selfCopy\": false,\n        \"includeFingerprint\": false,\n        \"expire\": 6673,\n        \"fileCount\": {},\n        \"deleted\": false,\n        \"acl\": \"string\",\n        \"attachments\": [\n          {\n            \"emailPackageId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"attachmentId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"withdrawn\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"drmFile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"accessType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tags\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"permissions\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"objectId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"size\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mime\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"created\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deleted\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fingerprint\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fingerprintAlgo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fingerprints\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"adminQuarantineStatus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"avStatus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"dlpStatus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"emailPackageId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"attachmentId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"withdrawn\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"drmFile\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"accessType\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tags\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"permissions\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"objectId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"size\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mime\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"created\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"deleted\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fingerprint\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fingerprintAlgo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"fingerprints\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"adminQuarantineStatus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"avStatus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"dlpStatus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"downloadLink\": \"string\"\n      },\n      \"rawBody\": \"string\",\n      \"headline\": \"string\",\n      \"notice\": \"string\",\n      \"fullHtmlBody\": \"string\",\n      \"emailFrom\": \"string\",\n      \"templateBody\": \"string\",\n      \"webFormId\": \"string\",\n      \"webFormFields\": {},\n      \"sender\": {\n        \"id\": \"string\",\n        \"email\": \"string\",\n        \"name\": \"string\",\n        \"profileIcon\": \"string\"\n      },\n      \"sharedMailboxId\": \"string\",\n      \"htmlBody\": \"string\",\n      \"actor\": {\n        \"id\": \"string\",\n        \"email\": \"string\",\n        \"name\": \"string\",\n        \"profileIcon\": \"string\"\n      },\n      \"darkModeStyle\": \"string\",\n      \"exists\": true\n    }\n  ],\n  \"totalFiles\": 6438,\n  \"totalFolders\": 2077,\n  \"totalEmails\": 1810,\n  \"emailSuggestions\": [\n    \"string\",\n    \"string\"\n  ],\n  \"fileSuggestions\": [\n    \"string\",\n    \"string\"\n  ],\n  \"fileHighlightings\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9c628228-bc34-4d46-ab44-62857eb5bb30",
+              "name": "Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "includeContent",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "searchType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "searchType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "objectId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "fileSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "fileSize:gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "fileSize:gte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "fileSize:lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "fileSize:lte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "user",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fileType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fileType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "flsOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "sharedMailboxId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nameOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "subject",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "senderId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "recipientId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fileName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "folderName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fileContent",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "spellCheck",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "bucket",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tracking_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "extensions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extensions",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_AUTH_INVALID_CSRF\",\n      \"message\": \"Invalid CSRF Authentication\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "396605fe-3f95-45a6-b086-e927bc288226",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_PROFILE_COLLABORATION_DISABLED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "includeContent",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "searchType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "searchType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "objectId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "fileSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "fileSize:gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "fileSize:gte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "fileSize:lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "fileSize:lte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "user",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fileType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fileType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "flsOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "sharedMailboxId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nameOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "subject",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "senderId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "recipientId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fileName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "folderName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fileContent",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "spellCheck",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "bucket",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tracking_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "extensions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extensions",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_PROFILE_COLLABORATION_DISABLED\",\n      \"message\": \"User's profile has no collaboration access\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e907551-150b-4f71-9f21-c02d4d2ee22f",
+              "name": "Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INVALID_PARAMETER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "includeContent",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "searchType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "searchType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "objectId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "fileSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "fileSize:gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "fileSize:gte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "fileSize:lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "fileSize:lte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "user",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fileType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fileType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "flsOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "sharedMailboxId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nameOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "subject",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "senderId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "recipientId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fileName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "folderName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fileContent",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "spellCheck",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "bucket",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tracking_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "extensions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extensions",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_INVALID_PARAMETER\",\n      \"message\": \"Invalid Parameter Exception\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d3007142-b677-473f-a03a-459b67dc8f89",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "includeContent",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "searchType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "searchType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "objectId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "fileSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "fileSize:gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "fileSize:gte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "fileSize:lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "fileSize:lte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "user",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fileType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fileType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "flsOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "sharedMailboxId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nameOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "subject",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "senderId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "recipientId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fileName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "folderName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fileContent",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "spellCheck",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "bucket",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tracking_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "extensions",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "extensions",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8b34f047-0885-42f3-9465-dade2bfa7397",
+    "name": "Kiteworks API Documentation activities search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

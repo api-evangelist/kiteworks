@@ -1,0 +1,4582 @@
+{
+  "item": [
+    {
+      "id": "bd2945d0-6329-4548-84c9-60682ef6c65a",
+      "name": "scim",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "074ec6da-ee79-4ef0-b8d6-baf255bdcd61",
+          "name": "Create a user",
+          "request": {
+            "name": "Create a user",
+            "description": {
+              "content": "### Description:\n  Creates a new SCIM user with the specified attributes.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The newly created user is returned.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "scim",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "attributes",
+                  "value": "<string>",
+                  "description": "Comma-separated list of attribute names to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "attributes",
+                  "value": "<string>",
+                  "description": "Comma-separated list of attribute names to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "excludedAttributes",
+                  "value": "<string>",
+                  "description": "Comma-separated list of attribute names to exclude from the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "excludedAttributes",
+                  "value": "<string>",
+                  "description": "Comma-separated list of attribute names to exclude from the response."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"schemas\": [\n    \"<string>\"\n  ],\n  \"userName\": \"<email>\",\n  \"password\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"userType\": \"<string>\",\n  \"phoneNumbers\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"notify\": false,\n  \"userMustChange\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "147eaabf-5973-448c-81fe-17a37c7e9df6",
+              "name": "The user is created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\"\n  ],\n  \"userName\": \"<email>\",\n  \"password\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"userType\": \"<string>\",\n  \"phoneNumbers\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"notify\": false,\n  \"userMustChange\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ],\n  \"id\": \"string\",\n  \"meta\": {\n    \"resourceType\": \"string\",\n    \"created\": \"1946-09-30\",\n    \"lastModified\": \"2007-04-05\",\n    \"location\": \"string\"\n  },\n  \"userName\": \"string\",\n  \"displayName\": \"string\",\n  \"userType\": \"string\",\n  \"preferredLanguage\": \"string\",\n  \"active\": true,\n  \"emails\": [\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": true\n    },\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    }\n  ],\n  \"phoneNumbers\": [\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    },\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    }\n  ],\n  \"photos\": [\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": true\n    },\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    }\n  ],\n  \"roles\": [\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    },\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "35d01686-5874-45d1-ae7f-3fc3af172c1b",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\"\n  ],\n  \"userName\": \"<email>\",\n  \"password\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"userType\": \"<string>\",\n  \"phoneNumbers\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"notify\": false,\n  \"userMustChange\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "76161276-cc2b-4d28-a487-e12b6b53359c",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\"\n  ],\n  \"userName\": \"<email>\",\n  \"password\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"userType\": \"<string>\",\n  \"phoneNumbers\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"notify\": false,\n  \"userMustChange\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e1f634d1-da82-4f6e-9e35-9d55fd30dfe4",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\"\n  ],\n  \"userName\": \"<email>\",\n  \"password\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"userType\": \"<string>\",\n  \"phoneNumbers\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"notify\": false,\n  \"userMustChange\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fe5a127f-8b87-4fd5-8e2a-11915aa9a780",
+              "name": "Conflict.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\"\n  ],\n  \"userName\": \"<email>\",\n  \"password\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"userType\": \"<string>\",\n  \"phoneNumbers\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"notify\": false,\n  \"userMustChange\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "701ba2ca-bd47-4143-8e86-8a126a156c29",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\"\n  ],\n  \"userName\": \"<email>\",\n  \"password\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"userType\": \"<string>\",\n  \"phoneNumbers\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"notify\": false,\n  \"userMustChange\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4044b23a-bd53-4066-9361-43d41f5b4106",
+          "name": "Retrieve users",
+          "request": {
+            "name": "Retrieve users",
+            "description": {
+              "content": "### Description:\n  Returns a paginated list of SCIM users matching the specified filter criteria.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  A list of SCIM users is returned.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "scim",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "attributes",
+                  "value": "<string>",
+                  "description": "Comma-separated list of attribute names to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "attributes",
+                  "value": "<string>",
+                  "description": "Comma-separated list of attribute names to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "excludedAttributes",
+                  "value": "<string>",
+                  "description": "Comma-separated list of attribute names to exclude from the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "excludedAttributes",
+                  "value": "<string>",
+                  "description": "Comma-separated list of attribute names to exclude from the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "SCIM filter expression to narrow the list of returned users (e.g., `userName eq \"user@example.com\"`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "sortBy",
+                  "value": "<string>",
+                  "description": "Attribute name to sort results by."
+                },
+                {
+                  "disabled": false,
+                  "key": "sortOrder",
+                  "value": "<string>",
+                  "description": "Sort direction for the results.<br>`ascending` – Sort in ascending order.<br>`descending` – Sort in descending order."
+                },
+                {
+                  "disabled": false,
+                  "key": "startIndex",
+                  "value": "<integer>",
+                  "description": "1-based index of the first result to return, used for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Maximum number of results to return per page (maximum: 1,000,000)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cdc6f6e9-db00-4a34-898e-abe953f6fa8f",
+              "name": "The users are returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ],\n  \"totalResults\": 9078,\n  \"itemsPerPage\": 4262,\n  \"startIndex\": 3214,\n  \"Resources\": [\n    {\n      \"schemas\": [\n        \"string\",\n        \"string\"\n      ],\n      \"id\": \"string\",\n      \"meta\": {\n        \"resourceType\": \"string\",\n        \"created\": \"1986-03-14\",\n        \"lastModified\": \"1987-05-10\",\n        \"location\": \"string\"\n      },\n      \"userName\": \"string\",\n      \"displayName\": \"string\",\n      \"userType\": \"string\",\n      \"preferredLanguage\": \"string\",\n      \"active\": true,\n      \"emails\": [\n        {\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"primary\": true\n        },\n        {\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"primary\": false\n        }\n      ],\n      \"phoneNumbers\": [\n        {\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"primary\": true\n        },\n        {\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"primary\": false\n        }\n      ],\n      \"photos\": [\n        {\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"primary\": false\n        },\n        {\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"primary\": false\n        }\n      ],\n      \"roles\": [\n        {\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"primary\": true\n        },\n        {\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"primary\": true\n        }\n      ]\n    },\n    {\n      \"schemas\": [\n        \"string\",\n        \"string\"\n      ],\n      \"id\": \"string\",\n      \"meta\": {\n        \"resourceType\": \"string\",\n        \"created\": \"2020-09-02\",\n        \"lastModified\": \"2011-12-27\",\n        \"location\": \"string\"\n      },\n      \"userName\": \"string\",\n      \"displayName\": \"string\",\n      \"userType\": \"string\",\n      \"preferredLanguage\": \"string\",\n      \"active\": false,\n      \"emails\": [\n        {\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"primary\": true\n        },\n        {\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"primary\": true\n        }\n      ],\n      \"phoneNumbers\": [\n        {\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"primary\": true\n        },\n        {\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"primary\": false\n        }\n      ],\n      \"photos\": [\n        {\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"primary\": true\n        },\n        {\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"primary\": false\n        }\n      ],\n      \"roles\": [\n        {\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"primary\": false\n        },\n        {\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"primary\": false\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c1f2e2d-e507-42fd-96a8-e2d779faf1b8",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "33ed48ad-939f-4004-8e1e-7419775a4f25",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ff1bdca5-e2cf-4162-892d-4418c2b2674f",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aa7e1d16-2fdf-4fcc-93a1-6a334bcc77ad",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "650b7177-cab4-46da-b6ae-706e34c87973",
+          "name": "Create a user",
+          "request": {
+            "name": "Create a user",
+            "description": {
+              "content": "### Description:\n  Creates a new SCIM user with the specified attributes.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The newly created user is returned.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "scim",
+                "Users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "attributes",
+                  "value": "<string>",
+                  "description": "Comma-separated list of attribute names to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "attributes",
+                  "value": "<string>",
+                  "description": "Comma-separated list of attribute names to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "excludedAttributes",
+                  "value": "<string>",
+                  "description": "Comma-separated list of attribute names to exclude from the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "excludedAttributes",
+                  "value": "<string>",
+                  "description": "Comma-separated list of attribute names to exclude from the response."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"schemas\": [\n    \"<string>\"\n  ],\n  \"userName\": \"<email>\",\n  \"password\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"userType\": \"<string>\",\n  \"phoneNumbers\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"notify\": false,\n  \"userMustChange\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "55122510-4c79-4fe8-8743-7730808e1269",
+              "name": "The user is created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\"\n  ],\n  \"userName\": \"<email>\",\n  \"password\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"userType\": \"<string>\",\n  \"phoneNumbers\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"notify\": false,\n  \"userMustChange\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ],\n  \"id\": \"string\",\n  \"meta\": {\n    \"resourceType\": \"string\",\n    \"created\": \"1986-09-28\",\n    \"lastModified\": \"1967-02-23\",\n    \"location\": \"string\"\n  },\n  \"userName\": \"string\",\n  \"displayName\": \"string\",\n  \"userType\": \"string\",\n  \"preferredLanguage\": \"string\",\n  \"active\": true,\n  \"emails\": [\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    },\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": true\n    }\n  ],\n  \"phoneNumbers\": [\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    },\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    }\n  ],\n  \"photos\": [\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    },\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    }\n  ],\n  \"roles\": [\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    },\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a15849f-d0c6-44cc-8273-98280a8d23ba",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\"\n  ],\n  \"userName\": \"<email>\",\n  \"password\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"userType\": \"<string>\",\n  \"phoneNumbers\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"notify\": false,\n  \"userMustChange\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2718f5bd-9fcf-47a9-9ce4-f093a986edec",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\"\n  ],\n  \"userName\": \"<email>\",\n  \"password\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"userType\": \"<string>\",\n  \"phoneNumbers\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"notify\": false,\n  \"userMustChange\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "55d7b60c-97eb-48e6-b1bd-f7bd326b090c",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\"\n  ],\n  \"userName\": \"<email>\",\n  \"password\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"userType\": \"<string>\",\n  \"phoneNumbers\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"notify\": false,\n  \"userMustChange\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5e7ce36c-5eb9-457a-bbd9-5bec92ff39f2",
+              "name": "Conflict.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\"\n  ],\n  \"userName\": \"<email>\",\n  \"password\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"userType\": \"<string>\",\n  \"phoneNumbers\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"notify\": false,\n  \"userMustChange\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ec607e64-63ef-490f-8b58-c61a89460609",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\"\n  ],\n  \"userName\": \"<email>\",\n  \"password\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"userType\": \"<string>\",\n  \"phoneNumbers\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"notify\": false,\n  \"userMustChange\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a32ebde-d569-4881-86f0-3299e362886f",
+          "name": "Retrieve users",
+          "request": {
+            "name": "Retrieve users",
+            "description": {
+              "content": "### Description:\n  Returns a paginated list of SCIM users matching the specified filter criteria.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  A list of SCIM users is returned.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "scim",
+                "Users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "attributes",
+                  "value": "<string>",
+                  "description": "Comma-separated list of attribute names to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "attributes",
+                  "value": "<string>",
+                  "description": "Comma-separated list of attribute names to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "excludedAttributes",
+                  "value": "<string>",
+                  "description": "Comma-separated list of attribute names to exclude from the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "excludedAttributes",
+                  "value": "<string>",
+                  "description": "Comma-separated list of attribute names to exclude from the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "SCIM filter expression to narrow the list of returned users (e.g., `userName eq \"user@example.com\"`)."
+                },
+                {
+                  "disabled": false,
+                  "key": "sortBy",
+                  "value": "<string>",
+                  "description": "Attribute name to sort results by."
+                },
+                {
+                  "disabled": false,
+                  "key": "sortOrder",
+                  "value": "<string>",
+                  "description": "Sort direction for the results.<br>`ascending` – Sort in ascending order.<br>`descending` – Sort in descending order."
+                },
+                {
+                  "disabled": false,
+                  "key": "startIndex",
+                  "value": "<integer>",
+                  "description": "1-based index of the first result to return, used for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Maximum number of results to return per page (maximum: 1,000,000)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7bafd59d-4e5f-466c-a84d-5094b4c0d396",
+              "name": "The users are returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ],\n  \"totalResults\": 3295,\n  \"itemsPerPage\": 980,\n  \"startIndex\": 5468,\n  \"Resources\": [\n    {\n      \"schemas\": [\n        \"string\",\n        \"string\"\n      ],\n      \"id\": \"string\",\n      \"meta\": {\n        \"resourceType\": \"string\",\n        \"created\": \"2014-12-31\",\n        \"lastModified\": \"1952-06-05\",\n        \"location\": \"string\"\n      },\n      \"userName\": \"string\",\n      \"displayName\": \"string\",\n      \"userType\": \"string\",\n      \"preferredLanguage\": \"string\",\n      \"active\": true,\n      \"emails\": [\n        {\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"primary\": false\n        },\n        {\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"primary\": true\n        }\n      ],\n      \"phoneNumbers\": [\n        {\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"primary\": true\n        },\n        {\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"primary\": true\n        }\n      ],\n      \"photos\": [\n        {\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"primary\": true\n        },\n        {\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"primary\": true\n        }\n      ],\n      \"roles\": [\n        {\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"primary\": false\n        },\n        {\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"primary\": true\n        }\n      ]\n    },\n    {\n      \"schemas\": [\n        \"string\",\n        \"string\"\n      ],\n      \"id\": \"string\",\n      \"meta\": {\n        \"resourceType\": \"string\",\n        \"created\": \"1973-08-26\",\n        \"lastModified\": \"2017-01-21\",\n        \"location\": \"string\"\n      },\n      \"userName\": \"string\",\n      \"displayName\": \"string\",\n      \"userType\": \"string\",\n      \"preferredLanguage\": \"string\",\n      \"active\": false,\n      \"emails\": [\n        {\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"primary\": true\n        },\n        {\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"primary\": false\n        }\n      ],\n      \"phoneNumbers\": [\n        {\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"primary\": false\n        },\n        {\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"primary\": false\n        }\n      ],\n      \"photos\": [\n        {\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"primary\": true\n        },\n        {\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"primary\": false\n        }\n      ],\n      \"roles\": [\n        {\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"primary\": true\n        },\n        {\n          \"value\": \"string\",\n          \"type\": \"string\",\n          \"primary\": false\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d34e3deb-6c9f-47f5-addd-534df717683b",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ac00fcc7-9587-4952-9aca-e69b81b637f9",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3ad9d403-1dce-4637-8c5b-98bc03ffec14",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "395fcc8d-2b09-4681-b51e-e28fab02d403",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b6d3ea30-f043-4c4e-9770-d8781dd8c9cb",
+          "name": "Update a user",
+          "request": {
+            "name": "Update a user",
+            "description": {
+              "content": "### Description:\n  Updates the SCIM user corresponding to the provided ID.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The updated user is returned.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "scim",
+                "users",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier (UUID) of the entity."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"schemas\": [\n    \"<string>\"\n  ],\n  \"password\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"userType\": \"<string>\",\n  \"phoneNumbers\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"userTypeDemotionOptions\": {\n    \"remoteWipe\": false,\n    \"deleteUnsharedData\": null,\n    \"retainData\": null,\n    \"retainPermissionToSharedData\": false,\n    \"retainToUser\": false\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "20ee5d3d-910b-4c16-abcf-28e0c51ff651",
+              "name": "The user is updated and returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\"\n  ],\n  \"password\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"userType\": \"<string>\",\n  \"phoneNumbers\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"userTypeDemotionOptions\": {\n    \"remoteWipe\": false,\n    \"deleteUnsharedData\": null,\n    \"retainData\": null,\n    \"retainPermissionToSharedData\": false,\n    \"retainToUser\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ],\n  \"id\": \"string\",\n  \"meta\": {\n    \"resourceType\": \"string\",\n    \"created\": \"1986-09-28\",\n    \"lastModified\": \"1967-02-23\",\n    \"location\": \"string\"\n  },\n  \"userName\": \"string\",\n  \"displayName\": \"string\",\n  \"userType\": \"string\",\n  \"preferredLanguage\": \"string\",\n  \"active\": true,\n  \"emails\": [\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    },\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": true\n    }\n  ],\n  \"phoneNumbers\": [\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    },\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    }\n  ],\n  \"photos\": [\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    },\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    }\n  ],\n  \"roles\": [\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    },\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ab6f666-cd0d-461c-a287-2b1eeed193d2",
+              "name": "ERR_AUTH_INVALID_CSRF\n\nERR_AUTH_UNAUTHORIZED\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\"\n  ],\n  \"password\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"userType\": \"<string>\",\n  \"phoneNumbers\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"userTypeDemotionOptions\": {\n    \"remoteWipe\": false,\n    \"deleteUnsharedData\": null,\n    \"retainData\": null,\n    \"retainPermissionToSharedData\": false,\n    \"retainToUser\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7d8264a6-09ba-4b66-bc33-d924b67fb54e",
+              "name": "ERR_ENTITY_NOT_FOUND",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\"\n  ],\n  \"password\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"userType\": \"<string>\",\n  \"phoneNumbers\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"userTypeDemotionOptions\": {\n    \"remoteWipe\": false,\n    \"deleteUnsharedData\": null,\n    \"retainData\": null,\n    \"retainPermissionToSharedData\": false,\n    \"retainToUser\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "19343524-0cd3-4d87-ae31-3d411a77239f",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\"\n  ],\n  \"password\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"userType\": \"<string>\",\n  \"phoneNumbers\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"userTypeDemotionOptions\": {\n    \"remoteWipe\": false,\n    \"deleteUnsharedData\": null,\n    \"retainData\": null,\n    \"retainPermissionToSharedData\": false,\n    \"retainToUser\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "82fdb206-1431-40ba-ac8b-19536e3aa01a",
+          "name": "Return a user",
+          "request": {
+            "name": "Return a user",
+            "description": {
+              "content": "### Description:\n  Returns the SCIM user corresponding to the provided ID.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The user is returned.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "scim",
+                "users",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "attributes",
+                  "value": "<string>",
+                  "description": "Comma-separated list of attribute names to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "attributes",
+                  "value": "<string>",
+                  "description": "Comma-separated list of attribute names to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "excludedAttributes",
+                  "value": "<string>",
+                  "description": "Comma-separated list of attribute names to exclude from the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "excludedAttributes",
+                  "value": "<string>",
+                  "description": "Comma-separated list of attribute names to exclude from the response."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier (UUID) of the entity."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f7ad2fc5-a03c-4071-8983-eff3f9b80420",
+              "name": "The user is returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ],\n  \"id\": \"string\",\n  \"meta\": {\n    \"resourceType\": \"string\",\n    \"created\": \"1986-09-28\",\n    \"lastModified\": \"1967-02-23\",\n    \"location\": \"string\"\n  },\n  \"userName\": \"string\",\n  \"displayName\": \"string\",\n  \"userType\": \"string\",\n  \"preferredLanguage\": \"string\",\n  \"active\": true,\n  \"emails\": [\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    },\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": true\n    }\n  ],\n  \"phoneNumbers\": [\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    },\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    }\n  ],\n  \"photos\": [\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    },\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    }\n  ],\n  \"roles\": [\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    },\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6f95ca4-ed81-4fdc-99af-43db101ef878",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7429c7f2-b285-4112-94c3-5960d1533cfb",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "76892a40-c721-4e4d-acd8-5dd7a9ea1de1",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "792563d7-3ef1-4f9a-a807-b68afdbf70ce",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dd46146d-39d6-4c0b-a718-052cb5bef41e",
+          "name": "Delete a user",
+          "request": {
+            "name": "Delete a user",
+            "description": {
+              "content": "### Description:\n  Deletes the SCIM user corresponding to the provided ID.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The user is deleted.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "scim",
+                "users",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "remoteWipe",
+                  "value": "false",
+                  "description": "If true, triggers a remote wipe of the user data from all registered devices."
+                },
+                {
+                  "disabled": false,
+                  "key": "deleteUnsharedData",
+                  "value": "",
+                  "description": "If true, permanently deletes data that is not shared with other users."
+                },
+                {
+                  "disabled": false,
+                  "key": "retainData",
+                  "value": "",
+                  "description": "If true, retains the user data after deletion."
+                },
+                {
+                  "disabled": false,
+                  "key": "retainPermissionToSharedData",
+                  "value": "false",
+                  "description": "If true, the specified `retainToUser` will retain access to shared data."
+                },
+                {
+                  "disabled": false,
+                  "key": "retainToUser",
+                  "value": "false",
+                  "description": "UUID of the user who will receive ownership of the deleted user data."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier (UUID) of the entity."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9f65bde8-1468-4a92-bfec-88fcda975de3",
+              "name": "The user is deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "remoteWipe",
+                      "value": "false"
+                    },
+                    {
+                      "key": "deleteUnsharedData",
+                      "value": ""
+                    },
+                    {
+                      "key": "retainData",
+                      "value": ""
+                    },
+                    {
+                      "key": "retainPermissionToSharedData",
+                      "value": "false"
+                    },
+                    {
+                      "key": "retainToUser",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1bc1417e-db36-41be-be8b-aa8639dbbd53",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "remoteWipe",
+                      "value": "false"
+                    },
+                    {
+                      "key": "deleteUnsharedData",
+                      "value": ""
+                    },
+                    {
+                      "key": "retainData",
+                      "value": ""
+                    },
+                    {
+                      "key": "retainPermissionToSharedData",
+                      "value": "false"
+                    },
+                    {
+                      "key": "retainToUser",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a400a62f-a857-494e-a3e8-ae837a1d5ba1",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "remoteWipe",
+                      "value": "false"
+                    },
+                    {
+                      "key": "deleteUnsharedData",
+                      "value": ""
+                    },
+                    {
+                      "key": "retainData",
+                      "value": ""
+                    },
+                    {
+                      "key": "retainPermissionToSharedData",
+                      "value": "false"
+                    },
+                    {
+                      "key": "retainToUser",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8170b067-8a81-478a-86d4-4f35d1d00f84",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "remoteWipe",
+                      "value": "false"
+                    },
+                    {
+                      "key": "deleteUnsharedData",
+                      "value": ""
+                    },
+                    {
+                      "key": "retainData",
+                      "value": ""
+                    },
+                    {
+                      "key": "retainPermissionToSharedData",
+                      "value": "false"
+                    },
+                    {
+                      "key": "retainToUser",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "768a49a9-2385-4cc3-9e41-ae30ea0c3fc3",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "remoteWipe",
+                      "value": "false"
+                    },
+                    {
+                      "key": "deleteUnsharedData",
+                      "value": ""
+                    },
+                    {
+                      "key": "retainData",
+                      "value": ""
+                    },
+                    {
+                      "key": "retainPermissionToSharedData",
+                      "value": "false"
+                    },
+                    {
+                      "key": "retainToUser",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "563486e9-9501-4789-a9d1-f4f032a7f925",
+          "name": "Update a user",
+          "request": {
+            "name": "Update a user",
+            "description": {
+              "content": "### Description:\n  Updates the SCIM user corresponding to the provided ID.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The updated user is returned.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "scim",
+                "Users",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier (UUID) of the entity."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"schemas\": [\n    \"<string>\"\n  ],\n  \"password\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"userType\": \"<string>\",\n  \"phoneNumbers\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"userTypeDemotionOptions\": {\n    \"remoteWipe\": false,\n    \"deleteUnsharedData\": null,\n    \"retainData\": null,\n    \"retainPermissionToSharedData\": false,\n    \"retainToUser\": false\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "db99a7f0-5186-4e0c-ae43-bf10703cf024",
+              "name": "The user is updated and returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\"\n  ],\n  \"password\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"userType\": \"<string>\",\n  \"phoneNumbers\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"userTypeDemotionOptions\": {\n    \"remoteWipe\": false,\n    \"deleteUnsharedData\": null,\n    \"retainData\": null,\n    \"retainPermissionToSharedData\": false,\n    \"retainToUser\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ],\n  \"id\": \"string\",\n  \"meta\": {\n    \"resourceType\": \"string\",\n    \"created\": \"1986-09-28\",\n    \"lastModified\": \"1967-02-23\",\n    \"location\": \"string\"\n  },\n  \"userName\": \"string\",\n  \"displayName\": \"string\",\n  \"userType\": \"string\",\n  \"preferredLanguage\": \"string\",\n  \"active\": true,\n  \"emails\": [\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    },\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": true\n    }\n  ],\n  \"phoneNumbers\": [\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    },\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    }\n  ],\n  \"photos\": [\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    },\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    }\n  ],\n  \"roles\": [\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    },\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f91fcfc-413d-4638-860d-6b86c01c285b",
+              "name": "ERR_AUTH_INVALID_CSRF\n\nERR_AUTH_UNAUTHORIZED\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\"\n  ],\n  \"password\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"userType\": \"<string>\",\n  \"phoneNumbers\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"userTypeDemotionOptions\": {\n    \"remoteWipe\": false,\n    \"deleteUnsharedData\": null,\n    \"retainData\": null,\n    \"retainPermissionToSharedData\": false,\n    \"retainToUser\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b516e1e3-0efa-4ca5-9363-9643a50d849e",
+              "name": "ERR_ENTITY_NOT_FOUND",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\"\n  ],\n  \"password\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"userType\": \"<string>\",\n  \"phoneNumbers\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"userTypeDemotionOptions\": {\n    \"remoteWipe\": false,\n    \"deleteUnsharedData\": null,\n    \"retainData\": null,\n    \"retainPermissionToSharedData\": false,\n    \"retainToUser\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "04be41f5-2ec9-418d-8897-1089794e4425",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemas\": [\n    \"<string>\"\n  ],\n  \"password\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"userType\": \"<string>\",\n  \"phoneNumbers\": [\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"value\": \"<string>\",\n      \"primary\": \"<boolean>\"\n    }\n  ],\n  \"roles\": [\n    {\n      \"value\": \"<string>\"\n    }\n  ],\n  \"active\": \"<boolean>\",\n  \"userTypeDemotionOptions\": {\n    \"remoteWipe\": false,\n    \"deleteUnsharedData\": null,\n    \"retainData\": null,\n    \"retainPermissionToSharedData\": false,\n    \"retainToUser\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f981926d-e147-418a-93f2-610ffd09d414",
+          "name": "Return a user",
+          "request": {
+            "name": "Return a user",
+            "description": {
+              "content": "### Description:\n  Returns the SCIM user corresponding to the provided ID.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The user is returned.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "scim",
+                "Users",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "attributes",
+                  "value": "<string>",
+                  "description": "Comma-separated list of attribute names to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "attributes",
+                  "value": "<string>",
+                  "description": "Comma-separated list of attribute names to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "excludedAttributes",
+                  "value": "<string>",
+                  "description": "Comma-separated list of attribute names to exclude from the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "excludedAttributes",
+                  "value": "<string>",
+                  "description": "Comma-separated list of attribute names to exclude from the response."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier (UUID) of the entity."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d2436574-341e-48d3-9c8f-bd5e28833333",
+              "name": "The user is returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"schemas\": [\n    \"string\",\n    \"string\"\n  ],\n  \"id\": \"string\",\n  \"meta\": {\n    \"resourceType\": \"string\",\n    \"created\": \"1986-09-28\",\n    \"lastModified\": \"1967-02-23\",\n    \"location\": \"string\"\n  },\n  \"userName\": \"string\",\n  \"displayName\": \"string\",\n  \"userType\": \"string\",\n  \"preferredLanguage\": \"string\",\n  \"active\": true,\n  \"emails\": [\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    },\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": true\n    }\n  ],\n  \"phoneNumbers\": [\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    },\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    }\n  ],\n  \"photos\": [\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    },\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    }\n  ],\n  \"roles\": [\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": false\n    },\n    {\n      \"value\": \"string\",\n      \"type\": \"string\",\n      \"primary\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2481a841-52d7-4abe-81a9-6d6e141286b2",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e088c12e-2d40-460f-bdee-2193390c55aa",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2c3ad559-d88f-46d3-9905-3cbad14d14e3",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d7baba23-1438-40fe-8dd5-13765b2decce",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludedAttributes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "166aef91-4204-4410-8ec6-184c5fe8d60b",
+          "name": "Delete a user",
+          "request": {
+            "name": "Delete a user",
+            "description": {
+              "content": "### Description:\n  Deletes the SCIM user corresponding to the provided ID.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The user is deleted.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "scim",
+                "Users",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "remoteWipe",
+                  "value": "false",
+                  "description": "If true, triggers a remote wipe of the user data from all registered devices."
+                },
+                {
+                  "disabled": false,
+                  "key": "deleteUnsharedData",
+                  "value": "",
+                  "description": "If true, permanently deletes data that is not shared with other users."
+                },
+                {
+                  "disabled": false,
+                  "key": "retainData",
+                  "value": "",
+                  "description": "If true, retains the user data after deletion."
+                },
+                {
+                  "disabled": false,
+                  "key": "retainPermissionToSharedData",
+                  "value": "false",
+                  "description": "If true, the specified `retainToUser` will retain access to shared data."
+                },
+                {
+                  "disabled": false,
+                  "key": "retainToUser",
+                  "value": "false",
+                  "description": "UUID of the user who will receive ownership of the deleted user data."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier (UUID) of the entity."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8003b766-46fa-4b98-b671-59bcaa55a613",
+              "name": "The user is deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "remoteWipe",
+                      "value": "false"
+                    },
+                    {
+                      "key": "deleteUnsharedData",
+                      "value": ""
+                    },
+                    {
+                      "key": "retainData",
+                      "value": ""
+                    },
+                    {
+                      "key": "retainPermissionToSharedData",
+                      "value": "false"
+                    },
+                    {
+                      "key": "retainToUser",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dbd0d017-c689-4793-8be8-bbb075f20a20",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "remoteWipe",
+                      "value": "false"
+                    },
+                    {
+                      "key": "deleteUnsharedData",
+                      "value": ""
+                    },
+                    {
+                      "key": "retainData",
+                      "value": ""
+                    },
+                    {
+                      "key": "retainPermissionToSharedData",
+                      "value": "false"
+                    },
+                    {
+                      "key": "retainToUser",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6a5c9519-de5d-4975-b09b-01e8235f382b",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "remoteWipe",
+                      "value": "false"
+                    },
+                    {
+                      "key": "deleteUnsharedData",
+                      "value": ""
+                    },
+                    {
+                      "key": "retainData",
+                      "value": ""
+                    },
+                    {
+                      "key": "retainPermissionToSharedData",
+                      "value": "false"
+                    },
+                    {
+                      "key": "retainToUser",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3ffd89aa-c0d7-48ca-948c-045419802769",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "remoteWipe",
+                      "value": "false"
+                    },
+                    {
+                      "key": "deleteUnsharedData",
+                      "value": ""
+                    },
+                    {
+                      "key": "retainData",
+                      "value": ""
+                    },
+                    {
+                      "key": "retainPermissionToSharedData",
+                      "value": "false"
+                    },
+                    {
+                      "key": "retainToUser",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "adbf03a4-1c22-4d65-81d9-0b0cfd273062",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "remoteWipe",
+                      "value": "false"
+                    },
+                    {
+                      "key": "deleteUnsharedData",
+                      "value": ""
+                    },
+                    {
+                      "key": "retainData",
+                      "value": ""
+                    },
+                    {
+                      "key": "retainPermissionToSharedData",
+                      "value": "false"
+                    },
+                    {
+                      "key": "retainToUser",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d1c3df72-862a-478e-864a-fb2285f7c679",
+          "name": "Return SCIM service provider configuration",
+          "request": {
+            "name": "Return SCIM service provider configuration",
+            "description": {
+              "content": "### Description:\n  Returns the SCIM service provider configuration, including supported features and authentication schemes.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The service provider configuration is returned.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "scim",
+                "ServiceProviderConfig"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a72e7312-d222-4154-b9ea-99b218e098a2",
+              "name": "The service provider configuration is returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "ServiceProviderConfig"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "08ac2c16-2515-4cf2-a348-628cbb70bf0a",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "ServiceProviderConfig"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0d1b7d04-136f-4015-b57d-1e20f521dfa1",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "ServiceProviderConfig"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8cf3e0e6-d152-4779-9db7-223481344eee",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "ServiceProviderConfig"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d7958cf2-e66e-48c4-adee-91cc74020c38",
+          "name": "Return SCIM schemas",
+          "request": {
+            "name": "Return SCIM schemas",
+            "description": {
+              "content": "### Description:\n  Returns all supported SCIM schemas.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The supported SCIM schemas are returned.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "scim",
+                "Schemas"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "85ee1ed8-8428-4bff-9995-f43e9cf5d8fe",
+              "name": "The supported SCIM schemas are returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Schemas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6ea92340-c3ec-4725-8a18-cd54b6750071",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Schemas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "72ab487e-c81a-4a0e-bd07-b52c9bfa54ba",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Schemas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ae11ecff-43a1-4ef3-9897-bcbd0f94ad17",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Schemas"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "023d4c76-f428-4f53-b25f-c3001031a91a",
+          "name": "Return a SCIM schema",
+          "request": {
+            "name": "Return a SCIM schema",
+            "description": {
+              "content": "### Description:\n  Returns the SCIM schema corresponding to the provided ID.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The requested SCIM schema is returned if it exists.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "scim",
+                "Schemas",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID/URN of the schema"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fc93cde3-0fbe-4d70-8a17-4d42a45ab6f6",
+              "name": "The requested SCIM schema is returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Schemas",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID/URN of the schema"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "958429a3-adec-458e-aaa4-ad9a55197312",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Schemas",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID/URN of the schema"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "efa3de95-5500-4b58-a8e7-b4184b9ee62f",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Schemas",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID/URN of the schema"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f14a65fa-7225-42c1-a73d-39e38fe9e399",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "Schemas",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID/URN of the schema"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d3038701-da5c-4fe5-8c32-a1d068f01043",
+          "name": "Return SCIM resource types",
+          "request": {
+            "name": "Return SCIM resource types",
+            "description": {
+              "content": "### Description:\n  Returns all supported SCIM resource types.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The supported SCIM resource types are returned.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "scim",
+                "ResourceTypes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1fc9e02b-6677-4cab-bd42-11e97ee5266c",
+              "name": "The supported SCIM resource types are returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "ResourceTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f4cb3057-1684-44a5-a4d1-9fdace58de33",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "ResourceTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5897b020-4257-40ee-9892-56c4b595c5bf",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "ResourceTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aeb0b353-2751-450a-a0cc-37568025b7e9",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "ResourceTypes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d282d721-4749-4b54-8077-bd2c3562c134",
+          "name": "Return a SCIM resource type",
+          "request": {
+            "name": "Return a SCIM resource type",
+            "description": {
+              "content": "### Description:\n  Returns the SCIM resource type corresponding to the provided ID.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The requested SCIM resource type is returned if it exists.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "scim",
+                "ResourceTypes",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID/URN of the schema"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ac985588-fad0-4fe5-a49a-606fe8d7e867",
+              "name": "The requested SCIM resource type is returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "ResourceTypes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID/URN of the schema"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b1489d19-e16a-4ec2-a54c-563cc3028e87",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "ResourceTypes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID/URN of the schema"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6615c8e3-a31e-48d8-99d3-5ccb3e187daf",
+              "name": "Forbidden.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "ResourceTypes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID/URN of the schema"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "44dae790-594f-477c-aab2-b53ad84ab58f",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "scim",
+                    "ResourceTypes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID/URN of the schema"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5f541b98-d9d7-4153-86ed-d21ec57ce62d",
+    "name": "Kiteworks API Documentation activities scim API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

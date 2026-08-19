@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities roles API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "roles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List user roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/roles",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Role name"
+              },
+              {
+                "name": "name:contains",
+                "value": "",
+                "type": "query",
+                "description": "Role name. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "disabled",
+                "value": "",
+                "type": "query",
+                "description": "Whether Role is disabled"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter roles by type. Accepted values: `d`, `f`."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns a list of available user roles (e.g., Manager, Collaborator, Downloader, Viewer, Uploader), including each role's name, rank, and type."
+        },
+        {
+          "info": {
+            "name": "Get a role",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/roles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the role to be retrieved"
+              }
+            ]
+          },
+          "docs": "Returns the details of the specified role, including its name, rank, and type."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

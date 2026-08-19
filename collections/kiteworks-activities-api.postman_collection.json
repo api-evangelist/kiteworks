@@ -1,0 +1,606 @@
+{
+  "item": [
+    {
+      "id": "ffe9f6fb-d68b-44b5-8e91-0afafb201abf",
+      "name": "activities",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cc5c0e21-124b-4655-bce4-010c1c6aeb85",
+          "name": "Get all activities",
+          "request": {
+            "name": "Get all activities",
+            "description": {
+              "content": "Returns the activity log for the authenticated user across all files and folders they have access to.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "activities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "noDayBack",
+                  "value": "<integer>",
+                  "description": "Number of days back to search"
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<date>",
+                  "description": "Start date"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<date>",
+                  "description": "End date"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "Filter activities by scope. Accepted values: `all`, `my`."
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Search by mail body, subject and sender/recipients"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Filter activities by type. Accepted values: `all`, `folder_changes`, `file_changes`, `user_preferences`, `mail`, `tasks`, `comments`, `kitepoint`."
+                },
+                {
+                  "disabled": false,
+                  "key": "transactionId",
+                  "value": "<string>",
+                  "description": "Transaction ID associated with the activities"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "name:asc",
+                  "description": "Sorting options"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit"
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "With parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2b81027c-04d1-405b-8a88-a60175f2463c",
+              "name": "Returns a list of activity records for the authenticated user.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "activities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "noDayBack",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "created:asc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 1002,\n    \"event\": \"upload\",\n    \"message\": \"User uploaded budget-2024.xlsx\",\n    \"type\": \"f\",\n    \"created\": \"2024-03-16T08:00:00+00:00\",\n    \"successful\": 1,\n    \"user\": {\n      \"id\": 5,\n      \"name\": \"Jane Smith\"\n    },\n    \"data\": {\n      \"file\": {\n        \"id\": 8,\n        \"name\": \"budget-2024.xlsx\"\n      }\n    }\n  },\n  {\n    \"id\": 1001,\n    \"event\": \"download\",\n    \"message\": \"User downloaded quarterly-report.pdf\",\n    \"type\": \"f\",\n    \"created\": \"2024-03-15T10:30:00+00:00\",\n    \"successful\": 1,\n    \"user\": {\n      \"id\": 5,\n      \"name\": \"Jane Smith\"\n    },\n    \"data\": {\n      \"file\": {\n        \"id\": 7,\n        \"name\": \"quarterly-report.pdf\"\n      }\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea994a88-ba5f-4ce6-aa5a-713e1de28c61",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "activities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "noDayBack",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "created:asc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "383a49e5-1829-4ed3-9047-d5949dd4a3e4",
+          "name": "Get file activities",
+          "request": {
+            "name": "Get file activities",
+            "description": {
+              "content": "Returns the activity log for the specified file, scoped to the authenticated user. **Requires `user_view` permission on the file.** For Repositories Gateway source files, `view` permission is required instead.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "files",
+                ":file_id",
+                "activities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "noDayBack",
+                  "value": "<integer>",
+                  "description": "Number of days back to search"
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<date>",
+                  "description": "Start date"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<date>",
+                  "description": "End date"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "Filter activities by scope. Accepted values: `all`, `my`."
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Search by mail body, subject and sender/recipients"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Filter activities by type. Accepted values: `all`, `folder_changes`, `file_changes`, `user_preferences`, `mail`, `tasks`, `comments`, `kitepoint`."
+                },
+                {
+                  "disabled": false,
+                  "key": "transactionId",
+                  "value": "<string>",
+                  "description": "Transaction ID associated with the activities"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "name:asc",
+                  "description": "Sorting options"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit"
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "With parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "file_id",
+                  "description": "(Required) The unique identifier (UUID) of the file"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c266689c-eac4-4b3b-b241-996384958b6b",
+              "name": "Returns a list of activity records for the specified file.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    ":file_id",
+                    "activities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "noDayBack",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "created:asc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "file_id",
+                      "description": "(Required) The unique identifier (UUID) of the file"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 1001,\n    \"event\": \"download\",\n    \"message\": \"User downloaded quarterly-report.pdf\",\n    \"type\": \"f\",\n    \"created\": \"2024-03-15T10:30:00+00:00\",\n    \"successful\": 1,\n    \"user\": {\n      \"id\": 5,\n      \"name\": \"Jane Smith\"\n    },\n    \"data\": {\n      \"file\": {\n        \"id\": 7,\n        \"name\": \"quarterly-report.pdf\"\n      }\n    }\n  },\n  {\n    \"id\": 1000,\n    \"event\": \"view\",\n    \"message\": \"User viewed quarterly-report.pdf\",\n    \"type\": \"f\",\n    \"created\": \"2024-03-15T09:00:00+00:00\",\n    \"successful\": 1,\n    \"user\": {\n      \"id\": 5,\n      \"name\": \"Jane Smith\"\n    },\n    \"data\": {\n      \"file\": {\n        \"id\": 7,\n        \"name\": \"quarterly-report.pdf\"\n      }\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "100793ba-df5c-458f-9444-51aa283c1d33",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    ":file_id",
+                    "activities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "noDayBack",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "created:asc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "file_id",
+                      "description": "(Required) The unique identifier (UUID) of the file"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6217c4bf-7cbc-4192-a0a9-3f6fea4ba89f",
+    "name": "Kiteworks API Documentation activities API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,286 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities permissions API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "permissions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Return the list of permissions available on a comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/permissions/comment/:comment_id",
+            "params": [
+              {
+                "name": "comment_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the comment"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Unique action identifier"
+              },
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "Unique action identifier. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Action name"
+              },
+              {
+                "name": "name:contains",
+                "value": "",
+                "type": "query",
+                "description": "Action name. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "allowed",
+                "value": "",
+                "type": "query",
+                "description": "Determines if one has permissions to perform action"
+              },
+              {
+                "name": "enabled",
+                "value": "",
+                "type": "query",
+                "description": "Determines if the given action is available considering the current object state (locked, deleted, etc.)."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns the list of actions the current user is allowed to perform on the specified comment, such as editing or deleting it."
+        },
+        {
+          "info": {
+            "name": "Get file permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/permissions/file/:file_id",
+            "params": [
+              {
+                "name": "file_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the file"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Unique action identifier"
+              },
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "Unique action identifier. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Action name"
+              },
+              {
+                "name": "name:contains",
+                "value": "",
+                "type": "query",
+                "description": "Action name. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "allowed",
+                "value": "",
+                "type": "query",
+                "description": "Determines if one has permissions to perform action"
+              },
+              {
+                "name": "enabled",
+                "value": "",
+                "type": "query",
+                "description": "Determines if the given action is available considering the current object state (locked, deleted, etc.)."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns the list of actions the current user is allowed to perform on the specified file, such as downloading, editing, or commenting."
+        },
+        {
+          "info": {
+            "name": "Get file permissions for a set of files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/permissions/files",
+            "params": [
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the file.. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Action name"
+              },
+              {
+                "name": "name:contains",
+                "value": "",
+                "type": "query",
+                "description": "Action name. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "allowed",
+                "value": "",
+                "type": "query",
+                "description": "Determines if one has permissions to perform action"
+              },
+              {
+                "name": "enabled",
+                "value": "",
+                "type": "query",
+                "description": "Determines if the given action is available considering the current object state (locked, deleted, etc.)."
+              },
+              {
+                "name": "action_id",
+                "value": "",
+                "type": "query",
+                "description": "Unique action identifier"
+              },
+              {
+                "name": "action_id:in",
+                "value": "",
+                "type": "query",
+                "description": "Unique action identifier. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns the current user's allowed actions for each of the specified files. File IDs are passed as request parameters. Returns 400 if no file IDs are provided."
+        },
+        {
+          "info": {
+            "name": "Return the list of permissions available on a task",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/permissions/task/:task_id",
+            "params": [
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the task"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Unique action identifier"
+              },
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "Unique action identifier. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Action name"
+              },
+              {
+                "name": "name:contains",
+                "value": "",
+                "type": "query",
+                "description": "Action name. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "allowed",
+                "value": "",
+                "type": "query",
+                "description": "Determines if one has permissions to perform action"
+              },
+              {
+                "name": "enabled",
+                "value": "",
+                "type": "query",
+                "description": "Determines if the given action is available considering the current object state (locked, deleted, etc.)."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns the list of actions the current user is allowed to perform on the specified task, such as completing or deleting it."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

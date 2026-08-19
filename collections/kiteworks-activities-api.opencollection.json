@@ -1,0 +1,194 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "activities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all activities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/activities",
+            "params": [
+              {
+                "name": "noDayBack",
+                "value": "",
+                "type": "query",
+                "description": "Number of days back to search"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End date"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter activities by scope. Accepted values: `all`, `my`."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search by mail body, subject and sender/recipients"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter activities by type. Accepted values: `all`, `folder_changes`, `file_changes`, `user_preferences`, `mail`, `tasks`, `comments`, `kitepoint`."
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "query",
+                "description": "Transaction ID associated with the activities"
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns the activity log for the authenticated user across all files and folders they have access to."
+        },
+        {
+          "info": {
+            "name": "Get file activities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/files/:file_id/activities",
+            "params": [
+              {
+                "name": "file_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the file"
+              },
+              {
+                "name": "noDayBack",
+                "value": "",
+                "type": "query",
+                "description": "Number of days back to search"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End date"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter activities by scope. Accepted values: `all`, `my`."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search by mail body, subject and sender/recipients"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter activities by type. Accepted values: `all`, `folder_changes`, `file_changes`, `user_preferences`, `mail`, `tasks`, `comments`, `kitepoint`."
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "query",
+                "description": "Transaction ID associated with the activities"
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns the activity log for the specified file, scoped to the authenticated user. **Requires `user_view` permission on the file.** For Repositories Gateway source files, `view` permission is required instead."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,247 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities devices API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "devices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List devices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/devices",
+            "params": [
+              {
+                "name": "installTagId",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of install tag for this Device"
+              },
+              {
+                "name": "installTagId:contains",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of install tag for this Device. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of user for this Device"
+              },
+              {
+                "name": "userId:in",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of user for this Device. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "clientId",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of client for this Device"
+              },
+              {
+                "name": "clientId:contains",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of client for this Device. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns a list of devices per user that have authenticated on this server. Each record includes the device name (e.g. iPad, iPhone), install tag ID, client ID, and remote wipe flag."
+        },
+        {
+          "info": {
+            "name": "Register a device",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/devices",
+            "params": [
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Registers a new device for a user. Called when a user logs in to Kiteworks to track the device they are using."
+        },
+        {
+          "info": {
+            "name": "Report wipe completed",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/rest/devices/me/actions/wipe"
+          },
+          "docs": "Notifies the server that the current device has completed a requested remote wipe. Updates the wipe flag to completed."
+        },
+        {
+          "info": {
+            "name": "Get a device",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/devices/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the device."
+              }
+            ]
+          },
+          "docs": "Returns the details of the specified device, including device name, install tag ID, client ID, and remote wipe flag."
+        },
+        {
+          "info": {
+            "name": "Update a device",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/rest/devices/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the device."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the details of the specified device. Supports updating the mobile key store and messaging registration token."
+        },
+        {
+          "info": {
+            "name": "Delete a device",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/devices/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the device."
+              }
+            ]
+          },
+          "docs": "Deletes the specified device."
+        },
+        {
+          "info": {
+            "name": "Get the wipe status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/devices/:install_tag_id/wipe",
+            "params": [
+              {
+                "name": "install_tag_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique install tag identifier for the device, usually the device serial number."
+              }
+            ]
+          },
+          "docs": "Returns the remote wipe status of the specified device, identified by its install tag ID (usually the device serial number)."
+        },
+        {
+          "info": {
+            "name": "List devices for a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/users/:id/devices",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the user whose devices to be retrieved"
+              }
+            ]
+          },
+          "docs": "Returns a list of devices registered to the specified user."
+        },
+        {
+          "info": {
+            "name": "Log out the current user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/devices/me/actions/logout"
+          },
+          "docs": "### Description:\n  Logs out the current user and invalidates the active session.\n### Precondition:\n  User must have an active session.\n### Response:\n  Returns logout confirmation details.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

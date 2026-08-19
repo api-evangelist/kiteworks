@@ -1,0 +1,459 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities requestFile API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "requestFile",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send a Request File to Folder request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/folders/:id/actions/requestFile",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Initiates a Request File to Folder.\n### Precondition:\n  The user profile must have the necessary access rights to request files to the folder.\n### Response:\n  Successfully creates a request file and returns the request file details.\n"
+        },
+        {
+          "info": {
+            "name": "Returns Request File Info by ref",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/requestFile/:ref",
+            "params": [
+              {
+                "name": "ref",
+                "value": "",
+                "type": "path",
+                "description": "The unique reference of the Request File upload link."
+              },
+              {
+                "name": "read",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to log the view event. Defaults to true."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Retrieves detailed information about a Request File using the provided reference (ref).\n### Precondition:\n  The user must have valid authentication and appropriate access to view the request file information.\n### Response:\n  Returns the details of the specified request file, including its associated metadata and status.\n"
+        },
+        {
+          "info": {
+            "name": "Expire a request file link",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/requestFile/:ref",
+            "params": [
+              {
+                "name": "ref",
+                "value": "",
+                "type": "path",
+                "description": "The unique reference of the Request File upload link."
+              }
+            ]
+          },
+          "docs": "Marks the request file link as expired, preventing any further file uploads through it. **Requires the authenticated user to be the user who created the request file link.**"
+        },
+        {
+          "info": {
+            "name": "Upload a file requested by user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/requestFile/:ref/actions/file",
+            "params": [
+              {
+                "name": "ref",
+                "value": "",
+                "type": "path",
+                "description": "The unique reference of the Request File upload link."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "body",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "clientCreated",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "clientModified",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Uploads a file to a folder or inbox in response to a file request from another user.\n                       Access is granted via the request file reference link (`ref`). If the request requires\n                       authentication (`require_auth`), the caller must be logged in. The uploaded file is\n                       renamed to include the uploader's email address.\\n\\nThe request link must not be expired\n                       or have reached its upload limit. Sufficient storage must be av"
+        },
+        {
+          "info": {
+            "name": "Add a comment to an uploaded file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/requestFile/:ref/comment/:object_id",
+            "params": [
+              {
+                "name": "ref",
+                "value": "",
+                "type": "path",
+                "description": "The unique reference of the Request File upload link."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "path",
+                "description": "Object ID of the file being commented on."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a comment to a file that was uploaded through the request file link. Only accessible when the link requires authentication (`require_auth=true`) and has not expired."
+        },
+        {
+          "info": {
+            "name": "Get preview metadata for a source file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/requestFile/:ref/preview/:object_id",
+            "params": [
+              {
+                "name": "ref",
+                "value": "",
+                "type": "path",
+                "description": "The unique reference of the Request File upload link."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the source file."
+              }
+            ]
+          },
+          "docs": "Gets the preview metadata for a source file attached to the request file link. If the source file's action is set to `view`, the preview is generated with the Viewer role."
+        },
+        {
+          "info": {
+            "name": "Get source files attached by the requester",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/requestFile/:ref/sources",
+            "params": [
+              {
+                "name": "ref",
+                "value": "",
+                "type": "path",
+                "description": "The unique reference of the Request File upload link."
+              }
+            ]
+          },
+          "docs": "Returns the list of files the requester attached to the request file link for the uploader to view or download. Each entry includes computed permissions based on DLP policy and the configured action (`view` or `download`)."
+        },
+        {
+          "info": {
+            "name": "Get source file metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/requestFile/:ref/sources/:object_id",
+            "params": [
+              {
+                "name": "ref",
+                "value": "",
+                "type": "path",
+                "description": "The unique reference of the Request File upload link."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the source file."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Gets the file metadata for a specific source file attached to the request file link."
+        },
+        {
+          "info": {
+            "name": "Download files from folder in request files to folder message",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/requestFile/:ref/sources/:object_id/content",
+            "headers": [
+              {
+                "name": "Range",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ref",
+                "value": "",
+                "type": "path",
+                "description": "The unique reference of the Request File upload link."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the file"
+              }
+            ]
+          },
+          "docs": "Downloads a file that was made available to recipients as a source attachment in a\n                       request files to folder message. Access is granted via the request file reference link\n                       (`ref`).\\n\\nThe request link must be valid and not expired. If the request requires\n                       authentication, the caller must be logged in. The file must not be deleted, infected,\n                       or DLP-locked."
+        },
+        {
+          "info": {
+            "name": "Get files uploaded by the current user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/requestFile/:ref/uploads",
+            "params": [
+              {
+                "name": "ref",
+                "value": "",
+                "type": "path",
+                "description": "The unique reference of the Request File upload link."
+              }
+            ]
+          },
+          "docs": "Returns the list of files the currently authenticated user has uploaded for the specified request file link. Returns an empty list when the link does not require authentication (`require_auth=false`)."
+        },
+        {
+          "info": {
+            "name": "Get uploaded file metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/requestFile/:ref/uploads/:object_id",
+            "params": [
+              {
+                "name": "ref",
+                "value": "",
+                "type": "path",
+                "description": "The unique reference of the Request File upload link."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the uploaded file."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Gets the file metadata for a specific file uploaded through the request file link. Only accessible when the link requires authentication (`require_auth=true`). The uploader's email address is stripped from the displayed file name before it is returned."
+        },
+        {
+          "info": {
+            "name": "Delete an uploaded file",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/requestFile/:ref/uploads/:object_id",
+            "params": [
+              {
+                "name": "ref",
+                "value": "",
+                "type": "path",
+                "description": "The unique reference of the Request File upload link."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the uploaded file."
+              }
+            ]
+          },
+          "docs": "Deletes a file that was uploaded through the request file link. Only accessible when the link requires authentication (`require_auth=true`) and has not expired."
+        },
+        {
+          "info": {
+            "name": "Download files uploaded to request files to folder or inbox message",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/requestFile/:ref/uploads/:object_id/content",
+            "headers": [
+              {
+                "name": "Range",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ref",
+                "value": "",
+                "type": "path",
+                "description": "The unique reference of the Request File upload link."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the file"
+              }
+            ]
+          },
+          "docs": "Downloads a file that was uploaded to a request files to folder or inbox message. Access\n                       is granted via the request file reference link (`ref`).\\n\\n**Authentication is required**\n                       — guest access is not permitted for this endpoint. The file must be associated with the\n                       specified request link, must not be deleted, and must not be infected or DLP-locked."
+        },
+        {
+          "info": {
+            "name": "Request files to inbox",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/mail/actions/requestFile",
+            "params": [
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes the entity in the response body."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Sends a request files to inbox message.\n### Precondition:\n  Must be assigned a user profile with the ability to request files to inbox.\n### Response:\n  Sends the message requesting files to your inbox.\n"
+        },
+        {
+          "info": {
+            "name": "Reply to Request File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/requestFile/:ref/reply",
+            "params": [
+              {
+                "name": "ref",
+                "value": "",
+                "type": "path",
+                "description": "The unique reference of the Request File upload link."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Processes a reply to a specific Request File.\n### Precondition:\n  The user must be authenticated and have the proper access to reply to the specified request file.\n### Response:\n  The reply to the request file is processed, and a successful response is returned with the status of the action.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

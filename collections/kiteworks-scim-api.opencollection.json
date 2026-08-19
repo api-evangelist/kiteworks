@@ -1,0 +1,463 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities scim API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "scim",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/scim/users",
+            "params": [
+              {
+                "name": "attributes",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of attribute names to include in the response."
+              },
+              {
+                "name": "excludedAttributes",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of attribute names to exclude from the response."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "SCIM filter expression to narrow the list of returned users (e.g., `userName eq \"user@example.com\"`)."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "Attribute name to sort results by."
+              },
+              {
+                "name": "sortOrder",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction for the results.<br>`ascending` – Sort in ascending order.<br>`descending` – Sort in descending order."
+              },
+              {
+                "name": "startIndex",
+                "value": "",
+                "type": "query",
+                "description": "1-based index of the first result to return, used for pagination."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return per page (maximum: 1,000,000)."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Returns a paginated list of SCIM users matching the specified filter criteria.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  A list of SCIM users is returned.\n"
+        },
+        {
+          "info": {
+            "name": "Create a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/scim/users",
+            "params": [
+              {
+                "name": "attributes",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of attribute names to include in the response."
+              },
+              {
+                "name": "excludedAttributes",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of attribute names to exclude from the response."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Creates a new SCIM user with the specified attributes.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The newly created user is returned.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/scim/Users",
+            "params": [
+              {
+                "name": "attributes",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of attribute names to include in the response."
+              },
+              {
+                "name": "excludedAttributes",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of attribute names to exclude from the response."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "SCIM filter expression to narrow the list of returned users (e.g., `userName eq \"user@example.com\"`)."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "Attribute name to sort results by."
+              },
+              {
+                "name": "sortOrder",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction for the results.<br>`ascending` – Sort in ascending order.<br>`descending` – Sort in descending order."
+              },
+              {
+                "name": "startIndex",
+                "value": "",
+                "type": "query",
+                "description": "1-based index of the first result to return, used for pagination."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return per page (maximum: 1,000,000)."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Returns a paginated list of SCIM users matching the specified filter criteria.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  A list of SCIM users is returned.\n"
+        },
+        {
+          "info": {
+            "name": "Create a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/scim/Users",
+            "params": [
+              {
+                "name": "attributes",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of attribute names to include in the response."
+              },
+              {
+                "name": "excludedAttributes",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of attribute names to exclude from the response."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Creates a new SCIM user with the specified attributes.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The newly created user is returned.\n"
+        },
+        {
+          "info": {
+            "name": "Return a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/scim/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              },
+              {
+                "name": "attributes",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of attribute names to include in the response."
+              },
+              {
+                "name": "excludedAttributes",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of attribute names to exclude from the response."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Returns the SCIM user corresponding to the provided ID.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The user is returned.\n"
+        },
+        {
+          "info": {
+            "name": "Update a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/rest/scim/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Updates the SCIM user corresponding to the provided ID.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The updated user is returned.\n"
+        },
+        {
+          "info": {
+            "name": "Delete a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/scim/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              },
+              {
+                "name": "remoteWipe",
+                "value": "",
+                "type": "query",
+                "description": "If true, triggers a remote wipe of the user data from all registered devices."
+              },
+              {
+                "name": "deleteUnsharedData",
+                "value": "",
+                "type": "query",
+                "description": "If true, permanently deletes data that is not shared with other users."
+              },
+              {
+                "name": "retainData",
+                "value": "",
+                "type": "query",
+                "description": "If true, retains the user data after deletion."
+              },
+              {
+                "name": "retainPermissionToSharedData",
+                "value": "",
+                "type": "query",
+                "description": "If true, the specified `retainToUser` will retain access to shared data."
+              },
+              {
+                "name": "retainToUser",
+                "value": "",
+                "type": "query",
+                "description": "UUID of the user who will receive ownership of the deleted user data."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Deletes the SCIM user corresponding to the provided ID.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The user is deleted.\n"
+        },
+        {
+          "info": {
+            "name": "Return a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/scim/Users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              },
+              {
+                "name": "attributes",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of attribute names to include in the response."
+              },
+              {
+                "name": "excludedAttributes",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of attribute names to exclude from the response."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Returns the SCIM user corresponding to the provided ID.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The user is returned.\n"
+        },
+        {
+          "info": {
+            "name": "Update a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/rest/scim/Users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Updates the SCIM user corresponding to the provided ID.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The updated user is returned.\n"
+        },
+        {
+          "info": {
+            "name": "Delete a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/scim/Users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              },
+              {
+                "name": "remoteWipe",
+                "value": "",
+                "type": "query",
+                "description": "If true, triggers a remote wipe of the user data from all registered devices."
+              },
+              {
+                "name": "deleteUnsharedData",
+                "value": "",
+                "type": "query",
+                "description": "If true, permanently deletes data that is not shared with other users."
+              },
+              {
+                "name": "retainData",
+                "value": "",
+                "type": "query",
+                "description": "If true, retains the user data after deletion."
+              },
+              {
+                "name": "retainPermissionToSharedData",
+                "value": "",
+                "type": "query",
+                "description": "If true, the specified `retainToUser` will retain access to shared data."
+              },
+              {
+                "name": "retainToUser",
+                "value": "",
+                "type": "query",
+                "description": "UUID of the user who will receive ownership of the deleted user data."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Deletes the SCIM user corresponding to the provided ID.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The user is deleted.\n"
+        },
+        {
+          "info": {
+            "name": "Return SCIM service provider configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/scim/ServiceProviderConfig"
+          },
+          "docs": "### Description:\n  Returns the SCIM service provider configuration, including supported features and authentication schemes.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The service provider configuration is returned.\n"
+        },
+        {
+          "info": {
+            "name": "Return SCIM schemas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/scim/Schemas"
+          },
+          "docs": "### Description:\n  Returns all supported SCIM schemas.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The supported SCIM schemas are returned.\n"
+        },
+        {
+          "info": {
+            "name": "Return a SCIM schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/scim/Schemas/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID/URN of the schema"
+              }
+            ]
+          },
+          "docs": "### Description:\n  Returns the SCIM schema corresponding to the provided ID.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The requested SCIM schema is returned if it exists.\n"
+        },
+        {
+          "info": {
+            "name": "Return SCIM resource types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/scim/ResourceTypes"
+          },
+          "docs": "### Description:\n  Returns all supported SCIM resource types.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The supported SCIM resource types are returned.\n"
+        },
+        {
+          "info": {
+            "name": "Return a SCIM resource type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/scim/ResourceTypes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID/URN of the schema"
+              }
+            ]
+          },
+          "docs": "### Description:\n  Returns the SCIM resource type corresponding to the provided ID.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The requested SCIM resource type is returned if it exists.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

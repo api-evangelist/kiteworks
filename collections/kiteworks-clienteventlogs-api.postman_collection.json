@@ -1,0 +1,306 @@
+{
+  "item": [
+    {
+      "id": "20768590-e5c9-4831-937e-2621bbd461a1",
+      "name": "clientEventLogs",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4934bc50-87d0-465b-a675-495e6ce5838a",
+          "name": "Submit client event logs",
+          "request": {
+            "name": "Submit client event logs",
+            "description": {
+              "content": "### Description:\n  Submits one or more event log entries from the client for recording on the server.\n### Precondition:\n  User must be authenticated.\n### Response:\n  Returns the created event log entries.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "clients",
+                "action",
+                "eventLog"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"data\": \"<object>\",\n      \"eventId\": \"<string>\",\n      \"eventName\": \"<string>\",\n      \"singleLine\": \"<string>\",\n      \"successful\": \"<boolean>\",\n      \"created\": \"<integer>\"\n    },\n    {\n      \"data\": \"<object>\",\n      \"eventId\": \"<string>\",\n      \"eventName\": \"<string>\",\n      \"singleLine\": \"<string>\",\n      \"successful\": \"<boolean>\",\n      \"created\": \"<integer>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6030fa1e-4aee-48b5-89a7-4525342b7558",
+              "name": "The event logs have been successfully submitted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "clients",
+                    "action",
+                    "eventLog"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"data\": \"<object>\",\n      \"eventId\": \"<string>\",\n      \"eventName\": \"<string>\",\n      \"singleLine\": \"<string>\",\n      \"successful\": \"<boolean>\",\n      \"created\": \"<integer>\"\n    },\n    {\n      \"data\": \"<object>\",\n      \"eventId\": \"<string>\",\n      \"eventName\": \"<string>\",\n      \"singleLine\": \"<string>\",\n      \"successful\": \"<boolean>\",\n      \"created\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"successIds\": [\n    \"string\",\n    \"string\"\n  ],\n  \"failedIds\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc3e68aa-6a65-4aac-822c-c809819e1af4",
+              "name": "Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "clients",
+                    "action",
+                    "eventLog"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"data\": \"<object>\",\n      \"eventId\": \"<string>\",\n      \"eventName\": \"<string>\",\n      \"singleLine\": \"<string>\",\n      \"successful\": \"<boolean>\",\n      \"created\": \"<integer>\"\n    },\n    {\n      \"data\": \"<object>\",\n      \"eventId\": \"<string>\",\n      \"eventName\": \"<string>\",\n      \"singleLine\": \"<string>\",\n      \"successful\": \"<boolean>\",\n      \"created\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_AUTH_INVALID_CSRF\",\n      \"message\": \"Invalid CSRF Authentication\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a56156fd-0c23-44bc-b748-cb8a288ce969",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "clients",
+                    "action",
+                    "eventLog"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"data\": \"<object>\",\n      \"eventId\": \"<string>\",\n      \"eventName\": \"<string>\",\n      \"singleLine\": \"<string>\",\n      \"successful\": \"<boolean>\",\n      \"created\": \"<integer>\"\n    },\n    {\n      \"data\": \"<object>\",\n      \"eventId\": \"<string>\",\n      \"eventName\": \"<string>\",\n      \"singleLine\": \"<string>\",\n      \"successful\": \"<boolean>\",\n      \"created\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_ACCESS_USER\",\n      \"message\": \"Insufficient access permissions\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b918f8d-efc7-46ad-8a4a-924bb3e67d44",
+              "name": "Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INVALID_PARAMETER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "clients",
+                    "action",
+                    "eventLog"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"data\": \"<object>\",\n      \"eventId\": \"<string>\",\n      \"eventName\": \"<string>\",\n      \"singleLine\": \"<string>\",\n      \"successful\": \"<boolean>\",\n      \"created\": \"<integer>\"\n    },\n    {\n      \"data\": \"<object>\",\n      \"eventId\": \"<string>\",\n      \"eventName\": \"<string>\",\n      \"singleLine\": \"<string>\",\n      \"successful\": \"<boolean>\",\n      \"created\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_INVALID_PARAMETER\",\n      \"message\": \"Invalid Parameter Exception\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e772e415-50d4-4718-8932-5e288120e29d",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "clients",
+                    "action",
+                    "eventLog"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"data\": \"<object>\",\n      \"eventId\": \"<string>\",\n      \"eventName\": \"<string>\",\n      \"singleLine\": \"<string>\",\n      \"successful\": \"<boolean>\",\n      \"created\": \"<integer>\"\n    },\n    {\n      \"data\": \"<object>\",\n      \"eventId\": \"<string>\",\n      \"eventName\": \"<string>\",\n      \"singleLine\": \"<string>\",\n      \"successful\": \"<boolean>\",\n      \"created\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1da2fa87-0ef6-41c5-beae-51a6f33e867d",
+    "name": "Kiteworks API Documentation activities clientEventLogs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

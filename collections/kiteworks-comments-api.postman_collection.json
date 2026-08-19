@@ -1,0 +1,1908 @@
+{
+  "item": [
+    {
+      "id": "420daa92-d2fd-4bd1-86a6-f0155ee535b1",
+      "name": "comments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a40a5f56-513a-49f5-96c1-81af86dffea3",
+          "name": "Get a comment",
+          "request": {
+            "name": "Get a comment",
+            "description": {
+              "content": "Returns the details of the specified comment, including the file it is attached to and the comment text. **Requires `comment_view` permission on the associated file.**",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "comments",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "With parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the comment."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e76f0401-f8c3-4866-ad27-99322293fc0e",
+              "name": "Returns the comment record.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "comments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the comment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 201,\n  \"parent_id\": 0,\n  \"object_id\": 7,\n  \"folder_id\": 3,\n  \"user_id\": 5,\n  \"created\": \"2024-03-15T10:00:00+00:00\",\n  \"modified\": \"2024-03-15T10:00:00+00:00\",\n  \"contents\": \"Please review section 3.\",\n  \"deleted\": false,\n  \"is_comment\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff7e73dc-19cb-4cd7-9175-748fed00f204",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "comments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the comment."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ddf4ba46-1ac6-42a0-83f5-4b48caec8e7f",
+          "name": "Update a comment",
+          "request": {
+            "name": "Update a comment",
+            "description": {
+              "content": "Updates the text of the specified comment. **Requires `comment_edit` permission on the associated file.** Only the comment author or a folder manager may update the comment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "comments",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the comment."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contents\": \"<string>\",\n  \"addLinks\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "aa550c22-9f5e-483d-a4f3-faae825dd12d",
+              "name": "Returns the updated comment record.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "comments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the comment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contents\": \"<string>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 201,\n  \"parent_id\": 0,\n  \"object_id\": 7,\n  \"folder_id\": 3,\n  \"user_id\": 5,\n  \"created\": \"2024-03-15T10:00:00+00:00\",\n  \"modified\": \"2024-03-16T08:00:00+00:00\",\n  \"contents\": \"Please review section 3 and section 4.\",\n  \"deleted\": false,\n  \"is_comment\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "853cf3cc-cefd-4da0-8cb4-27f7e949c7f9",
+              "name": "Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_MAX_VALUE, ERR_INPUT_HTML_TAGS_INVALID, ERR_INPUT_REQUIRED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "comments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the comment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contents\": \"<string>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_INPUT_HTML_TAGS_INVALID\",\n    \"message\": \"Cannot contain HTML tags other than B, I, or U\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ceaae39a-f3f2-4189-9f05-cbd42fcde7cf",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "comments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the comment."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contents\": \"<string>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "36c53773-a429-47ff-99d3-7d429e5373e5",
+          "name": "Delete a comment",
+          "request": {
+            "name": "Delete a comment",
+            "description": {
+              "content": "Deletes the specified comment. **Requires `comment_delete` permission on the associated file.** Only the comment author or a folder manager may delete the comment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "comments",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the comment."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f584bbdd-c9ef-4a63-be48-f9f4d40b48f6",
+              "name": "The comment was successfully deleted. Returns no content.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "comments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the comment."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "afb97452-3d1a-45db-b740-8cfe6159360c",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "comments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the comment."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "84920de6-0002-4e8d-9004-8156475b02f6",
+          "name": "Get file comments",
+          "request": {
+            "name": "Get file comments",
+            "description": {
+              "content": "Returns a list of comments on the specified file. **Requires `comment_view` permission on the file.**",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "files",
+                ":id",
+                "comments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "parentId",
+                  "value": "<integer>",
+                  "description": "Unique identifier of the parent comment"
+                },
+                {
+                  "disabled": false,
+                  "key": "parentId:in",
+                  "value": "<integer>",
+                  "description": "Unique identifier of the parent comment. Search for results that match any of the specified values for this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "userId",
+                  "value": "<string>",
+                  "description": "Unique identifier of the comment author"
+                },
+                {
+                  "disabled": false,
+                  "key": "userId:in",
+                  "value": "<string>",
+                  "description": "Unique identifier of the comment author. Search for results that match any of the specified values for this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "created",
+                  "value": "<date>",
+                  "description": "The creation date of the comment."
+                },
+                {
+                  "disabled": false,
+                  "key": "created:gt",
+                  "value": "<date>",
+                  "description": "The creation date of the comment.. Search for results where this parameter value is greater than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "created:gte",
+                  "value": "<date>",
+                  "description": "The creation date of the comment.. Search for results where this parameter value is greater than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "created:lt",
+                  "value": "<date>",
+                  "description": "The creation date of the comment.. Search for results where this parameter value is less than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "created:lte",
+                  "value": "<date>",
+                  "description": "The creation date of the comment.. Search for results where this parameter value is less than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified",
+                  "value": "<date>",
+                  "description": "The last modification date of the comment."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified:gt",
+                  "value": "<date>",
+                  "description": "The last modification date of the comment.. Search for results where this parameter value is greater than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified:gte",
+                  "value": "<date>",
+                  "description": "The last modification date of the comment.. Search for results where this parameter value is greater than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified:lt",
+                  "value": "<date>",
+                  "description": "The last modification date of the comment.. Search for results where this parameter value is less than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified:lte",
+                  "value": "<date>",
+                  "description": "The last modification date of the comment.. Search for results where this parameter value is less than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "contents:contains",
+                  "value": "<string>",
+                  "description": "Content of the comment. Search for results that contain the specified characters in this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "modified:desc",
+                  "description": "Sorting options"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit"
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "With parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier (UUID) of the file."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a594138a-4487-4dd2-b1c8-087be6263109",
+              "name": "Returns a paginated list of comments for the specified file.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    ":id",
+                    "comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "parentId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "parentId:in",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "userId:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "contents:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "modified:asc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the file."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 201,\n      \"parent_id\": 0,\n      \"object_id\": 7,\n      \"folder_id\": 3,\n      \"user_id\": 5,\n      \"created\": \"2024-03-15T10:00:00+00:00\",\n      \"modified\": \"2024-03-15T10:00:00+00:00\",\n      \"contents\": \"Please review section 3.\",\n      \"deleted\": false,\n      \"is_comment\": true\n    },\n    {\n      \"id\": 202,\n      \"parent_id\": 201,\n      \"object_id\": 7,\n      \"folder_id\": 3,\n      \"user_id\": 3,\n      \"created\": \"2024-03-15T11:00:00+00:00\",\n      \"modified\": \"2024-03-15T11:00:00+00:00\",\n      \"contents\": \"Done, updated section 3.\",\n      \"deleted\": false,\n      \"is_comment\": true\n    }\n  ],\n  \"total\": 2,\n  \"page\": 1,\n  \"pageSize\": 20\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d6376ee-4e26-45cb-b196-c60f1b129485",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    ":id",
+                    "comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "parentId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "parentId:in",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "userId:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "contents:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "modified:asc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the file."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "09088732-6be4-4c4b-953b-7f8397fe7ec5",
+          "name": "Add file comment",
+          "request": {
+            "name": "Add file comment",
+            "description": {
+              "content": "Adds a comment to the specified file. To reply to an existing comment, include a `parentId` in the request body. **Requires `comment_add` permission on the file.**",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "files",
+                ":id",
+                "comments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "returnEntity",
+                  "value": "<boolean>",
+                  "description": "If set to `true`, returns information about the newly created entity."
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier (UUID) of the file."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contents\": \"<string>\",\n  \"parentId\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "48380284-5fd6-4224-840c-d1519124085b",
+              "name": "Returns the newly created comment record.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    ":id",
+                    "comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the file."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contents\": \"<string>\",\n  \"parentId\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 203,\n  \"parent_id\": 0,\n  \"object_id\": 7,\n  \"folder_id\": 3,\n  \"user_id\": 5,\n  \"created\": \"2024-03-16T09:00:00+00:00\",\n  \"modified\": \"2024-03-16T09:00:00+00:00\",\n  \"contents\": \"Looks good to me.\",\n  \"deleted\": false,\n  \"is_comment\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9124943e-2158-47f9-ba5e-3ed72e8aacdb",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    ":id",
+                    "comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the file."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contents\": \"<string>\",\n  \"parentId\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_ACCESS_USER\",\n    \"message\": \"Insufficient access permissions\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94c8da49-a12e-4618-9fd3-4e563d8e9078",
+              "name": "Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_MAX_VALUE, ERR_INPUT_HTML_TAGS_INVALID, ERR_INPUT_REQUIRED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    ":id",
+                    "comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the file."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contents\": \"<string>\",\n  \"parentId\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_INPUT_HTML_TAGS_INVALID\",\n    \"message\": \"Cannot contain HTML tags other than B, I, or U\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c3e87a5-3aeb-472d-aa1e-aa706158b84e",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    ":id",
+                    "comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the file."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contents\": \"<string>\",\n  \"parentId\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e1796047-5d66-40d9-a234-b354f082ae32",
+          "name": "List comments for the folder",
+          "request": {
+            "name": "List comments for the folder",
+            "description": {
+              "content": "Returns all comments on files within the specified folder. **Requires `comment_view` permission on the folder.**",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "folders",
+                ":id",
+                "comments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "parentId",
+                  "value": "<integer>",
+                  "description": "Unique identifier of the parent comment"
+                },
+                {
+                  "disabled": false,
+                  "key": "parentId:in",
+                  "value": "<integer>",
+                  "description": "Unique identifier of the parent comment. Search for results that match any of the specified values for this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "userId",
+                  "value": "<string>",
+                  "description": "Unique identifier of the comment author"
+                },
+                {
+                  "disabled": false,
+                  "key": "userId:in",
+                  "value": "<string>",
+                  "description": "Unique identifier of the comment author. Search for results that match any of the specified values for this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "created",
+                  "value": "<date>",
+                  "description": "The creation date of the comment."
+                },
+                {
+                  "disabled": false,
+                  "key": "created:gt",
+                  "value": "<date>",
+                  "description": "The creation date of the comment.. Search for results where this parameter value is greater than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "created:gte",
+                  "value": "<date>",
+                  "description": "The creation date of the comment.. Search for results where this parameter value is greater than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "created:lt",
+                  "value": "<date>",
+                  "description": "The creation date of the comment.. Search for results where this parameter value is less than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "created:lte",
+                  "value": "<date>",
+                  "description": "The creation date of the comment.. Search for results where this parameter value is less than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified",
+                  "value": "<date>",
+                  "description": "The last modification date of the comment."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified:gt",
+                  "value": "<date>",
+                  "description": "The last modification date of the comment.. Search for results where this parameter value is greater than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified:gte",
+                  "value": "<date>",
+                  "description": "The last modification date of the comment.. Search for results where this parameter value is greater than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified:lt",
+                  "value": "<date>",
+                  "description": "The last modification date of the comment.. Search for results where this parameter value is less than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified:lte",
+                  "value": "<date>",
+                  "description": "The last modification date of the comment.. Search for results where this parameter value is less than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "contents:contains",
+                  "value": "<string>",
+                  "description": "Content of the comment. Search for results that contain the specified characters in this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "modified:desc",
+                  "description": "Sorting options"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit"
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "With parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier (UUID) of the folder."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4a150f33-c47e-4e4e-a5d2-575c03c90a7a",
+              "name": "Returns a paginated list of comments for files within the specified folder.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "folders",
+                    ":id",
+                    "comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "parentId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "parentId:in",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "userId:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "contents:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "modified:asc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the folder."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 201,\n      \"parent_id\": 0,\n      \"object_id\": 7,\n      \"folder_id\": 3,\n      \"user_id\": 5,\n      \"created\": \"2024-03-15T10:00:00+00:00\",\n      \"modified\": \"2024-03-15T10:00:00+00:00\",\n      \"contents\": \"Please review section 3.\",\n      \"deleted\": false,\n      \"is_comment\": true\n    },\n    {\n      \"id\": 202,\n      \"parent_id\": 201,\n      \"object_id\": 7,\n      \"folder_id\": 3,\n      \"user_id\": 3,\n      \"created\": \"2024-03-15T11:00:00+00:00\",\n      \"modified\": \"2024-03-15T11:00:00+00:00\",\n      \"contents\": \"Done, updated section 3.\",\n      \"deleted\": false,\n      \"is_comment\": true\n    }\n  ],\n  \"total\": 2,\n  \"page\": 1,\n  \"pageSize\": 20\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f1bd64e6-71db-4607-9512-3b74241a9f28",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "folders",
+                    ":id",
+                    "comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "parentId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "parentId:in",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "userId:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "contents:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "modified:asc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the folder."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1806690d-e575-46ee-91fd-a8db1e925fd8",
+          "name": "Return the list of permissions available on a comment",
+          "request": {
+            "name": "Return the list of permissions available on a comment",
+            "description": {
+              "content": "Returns the list of actions the current user is allowed to perform on the specified comment, such as editing or deleting it.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "permissions",
+                "comment",
+                ":comment_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<integer>",
+                  "description": "Unique action identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "id:in",
+                  "value": "<integer>",
+                  "description": "Unique action identifier. Search for results that match any of the specified values for this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Action name"
+                },
+                {
+                  "disabled": false,
+                  "key": "name:contains",
+                  "value": "<string>",
+                  "description": "Action name. Search for results that contain the specified characters in this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "allowed",
+                  "value": "<boolean>",
+                  "description": "Determines if one has permissions to perform action"
+                },
+                {
+                  "disabled": false,
+                  "key": "enabled",
+                  "value": "<boolean>",
+                  "description": "Determines if the given action is available considering the current object state (locked, deleted, etc.)."
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "With parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "comment_id",
+                  "description": "(Required) ID of the comment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d20b6bed-520b-4ee6-a9e3-52ffc005e070",
+              "name": "Comment permissions retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "permissions",
+                    "comment",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "id:in",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "allowed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "enabled",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "comment_id",
+                      "description": "(Required) ID of the comment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"COMMENT_EDIT\",\n      \"name\": \"Edit Comment\",\n      \"allowed\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd2d8036-9629-4407-9c8e-bcb950d5e7bb",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "permissions",
+                    "comment",
+                    ":comment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "id:in",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "allowed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "enabled",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "comment_id",
+                      "description": "(Required) ID of the comment"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a91ee522-8313-42da-99a8-8a9e5aae6543",
+    "name": "Kiteworks API Documentation activities comments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,1393 @@
+{
+  "item": [
+    {
+      "id": "c130f1d1-9a11-4f31-8831-16fbd61c903c",
+      "name": "adminRoles",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "16fd8ac8-ea33-4562-a56d-51267e99f3f9",
+          "name": "List admin roles",
+          "request": {
+            "name": "List admin roles",
+            "description": {
+              "content": "Returns a list of admin roles available in Kiteworks (e.g. System Admin, Application Admin).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "adminRoles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "id:desc",
+                  "description": "Sorting options"
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "With parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7656f6da-ef89-4069-8411-dcfc271f00ef",
+              "name": "Returns a list of admin role records.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "adminRoles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orderBy",
+                      "value": "name:desc"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": 1,\n    \"name\": \"System Admin\",\n    \"guid\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\"\n  },\n  {\n    \"id\": 2,\n    \"name\": \"Application Admin\",\n    \"guid\": \"b2c3d4e5-f6a7-8901-bcde-f12345678901\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c037a675-186a-4a1b-9884-60846d8fa16b",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "adminRoles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orderBy",
+                      "value": "name:desc"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4be23af1-5455-41af-a990-1d2a0df9fac3",
+          "name": "Get an admin role",
+          "request": {
+            "name": "Get an admin role",
+            "description": {
+              "content": "Returns the details of the specified admin role.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "adminRoles",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the admin role."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5daf0b89-b24e-4fb8-bf3f-afc99eeaf6d8",
+              "name": "Returns the admin role record.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "adminRoles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the admin role."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 2,\n  \"name\": \"Application Admin\",\n  \"guid\": \"b2c3d4e5-f6a7-8901-bcde-f12345678901\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c97677f3-0a54-4c2e-9fc7-351673919e44",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "adminRoles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the admin role."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "283efa3d-7029-4870-8238-93c1d6278189",
+          "name": "List users with an admin role",
+          "request": {
+            "name": "List users with an admin role",
+            "description": {
+              "content": "Returns the list of users who have been assigned the specified admin role.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "adminRoles",
+                ":id",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<string>",
+                  "description": "Filter users based on their email address."
+                },
+                {
+                  "disabled": false,
+                  "key": "email:contains",
+                  "value": "<string>",
+                  "description": "Filter users based on their email address.. Search for results that contain the specified characters in this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Filter users based on their full name."
+                },
+                {
+                  "disabled": false,
+                  "key": "name:contains",
+                  "value": "<string>",
+                  "description": "Filter users based on their full name.. Search for results that contain the specified characters in this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "metadata",
+                  "value": "<string>",
+                  "description": "Filter users based on their metadata information."
+                },
+                {
+                  "disabled": false,
+                  "key": "metadataContains",
+                  "value": "<string>",
+                  "description": "Filter users whose metadata contains the specified characters."
+                },
+                {
+                  "disabled": false,
+                  "key": "deleted",
+                  "value": "<boolean>",
+                  "description": "Filter users based on whether they have been deleted."
+                },
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<boolean>",
+                  "description": "Filter users based on whether they are active in the system."
+                },
+                {
+                  "disabled": false,
+                  "key": "verified",
+                  "value": "<boolean>",
+                  "description": "Filter users based on their verification status."
+                },
+                {
+                  "disabled": false,
+                  "key": "suspended",
+                  "value": "<boolean>",
+                  "description": "Filter users based on whether they are suspended."
+                },
+                {
+                  "disabled": false,
+                  "key": "isRecipient",
+                  "value": "<boolean>",
+                  "description": "Filter users who are recipients of specific items."
+                },
+                {
+                  "disabled": false,
+                  "key": "allowsCollaboration",
+                  "value": "<boolean>",
+                  "description": "Filter users whose profiles allow collaboration access."
+                },
+                {
+                  "disabled": false,
+                  "key": "created",
+                  "value": "<date>",
+                  "description": "Filter users based on the creation date of their account."
+                },
+                {
+                  "disabled": false,
+                  "key": "created:gt",
+                  "value": "<date>",
+                  "description": "Filter users based on the creation date of their account.. Search for results where this parameter value is greater than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "created:gte",
+                  "value": "<date>",
+                  "description": "Filter users based on the creation date of their account.. Search for results where this parameter value is greater than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "created:lt",
+                  "value": "<date>",
+                  "description": "Filter users based on the creation date of their account.. Search for results where this parameter value is less than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "created:lte",
+                  "value": "<date>",
+                  "description": "Filter users based on the creation date of their account.. Search for results where this parameter value is less than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "id:desc",
+                  "description": "Sorting options"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit"
+                },
+                {
+                  "disabled": false,
+                  "key": "locate_id",
+                  "value": "<integer>",
+                  "description": "If specified, \"offset\" parameter will be ignored\n                                            and the page containing entity with this Id will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "With parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the admin role."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ef71adee-342b-4c62-8617-114fe1e548d5",
+              "name": "Returns a list of user records assigned to the specified admin role.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "adminRoles",
+                    ":id",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadataContains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deleted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "verified",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "suspended",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "isRecipient",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "allowsCollaboration",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "created",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "created:asc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locate_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the admin role."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 10,\n      \"name\": \"Alice Johnson\",\n      \"email\": \"alice@example.com\",\n      \"username\": \"alice.johnson\"\n    },\n    {\n      \"id\": 11,\n      \"name\": \"Bob Smith\",\n      \"email\": \"bob@example.com\",\n      \"username\": \"bob.smith\"\n    }\n  ],\n  \"total\": 2,\n  \"page\": 1,\n  \"pageSize\": 20\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7b5f8e4-7fec-4b5a-a1af-ae3b51dc2115",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "adminRoles",
+                    ":id",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadataContains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deleted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "verified",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "suspended",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "isRecipient",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "allowsCollaboration",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "created",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "created:asc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locate_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the admin role."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_ACCESS_USER\",\n    \"message\": \"Insufficient access permissions\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc7c8750-301c-486f-bdb8-7ed1ce45d7d2",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "adminRoles",
+                    ":id",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "email:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadata",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metadataContains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "deleted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "verified",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "suspended",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "isRecipient",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "allowsCollaboration",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "created",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "created:asc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locate_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the admin role."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b51f7822-80c2-4f84-8d82-5214eacfae63",
+          "name": "Assign an admin role to a user",
+          "request": {
+            "name": "Assign an admin role to a user",
+            "description": {
+              "content": "Assigns the specified admin role to a user, replacing any previously assigned role. If the user's current role has advanced form access and the new role does not, you must specify how to handle the advanced form data via `deleteAdvancedFormData` and optionally `retainToAdvancedFormUser`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "adminRoles",
+                ":id",
+                "users",
+                ":user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "deleteAdvancedFormData",
+                  "value": "<boolean>",
+                  "description": "Whether to delete advanced form data when changing to role without advanced form access. Required when current role has advanced form access and new role does not."
+                },
+                {
+                  "disabled": false,
+                  "key": "retainToAdvancedFormUser",
+                  "value": "<string>",
+                  "description": "User ID to retain advanced form data to when deleteAdvancedFormData is false. Required when deleteAdvancedFormData is false."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) ID of the Admin role"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "user_id",
+                  "description": "(Required) ID of user to promote admin role"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e9207c52-4bd7-4f7a-91a1-7a1af0b1e14d",
+              "name": "Returns the newly created admin role assignment.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "adminRoles",
+                    ":id",
+                    "users",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "deleteAdvancedFormData",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "retainToAdvancedFormUser",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the Admin role"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) ID of user to promote admin role"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"user_id\": 10,\n    \"admin_role\": 2\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aaf23357-feae-47be-848d-de3848c982e8",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_SYSTEM_ADMIN, ERR_LICENSE_DLI, ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "adminRoles",
+                    ":id",
+                    "users",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "deleteAdvancedFormData",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "retainToAdvancedFormUser",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the Admin role"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) ID of user to promote admin role"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_ACCESS_SYSTEM_ADMIN\",\n    \"message\": \"Authenticated user is not a System Admin\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a9024999-29f0-46db-9f33-33f8312a1228",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "adminRoles",
+                    ":id",
+                    "users",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "deleteAdvancedFormData",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "retainToAdvancedFormUser",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the Admin role"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) ID of user to promote admin role"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f5c8fb93-c972-44ae-89c5-f0e27ed57bde",
+          "name": "Remove an admin role from a user",
+          "request": {
+            "name": "Remove an admin role from a user",
+            "description": {
+              "content": "Removes the specified admin role from a user. The user account itself is not deleted. If the role being removed has advanced form access, you must specify how to handle the advanced form data via `deleteAdvancedFormData` and optionally `retainToAdvancedFormUser`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "adminRoles",
+                ":id",
+                "users",
+                ":user_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "deleteAdvancedFormData",
+                  "value": "<boolean>",
+                  "description": "Whether to delete advanced form data when removing role with advanced form access. Required when role has advanced form access."
+                },
+                {
+                  "disabled": false,
+                  "key": "retainToAdvancedFormUser",
+                  "value": "<string>",
+                  "description": "User ID to retain advanced form data to when deleteAdvancedFormData is false. Required when deleteAdvancedFormData is false."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the admin role to remove from the user."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "user_id",
+                  "description": "(Required) The unique identifier (UUID) of the user."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2e600f19-b38a-4c5c-97f5-2d35f6cdd4bd",
+              "name": "The admin role was successfully removed from the user. Returns no content.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "adminRoles",
+                    ":id",
+                    "users",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "deleteAdvancedFormData",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "retainToAdvancedFormUser",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the admin role to remove from the user."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) The unique identifier (UUID) of the user."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "19709465-4920-46cd-a6c7-13ab9b18fd90",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_SYSTEM_ADMIN, ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "adminRoles",
+                    ":id",
+                    "users",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "deleteAdvancedFormData",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "retainToAdvancedFormUser",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the admin role to remove from the user."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) The unique identifier (UUID) of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_ACCESS_SYSTEM_ADMIN\",\n    \"message\": \"Authenticated user is not a System Admin\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "862b76d1-7f4b-4837-a76f-744a12b9f30e",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "adminRoles",
+                    ":id",
+                    "users",
+                    ":user_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "deleteAdvancedFormData",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "retainToAdvancedFormUser",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the admin role to remove from the user."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_id",
+                      "description": "(Required) The unique identifier (UUID) of the user."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "fb851099-0f4b-4562-99ad-c0ad8e5d7660",
+    "name": "Kiteworks API Documentation activities adminRoles API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

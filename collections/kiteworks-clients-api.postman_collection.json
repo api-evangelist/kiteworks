@@ -1,0 +1,1272 @@
+{
+  "item": [
+    {
+      "id": "9087c0c1-fc40-46a8-b53b-0084e54cacad",
+      "name": "clients",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9723823e-fe63-4b85-abd1-c207e85fe137",
+          "name": "List clients",
+          "request": {
+            "name": "List clients",
+            "description": {
+              "content": "Returns a list of registered OAuth clients. Hidden clients are excluded from the results.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "clients"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Client name"
+                },
+                {
+                  "disabled": false,
+                  "key": "name:contains",
+                  "value": "<string>",
+                  "description": "Client name. Search for results that contain the specified characters in this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "description:contains",
+                  "value": "<string>",
+                  "description": "Client description. Search for results that contain the specified characters in this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "name:asc",
+                  "description": "Sorting options"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit"
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "With parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d8d5fc23-8a8b-4f48-8bee-3e3782c401f9",
+              "name": "Returns a paginated list of OAuth client records.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "clients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "description:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "name:desc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"mobile_app_ios\",\n      \"name\": \"iOS Mobile App\",\n      \"description\": \"Company iOS mobile client\",\n      \"redirect_uri\": \"https://example.com/callback\",\n      \"scope\": \"*\",\n      \"flag\": 0,\n      \"flow\": 1,\n      \"access_token_lifetime\": 24,\n      \"refresh_token_lifetime\": 720,\n      \"type\": 2,\n      \"touch_id\": true,\n      \"min_version\": 28\n    },\n    {\n      \"id\": \"custom_integration\",\n      \"name\": \"Custom Integration\",\n      \"description\": \"Third-party integration client\",\n      \"redirect_uri\": \"https://integration.example.com/callback\",\n      \"scope\": \"files folders\",\n      \"flag\": 0,\n      \"flow\": 1,\n      \"access_token_lifetime\": 8,\n      \"refresh_token_lifetime\": 168,\n      \"type\": 0,\n      \"touch_id\": false,\n      \"min_version\": 28\n    }\n  ],\n  \"total\": 2,\n  \"page\": 1,\n  \"pageSize\": 20\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a8f8737-ffe8-476d-892c-9c970dffa225",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "clients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "description:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "name:desc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "17406025-1edb-46ad-8b89-ab40ccf9e622",
+          "name": "Create a client",
+          "request": {
+            "name": "Create a client",
+            "description": {
+              "content": "Creates a new OAuth client (e.g. a custom mobile app). The response includes the plain-text `client_secret`, which is only returned once at creation time and cannot be retrieved again.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "clients"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "returnEntity",
+                  "value": "<boolean>",
+                  "description": "If set to `true`, returns information about the newly created entity."
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"redirectUri\": \"<string>\",\n  \"scope\": \"<string>\",\n  \"signatureKey\": \"<string>\",\n  \"accessTokenLifetime\": \"<integer>\",\n  \"refreshTokenLifetime\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "21f46346-47ca-4788-bee2-78f1e9cb2c32",
+              "name": "Returns the newly created client record, including the plain-text `client_secret`.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "clients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"redirectUri\": \"<string>\",\n  \"scope\": \"<string>\",\n  \"signatureKey\": \"<string>\",\n  \"accessTokenLifetime\": \"<integer>\",\n  \"refreshTokenLifetime\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"custom_integration\",\n  \"client_secret\": \"p1a2i3n4t5e6x7t8s9e0c\",\n  \"name\": \"Custom Integration\",\n  \"description\": \"Third-party integration client\",\n  \"redirect_uri\": \"https://integration.example.com/callback\",\n  \"scope\": \"files folders\",\n  \"flag\": 0,\n  \"flow\": 1,\n  \"access_token_lifetime\": 8,\n  \"refresh_token_lifetime\": 168,\n  \"type\": 0,\n  \"touch_id\": false,\n  \"min_version\": 28\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed2e04f9-9b5b-4d6f-84d6-7cf617b368b5",
+              "name": "Conflict<br /><br /><i>Possible error codes: </i>ERR_ENTITY_EXISTS",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "clients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"redirectUri\": \"<string>\",\n  \"scope\": \"<string>\",\n  \"signatureKey\": \"<string>\",\n  \"accessTokenLifetime\": \"<integer>\",\n  \"refreshTokenLifetime\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_ENTITY_EXISTS\",\n    \"message\": \"Entity exists\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b9366b1-3130-4eef-bbb8-a52581eac077",
+              "name": "Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_REQUIRED, ERR_INPUT_NOT_INTEGER, ERR_INPUT_MIN_VALUE",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "clients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"redirectUri\": \"<string>\",\n  \"scope\": \"<string>\",\n  \"signatureKey\": \"<string>\",\n  \"accessTokenLifetime\": \"<integer>\",\n  \"refreshTokenLifetime\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_INPUT_REQUIRED\",\n    \"message\": \"Field is required\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d832379f-2cc6-45d4-92a6-90f6dd3d44ea",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "clients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"redirectUri\": \"<string>\",\n  \"scope\": \"<string>\",\n  \"signatureKey\": \"<string>\",\n  \"accessTokenLifetime\": \"<integer>\",\n  \"refreshTokenLifetime\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f605148e-a844-4b91-aa52-ea17a32971a1",
+          "name": "Get current client",
+          "request": {
+            "name": "Get current client",
+            "description": {
+              "content": "Returns the settings of the OAuth client used to make the current request (e.g. pin timeout, token lifetime).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "clients",
+                "me"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b1d0a04d-b11d-4d9a-9c07-ee8d4ddbb855",
+              "name": "Returns the OAuth client record for the client making the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "clients",
+                    "me"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"mobile_app_ios\",\n  \"name\": \"iOS Mobile App\",\n  \"description\": \"Company iOS mobile client\",\n  \"redirect_uri\": \"https://example.com/callback\",\n  \"scope\": \"*\",\n  \"flag\": 0,\n  \"flow\": 1,\n  \"access_token_lifetime\": 24,\n  \"refresh_token_lifetime\": 720,\n  \"ask_pin\": 1,\n  \"pin_timeout\": 5,\n  \"max_pin_attempts\": 5,\n  \"type\": 2,\n  \"touch_id\": true,\n  \"min_version\": 28\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a77d3519-f51b-4d00-8af1-341abf432b75",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "clients",
+                    "me"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6252af72-2698-4e46-bf3f-b4edea9b3a6d",
+          "name": "Get a client",
+          "request": {
+            "name": "Get a client",
+            "description": {
+              "content": "Returns the settings for the specified OAuth client (e.g. an iOS mobile app), including token lifetimes, PIN policy, scope, and OAuth flow configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "clients",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the client."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "085de1bf-60ea-4a64-95be-9c9939cac9dc",
+              "name": "Returns the OAuth client record.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "clients",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the client."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"custom_integration\",\n  \"name\": \"Custom Integration\",\n  \"description\": \"Third-party integration client\",\n  \"redirect_uri\": \"https://integration.example.com/callback\",\n  \"scope\": \"files folders\",\n  \"flag\": 0,\n  \"flow\": 1,\n  \"access_token_lifetime\": 8,\n  \"refresh_token_lifetime\": 168,\n  \"type\": 0,\n  \"touch_id\": false,\n  \"min_version\": 28\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aa7d79b7-28ea-4eb6-8d4e-dd1b6c037a4a",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "clients",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the client."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ecbd62ab-1bbf-4fbf-8e99-04725379b80e",
+          "name": "Update a client",
+          "request": {
+            "name": "Update a client",
+            "description": {
+              "content": "Updates the settings for the specified OAuth client. The fields available for update depend on the client type: custom clients support `name`, `description`, `redirectUri`, `accessTokenLifetime`, `refreshTokenLifetime`, `scope`, and `signatureKey`; built-in clients support only `accessTokenLifetime` and `refreshTokenLifetime`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "clients",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the client to be updated"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"redirectUri\": \"<string>\",\n  \"scope\": \"<string>\",\n  \"signatureKey\": \"<string>\",\n  \"accessTokenLifetime\": \"<integer>\",\n  \"refreshTokenLifetime\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f5f90f43-2274-42eb-9a92-f0c12283b2ee",
+              "name": "Returns the updated OAuth client record.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "clients",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the client to be updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"redirectUri\": \"<string>\",\n  \"scope\": \"<string>\",\n  \"signatureKey\": \"<string>\",\n  \"accessTokenLifetime\": \"<integer>\",\n  \"refreshTokenLifetime\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"custom_integration\",\n  \"name\": \"Custom Integration v2\",\n  \"description\": \"Updated third-party integration client\",\n  \"redirect_uri\": \"https://integration.example.com/callback\",\n  \"scope\": \"files folders\",\n  \"flag\": 0,\n  \"flow\": 1,\n  \"access_token_lifetime\": 12,\n  \"refresh_token_lifetime\": 336,\n  \"type\": 0,\n  \"touch_id\": false,\n  \"min_version\": 28\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e3a2453-2c2c-4150-9e43-78d61e9f140c",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "clients",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the client to be updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"redirectUri\": \"<string>\",\n  \"scope\": \"<string>\",\n  \"signatureKey\": \"<string>\",\n  \"accessTokenLifetime\": \"<integer>\",\n  \"refreshTokenLifetime\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_ACCESS_USER\",\n    \"message\": \"Insufficient access permissions\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c6c3f9f-ef84-4c26-ac85-f608f689cbc9",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "clients",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the client to be updated"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"redirectUri\": \"<string>\",\n  \"scope\": \"<string>\",\n  \"signatureKey\": \"<string>\",\n  \"accessTokenLifetime\": \"<integer>\",\n  \"refreshTokenLifetime\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "19efcf99-be53-408a-b824-80284c9b003a",
+          "name": "Delete a client",
+          "request": {
+            "name": "Delete a client",
+            "description": {
+              "content": "Deletes the specified OAuth client. Built-in system clients cannot be deleted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "clients",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the client to be deleted"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b99f0a28-8911-44f7-a1e8-d41fd0fe22bd",
+              "name": "The client was successfully deleted. Returns no content.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "clients",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the client to be deleted"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a41d12b0-1cdb-48cd-b6a1-bf2ca7402907",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "clients",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the client to be deleted"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_ACCESS_USER\",\n    \"message\": \"Insufficient access permissions\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd64de7e-49b9-419b-978b-7d82fc75d441",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "clients",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the client to be deleted"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3b740e76-4966-4580-9bff-9697cf0e7c2c",
+          "name": "List scopes of a client",
+          "request": {
+            "name": "List scopes of a client",
+            "description": {
+              "content": "Returns the list of API resource scopes the specified client is authorized to access, such as folders, files, members, and comments.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "clients",
+                ":id",
+                "scopes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the client whose scopes to be retrieved"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "faaa65a0-a390-48e1-8a7f-5e6bc944174c",
+              "name": "Client scopes retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "clients",
+                    ":id",
+                    "scopes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the client whose scopes to be retrieved"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    \"folders/*\",\n    \"files/*\",\n    \"members/*\",\n    \"comments/*\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "209ce01d-0412-41a6-b227-e2fb8e4db7f7",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "clients",
+                    ":id",
+                    "scopes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the client whose scopes to be retrieved"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ec611f3d-6ed6-476e-bbba-fb42e0123054",
+    "name": "Kiteworks API Documentation activities clients API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

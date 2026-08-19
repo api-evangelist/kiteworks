@@ -1,0 +1,205 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities clients API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "clients",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List clients",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/clients",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Client name"
+              },
+              {
+                "name": "name:contains",
+                "value": "",
+                "type": "query",
+                "description": "Client name. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "description:contains",
+                "value": "",
+                "type": "query",
+                "description": "Client description. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns a list of registered OAuth clients. Hidden clients are excluded from the results."
+        },
+        {
+          "info": {
+            "name": "Create a client",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/clients",
+            "params": [
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new OAuth client (e.g. a custom mobile app). The response includes the plain-text `client_secret`, which is only returned once at creation time and cannot be retrieved again."
+        },
+        {
+          "info": {
+            "name": "Get current client",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/clients/me"
+          },
+          "docs": "Returns the settings of the OAuth client used to make the current request (e.g. pin timeout, token lifetime)."
+        },
+        {
+          "info": {
+            "name": "Get a client",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/clients/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the client."
+              }
+            ]
+          },
+          "docs": "Returns the settings for the specified OAuth client (e.g. an iOS mobile app), including token lifetimes, PIN policy, scope, and OAuth flow configuration."
+        },
+        {
+          "info": {
+            "name": "Update a client",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/rest/clients/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the client to be updated"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the settings for the specified OAuth client. The fields available for update depend on the client type: custom clients support `name`, `description`, `redirectUri`, `accessTokenLifetime`, `refreshTokenLifetime`, `scope`, and `signatureKey`; built-in clients support only `accessTokenLifetime` and `refreshTokenLifetime`."
+        },
+        {
+          "info": {
+            "name": "Delete a client",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/clients/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the client to be deleted"
+              }
+            ]
+          },
+          "docs": "Deletes the specified OAuth client. Built-in system clients cannot be deleted."
+        },
+        {
+          "info": {
+            "name": "List scopes of a client",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/clients/:id/scopes",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the client whose scopes to be retrieved"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns the list of API resource scopes the specified client is authorized to access, such as folders, files, members, and comments."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

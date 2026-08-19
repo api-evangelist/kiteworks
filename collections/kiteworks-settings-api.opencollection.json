@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities settings API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "settings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Password Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/settings/passwordPolicy"
+          },
+          "docs": "Returns the system's password policy settings, including minimum length, required character types, and whether the policy is enabled."
+        },
+        {
+          "info": {
+            "name": "Get system settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/settings/system"
+          },
+          "docs": "Returns the system-level settings, including language, location, storage quota, and mobile number configuration as configured by the system administrator."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

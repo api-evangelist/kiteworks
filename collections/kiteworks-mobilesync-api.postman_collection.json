@@ -1,0 +1,2225 @@
+{
+  "item": [
+    {
+      "id": "5f89ec3f-d543-487d-b297-d0c08d5b8ef7",
+      "name": "mobileSync",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2225eddd-6991-452f-8d4e-7086337cb5b4",
+          "name": "Add multiple files to mobile sync list",
+          "request": {
+            "name": "Add multiple files to mobile sync list",
+            "description": {
+              "content": "Adds multiple files to the current user's mobile sync list in a single request. Supports partial success, meaning valid items are processed even if some fail. This operation will not return location headers for each entity created, if the inserted records are\n        required, returnEntity should be set to true.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "files",
+                "actions",
+                "mobileSyncItems"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id:in",
+                  "value": "<string>",
+                  "description": "(Required) A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of unique identifiers for the entities to be processed."
+                },
+                {
+                  "disabled": false,
+                  "key": "partialSuccess",
+                  "value": "<boolean>",
+                  "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+                },
+                {
+                  "disabled": false,
+                  "key": "returnEntity",
+                  "value": "<boolean>",
+                  "description": "If set to `true`, returns information about the newly created entity."
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b00eeb9d-3885-412c-99ec-d38be4c330fb",
+              "name": "Mobile sync items created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    "actions",
+                    "mobileSyncItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partialSuccess",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 10,\n      \"fileId\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\",\n      \"userId\": \"u1a2b3c4-d5e6-7890-abcd-ef1234567890\",\n      \"created\": \"2024-04-01T09:00:00Z\"\n    },\n    {\n      \"id\": 11,\n      \"fileId\": \"b2c3d4e5-f6a7-8901-bcde-f12345678901\",\n      \"userId\": \"u1a2b3c4-d5e6-7890-abcd-ef1234567890\",\n      \"created\": \"2024-04-01T09:00:00Z\"\n    }\n  ],\n  \"metadata\": {\n    \"total\": 2,\n    \"limit\": 50,\n    \"offset\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ebc655e-f2e0-4353-a40d-d3e4edabbec6",
+              "name": "Conflict<br /><br /><i>Possible error codes: </i>ERR_ENTITY_EXISTS",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    "actions",
+                    "mobileSyncItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partialSuccess",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_ENTITY_EXISTS\",\n    \"message\": \"Entity exists\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d09269a4-d8be-47d9-a7d9-08db39c808d5",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    "actions",
+                    "mobileSyncItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partialSuccess",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b19dade6-8e0a-4bb7-9345-f41cb556fdf3",
+          "name": "Delete multiple files from user mobile sync list",
+          "request": {
+            "name": "Delete multiple files from user mobile sync list",
+            "description": {
+              "content": "Removes multiple files from the current user's mobile sync list in a single request. Supports partial success, meaning valid items are processed even if some fail.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "files",
+                "actions",
+                "mobileSyncItems"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id:in",
+                  "value": "<string>",
+                  "description": "(Required) A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of unique identifiers for the entities to be processed."
+                },
+                {
+                  "disabled": false,
+                  "key": "partialSuccess",
+                  "value": "<boolean>",
+                  "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "950a4a87-ce1d-4948-b6e6-f5549a59137e",
+              "name": "Mobile sync items removed successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    "actions",
+                    "mobileSyncItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partialSuccess",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "96019721-0a19-4044-8fc3-674c69be1e68",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    "actions",
+                    "mobileSyncItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partialSuccess",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_ACCESS_USER\",\n    \"message\": \"Insufficient access permissions\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9555476d-c7fc-4e6c-9387-44b1f58d1278",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    "actions",
+                    "mobileSyncItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partialSuccess",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29bdade2-e639-4c60-a2de-8838858ea3eb",
+          "name": "Push files list to mobile sync list",
+          "request": {
+            "name": "Push files list to mobile sync list",
+            "description": {
+              "content": "Adds multiple files to the mobile sync list for all members of the files' parent folder. Requires mobile sync to be enabled. Supports partial success, meaning valid items are processed even if some fail. This operation will not return location headers for each entity created, if the inserted records are\n        required, returnEntity should be set to true.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "files",
+                "actions",
+                "push"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id:in",
+                  "value": "<string>",
+                  "description": "(Required) A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of unique identifiers for the entities to be processed."
+                },
+                {
+                  "disabled": false,
+                  "key": "partialSuccess",
+                  "value": "<boolean>",
+                  "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+                },
+                {
+                  "disabled": false,
+                  "key": "returnEntity",
+                  "value": "<boolean>",
+                  "description": "If set to `true`, returns information about the newly created entity."
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d0d9bc28-6e49-403d-a0f6-cccd5e4e9424",
+              "name": "Files pushed to mobile sync list successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    "actions",
+                    "push"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partialSuccess",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 20,\n      \"fileId\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\",\n      \"userId\": \"u1a2b3c4-d5e6-7890-abcd-ef1234567890\",\n      \"pushUserId\": \"u9z8y7x6-w5v4-3210-uvwx-yz1234567890\",\n      \"created\": \"2024-04-01T10:00:00Z\"\n    }\n  ],\n  \"metadata\": {\n    \"total\": 1,\n    \"limit\": 50,\n    \"offset\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c8ae6a4-5b8a-4b17-b542-77a732959296",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    "actions",
+                    "push"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partialSuccess",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29a4de7f-04c8-425c-8cdc-b9519a4b36c0",
+          "name": "Un-Push multiple files",
+          "request": {
+            "name": "Un-Push multiple files",
+            "description": {
+              "content": "Removes multiple files from all folder members' mobile sync list in a single request. Requires mobile sync to be enabled. Supports partial success, meaning valid items are processed even if some fail.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "files",
+                "actions",
+                "push"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id:in",
+                  "value": "<string>",
+                  "description": "(Required) A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of unique identifiers for the entities to be processed."
+                },
+                {
+                  "disabled": false,
+                  "key": "partialSuccess",
+                  "value": "<boolean>",
+                  "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": []
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2ed99fa0-8ec0-4772-8a80-1e544e75a012",
+              "name": "Files removed from all folder members' mobile sync list successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    "actions",
+                    "push"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partialSuccess",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "079c0974-9e92-47c9-8e92-ee6cc10d86d9",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    "actions",
+                    "push"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partialSuccess",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0a87480d-6d6f-498e-8026-2fac2c76c5ce",
+          "name": "Push file to mobile sync list",
+          "request": {
+            "name": "Push file to mobile sync list",
+            "description": {
+              "content": "Adds the specified file to the mobile sync list for all members of the file's parent folder. Requires mobile sync to be enabled.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "files",
+                ":id",
+                "actions",
+                "push"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "returnEntity",
+                  "value": "<boolean>",
+                  "description": "If set to `true`, returns information about the newly created entity."
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the file"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "65858beb-7622-4605-9116-39dc1560bb30",
+              "name": "File pushed to mobile sync list successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    ":id",
+                    "actions",
+                    "push"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the file"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 20,\n      \"fileId\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\",\n      \"userId\": \"u1a2b3c4-d5e6-7890-abcd-ef1234567890\",\n      \"pushUserId\": \"u9z8y7x6-w5v4-3210-uvwx-yz1234567890\",\n      \"created\": \"2024-04-01T10:00:00Z\"\n    }\n  ],\n  \"metadata\": {\n    \"total\": 1,\n    \"limit\": 50,\n    \"offset\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6df5e574-c7bf-43dc-8cb2-be0d7514bb95",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    ":id",
+                    "actions",
+                    "push"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the file"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cab18a3e-83dd-4bdb-af79-ce1e222c815b",
+          "name": "Un-Push file from mobile sync list",
+          "request": {
+            "name": "Un-Push file from mobile sync list",
+            "description": {
+              "content": "Removes the specified file from all folder members' mobile sync list. Requires mobile sync to be enabled.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "files",
+                ":id",
+                "actions",
+                "push"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "returnEntity",
+                  "value": "<boolean>",
+                  "description": "If set to `true`, returns information about the newly created entity."
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifer (UUID) of the file"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ebad4d51-3f4e-4845-8a80-7cd9c7d69db1",
+              "name": "File removed from all folder members' mobile sync list successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    ":id",
+                    "actions",
+                    "push"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifer (UUID) of the file"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ae5bc271-251c-406e-a533-700717ce15f1",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    ":id",
+                    "actions",
+                    "push"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifer (UUID) of the file"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "926e6535-c7d4-4fd3-940b-72e0611fe21c",
+          "name": "Set file as a mobile sync item",
+          "request": {
+            "name": "Set file as a mobile sync item",
+            "description": {
+              "content": "Adds the specified file to the current user's mobile sync list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "mobileSyncItems"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "returnEntity",
+                  "value": "<boolean>",
+                  "description": "If set to `true`, returns information about the newly created entity."
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fileId\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "123f10ce-9b75-48f8-99c1-610e00b4a503",
+              "name": "Mobile sync item created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "mobileSyncItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fileId\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 10,\n  \"fileId\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\",\n  \"userId\": \"u1a2b3c4-d5e6-7890-abcd-ef1234567890\",\n  \"pushUserId\": \"u1a2b3c4-d5e6-7890-abcd-ef1234567890\",\n  \"created\": \"2024-04-01T09:00:00Z\",\n  \"fingerprint\": \"abc123def456\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d75b1768-bf06-44fa-b080-08d9a27069f8",
+              "name": "Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_REQUIRED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "mobileSyncItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fileId\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_INPUT_REQUIRED\",\n    \"message\": \"Field is required\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ce97758-a0a7-4d88-af4d-4fb896666b7f",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "mobileSyncItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fileId\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2d5dc4a8-36a1-4acc-8b52-8e2ab7e87b55",
+          "name": "List mobile sync items for the current user",
+          "request": {
+            "name": "List mobile sync items for the current user",
+            "description": {
+              "content": "### Description:\n  Returns a paginated list of mobile sync items belonging to the current user.\n### Precondition:\n  User must be authenticated. The tenant must not be suspended and the license must not be expired.\n### Response:\n  Returns a list of mobile sync items for the current user.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "mobileSyncItems"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "returnEntity",
+                  "value": "<boolean>",
+                  "description": "If true, includes the entity in the response body."
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "Specifies additional fields to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                },
+                {
+                  "disabled": false,
+                  "key": "avStatus",
+                  "value": "<string>",
+                  "description": "Filter results by antivirus scan status. Accepted values: `allowed`, `disallowed`, `scanning`."
+                },
+                {
+                  "disabled": false,
+                  "key": "dlpStatus",
+                  "value": "<string>",
+                  "description": "Filter results by DLP scan status. Accepted values: `allowed`, `disallowed`, `scanning`."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "<string>",
+                  "description": "Sort order for the results. Default is `created:desc`.<br>Allowed values: `created:asc`, `created:desc`."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Range limit."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Range offset."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2b32b232-367a-4f93-9495-56c203dd0751",
+              "name": "The list of mobile sync items has been successfully returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "mobileSyncItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "avStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dlpStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 1085,\n      \"fileId\": \"string\",\n      \"userId\": \"string\",\n      \"pushUserId\": \"string\",\n      \"created\": \"1949-03-15\",\n      \"fingerprint\": \"string\",\n      \"fingerprints\": [\n        {\n          \"algo\": \"string\",\n          \"hash\": \"string\"\n        },\n        {\n          \"algo\": \"string\",\n          \"hash\": \"string\"\n        }\n      ],\n      \"secure\": true,\n      \"toBeNotified\": false,\n      \"pushedObject\": {\n        \"objectId\": \"string\",\n        \"userId\": \"string\",\n        \"created\": \"1993-09-06\",\n        \"user\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"profileIcon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"syncedObject\": {\n        \"objectId\": \"string\",\n        \"userId\": \"string\",\n        \"created\": \"2026-01-31\",\n        \"user\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"profileIcon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"pushUser\": {\n        \"id\": \"string\",\n        \"email\": \"string\",\n        \"name\": \"string\",\n        \"profileIcon\": \"string\"\n      },\n      \"avStatus\": \"string\",\n      \"dlpStatus\": \"string\",\n      \"file\": {\n        \"id\": \"e95037bd-2a1b-e806-a869-3fe12a80396f\",\n        \"parentId\": \"ae986244-305e-96f0-764f-1a2eb309b227\",\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"userId\": \"ecd3722b-1ec7-a520-3e6f-6fdfe4988b50\",\n        \"creator\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"profileIcon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"created\": \"2009-07-23\",\n        \"modified\": \"1997-10-17\",\n        \"expire\": \"1990-12-16\",\n        \"permissions\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"allowed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"allowed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"deleted\": false,\n        \"permDeleted\": false,\n        \"permalink\": \"string\",\n        \"path\": \"string\",\n        \"members\": [\n          {\n            \"objectId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"roleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"userId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"groupId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"user\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"role\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"group\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sharedBy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"created\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"inheritRoleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"allowedFolderRoleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rank\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"originFolder\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"objectId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"roleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"userId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"groupId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"user\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"role\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"group\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sharedBy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"created\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"inheritRoleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"allowedFolderRoleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rank\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"originFolder\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"vendorDocId\": \"string\",\n        \"vendorDocName\": \"string\",\n        \"secure\": false,\n        \"source\": 1297,\n        \"modifier\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"profileIcon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"size\": 6924,\n        \"mime\": \"string\",\n        \"fingerprint\": \"string\",\n        \"fingerprints\": [\n          {\n            \"algo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hash\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"algo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hash\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"clientCreated\": \"1996-09-09\",\n        \"clientModified\": \"1953-07-08\",\n        \"overriddenExpire\": false,\n        \"sharedBy\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"profileIcon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"sharedTime\": \"1996-04-20\",\n        \"parent\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parentId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"userId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"creator\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"created\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"modified\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"expire\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"permissions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deleted\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"permDeleted\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"permalink\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"path\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"members\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"vendorDocId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"vendorDocName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"secure\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"source\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isShared\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"syncable\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fileLifetime\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isFavorite\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"pushedFilesCount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"currentUserRole\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"avStatus\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"dlpStatus\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"totalMembersCount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"totalFoldersCount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"totalFilesCount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"maxFolderExpiration\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"maxFileLifetime\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isLdapGroupMember\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isUnderMyFolder\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"pathIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isRoot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"rootId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"useFolderQuota\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"quota\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"size\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"freeSpace\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"inheritanceEnabled\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"originalFileId\": \"6db7b3e3-3bff-88b9-86dd-3a446a5f8da8\",\n        \"avStatus\": \"string\",\n        \"dlpStatus\": \"string\",\n        \"adminQuarantineStatus\": \"string\",\n        \"locked\": false,\n        \"lockUser\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"profileIcon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"isShared\": false,\n        \"lastModifiedBy\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"profileIcon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"pushedObject\": {\n          \"objectId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"userId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"created\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"user\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"pathIds\": \"0ab317c2-7d5d-1c6d-9031-e0003d1d65e5\",\n        \"wopiapp\": {\n          \"wopiSrc\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"userId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"service\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scheme\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"schemeSupport\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"pushed\": true,\n        \"tags\": [\n          {\n            \"guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"safeEdit\": {\n          \"safeEditLocked\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"user\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"versionsCount\": 3060,\n        \"tracking_id\": \"713aeeaa-b8e5-2611-0727-fd54c921264a\"\n      }\n    },\n    {\n      \"id\": 2545,\n      \"fileId\": \"string\",\n      \"userId\": \"string\",\n      \"pushUserId\": \"string\",\n      \"created\": \"1951-02-20\",\n      \"fingerprint\": \"string\",\n      \"fingerprints\": [\n        {\n          \"algo\": \"string\",\n          \"hash\": \"string\"\n        },\n        {\n          \"algo\": \"string\",\n          \"hash\": \"string\"\n        }\n      ],\n      \"secure\": true,\n      \"toBeNotified\": false,\n      \"pushedObject\": {\n        \"objectId\": \"string\",\n        \"userId\": \"string\",\n        \"created\": \"2000-06-05\",\n        \"user\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"profileIcon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"syncedObject\": {\n        \"objectId\": \"string\",\n        \"userId\": \"string\",\n        \"created\": \"1982-04-05\",\n        \"user\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"profileIcon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      \"pushUser\": {\n        \"id\": \"string\",\n        \"email\": \"string\",\n        \"name\": \"string\",\n        \"profileIcon\": \"string\"\n      },\n      \"avStatus\": \"string\",\n      \"dlpStatus\": \"string\",\n      \"file\": {\n        \"id\": \"88e21a07-ef26-d2c6-dcff-2a4ac08c9c18\",\n        \"parentId\": \"30c4eb15-71d9-c672-67c3-5421ed92b975\",\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"userId\": \"27485a7e-1798-9b9b-e615-323df6b84564\",\n        \"creator\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"profileIcon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"created\": \"1956-01-28\",\n        \"modified\": \"1989-11-07\",\n        \"expire\": \"1948-04-19\",\n        \"permissions\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"allowed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"allowed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"deleted\": false,\n        \"permDeleted\": false,\n        \"permalink\": \"string\",\n        \"path\": \"string\",\n        \"members\": [\n          {\n            \"objectId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"roleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"userId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"groupId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"user\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"role\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"group\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sharedBy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"created\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"inheritRoleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"allowedFolderRoleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rank\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"originFolder\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"objectId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"roleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"userId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"groupId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"user\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"role\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"group\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sharedBy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"created\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"inheritRoleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"allowedFolderRoleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rank\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"originFolder\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"vendorDocId\": \"string\",\n        \"vendorDocName\": \"string\",\n        \"secure\": true,\n        \"source\": 9672,\n        \"modifier\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"profileIcon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"size\": 6989,\n        \"mime\": \"string\",\n        \"fingerprint\": \"string\",\n        \"fingerprints\": [\n          {\n            \"algo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hash\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"algo\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hash\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"clientCreated\": \"1972-04-27\",\n        \"clientModified\": \"1988-03-27\",\n        \"overriddenExpire\": true,\n        \"sharedBy\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"profileIcon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"sharedTime\": \"1976-05-26\",\n        \"parent\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parentId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"userId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"creator\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"created\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"modified\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"expire\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"permissions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deleted\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"permDeleted\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"permalink\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"path\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"members\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"vendorDocId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"vendorDocName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"secure\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"source\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isShared\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"syncable\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fileLifetime\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isFavorite\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"pushedFilesCount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"currentUserRole\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"avStatus\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"dlpStatus\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"totalMembersCount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"totalFoldersCount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"totalFilesCount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"maxFolderExpiration\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"maxFileLifetime\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isLdapGroupMember\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isUnderMyFolder\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"pathIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isRoot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"rootId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"useFolderQuota\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"quota\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"size\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"freeSpace\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"inheritanceEnabled\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"originalFileId\": \"be66f76c-ec21-a22e-af28-5b1d4e06416c\",\n        \"avStatus\": \"string\",\n        \"dlpStatus\": \"string\",\n        \"adminQuarantineStatus\": \"string\",\n        \"locked\": false,\n        \"lockUser\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"profileIcon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"isShared\": true,\n        \"lastModifiedBy\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"profileIcon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"pushedObject\": {\n          \"objectId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"userId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"created\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"user\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"pathIds\": \"20400753-3cbc-5d14-4afe-fdb37e2ab1b0\",\n        \"wopiapp\": {\n          \"wopiSrc\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"userId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"service\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scheme\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"schemeSupport\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"pushed\": true,\n        \"tags\": [\n          {\n            \"guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"guid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"safeEdit\": {\n          \"safeEditLocked\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"user\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"versionsCount\": 3124,\n        \"tracking_id\": \"0acf13f8-8772-32d5-2d90-f4131b9742fe\"\n      }\n    }\n  ],\n  \"metadata\": {\n    \"total\": 2765,\n    \"limit\": 1080,\n    \"offset\": 2577\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f7a7df6-808f-4705-8b0b-6e87050afa8f",
+              "name": "Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "mobileSyncItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "avStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dlpStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_AUTH_INVALID_CSRF\",\n      \"message\": \"Invalid CSRF Authentication\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a56826ce-5f45-480d-87f7-2d784540fcee",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_SYSTEM_TENANT_SUSPENDED, ERR_ACCESS_USER, ERR_ENTITY_DELETED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "mobileSyncItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "avStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dlpStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_SYSTEM_TENANT_SUSPENDED\",\n      \"message\": \"Access to the service is restricted by the service provider. Contact your administrator for updates on restoring normal access.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fcd13232-8c9b-41d5-8bf9-f028b0e58799",
+              "name": "Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_LICENSE_EXPIRED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "mobileSyncItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "avStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dlpStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_LICENSE_EXPIRED\",\n      \"message\": \"License has expired\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "23232ab2-9fd9-4a84-ac0d-f23715564bd2",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "mobileSyncItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "avStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dlpStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ffeef653-9843-498f-8ad2-2359051e4120",
+          "name": "Remove mobile sync item",
+          "request": {
+            "name": "Remove mobile sync item",
+            "description": {
+              "content": "Removes the specified item from the current user's mobile sync list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "mobileSyncItems",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) ID of the mobile sync item to be removed"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5fb63841-cb74-4015-9f8d-e751b6493f3a",
+              "name": "Mobile sync item removed successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "mobileSyncItems",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the mobile sync item to be removed"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ebbe31bc-7247-4a41-814e-35c21abb6d6a",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "mobileSyncItems",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the mobile sync item to be removed"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_ACCESS_USER\",\n    \"message\": \"Insufficient access permissions\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eec9b4eb-c2ba-40ed-824d-0e372ec87cff",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "mobileSyncItems",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the mobile sync item to be removed"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "62169c19-bf56-4604-b4ff-03017a081b13",
+          "name": "Return a mobile sync item",
+          "request": {
+            "name": "Return a mobile sync item",
+            "description": {
+              "content": "### Description:\n  Returns information about the specified mobile sync item belonging to the current user.\n### Precondition:\n  User must be authenticated and must own the specified mobile sync item. The tenant must not be suspended and the license must not be expired.\n### Response:\n  Returns the specified mobile sync item.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "mobileSyncItems",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "returnEntity",
+                  "value": "<boolean>",
+                  "description": "If true, includes the entity in the response body."
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "Specifies additional fields to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the entity."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4968d227-d775-40e2-afa1-753953bbe082",
+              "name": "The mobile sync item has been successfully returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "mobileSyncItems",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 4059,\n  \"fileId\": \"string\",\n  \"userId\": \"string\",\n  \"pushUserId\": \"string\",\n  \"created\": \"1959-05-19\",\n  \"fingerprint\": \"string\",\n  \"fingerprints\": [\n    {\n      \"algo\": \"string\",\n      \"hash\": \"string\"\n    },\n    {\n      \"algo\": \"string\",\n      \"hash\": \"string\"\n    }\n  ],\n  \"secure\": false,\n  \"toBeNotified\": false,\n  \"pushedObject\": {\n    \"objectId\": \"string\",\n    \"userId\": \"string\",\n    \"created\": \"1997-06-24\",\n    \"user\": {\n      \"id\": \"string\",\n      \"email\": \"string\",\n      \"name\": \"string\",\n      \"profileIcon\": \"string\"\n    }\n  },\n  \"syncedObject\": {\n    \"objectId\": \"string\",\n    \"userId\": \"string\",\n    \"created\": \"2010-12-11\",\n    \"user\": {\n      \"id\": \"string\",\n      \"email\": \"string\",\n      \"name\": \"string\",\n      \"profileIcon\": \"string\"\n    }\n  },\n  \"pushUser\": {\n    \"id\": \"string\",\n    \"email\": \"string\",\n    \"name\": \"string\",\n    \"profileIcon\": \"string\"\n  },\n  \"avStatus\": \"string\",\n  \"dlpStatus\": \"string\",\n  \"file\": {\n    \"id\": \"674eba36-a512-1347-2721-82e0a486e7f7\",\n    \"parentId\": \"892af7fa-2e46-4a32-c56d-8b32ac1298ad\",\n    \"name\": \"string\",\n    \"type\": \"string\",\n    \"userId\": \"6d4ed609-abe9-2d96-186e-ae7b68a56698\",\n    \"creator\": {\n      \"id\": \"string\",\n      \"email\": \"string\",\n      \"name\": \"string\",\n      \"profileIcon\": \"string\"\n    },\n    \"created\": \"1996-09-25\",\n    \"modified\": \"1975-02-15\",\n    \"expire\": \"1980-06-29\",\n    \"permissions\": [\n      {\n        \"id\": 9365,\n        \"name\": \"string\",\n        \"allowed\": false\n      },\n      {\n        \"id\": 4778,\n        \"name\": \"string\",\n        \"allowed\": true\n      }\n    ],\n    \"deleted\": false,\n    \"permDeleted\": true,\n    \"permalink\": \"string\",\n    \"path\": \"string\",\n    \"members\": [\n      {\n        \"objectId\": \"string\",\n        \"roleId\": 7466,\n        \"userId\": \"string\",\n        \"groupId\": 5491,\n        \"user\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"profileIcon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"role\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"rank\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"group\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"dn\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"sharedBy\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"profileIcon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"created\": \"1998-10-07\",\n        \"inheritRoleId\": 3292,\n        \"allowedFolderRoleId\": [\n          5283,\n          2117\n        ],\n        \"email\": \"string\",\n        \"rank\": 769,\n        \"originFolder\": {}\n      },\n      {\n        \"objectId\": \"string\",\n        \"roleId\": 6522,\n        \"userId\": \"string\",\n        \"groupId\": 7621,\n        \"user\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"profileIcon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"role\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"rank\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"group\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"dn\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"sharedBy\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"profileIcon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"created\": \"1960-03-12\",\n        \"inheritRoleId\": 3259,\n        \"allowedFolderRoleId\": [\n          6337,\n          4962\n        ],\n        \"email\": \"string\",\n        \"rank\": 6114,\n        \"originFolder\": {}\n      }\n    ],\n    \"vendorDocId\": \"string\",\n    \"vendorDocName\": \"string\",\n    \"secure\": false,\n    \"source\": 8590,\n    \"modifier\": {\n      \"id\": \"string\",\n      \"email\": \"string\",\n      \"name\": \"string\",\n      \"profileIcon\": \"string\"\n    },\n    \"size\": 5232,\n    \"mime\": \"string\",\n    \"fingerprint\": \"string\",\n    \"fingerprints\": [\n      {\n        \"algo\": \"string\",\n        \"hash\": \"string\"\n      },\n      {\n        \"algo\": \"string\",\n        \"hash\": \"string\"\n      }\n    ],\n    \"clientCreated\": \"2010-02-26\",\n    \"clientModified\": \"2021-04-14\",\n    \"overriddenExpire\": false,\n    \"sharedBy\": {\n      \"id\": \"string\",\n      \"email\": \"string\",\n      \"name\": \"string\",\n      \"profileIcon\": \"string\"\n    },\n    \"sharedTime\": \"1995-09-09\",\n    \"parent\": {\n      \"id\": \"4cc6da38-fddb-477f-9e36-3d4cea2ff070\",\n      \"parentId\": \"f2f68168-460e-3b63-202b-36f8c46d9a84\",\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"userId\": \"fc670ef9-a1a3-9fb9-2896-5c4f553598e0\",\n      \"creator\": {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"email\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"profileIcon\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"created\": \"2006-11-07\",\n      \"modified\": \"2007-05-30\",\n      \"expire\": \"1971-07-02\",\n      \"permissions\": [\n        {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"allowed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"allowed\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"deleted\": false,\n      \"permDeleted\": true,\n      \"permalink\": \"string\",\n      \"path\": \"string\",\n      \"members\": [\n        {\n          \"objectId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"roleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"userId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"groupId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"user\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"group\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sharedBy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"created\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"inheritRoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"allowedFolderRoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"rank\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"originFolder\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"objectId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"roleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"userId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"groupId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"user\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"role\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"group\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"sharedBy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"created\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"inheritRoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"allowedFolderRoleId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"rank\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"originFolder\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"vendorDocId\": \"string\",\n      \"vendorDocName\": \"string\",\n      \"secure\": true,\n      \"source\": 7931,\n      \"isShared\": false,\n      \"syncable\": false,\n      \"fileLifetime\": 5943,\n      \"description\": \"string\",\n      \"isFavorite\": false,\n      \"pushedFilesCount\": 7876,\n      \"currentUserRole\": {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"rank\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"avStatus\": \"string\",\n      \"dlpStatus\": \"string\",\n      \"totalMembersCount\": 3709,\n      \"totalFoldersCount\": 6918,\n      \"totalFilesCount\": 24,\n      \"maxFolderExpiration\": \"1956-04-21\",\n      \"maxFileLifetime\": 1630,\n      \"isLdapGroupMember\": true,\n      \"isUnderMyFolder\": true,\n      \"pathIds\": \"string\",\n      \"isRoot\": true,\n      \"rootId\": \"b83fc958-c5e3-05c3-b2a0-a86a3110df8c\",\n      \"useFolderQuota\": false,\n      \"quota\": 8438,\n      \"size\": 5544,\n      \"freeSpace\": 2470,\n      \"inheritanceEnabled\": false\n    },\n    \"originalFileId\": \"7c1c13d4-3a8a-9083-72ad-ea94a04577d7\",\n    \"avStatus\": \"string\",\n    \"dlpStatus\": \"string\",\n    \"adminQuarantineStatus\": \"string\",\n    \"locked\": true,\n    \"lockUser\": {\n      \"id\": \"string\",\n      \"email\": \"string\",\n      \"name\": \"string\",\n      \"profileIcon\": \"string\"\n    },\n    \"isShared\": true,\n    \"lastModifiedBy\": {\n      \"id\": \"string\",\n      \"email\": \"string\",\n      \"name\": \"string\",\n      \"profileIcon\": \"string\"\n    },\n    \"pushedObject\": {\n      \"objectId\": \"string\",\n      \"userId\": \"string\",\n      \"created\": \"1992-02-13\",\n      \"user\": {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"email\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"profileIcon\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"pathIds\": \"e4bed049-0b05-c106-f0a9-7bcf65b6431b\",\n    \"wopiapp\": {\n      \"wopiSrc\": \"string\",\n      \"userId\": \"string\",\n      \"service\": \"string\",\n      \"scheme\": \"string\",\n      \"schemeSupport\": \"string\"\n    },\n    \"pushed\": false,\n    \"tags\": [\n      {\n        \"guid\": \"2a3754cd-7288-77a6-15d8-d830cb918e4d\",\n        \"name\": \"string\",\n        \"type\": \"string\"\n      },\n      {\n        \"guid\": \"c1fafecb-2cf3-1acb-1030-79a303d615d5\",\n        \"name\": \"string\",\n        \"type\": \"string\"\n      }\n    ],\n    \"safeEdit\": {\n      \"safeEditLocked\": false,\n      \"user\": {\n        \"id\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"email\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"profileIcon\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"versionsCount\": 784,\n    \"tracking_id\": \"f6845980-51de-f422-fea9-aa91dc51d483\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc7958b1-ef7b-4cd1-b4fb-885d16da750a",
+              "name": "Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "mobileSyncItems",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_AUTH_INVALID_CSRF\",\n      \"message\": \"Invalid CSRF Authentication\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "369753ba-3c73-4a37-837b-8d6e8387a60b",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_SYSTEM_TENANT_SUSPENDED, ERR_ACCESS_USER, ERR_ENTITY_DELETED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "mobileSyncItems",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_SYSTEM_TENANT_SUSPENDED\",\n      \"message\": \"Access to the service is restricted by the service provider. Contact your administrator for updates on restoring normal access.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "35e87e4b-1521-4d6e-b788-5e497d993348",
+              "name": "Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_LICENSE_EXPIRED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "mobileSyncItems",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_LICENSE_EXPIRED\",\n      \"message\": \"License has expired\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b39a214b-f6d0-42f3-9ce3-dd39f3a475a4",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "mobileSyncItems",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the entity."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b52ecad2-9972-4b22-9512-f0bb9188c85c",
+    "name": "Kiteworks API Documentation activities mobileSync API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

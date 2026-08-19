@@ -1,0 +1,2966 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities files API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Delete files",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/files",
+            "params": [
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of unique identifiers for the entities to be processed."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Deletes the specified files. Depending on the system retention policy, the files may be\n                       recoverable until permanently deleted by the system.\\n\\n**Requires `file_delete` permission\n                       on the parent folder for each file.**"
+        },
+        {
+          "info": {
+            "name": "Copy files",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/files/actions/copy",
+            "params": [
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes the entity in the response body."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              },
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of file UUIDs to copy. Cannot be used together with `ids` in the request body."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If true, successfully copied files are committed even if some files fail to copy."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Copies the specified files to a folder.\n### Precondition:\n  Must be assigned the `file_copy` permission for the files being copied and `file_add` permission for the destination folder.\n### Response:\n  Copies the files to the folder. If duplicate files exist, appends a number to copied file names.\n"
+        },
+        {
+          "info": {
+            "name": "Lock files",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/rest/files/actions/lock",
+            "params": [
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of unique identifier (UUID) of the objects to be processed."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes the entity in the response body."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Locks the specified files, preventing others from performing actions such as editing, moving, and deleting the files.\n### Precondition:\n  Must be assigned the `lock` permission for the files.\n### Response:\n  Locks the files.\n"
+        },
+        {
+          "info": {
+            "name": "Add multiple files to mobile sync list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/files/actions/mobileSyncItems",
+            "params": [
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of unique identifiers for the entities to be processed."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Adds multiple files to the current user's mobile sync list in a single request. Supports partial success, meaning valid items are processed even if some fail. This operation will not return location headers for each entity created, if the inserted records are\n        required, returnEntity should be set to true."
+        },
+        {
+          "info": {
+            "name": "Delete multiple files from user mobile sync list",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/files/actions/mobileSyncItems",
+            "params": [
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of unique identifiers for the entities to be processed."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Removes multiple files from the current user's mobile sync list in a single request. Supports partial success, meaning valid items are processed even if some fail."
+        },
+        {
+          "info": {
+            "name": "Move files",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/files/actions/move",
+            "params": [
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes the entity in the response body."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              },
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of file UUIDs to move. Cannot be used together with `ids` in the request body."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If true, successfully moved files are committed even if some files fail to move."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Moves the specified files to a folder.\n### Precondition:\n  Must be assigned the `file_move` permission for the files being moved and the `file_add` permission for the destination folder.\n### Response:\n  Moves the files to the folder.\n"
+        },
+        {
+          "info": {
+            "name": "Delete files permanently",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/files/actions/permanent",
+            "params": [
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of unique identifiers for the entities to be processed."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Permanently deletes the specified files. Files cannot be recovered after this operation.\\n\\n\n                       **Requires `permanent delete` permission on the parent folder for each file.** Each file must\n                       already be in the deleted state and must not be locked."
+        },
+        {
+          "info": {
+            "name": "Push files list to mobile sync list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/files/actions/push",
+            "params": [
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of unique identifiers for the entities to be processed."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Adds multiple files to the mobile sync list for all members of the files' parent folder. Requires mobile sync to be enabled. Supports partial success, meaning valid items are processed even if some fail. This operation will not return location headers for each entity created, if the inserted records are\n        required, returnEntity should be set to true."
+        },
+        {
+          "info": {
+            "name": "Un-Push multiple files",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/files/actions/push",
+            "params": [
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of unique identifiers for the entities to be processed."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Removes multiple files from all folder members' mobile sync list in a single request. Requires mobile sync to be enabled. Supports partial success, meaning valid items are processed even if some fail."
+        },
+        {
+          "info": {
+            "name": "Recover deleted files",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/rest/files/actions/recover",
+            "params": [
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of unique identifiers for the entities to be processed."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Recovers the specified deleted files, restoring them to their parent folders.\\n\\n**Requires\n                       `file_recover` permission on the parent folder for each file.** Each file must be in the\n                       deleted state and must not be permanently deleted."
+        },
+        {
+          "info": {
+            "name": "Scan files for security",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/files/actions/scan",
+            "params": [
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "List of IDs of entities to scan. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Queues security scans for the specified files. Depending on system scan policies, files are\n                       scanned for anti-virus threats, data loss prevention (DLP) violations, and advanced threat\n                       protection. Scans run asynchronously.\\n\\n**Requires `view` permission on each file.** Files\n                       must not be deleted."
+        },
+        {
+          "info": {
+            "name": "Unlock files",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/rest/files/actions/unlock",
+            "params": [
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of unique identifier (UUID) of the objects to be processed."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes the entity in the response body."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Unlocks the specified files, enabling others to perform actions such as edit, move, and delete the files.\n### Precondition:\n  Must be assigned the `unlock` permission for the files.\n### Response:\n  Unlocks the files.\n"
+        },
+        {
+          "info": {
+            "name": "Download files and folders in ZIP format",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/files/actions/zip",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name for the generated ZIP archive."
+              },
+              {
+                "name": "fileId:in",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of file IDs to include in the ZIP archive.. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "folderId:in",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of folder IDs to include in the ZIP archive.. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "username",
+                "value": "",
+                "type": "query",
+                "description": "The email address of the user requesting the ZIP archive."
+              },
+              {
+                "name": "extensions",
+                "value": "",
+                "type": "query",
+                "description": "Filter files by the specified comma-separated list of extensions."
+              },
+              {
+                "name": "utcOffset",
+                "value": "",
+                "type": "query",
+                "description": "The user's timezone offset in seconds (e.g., UTC+08:00 = 28800)."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Downloads the specified files and folders as a ZIP archive. Folder contents are included\n                       recursively. Optionally filtered by file extension.\\n\\n**Requires `download` permission on\n                       each file and folder.** Files must not be deleted, infected, or DLP-locked."
+        },
+        {
+          "info": {
+            "name": "Get file and folder security status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/files/actions/zipStatus",
+            "params": [
+              {
+                "name": "fileId:in",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of file IDs (UUID) to check. (Recommended request size <= 100)"
+              },
+              {
+                "name": "folderId:in",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of folder IDs (UUID) to check. (Recommended request size <= 100)"
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether the operation should proceed if some files/folders fail the check."
+              },
+              {
+                "name": "extensions",
+                "value": "",
+                "type": "query",
+                "description": "Filter results to include only files with the specified comma-separated list of extensions."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Gets the security scan results of specified files and folders in preparation for downloading them in ZIP format.\n### Precondition:\n  Must be assigned the `download` permission for the files and folders.\n### Response:\n  Returns an empty response if all files are safe for download.\n"
+        },
+        {
+          "info": {
+            "name": "Get file metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/files/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              },
+              {
+                "name": "requirementId",
+                "value": "",
+                "type": "query",
+                "description": "UUID of the approval requirement. Required together with `accessVerificationId` to access a file under an approval workflow."
+              },
+              {
+                "name": "accessVerificationId",
+                "value": "",
+                "type": "query",
+                "description": "UUID of the access verification event. Required together with `requirementId` to validate approver access."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Gets metadata for specified files, such as file owner, creation date, digital fingerprint, and security scan status.\n### Precondition:\n  Must be assigned the `properties_view` permission for the file.\n### Response:\n  Returns the file metadata.\n"
+        },
+        {
+          "info": {
+            "name": "Upload a file version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/files/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the file"
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "body",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "clientCreated",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "clientModified",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Uploads a new version of the specified file. The uploaded content becomes the new current version (version 0), and the previous current version is incremented. **Requires `version_create` permission on the file.**"
+        },
+        {
+          "info": {
+            "name": "Update a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/rest/files/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes the entity in the response body."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Updates a file's properties such as name and expiration date.\n### Precondition:\n  User must have `properties_edit` permission for the file.\n### Response:\n  The file is updated.\n"
+        },
+        {
+          "info": {
+            "name": "Delete a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/files/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the file."
+              }
+            ]
+          },
+          "docs": "Deletes the specified file. Depending on the system retention policy, the file may be\n                       recoverable until permanently deleted by the system.\\n\\n**Requires `delete` permission on\n                       the parent folder.** The file must not be locked."
+        },
+        {
+          "info": {
+            "name": "Lock a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/rest/files/:id/actions/lock",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the file"
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Locks the specified file, preventing other users from editing, moving, or deleting it until\n                       the lock is released.\\n\\n**Requires `lock` permission on the file.** The file must not already\n                       be locked or deleted."
+        },
+        {
+          "info": {
+            "name": "Permanently delete a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/files/:id/actions/permanent",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Permanently deletes the specified file. The file must have been soft-deleted first.\n### Precondition:\n  The user must be the owner, manager, or collaborator of the file.\n  The file must not be locked or safe-edit locked, unless the user is an admin.\n  The file must have been soft-deleted via `DELETE /rest/files/{id}`.\n### Response:\n  The file is permanently deleted and its content cannot be retrieved.\n"
+        },
+        {
+          "info": {
+            "name": "Push file to mobile sync list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/files/:id/actions/push",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the file"
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Adds the specified file to the mobile sync list for all members of the file's parent folder. Requires mobile sync to be enabled."
+        },
+        {
+          "info": {
+            "name": "Un-Push file from mobile sync list",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/files/:id/actions/push",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifer (UUID) of the file"
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Removes the specified file from all folder members' mobile sync list. Requires mobile sync to be enabled."
+        },
+        {
+          "info": {
+            "name": "Recover a file.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/rest/files/:id/actions/recover",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the file"
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Recovers the specified deleted file, restoring it to its parent folder.\\n\\n**Requires\n                       `recover` permission on the parent folder.** The file must be in the deleted state and must\n                       not be permanently deleted."
+        },
+        {
+          "info": {
+            "name": "Check file into Repositories Gateway source",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/rest/files/:id/actions/return",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the file"
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Checks the specified file back into its Repositories Gateway source. The local copy of\n                       the file is permanently deleted after a successful check-in. If the file is locked in\n                       the Repositories Gateway source and the caller has `unlock` permission, the lock is\n                       released automatically.\\n\\n**Requires `view` permission on the parent folder.** The file\n                       must be eligible to return to source (i.e., it was originally "
+        },
+        {
+          "info": {
+            "name": "Scan a file for security",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/files/:id/actions/scan",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the file"
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Queues a security scan for the specified file. Depending on system scan policies, the file\n                       is scanned for anti-virus threats, data loss prevention (DLP) violations, and advanced threat\n                       protection. The scan runs asynchronously.\\n\\n**Requires `view` permission on the file.**\n                       The file must not be deleted."
+        },
+        {
+          "info": {
+            "name": "Unlock a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/rest/files/:id/actions/unlock",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the file"
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Unlocks the specified file, allowing other users to edit, move, and delete it.\\n\\n\n                       **Requires `unlock` permission on the file.** The file must currently be locked."
+        },
+        {
+          "info": {
+            "name": "Get file comments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/files/:id/comments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the file."
+              },
+              {
+                "name": "parentId",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the parent comment"
+              },
+              {
+                "name": "parentId:in",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the parent comment. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the comment author"
+              },
+              {
+                "name": "userId:in",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the comment author. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "created",
+                "value": "",
+                "type": "query",
+                "description": "The creation date of the comment."
+              },
+              {
+                "name": "created:gt",
+                "value": "",
+                "type": "query",
+                "description": "The creation date of the comment.. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "created:gte",
+                "value": "",
+                "type": "query",
+                "description": "The creation date of the comment.. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "created:lt",
+                "value": "",
+                "type": "query",
+                "description": "The creation date of the comment.. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "created:lte",
+                "value": "",
+                "type": "query",
+                "description": "The creation date of the comment.. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "modified",
+                "value": "",
+                "type": "query",
+                "description": "The last modification date of the comment."
+              },
+              {
+                "name": "modified:gt",
+                "value": "",
+                "type": "query",
+                "description": "The last modification date of the comment.. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "modified:gte",
+                "value": "",
+                "type": "query",
+                "description": "The last modification date of the comment.. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "modified:lt",
+                "value": "",
+                "type": "query",
+                "description": "The last modification date of the comment.. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "modified:lte",
+                "value": "",
+                "type": "query",
+                "description": "The last modification date of the comment.. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "contents:contains",
+                "value": "",
+                "type": "query",
+                "description": "Content of the comment. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns a list of comments on the specified file. **Requires `comment_view` permission on the file.**"
+        },
+        {
+          "info": {
+            "name": "Add file comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/files/:id/comments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the file."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a comment to the specified file. To reply to an existing comment, include a `parentId` in the request body. **Requires `comment_add` permission on the file.**"
+        },
+        {
+          "info": {
+            "name": "Download a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/files/:id/content",
+            "headers": [
+              {
+                "name": "Range",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Downloads the specified file.\n### Precondition:\n  Must be assigned the `download` permission for the file.\n### Response:\n  Downloads the file to the specified location.\n"
+        },
+        {
+          "info": {
+            "name": "Get access token for external file edit.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/files/:id/externalEdit",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the file"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Retrieves a short-lived refresh token scoped to the specified file, authorizing an external\n                       editor to download the current version and upload a new version.\\n\\n**Requires `file_add`\n                       permission on the parent folder.** The file must not be permanently deleted. Users with\n                       Collaborator, Downloader, or Viewer roles cannot edit files in restricted folders."
+        },
+        {
+          "info": {
+            "name": "Get users with access to a shared file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/files/:id/members",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by user ID (UUID)."
+              },
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by LDAP group ID."
+              },
+              {
+                "name": "roleId",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by role ID."
+              },
+              {
+                "name": "userId:in",
+                "value": "",
+                "type": "query",
+                "description": "Filter by a comma-separated list of user IDs (UUID). (Recommended request size <= 100)"
+              },
+              {
+                "name": "groupId:in",
+                "value": "",
+                "type": "query",
+                "description": "Filter by a comma-separated list of LDAP Group IDs. (Recommended request size <= 100)"
+              },
+              {
+                "name": "roleId:in",
+                "value": "",
+                "type": "query",
+                "description": "Filter by a comma-separated list of role IDs."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter members by the object type they have access to.<br>`f` – File membership.<br>`d` – Directory (folder) membership."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for the results. Default is `id:asc`.<br>Allowed values: `id:asc`, `id:desc`, `userId:asc`, `userId:desc`, `groupId:asc`, `groupId:desc`, `roleId:asc`, `roleId:desc`, `rank:asc`, `rank:desc`, `email:asc`, `email:desc`."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Range limit."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Range offset."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Gets a list of users with access to the specified shared file. Also gets the file metadata, providing context and information about the shared file such as each user's role for accessing the file and the user who shared the file.\n### Precondition:\n  File sharing must be activated on the system. Must be assigned the `user_view` permission for the shared file.\n### Response:\n  Returns the list of users with access to the shared file, along with metadata about the shared file.\n###"
+        },
+        {
+          "info": {
+            "name": "Remove all access to a shared file",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/files/:id/members",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Removes user access to the specified shared file.\n### Precondition:\n  Must be assigned the `user_add` permission for the folder containing the shared file.\n### Response:\n  Removes user access to the shared file.\n"
+        },
+        {
+          "info": {
+            "name": "List LDAP groups with access to a shared file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/files/:id/members/ldapGroup",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the file"
+              },
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the group."
+              },
+              {
+                "name": "groupId:in",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the group.. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "roleId",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the role."
+              },
+              {
+                "name": "roleId:in",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the role.. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns a list of LDAP groups and their assigned roles for the folder containing the specified file. Requires the `user_view` permission on the shared file."
+        },
+        {
+          "info": {
+            "name": "Get a specific LDAP group's access to a shared file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/files/:id/members/ldapGroup/:ldap_group_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the file"
+              },
+              {
+                "name": "ldap_group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the LDAP group."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns the access grant record for the specified LDAP group on the folder containing the file, including the group's assigned role. Requires the `user_view` permission on the shared file."
+        },
+        {
+          "info": {
+            "name": "Returns the specified user member associated with the file.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/files/:id/members/:member_user_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the file."
+              },
+              {
+                "name": "member_user_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the user member."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns the name of the specified user with access to the specified shared file. Also gets metadata, providing context and information about the user such as their ID, email address, and role for accessing the file. Must be assigned the `user_view` permission for the shared file."
+        },
+        {
+          "info": {
+            "name": "Update file member",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/rest/files/:id/members/:member_user_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              },
+              {
+                "name": "member_user_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the user."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Changes the role assigned to the specified user for accessing the specified shared file.\n### Precondition:\n  Must be assigned the `user_add` permission for the folder containing the file.\n### Response:\n  Changes the user's role to the specified role.\n"
+        },
+        {
+          "info": {
+            "name": "Remove a user's access to a shared file",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/files/:id/members/:member_user_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              },
+              {
+                "name": "member_user_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the user."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Removes the specified user's access to the specified shared file.\n### Precondition:\n  Must be assigned the `user_add` permission for the folder containing the shared file.\n### Response:\n  Removes the user's access to the shared file.\n"
+        },
+        {
+          "info": {
+            "name": "Get file path",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/files/:id/path",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the file"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns the full ancestor path of the specified file, from the workspace root down to the\n                       file's parent folder. Each element in the path represents a folder node with its ID and\n                       name.\\n\\n**Requires `properties_view` permission on the file.**"
+        },
+        {
+          "info": {
+            "name": "Get file preview metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/files/:id/preview",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Gets file preview metadata about the specified file, such as the permalink for previewing the file and if the file contains a watermark.\n### Precondition:\n  Must be assigned the `view` permission for the file.\n### Response:\n  Returns the file preview metadata.\n"
+        },
+        {
+          "info": {
+            "name": "Get file tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/files/:id/tasks",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the file."
+              },
+              {
+                "name": "assigneeId",
+                "value": "",
+                "type": "query",
+                "description": "Assigned User unique identifier"
+              },
+              {
+                "name": "assigneeId:in",
+                "value": "",
+                "type": "query",
+                "description": "Assigned User unique identifier. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "due",
+                "value": "",
+                "type": "query",
+                "description": "Task due date"
+              },
+              {
+                "name": "due:gt",
+                "value": "",
+                "type": "query",
+                "description": "Task due date. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "due:gte",
+                "value": "",
+                "type": "query",
+                "description": "Task due date. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "due:lt",
+                "value": "",
+                "type": "query",
+                "description": "Task due date. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "due:lte",
+                "value": "",
+                "type": "query",
+                "description": "Task due date. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "parentId",
+                "value": "",
+                "type": "query",
+                "description": "Parent Comment identifier"
+              },
+              {
+                "name": "parentId:in",
+                "value": "",
+                "type": "query",
+                "description": "Parent Comment identifier. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of User who created a Task"
+              },
+              {
+                "name": "userId:in",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of User who created a Task. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "created",
+                "value": "",
+                "type": "query",
+                "description": "Task creation date"
+              },
+              {
+                "name": "created:gt",
+                "value": "",
+                "type": "query",
+                "description": "Task creation date. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "created:gte",
+                "value": "",
+                "type": "query",
+                "description": "Task creation date. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "created:lt",
+                "value": "",
+                "type": "query",
+                "description": "Task creation date. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "created:lte",
+                "value": "",
+                "type": "query",
+                "description": "Task creation date. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "modified",
+                "value": "",
+                "type": "query",
+                "description": "Task modification date"
+              },
+              {
+                "name": "modified:gt",
+                "value": "",
+                "type": "query",
+                "description": "Task modification date. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "modified:gte",
+                "value": "",
+                "type": "query",
+                "description": "Task modification date. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "modified:lt",
+                "value": "",
+                "type": "query",
+                "description": "Task modification date. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "modified:lte",
+                "value": "",
+                "type": "query",
+                "description": "Task modification date. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "contents:contains",
+                "value": "",
+                "type": "query",
+                "description": "Task content. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter tasks by status. Accepted values: `D`, `P`, `C`."
+              },
+              {
+                "name": "deleted",
+                "value": "",
+                "type": "query",
+                "description": "Whether the task has been deleted"
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Gets a list of tasks assigned to the specified file. **Requires `task_view` permission on the file's parent folder.**"
+        },
+        {
+          "info": {
+            "name": "Create file task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/files/:id/tasks",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Object ID of the file task is created on"
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a task for the specified file and assigns it to a user. The assignee must have at least `properties_view` permission on the file's parent folder. **Requires `task_add` permission on the file's parent folder.**"
+        },
+        {
+          "info": {
+            "name": "Get file versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/files/:id/versions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the file."
+              },
+              {
+                "name": "created",
+                "value": "",
+                "type": "query",
+                "description": "File Version creation date"
+              },
+              {
+                "name": "created:gt",
+                "value": "",
+                "type": "query",
+                "description": "File Version creation date. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "created:gte",
+                "value": "",
+                "type": "query",
+                "description": "File Version creation date. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "created:lt",
+                "value": "",
+                "type": "query",
+                "description": "File Version creation date. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "created:lte",
+                "value": "",
+                "type": "query",
+                "description": "File Version creation date. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "locate_id",
+                "value": "",
+                "type": "query",
+                "description": "If specified, \"offset\" parameter will be ignored\n                                            and the page containing entity with this Id will be returned."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Gets a list of file versions for the specified file. Also gets the file metadata, such as its owner, creation date, digital fingerprint, and security scan status. **Requires `version_view` permission on the file.**"
+        },
+        {
+          "info": {
+            "name": "Upload a file version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/files/:id/versions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the file (UUID) to which the version is being uploaded."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "body",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Uploads a new version of the specified file using streaming upload, where the file content is sent in the request body. Requires the `version_create` permission on the target file. Returns the updated file entity."
+        },
+        {
+          "info": {
+            "name": "Get a file version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/files/:id/versions/:version_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the file."
+              },
+              {
+                "name": "version_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the file version."
+              }
+            ]
+          },
+          "docs": "Gets file metadata for the specified file version, such as the date it was added, its expiration date, and any tags applied to the file. **Requires `version_view` permission on the file.**"
+        },
+        {
+          "info": {
+            "name": "Delete a file version",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/files/:id/versions/:version_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the file."
+              },
+              {
+                "name": "version_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the file version."
+              }
+            ]
+          },
+          "docs": "Deletes the specified version of the file. Cannot delete the last remaining version of a file. **Requires `version_delete` permission on the file.**"
+        },
+        {
+          "info": {
+            "name": "Promote a file version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/files/:id/versions/:version_id/actions/promote",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of file"
+              },
+              {
+                "name": "version_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the file version."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Makes the specified version of the file the current version of the file. The promoted version is assigned version number 0 (current), and all lower-numbered versions are incremented. Also updates the file name to match the promoted version. **Requires `version_promote` permission on the file.**"
+        },
+        {
+          "info": {
+            "name": "Scan a file version for security",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/files/:id/versions/:version_id/actions/scan",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of file"
+              },
+              {
+                "name": "version_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the file version."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Triggers a security scan on the specified file version. Depending on system scan policies, the scan may include anti-virus, data loss prevention, and advanced threat protection checks. **Requires `version_view` permission on the file.**"
+        },
+        {
+          "info": {
+            "name": "Download a file version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/files/:id/versions/:version_id/content",
+            "headers": [
+              {
+                "name": "Range",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of file"
+              },
+              {
+                "name": "version_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the file version."
+              }
+            ]
+          },
+          "docs": "Downloads the binary content of the specified file version. **Requires `download` permission on the file.** Users assigned the Downloader or Viewer role can only download the current version (version 0); attempting to download an older version returns a 403."
+        },
+        {
+          "info": {
+            "name": "Get file preview metadata for a file version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/files/:id/versions/:version_id/preview",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the file."
+              },
+              {
+                "name": "version_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the file version."
+              }
+            ]
+          },
+          "docs": "Gets file preview metadata for the specified file version, such as the permalink for previewing the file and if the file contains a watermark. **Requires `view` permission on the file.**"
+        },
+        {
+          "info": {
+            "name": "Upload a file using multipart form data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/folders/:id/actions/file",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the target folder."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "body",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "clientCreated",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "clientModified",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "disableAutoVersion",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "note",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Uploads a file to the specified folder using multipart form data. If a file with the same\n                       name already exists, a new version is created unless `disableAutoVersion` is set.\\n\\n\n                       **Requires `file_add` permission on the target folder** (or `version_create` if a file with\n                       the same name already exists). The folder must not be deleted. Sufficient storage must be\n                       available. The file extension and MIME type must n"
+        },
+        {
+          "info": {
+            "name": "Upload a base64-encoded file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/folders/:id/actions/fileBase64Encoded",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the target folder."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Uploads a base64-encoded file to the specified folder. If a file with the same name already\n                       exists, a new version is created unless `disableAutoVersion` is set.\\n\\n**Requires\n                       `file_add` permission on the target folder** (or `version_create` if a file with the same\n                       name already exists). The file content must be valid base64. The file size must not exceed\n                       the system-configured upload size limit. The file ex"
+        },
+        {
+          "info": {
+            "name": "Create Microsoft Office document from template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/folders/:parent_id/actions/fileFromTemplate",
+            "params": [
+              {
+                "name": "parent_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the parent folder"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new, blank Microsoft Office document from a template in the specified folder.\\n\\n\n                       **Requires `file_add` permission on the target folder.** The folder must not be deleted.\n                       The file name must not contain invalid characters."
+        },
+        {
+          "info": {
+            "name": "Upload a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/folders/:parent/files",
+            "headers": [
+              {
+                "name": "X-KW-Note",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "parent",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the target folder."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "body",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Uploads a file to the specified folder using streaming upload, where the file content is sent in the request body and metadata is provided via request headers. Requires the `file_add` permission on the target folder. Returns the created file entity."
+        },
+        {
+          "info": {
+            "name": "Get file permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/permissions/file/:file_id",
+            "params": [
+              {
+                "name": "file_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the file"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Unique action identifier"
+              },
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "Unique action identifier. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Action name"
+              },
+              {
+                "name": "name:contains",
+                "value": "",
+                "type": "query",
+                "description": "Action name. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "allowed",
+                "value": "",
+                "type": "query",
+                "description": "Determines if one has permissions to perform action"
+              },
+              {
+                "name": "enabled",
+                "value": "",
+                "type": "query",
+                "description": "Determines if the given action is available considering the current object state (locked, deleted, etc.)."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns the list of actions the current user is allowed to perform on the specified file, such as downloading, editing, or commenting."
+        },
+        {
+          "info": {
+            "name": "Get file permissions for a set of files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/permissions/files",
+            "params": [
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the file.. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Action name"
+              },
+              {
+                "name": "name:contains",
+                "value": "",
+                "type": "query",
+                "description": "Action name. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "allowed",
+                "value": "",
+                "type": "query",
+                "description": "Determines if one has permissions to perform action"
+              },
+              {
+                "name": "enabled",
+                "value": "",
+                "type": "query",
+                "description": "Determines if the given action is available considering the current object state (locked, deleted, etc.)."
+              },
+              {
+                "name": "action_id",
+                "value": "",
+                "type": "query",
+                "description": "Unique action identifier"
+              },
+              {
+                "name": "action_id:in",
+                "value": "",
+                "type": "query",
+                "description": "Unique action identifier. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns the current user's allowed actions for each of the specified files. File IDs are passed as request parameters. Returns 400 if no file IDs are provided."
+        },
+        {
+          "info": {
+            "name": "Upload a file requested by user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/requestFile/:ref/actions/file",
+            "params": [
+              {
+                "name": "ref",
+                "value": "",
+                "type": "path",
+                "description": "The unique reference of the Request File upload link."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "body",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "clientCreated",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "clientModified",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Uploads a file to a folder or inbox in response to a file request from another user.\n                       Access is granted via the request file reference link (`ref`). If the request requires\n                       authentication (`require_auth`), the caller must be logged in. The uploaded file is\n                       renamed to include the uploader's email address.\\n\\nThe request link must not be expired\n                       or have reached its upload limit. Sufficient storage must be av"
+        },
+        {
+          "info": {
+            "name": "Add a comment to an uploaded file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/requestFile/:ref/comment/:object_id",
+            "params": [
+              {
+                "name": "ref",
+                "value": "",
+                "type": "path",
+                "description": "The unique reference of the Request File upload link."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "path",
+                "description": "Object ID of the file being commented on."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a comment to a file that was uploaded through the request file link. Only accessible when the link requires authentication (`require_auth=true`) and has not expired."
+        },
+        {
+          "info": {
+            "name": "Download files from folder in request files to folder message",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/requestFile/:ref/sources/:object_id/content",
+            "headers": [
+              {
+                "name": "Range",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ref",
+                "value": "",
+                "type": "path",
+                "description": "The unique reference of the Request File upload link."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the file"
+              }
+            ]
+          },
+          "docs": "Downloads a file that was made available to recipients as a source attachment in a\n                       request files to folder message. Access is granted via the request file reference link\n                       (`ref`).\\n\\nThe request link must be valid and not expired. If the request requires\n                       authentication, the caller must be logged in. The file must not be deleted, infected,\n                       or DLP-locked."
+        },
+        {
+          "info": {
+            "name": "Download files uploaded to request files to folder or inbox message",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/requestFile/:ref/uploads/:object_id/content",
+            "headers": [
+              {
+                "name": "Range",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ref",
+                "value": "",
+                "type": "path",
+                "description": "The unique reference of the Request File upload link."
+              },
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the file"
+              }
+            ]
+          },
+          "docs": "Downloads a file that was uploaded to a request files to folder or inbox message. Access\n                       is granted via the request file reference link (`ref`).\\n\\n**Authentication is required**\n                       — guest access is not permitted for this endpoint. The file must be associated with the\n                       specified request link, must not be deleted, and must not be infected or DLP-locked."
+        },
+        {
+          "info": {
+            "name": "Download a file from Repositories Gateway source by transaction ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/sources/actions/downloadByTransaction",
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "query",
+                "description": "Transaction ID of download"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Downloads a file from its Repositories Gateway source using the transaction ID obtained\n                       from `POST /sources/{id}/actions/initiateDownload`. The transfer must have completed\n                       successfully before calling this endpoint.\\n\\n**Requires `download` permission on the\n                       file.**"
+        },
+        {
+          "info": {
+            "name": "Upload a file version to Repositories Gateway source",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/sources/actions/files/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Repositories Gateway file to add a new version to."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "body",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Uploads a new version of the specified file to its Repositories Gateway source. Returns a\n                       transfer status record reflecting the result of the upload operation.\\n\\n**Requires\n                       `file_add` permission on the Repositories Gateway parent folder of the file.** The file\n                       extension and MIME type must not be excluded by the system policy."
+        },
+        {
+          "info": {
+            "name": "Upload a file to Repositories Gateway source",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/sources/:id/actions/file",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Repositories Gateway target folder."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "body",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Uploads a file to the specified Repositories Gateway source folder. Returns a transfer\n                       status record that reflects the result of the upload operation.\\n\\n**Requires `file_add`\n                       permission on the target Repositories Gateway folder.** The file extension and MIME type\n                       must not be excluded by the system policy."
+        },
+        {
+          "info": {
+            "name": "Download a file asynchronously from Repositories Gateway source",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/sources/:id/actions/initiateDownload",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the file from Repositories Gateway Source."
+              }
+            ]
+          },
+          "docs": "Initiates an asynchronous download of the specified file from its Repositories Gateway\n                       source. Returns a transfer status record that can be polled via\n                       `GET /sources/actions/downloadByTransaction` until the transfer completes.\\n\\n\n                       **Requires `download` permission on the file.**"
+        },
+        {
+          "info": {
+            "name": "Download a file from repositories gateway source",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/sources/:id/content",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Repositories Gateway file id"
+              }
+            ]
+          },
+          "docs": "Downloads the binary content of the specified file from its Repositories Gateway source.\\n\\n\n                       **Requires `download` permission on the file.**"
+        },
+        {
+          "info": {
+            "name": "Get file preview metadata for a file in Repositories Gateway source",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/sources/:id/preview",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the file from Repositories Gateway Source."
+              }
+            ]
+          },
+          "docs": "Gets the current preview generation status for the specified file in a Repositories Gateway\n                       source. When the preview is ready, the response includes the MIME type and a link to retrieve\n                       it. If the file is empty, infected, or DLP-locked, an appropriate error status is returned\n                       instead.\\n\\n**Requires `view` permission on the file.**"
+        },
+        {
+          "info": {
+            "name": "Download a file via a reference link",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/files/actions/content/link/:ref",
+            "params": [
+              {
+                "name": "ref",
+                "value": "",
+                "type": "path",
+                "description": "The unique reference for the download link."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Downloads the file identified by the provided reference link.\n### Precondition:\n  Must be assigned the `download` permission for the file.\n### Response:\n  The file content is streamed to the user.\n"
+        },
+        {
+          "info": {
+            "name": "Preview a file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/preview/file/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the entity."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Returns the preview content for the specified file via the Repositories Gateway.\n### Precondition:\n  User must have the `view` permission for the file.\n### Response:\n  The preview content is returned.\n"
+        },
+        {
+          "info": {
+            "name": "Share files",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/files/members",
+            "params": [
+              {
+                "name": "updateIfExists",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, updates the member if they already exist and have a different folder role."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              },
+              {
+                "name": "downgradeNested",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, demote the user member role in all applicable nested folders."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes the entity in the response body."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Shares specified files with multiple users.\n### Precondition:\n  Must be assigned the `user_add` permission for the folder.\n### Response:\n  Shares the files with the specified users.\n"
+        },
+        {
+          "info": {
+            "name": "Get shared files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/files/shared",
+            "params": [
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort by. Default is `shared`.<br>Allowed values: `name`, `size`, `shared`, `sharedBy`, `modified`."
+              },
+              {
+                "name": "orderType",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction. `asc` for ascending, `desc` for descending. Default is `desc`."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Range limit."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Range offset."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Gets a list of files that have been shared with the user. For each file, the file name, size, and date the file was shared is returned.\n### Precondition:\n  If the user is assigned the Restricted profile, the \"Collaboration Allowed\" setting must be turned on to get results.\n### Response:\n  Returns the list of files that have been shared with the user.\n### Sorting:\n  Sorting can be applied using two query parameters: `orderBy` for the field name,\n  and `orderType` for the sort o"
+        },
+        {
+          "info": {
+            "name": "Remove access to shared file",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/files/:id/members/me",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Removes the current user's access to the specified file that was shared with them.\n### Precondition:\n  The file must have been shared with the user.\n### Response:\n  Removes the user's access to the shared file.\n"
+        },
+        {
+          "info": {
+            "name": "Get file preview status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/files/previewSupport",
+            "params": [
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of file UUIDs to check for preview support."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Gets the status of the specified file to determine if the file type is supported for preview.\n### Precondition:\n  Must be assigned the `view` permission for the folder.\n### Response:\n  Returns confirmation as to whether the file type is supported for preview.\n"
+        },
+        {
+          "info": {
+            "name": "Get link for downloading files and folders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/files/actions/downloadLink",
+            "params": [
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether the operation should proceed if some files/folders fail the check."
+              },
+              {
+                "name": "extensions",
+                "value": "",
+                "type": "query",
+                "description": "Filter results to include only files with the specified comma-separated list of extensions."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Generates a link for downloading specified folders and files.\n### Precondition:\n  Must be assigned the download permission for the specified files and folders.\n### Response:\n  A download link is generated and returned.\n  Returns the link for downloading the files and folders, once files complete security scans. Depending on system scan policies, files will be scanned for anti-virus, data loss prevention, and advanced threat protection.\n"
+        },
+        {
+          "info": {
+            "name": "Update files",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/rest/admin/files",
+            "params": [
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes the entity in the response body."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Updates the metadata of multiple files at the same time.\n### Precondition:\n  Must be an administrator with access to the Files and Folders page in the Kiteworks PDN Admin.\n### Response:\n  Updates the selected files.\n"
+        },
+        {
+          "info": {
+            "name": "Scan a file for security",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/admin/files/:id/actions/rescan",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes the entity in the response body."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Runs a security scan on the specified file.\n### Precondition:\n  Must authenticate as an administrator with a role allowing for manually scanning files for security.\n### Response:\n  Scans the selected file for security. Depending on system scan policies, the file is scanned for anti-virus, data loss prevention, and advanced threat protection.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

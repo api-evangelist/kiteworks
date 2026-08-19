@@ -1,0 +1,133 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities groups API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Kiteworks groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/groups",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by the exact group name."
+              },
+              {
+                "name": "name:contains",
+                "value": "",
+                "type": "query",
+                "description": "Filter results to groups whose names contain the specified characters."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for the results. Default is `name:asc`.<br>Allowed values: `id:asc`, `id:desc`, `name:asc`, `name:desc`."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of groups to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of groups to skip before returning results, for pagination."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Returns the list of Kiteworks groups for the current user, including the email address of each member in the group.\n### Precondition:\n  User must be authenticated.\n### Response:\n  Returns the list of groups.\n"
+        },
+        {
+          "info": {
+            "name": "Create a group entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/groups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Creates a new Kiteworks group of users.\n### Precondition:\n  User must be authenticated.\n### Response:\n  Returns the newly created group.\n"
+        },
+        {
+          "info": {
+            "name": "Return users for the specified group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the entity."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Returns the list of users for the specified group.\n### Precondition:\n  User must be authenticated.\n### Response:\n  Returns the group details including its members.\n"
+        },
+        {
+          "info": {
+            "name": "Update a group entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/rest/groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the entity."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Updates the specified group's name and members.\n### Precondition:\n  User must be the owner of the group.\n### Response:\n  The group is updated.\n"
+        },
+        {
+          "info": {
+            "name": "Delete a group entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/groups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the entity."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Deletes the specified group.\n### Precondition:\n  User must be the owner of the group.\n### Response:\n  The group is deleted.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

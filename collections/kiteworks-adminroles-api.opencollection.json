@@ -1,0 +1,299 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities adminRoles API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "adminRoles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List admin roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/adminRoles",
+            "params": [
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns a list of admin roles available in Kiteworks (e.g. System Admin, Application Admin)."
+        },
+        {
+          "info": {
+            "name": "Get an admin role",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/adminRoles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the admin role."
+              }
+            ]
+          },
+          "docs": "Returns the details of the specified admin role."
+        },
+        {
+          "info": {
+            "name": "List users with an admin role",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/adminRoles/:id/users",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the admin role."
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on their email address."
+              },
+              {
+                "name": "email:contains",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on their email address.. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on their full name."
+              },
+              {
+                "name": "name:contains",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on their full name.. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "metadata",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on their metadata information."
+              },
+              {
+                "name": "metadataContains",
+                "value": "",
+                "type": "query",
+                "description": "Filter users whose metadata contains the specified characters."
+              },
+              {
+                "name": "deleted",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on whether they have been deleted."
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on whether they are active in the system."
+              },
+              {
+                "name": "verified",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on their verification status."
+              },
+              {
+                "name": "suspended",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on whether they are suspended."
+              },
+              {
+                "name": "isRecipient",
+                "value": "",
+                "type": "query",
+                "description": "Filter users who are recipients of specific items."
+              },
+              {
+                "name": "allowsCollaboration",
+                "value": "",
+                "type": "query",
+                "description": "Filter users whose profiles allow collaboration access."
+              },
+              {
+                "name": "created",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on the creation date of their account."
+              },
+              {
+                "name": "created:gt",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on the creation date of their account.. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "created:gte",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on the creation date of their account.. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "created:lt",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on the creation date of their account.. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "created:lte",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on the creation date of their account.. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "locate_id",
+                "value": "",
+                "type": "query",
+                "description": "If specified, \"offset\" parameter will be ignored\n                                            and the page containing entity with this Id will be returned."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns the list of users who have been assigned the specified admin role."
+        },
+        {
+          "info": {
+            "name": "Assign an admin role to a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/rest/adminRoles/:id/users/:user_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the Admin role"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of user to promote admin role"
+              },
+              {
+                "name": "deleteAdvancedFormData",
+                "value": "",
+                "type": "query",
+                "description": "Whether to delete advanced form data when changing to role without advanced form access. Required when current role has advanced form access and new role does not."
+              },
+              {
+                "name": "retainToAdvancedFormUser",
+                "value": "",
+                "type": "query",
+                "description": "User ID to retain advanced form data to when deleteAdvancedFormData is false. Required when deleteAdvancedFormData is false."
+              }
+            ]
+          },
+          "docs": "Assigns the specified admin role to a user, replacing any previously assigned role. If the user's current role has advanced form access and the new role does not, you must specify how to handle the advanced form data via `deleteAdvancedFormData` and optionally `retainToAdvancedFormUser`."
+        },
+        {
+          "info": {
+            "name": "Remove an admin role from a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/adminRoles/:id/users/:user_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the admin role to remove from the user."
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the user."
+              },
+              {
+                "name": "deleteAdvancedFormData",
+                "value": "",
+                "type": "query",
+                "description": "Whether to delete advanced form data when removing role with advanced form access. Required when role has advanced form access."
+              },
+              {
+                "name": "retainToAdvancedFormUser",
+                "value": "",
+                "type": "query",
+                "description": "User ID to retain advanced form data to when deleteAdvancedFormData is false. Required when deleteAdvancedFormData is false."
+              }
+            ]
+          },
+          "docs": "Removes the specified admin role from a user. The user account itself is not deleted. If the role being removed has advanced form access, you must specify how to handle the advanced form data via `deleteAdvancedFormData` and optionally `retainToAdvancedFormUser`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

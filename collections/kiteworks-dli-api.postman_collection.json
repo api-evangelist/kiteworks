@@ -1,0 +1,5698 @@
+{
+  "item": [
+    {
+      "id": "2ba60a9f-c12c-4ad1-a2a7-c79cbdf56740",
+      "name": "dli",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "24a26fa7-9b3b-467e-ba1c-11a118fa6a4b",
+          "name": "Return the list of all exports for all users",
+          "request": {
+            "name": "Return the list of all exports for all users",
+            "description": {
+              "content": "Returns a paginated list of all data exports across all users, including each export's status, type, date range, and download URL. Requires admin privileges.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "dli",
+                "exports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>",
+                  "description": "Unique identifier of user"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_id:in",
+                  "value": "<string>",
+                  "description": "Unique identifier of user. Search for results that match any of the specified values for this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status of the generated report"
+                },
+                {
+                  "disabled": false,
+                  "key": "status:contains",
+                  "value": "<string>",
+                  "description": "Status of the generated report. Search for results that contain the specified characters in this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit"
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "With parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d4379545-bce8-4314-b718-2094b2fd1b90",
+              "name": "List of exports retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "exports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"exp-guid-001\",\n      \"status\": \"completed\",\n      \"type\": \"files\",\n      \"startDate\": \"2024-01-01\",\n      \"endDate\": \"2024-01-31\",\n      \"userId\": \"u1a2b3c4-d5e6-7890-abcd-ef1234567890\",\n      \"generatedDate\": \"2024-02-01T08:00:00Z\",\n      \"fileName\": \"export_files_jan2024.zip\",\n      \"downloadURL\": \"https://example.com/exports/exp-guid-001\"\n    }\n  ],\n  \"metadata\": {\n    \"total\": 1,\n    \"limit\": 50,\n    \"offset\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d729252f-745a-4aad-a7bf-2194279d675a",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_LICENSE_DLI",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "exports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_LICENSE_DLI\",\n    \"message\": \"Feature DLI is not enabled by license\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "296765ba-f669-47c4-a751-3bf0efa8b4cf",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "exports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "user_id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bf49abd7-7d51-4bd8-91d3-5336c7af0a7f",
+          "name": "Start generating export for the specified user",
+          "request": {
+            "name": "Start generating export for the specified user",
+            "description": {
+              "content": "Initiates one or more data export jobs for the specified user based on the requested report types and date range. Returns the newly created export record(s) in a pending state. Requires admin privileges.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "dli",
+                "exports",
+                "users",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "returnEntity",
+                  "value": "<boolean>",
+                  "description": "If set to `true`, returns information about the newly created entity."
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the user"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"startDate\": \"<date>\",\n  \"endDate\": \"<date>\",\n  \"types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"addLinks\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2c9db3bd-e583-4fd3-beb3-20785713e1b2",
+              "name": "Export job(s) created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "exports",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"startDate\": \"<date>\",\n  \"endDate\": \"<date>\",\n  \"types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"exp-guid-002\",\n      \"status\": \"pending\",\n      \"type\": \"activities\",\n      \"startDate\": \"2024-03-01\",\n      \"endDate\": \"2024-03-31\",\n      \"userId\": \"u1a2b3c4-d5e6-7890-abcd-ef1234567890\",\n      \"generatedDate\": null,\n      \"fileName\": null,\n      \"downloadURL\": null\n    }\n  ],\n  \"metadata\": {\n    \"total\": 1,\n    \"limit\": 50,\n    \"offset\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a38673c5-b1ec-4810-a386-048cd5ff0597",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_LICENSE_DLI, ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "exports",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"startDate\": \"<date>\",\n  \"endDate\": \"<date>\",\n  \"types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_LICENSE_DLI\",\n    \"message\": \"Feature DLI is not enabled by license\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fff60d09-6589-4c2e-a2ef-95b2269f7965",
+              "name": "Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_INVALID_DATE, ERR_INPUT_DATE_NOT_BEFORE, ERR_INPUT_REQUIRED, ERR_INPUT_DATE_NOT_AFTER, ERR_INPUT_NOT_ARRAY, ERR_INPUT_NOT_IN_LIST",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "exports",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"startDate\": \"<date>\",\n  \"endDate\": \"<date>\",\n  \"types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_INPUT_REQUIRED\",\n    \"message\": \"Field is required\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "673a1243-74ce-470e-ad66-41f3b0b4fdcc",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "exports",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the user"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"startDate\": \"<date>\",\n  \"endDate\": \"<date>\",\n  \"types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9c5e0c87-84ed-4249-bf84-29d80494ba74",
+          "name": "Return information of an export such as status, download url, user ID, etc.",
+          "request": {
+            "name": "Return information of an export such as status, download url, user ID, etc.",
+            "description": {
+              "content": "Returns the details of a specific export job, including its status, type, date range, the user it belongs to, and the download URL when the export is complete. Requires admin privileges.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "dli",
+                "exports",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) ID of the export"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2f6c73dd-0745-4bfe-9ed9-4f24dba3f60b",
+              "name": "Export details retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "exports",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the export"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"exp-guid-001\",\n  \"status\": \"completed\",\n  \"type\": \"files\",\n  \"startDate\": \"2024-01-01\",\n  \"endDate\": \"2024-01-31\",\n  \"userId\": \"u1a2b3c4-d5e6-7890-abcd-ef1234567890\",\n  \"generatedDate\": \"2024-02-01T08:00:00Z\",\n  \"fileName\": \"export_files_jan2024.zip\",\n  \"downloadURL\": \"https://example.com/exports/exp-guid-001\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b7e4c9d4-03e3-46fa-8685-f3ff9744f8da",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_LICENSE_DLI, ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "exports",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the export"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_LICENSE_DLI\",\n    \"message\": \"Feature DLI is not enabled by license\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20a0ef0e-ce5f-40c0-abd7-4b286df65160",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "exports",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the export"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "92cbde49-860d-46c8-b6c8-4f8b42fe236f",
+          "name": "Delete the specified export.",
+          "request": {
+            "name": "Delete the specified export.",
+            "description": {
+              "content": "Permanently deletes the specified export record and its associated data. Requires admin privileges.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "dli",
+                "exports",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) ID of the export"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9a0d1b49-4e91-4877-9c04-abf6ad1fd46d",
+              "name": "Export deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "exports",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the export"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ccf05a12-350b-4fc9-95fa-3943cae6e67e",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_LICENSE_DLI, ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "exports",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the export"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_LICENSE_DLI\",\n    \"message\": \"Feature DLI is not enabled by license\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "517afd20-fd51-4919-a98e-bb9f3556bfd7",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "exports",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the export"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "943e055e-7ddb-46a9-a0e4-5b48e4d1823e",
+          "name": "Download the generated export.",
+          "request": {
+            "name": "Download the generated export.",
+            "description": {
+              "content": "Downloads the generated export file as a binary stream. The export must be in a completed state before it can be downloaded. Requires admin privileges.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "dli",
+                "exports",
+                ":id",
+                "content"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) ID of the export"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "98ecaa50-7369-4718-986c-a97d4c7e7dfb",
+              "name": "Export file returned as a binary stream.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "exports",
+                    ":id",
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the export"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e3fbec03-86ec-42f2-9e50-051c6326ea28",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_LICENSE_DLI, ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "exports",
+                    ":id",
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the export"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_LICENSE_DLI\",\n    \"message\": \"Feature DLI is not enabled by license\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f95c82fe-79b9-4b0b-98ff-22accff100a1",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "exports",
+                    ":id",
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the export"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "80bfd0b6-2114-466a-8bfc-c6f6e9bb46d7",
+          "name": "Return the list of Activities for this file",
+          "request": {
+            "name": "Return the list of Activities for this file",
+            "description": {
+              "content": "Returns all activities performed by the specified user on the specified file. Each activity includes the affected object, a human-readable message, the acting user, and whether the action was successful. Requires admin privileges.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "dli",
+                "files",
+                ":fileId",
+                "users",
+                ":userId",
+                "activities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "noDayBack",
+                  "value": "<integer>",
+                  "description": "Number of days back to search"
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<date>",
+                  "description": "Start date"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<date>",
+                  "description": "End date"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "Filter activities by scope. Accepted values: `all`, `my`."
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Search by mail body, subject and sender/recipients"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Filter activities by type. Accepted values: `all`, `folder_changes`, `file_changes`, `user_preferences`, `mail`, `tasks`, `comments`, `kitepoint`."
+                },
+                {
+                  "disabled": false,
+                  "key": "transactionId",
+                  "value": "<string>",
+                  "description": "Transaction ID associated with the activities"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "created:asc",
+                  "description": "Sorting options"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit"
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "With parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "fileId",
+                  "description": "(Required) ID of the file"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) The unique identifier of the user."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f5fda899-338a-49ff-b6da-8bb87e2d9308",
+              "name": "List of file activities for the user retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "files",
+                    ":fileId",
+                    "users",
+                    ":userId",
+                    "activities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "noDayBack",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "name:asc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fileId",
+                      "description": "(Required) ID of the file"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The unique identifier of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"object\": {\n        \"id\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\",\n        \"name\": \"contract.pdf\",\n        \"type\": \"file\"\n      },\n      \"message\": \"User downloaded file contract.pdf\",\n      \"directUser\": {\n        \"id\": \"u1a2b3c4-d5e6-7890-abcd-ef1234567890\",\n        \"name\": \"Alice Smith\",\n        \"email\": \"alice@example.com\"\n      },\n      \"successful\": 1\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16bc202f-4a88-406c-94df-8bcd3a123d2a",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_LICENSE_DLI, ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "files",
+                    ":fileId",
+                    "users",
+                    ":userId",
+                    "activities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "noDayBack",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "name:asc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fileId",
+                      "description": "(Required) ID of the file"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The unique identifier of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_LICENSE_DLI\",\n    \"message\": \"Feature DLI is not enabled by license\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "200231cd-11e2-4c88-aa8c-269029ebaa6f",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "files",
+                    ":fileId",
+                    "users",
+                    ":userId",
+                    "activities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "noDayBack",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "name:asc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fileId",
+                      "description": "(Required) ID of the file"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The unique identifier of the user."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "70629159-0a7b-48a7-9099-692ca4ea6d7c",
+          "name": "Retrieve information about the file specified.",
+          "request": {
+            "name": "Retrieve information about the file specified.",
+            "description": {
+              "content": "Returns metadata for the specified file, including its name, size, MIME type, content fingerprint, creation and modification dates, deletion status, and lock state.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "dli",
+                "files",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "With parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the file"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "290331cd-1790-4a9a-acca-9451eb53adce",
+              "name": "File metadata retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "files",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the file"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\",\n  \"name\": \"contract.pdf\",\n  \"size\": 204800,\n  \"mime\": \"application/pdf\",\n  \"fingerprint\": \"d41d8cd98f00b204e9800998ecf8427e\",\n  \"created\": \"2024-01-15T10:30:00Z\",\n  \"modified\": \"2024-03-20T14:45:00Z\",\n  \"deleted\": false,\n  \"locked\": 0,\n  \"parentId\": \"f0e1d2c3-b4a5-6789-0fed-cba987654321\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5cf356b8-093c-4f9a-bfa9-9abe62e4e9f4",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_LICENSE_DLI, ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "files",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the file"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_LICENSE_DLI\",\n    \"message\": \"Feature DLI is not enabled by license\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cbb585fe-f7c7-4593-822c-bdf8b1602bbc",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "files",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the file"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1c7f0ea4-3e32-493c-9b4f-9a797c04dd1c",
+          "name": "Read file content",
+          "request": {
+            "name": "Read file content",
+            "description": {
+              "content": "Downloads the binary content of the specified file. Supports partial downloads via the Range header.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "dli",
+                "files",
+                ":id",
+                "content"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the file"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Range of bytes to download. e.g. `bytes=0-1024`",
+                "key": "Range",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "38222441-d74a-4aec-b6fc-fdfbd1370ce8",
+              "name": "File content returned as a binary stream.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "files",
+                    ":id",
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the file"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Range of bytes to download. e.g. `bytes=0-1024`",
+                    "key": "Range",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5d0a5a9f-82df-48bf-87ce-803ef8535c20",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_LICENSE_DLI, ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "files",
+                    ":id",
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the file"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Range of bytes to download. e.g. `bytes=0-1024`",
+                    "key": "Range",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_LICENSE_DLI\",\n    \"message\": \"Feature DLI is not enabled by license\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff770cd7-4710-48bb-b924-c125dbf02af6",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "files",
+                    ":id",
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the file"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Range of bytes to download. e.g. `bytes=0-1024`",
+                    "key": "Range",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "21fe0e80-518a-42e1-b861-e6f4bff24c5f",
+          "name": "Get file path",
+          "request": {
+            "name": "Get file path",
+            "description": {
+              "content": "Returns the full ancestor path of the specified file as an ordered list of folder nodes, from the workspace root down to the file's parent folder.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "dli",
+                "files",
+                ":id",
+                "path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the file"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "87b831cc-9d84-4b47-ac30-f10afdce5a03",
+              "name": "File path retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "files",
+                    ":id",
+                    "path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the file"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"root-folder-guid\",\n      \"name\": \"Workspace\"\n    },\n    {\n      \"id\": \"sub-folder-guid\",\n      \"name\": \"Projects\"\n    },\n    {\n      \"id\": \"parent-folder-guid\",\n      \"name\": \"Q1 Reports\"\n    }\n  ],\n  \"links\": [\n    {\n      \"rel\": \"self\",\n      \"href\": \"https://example.com/api/rest/1/dli/files/a1b2c3d4/path\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05b2287f-d23b-4d44-9e57-b56c53fb2299",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_LICENSE_DLI, ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "files",
+                    ":id",
+                    "path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the file"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_LICENSE_DLI\",\n    \"message\": \"Feature DLI is not enabled by license\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9807853-6973-4964-a0e1-56e4d61b4150",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "files",
+                    ":id",
+                    "path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the file"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "090a7598-b083-49e5-bdc7-44f930e30fe4",
+          "name": "Retrieve information about the file preview.",
+          "request": {
+            "name": "Retrieve information about the file preview.",
+            "description": {
+              "content": "Returns preview access links and processing status for the specified file.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "dli",
+                "files",
+                ":id",
+                "preview"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the file"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5aabfb18-29ae-4586-aeff-a74aa10eb333",
+              "name": "Preview metadata retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "files",
+                    ":id",
+                    "preview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the file"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"link\": \"https://example.com/preview/abc123/dli/1\",\n  \"pdf\": \"https://example.com/preview/abc123/pdf/dli/1\",\n  \"viewUrl\": \"https://example.com/preview/abc123/view/dli/1\",\n  \"status\": \"Preview\",\n  \"watermark\": \"CONFIDENTIAL\",\n  \"tdfOriginalExtension\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af04297f-ed03-4ca7-aaca-dfa9c418b85a",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_LICENSE_DLI, ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "files",
+                    ":id",
+                    "preview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the file"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_LICENSE_DLI\",\n    \"message\": \"Feature DLI is not enabled by license\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dcd54215-ad63-4b84-a12e-bb557e841d19",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "files",
+                    ":id",
+                    "preview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the file"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e91a48d9-7a69-4c56-b1ef-f1efe9da92f3",
+          "name": "List versions",
+          "request": {
+            "name": "List versions",
+            "description": {
+              "content": "Returns a paginated list of all versions for the specified file. Each version includes its name, size, MIME type, creation date, creator, and content fingerprint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "dli",
+                "files",
+                ":id",
+                "versions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "created",
+                  "value": "<integer>",
+                  "description": "File Version creation date"
+                },
+                {
+                  "disabled": false,
+                  "key": "created:gt",
+                  "value": "<integer>",
+                  "description": "File Version creation date. Search for results where this parameter value is greater than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "created:gte",
+                  "value": "<integer>",
+                  "description": "File Version creation date. Search for results where this parameter value is greater than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "created:lt",
+                  "value": "<integer>",
+                  "description": "File Version creation date. Search for results where this parameter value is less than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "created:lte",
+                  "value": "<integer>",
+                  "description": "File Version creation date. Search for results where this parameter value is less than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "id:asc",
+                  "description": "Sorting options"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit"
+                },
+                {
+                  "disabled": false,
+                  "key": "locate_id",
+                  "value": "<integer>",
+                  "description": "If specified, \"offset\" parameter will be ignored\n                                            and the page containing entity with this Id will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "With parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Object id of file to retrieve versions for"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9ab0f9dc-4ffc-48b4-93b6-f44d58cb5b56",
+              "name": "List of file versions retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "files",
+                    ":id",
+                    "versions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "created",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "created:gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "created:gte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "created:lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "created:lte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "versionNumber:desc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locate_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Object id of file to retrieve versions for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"v1b2c3d4-e5f6-7890-abcd-ef1234567890\",\n      \"name\": \"report_v2.pdf\",\n      \"versionNumber\": 2,\n      \"size\": 102400,\n      \"mime\": \"application/pdf\",\n      \"fingerprint\": \"abc123def456\",\n      \"created\": \"2024-03-20T14:45:00Z\",\n      \"deleted\": false,\n      \"objectId\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\"\n    }\n  ],\n  \"metadata\": {\n    \"total\": 1,\n    \"limit\": 50,\n    \"offset\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d06e515b-c40d-4aad-98cd-c3137e39f65d",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_LICENSE_DLI, ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "files",
+                    ":id",
+                    "versions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "created",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "created:gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "created:gte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "created:lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "created:lte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "versionNumber:desc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locate_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Object id of file to retrieve versions for"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_LICENSE_DLI\",\n    \"message\": \"Feature DLI is not enabled by license\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0acabc97-6e0c-4b65-8874-e49db5bb59c7",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "files",
+                    ":id",
+                    "versions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "created",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "created:gt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "created:gte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "created:lt",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "created:lte",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "versionNumber:desc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locate_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Object id of file to retrieve versions for"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1c19743-41f2-4a5f-83c1-abdcf2868e59",
+          "name": "Allow DLI admin to get specified version",
+          "request": {
+            "name": "Allow DLI admin to get specified version",
+            "description": {
+              "content": "Returns the metadata for a specific version of a file, including its name, size, MIME type, creation date, creator, and content fingerprint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "dli",
+                "files",
+                ":id",
+                "versions",
+                ":version_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Object id of file to retrieve versions for"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "version_id",
+                  "description": "(Required) version ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "21042ed4-8175-4791-8d5a-5e1dda8e1dc5",
+              "name": "Version metadata retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "files",
+                    ":id",
+                    "versions",
+                    ":version_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Object id of file to retrieve versions for"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "version_id",
+                      "description": "(Required) version ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"v1b2c3d4-e5f6-7890-abcd-ef1234567890\",\n  \"name\": \"report_v2.pdf\",\n  \"versionNumber\": 2,\n  \"size\": 102400,\n  \"mime\": \"application/pdf\",\n  \"fingerprint\": \"abc123def456\",\n  \"created\": \"2024-03-20T14:45:00Z\",\n  \"deleted\": false,\n  \"objectId\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3559affc-9fd4-4e7a-a771-9fa26734c856",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_LICENSE_DLI, ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "files",
+                    ":id",
+                    "versions",
+                    ":version_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Object id of file to retrieve versions for"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "version_id",
+                      "description": "(Required) version ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_LICENSE_DLI\",\n    \"message\": \"Feature DLI is not enabled by license\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b1795a5-a447-4e61-8fec-869d522ae2a8",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "files",
+                    ":id",
+                    "versions",
+                    ":version_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Object id of file to retrieve versions for"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "version_id",
+                      "description": "(Required) version ID"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "77e9ad35-8ae3-49b0-ad3a-4f031d184583",
+          "name": "Download specified version",
+          "request": {
+            "name": "Download specified version",
+            "description": {
+              "content": "Downloads the binary content of the specified file version. Supports partial downloads via the Range header.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "dli",
+                "files",
+                ":id",
+                "versions",
+                ":version_id",
+                "content"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the file"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "version_id",
+                  "description": "(Required) version ID for which to retrieve content"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Range of bytes to download. e.g. `bytes=0-1024`",
+                "key": "Range",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "03fa4734-e810-4288-b819-2fb0a4e48610",
+              "name": "Version content returned as a binary stream.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "files",
+                    ":id",
+                    "versions",
+                    ":version_id",
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the file"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "version_id",
+                      "description": "(Required) version ID for which to retrieve content"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Range of bytes to download. e.g. `bytes=0-1024`",
+                    "key": "Range",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "59defbc6-45e0-4487-aaf0-47426d085920",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_LICENSE_DLI, ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "files",
+                    ":id",
+                    "versions",
+                    ":version_id",
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the file"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "version_id",
+                      "description": "(Required) version ID for which to retrieve content"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Range of bytes to download. e.g. `bytes=0-1024`",
+                    "key": "Range",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_LICENSE_DLI\",\n    \"message\": \"Feature DLI is not enabled by license\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8336fdf8-eeec-412b-bd55-83c34406d43c",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "files",
+                    ":id",
+                    "versions",
+                    ":version_id",
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the file"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "version_id",
+                      "description": "(Required) version ID for which to retrieve content"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Range of bytes to download. e.g. `bytes=0-1024`",
+                    "key": "Range",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "53192abb-9d60-4fd5-b9e6-a55f30e3b10e",
+          "name": "Return the list of activities for this folder of the specified user",
+          "request": {
+            "name": "Return the list of activities for this folder of the specified user",
+            "description": {
+              "content": "Returns all activities performed by the specified user on the specified folder. Each activity includes the affected object, a human-readable message, the acting user, and whether the action was successful. Requires admin privileges.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "dli",
+                "folders",
+                ":folderId",
+                "users",
+                ":userId",
+                "activities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "noDayBack",
+                  "value": "<integer>",
+                  "description": "Number of days back to search"
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<date>",
+                  "description": "Start date"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<date>",
+                  "description": "End date"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "Filter activities by scope. Accepted values: `all`, `my`."
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Search by mail body, subject and sender/recipients"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Filter activities by type. Accepted values: `all`, `folder_changes`, `file_changes`, `user_preferences`, `mail`, `tasks`, `comments`, `kitepoint`."
+                },
+                {
+                  "disabled": false,
+                  "key": "transactionId",
+                  "value": "<string>",
+                  "description": "Transaction ID associated with the activities"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "created:asc",
+                  "description": "Sorting options"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit"
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "With parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "folderId",
+                  "description": "(Required) The unique identifier of the folder."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) The unique identifier of the user."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d7e2d6db-402a-447d-bc9c-352da67ccf5d",
+              "name": "List of folder activities for the user retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "folders",
+                    ":folderId",
+                    "users",
+                    ":userId",
+                    "activities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "noDayBack",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "name:asc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "folderId",
+                      "description": "(Required) The unique identifier of the folder."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The unique identifier of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"object\": {\n        \"id\": \"f0e1d2c3-b4a5-6789-0fed-cba987654321\",\n        \"name\": \"Q1 Reports\",\n        \"type\": \"folder\"\n      },\n      \"message\": \"User uploaded file to Q1 Reports\",\n      \"directUser\": {\n        \"id\": \"u1a2b3c4-d5e6-7890-abcd-ef1234567890\",\n        \"name\": \"Alice Smith\",\n        \"email\": \"alice@example.com\"\n      },\n      \"successful\": 1\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4e0debe-125a-49c7-bef1-2e5a52e29775",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_LICENSE_DLI, ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "folders",
+                    ":folderId",
+                    "users",
+                    ":userId",
+                    "activities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "noDayBack",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "name:asc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "folderId",
+                      "description": "(Required) The unique identifier of the folder."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The unique identifier of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_LICENSE_DLI\",\n    \"message\": \"Feature DLI is not enabled by license\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "844fccc7-9b76-4f65-a305-0b584db3ce76",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "folders",
+                    ":folderId",
+                    "users",
+                    ":userId",
+                    "activities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "noDayBack",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "name:asc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "folderId",
+                      "description": "(Required) The unique identifier of the folder."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The unique identifier of the user."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "11823f6f-1ce2-4f87-97d4-1873440f6e53",
+          "name": "Retrieve folder information.",
+          "request": {
+            "name": "Retrieve folder information.",
+            "description": {
+              "content": "Returns metadata for the specified folder, including its name, creation date, deletion status, and permalink.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "dli",
+                "folders",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "With parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the folder."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8ef4f8db-7d83-497f-998f-f012f117bd1e",
+              "name": "Folder metadata retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "folders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the folder."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"f0e1d2c3-b4a5-6789-0fed-cba987654321\",\n  \"name\": \"Q1 Reports\",\n  \"created\": \"2023-11-01T08:00:00Z\",\n  \"modified\": \"2024-02-14T12:30:00Z\",\n  \"deleted\": false,\n  \"parentId\": \"root-folder-guid\",\n  \"permalink\": \"https://example.com/w/f0e1d2c3\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1460fc17-0893-46db-aa21-e3b7163873ba",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_LICENSE_DLI, ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "folders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the folder."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_LICENSE_DLI\",\n    \"message\": \"Feature DLI is not enabled by license\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bbb33e00-1e28-427d-8dc7-08dc64edc5db",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "folders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the folder."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "03473546-bf1a-4bef-a0c7-31e00a53a274",
+          "name": "List email attachments",
+          "request": {
+            "name": "List email attachments",
+            "description": {
+              "content": "Returns a paginated list of all attachments for the specified email, including each attachment's ID, name, size, MIME type, and content fingerprint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "dli",
+                "mail",
+                ":id",
+                "attachments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ref",
+                  "value": "<string>",
+                  "description": "The reference code for the email. Required if the email can be accessed without authentication."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit"
+                },
+                {
+                  "disabled": false,
+                  "key": "locate_id",
+                  "value": "<integer>",
+                  "description": "If specified, \"offset\" parameter will be ignored\n                                            and the page containing entity with this Id will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "With parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the email containing the attachment."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cde7d8b4-242f-43f3-a5af-0afa6a1d10ca",
+              "name": "List of email attachments retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "mail",
+                    ":id",
+                    "attachments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ref",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locate_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the email containing the attachment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"attachmentId\": \"att-guid-001\",\n      \"name\": \"invoice.pdf\",\n      \"size\": 51200,\n      \"mime\": \"application/pdf\",\n      \"fingerprint\": \"abc123def456\",\n      \"created\": \"2024-03-15T09:00:00Z\",\n      \"deleted\": false,\n      \"emailPackageId\": \"p1a2b3c4-d5e6-7890-abcd-ef1234567890\"\n    }\n  ],\n  \"metadata\": {\n    \"total\": 1,\n    \"limit\": 50,\n    \"offset\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e83defc-af1f-439f-a122-ecd64c62a807",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_LICENSE_DLI, ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "mail",
+                    ":id",
+                    "attachments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ref",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locate_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the email containing the attachment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_LICENSE_DLI\",\n    \"message\": \"Feature DLI is not enabled by license\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92041b78-f38f-453b-9deb-972fc1572bde",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "mail",
+                    ":id",
+                    "attachments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ref",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locate_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the email containing the attachment."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bb6a9a90-78ff-4f6f-a83d-7eb52aca897f",
+          "name": "List Recipients",
+          "request": {
+            "name": "List Recipients",
+            "description": {
+              "content": "Returns a paginated list of all recipients (To, CC, and BCC) for the specified email, including each recipient's user ID, email address, and recipient type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "dli",
+                "mail",
+                ":id",
+                "recipients"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "1",
+                  "description": "Filter recipients by type. Accepted values: `0`, `1`, `2`."
+                },
+                {
+                  "disabled": false,
+                  "key": "ref",
+                  "value": "<string>",
+                  "description": "The reference ID of the email (Mandatory if the email can be accessed without authentication)."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "type:asc",
+                  "description": "Sorting options"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit"
+                },
+                {
+                  "disabled": false,
+                  "key": "locate_id",
+                  "value": "<integer>",
+                  "description": "If specified, \"offset\" parameter will be ignored\n                                            and the page containing entity with this Id will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "With parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the email"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b3813b1b-2c94-4be0-9354-30179e0c3335",
+              "name": "List of email recipients retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "mail",
+                    ":id",
+                    "recipients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "2"
+                    },
+                    {
+                      "key": "ref",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "type:desc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locate_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the email"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"userId\": \"u1a2b3c4-d5e6-7890-abcd-ef1234567890\",\n      \"email\": \"alice@example.com\",\n      \"type\": 1\n    },\n    {\n      \"userId\": \"u2b3c4d5-e6f7-8901-bcde-f12345678901\",\n      \"email\": \"bob@example.com\",\n      \"type\": 2\n    }\n  ],\n  \"metadata\": {\n    \"total\": 2,\n    \"limit\": 50,\n    \"offset\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1a8be80-6d69-45eb-8d1f-bc99450ebc81",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_LICENSE_DLI, ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "mail",
+                    ":id",
+                    "recipients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "2"
+                    },
+                    {
+                      "key": "ref",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "type:desc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locate_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the email"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_LICENSE_DLI\",\n    \"message\": \"Feature DLI is not enabled by license\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8573a82-c98f-49c5-aa59-76d4297fef10",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "mail",
+                    ":id",
+                    "recipients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "2"
+                    },
+                    {
+                      "key": "ref",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "type:desc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locate_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the email"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e514d3b7-51c3-41ff-8eb5-93232eb7b79f",
+          "name": "Return the list of all activities of the specified user",
+          "request": {
+            "name": "Return the list of all activities of the specified user",
+            "description": {
+              "content": "Returns all activities performed by or on behalf of the specified user. Each activity includes the affected object, a human-readable message, the acting user, and whether the action was successful. Requires admin privileges.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "dli",
+                "users",
+                ":id",
+                "activities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "noDayBack",
+                  "value": "<integer>",
+                  "description": "Number of days back to search"
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<date>",
+                  "description": "Start date"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<date>",
+                  "description": "End date"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter",
+                  "value": "<string>",
+                  "description": "Filter activities by scope. Accepted values: `all`, `my`."
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Search by mail body, subject and sender/recipients"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Filter activities by type. Accepted values: `all`, `folder_changes`, `file_changes`, `user_preferences`, `mail`, `tasks`, `comments`, `kitepoint`."
+                },
+                {
+                  "disabled": false,
+                  "key": "transactionId",
+                  "value": "<string>",
+                  "description": "Transaction ID associated with the activities"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "created:asc",
+                  "description": "Sorting options"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit"
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "With parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the user"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3893db4a-a61d-4124-b25b-fb6253852ad5",
+              "name": "List of user activities retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "users",
+                    ":id",
+                    "activities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "noDayBack",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "name:asc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"object\": {\n        \"id\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\",\n        \"name\": \"contract.pdf\",\n        \"type\": \"file\"\n      },\n      \"message\": \"User downloaded file contract.pdf\",\n      \"directUser\": {\n        \"id\": \"u1a2b3c4-d5e6-7890-abcd-ef1234567890\",\n        \"name\": \"Alice Smith\",\n        \"email\": \"alice@example.com\"\n      },\n      \"successful\": 1\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3727ba3-48a3-4047-a00d-c66e26ccece5",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_LICENSE_DLI, ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "users",
+                    ":id",
+                    "activities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "noDayBack",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "name:asc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_LICENSE_DLI\",\n    \"message\": \"Feature DLI is not enabled by license\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3aa23374-5b42-49e9-88c3-0914f3787a26",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "users",
+                    ":id",
+                    "activities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "noDayBack",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "transactionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "name:asc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the user"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "190c854f-4a70-42f4-919a-e0133882218a",
+          "name": "Retrieve information about the mail specified be a user",
+          "request": {
+            "name": "Retrieve information about the mail specified be a user",
+            "description": {
+              "content": "Returns a paginated list of all emails sent or received by the specified user, including emails where the user is the sender and emails where the user appears as a recipient.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "dli",
+                "users",
+                ":id",
+                "mail"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "senderId",
+                  "value": "<string>",
+                  "description": "Unique identifier of User who sent Email"
+                },
+                {
+                  "disabled": false,
+                  "key": "senderId:in",
+                  "value": "<string>",
+                  "description": "Unique identifier of User who sent Email. Search for results that match any of the specified values for this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "isRecipient",
+                  "value": "<boolean>",
+                  "description": "Filter emails where the current user is a recipient."
+                },
+                {
+                  "disabled": false,
+                  "key": "read",
+                  "value": "<boolean>",
+                  "description": "Whether the email is read or not by the current user."
+                },
+                {
+                  "disabled": false,
+                  "key": "date",
+                  "value": "<date>",
+                  "description": "Email creation date"
+                },
+                {
+                  "disabled": false,
+                  "key": "date:gt",
+                  "value": "<date>",
+                  "description": "Email creation date. Search for results where this parameter value is greater than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "date:gte",
+                  "value": "<date>",
+                  "description": "Email creation date. Search for results where this parameter value is greater than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "date:lt",
+                  "value": "<date>",
+                  "description": "Email creation date. Search for results where this parameter value is less than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "date:lte",
+                  "value": "<date>",
+                  "description": "Email creation date. Search for results where this parameter value is less than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified_date",
+                  "value": "<date>",
+                  "description": "Email modification date"
+                },
+                {
+                  "disabled": false,
+                  "key": "modified_date:gt",
+                  "value": "<date>",
+                  "description": "Email modification date. Search for results where this parameter value is greater than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified_date:gte",
+                  "value": "<date>",
+                  "description": "Email modification date. Search for results where this parameter value is greater than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified_date:lt",
+                  "value": "<date>",
+                  "description": "Email modification date. Search for results where this parameter value is less than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified_date:lte",
+                  "value": "<date>",
+                  "description": "Email modification date. Search for results where this parameter value is less than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "deleted",
+                  "value": "<boolean>",
+                  "description": "Filter emails based on whether they have been deleted."
+                },
+                {
+                  "disabled": false,
+                  "key": "emailPackageId",
+                  "value": "<string>",
+                  "description": "Email Package unique identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "emailPackageId:in",
+                  "value": "<string>",
+                  "description": "Email Package unique identifier. Search for results that match any of the specified values for this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "templateId",
+                  "value": "<integer>",
+                  "description": "Email Template unique identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "templateId:in",
+                  "value": "<integer>",
+                  "description": "Email Template unique identifier. Search for results that match any of the specified values for this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "error",
+                  "description": "Filter emails by status. Accepted values: `sent`, `draft`, `queued`, `error`, `self_send`, `transferring`."
+                },
+                {
+                  "disabled": false,
+                  "key": "isPreview",
+                  "value": "<boolean>",
+                  "description": "Whether the email is a preview email"
+                },
+                {
+                  "disabled": false,
+                  "key": "isUserSent",
+                  "value": "<boolean>",
+                  "description": "Whether the email was sent by some user"
+                },
+                {
+                  "disabled": false,
+                  "key": "bucket",
+                  "value": "<string>",
+                  "description": "Filter emails by bucket. Accepted values: `draft`, `inbox`, `outgoing`, `sent`, `trash`."
+                },
+                {
+                  "disabled": false,
+                  "key": "returnCustomWebForm",
+                  "value": "<boolean>",
+                  "description": "Return all emails including those with the custom web form."
+                },
+                {
+                  "disabled": false,
+                  "key": "customWebFormOnly",
+                  "value": "<boolean>",
+                  "description": "Return only emails with the custom web form"
+                },
+                {
+                  "disabled": false,
+                  "key": "webFormId",
+                  "value": "<string>",
+                  "description": "Email web form ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "webFormId:contains",
+                  "value": "<string>",
+                  "description": "Email web form ID. Search for results that contain the specified characters in this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "id:asc",
+                  "description": "Sorting options"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit"
+                },
+                {
+                  "disabled": false,
+                  "key": "locate_id",
+                  "value": "<integer>",
+                  "description": "If specified, \"offset\" parameter will be ignored\n                                            and the page containing entity with this Id will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "With parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the user"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5fb048cc-5fe3-49c9-a19b-b1d6dcf18797",
+              "name": "List of emails retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "users",
+                    ":id",
+                    "mail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "senderId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "senderId:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "isRecipient",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "read",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "date:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "date:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "date:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "date:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified_date:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified_date:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified_date:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified_date:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "deleted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "emailPackageId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "emailPackageId:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "templateId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "templateId:in",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "transferring"
+                    },
+                    {
+                      "key": "isPreview",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "isUserSent",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "bucket",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "returnCustomWebForm",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "customWebFormOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "webFormId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "webFormId:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "status:asc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locate_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"e1a2b3c4-d5e6-7890-abcd-ef1234567890\",\n      \"senderId\": \"u1a2b3c4-d5e6-7890-abcd-ef1234567890\",\n      \"subject\": \"Q1 Report\",\n      \"status\": \"sent\",\n      \"type\": \"standard\",\n      \"date\": \"2024-03-15\",\n      \"deleted\": false,\n      \"emailPackageId\": \"p1a2b3c4-d5e6-7890-abcd-ef1234567890\"\n    }\n  ],\n  \"metadata\": {\n    \"total\": 1,\n    \"limit\": 50,\n    \"offset\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c15e5234-5898-4a96-bcdb-a83cdd0fb106",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_LICENSE_DLI, ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "users",
+                    ":id",
+                    "mail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "senderId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "senderId:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "isRecipient",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "read",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "date:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "date:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "date:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "date:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified_date:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified_date:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified_date:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified_date:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "deleted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "emailPackageId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "emailPackageId:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "templateId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "templateId:in",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "transferring"
+                    },
+                    {
+                      "key": "isPreview",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "isUserSent",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "bucket",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "returnCustomWebForm",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "customWebFormOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "webFormId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "webFormId:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "status:asc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locate_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_LICENSE_DLI\",\n    \"message\": \"Feature DLI is not enabled by license\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94dcb3ad-6f9f-450e-b94a-57a1aa31b4d9",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "dli",
+                    "users",
+                    ":id",
+                    "mail"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "senderId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "senderId:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "isRecipient",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "read",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "date:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "date:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "date:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "date:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified_date:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified_date:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified_date:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified_date:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "deleted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "emailPackageId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "emailPackageId:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "templateId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "templateId:in",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "transferring"
+                    },
+                    {
+                      "key": "isPreview",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "isUserSent",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "bucket",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "returnCustomWebForm",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "customWebFormOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "webFormId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "webFormId:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "status:asc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locate_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the user"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "13cebe30-e04c-43a0-abaf-0f197ae77252",
+    "name": "Kiteworks API Documentation activities dli API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

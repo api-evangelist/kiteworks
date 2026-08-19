@@ -1,0 +1,2487 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities folders API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "folders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Delete a list of folders",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/folders",
+            "params": [
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of unique identifiers for the entities to be processed."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Deletes multiple folders specified in the request."
+        },
+        {
+          "info": {
+            "name": "Set multiple folders as favorite",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/folders/actions/favorite",
+            "params": [
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of unique identifiers for the entities to be processed."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Marks multiple folders as favorites for the current user in a single request. Supports partial success, meaning valid items are processed even if some fail."
+        },
+        {
+          "info": {
+            "name": "Removes specified folders from favorites",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/folders/actions/favorite",
+            "params": [
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of unique identifiers for the entities to be processed."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Removes multiple folders from the current user's favorites list in a single request. Supports partial success, meaning valid items are processed even if some fail."
+        },
+        {
+          "info": {
+            "name": "Permanently delete the specified folders",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/folders/actions/permanent",
+            "params": [
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of unique identifiers for the entities to be processed."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Permanently delete the specified folders.\n               These folders will no longer be accessible by any means."
+        },
+        {
+          "info": {
+            "name": "Recover deleted folders",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/rest/folders/actions/recover",
+            "params": [
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of unique identifiers for the entities to be processed."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Recover deleted folders and their children files and folders."
+        },
+        {
+          "info": {
+            "name": "Triggers on demand AV/DLP scan on multiple folders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/folders/actions/scan",
+            "params": [
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "List of IDs of entities to scan. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Attempts to trigger an AV/DLP scan on requested folders."
+        },
+        {
+          "info": {
+            "name": "List top level shared folders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/folders/shared",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Folder name"
+              },
+              {
+                "name": "name:contains",
+                "value": "",
+                "type": "query",
+                "description": "Folder name. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of Object creator"
+              },
+              {
+                "name": "userId:in",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of Object creator. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "created",
+                "value": "",
+                "type": "query",
+                "description": "Object creation date"
+              },
+              {
+                "name": "created:gt",
+                "value": "",
+                "type": "query",
+                "description": "Object creation date. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "created:gte",
+                "value": "",
+                "type": "query",
+                "description": "Object creation date. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "created:lt",
+                "value": "",
+                "type": "query",
+                "description": "Object creation date. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "created:lte",
+                "value": "",
+                "type": "query",
+                "description": "Object creation date. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "modified",
+                "value": "",
+                "type": "query",
+                "description": "Object modification date"
+              },
+              {
+                "name": "modified:gt",
+                "value": "",
+                "type": "query",
+                "description": "Object modification date. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "modified:gte",
+                "value": "",
+                "type": "query",
+                "description": "Object modification date. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "modified:lt",
+                "value": "",
+                "type": "query",
+                "description": "Object modification date. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "modified:lte",
+                "value": "",
+                "type": "query",
+                "description": "Object modification date. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "deleted",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether the object is deleted."
+              },
+              {
+                "name": "expire",
+                "value": "",
+                "type": "query",
+                "description": "Expiration date"
+              },
+              {
+                "name": "expire:gt",
+                "value": "",
+                "type": "query",
+                "description": "Expiration date. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "expire:gte",
+                "value": "",
+                "type": "query",
+                "description": "Expiration date. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "expire:lt",
+                "value": "",
+                "type": "query",
+                "description": "Expiration date. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "expire:lte",
+                "value": "",
+                "type": "query",
+                "description": "Expiration date. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "fileLifetime",
+                "value": "",
+                "type": "query",
+                "description": "Folder lifetime"
+              },
+              {
+                "name": "fileLifetime:gt",
+                "value": "",
+                "type": "query",
+                "description": "Folder lifetime. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "fileLifetime:gte",
+                "value": "",
+                "type": "query",
+                "description": "Folder lifetime. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "fileLifetime:lt",
+                "value": "",
+                "type": "query",
+                "description": "Folder lifetime. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "fileLifetime:lte",
+                "value": "",
+                "type": "query",
+                "description": "Folder lifetime. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "secure",
+                "value": "",
+                "type": "query",
+                "description": "Folder secure flag"
+              },
+              {
+                "name": "description:contains",
+                "value": "",
+                "type": "query",
+                "description": "Folder description. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "sharedByMe",
+                "value": "",
+                "type": "query",
+                "description": "Filter shared folders by direction. Use `true` to return only folders shared by me, `false` for folders shared with me, or omit to return both."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Return the list of top level shared folders."
+        },
+        {
+          "info": {
+            "name": "Move a folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/folders/:id/actions/move",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes the entity in the response body."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Moves the specified folder to a new destination folder.\n### Precondition:\n  User must have `folder_move` permission for the folder being moved.\n  User must have `folder_add` permission for the destination folder.\n### Response:\n  The folder is moved to the destination folder.\n"
+        },
+        {
+          "info": {
+            "name": "Permanently delete the specified folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/folders/:id/actions/permanent",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the folder."
+              }
+            ]
+          },
+          "docs": "Permanently delete the specified folder.\n               This folder will no longer be accessible by any means."
+        },
+        {
+          "info": {
+            "name": "Recover deleted folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/rest/folders/:id/actions/recover",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the folder."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Recover the specified folder. This un-marks the folder for deletion."
+        },
+        {
+          "info": {
+            "name": "Triggers on demand AV/DLP folder scan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/folders/:id/actions/scan",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the folder."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "folderId:in",
+                "value": "",
+                "type": "query",
+                "description": "List of folder IDs of entities to scan. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "fileId:in",
+                "value": "",
+                "type": "query",
+                "description": "List of file IDs of entities to scan. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Attempts to trigger an AV/DLP scan on requested folder."
+        },
+        {
+          "info": {
+            "name": "Send message from a folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/folders/:id/actions/sendMessage",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\nSends a message from the specified folder to members of the folder.\n\n### Precondition:\nThe user must be a member of the folder.\n\n### Response:\nThe message has been successfully sent to members.\n"
+        },
+        {
+          "info": {
+            "name": "List comments for the folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/folders/:id/comments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the folder."
+              },
+              {
+                "name": "parentId",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the parent comment"
+              },
+              {
+                "name": "parentId:in",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the parent comment. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the comment author"
+              },
+              {
+                "name": "userId:in",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the comment author. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "created",
+                "value": "",
+                "type": "query",
+                "description": "The creation date of the comment."
+              },
+              {
+                "name": "created:gt",
+                "value": "",
+                "type": "query",
+                "description": "The creation date of the comment.. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "created:gte",
+                "value": "",
+                "type": "query",
+                "description": "The creation date of the comment.. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "created:lt",
+                "value": "",
+                "type": "query",
+                "description": "The creation date of the comment.. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "created:lte",
+                "value": "",
+                "type": "query",
+                "description": "The creation date of the comment.. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "modified",
+                "value": "",
+                "type": "query",
+                "description": "The last modification date of the comment."
+              },
+              {
+                "name": "modified:gt",
+                "value": "",
+                "type": "query",
+                "description": "The last modification date of the comment.. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "modified:gte",
+                "value": "",
+                "type": "query",
+                "description": "The last modification date of the comment.. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "modified:lt",
+                "value": "",
+                "type": "query",
+                "description": "The last modification date of the comment.. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "modified:lte",
+                "value": "",
+                "type": "query",
+                "description": "The last modification date of the comment.. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "contents:contains",
+                "value": "",
+                "type": "query",
+                "description": "Content of the comment. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns all comments on files within the specified folder. **Requires `comment_view` permission on the folder.**"
+        },
+        {
+          "info": {
+            "name": "List children folders of specified parent",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/folders/:id/folders",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the parent folder"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Folder name"
+              },
+              {
+                "name": "name:contains",
+                "value": "",
+                "type": "query",
+                "description": "Folder name. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of Object creator"
+              },
+              {
+                "name": "userId:in",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of Object creator. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "created",
+                "value": "",
+                "type": "query",
+                "description": "Object creation date"
+              },
+              {
+                "name": "created:gt",
+                "value": "",
+                "type": "query",
+                "description": "Object creation date. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "created:gte",
+                "value": "",
+                "type": "query",
+                "description": "Object creation date. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "created:lt",
+                "value": "",
+                "type": "query",
+                "description": "Object creation date. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "created:lte",
+                "value": "",
+                "type": "query",
+                "description": "Object creation date. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "modified",
+                "value": "",
+                "type": "query",
+                "description": "Object modification date"
+              },
+              {
+                "name": "modified:gt",
+                "value": "",
+                "type": "query",
+                "description": "Object modification date. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "modified:gte",
+                "value": "",
+                "type": "query",
+                "description": "Object modification date. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "modified:lt",
+                "value": "",
+                "type": "query",
+                "description": "Object modification date. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "modified:lte",
+                "value": "",
+                "type": "query",
+                "description": "Object modification date. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "deleted",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether the object is deleted."
+              },
+              {
+                "name": "expire",
+                "value": "",
+                "type": "query",
+                "description": "Expiration date"
+              },
+              {
+                "name": "expire:gt",
+                "value": "",
+                "type": "query",
+                "description": "Expiration date. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "expire:gte",
+                "value": "",
+                "type": "query",
+                "description": "Expiration date. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "expire:lt",
+                "value": "",
+                "type": "query",
+                "description": "Expiration date. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "expire:lte",
+                "value": "",
+                "type": "query",
+                "description": "Expiration date. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "fileLifetime",
+                "value": "",
+                "type": "query",
+                "description": "Folder lifetime"
+              },
+              {
+                "name": "fileLifetime:gt",
+                "value": "",
+                "type": "query",
+                "description": "Folder lifetime. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "fileLifetime:gte",
+                "value": "",
+                "type": "query",
+                "description": "Folder lifetime. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "fileLifetime:lt",
+                "value": "",
+                "type": "query",
+                "description": "Folder lifetime. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "fileLifetime:lte",
+                "value": "",
+                "type": "query",
+                "description": "Folder lifetime. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "secure",
+                "value": "",
+                "type": "query",
+                "description": "Folder secure flag"
+              },
+              {
+                "name": "description:contains",
+                "value": "",
+                "type": "query",
+                "description": "Folder description. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "locate_id",
+                "value": "",
+                "type": "query",
+                "description": "If specified, \"offset\" parameter will be ignored\n                                            and the page containing entity with this Id will be returned."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Return the list of folders in the specified folder including its metadata."
+        },
+        {
+          "info": {
+            "name": "Create a folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/folders/:id/folders",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes the entity in the response body."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Creates a new folder under the specified parent folder.\n### Precondition:\n  User must have `folder_add` permission for the parent folder.\n### Response:\n  The new folder is created and its details are returned.\n"
+        },
+        {
+          "info": {
+            "name": "List folder members.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/folders/:id/members",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by email address."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by user ID."
+              },
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by group ID."
+              },
+              {
+                "name": "roleId",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by role ID."
+              },
+              {
+                "name": "userId:in",
+                "value": "",
+                "type": "query",
+                "description": "Filter by a comma-separated list of user IDs. (Recommended request size <= 100)"
+              },
+              {
+                "name": "groupId:in",
+                "value": "",
+                "type": "query",
+                "description": "Filter by a comma-separated list of LDAP Group IDs. (Recommended request size <= 100)"
+              },
+              {
+                "name": "roleId:in",
+                "value": "",
+                "type": "query",
+                "description": "Filter by a comma-separated list of role IDs."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter members by the object type they have access to.<br>`d` – Directory (folder) membership.<br>`f` – File membership."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for the results. Default is `id:asc`.<br>Allowed values: `id:asc`, `id:desc`, `userId:asc`, `userId:desc`, `groupId:asc`, `groupId:desc`, `roleId:asc`, `roleId:desc`, `rank:asc`, `rank:desc`, `email:asc`, `email:desc`."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Range limit."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Range offset."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Returns a paginated list of members who have access to the specified folder.\n### Precondition:\n  User must have `user_view` permission for the folder.\n### Response:\n  A list of folder members is returned.\n### Sorting:\n  Sort string syntax `FIELD_NAME:ORDER`.\n\n  ORDER can be `asc` or `desc`.\n### Sorting options:\n  | FIELD_NAME | Description |\n  |------------|-------------|\n  | id         | The member ID |\n  | userId     | The user ID |\n  | groupId    | The group ID |\n  | roleId"
+        },
+        {
+          "info": {
+            "name": "Add members to a folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/folders/:id/members",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              },
+              {
+                "name": "updateIfExists",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, updates the member if they already exist and have a different folder role."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              },
+              {
+                "name": "downgradeNested",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, demote the user member role in all applicable nested folders."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes the entity in the response body."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Adds one or more users or LDAP groups as members of the specified folder.\n### Precondition:\n  User must have `user_add` permission for the folder.\n### Response:\n  The new members are added to the folder.\n"
+        },
+        {
+          "info": {
+            "name": "List LDAP groups with access to a folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/folders/:id/members/ldapGroup",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the folder."
+              },
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the group."
+              },
+              {
+                "name": "groupId:in",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the group.. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "roleId",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the role."
+              },
+              {
+                "name": "roleId:in",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the role.. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns a list of LDAP groups and their assigned roles for the specified folder."
+        },
+        {
+          "info": {
+            "name": "Return a specific LDAP group's access to a folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/folders/:id/members/ldapGroup/:ldap_group_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the folder."
+              },
+              {
+                "name": "ldap_group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the LDAP group member"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns the access grant record for the specified LDAP group in the folder, including the group's assigned role."
+        },
+        {
+          "info": {
+            "name": "Update folder LDAP group members",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/rest/folders/:id/members/ldapGroup/:ldap_group_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the folder."
+              },
+              {
+                "name": "ldap_group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the LDAP group member."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "downgradeNested",
+                "value": "",
+                "type": "query",
+                "description": "Also downgrade the member role for nested folders."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates LDAP group members within the folder"
+        },
+        {
+          "info": {
+            "name": "Delete a folder LDAP group member",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/folders/:id/members/ldapGroup/:ldap_group_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              },
+              {
+                "name": "ldap_group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the LDAP group."
+              },
+              {
+                "name": "downgradeNested",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the user's role will be removed from all nested folders."
+              }
+            ]
+          },
+          "docs": "### Description:\nRemoves an LDAP member from the specified folder.\n\n### Precondition:\nThe user must have the `user_remove` permission for the folder.\n\n### Response:\nThe specified folder LDAP group member is successfully removed.\n"
+        },
+        {
+          "info": {
+            "name": "Return folder user member",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/folders/:id/members/:member_user_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the folder."
+              },
+              {
+                "name": "member_user_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the user member."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns the specified user member within the folder."
+        },
+        {
+          "info": {
+            "name": "Update folder user members",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/rest/folders/:id/members/:member_user_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the folder."
+              },
+              {
+                "name": "member_user_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the user member."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "downgradeNested",
+                "value": "",
+                "type": "query",
+                "description": "Also downgrade the member role for nested folders."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the user members within the folder."
+        },
+        {
+          "info": {
+            "name": "Delete a folder member",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/folders/:id/members/:member_user_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              },
+              {
+                "name": "member_user_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the user."
+              },
+              {
+                "name": "downgradeNested",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the user's role will be removed from all nested folders."
+              }
+            ]
+          },
+          "docs": "### Description:\nRemoves a member from the specified folder.\n\n### Precondition:\nThe user must have the `user_remove` permission for the folder.\n\n### Response:\nThe specified folder member is successfully removed.\n"
+        },
+        {
+          "info": {
+            "name": "Get tasks for a folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/folders/:id/tasks",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the folder."
+              },
+              {
+                "name": "assigneeId",
+                "value": "",
+                "type": "query",
+                "description": "Assigned User unique identifier"
+              },
+              {
+                "name": "assigneeId:in",
+                "value": "",
+                "type": "query",
+                "description": "Assigned User unique identifier. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "due",
+                "value": "",
+                "type": "query",
+                "description": "Task due date"
+              },
+              {
+                "name": "due:gt",
+                "value": "",
+                "type": "query",
+                "description": "Task due date. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "due:gte",
+                "value": "",
+                "type": "query",
+                "description": "Task due date. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "due:lt",
+                "value": "",
+                "type": "query",
+                "description": "Task due date. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "due:lte",
+                "value": "",
+                "type": "query",
+                "description": "Task due date. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "parentId",
+                "value": "",
+                "type": "query",
+                "description": "Parent Comment identifier"
+              },
+              {
+                "name": "parentId:in",
+                "value": "",
+                "type": "query",
+                "description": "Parent Comment identifier. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of User who created a Task"
+              },
+              {
+                "name": "userId:in",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of User who created a Task. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "created",
+                "value": "",
+                "type": "query",
+                "description": "Task creation date"
+              },
+              {
+                "name": "created:gt",
+                "value": "",
+                "type": "query",
+                "description": "Task creation date. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "created:gte",
+                "value": "",
+                "type": "query",
+                "description": "Task creation date. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "created:lt",
+                "value": "",
+                "type": "query",
+                "description": "Task creation date. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "created:lte",
+                "value": "",
+                "type": "query",
+                "description": "Task creation date. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "modified",
+                "value": "",
+                "type": "query",
+                "description": "Task modification date"
+              },
+              {
+                "name": "modified:gt",
+                "value": "",
+                "type": "query",
+                "description": "Task modification date. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "modified:gte",
+                "value": "",
+                "type": "query",
+                "description": "Task modification date. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "modified:lt",
+                "value": "",
+                "type": "query",
+                "description": "Task modification date. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "modified:lte",
+                "value": "",
+                "type": "query",
+                "description": "Task modification date. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "contents:contains",
+                "value": "",
+                "type": "query",
+                "description": "Task content. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter tasks by status. Accepted values: `D`, `P`, `C`."
+              },
+              {
+                "name": "deleted",
+                "value": "",
+                "type": "query",
+                "description": "Whether the task has been deleted"
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Gets a list of tasks associated with all files in the specified folder. **Requires `task_view` permission on the folder.**"
+        },
+        {
+          "info": {
+            "name": "Get the ancestor path of a folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/folders/:id/tree",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the folder."
+              },
+              {
+                "name": "includeOwner",
+                "value": "",
+                "type": "query",
+                "description": "Include owner root folder in the tree"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns the ancestor path of the specified folder as an ordered list of folder nodes, from the root down to the target folder."
+        },
+        {
+          "info": {
+            "name": "Return the list of files in a folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/folders/:parent/files",
+            "params": [
+              {
+                "name": "parent",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the parent folder."
+              },
+              {
+                "name": "deleted",
+                "value": "",
+                "type": "query",
+                "description": "Filter by deletion status. If true, show only deleted items; if false, show non-deleted items; if not specified, show both deleted and non-deleted items."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the name of file within the folder."
+              },
+              {
+                "name": "name:contains",
+                "value": "",
+                "type": "query",
+                "description": "Search for files whose names contain the specified characters."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the file creator."
+              },
+              {
+                "name": "userId:in",
+                "value": "",
+                "type": "query",
+                "description": "Search for files created by the specified user IDs. (Recommended request size <= 100)"
+              },
+              {
+                "name": "created",
+                "value": "",
+                "type": "query",
+                "description": "Search for files created on the specified date."
+              },
+              {
+                "name": "created:gt",
+                "value": "",
+                "type": "query",
+                "description": "Search for files created after the specified date."
+              },
+              {
+                "name": "created:gte",
+                "value": "",
+                "type": "query",
+                "description": "Search for files created on or after the specified date."
+              },
+              {
+                "name": "created:lt",
+                "value": "",
+                "type": "query",
+                "description": "Search for files created before the specified date."
+              },
+              {
+                "name": "created:lte",
+                "value": "",
+                "type": "query",
+                "description": "Search for files created on or before the specified date."
+              },
+              {
+                "name": "modified",
+                "value": "",
+                "type": "query",
+                "description": "Search for files modified on the specified date."
+              },
+              {
+                "name": "modified:gt",
+                "value": "",
+                "type": "query",
+                "description": "Search for files modified after the specified date."
+              },
+              {
+                "name": "modified:gte",
+                "value": "",
+                "type": "query",
+                "description": "Search for files modified on or after the specified date."
+              },
+              {
+                "name": "modified:lt",
+                "value": "",
+                "type": "query",
+                "description": "Search for files modified before the specified date."
+              },
+              {
+                "name": "modified:lte",
+                "value": "",
+                "type": "query",
+                "description": "Search for files modified on or before the specified date."
+              },
+              {
+                "name": "expire",
+                "value": "",
+                "type": "query",
+                "description": "Search for files that expire on the specified date."
+              },
+              {
+                "name": "expire:gt",
+                "value": "",
+                "type": "query",
+                "description": "Search for files that expire after the specified date."
+              },
+              {
+                "name": "expire:gte",
+                "value": "",
+                "type": "query",
+                "description": "Search for files that expire on or after the specified date."
+              },
+              {
+                "name": "expire:lt",
+                "value": "",
+                "type": "query",
+                "description": "Search for files that expire before the specified date."
+              },
+              {
+                "name": "expire:lte",
+                "value": "",
+                "type": "query",
+                "description": "Search for files that expire on or before the specified date."
+              },
+              {
+                "name": "isPushed",
+                "value": "",
+                "type": "query",
+                "description": "If true, returns only files that have been pushed to a mobile device via the mobile sync feature."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for the results. Default is `name:asc`.<br>Allowed values: `name:asc`, `name:desc`, `created:asc`, `created:desc`, `modified:asc`, `modified:desc`, `size:asc`, `size:desc`."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Range limit."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Range offset."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Returns the list of files within the specified folder.\n### Precondition:\n  User must have `properties_view` permission for the folder.\n### Response:\n  Returns a list of files within the specified folder.\n### Sorting:\n  Sort string syntax `FIELD_NAME:ORDER`.\n\n  ORDER can be `asc` or `desc`.\n### Sorting options:\n  | FIELD_NAME | Description |\n  |------------|-------------|\n  | name       | The name of the file |\n  | created    | The creation datetime of file |\n  | modified   | T"
+        },
+        {
+          "info": {
+            "name": "List folder permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/permissions/folder/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              },
+              {
+                "name": "actionId",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier for the action."
+              },
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "List of unique action identifiers. Search for results that match any of the specified values."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the permission action name.<br>Allowed values: `view`, `download`, `comment_view`, `comment_add`, `comment_edit`, `comment_reply`, `comment_delete`, `task_view`, `task_update_status`, `notification_subscribe`, `notification_unsubscribe`, `properties_view`, `file_send`, `tray_add`, `favorite_add`."
+              },
+              {
+                "name": "name:contains",
+                "value": "",
+                "type": "query",
+                "description": "Action name filter. Search for actions whose names contain the specified characters."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Return the list of permissions associated with the specified folder.\n### Precondition:\n  The user must be a member of the folder.\n### Response:\n  Returns a list of available permissions for the specified folder.\n"
+        },
+        {
+          "info": {
+            "name": "Move multiple folders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/folders/actions/move",
+            "params": [
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes the entity in the response body."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Moves multiple folders to a new destination folder.\n### Precondition:\n  User must have `folder_move` permission for the folders being moved.\n  User must have `folder_add` permission for the destination folder.\n### Response:\n  The folders are moved to the destination folder.\n"
+        },
+        {
+          "info": {
+            "name": "Return the folder quota",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/folders/:id/quota",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              },
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier (UUID) of the file."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Returns the quota information for a specific folder.\n### Precondition:\n  User must have `file_add` permission for the folder.\n### Response:\n  The folder quota is returned.\n"
+        },
+        {
+          "info": {
+            "name": "List folder children",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/folders/:id/children",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              },
+              {
+                "name": "deleted",
+                "value": "",
+                "type": "query",
+                "description": "Filter by deletion status. If true, show only deleted items; if false, show non-deleted items; if not specified, show both deleted and non-deleted items."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for the results. Default is `name:asc`.<br>Allowed values: `name:asc`, `name:desc`, `created:asc`, `created:desc`, `modified:asc`, `modified:desc`, `size:asc`, `size:desc`."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by object type.<br>`f` – Files only.<br>`d` – Directories (folders) only."
+              },
+              {
+                "name": "extensions",
+                "value": "",
+                "type": "query",
+                "description": "A comma-delimited list of file extensions to include in the filter."
+              },
+              {
+                "name": "regex",
+                "value": "",
+                "type": "query",
+                "description": "A regular expression pattern used to filter files by their names or other attributes."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the name of the folder or file within the folder."
+              },
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by a specific file ID."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Range limit."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Range offset."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Returns the list of folder children, where folders are fetched first, followed by files.\n### Precondition:\n  User must have `properties_view` permission for the folder.\n### Response:\n  Returns a list of folders and files within the specified folder.\n### Sorting:\n  Sort string syntax `FIELD_NAME:ORDER`.\n\n  ORDER can be `asc` or `desc`.\n### Sorting options:\n  | FIELD_NAME | Description |\n  |------------|-------------|\n  | name       | The name of the folder or file |\n  | created"
+        },
+        {
+          "info": {
+            "name": "List top level folders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/folders/top",
+            "params": [
+              {
+                "name": "deleted",
+                "value": "",
+                "type": "query",
+                "description": "Filter by deletion status. If true, show only deleted items; if false, show non-deleted items; if not specified, show both deleted and non-deleted items."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for the results. Default is `name:asc`.<br>Allowed values: `name:asc`, `name:desc`, `created:asc`, `created:desc`, `modified:asc`, `modified:desc`, `size:asc`, `size:desc`."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Range limit."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Range offset."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Returns the list of top level folders.\n### Precondition:\n  The user profile must have \"Collaboration Allowed\" enabled.\n### Response:\n  Lists of top level folders are returned.\n### Sorting:\n  Sort string syntax `FIELD_NAME:ORDER`.\n\n  ORDER can be `asc` or `desc`.\n### Sorting options:\n  | FIELD_NAME | Description |\n  |------------|-------------|\n  | name       | The name of the folder |\n  | created    | The creation datetime of the folder |\n  | modified   | The last modified dat"
+        },
+        {
+          "info": {
+            "name": "Return the folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/folders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes the entity in the response body."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Returns the folder corresponding to the provided ID.\n### Precondition:\n  User must have `properties_view` permission for the folder.\n### Response:\n  The folder is returned.\n"
+        },
+        {
+          "info": {
+            "name": "Update a folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/rest/folders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes the entity in the response body."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Updates the properties of the specified folder.\n### Precondition:\n  User must have `properties_edit` permission for the folder.\n### Response:\n  The folder is updated.\n"
+        },
+        {
+          "info": {
+            "name": "Delete a folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/folders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Deletes a specified folder.\n### Precondition:\n  User must have `folder_delete` permission for the folder.\n### Response:\n  The folder is deleted\n## Additional Information:\n  The folder will be automatically deleted after a set number of days as configured by the administrator.\n"
+        },
+        {
+          "info": {
+            "name": "Return folder activities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/folders/:id/activities",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              },
+              {
+                "name": "noDayBack",
+                "value": "",
+                "type": "query",
+                "description": "Number of days to look back when searching for activities."
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Start time of the search range, represented as a Unix timestamp."
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "End time of the search range, represented as a Unix timestamp."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date of the search range."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End date of the search range."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter activities by ownership.<br>`all` – Show all activities in the folder.<br>`my` – Show only activities performed by the current user."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search activities by email body, subject, sender, or recipients."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter activities by type.<br>`all` – All activity types.<br>`content_changes` – File content uploads or replacements.<br>`file_changes` – File metadata changes (rename, move, delete, etc.).<br>`folder_changes` – Folder-level changes.<br>`kitepoint` – KitePoint reward activities.<br>`mail` – Email send/receive activities.<br>`tasks` – Task-related activities.<br>`comments` – Comment activities.<br>`folder_activities` – General folder activities."
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "query",
+                "description": "Filter activities by transaction ID."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for the results. Default is `created:desc`.<br>Allowed values: `id:asc`, `id:desc`, `created:asc`, `created:desc`, `event_name:asc`, `event_name:desc`, `name:asc`, `name:desc`."
+              },
+              {
+                "name": "nested",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, includes activities from nested folders."
+              },
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "query",
+                "description": "Specifies a file ID within the folder to filter activities related to that file."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Range limit."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Range offset."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "### Description:\nReturn the activities of a specified folder.\n\n### Precondition:\nThe user must have the `user_view` permission for the folder.\n\n### Response:\nReturns the folder activities.\n"
+        },
+        {
+          "info": {
+            "name": "Export folder activities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/folders/:id/activities/actions/exportCSV",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              },
+              {
+                "name": "noDayBack",
+                "value": "",
+                "type": "query",
+                "description": "Number of days to look back when searching for activities."
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Start time of the search range, represented as a Unix timestamp."
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "End time of the search range, represented as a Unix timestamp."
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date of the search range."
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End date of the search range."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter activities by ownership.<br>`all` – Show all activities in the folder.<br>`my` – Show only activities performed by the current user."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search activities by email body, subject, sender, or recipients."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter activities by type.<br>`all` – All activity types.<br>`content_changes` – File content uploads or replacements.<br>`file_changes` – File metadata changes (rename, move, delete, etc.).<br>`folder_changes` – Folder-level changes.<br>`kitepoint` – KitePoint reward activities.<br>`mail` – Email send/receive activities.<br>`tasks` – Task-related activities.<br>`comments` – Comment activities.<br>`folder_activities` – General folder activities."
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "query",
+                "description": "Filter activities by transaction ID."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for the results. Default is `created:desc`.<br>Allowed values: `id:asc`, `id:desc`, `created:asc`, `created:desc`, `event_name:asc`, `event_name:desc`, `name:asc`, `name:desc`."
+              },
+              {
+                "name": "nested",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, includes activities from nested folders."
+              },
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "query",
+                "description": "Specifies a file ID within the folder to filter activities related to that file."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Range limit."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Range offset."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "### Description:\nExports the activities of a folder in CSV format.\n\n### Precondition:\nThe user must have the `user_view` permission for the folder.\n\n### Response:\nThe folder activities are returned in CSV format.\n"
+        },
+        {
+          "info": {
+            "name": "Remove oneself as a folder member",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/folders/:id/members/me",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              },
+              {
+                "name": "downgradeNested",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the user's role will be removed from all nested folders."
+              }
+            ]
+          },
+          "docs": "### Description:\nRemoves the current user from the specified folder.\n\n### Precondition:\nThe user must be a member of the folder.\n\n### Response:\nThe current user is removed from the folder.\n"
+        },
+        {
+          "info": {
+            "name": "Bulk update folders",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/rest/admin/folders",
+            "params": [
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes the entity in the response body."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Updates multiple folders in a single request.\n### Precondition:\n  The user must be an administrator with access to the Files and Folders page in the Kiteworks PDN Admin.\n### Response:\n  The specified folders are updated.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

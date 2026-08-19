@@ -1,0 +1,1472 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities admin API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "admin",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List hostnames",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/admin/hostnames",
+            "params": [
+              {
+                "name": "alias_name",
+                "value": "",
+                "type": "query",
+                "description": "Alias name"
+              },
+              {
+                "name": "alias_name:contains",
+                "value": "",
+                "type": "query",
+                "description": "Alias name. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "tenant_id",
+                "value": "",
+                "type": "query",
+                "description": "Tenant ID"
+              },
+              {
+                "name": "tenant_id:gt",
+                "value": "",
+                "type": "query",
+                "description": "Tenant ID. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "tenant_id:gte",
+                "value": "",
+                "type": "query",
+                "description": "Tenant ID. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "tenant_id:lt",
+                "value": "",
+                "type": "query",
+                "description": "Tenant ID. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "tenant_id:lte",
+                "value": "",
+                "type": "query",
+                "description": "Tenant ID. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "deleted",
+                "value": "",
+                "type": "query",
+                "description": "Filter by whether the hostname is deleted."
+              },
+              {
+                "name": "disabled",
+                "value": "",
+                "type": "query",
+                "description": "Filter by whether the hostname is disabled."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of all alias hostnames, including their hostname, disabled state, and deletion status."
+        },
+        {
+          "info": {
+            "name": "Create an alias hostname",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/admin/hostnames",
+            "params": [
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new alias hostname for the current tenant. The hostname must be a valid subdomain of the configured site domain and must not already exist."
+        },
+        {
+          "info": {
+            "name": "Deletes list of hostnames",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/admin/hostnames",
+            "params": [
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of unique identifiers for the entities to be processed."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Soft-deletes a list of hostnames in a single request. Supports partial success, meaning valid items are processed even if some fail."
+        },
+        {
+          "info": {
+            "name": "Returns the details of hostname of the specified ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/admin/hostnames/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the hostname to be retrieved"
+              }
+            ]
+          },
+          "docs": "Returns the hostname record identified by the given ID, including its hostname value, disabled state, and deletion status."
+        },
+        {
+          "info": {
+            "name": "Disable / enable alias hostname",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/rest/admin/hostnames/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the hostname to disable"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the disabled state of the specified hostname, allowing it to be enabled or disabled."
+        },
+        {
+          "info": {
+            "name": "Mark specified hostname as deleted.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/admin/hostnames/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the hostname"
+              }
+            ]
+          },
+          "docs": "Soft-deletes the specified hostname by marking it as deleted. The record is retained but treated as inactive."
+        },
+        {
+          "info": {
+            "name": "List emails",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/admin/mail",
+            "params": [
+              {
+                "name": "senderId",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of User who sent Email"
+              },
+              {
+                "name": "senderId:in",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of User who sent Email. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "Email creation date"
+              },
+              {
+                "name": "date:gt",
+                "value": "",
+                "type": "query",
+                "description": "Email creation date. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "date:gte",
+                "value": "",
+                "type": "query",
+                "description": "Email creation date. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "date:lt",
+                "value": "",
+                "type": "query",
+                "description": "Email creation date. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "date:lte",
+                "value": "",
+                "type": "query",
+                "description": "Email creation date. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "modified_date",
+                "value": "",
+                "type": "query",
+                "description": "Email modification date"
+              },
+              {
+                "name": "modified_date:gt",
+                "value": "",
+                "type": "query",
+                "description": "Email modification date. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "modified_date:gte",
+                "value": "",
+                "type": "query",
+                "description": "Email modification date. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "modified_date:lt",
+                "value": "",
+                "type": "query",
+                "description": "Email modification date. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "modified_date:lte",
+                "value": "",
+                "type": "query",
+                "description": "Email modification date. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "deleted",
+                "value": "",
+                "type": "query",
+                "description": "Filter emails based on whether they have been deleted."
+              },
+              {
+                "name": "emailPackageId",
+                "value": "",
+                "type": "query",
+                "description": "Email Package unique identifier"
+              },
+              {
+                "name": "emailPackageId:in",
+                "value": "",
+                "type": "query",
+                "description": "Email Package unique identifier. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "templateId",
+                "value": "",
+                "type": "query",
+                "description": "Email Template unique identifier"
+              },
+              {
+                "name": "templateId:in",
+                "value": "",
+                "type": "query",
+                "description": "Email Template unique identifier. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter emails by status. Accepted values: `sent`, `draft`, `queued`, `error`, `self_send`, `transferring`."
+              },
+              {
+                "name": "isPreview",
+                "value": "",
+                "type": "query",
+                "description": "Whether the email is a preview email"
+              },
+              {
+                "name": "isUserSent",
+                "value": "",
+                "type": "query",
+                "description": "Whether the email was sent by some user"
+              },
+              {
+                "name": "webFormId",
+                "value": "",
+                "type": "query",
+                "description": "Email web form ID"
+              },
+              {
+                "name": "webFormId:contains",
+                "value": "",
+                "type": "query",
+                "description": "Email web form ID. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              }
+            ]
+          },
+          "docs": "Returns a list of emails for any user in the system. This includes sent emails, received emails, draft emails, and request a file emails. Requires admin privileges."
+        },
+        {
+          "info": {
+            "name": "Withdraw all files from the emails of deleted or demoted users",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/admin/mail/actions/withdrawFiles/users/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the user from whom to withdraw files."
+              },
+              {
+                "name": "emailId:in",
+                "value": "",
+                "type": "query",
+                "description": "A list of email IDs to be processed."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Withdraws all files from the emails of users who have been deleted or demoted."
+        },
+        {
+          "info": {
+            "name": "List user types (profiles)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/admin/profiles",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Profile name"
+              },
+              {
+                "name": "name:contains",
+                "value": "",
+                "type": "query",
+                "description": "Profile name. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of user type profiles configured in the system (e.g., Standard and Restricted), including each profile's name, built-in status, and cloneability."
+        },
+        {
+          "info": {
+            "name": "Get profile mapping order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/admin/profiles/mappingOrder"
+          },
+          "docs": "Returns the current ordering of user type profiles used to determine which profile is applied to a user on login when multiple mapping rules match."
+        },
+        {
+          "info": {
+            "name": "Update profile mapping order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/rest/admin/profiles/mappingOrder",
+            "params": [
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the ordering of user type profiles used to determine which profile is applied to a user on login when multiple mapping rules match. When the peek parameter is set, returns the projected impact without applying changes."
+        },
+        {
+          "info": {
+            "name": "Get profile mapping results for user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/admin/profiles/mappings",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "query",
+                "description": "Username or email of the user to test mappings for"
+              }
+            ]
+          },
+          "docs": "Simulates profile mapping evaluation for the specified user and returns which profile mapping rules would match, without applying any changes."
+        },
+        {
+          "info": {
+            "name": "Return a user type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/admin/profiles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the user type (profile) to be retrieved"
+              }
+            ]
+          },
+          "docs": "Returns the details of the specified user type profile, including its name, built-in status, and cloneability."
+        },
+        {
+          "info": {
+            "name": "Get profile mapping details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/admin/profiles/:id/mappings",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the profile to get mapping details for"
+              }
+            ]
+          },
+          "docs": "Returns the identity provider mapping rules configured for the specified profile, including LDAP, SSO, and kiteworks-based filter policies."
+        },
+        {
+          "info": {
+            "name": "Update profile mapping details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/rest/admin/profiles/:id/mappings",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the profile to update mapping details for"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the identity provider mapping rules for the specified profile. When the peek parameter is set, returns the projected impact of the changes without applying them."
+        },
+        {
+          "info": {
+            "name": "Return list of users with the specified types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/admin/profiles/:id/users",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the user type (profile) to retrieve users for"
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on their email address."
+              },
+              {
+                "name": "email:contains",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on their email address.. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on their full name."
+              },
+              {
+                "name": "name:contains",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on their full name.. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "metadata",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on their metadata information."
+              },
+              {
+                "name": "metadataContains",
+                "value": "",
+                "type": "query",
+                "description": "Filter users whose metadata contains the specified characters."
+              },
+              {
+                "name": "deleted",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on whether they have been deleted."
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on whether they are active in the system."
+              },
+              {
+                "name": "verified",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on their verification status."
+              },
+              {
+                "name": "suspended",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on whether they are suspended."
+              },
+              {
+                "name": "isRecipient",
+                "value": "",
+                "type": "query",
+                "description": "Filter users who are recipients of specific items."
+              },
+              {
+                "name": "allowsCollaboration",
+                "value": "",
+                "type": "query",
+                "description": "Filter users whose profiles allow collaboration access."
+              },
+              {
+                "name": "created",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on the creation date of their account."
+              },
+              {
+                "name": "created:gt",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on the creation date of their account.. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "created:gte",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on the creation date of their account.. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "created:lt",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on the creation date of their account.. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "created:lte",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on the creation date of their account.. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "locate_id",
+                "value": "",
+                "type": "query",
+                "description": "If specified, \"offset\" parameter will be ignored\n                                            and the page containing entity with this Id will be returned."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of users assigned to the specified user type profile (e.g., all Restricted users), including their names and email addresses."
+        },
+        {
+          "info": {
+            "name": "Bulk update user types (profiles)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/rest/admin/profiles/:id/users",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the user type (profile)."
+              },
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of user IDs to be assigned to the user type (profile)."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reassigns multiple users to the specified user type profile. When demoting users to a Restricted or Recipient profile, optional demotion settings control how existing data is handled (retained, deleted, or transferred to another user)."
+        },
+        {
+          "info": {
+            "name": "Get a list of Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/admin/users",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on their email address."
+              },
+              {
+                "name": "email:contains",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on their email address.. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on their full name."
+              },
+              {
+                "name": "name:contains",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on their full name.. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "metadata",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on their metadata information."
+              },
+              {
+                "name": "metadataContains",
+                "value": "",
+                "type": "query",
+                "description": "Filter users whose metadata contains the specified characters."
+              },
+              {
+                "name": "deleted",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on whether they have been deleted."
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on whether they are active in the system."
+              },
+              {
+                "name": "verified",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on their verification status."
+              },
+              {
+                "name": "suspended",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on whether they are suspended."
+              },
+              {
+                "name": "isRecipient",
+                "value": "",
+                "type": "query",
+                "description": "Filter users who are recipients of specific items."
+              },
+              {
+                "name": "allowsCollaboration",
+                "value": "",
+                "type": "query",
+                "description": "Filter users whose profiles allow collaboration access."
+              },
+              {
+                "name": "created",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on the creation date of their account."
+              },
+              {
+                "name": "created:gt",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on the creation date of their account.. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "created:gte",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on the creation date of their account.. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "created:lt",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on the creation date of their account.. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "created:lte",
+                "value": "",
+                "type": "query",
+                "description": "Filter users based on the creation date of their account.. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "locate_id",
+                "value": "",
+                "type": "query",
+                "description": "If specified, \"offset\" parameter will be ignored\n                                            and the page containing entity with this Id will be returned."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns a list of Users in the system. The user must be an administrator with access to User Management."
+        },
+        {
+          "info": {
+            "name": "Create a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/admin/users",
+            "params": [
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new User in the system by specifying an email address and name."
+        },
+        {
+          "info": {
+            "name": "Bulk update user emails",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/admin/users/migrateEmails",
+            "params": [
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk update user emails by migrating old email addresses to new ones. Accepts an array of objects containing old and new email pairs."
+        },
+        {
+          "info": {
+            "name": "Bulk update user emails via CSV file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/admin/users/migrateEmailsCsv",
+            "params": [
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "body",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "deleteIfExists",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Bulk update user emails by migrating old email addresses to new ones using a CSV file."
+        },
+        {
+          "info": {
+            "name": "Get User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/admin/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the user to retrieve"
+              }
+            ]
+          },
+          "docs": "Returns the details of the specified user, including their name, email address, and account status."
+        },
+        {
+          "info": {
+            "name": "Update User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/rest/admin/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the user to be updated"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the details of a user, such as changing their name, setting them as deleted, or updating their active/inactive status."
+        },
+        {
+          "info": {
+            "name": "Deletes a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/admin/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the user to delete"
+              },
+              {
+                "name": "retainToUser",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the new owner to whom the data will be transferred, applicable when `retainData` and/or `retainPermissionToSharedData` are set to true."
+              },
+              {
+                "name": "retainToAdvancedFormUser",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the user to whom the advanced form data will be transferred, similar to retainToUser but specifically for advanced form components."
+              },
+              {
+                "name": "remoteWipe",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to remotely wipe data from both desktop and mobile devices."
+              },
+              {
+                "name": "deleteUnsharedData",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether data owned by the user should be deleted. This is required and must be set to True if `retainData` is False, and vice versa."
+              },
+              {
+                "name": "retainData",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether data should be retained and transferred to another user. This is required and must be True if `deleteUnsharedData` is False, and vice versa."
+              },
+              {
+                "name": "retainPermissionToSharedData",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether permissions to shared folders should be retained."
+              },
+              {
+                "name": "withdrawFileLinks",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether files sent by deleted or demoted users should be withdrawn."
+              },
+              {
+                "name": "withdrawRequestFiles",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether request files sent by deleted or demoted users should be withdrawn."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Mark the specified user as deleted. This user will still be returned in the GET Users query."
+        },
+        {
+          "info": {
+            "name": "Return admin roles of the specified user id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/admin/users/:id/adminRoles",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the user to retrieve admin role"
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns all admin roles assigned to the specified user. The user may be active or deleted."
+        },
+        {
+          "info": {
+            "name": "List devices for a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/admin/users/:id/devices",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the user whose devices to be retrieved"
+              },
+              {
+                "name": "installTagId",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of install tag for this Device"
+              },
+              {
+                "name": "installTagId:contains",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of install tag for this Device. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of user for this Device"
+              },
+              {
+                "name": "userId:in",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of user for this Device. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "clientId",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of client for this Device"
+              },
+              {
+                "name": "clientId:contains",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of client for this Device. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns a list of devices registered to the specified user."
+        },
+        {
+          "info": {
+            "name": "Get admin activities list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/admin/activities",
+            "params": [
+              {
+                "name": "startDateTime",
+                "value": "",
+                "type": "query",
+                "description": "The start date and time for the activity range."
+              },
+              {
+                "name": "endDateTime",
+                "value": "",
+                "type": "query",
+                "description": "The end date and time for the activity range."
+              },
+              {
+                "name": "eventFilters:in",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of event filters to filter the activities."
+              },
+              {
+                "name": "objectIds:in",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of object IDs to filter the activities."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query",
+                "description": "User ID to filter activities by a specific user."
+              },
+              {
+                "name": "maxPages",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of pages to retrieve."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for the results. Default is `created:desc`.<br>Allowed values: `created:asc`, `created:desc`, `client:asc`, `client:desc`, `username:asc`, `username:desc`, `ip_address:asc`, `ip_address:desc`."
+              },
+              {
+                "name": "compact",
+                "value": "",
+                "type": "query",
+                "description": "If true, returns a more compact response."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip before returning results, for pagination."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Retrieves the list of admin activities.\n### Precondition:\n  The user must be an administrator with access to `Activity Log`.\n### Response:\n  Returns the list of activities performed by the admin.\n### Sorting:\n  Sort string syntax `FIELD_NAME:ORDER`.\n\n  ORDER can be `asc` or `desc`.\n### Sorting options:\n  | FIELD_NAME | Description |\n  |------------|-------------|\n  | created    | The creation date and time of the activity |\n  | client     | The client name |\n  | username   | T"
+        },
+        {
+          "info": {
+            "name": "Get admin activity detail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/admin/activities/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Retrieves detailed information about a specific activity.\n### Precondition:\n  The user must be an administrator with access to `Activity Log`.\n### Response:\n  Returns the full details of the specified activity.\n"
+        },
+        {
+          "info": {
+            "name": "Export admin activities list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/admin/activities/actions/exportCSV",
+            "params": [
+              {
+                "name": "startDateTime",
+                "value": "",
+                "type": "query",
+                "description": "The start date and time for the activity range."
+              },
+              {
+                "name": "endDateTime",
+                "value": "",
+                "type": "query",
+                "description": "The end date and time for the activity range."
+              },
+              {
+                "name": "eventFilters:in",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of event filters to filter the activities."
+              },
+              {
+                "name": "objectIds:in",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of object IDs to filter the activities."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query",
+                "description": "User ID to filter activities by a specific user."
+              },
+              {
+                "name": "maxPages",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of pages to retrieve."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for the results. Default is `created:desc`.<br>Allowed values: `created:asc`, `created:desc`, `client:asc`, `client:desc`, `username:asc`, `username:desc`, `ip_address:asc`, `ip_address:desc`."
+              },
+              {
+                "name": "compact",
+                "value": "",
+                "type": "query",
+                "description": "If true, returns a more compact response."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip before returning results, for pagination."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Exports the list of admin activities based on the provided filters.\n### Precondition:\n  The user must be an administrator with access to `Activity Log`.\n### Response:\n  The admin activities list is generated and sent via email to the requesting user.\n### Sorting:\n  Sort string syntax `FIELD_NAME:ORDER`.\n\n  ORDER can be `asc` or `desc`.\n### Sorting options:\n  | FIELD_NAME | Description |\n  |------------|-------------|\n  | created    | The creation date and time of the activity "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

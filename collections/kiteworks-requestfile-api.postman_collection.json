@@ -1,0 +1,4120 @@
+{
+  "item": [
+    {
+      "id": "c3aa8224-6c4a-4e0d-bb7a-6e43622c3d8d",
+      "name": "requestFile",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b719f9a6-cc47-459c-badb-e72c3c6ed02d",
+          "name": "Send a Request File to Folder request",
+          "request": {
+            "name": "Send a Request File to Folder request",
+            "description": {
+              "content": "### Description:\n  Initiates a Request File to Folder.\n### Precondition:\n  The user profile must have the necessary access rights to request files to the folder.\n### Response:\n  Successfully creates a request file and returns the request file details.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "folders",
+                ":id",
+                "actions",
+                "requestFile"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier (UUID) of the entity."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"subject\": \"<string>\",\n  \"to\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"body\": \"<string>\",\n  \"expire\": \"<date>\",\n  \"count\": \"<integer>\",\n  \"requireAuth\": \"<boolean>\",\n  \"files\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"actionId\": \"<integer>\",\n  \"showToken\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f1460358-8e95-4690-8097-2a20f7e4a3f3",
+              "name": "Request File to Folder request has been successfully created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "folders",
+                    ":id",
+                    "actions",
+                    "requestFile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subject\": \"<string>\",\n  \"to\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"body\": \"<string>\",\n  \"expire\": \"<date>\",\n  \"count\": \"<integer>\",\n  \"requireAuth\": \"<boolean>\",\n  \"files\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"actionId\": \"<integer>\",\n  \"showToken\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "329a6c29-19da-4490-959c-3b8b582b6478",
+              "name": "Bad Request<br /><br /><i>Possible error codes: </i>ERR_REQUEST_INVALID_JSON",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "folders",
+                    ":id",
+                    "actions",
+                    "requestFile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subject\": \"<string>\",\n  \"to\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"body\": \"<string>\",\n  \"expire\": \"<date>\",\n  \"count\": \"<integer>\",\n  \"requireAuth\": \"<boolean>\",\n  \"files\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"actionId\": \"<integer>\",\n  \"showToken\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_REQUEST_INVALID_JSON\",\n      \"message\": \"Invalid json provided\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd4b1861-5dfe-4060-abb3-e151bb60bdb9",
+              "name": "Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "folders",
+                    ":id",
+                    "actions",
+                    "requestFile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subject\": \"<string>\",\n  \"to\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"body\": \"<string>\",\n  \"expire\": \"<date>\",\n  \"count\": \"<integer>\",\n  \"requireAuth\": \"<boolean>\",\n  \"files\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"actionId\": \"<integer>\",\n  \"showToken\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_AUTH_INVALID_CSRF\",\n      \"message\": \"Invalid CSRF Authentication\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e09d5066-e4da-4a65-b682-57f4c9dad339",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_ENTITY_DELETED, ERR_ENTITY_DLP_LOCKED, ERR_ENTITY_IS_SECURE_FOLDER, ERR_ENTITY_NOT_SCANNED, ERR_ENTITY_VIRUS_FOUND, ERR_INPUT_EMAIL_IS_DISTRIBUTION_LIST, ERR_LICENSE_MAX_USERS_COUNT_REACHED, ERR_USER_HAS_NO_USER_TYPE, ERR_USER_TYPE_NO_ACCESS",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "folders",
+                    ":id",
+                    "actions",
+                    "requestFile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subject\": \"<string>\",\n  \"to\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"body\": \"<string>\",\n  \"expire\": \"<date>\",\n  \"count\": \"<integer>\",\n  \"requireAuth\": \"<boolean>\",\n  \"files\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"actionId\": \"<integer>\",\n  \"showToken\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_ACCESS_USER\",\n      \"message\": \"Insufficient access permissions\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a69e8ce-aab7-475c-bf01-302bd6d57caf",
+              "name": "Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_HYPERLINK, ERR_INPUT_INVALID_DATE, ERR_INPUT_REQUIRED, ERR_INVALID_PARAMETER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "folders",
+                    ":id",
+                    "actions",
+                    "requestFile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subject\": \"<string>\",\n  \"to\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"body\": \"<string>\",\n  \"expire\": \"<date>\",\n  \"count\": \"<integer>\",\n  \"requireAuth\": \"<boolean>\",\n  \"files\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"actionId\": \"<integer>\",\n  \"showToken\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_INPUT_HYPERLINK\",\n      \"message\": \"Not allowed hyperlink domain. Hyperlink domain should not different from anchored text domain.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "455e5a60-db55-454c-91c7-7213f98a2e4c",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "folders",
+                    ":id",
+                    "actions",
+                    "requestFile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subject\": \"<string>\",\n  \"to\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"body\": \"<string>\",\n  \"expire\": \"<date>\",\n  \"count\": \"<integer>\",\n  \"requireAuth\": \"<boolean>\",\n  \"files\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"actionId\": \"<integer>\",\n  \"showToken\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5eba77e0-2658-41da-959c-839cf6be2c90",
+          "name": "Expire a request file link",
+          "request": {
+            "name": "Expire a request file link",
+            "description": {
+              "content": "Marks the request file link as expired, preventing any further file uploads through it. **Requires the authenticated user to be the user who created the request file link.**",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "requestFile",
+                ":ref"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ref",
+                  "description": "(Required) The unique reference of the Request File upload link."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b6542546-f542-402e-8201-6d865c2ae6cb",
+              "name": "The request file link was successfully expired. Returns no content.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4a0376a0-610f-4b9f-a648-b1e3e7802a77",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_ACCESS_USER\",\n    \"message\": \"Insufficient access permissions\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0acab26d-50ba-4cd6-ab77-9c9cfbad5dac",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cdba0352-ee4f-4647-8eff-6f6d357209b3",
+          "name": "Returns Request File Info by ref",
+          "request": {
+            "name": "Returns Request File Info by ref",
+            "description": {
+              "content": "### Description:\n  Retrieves detailed information about a Request File using the provided reference (ref).\n### Precondition:\n  The user must have valid authentication and appropriate access to view the request file information.\n### Response:\n  Returns the details of the specified request file, including its associated metadata and status.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "requestFile",
+                ":ref"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "read",
+                  "value": "<boolean>",
+                  "description": "Indicates whether to log the view event. Defaults to true."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ref",
+                  "description": "(Required) The unique reference of the Request File upload link."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1d09c146-526c-4de0-abc9-6f2d703f0cf5",
+              "name": "The Request File Info, including the details of the specified request file.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "read",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 4060,\n  \"type\": \"string\",\n  \"requestor\": {\n    \"id\": \"string\",\n    \"email\": \"string\"\n  },\n  \"recipient\": {\n    \"id\": \"string\",\n    \"email\": \"string\"\n  },\n  \"remaining\": 8083,\n  \"fileLimit\": 4902,\n  \"email\": {\n    \"id\": \"string\",\n    \"subject\": \"string\",\n    \"body\": \"string\",\n    \"fullHtmlBody\": \"string\",\n    \"parentEmailId\": \"string\",\n    \"emailPackageId\": \"string\",\n    \"senderId\": \"string\",\n    \"sharedMailboxId\": \"string\"\n  },\n  \"message\": \"string\",\n  \"requireAuth\": true,\n  \"expire\": \"2007-11-15\",\n  \"config\": {\n    \"excludedFileExtensions\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"uploadLink\": \"string\",\n  \"ref\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6dbbb1b3-9292-4047-a43a-65be95fab7d4",
+              "name": "Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_REQUEST_FILE, ERR_AUTH_UNAUTHORIZED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "read",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_AUTH_INVALID_CSRF\",\n      \"message\": \"Invalid CSRF Authentication\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "61939c47-459a-4ac4-aac4-c61108aa2d5e",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_ENTITY_DELETED, ERR_ENTITY_REQUEST_FILE_EXPIRED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "read",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_ACCESS_USER\",\n      \"message\": \"Insufficient access permissions\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d63ae5d-6b5c-4a5b-8f8a-cd618344a695",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "read",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7f79d094-4950-42dc-8e25-582816bbe130",
+          "name": "Upload a file requested by user",
+          "request": {
+            "name": "Upload a file requested by user",
+            "description": {
+              "content": "Uploads a file to a folder or inbox in response to a file request from another user.\n                       Access is granted via the request file reference link (`ref`). If the request requires\n                       authentication (`require_auth`), the caller must be logged in. The uploaded file is\n                       renamed to include the uploader's email address.\\n\\nThe request link must not be expired\n                       or have reached its upload limit. Sufficient storage must be available in the target\n                       folder. The file extension and MIME type must not be excluded by the requestor's system\n                       policy.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "requestFile",
+                ":ref",
+                "actions",
+                "file"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "returnEntity",
+                  "value": "<boolean>",
+                  "description": "If set to `true`, returns information about the newly created entity."
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ref",
+                  "description": "(Required) The unique reference of the Request File upload link."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "body",
+                  "type": "file",
+                  "description": "(Required) The binary content of the file."
+                },
+                {
+                  "key": "clientCreated",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "The date and time when the file was created on the client side."
+                },
+                {
+                  "key": "clientModified",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "The date and time when the file was last modified on the client side."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "86fe41e7-ed49-47e3-b1a1-05aadeea560e",
+              "name": "Returns the uploaded file metadata.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "actions",
+                    "file"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The binary content of the file.",
+                        "type": "text/plain"
+                      },
+                      "key": "body",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The date and time when the file was created on the client side.",
+                        "type": "text/plain"
+                      },
+                      "key": "clientCreated",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The date and time when the file was last modified on the client side.",
+                        "type": "text/plain"
+                      },
+                      "key": "clientModified",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"30\",\n  \"name\": \"contract (alice@example.com).pdf\",\n  \"size\": 512000,\n  \"mime\": \"application/pdf\",\n  \"deleted\": false,\n  \"locked\": 0,\n  \"created\": \"2024-06-20T15:00:00Z\",\n  \"modified\": \"2024-06-20T15:00:00Z\",\n  \"parent\": {\n    \"id\": \"3\",\n    \"name\": \"Incoming Requests\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bf355ff2-477d-4339-a4d9-e4a374453856",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_ENTITY_RESTRICTED_EXTENSION, ERR_ENTITY_RESTRICTED_EXTENSION_CUSTOM, ERR_ENTITY_RESTRICTED_TYPE, ERR_ENTITY_RESTRICTED_TYPE_CUSTOM, ERR_ENTITY_RESTRICTED_TYPE_GROUP",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "actions",
+                    "file"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The binary content of the file.",
+                        "type": "text/plain"
+                      },
+                      "key": "body",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The date and time when the file was created on the client side.",
+                        "type": "text/plain"
+                      },
+                      "key": "clientCreated",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The date and time when the file was last modified on the client side.",
+                        "type": "text/plain"
+                      },
+                      "key": "clientModified",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_ACCESS_USER\",\n    \"message\": \"Insufficient access permissions\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54a7c0ba-f1ec-4c0c-8acc-ed49b3027542",
+              "name": "Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_INVALID_DATE",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "actions",
+                    "file"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The binary content of the file.",
+                        "type": "text/plain"
+                      },
+                      "key": "body",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The date and time when the file was created on the client side.",
+                        "type": "text/plain"
+                      },
+                      "key": "clientCreated",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The date and time when the file was last modified on the client side.",
+                        "type": "text/plain"
+                      },
+                      "key": "clientModified",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d023cc81-2054-41dd-9666-7dee9afbbf05",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "actions",
+                    "file"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The binary content of the file.",
+                        "type": "text/plain"
+                      },
+                      "key": "body",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The date and time when the file was created on the client side.",
+                        "type": "text/plain"
+                      },
+                      "key": "clientCreated",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The date and time when the file was last modified on the client side.",
+                        "type": "text/plain"
+                      },
+                      "key": "clientModified",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "58fa45db-6530-41de-9c9a-7b75f047d31e",
+          "name": "Add a comment to an uploaded file",
+          "request": {
+            "name": "Add a comment to an uploaded file",
+            "description": {
+              "content": "Adds a comment to a file that was uploaded through the request file link. Only accessible when the link requires authentication (`require_auth=true`) and has not expired.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "requestFile",
+                ":ref",
+                "comment",
+                ":object_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "returnEntity",
+                  "value": "<boolean>",
+                  "description": "If set to `true`, returns information about the newly created entity."
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ref",
+                  "description": "(Required) The unique reference of the Request File upload link."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_id",
+                  "description": "(Required) Object ID of the file being commented on."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contents\": \"<string>\",\n  \"parentId\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d7d3a36e-d779-4067-80fd-024e773bc3a0",
+              "name": "Returns the newly created comment record.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "comment",
+                    ":object_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) Object ID of the file being commented on."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contents\": \"<string>\",\n  \"parentId\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 88,\n  \"parent_id\": 0,\n  \"object_id\": 55,\n  \"user_id\": 5,\n  \"contents\": \"Please review the highlighted sections on page 3.\",\n  \"created\": \"2024-03-20T12:00:00+00:00\",\n  \"modified\": \"2024-03-20T12:00:00+00:00\",\n  \"deleted\": false,\n  \"folder_id\": 3,\n  \"is_comment\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4822bed7-eae3-4584-a3bf-4b0387c0fc18",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "comment",
+                    ":object_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) Object ID of the file being commented on."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contents\": \"<string>\",\n  \"parentId\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_ACCESS_USER\",\n    \"message\": \"Insufficient access permissions\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "89290d7b-cb15-402c-a3f1-4ecf2626df24",
+              "name": "Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_MAX_VALUE, ERR_INPUT_HTML_TAGS_INVALID, ERR_INPUT_REQUIRED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "comment",
+                    ":object_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) Object ID of the file being commented on."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contents\": \"<string>\",\n  \"parentId\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_INPUT_HTML_TAGS_INVALID\",\n    \"message\": \"Cannot contain HTML tags other than B, I, or U\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb382eef-cb78-4a7e-84cf-7d06242a9bb0",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "comment",
+                    ":object_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) Object ID of the file being commented on."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"contents\": \"<string>\",\n  \"parentId\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6d6c36d7-6602-42f7-8a8c-f5dd14564a7c",
+          "name": "Get preview metadata for a source file",
+          "request": {
+            "name": "Get preview metadata for a source file",
+            "description": {
+              "content": "Gets the preview metadata for a source file attached to the request file link. If the source file's action is set to `view`, the preview is generated with the Viewer role.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "requestFile",
+                ":ref",
+                "preview",
+                ":object_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ref",
+                  "description": "(Required) The unique reference of the Request File upload link."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_id",
+                  "description": "(Required) The unique identifier (UUID) of the source file."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1b626b12-9314-45a7-9024-958899ddd580",
+              "name": "Returns the preview metadata for the specified source file.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "preview",
+                    ":object_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) The unique identifier (UUID) of the source file."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"link\": \"/preview/files/7/preview.html\",\n  \"pdf\": null,\n  \"view_url\": \"https://viewer.example.com/view?token=abc123\",\n  \"status\": \"Preview\",\n  \"mime\": \"application/pdf\",\n  \"native\": true,\n  \"watermark\": null,\n  \"tdfOriginalExtension\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26b33846-2ba9-4f80-a79f-8932abd8916f",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "preview",
+                    ":object_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) The unique identifier (UUID) of the source file."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_ACCESS_USER\",\n    \"message\": \"Insufficient access permissions\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9821151c-7594-4a28-8754-7b45ffa71214",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "preview",
+                    ":object_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) The unique identifier (UUID) of the source file."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fafebc97-1e59-4e2e-9d97-d52bedb73718",
+          "name": "Get source files attached by the requester",
+          "request": {
+            "name": "Get source files attached by the requester",
+            "description": {
+              "content": "Returns the list of files the requester attached to the request file link for the uploader to view or download. Each entry includes computed permissions based on DLP policy and the configured action (`view` or `download`).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "requestFile",
+                ":ref",
+                "sources"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ref",
+                  "description": "(Required) The unique reference of the Request File upload link."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fc16a73c-5c49-4117-b27e-b0ae6ba8050d",
+              "name": "Returns a paginated list of source file records attached to the request file link.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "sources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 1,\n      \"file_id\": 7,\n      \"requestfile_id\": 12,\n      \"action_id\": 1,\n      \"permissions\": [\n        {\n          \"name\": \"view\",\n          \"enabled\": true\n        },\n        {\n          \"name\": \"download\",\n          \"enabled\": false\n        }\n      ]\n    },\n    {\n      \"id\": 2,\n      \"file_id\": 8,\n      \"requestfile_id\": 12,\n      \"action_id\": 2,\n      \"permissions\": [\n        {\n          \"name\": \"view\",\n          \"enabled\": true\n        },\n        {\n          \"name\": \"download\",\n          \"enabled\": true\n        }\n      ]\n    }\n  ],\n  \"total\": 2,\n  \"page\": 1,\n  \"pageSize\": 20\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d5ee0f1-cdef-4026-8848-b1c272dfb569",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "sources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_ACCESS_USER\",\n    \"message\": \"Insufficient access permissions\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87a245ca-c080-4b7f-907f-994961112435",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "sources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cadaf8e3-4167-4721-be52-b50b19d07ab4",
+          "name": "Get source file metadata",
+          "request": {
+            "name": "Get source file metadata",
+            "description": {
+              "content": "Gets the file metadata for a specific source file attached to the request file link.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "requestFile",
+                ":ref",
+                "sources",
+                ":object_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "With parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ref",
+                  "description": "(Required) The unique reference of the Request File upload link."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_id",
+                  "description": "(Required) The unique identifier (UUID) of the source file."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6af54d65-3c13-4d31-8420-06b38f16d57d",
+              "name": "Returns the file metadata for the specified source file.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "sources",
+                    ":object_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) The unique identifier (UUID) of the source file."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 7,\n  \"name\": \"onboarding-checklist.pdf\",\n  \"parent_id\": 3,\n  \"size\": 102400,\n  \"mime\": \"application/pdf\",\n  \"created\": \"2024-01-10T09:00:00+00:00\",\n  \"modified\": \"2024-03-01T14:30:00+00:00\",\n  \"deleted\": false,\n  \"locked\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2da09d5e-cc52-4c88-b501-cc6508c1d99c",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "sources",
+                    ":object_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) The unique identifier (UUID) of the source file."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_ACCESS_USER\",\n    \"message\": \"Insufficient access permissions\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce400d64-6ba7-43f9-a90c-cbc88216fa7f",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "sources",
+                    ":object_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) The unique identifier (UUID) of the source file."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7fce9402-9aff-491d-befe-112a7985fc77",
+          "name": "Download files from folder in request files to folder message",
+          "request": {
+            "name": "Download files from folder in request files to folder message",
+            "description": {
+              "content": "Downloads a file that was made available to recipients as a source attachment in a\n                       request files to folder message. Access is granted via the request file reference link\n                       (`ref`).\\n\\nThe request link must be valid and not expired. If the request requires\n                       authentication, the caller must be logged in. The file must not be deleted, infected,\n                       or DLP-locked.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "requestFile",
+                ":ref",
+                "sources",
+                ":object_id",
+                "content"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ref",
+                  "description": "(Required) The unique reference of the Request File upload link."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_id",
+                  "description": "(Required) The unique identifier of the file"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Range of bytes to download. e.g. `bytes=0-1024`",
+                "key": "Range",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c286b0da-8b62-4882-a2f5-f0f7cf62c0c6",
+              "name": "Returns the binary file content as a downloadable stream.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "sources",
+                    ":object_id",
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) The unique identifier of the file"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Range of bytes to download. e.g. `bytes=0-1024`",
+                    "key": "Range",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7be6572d-d2e8-4560-8f96-978c7e39e5a4",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "sources",
+                    ":object_id",
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) The unique identifier of the file"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Range of bytes to download. e.g. `bytes=0-1024`",
+                    "key": "Range",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_ACCESS_USER\",\n    \"message\": \"Insufficient access permissions\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb2e2e19-f057-4f44-850b-571bdce27782",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "sources",
+                    ":object_id",
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) The unique identifier of the file"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Range of bytes to download. e.g. `bytes=0-1024`",
+                    "key": "Range",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "37c6c604-f2ca-4388-ae71-0300d8eaab4d",
+          "name": "Get files uploaded by the current user",
+          "request": {
+            "name": "Get files uploaded by the current user",
+            "description": {
+              "content": "Returns the list of files the currently authenticated user has uploaded for the specified request file link. Returns an empty list when the link does not require authentication (`require_auth=false`).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "requestFile",
+                ":ref",
+                "uploads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ref",
+                  "description": "(Required) The unique reference of the Request File upload link."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ee0a37ab-d2cc-49cf-90f5-6cffd7d5f399",
+              "name": "Returns a paginated list of upload records for the current user. Returns `{data: []}` when the link does not require authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "uploads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 10,\n      \"file_id\": 55,\n      \"requestfile_id\": 12\n    },\n    {\n      \"id\": 11,\n      \"file_id\": 56,\n      \"requestfile_id\": 12\n    }\n  ],\n  \"total\": 2,\n  \"page\": 1,\n  \"pageSize\": 20\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f24eb04-e855-4e1c-be5e-388d61f36a6c",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "uploads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_ACCESS_USER\",\n    \"message\": \"Insufficient access permissions\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6677f6a3-a00f-4546-b4b3-ebdbd2f8a827",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "uploads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fda42d4d-2ee9-42c0-a053-ab8992d67641",
+          "name": "Get uploaded file metadata",
+          "request": {
+            "name": "Get uploaded file metadata",
+            "description": {
+              "content": "Gets the file metadata for a specific file uploaded through the request file link. Only accessible when the link requires authentication (`require_auth=true`). The uploader's email address is stripped from the displayed file name before it is returned.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "requestFile",
+                ":ref",
+                "uploads",
+                ":object_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "With parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ref",
+                  "description": "(Required) The unique reference of the Request File upload link."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_id",
+                  "description": "(Required) The unique identifier (UUID) of the uploaded file."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "78694b5f-c598-46f6-b982-2eb87c9e87e6",
+              "name": "Returns the file metadata for the specified uploaded file, with the uploader's email suffix removed from the file name.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "uploads",
+                    ":object_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) The unique identifier (UUID) of the uploaded file."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 55,\n  \"name\": \"signed-agreement.pdf\",\n  \"parent_id\": 3,\n  \"size\": 85000,\n  \"mime\": \"application/pdf\",\n  \"created\": \"2024-03-20T11:00:00+00:00\",\n  \"modified\": \"2024-03-20T11:00:00+00:00\",\n  \"deleted\": false,\n  \"locked\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ca3735f-892a-4040-b10c-64716f5f74a2",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "uploads",
+                    ":object_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) The unique identifier (UUID) of the uploaded file."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_ACCESS_USER\",\n    \"message\": \"Insufficient access permissions\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad7e1c4c-cae3-46f7-a318-3ec45f87f7a6",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "uploads",
+                    ":object_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) The unique identifier (UUID) of the uploaded file."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "52dd6fb8-e660-4ba7-8b40-4e642225f446",
+          "name": "Delete an uploaded file",
+          "request": {
+            "name": "Delete an uploaded file",
+            "description": {
+              "content": "Deletes a file that was uploaded through the request file link. Only accessible when the link requires authentication (`require_auth=true`) and has not expired.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "requestFile",
+                ":ref",
+                "uploads",
+                ":object_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ref",
+                  "description": "(Required) The unique reference of the Request File upload link."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_id",
+                  "description": "(Required) The unique identifier (UUID) of the uploaded file."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "874d0d08-df9d-4a03-a821-680d2af5476b",
+              "name": "The uploaded file was successfully deleted. Returns no content.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "uploads",
+                    ":object_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) The unique identifier (UUID) of the uploaded file."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "120d7950-30d3-4c63-9a15-79ac39907dd1",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_ENTITY_LOCKED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "uploads",
+                    ":object_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) The unique identifier (UUID) of the uploaded file."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_ACCESS_USER\",\n    \"message\": \"Insufficient access permissions\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a480f880-346f-4190-affe-ca07752a620e",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "uploads",
+                    ":object_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) The unique identifier (UUID) of the uploaded file."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b69e4aee-1c34-43ab-8c26-c4ded38b9036",
+          "name": "Download files uploaded to request files to folder or inbox message",
+          "request": {
+            "name": "Download files uploaded to request files to folder or inbox message",
+            "description": {
+              "content": "Downloads a file that was uploaded to a request files to folder or inbox message. Access\n                       is granted via the request file reference link (`ref`).\\n\\n**Authentication is required**\n                       — guest access is not permitted for this endpoint. The file must be associated with the\n                       specified request link, must not be deleted, and must not be infected or DLP-locked.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "requestFile",
+                ":ref",
+                "uploads",
+                ":object_id",
+                "content"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ref",
+                  "description": "(Required) The unique reference of the Request File upload link."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "object_id",
+                  "description": "(Required) The unique identifier of the file"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Range of bytes to download. e.g. `bytes=0-1024`",
+                "key": "Range",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "68599c6b-b2fc-4142-9eb4-34039d08498f",
+              "name": "Returns the binary file content as a downloadable stream.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "uploads",
+                    ":object_id",
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) The unique identifier of the file"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Range of bytes to download. e.g. `bytes=0-1024`",
+                    "key": "Range",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6cab424f-7dc8-4776-9005-668710e476d7",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "uploads",
+                    ":object_id",
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) The unique identifier of the file"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Range of bytes to download. e.g. `bytes=0-1024`",
+                    "key": "Range",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_ACCESS_USER\",\n    \"message\": \"Insufficient access permissions\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "078a14d5-f6bf-4ba0-8353-4293cb8fe9bb",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "uploads",
+                    ":object_id",
+                    "content"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "object_id",
+                      "description": "(Required) The unique identifier of the file"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Range of bytes to download. e.g. `bytes=0-1024`",
+                    "key": "Range",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9bff2940-1975-42a5-923e-8404895b4ee7",
+          "name": "Request files to inbox",
+          "request": {
+            "name": "Request files to inbox",
+            "description": {
+              "content": "### Description:\n  Sends a request files to inbox message.\n### Precondition:\n  Must be assigned a user profile with the ability to request files to inbox.\n### Response:\n  Sends the message requesting files to your inbox.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "mail",
+                "actions",
+                "requestFile"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "returnEntity",
+                  "value": "<boolean>",
+                  "description": "If true, includes the entity in the response body."
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "Specifies additional fields to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"subject\": \"<string>\",\n  \"to\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"body\": \"<string>\",\n  \"expire\": \"<date>\",\n  \"fileLimit\": \"<integer>\",\n  \"requireAuth\": \"<boolean>\",\n  \"returnReceipts\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"sharedMailboxId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ba04cf67-1f74-4ed0-b35d-79b6d58259c1",
+              "name": "Request File to Inbox request has been successfully created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "mail",
+                    "actions",
+                    "requestFile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subject\": \"<string>\",\n  \"to\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"body\": \"<string>\",\n  \"expire\": \"<date>\",\n  \"fileLimit\": \"<integer>\",\n  \"requireAuth\": \"<boolean>\",\n  \"returnReceipts\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"sharedMailboxId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ef5d4475-fa7b-452d-ac76-bb70ce0bd439",
+              "name": "Bad Request<br /><br /><i>Possible error codes: </i>ERR_REQUEST_INVALID_JSON",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "mail",
+                    "actions",
+                    "requestFile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subject\": \"<string>\",\n  \"to\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"body\": \"<string>\",\n  \"expire\": \"<date>\",\n  \"fileLimit\": \"<integer>\",\n  \"requireAuth\": \"<boolean>\",\n  \"returnReceipts\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"sharedMailboxId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_REQUEST_INVALID_JSON\",\n      \"message\": \"Invalid json provided\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "810cbed9-8c20-4ce7-8eb8-bc92c45112b4",
+              "name": "Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "mail",
+                    "actions",
+                    "requestFile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subject\": \"<string>\",\n  \"to\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"body\": \"<string>\",\n  \"expire\": \"<date>\",\n  \"fileLimit\": \"<integer>\",\n  \"requireAuth\": \"<boolean>\",\n  \"returnReceipts\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"sharedMailboxId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_AUTH_INVALID_CSRF\",\n      \"message\": \"Invalid CSRF Authentication\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b6ecaed-d5b0-4835-bb1d-c4f7cdf24cda",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_INPUT_EMAIL_IS_DISTRIBUTION_LIST, ERR_LICENSE_MAX_USERS_COUNT_REACHED, ERR_SYSTEM_REQUEST_FILE_DISABLED, ERR_USER_HAS_NO_USER_TYPE, ERR_PROFILE_SEND_FILE_EXTERNAL_DISABLED, ERR_USER_TYPE_NO_ACCESS",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "mail",
+                    "actions",
+                    "requestFile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subject\": \"<string>\",\n  \"to\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"body\": \"<string>\",\n  \"expire\": \"<date>\",\n  \"fileLimit\": \"<integer>\",\n  \"requireAuth\": \"<boolean>\",\n  \"returnReceipts\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"sharedMailboxId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_INPUT_EMAIL_IS_DISTRIBUTION_LIST\",\n      \"message\": \"Distribution list user is not allowed to register\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2dae850-bd5b-4ad0-9c06-7097cf7343ae",
+              "name": "Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_HYPERLINK, ERR_INPUT_INVALID_DATE, ERR_INPUT_REQUIRED, ERR_INVALID_PARAMETER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "mail",
+                    "actions",
+                    "requestFile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subject\": \"<string>\",\n  \"to\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"body\": \"<string>\",\n  \"expire\": \"<date>\",\n  \"fileLimit\": \"<integer>\",\n  \"requireAuth\": \"<boolean>\",\n  \"returnReceipts\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"sharedMailboxId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_INPUT_HYPERLINK\",\n      \"message\": \"Not allowed hyperlink domain. Hyperlink domain should not different from anchored text domain.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2851bc5-6d94-42fe-a8fe-607e7aa729ef",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "mail",
+                    "actions",
+                    "requestFile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subject\": \"<string>\",\n  \"to\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"body\": \"<string>\",\n  \"expire\": \"<date>\",\n  \"fileLimit\": \"<integer>\",\n  \"requireAuth\": \"<boolean>\",\n  \"returnReceipts\": [\n    \"<email>\",\n    \"<email>\"\n  ],\n  \"sharedMailboxId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a58005c4-2aa4-4fcb-bec7-69ec3e3c108a",
+          "name": "Reply to Request File",
+          "request": {
+            "name": "Reply to Request File",
+            "description": {
+              "content": "### Description:\n  Processes a reply to a specific Request File.\n### Precondition:\n  The user must be authenticated and have the proper access to reply to the specified request file.\n### Response:\n  The reply to the request file is processed, and a successful response is returned with the status of the action.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "requestFile",
+                ":ref",
+                "reply"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ref",
+                  "description": "(Required) The unique reference of the Request File upload link."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"body\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b83ba9e1-a97a-4c8a-9c6b-a5edb7634900",
+              "name": "The reply to the Request File has been successfully processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "reply"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"body\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5d1c7fc1-1bbb-46a8-83dc-f6d86b4289af",
+              "name": "Bad Request<br /><br /><i>Possible error codes: </i>ERR_REQUEST_INVALID_JSON",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "reply"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"body\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_REQUEST_INVALID_JSON\",\n      \"message\": \"Invalid json provided\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "770e46b1-ce48-4139-a5df-04cd24cd8ce9",
+              "name": "Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "reply"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"body\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_AUTH_INVALID_CSRF\",\n      \"message\": \"Invalid CSRF Authentication\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5966251-3ed0-42e2-b767-bb70db5eee54",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_ENTITY_REQUEST_FILE_NO_FILE_UPLOADED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "reply"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"body\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_ACCESS_USER\",\n      \"message\": \"Insufficient access permissions\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "020f4ef2-b062-4c7d-af1f-dd1796cac939",
+              "name": "Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_HYPERLINK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "reply"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"body\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_INPUT_HYPERLINK\",\n      \"message\": \"Not allowed hyperlink domain. Hyperlink domain should not different from anchored text domain.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd16d660-d7fd-4e6c-857b-f8eab13bc888",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "reply"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"body\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8d8fbfd3-0957-44e6-b334-d5e73042816b",
+    "name": "Kiteworks API Documentation activities requestFile API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

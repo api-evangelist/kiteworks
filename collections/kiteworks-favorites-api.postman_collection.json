@@ -1,0 +1,1282 @@
+{
+  "item": [
+    {
+      "id": "2c97b38c-68df-4fa9-aba2-f46b5ea39cec",
+      "name": "favorites",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "20a1a99c-5e13-4002-9ba0-70893b036ef6",
+          "name": "Add a favorite",
+          "request": {
+            "name": "Add a favorite",
+            "description": {
+              "content": "Marks the specified folder as a favorite for the current user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "favorites"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "returnEntity",
+                  "value": "<boolean>",
+                  "description": "If set to `true`, returns information about the newly created entity."
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"objectId\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "96203fc7-88a6-41f2-97f6-45dc6695ff5f",
+              "name": "Favorite created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "favorites"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"objectId\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 42,\n  \"objectId\": \"f0e1d2c3-b4a5-6789-0fed-cba987654321\",\n  \"userId\": \"u1a2b3c4-d5e6-7890-abcd-ef1234567890\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36fe9d78-53f3-4eb9-bcc7-e5b6ffcb8e6e",
+              "name": "Conflict<br /><br /><i>Possible error codes: </i>ERR_ENTITY_EXISTS",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "favorites"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"objectId\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_ENTITY_EXISTS\",\n    \"message\": \"Entity exists\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b180f87-62df-4bbb-8e88-1095b0df24ce",
+              "name": "Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_REQUIRED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "favorites"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"objectId\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_INPUT_REQUIRED\",\n    \"message\": \"Field is required\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e2014d7f-ce8a-427a-9ecb-0cc277091c0b",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "favorites"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"objectId\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "75ca20ea-d358-490a-aac8-dd51da08365b",
+          "name": "List favorites",
+          "request": {
+            "name": "List favorites",
+            "description": {
+              "content": "### Description:\n  Returns the list of favorites for the current user.\n### Precondition:\n  User must be authenticated.\n### Response:\n  The list of favorited files and folders is returned.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "favorites"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "returnEntity",
+                  "value": "<boolean>",
+                  "description": "If true, includes the entity in the response body."
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "Specifies additional fields to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                },
+                {
+                  "disabled": false,
+                  "key": "parentId",
+                  "value": "<string>",
+                  "description": "Filter favorites by parent folder ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "parentId:in",
+                  "value": "<string>",
+                  "description": "Filter favorites by parent folder ID. Search for results that contain any of the specified values."
+                },
+                {
+                  "disabled": false,
+                  "key": "parentId:in",
+                  "value": "<string>",
+                  "description": "Filter favorites by parent folder ID. Search for results that contain any of the specified values."
+                },
+                {
+                  "disabled": false,
+                  "key": "excludeEc",
+                  "value": "<boolean>",
+                  "description": "If set to `true`, excludes Repositories Gateway folders from the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "<string>",
+                  "description": "Sort order for the results. Default is `objects.created:asc`.<br>Allowed values: `objects.name:asc`, `objects.name:desc`, `objects.created:asc`, `objects.created:desc`, `objects.modified:asc`, `objects.modified:desc`."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Range limit."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Range offset."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ec803edb-227e-48d7-8365-1631bb4579fa",
+              "name": "The list of favorites has been successfully returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "favorites"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parentId:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parentId:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludeEc",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 2603,\n      \"userId\": \"string\",\n      \"objectId\": \"1e56ea1f-dd26-e03e-1d75-d280d7673236\",\n      \"object\": {\n        \"id\": \"3d07e2cd-d3e8-6a1c-ab99-2502dcefc73f\",\n        \"parentId\": \"9cdb5810-74e2-171d-7052-fc8c0ab5906d\",\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"userId\": \"3bc6d914-b57e-0728-9ccc-90f3f0e32cfe\",\n        \"creator\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"profileIcon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"created\": \"1951-01-12\",\n        \"modified\": \"2006-06-11\",\n        \"expire\": \"1979-03-18\",\n        \"permissions\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"allowed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"allowed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"deleted\": true,\n        \"permDeleted\": true,\n        \"permalink\": \"string\",\n        \"path\": \"string\",\n        \"members\": [\n          {\n            \"objectId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"roleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"userId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"groupId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"user\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"role\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"group\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sharedBy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"created\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"inheritRoleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"allowedFolderRoleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rank\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"originFolder\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"objectId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"roleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"userId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"groupId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"user\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"role\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"group\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sharedBy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"created\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"inheritRoleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"allowedFolderRoleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rank\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"originFolder\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"vendorDocId\": \"string\",\n        \"vendorDocName\": \"string\",\n        \"secure\": true,\n        \"source\": 8540,\n        \"isShared\": true,\n        \"syncable\": true,\n        \"fileLifetime\": 2191,\n        \"description\": \"string\",\n        \"parent\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parentId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"userId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"creator\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"created\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"modified\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"expire\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"permissions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deleted\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"permDeleted\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"permalink\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"path\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"members\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"vendorDocId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"vendorDocName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"secure\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"source\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isShared\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"syncable\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fileLifetime\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isFavorite\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"pushedFilesCount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"currentUserRole\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"avStatus\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"dlpStatus\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"totalMembersCount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"totalFoldersCount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"totalFilesCount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"maxFolderExpiration\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"maxFileLifetime\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isLdapGroupMember\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isUnderMyFolder\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"pathIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isRoot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"rootId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"useFolderQuota\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"quota\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"size\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"freeSpace\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"inheritanceEnabled\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"isFavorite\": false,\n        \"pushedFilesCount\": 9918,\n        \"currentUserRole\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"rank\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"avStatus\": \"string\",\n        \"dlpStatus\": \"string\",\n        \"totalMembersCount\": 6410,\n        \"totalFoldersCount\": 1583,\n        \"totalFilesCount\": 8579,\n        \"maxFolderExpiration\": \"2005-03-19\",\n        \"maxFileLifetime\": 5382,\n        \"isLdapGroupMember\": false,\n        \"isUnderMyFolder\": false,\n        \"pathIds\": \"string\",\n        \"isRoot\": true,\n        \"rootId\": \"943c57c5-2d66-353b-94ed-5cc557263b9d\",\n        \"useFolderQuota\": false,\n        \"quota\": 9823,\n        \"size\": 3957,\n        \"freeSpace\": 9388,\n        \"inheritanceEnabled\": true\n      }\n    },\n    {\n      \"id\": 4639,\n      \"userId\": \"string\",\n      \"objectId\": \"730cb8df-b99b-0d06-e3fd-abaa8b60e43c\",\n      \"object\": {\n        \"id\": \"c5705c3b-9800-3100-f306-f0c2b81e7704\",\n        \"parentId\": \"5a99a770-d5f4-9672-b039-0f41abd9c1b0\",\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"userId\": \"d64fb849-49cc-91d9-0359-51da95f94a6e\",\n        \"creator\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"profileIcon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"created\": \"2003-03-15\",\n        \"modified\": \"1969-04-01\",\n        \"expire\": \"1952-04-06\",\n        \"permissions\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"allowed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"allowed\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"deleted\": true,\n        \"permDeleted\": true,\n        \"permalink\": \"string\",\n        \"path\": \"string\",\n        \"members\": [\n          {\n            \"objectId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"roleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"userId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"groupId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"user\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"role\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"group\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sharedBy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"created\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"inheritRoleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"allowedFolderRoleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rank\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"originFolder\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"objectId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"roleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"userId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"groupId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"user\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"role\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"group\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sharedBy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"created\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"inheritRoleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"allowedFolderRoleId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"email\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"rank\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"originFolder\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"vendorDocId\": \"string\",\n        \"vendorDocName\": \"string\",\n        \"secure\": true,\n        \"source\": 4083,\n        \"isShared\": true,\n        \"syncable\": false,\n        \"fileLifetime\": 6180,\n        \"description\": \"string\",\n        \"parent\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"parentId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"userId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"creator\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"created\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"modified\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"expire\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"permissions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"deleted\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"permDeleted\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"permalink\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"path\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"members\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"vendorDocId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"vendorDocName\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"secure\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"source\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isShared\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"syncable\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"fileLifetime\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isFavorite\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"pushedFilesCount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"currentUserRole\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"avStatus\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"dlpStatus\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"totalMembersCount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"totalFoldersCount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"totalFilesCount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"maxFolderExpiration\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"maxFileLifetime\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isLdapGroupMember\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isUnderMyFolder\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"pathIds\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"isRoot\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"rootId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"useFolderQuota\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"quota\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"size\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"freeSpace\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"inheritanceEnabled\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"isFavorite\": false,\n        \"pushedFilesCount\": 2211,\n        \"currentUserRole\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"rank\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"avStatus\": \"string\",\n        \"dlpStatus\": \"string\",\n        \"totalMembersCount\": 5988,\n        \"totalFoldersCount\": 5031,\n        \"totalFilesCount\": 4848,\n        \"maxFolderExpiration\": \"1985-08-30\",\n        \"maxFileLifetime\": 5393,\n        \"isLdapGroupMember\": true,\n        \"isUnderMyFolder\": true,\n        \"pathIds\": \"string\",\n        \"isRoot\": false,\n        \"rootId\": \"02dbaa8d-f3a9-2e58-29f1-e0ebe14ba27d\",\n        \"useFolderQuota\": false,\n        \"quota\": 2074,\n        \"size\": 8076,\n        \"freeSpace\": 886,\n        \"inheritanceEnabled\": true\n      }\n    }\n  ],\n  \"metadata\": {\n    \"total\": 6477,\n    \"limit\": 6321,\n    \"offset\": 6174\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8f3a4a6-7c0a-4bd7-bce8-d08156c77051",
+              "name": "Unauthorized<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "favorites"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parentId:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parentId:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludeEc",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_ACCESS_USER\",\n      \"message\": \"Insufficient access permissions\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5be04afe-3738-4fa0-8786-f101e1240699",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_DENIED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "favorites"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parentId:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parentId:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludeEc",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_ACCESS_DENIED\",\n      \"message\": \"Your access is denied.\",\n      \"redirectUrl\": \"/login?code=3317\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8685d5ee-dc80-49ab-8ef6-9979f7d6a0b8",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "favorites"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parentId:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parentId:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excludeEc",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7fff6273-7dce-4ff2-bb7d-db098935c880",
+          "name": "Remove a favorite",
+          "request": {
+            "name": "Remove a favorite",
+            "description": {
+              "content": "Removes the specified favorite from the current user's favorites list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "favorites",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) ID of the favorite to be removed"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1ad6468e-4dad-4511-aa95-51ba6ac4843d",
+              "name": "Favorite removed successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "favorites",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the favorite to be removed"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e7f117e2-1e5d-4ebc-b595-14531a26256a",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "favorites",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the favorite to be removed"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_ACCESS_USER\",\n    \"message\": \"Insufficient access permissions\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f349f075-7c99-47fa-bf7f-d6ff2df53b2a",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "favorites",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the favorite to be removed"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f5d37d17-8062-4379-b9a8-501319d233fd",
+          "name": "Set multiple folders as favorite",
+          "request": {
+            "name": "Set multiple folders as favorite",
+            "description": {
+              "content": "Marks multiple folders as favorites for the current user in a single request. Supports partial success, meaning valid items are processed even if some fail.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "folders",
+                "actions",
+                "favorite"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id:in",
+                  "value": "<string>",
+                  "description": "(Required) A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of unique identifiers for the entities to be processed."
+                },
+                {
+                  "disabled": false,
+                  "key": "partialSuccess",
+                  "value": "<boolean>",
+                  "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+                },
+                {
+                  "disabled": false,
+                  "key": "returnEntity",
+                  "value": "<boolean>",
+                  "description": "If set to `true`, returns information about the newly created entity."
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0b3a5b60-52dc-4c2d-9950-0ba2e8e2fb0b",
+              "name": "Favorites created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "folders",
+                    "actions",
+                    "favorite"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partialSuccess",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 42,\n      \"objectId\": \"f0e1d2c3-b4a5-6789-0fed-cba987654321\",\n      \"userId\": \"u1a2b3c4-d5e6-7890-abcd-ef1234567890\"\n    },\n    {\n      \"id\": 43,\n      \"objectId\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\",\n      \"userId\": \"u1a2b3c4-d5e6-7890-abcd-ef1234567890\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff025f05-2e3a-4a53-b615-f725956b262c",
+              "name": "Conflict<br /><br /><i>Possible error codes: </i>ERR_ENTITY_EXISTS",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "folders",
+                    "actions",
+                    "favorite"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partialSuccess",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_ENTITY_EXISTS\",\n    \"message\": \"Entity exists\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bf4439a5-b138-49de-9e2d-d82cee6fdb67",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "folders",
+                    "actions",
+                    "favorite"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partialSuccess",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "76c8bddd-2690-40b5-89f3-9648aceef989",
+          "name": "Removes specified folders from favorites",
+          "request": {
+            "name": "Removes specified folders from favorites",
+            "description": {
+              "content": "Removes multiple folders from the current user's favorites list in a single request. Supports partial success, meaning valid items are processed even if some fail.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "folders",
+                "actions",
+                "favorite"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id:in",
+                  "value": "<string>",
+                  "description": "(Required) A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of unique identifiers for the entities to be processed."
+                },
+                {
+                  "disabled": false,
+                  "key": "partialSuccess",
+                  "value": "<boolean>",
+                  "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b0af03eb-2bfc-4bb1-8b68-ed8963520034",
+              "name": "Favorites removed successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "folders",
+                    "actions",
+                    "favorite"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partialSuccess",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "725e08db-d1da-483f-9997-10fdf9b3267b",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "folders",
+                    "actions",
+                    "favorite"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partialSuccess",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_ACCESS_USER\",\n    \"message\": \"Insufficient access permissions\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c7ffee7-fb8f-4c78-9b11-46ab40f7d267",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "folders",
+                    "actions",
+                    "favorite"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partialSuccess",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "87714489-bfe8-43d0-943f-17f6790604de",
+    "name": "Kiteworks API Documentation activities favorites API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

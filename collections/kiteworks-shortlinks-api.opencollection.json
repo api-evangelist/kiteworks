@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities shortLinks API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "shortLinks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Short Link",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/shortLinks/:ref",
+            "params": [
+              {
+                "name": "ref",
+                "value": "",
+                "type": "path",
+                "description": "The ref value of the short link"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns the properties of the specified short link, including the associated entity ID, entity type, and expiration date. Access to email-package short links is allowed without authentication when the package access control is set to no-auth."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

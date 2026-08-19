@@ -1,0 +1,362 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities mobileSync API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "mobileSync",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add multiple files to mobile sync list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/files/actions/mobileSyncItems",
+            "params": [
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of unique identifiers for the entities to be processed."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Adds multiple files to the current user's mobile sync list in a single request. Supports partial success, meaning valid items are processed even if some fail. This operation will not return location headers for each entity created, if the inserted records are\n        required, returnEntity should be set to true."
+        },
+        {
+          "info": {
+            "name": "Delete multiple files from user mobile sync list",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/files/actions/mobileSyncItems",
+            "params": [
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of unique identifiers for the entities to be processed."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Removes multiple files from the current user's mobile sync list in a single request. Supports partial success, meaning valid items are processed even if some fail."
+        },
+        {
+          "info": {
+            "name": "Push files list to mobile sync list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/files/actions/push",
+            "params": [
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of unique identifiers for the entities to be processed."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Adds multiple files to the mobile sync list for all members of the files' parent folder. Requires mobile sync to be enabled. Supports partial success, meaning valid items are processed even if some fail. This operation will not return location headers for each entity created, if the inserted records are\n        required, returnEntity should be set to true."
+        },
+        {
+          "info": {
+            "name": "Un-Push multiple files",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/files/actions/push",
+            "params": [
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of unique identifiers for the entities to be processed."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Removes multiple files from all folder members' mobile sync list in a single request. Requires mobile sync to be enabled. Supports partial success, meaning valid items are processed even if some fail."
+        },
+        {
+          "info": {
+            "name": "Push file to mobile sync list",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/files/:id/actions/push",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the file"
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Adds the specified file to the mobile sync list for all members of the file's parent folder. Requires mobile sync to be enabled."
+        },
+        {
+          "info": {
+            "name": "Un-Push file from mobile sync list",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/files/:id/actions/push",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifer (UUID) of the file"
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Removes the specified file from all folder members' mobile sync list. Requires mobile sync to be enabled."
+        },
+        {
+          "info": {
+            "name": "List mobile sync items for the current user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/mobileSyncItems",
+            "params": [
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes the entity in the response body."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              },
+              {
+                "name": "avStatus",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by antivirus scan status. Accepted values: `allowed`, `disallowed`, `scanning`."
+              },
+              {
+                "name": "dlpStatus",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by DLP scan status. Accepted values: `allowed`, `disallowed`, `scanning`."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for the results. Default is `created:desc`.<br>Allowed values: `created:asc`, `created:desc`."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Range limit."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Range offset."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Returns a paginated list of mobile sync items belonging to the current user.\n### Precondition:\n  User must be authenticated. The tenant must not be suspended and the license must not be expired.\n### Response:\n  Returns a list of mobile sync items for the current user.\n"
+        },
+        {
+          "info": {
+            "name": "Set file as a mobile sync item",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/mobileSyncItems",
+            "params": [
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds the specified file to the current user's mobile sync list."
+        },
+        {
+          "info": {
+            "name": "Return a mobile sync item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/mobileSyncItems/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the entity."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes the entity in the response body."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Returns information about the specified mobile sync item belonging to the current user.\n### Precondition:\n  User must be authenticated and must own the specified mobile sync item. The tenant must not be suspended and the license must not be expired.\n### Response:\n  Returns the specified mobile sync item.\n"
+        },
+        {
+          "info": {
+            "name": "Remove mobile sync item",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/mobileSyncItems/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the mobile sync item to be removed"
+              }
+            ]
+          },
+          "docs": "Removes the specified item from the current user's mobile sync list."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

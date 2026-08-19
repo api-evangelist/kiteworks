@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities clientEventLogs API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "clientEventLogs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit client event logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/clients/action/eventLog",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Submits one or more event log entries from the client for recording on the server.\n### Precondition:\n  User must be authenticated.\n### Response:\n  Returns the created event log entries.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

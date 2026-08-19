@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities internal API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "internal",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an upload link for an Advanced Form submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/advancedForms/:id/submissions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Creates a subfolder under the form owner's folder for the submission, then returns an upload link that the Advanced Form client can use to upload the submitted files.\n### Precondition:\n  Caller must be an Advanced Forms client.\n  The authenticated user must be the form owner.\n### Response:\n  Returns an upload link pointing to the newly created submission subfolder.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

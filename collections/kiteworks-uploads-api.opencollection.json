@@ -1,0 +1,307 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities uploads API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "uploads",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve all user upload sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/uploads",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "locate_id",
+                "value": "",
+                "type": "query",
+                "description": "If specified, \"offset\" parameter will be ignored\n                                            and the page containing entity with this Id will be returned."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns all active (not yet completed) upload sessions associated with the authenticated user. Each record includes the session ID, file name, total and uploaded sizes, chunk counts, and upload URI."
+        },
+        {
+          "info": {
+            "name": "Get upload server configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/uploads/config"
+          },
+          "docs": "Returns the configuration of the upload server, including its active status and the maximum allowed chunk size."
+        },
+        {
+          "info": {
+            "name": "Get upload session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/uploads/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the upload session"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns the details of the specified upload session, including its progress, file size, chunk counts, and upload URI."
+        },
+        {
+          "info": {
+            "name": "Terminate upload session",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/uploads/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the upload session."
+              }
+            ]
+          },
+          "docs": "Terminates the specified upload session and discards any uploaded chunks. If the session resides on a different upload node, the termination request is forwarded to that node."
+        },
+        {
+          "info": {
+            "name": "Initiate a ZIP archive upload session for a folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/folders/:id/actions/initiateUpload/zip",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Creates an upload session for a ZIP archive to be uploaded to the specified folder. The archive will be automatically extracted after all chunks are received. Once the session is created, an upload link is returned which can be used to upload the archive in chunks.\n### Precondition:\n  The user must have `file_add` permission for the folder.\n### Response:\n  The upload session is created and an upload link is returned for subsequent chunk uploads.\n"
+        },
+        {
+          "info": {
+            "name": "Initiate a file upload session for a folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/folders/:id/actions/initiateUpload",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Creates an upload session for a file to be added to the specified folder. Once the session is created, an upload link is returned which can be used to upload the file in chunks.\n### Precondition:\n  The user must have `file_add` permission for the folder.\n### Response:\n  The upload session is created and an upload link is returned for subsequent chunk uploads.\n"
+        },
+        {
+          "info": {
+            "name": "Initiate a file upload session for a request file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/requestFile/:ref/actions/initiateUpload",
+            "params": [
+              {
+                "name": "ref",
+                "value": "",
+                "type": "path",
+                "description": "The unique reference of the Request File upload link."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Creates an upload session for a file to be uploaded to a request file. Once the session is created, an upload link is returned which can be used to upload the file in chunks.\n### Precondition:\n  The caller must have access to the request file for uploading.\n### Response:\n  The upload session is created and an upload link is returned for subsequent chunk uploads.\n"
+        },
+        {
+          "info": {
+            "name": "Initiate a file upload session for an email attachment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/mail/:id/actions/initiateUpload",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the email."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Creates an upload session for a file to be attached to an email. Once the session is created, an upload link is returned which can be used to upload the attachment in chunks.\n### Precondition:\n  The user must be the sender of the email.\n### Response:\n  The upload session is created and an upload link is returned for subsequent chunk uploads.\n"
+        },
+        {
+          "info": {
+            "name": "Initiate an unauthenticated file upload session for an email attachment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/public/mail/:id/actions/initiateUpload",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the email."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Creates an upload session for a file to be attached to an email, without requiring full authentication. Once the session is created, an upload link is returned which can be used to upload the attachment in chunks.\n### Precondition:\n  The caller must have a valid unauthenticated access context for the specified email.\n### Response:\n  The upload session is created and an upload link is returned for subsequent chunk uploads.\n"
+        },
+        {
+          "info": {
+            "name": "Initiate an upload session for a new file version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/files/:id/actions/initiateUpload",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the entity."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Creates an upload session to add a new version of an existing file. Once the session is created, an upload link is returned which can be used to upload the new version in chunks.\n### Precondition:\n  The user must have `version_created` permission for the specified file.\n### Response:\n  The upload session is created and an upload link is returned for subsequent chunk uploads.\n"
+        },
+        {
+          "info": {
+            "name": "Upload a file chunk",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/:host_name/rest/uploads/:id",
+            "params": [
+              {
+                "name": "host_name",
+                "value": "",
+                "type": "path",
+                "description": "The upload host name, which can be retrieved from GET /uploads/{id} or the initiateUpload response."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the upload."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes the entity in the response body."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Uploads a single chunk of a file to the server using the upload link obtained from an initiate-upload call. The file is reconstructed server-side once all chunks are received.\n### Precondition:\n  * The caller must hold a valid upload link.\n  * The client must split the file into chunks before uploading.\n  * Chunks must be uploaded sequentially, starting from index 1.\n### Response:\n  Returns the updated upload session after each intermediate chunk, and the completed file record"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

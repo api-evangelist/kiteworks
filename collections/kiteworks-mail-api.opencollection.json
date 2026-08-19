@@ -1,0 +1,1200 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities mail API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "mail",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get messages in mail folders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/mail",
+            "params": [
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes the entity in the response body."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              },
+              {
+                "name": "senderId",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the user who sent the email."
+              },
+              {
+                "name": "senderId:in",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the user who sent the email. Search for results that match any of the specified values of this parameter. (Recommended request size <= 100)"
+              },
+              {
+                "name": "isRecipient",
+                "value": "",
+                "type": "query",
+                "description": "Filter results to include only emails where the current user is a recipient."
+              },
+              {
+                "name": "read",
+                "value": "",
+                "type": "query",
+                "description": "Filter results based on whether the email has been read by the current user."
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by the email creation date."
+              },
+              {
+                "name": "date:gt",
+                "value": "",
+                "type": "query",
+                "description": "Filter emails created after the specified date."
+              },
+              {
+                "name": "date:gte",
+                "value": "",
+                "type": "query",
+                "description": "Filter emails created on or after the specified date."
+              },
+              {
+                "name": "date:lt",
+                "value": "",
+                "type": "query",
+                "description": "Filter emails created before the specified date."
+              },
+              {
+                "name": "date:lte",
+                "value": "",
+                "type": "query",
+                "description": "Filter emails created on or before the specified date."
+              },
+              {
+                "name": "modified_date",
+                "value": "",
+                "type": "query",
+                "description": "Filter emails by the last modified date of the email."
+              },
+              {
+                "name": "modified_date:gt",
+                "value": "",
+                "type": "query",
+                "description": "Filter emails modified after the specified date."
+              },
+              {
+                "name": "modified_date:gte",
+                "value": "",
+                "type": "query",
+                "description": "Filter emails modified on or after the specified date."
+              },
+              {
+                "name": "modified_date:lt",
+                "value": "",
+                "type": "query",
+                "description": "Filter emails modified before the specified date."
+              },
+              {
+                "name": "modified_date:lte",
+                "value": "",
+                "type": "query",
+                "description": "Filter emails modified on or before the specified date."
+              },
+              {
+                "name": "deleted",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether the email has been deleted."
+              },
+              {
+                "name": "emailPackageId",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by the unique identifier of the email package."
+              },
+              {
+                "name": "emailPackageId:in",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by email package identifiers. Matches any of the specified values."
+              },
+              {
+                "name": "templateId",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by the unique identifier of the email template."
+              },
+              {
+                "name": "templateId:in",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by email template identifiers. Matches any of the specified values."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by email status. Accepts a comma-separated list of values.<br>`sent` – Successfully delivered to recipients.<br>`draft` – Saved but not yet sent.<br>`queued` – Waiting to be sent.<br>`error` – Failed to send.<br>`self_send` – Sent only to the sender (self-copy only).<br>`pending_review` – Awaiting DLP or admin approval.<br>`denied` – Rejected by a DLP or admin policy."
+              },
+              {
+                "name": "isPreview",
+                "value": "",
+                "type": "query",
+                "description": "Filter results to include only preview emails if set to true."
+              },
+              {
+                "name": "isUserSent",
+                "value": "",
+                "type": "query",
+                "description": "Filter results to include only emails sent by the user if set to true."
+              },
+              {
+                "name": "bucket",
+                "value": "",
+                "type": "query",
+                "description": "Filter results to emails in the specified mailbox bucket.<br>`inbox` – Received emails.<br>`draft` – Unsent draft emails.<br>`outgoing` – Emails queued or in progress.<br>`sent` – Successfully sent emails.<br>`trash` – Deleted emails."
+              },
+              {
+                "name": "returnCustomWebForm",
+                "value": "",
+                "type": "query",
+                "description": "Includes emails with custom web forms in the results."
+              },
+              {
+                "name": "customWebFormOnly",
+                "value": "",
+                "type": "query",
+                "description": "Filter results to only include emails with custom web forms."
+              },
+              {
+                "name": "trackingOnly",
+                "value": "",
+                "type": "query",
+                "description": "Filter results to only include emails with tracking access."
+              },
+              {
+                "name": "approvalRequestOnly",
+                "value": "",
+                "type": "query",
+                "description": "Filter results to only include emails with approval requests."
+              },
+              {
+                "name": "webFormId",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by unique identifier of the email web form."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for the results. Default is `id:asc`.<br>Allowed values: `id:asc`, `id:desc`, `date:asc`, `date:desc`, `status:asc`, `status:desc`."
+              },
+              {
+                "name": "sharedMailboxId",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the shared mailbox. Filters results to emails belonging to the shared mailbox."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Range limit."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Range offset."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Gets a list of messages from the current user's mailbox folders: Inbox, Sent & Tracked, Drafts, Trash, and Outbox. Each result includes the email ID, sent date, and send status.\n### Precondition:\n  None.\n### Response:\n  Returns the list of messages across the user's mail folders.\n### Sorting:\n  Sort string syntax `FIELD_NAME:ORDER`.\n\n  ORDER can be `asc` or `desc`.\n### Sorting options:\n  | FIELD_NAME | Description              |\n  |------------|--------------------------|\n  | "
+        },
+        {
+          "info": {
+            "name": "Delete draft messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/mail",
+            "params": [
+              {
+                "name": "emailId:in",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of email IDs to be processed."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Using email IDs, deletes up to 100 draft messages from the current user's Drafts folder.\n### Precondition:\n  None.\n### Response:\n  Deletes the specified draft messages from the Drafts folder.\n"
+        },
+        {
+          "info": {
+            "name": "Get message counts for mail folders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/mail/actions/counters",
+            "params": [
+              {
+                "name": "returnCustomWebForm",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to include emails with custom web forms in the result."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Gets the number of messages in each of the current user's mailbox folders: Inbox, Sent & Tracked, Drafts, Trash, and Outbox.\n### Precondition:\n  None.\n### Response:\n  Returns the message count for each mail folder.\n"
+        },
+        {
+          "info": {
+            "name": "Permanently delete messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/rest/mail/actions/deletePermanent",
+            "params": [
+              {
+                "name": "emailId:in",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of email IDs to be processed."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Using email IDs, permanently deletes messages from the current user's Inbox and Sent folders. Depending on the system retention policy, messages may be recoverable until they are permanently purged by the system.\n### Preconditions:\n  Must be the sender or a recipient of the messages.\n### Response:\n  Returns a full or partial success response indicating which messages were permanently deleted.\n"
+        },
+        {
+          "info": {
+            "name": "Expand a distribution list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/mail/actions/distributionList",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "The email address to check or expand."
+              },
+              {
+                "name": "expand",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether to include the email addresses of distribution list members."
+              },
+              {
+                "name": "emailId",
+                "value": "",
+                "type": "query",
+                "description": "If provided, the distribution list will include only members who have received this specific email."
+              }
+            ]
+          },
+          "docs": "Resolves a distribution list email address and returns its members."
+        },
+        {
+          "info": {
+            "name": "Mark messages as read",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/rest/mail/actions/read",
+            "params": [
+              {
+                "name": "emailId:in",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of email IDs to be processed."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Using email IDs, marks the specified messages as read in the current user's Inbox.\n### Preconditions:\n  Must be the sender or a recipient of the messages.\n### Response:\n  Returns a full or partial success response indicating which messages were marked as read.\n"
+        },
+        {
+          "info": {
+            "name": "Recover deleted messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/rest/mail/actions/recover",
+            "params": [
+              {
+                "name": "emailId:in",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of email IDs to be processed."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Using email IDs, recovers deleted messages from the current user's Trash folder and returns them to the Inbox.\n### Preconditions:\n  Must be the sender or a recipient of the messages.\n### Response:\n  Returns a full or partial success response indicating which messages were recovered to the Inbox.\n"
+        },
+        {
+          "info": {
+            "name": "Send files",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/mail/actions/sendFile",
+            "params": [
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes the entity in the response body."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Creates an email message and sends the specified file attachments through Kiteworks.\n### Precondition:\n  Must be assigned a user profile with permission to send mail.\n### Response:\n  Returns the created email and sends the file attachments to the specified recipients.\n"
+        },
+        {
+          "info": {
+            "name": "Move messages to Trash",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/rest/mail/actions/trash",
+            "params": [
+              {
+                "name": "emailId:in",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of email IDs to be processed."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Using email IDs, moves messages from the current user's Inbox and Sent folders to the Trash folder.\n### Preconditions:\n  Must be the sender or a recipient of the messages.\n### Response:\n  Returns a full or partial success response indicating which messages were moved to Trash.\n"
+        },
+        {
+          "info": {
+            "name": "Mark messages as unread",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/rest/mail/actions/unread",
+            "params": [
+              {
+                "name": "emailId:in",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of email IDs to be processed."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Using email IDs, marks the specified messages as unread in the current user's Inbox.\n### Preconditions:\n  Must be the sender or a recipient of the messages.\n### Response:\n  Returns a full or partial success response indicating which messages were marked as unread.\n"
+        },
+        {
+          "info": {
+            "name": "Download email attachments in ZIP format",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/mail/:emailId/attachments/actions/zip",
+            "params": [
+              {
+                "name": "emailId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the email for downloading attachments as a ZIP file."
+              },
+              {
+                "name": "attachmentId:in",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the attachment.. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the ZIP file."
+              },
+              {
+                "name": "ref",
+                "value": "",
+                "type": "query",
+                "description": "The reference ID of the email (Mandatory if the email can be accessed without authentication)."
+              },
+              {
+                "name": "username",
+                "value": "",
+                "type": "query",
+                "description": "The email address of the user requesting the file."
+              },
+              {
+                "name": "utcOffset",
+                "value": "",
+                "type": "query",
+                "description": "The user's timezone offset in seconds. For example, UTC+08:00 = 28800 seconds."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Using email IDs, downloads a set of email attachments in ZIP format from your Inbox and Sent folders."
+        },
+        {
+          "info": {
+            "name": "Get email attachment security status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/mail/:emailId/attachments/actions/zipStatus",
+            "params": [
+              {
+                "name": "emailId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the email."
+              },
+              {
+                "name": "attachmentId:in",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the attachment.. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "ref",
+                "value": "",
+                "type": "query",
+                "description": "The reference ID of the email (Mandatory if the email can be accessed without authentication)."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Using email IDs, gets the security scan results of email attachments in your Inbox and Sent folders, prior to downloading in ZIP format."
+        },
+        {
+          "info": {
+            "name": "Get email attachment download report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/mail/:emailId/attachments/report",
+            "params": [
+              {
+                "name": "emailId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the email."
+              }
+            ]
+          },
+          "docs": "Returns a download tracking report for the specified email, listing all recorded download and interaction events for its attachments."
+        },
+        {
+          "info": {
+            "name": "Export email attachment download report as CSV",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/mail/:emailId/attachments/reportCsv",
+            "params": [
+              {
+                "name": "emailId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the email."
+              }
+            ]
+          },
+          "docs": "Generates a download tracking report for the specified email and returns it as a CSV file."
+        },
+        {
+          "info": {
+            "name": "Download email attachment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/mail/:emailId/attachments/:id/content",
+            "headers": [
+              {
+                "name": "Range",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "emailId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the email containing the attachment."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the attachment."
+              },
+              {
+                "name": "ref",
+                "value": "",
+                "type": "query",
+                "description": "The reference code for the email. Required if the email can be accessed without authentication."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Downloads the specified file attached to a message."
+        },
+        {
+          "info": {
+            "name": "Get email attachment preview metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/mail/:emailId/attachments/:id/preview",
+            "params": [
+              {
+                "name": "emailId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the email containing the attachment."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the attachment."
+              },
+              {
+                "name": "ref",
+                "value": "",
+                "type": "query",
+                "description": "The reference code for the email. Required if the email can be accessed without authentication."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Gets file preview metadata about an email attachment, such as the permalink for previewing the file and if the file contains a watermark. Must be assigned the `view` permission for the file."
+        },
+        {
+          "info": {
+            "name": "Get email metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/mail/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the email."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes the entity in the response body."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              },
+              {
+                "name": "ref",
+                "value": "",
+                "type": "query",
+                "description": "The reference ID of the email (Mandatory if the email can be accessed without authentication)."
+              },
+              {
+                "name": "print_flag",
+                "value": "",
+                "type": "query",
+                "description": "Indicates whether the user clicked to print the email."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Gets the metadata for a specified email message, including subject, sender, recipients, sent date, and attachment details.\n### Preconditions:\n  None.\n### Response:\n  Returns the email metadata.\n"
+        },
+        {
+          "info": {
+            "name": "Delete a draft message",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/mail/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the email."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Deletes a single message from the current user's Drafts folder.\n### Preconditions:\n  None.\n### Response:\n  Removes the draft message from the Drafts folder.\n"
+        },
+        {
+          "info": {
+            "name": "Update and send a draft message",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/rest/mail/:id/actions/sendFile",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the email."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes the entity in the response body."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Updates the content of an existing draft message and sends it to its recipients.\n### Precondition:\n  Must be assigned a user profile with permission to send mail.\n### Response:\n  Returns the updated email and sends the message to the specified recipients.\n"
+        },
+        {
+          "info": {
+            "name": "Get attachments for an email message",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/mail/:id/attachments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the email."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of attachments to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of attachments to skip before returning results, for pagination."
+              },
+              {
+                "name": "ref",
+                "value": "",
+                "type": "query",
+                "description": "The reference ID of the email (Mandatory if the email can be accessed without authentication)."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Using an email ID, returns a paginated list of attachments for the specified message, including file metadata for each attachment.\n### Preconditions:\n  Must be the sender or a recipient of the message.\n### Response:\n  Returns the list of email attachments with metadata, including total count for pagination.\n"
+        },
+        {
+          "info": {
+            "name": "Get an email attachment by attachment ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/mail/:id/attachments/:attachment_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the email."
+              },
+              {
+                "name": "attachment_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the attachment."
+              },
+              {
+                "name": "ref",
+                "value": "",
+                "type": "query",
+                "description": "The reference ID of the email (Mandatory if the email can be accessed without authentication)."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Using a file attachment ID, returns the name and metadata for the specified attachment on a given message.\n### Preconditions:\n  Must be the sender or a recipient of the message.\n### Response:\n  Returns the attachment filename and associated metadata.\n"
+        },
+        {
+          "info": {
+            "name": "Get the package associated with an email",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/mail/:id/packages",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the email."
+              },
+              {
+                "name": "ref",
+                "value": "",
+                "type": "query",
+                "description": "The reference ID of the email (Mandatory if the email can be accessed without authentication)."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Returns the package associated with the specified email message.\n### Preconditions:\n  Must have access to the specified email message.\n### Response:\n  Returns the email package details.\n"
+        },
+        {
+          "info": {
+            "name": "Get email recipients",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/mail/:id/recipients",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the email."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes the entity in the response body."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              },
+              {
+                "name": "ref",
+                "value": "",
+                "type": "query",
+                "description": "The reference ID of the email (Mandatory if the email can be accessed without authentication)."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for the recipient list. Default is `type:asc`.<br>Allowed values: `id:asc`, `id:desc`, `type:asc`, `type:desc`."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter recipients by type. Accepts a comma-separated list of integer values.<br>`0` – To.<br>`1` – CC.<br>`2` – BCC."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Range limit."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Range offset."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Gets a paginated list of recipient email addresses for the specified message.\n### Preconditions:\n  Must be the sender or a recipient of the message.\n### Response:\n  Returns the recipient email addresses and pagination metadata.\n"
+        },
+        {
+          "info": {
+            "name": "Withdraw files from a sent message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/mail/:id/actions/withdrawFiles",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the email."
+              },
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of attachment IDs to be withdrawn."
+              },
+              {
+                "name": "sharedMailboxId",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the Shared Mailbox. If provided, the operation will be performed within the specified Shared Mailbox context."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Using an email ID, withdraws the specified file attachments from a sent message.\n### Notes:\n  - The message itself is not withdrawn. Only the links to its file attachments are deactivated, making the files inaccessible to the original recipients. The files remain in the system until they expire.\n  - If a recipient forwarded the message before it was withdrawn, attachment links remain active for those recipients until the files expire.\n### Preconditions:\n  Must be the sender of"
+        },
+        {
+          "info": {
+            "name": "Save email attachments to a Kiteworks folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/mail/:id/actions/copy",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the email."
+              },
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes the entity in the response body."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Saves one or more email attachments to a specified Kiteworks folder.\n### Preconditions:\n  Must have the `file_copy` permission for the files being copied and `file_add` permission for the destination folder.\n### Response:\n  Returns the saved files in the destination folder. If duplicate filenames exist, a number is appended to the saved file names to avoid conflicts.\n"
+        },
+        {
+          "info": {
+            "name": "Send tracked activity report for a sent message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/mail/:id/actions/sendTrackingReport",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the email."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes the entity in the response body."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Generates and emails a tracked activity report for a sent message to the current user's Inbox.\n### Preconditions:\n  Must be the sender of the message and have tracking access enabled.\n### Response:\n  Sends the tracking report to the current user's Inbox.\n"
+        },
+        {
+          "info": {
+            "name": "Get email attachments sent by the current user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/mail/attachments",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Range limit."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Range offset."
+              },
+              {
+                "name": "bucket",
+                "value": "",
+                "type": "query",
+                "description": "Filters attachments to those belonging to emails in the specified bucket.<br>`inbox` – Received emails.<br>`draft` – Unsent draft emails.<br>`outgoing` – Emails queued or in progress.<br>`sent` – Successfully sent emails.<br>`trash` – Deleted emails."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for the results. Default is `id:desc`.<br>Allowed values: `id:asc`, `id:desc`, `subject:asc`, `subject:desc`, `sent_date:asc`, `sent_date:desc`, `modified_date:asc`, `modified_date:desc`, `type:asc`, `type:desc`, `size:asc`, `size:desc`."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Using an email ID, gets a list of files attached to messages in the current user's Inbox or Drafts folder, including file metadata.\n### Preconditions:\n  Messages must belong to the current user.\n### Response:\n  Returns the list of email attachments with associated metadata.\n### Sorting:\n  Sort string syntax `FIELD_NAME:ORDER`.\n\n  ORDER can be `asc` or `desc`.\n### Sorting options:\n  | FIELD_NAME    | Description                              |\n  |---------------|----------------"
+        },
+        {
+          "info": {
+            "name": "Withdraw multiple files from messages in Sent and Drafts folders",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/mail/attachments",
+            "params": [
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "### Description:\n  Using attachment IDs, withdraws the specified attachments from messages in the current user's Sent and Drafts folders.\n### Notes:\n  - The message itself is not withdrawn. Only the links to its file attachments are deactivated, making the files inaccessible to the original recipients. The files remain in the system until they expire.\n  - If a recipient forwarded the message before it was withdrawn, attachment links remain active for those recipients until the files expire.\n### "
+        },
+        {
+          "info": {
+            "name": "Withdraw messages from Sent and Drafts folders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/mail/actions/withdraw",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Using email IDs, withdraws messages from the current user's Sent and Drafts folders.\n### Notes:\n  - The messages themselves are not withdrawn. Only the links to their file attachments are deactivated, making the files inaccessible to the original recipients. The files remain in the system until they expire.\n  - If a recipient forwarded a message before it was withdrawn, attachment links remain active for those recipients until the files expire.\n### Preconditions:\n  Must be the"
+        },
+        {
+          "info": {
+            "name": "Get email message security scan status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/mail/:id/scanStatus",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the email."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Gets the security scan results for a mail message. Depending on system scan policies, message content and attachments may be scanned for antivirus threats, data loss prevention (DLP) violations, and advanced threat protection (ATP).\n### Preconditions:\n  Must be the sender or a recipient of the message.\n### Response:\n  Returns the security scan status for the message and its attachments.\n"
+        },
+        {
+          "info": {
+            "name": "Remove message tracking access",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/mail/:id/trackings/me",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the email."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Removes the current user's access to tracking activity on a specified message.\n### Preconditions:\n  Must be a recipient of the email and have tracking access.\n### Response:\n  Revokes the current user's tracking access for the specified message.\n"
+        },
+        {
+          "info": {
+            "name": "Update message tracking access",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/rest/mail/:id/settings",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the email."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Updates the tracking access settings for a sent message, adding or removing tracking permissions for specified users.\n### Preconditions:\n  Must be the sender of the message and have tracking access enabled.\n### Response:\n  Returns a confirmation that tracking access has been updated for the specified users.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

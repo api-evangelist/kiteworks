@@ -1,0 +1,201 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities favorites API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "favorites",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List favorites",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/favorites",
+            "params": [
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes the entity in the response body."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              },
+              {
+                "name": "parentId",
+                "value": "",
+                "type": "query",
+                "description": "Filter favorites by parent folder ID."
+              },
+              {
+                "name": "parentId:in",
+                "value": "",
+                "type": "query",
+                "description": "Filter favorites by parent folder ID. Search for results that contain any of the specified values."
+              },
+              {
+                "name": "excludeEc",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, excludes Repositories Gateway folders from the results."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for the results. Default is `objects.created:asc`.<br>Allowed values: `objects.name:asc`, `objects.name:desc`, `objects.created:asc`, `objects.created:desc`, `objects.modified:asc`, `objects.modified:desc`."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Range limit."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Range offset."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Returns the list of favorites for the current user.\n### Precondition:\n  User must be authenticated.\n### Response:\n  The list of favorited files and folders is returned.\n"
+        },
+        {
+          "info": {
+            "name": "Add a favorite",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/favorites",
+            "params": [
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Marks the specified folder as a favorite for the current user."
+        },
+        {
+          "info": {
+            "name": "Remove a favorite",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/favorites/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the favorite to be removed"
+              }
+            ]
+          },
+          "docs": "Removes the specified favorite from the current user's favorites list."
+        },
+        {
+          "info": {
+            "name": "Set multiple folders as favorite",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/folders/actions/favorite",
+            "params": [
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of unique identifiers for the entities to be processed."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Marks multiple folders as favorites for the current user in a single request. Supports partial success, meaning valid items are processed even if some fail."
+        },
+        {
+          "info": {
+            "name": "Removes specified folders from favorites",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/folders/actions/favorite",
+            "params": [
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of unique identifiers for the entities to be processed.. A comma-separated list of unique identifiers for the entities to be processed."
+              },
+              {
+                "name": "partialSuccess",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, the operation will continue for the valid items even if some items result in failure."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Removes multiple folders from the current user's favorites list in a single request. Supports partial success, meaning valid items are processed even if some fail."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1045 @@
+{
+  "item": [
+    {
+      "id": "c5393d13-2c38-496f-a7df-6b4a6e246777",
+      "name": "profiles",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e05fafa8-f8f9-4a23-83df-5cb7e7736d74",
+          "name": "Add custom profile",
+          "request": {
+            "name": "Add custom profile",
+            "description": {
+              "content": "Creates a new custom user type profile cloned from an existing built-in profile (e.g., Standard). The new profile's name must be unique. Returns 404 if the specified prototype profile does not exist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "profiles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "returnEntity",
+                  "value": "<boolean>",
+                  "description": "If set to `true`, returns information about the newly created entity."
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"prototype\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5c2e5228-d1a1-42a5-8124-c8ef0f7c005f",
+              "name": "Custom profile created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"prototype\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 5,\n  \"name\": \"Custom Standard\",\n  \"builtIn\": 0,\n  \"cloneable\": 0,\n  \"prototype\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "931a7eb0-187f-4add-8206-6c080fed0876",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"prototype\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_ACCESS_USER\",\n    \"message\": \"Insufficient access permissions\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "497d73c6-f7f6-4ae5-8a40-856831bbdc98",
+              "name": "Conflict<br /><br /><i>Possible error codes: </i>ERR_ENTITY_EXISTS",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"prototype\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_ENTITY_EXISTS\",\n    \"message\": \"Entity exists\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b92709a3-c518-40a6-aad5-2df289dc3d1a",
+              "name": "Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_NOT_IN_RANGE, ERR_INPUT_NOT_ALPHA_DASH, ERR_INPUT_REQUIRED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"prototype\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_INPUT_REQUIRED\",\n    \"message\": \"Field is required\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a1f6b9ff-9176-48d1-b1d9-fdf0ef2d7fbe",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"prototype\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bf093fc6-7f4e-418f-845e-cad338a8e23a",
+          "name": "Return user type (profile) details",
+          "request": {
+            "name": "Return user type (profile) details",
+            "description": {
+              "content": "Returns the details of the current user's own type profile, including its name, built-in status, and cloneability. Returns 403 if the requested profile does not belong to the current user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "profiles",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) ID of the user type (profile) to be retrieved"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0864059b-2352-4ac2-ac76-635aad343e47",
+              "name": "User type profile details retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "profiles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the user type (profile) to be retrieved"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 2,\n  \"name\": \"Restricted\",\n  \"builtIn\": 1,\n  \"cloneable\": 0\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01364d6f-68ce-4729-b19a-5c06ba72ec0e",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "profiles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the user type (profile) to be retrieved"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fd556dca-9149-4024-9737-73b6d91cab36",
+          "name": "Update profile",
+          "request": {
+            "name": "Update profile",
+            "description": {
+              "content": "Updates the feature settings of the specified user type profile. When disabling collaboration access, optional demotion settings control how existing user data is handled (retained, deleted, or transferred to another user).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "profiles",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) ID of the profile to be modified"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"allowSftp\": \"<boolean>\",\n  \"maxStorage\": \"<integer>\",\n  \"storageQuota\": \"<integer>\",\n  \"setExpirationLower\": \"<boolean>\",\n  \"sendExternal\": \"<integer>\",\n  \"linkExpiration\": \"<integer>\",\n  \"ldapMapping\": \"<string>\",\n  \"folderCreate\": \"<integer>\",\n  \"sysFolderCreate\": \"<integer>\",\n  \"sysFolderMaxQuota\": \"<integer>\",\n  \"sysFolderMaxCount\": \"<integer>\",\n  \"sysFolderDefaultQuota\": \"<integer>\",\n  \"maxLinkExpiration\": \"<integer>\",\n  \"acNoAuth\": \"<boolean>\",\n  \"acVerifyRecipient\": \"<boolean>\",\n  \"excludedFileExtensions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fileFilterExclusionGroups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fileFilterCustomFileTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"secureMessageBody\": \"<string>\",\n  \"secureMessageBodyDefault\": \"<boolean>\",\n  \"secureContainerRequired\": \"<boolean>\",\n  \"returnReceipt\": \"<string>\",\n  \"returnReceiptDefault\": \"<boolean>\",\n  \"selfCopy\": \"<string>\",\n  \"selfCopyDefault\": \"<boolean>\",\n  \"includeFingerprint\": \"<string>\",\n  \"includeFingerprintDefault\": \"<boolean>\",\n  \"requestFile\": \"<boolean>\",\n  \"requestFileAllowViewableFile\": \"<boolean>\",\n  \"requestFileUploadAuth\": \"<string>\",\n  \"requestFileAuthDefault\": \"<string>\",\n  \"requestFileExpiration\": \"<integer>\",\n  \"requestFileExpirationUserDecide\": \"<boolean>\",\n  \"requestFileExpirationMax\": \"<integer>\",\n  \"requestFileUploadLimit\": \"<integer>\",\n  \"requestFileUploadLimitUserDecide\": \"<boolean>\",\n  \"requestFileUploadsMax\": \"<integer>\",\n  \"twoFactorAuth\": \"<string>\",\n  \"inactiveExpiration\": \"<integer>\",\n  \"userCanReactivate\": \"<string>\",\n  \"cleanupInactiveAccount\": \"<boolean>\",\n  \"withdrawInactiveAccountFileLinks\": \"<boolean>\",\n  \"allowCollaboration\": \"<boolean>\",\n  \"sendFileLimit\": \"<integer>\",\n  \"remoteWipe\": \"<boolean>\",\n  \"deleteUnsharedData\": \"<boolean>\",\n  \"retainData\": \"<boolean>\",\n  \"retainToUser\": \"<string>\",\n  \"retainPermissionToSharedData\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "def25b58-f90b-4452-b243-7315ac91bb27",
+              "name": "Profile updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "profiles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the profile to be modified"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"allowSftp\": \"<boolean>\",\n  \"maxStorage\": \"<integer>\",\n  \"storageQuota\": \"<integer>\",\n  \"setExpirationLower\": \"<boolean>\",\n  \"sendExternal\": \"<integer>\",\n  \"linkExpiration\": \"<integer>\",\n  \"ldapMapping\": \"<string>\",\n  \"folderCreate\": \"<integer>\",\n  \"sysFolderCreate\": \"<integer>\",\n  \"sysFolderMaxQuota\": \"<integer>\",\n  \"sysFolderMaxCount\": \"<integer>\",\n  \"sysFolderDefaultQuota\": \"<integer>\",\n  \"maxLinkExpiration\": \"<integer>\",\n  \"acNoAuth\": \"<boolean>\",\n  \"acVerifyRecipient\": \"<boolean>\",\n  \"excludedFileExtensions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fileFilterExclusionGroups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fileFilterCustomFileTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"secureMessageBody\": \"<string>\",\n  \"secureMessageBodyDefault\": \"<boolean>\",\n  \"secureContainerRequired\": \"<boolean>\",\n  \"returnReceipt\": \"<string>\",\n  \"returnReceiptDefault\": \"<boolean>\",\n  \"selfCopy\": \"<string>\",\n  \"selfCopyDefault\": \"<boolean>\",\n  \"includeFingerprint\": \"<string>\",\n  \"includeFingerprintDefault\": \"<boolean>\",\n  \"requestFile\": \"<boolean>\",\n  \"requestFileAllowViewableFile\": \"<boolean>\",\n  \"requestFileUploadAuth\": \"<string>\",\n  \"requestFileAuthDefault\": \"<string>\",\n  \"requestFileExpiration\": \"<integer>\",\n  \"requestFileExpirationUserDecide\": \"<boolean>\",\n  \"requestFileExpirationMax\": \"<integer>\",\n  \"requestFileUploadLimit\": \"<integer>\",\n  \"requestFileUploadLimitUserDecide\": \"<boolean>\",\n  \"requestFileUploadsMax\": \"<integer>\",\n  \"twoFactorAuth\": \"<string>\",\n  \"inactiveExpiration\": \"<integer>\",\n  \"userCanReactivate\": \"<string>\",\n  \"cleanupInactiveAccount\": \"<boolean>\",\n  \"withdrawInactiveAccountFileLinks\": \"<boolean>\",\n  \"allowCollaboration\": \"<boolean>\",\n  \"sendFileLimit\": \"<integer>\",\n  \"remoteWipe\": \"<boolean>\",\n  \"deleteUnsharedData\": \"<boolean>\",\n  \"retainData\": \"<boolean>\",\n  \"retainToUser\": \"<string>\",\n  \"retainPermissionToSharedData\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 1,\n  \"name\": \"Standard\",\n  \"builtIn\": 1,\n  \"cloneable\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e3a3ada-92f8-476d-ab25-44b1e50f19a7",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "profiles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the profile to be modified"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"allowSftp\": \"<boolean>\",\n  \"maxStorage\": \"<integer>\",\n  \"storageQuota\": \"<integer>\",\n  \"setExpirationLower\": \"<boolean>\",\n  \"sendExternal\": \"<integer>\",\n  \"linkExpiration\": \"<integer>\",\n  \"ldapMapping\": \"<string>\",\n  \"folderCreate\": \"<integer>\",\n  \"sysFolderCreate\": \"<integer>\",\n  \"sysFolderMaxQuota\": \"<integer>\",\n  \"sysFolderMaxCount\": \"<integer>\",\n  \"sysFolderDefaultQuota\": \"<integer>\",\n  \"maxLinkExpiration\": \"<integer>\",\n  \"acNoAuth\": \"<boolean>\",\n  \"acVerifyRecipient\": \"<boolean>\",\n  \"excludedFileExtensions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fileFilterExclusionGroups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fileFilterCustomFileTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"secureMessageBody\": \"<string>\",\n  \"secureMessageBodyDefault\": \"<boolean>\",\n  \"secureContainerRequired\": \"<boolean>\",\n  \"returnReceipt\": \"<string>\",\n  \"returnReceiptDefault\": \"<boolean>\",\n  \"selfCopy\": \"<string>\",\n  \"selfCopyDefault\": \"<boolean>\",\n  \"includeFingerprint\": \"<string>\",\n  \"includeFingerprintDefault\": \"<boolean>\",\n  \"requestFile\": \"<boolean>\",\n  \"requestFileAllowViewableFile\": \"<boolean>\",\n  \"requestFileUploadAuth\": \"<string>\",\n  \"requestFileAuthDefault\": \"<string>\",\n  \"requestFileExpiration\": \"<integer>\",\n  \"requestFileExpirationUserDecide\": \"<boolean>\",\n  \"requestFileExpirationMax\": \"<integer>\",\n  \"requestFileUploadLimit\": \"<integer>\",\n  \"requestFileUploadLimitUserDecide\": \"<boolean>\",\n  \"requestFileUploadsMax\": \"<integer>\",\n  \"twoFactorAuth\": \"<string>\",\n  \"inactiveExpiration\": \"<integer>\",\n  \"userCanReactivate\": \"<string>\",\n  \"cleanupInactiveAccount\": \"<boolean>\",\n  \"withdrawInactiveAccountFileLinks\": \"<boolean>\",\n  \"allowCollaboration\": \"<boolean>\",\n  \"sendFileLimit\": \"<integer>\",\n  \"remoteWipe\": \"<boolean>\",\n  \"deleteUnsharedData\": \"<boolean>\",\n  \"retainData\": \"<boolean>\",\n  \"retainToUser\": \"<string>\",\n  \"retainPermissionToSharedData\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_ACCESS_USER\",\n    \"message\": \"Insufficient access permissions\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8910453-23b8-43ee-8e25-8740ef0d554a",
+              "name": "Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_NOT_BOOLEAN, ERR_INPUT_ATTRIBUTE_FORBIDDEN, ERR_INPUT_REQUIRED, ERR_INPUT_NOT_STRING, ERR_INPUT_NOT_INTEGER, ERR_INPUT_MIN_VALUE, ERR_INPUT_NOT_IN_LIST, ERR_INPUT_MAX_VALUE, ERR_INPUT_NOT_LESS_THEN, ERR_INPUT_NOT_ALLOWED, ERR_INPUT_INVALID, ERR_INPUT_NOT_ARRAY",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "profiles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the profile to be modified"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"allowSftp\": \"<boolean>\",\n  \"maxStorage\": \"<integer>\",\n  \"storageQuota\": \"<integer>\",\n  \"setExpirationLower\": \"<boolean>\",\n  \"sendExternal\": \"<integer>\",\n  \"linkExpiration\": \"<integer>\",\n  \"ldapMapping\": \"<string>\",\n  \"folderCreate\": \"<integer>\",\n  \"sysFolderCreate\": \"<integer>\",\n  \"sysFolderMaxQuota\": \"<integer>\",\n  \"sysFolderMaxCount\": \"<integer>\",\n  \"sysFolderDefaultQuota\": \"<integer>\",\n  \"maxLinkExpiration\": \"<integer>\",\n  \"acNoAuth\": \"<boolean>\",\n  \"acVerifyRecipient\": \"<boolean>\",\n  \"excludedFileExtensions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fileFilterExclusionGroups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fileFilterCustomFileTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"secureMessageBody\": \"<string>\",\n  \"secureMessageBodyDefault\": \"<boolean>\",\n  \"secureContainerRequired\": \"<boolean>\",\n  \"returnReceipt\": \"<string>\",\n  \"returnReceiptDefault\": \"<boolean>\",\n  \"selfCopy\": \"<string>\",\n  \"selfCopyDefault\": \"<boolean>\",\n  \"includeFingerprint\": \"<string>\",\n  \"includeFingerprintDefault\": \"<boolean>\",\n  \"requestFile\": \"<boolean>\",\n  \"requestFileAllowViewableFile\": \"<boolean>\",\n  \"requestFileUploadAuth\": \"<string>\",\n  \"requestFileAuthDefault\": \"<string>\",\n  \"requestFileExpiration\": \"<integer>\",\n  \"requestFileExpirationUserDecide\": \"<boolean>\",\n  \"requestFileExpirationMax\": \"<integer>\",\n  \"requestFileUploadLimit\": \"<integer>\",\n  \"requestFileUploadLimitUserDecide\": \"<boolean>\",\n  \"requestFileUploadsMax\": \"<integer>\",\n  \"twoFactorAuth\": \"<string>\",\n  \"inactiveExpiration\": \"<integer>\",\n  \"userCanReactivate\": \"<string>\",\n  \"cleanupInactiveAccount\": \"<boolean>\",\n  \"withdrawInactiveAccountFileLinks\": \"<boolean>\",\n  \"allowCollaboration\": \"<boolean>\",\n  \"sendFileLimit\": \"<integer>\",\n  \"remoteWipe\": \"<boolean>\",\n  \"deleteUnsharedData\": \"<boolean>\",\n  \"retainData\": \"<boolean>\",\n  \"retainToUser\": \"<string>\",\n  \"retainPermissionToSharedData\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_INPUT_NOT_BOOLEAN\",\n    \"message\": \"Input is not a valid boolean\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c460c2d-46c2-4c35-9832-5aae94baf88d",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "profiles",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the profile to be modified"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"allowSftp\": \"<boolean>\",\n  \"maxStorage\": \"<integer>\",\n  \"storageQuota\": \"<integer>\",\n  \"setExpirationLower\": \"<boolean>\",\n  \"sendExternal\": \"<integer>\",\n  \"linkExpiration\": \"<integer>\",\n  \"ldapMapping\": \"<string>\",\n  \"folderCreate\": \"<integer>\",\n  \"sysFolderCreate\": \"<integer>\",\n  \"sysFolderMaxQuota\": \"<integer>\",\n  \"sysFolderMaxCount\": \"<integer>\",\n  \"sysFolderDefaultQuota\": \"<integer>\",\n  \"maxLinkExpiration\": \"<integer>\",\n  \"acNoAuth\": \"<boolean>\",\n  \"acVerifyRecipient\": \"<boolean>\",\n  \"excludedFileExtensions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fileFilterExclusionGroups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fileFilterCustomFileTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"secureMessageBody\": \"<string>\",\n  \"secureMessageBodyDefault\": \"<boolean>\",\n  \"secureContainerRequired\": \"<boolean>\",\n  \"returnReceipt\": \"<string>\",\n  \"returnReceiptDefault\": \"<boolean>\",\n  \"selfCopy\": \"<string>\",\n  \"selfCopyDefault\": \"<boolean>\",\n  \"includeFingerprint\": \"<string>\",\n  \"includeFingerprintDefault\": \"<boolean>\",\n  \"requestFile\": \"<boolean>\",\n  \"requestFileAllowViewableFile\": \"<boolean>\",\n  \"requestFileUploadAuth\": \"<string>\",\n  \"requestFileAuthDefault\": \"<string>\",\n  \"requestFileExpiration\": \"<integer>\",\n  \"requestFileExpirationUserDecide\": \"<boolean>\",\n  \"requestFileExpirationMax\": \"<integer>\",\n  \"requestFileUploadLimit\": \"<integer>\",\n  \"requestFileUploadLimitUserDecide\": \"<boolean>\",\n  \"requestFileUploadsMax\": \"<integer>\",\n  \"twoFactorAuth\": \"<string>\",\n  \"inactiveExpiration\": \"<integer>\",\n  \"userCanReactivate\": \"<string>\",\n  \"cleanupInactiveAccount\": \"<boolean>\",\n  \"withdrawInactiveAccountFileLinks\": \"<boolean>\",\n  \"allowCollaboration\": \"<boolean>\",\n  \"sendFileLimit\": \"<integer>\",\n  \"remoteWipe\": \"<boolean>\",\n  \"deleteUnsharedData\": \"<boolean>\",\n  \"retainData\": \"<boolean>\",\n  \"retainToUser\": \"<string>\",\n  \"retainPermissionToSharedData\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "126bfdf3-4252-41c7-85d6-811c89939c90",
+          "name": "Delete custom profile and set new profile instead of deleted profile",
+          "request": {
+            "name": "Delete custom profile and set new profile instead of deleted profile",
+            "description": {
+              "content": "Permanently deletes the specified custom profile and reassigns all affected users to the specified replacement profile. Optional demotion settings control how existing user data is handled during the transition.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "profiles",
+                ":id",
+                "replace",
+                ":new_profile"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) ID of the custom profile to be deleted"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "new_profile",
+                  "description": "(Required) ID of the replacement profile to assign to affected users"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"remoteWipe\": \"<boolean>\",\n  \"deleteUnsharedData\": \"<boolean>\",\n  \"retainData\": \"<boolean>\",\n  \"retainToUser\": \"<string>\",\n  \"retainToAdvancedFormUser\": \"<string>\",\n  \"retainPermissionToSharedData\": \"<boolean>\",\n  \"withdrawRequestFiles\": \"<boolean>\",\n  \"withdrawFileLinks\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1e52ab1d-698c-48aa-9a7a-42dbfad78eb8",
+              "name": "Custom profile deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "profiles",
+                    ":id",
+                    "replace",
+                    ":new_profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the custom profile to be deleted"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "new_profile",
+                      "description": "(Required) ID of the replacement profile to assign to affected users"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"remoteWipe\": \"<boolean>\",\n  \"deleteUnsharedData\": \"<boolean>\",\n  \"retainData\": \"<boolean>\",\n  \"retainToUser\": \"<string>\",\n  \"retainToAdvancedFormUser\": \"<string>\",\n  \"retainPermissionToSharedData\": \"<boolean>\",\n  \"withdrawRequestFiles\": \"<boolean>\",\n  \"withdrawFileLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "40e21dbd-06c6-4cdc-93f5-ee7b2430189b",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "profiles",
+                    ":id",
+                    "replace",
+                    ":new_profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the custom profile to be deleted"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "new_profile",
+                      "description": "(Required) ID of the replacement profile to assign to affected users"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"remoteWipe\": \"<boolean>\",\n  \"deleteUnsharedData\": \"<boolean>\",\n  \"retainData\": \"<boolean>\",\n  \"retainToUser\": \"<string>\",\n  \"retainToAdvancedFormUser\": \"<string>\",\n  \"retainPermissionToSharedData\": \"<boolean>\",\n  \"withdrawRequestFiles\": \"<boolean>\",\n  \"withdrawFileLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_ACCESS_USER\",\n    \"message\": \"Insufficient access permissions\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b29bb08a-7696-4fa6-9a49-4fc869bf67da",
+              "name": "Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_NOT_BOOLEAN, ERR_INPUT_ATTRIBUTE_FORBIDDEN, ERR_INPUT_REQUIRED, ERR_INPUT_NOT_STRING",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "profiles",
+                    ":id",
+                    "replace",
+                    ":new_profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the custom profile to be deleted"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "new_profile",
+                      "description": "(Required) ID of the replacement profile to assign to affected users"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"remoteWipe\": \"<boolean>\",\n  \"deleteUnsharedData\": \"<boolean>\",\n  \"retainData\": \"<boolean>\",\n  \"retainToUser\": \"<string>\",\n  \"retainToAdvancedFormUser\": \"<string>\",\n  \"retainPermissionToSharedData\": \"<boolean>\",\n  \"withdrawRequestFiles\": \"<boolean>\",\n  \"withdrawFileLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_INPUT_NOT_BOOLEAN\",\n    \"message\": \"Input is not a valid boolean\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c75d4465-4ab2-4ae8-a316-9f025feb3df2",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "profiles",
+                    ":id",
+                    "replace",
+                    ":new_profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) ID of the custom profile to be deleted"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "new_profile",
+                      "description": "(Required) ID of the replacement profile to assign to affected users"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"remoteWipe\": \"<boolean>\",\n  \"deleteUnsharedData\": \"<boolean>\",\n  \"retainData\": \"<boolean>\",\n  \"retainToUser\": \"<string>\",\n  \"retainToAdvancedFormUser\": \"<string>\",\n  \"retainPermissionToSharedData\": \"<boolean>\",\n  \"withdrawRequestFiles\": \"<boolean>\",\n  \"withdrawFileLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "122441c9-53f8-492c-a4ce-e237bad38047",
+    "name": "Kiteworks API Documentation activities profiles API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

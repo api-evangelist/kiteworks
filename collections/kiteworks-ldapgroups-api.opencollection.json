@@ -1,0 +1,175 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities ldapGroups API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ldapGroups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns a list of LDAP groups.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/ldapGroups",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "LDAP group name"
+              },
+              {
+                "name": "name:contains",
+                "value": "",
+                "type": "query",
+                "description": "LDAP group name. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "LDAP group email."
+              },
+              {
+                "name": "email:contains",
+                "value": "",
+                "type": "query",
+                "description": "LDAP group email.. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns a list of LDAP groups that have been enabled through the kiteworks admin."
+        },
+        {
+          "info": {
+            "name": "Create an LDAP group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/ldapGroups",
+            "params": [
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new LDAP group by looking up the provided distinguished name (DN) in the directory. Returns 422 if the DN is invalid or not found."
+        },
+        {
+          "info": {
+            "name": "Gets an LDAP group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/ldapGroups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the LDAP group to be retrieved"
+              }
+            ]
+          },
+          "docs": "Returns the details of the specified LDAP group, including its name, email address, and description."
+        },
+        {
+          "info": {
+            "name": "Updates an LDAP group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/rest/ldapGroups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the LDAP to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the settings of the specified LDAP group."
+        },
+        {
+          "info": {
+            "name": "Deletes an LDAP group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/ldapGroups/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the LDAP group to delete"
+              }
+            ]
+          },
+          "docs": "Permanently deletes the specified LDAP group."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,251 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities sharedMailbox API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "sharedMailbox",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Return current user's shared mailboxes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/sharedMailboxes",
+            "params": [
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for the results.<br>Allowed values: `modified:asc`, `modified:desc`, `active:asc`, `active:desc`."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to skip before returning results, for pagination."
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Filter by active status. If true, returns only active shared mailboxes; if false, returns only inactive ones."
+              },
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of shared mailbox user IDs to filter by.  (Recommended request size <= 100)"
+              }
+            ]
+          },
+          "docs": "### Description:\n  Returns a paginated list of shared mailboxes available to the current user.\n### Precondition:\n  The user must be authenticated and belong to an internal domain.\n### Response:\n  A list of shared mailboxes is returned.\n"
+        },
+        {
+          "info": {
+            "name": "Update current user's shared mailbox active status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/rest/sharedMailboxes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Updates the active status of one or more shared mailboxes for the current user.\n### Precondition:\n  The user must be authenticated and belong to an internal domain.\n### Response:\n  The updated list of shared mailboxes is returned.\n"
+        },
+        {
+          "info": {
+            "name": "Return current user's shared mailbox counters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/sharedMailboxes/mail/actions/counters",
+            "params": [
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of shared mailbox user IDs to filter by.  (Recommended request size <= 100)"
+              }
+            ]
+          },
+          "docs": "### Description:\n  Returns unread message counters for the current user's active shared mailboxes.\n### Precondition:\n  The user must be authenticated.\n### Response:\n  A list of mail counters for each active shared mailbox is returned.\n"
+        },
+        {
+          "info": {
+            "name": "Return shared mailbox settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/sharedMailboxes/:id/settings",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the user."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Returns the application settings for the specified shared mailbox.\n### Precondition:\n  The user must be authenticated and the specified shared mailbox must be active.\n### Response:\n  The shared mailbox settings are returned.\n"
+        },
+        {
+          "info": {
+            "name": "List web forms available to a shared mailbox",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/sharedMailboxes/:id/webForms",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the user."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes the entity in the response body."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "Specifies additional fields to include in the response."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Returns a list of web forms available to the specified shared mailbox.\n### Precondition:\n  The user must be authenticated and the specified shared mailbox must be active.\n### Response:\n  A list of web forms is returned.\n"
+        },
+        {
+          "info": {
+            "name": "Return shared mailbox list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/admin/sharedMailboxes",
+            "params": [
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for the results.<br>`modified:asc` – Sort by last modified date, ascending.<br>`modified:desc` – Sort by last modified date, descending.<br>`active:asc` – Sort by active status, ascending.<br>`active:desc` – Sort by active status, descending."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip before returning, for pagination."
+              },
+              {
+                "name": "active",
+                "value": "",
+                "type": "query",
+                "description": "Filter by active status. If true, returns only active shared mailboxes; if false, returns only inactive ones."
+              },
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of shared mailbox user UUIDs to filter by.  (Recommended request size <= 100)"
+              }
+            ]
+          },
+          "docs": "### Description:\n  Returns a paginated list of shared mailboxes, optionally filtered by user IDs.\n### Precondition:\n  Caller must have system, application, or helpdesk admin role.\n### Response:\n  A list of shared mailboxes is returned.\n"
+        },
+        {
+          "info": {
+            "name": "Create a shared mailbox",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/admin/sharedMailboxes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Converts the specified user account into a shared mailbox and assigns the specified members.\n### Precondition:\n  Caller must have system, application, or helpdesk admin role.\n### Response:\n  The shared mailbox is created and its details are returned.\n"
+        },
+        {
+          "info": {
+            "name": "Delete shared mailboxes",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/admin/sharedMailboxes",
+            "params": [
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of shared mailbox user UUIDs to delete.  (Recommended request size <= 100)"
+              }
+            ]
+          },
+          "docs": "### Description:\n  Deletes the specified shared mailboxes and restores the associated user accounts.\n### Precondition:\n  Caller must have system, application, or helpdesk admin role.\n### Response:\n  The shared mailboxes are deleted successfully.\n"
+        },
+        {
+          "info": {
+            "name": "Update shared mailbox members",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/rest/admin/sharedMailboxes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Updates the member list of the specified shared mailbox.\n### Precondition:\n  Caller must have system, application, or helpdesk admin role.\n### Response:\n  The shared mailbox is updated and its details are returned.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

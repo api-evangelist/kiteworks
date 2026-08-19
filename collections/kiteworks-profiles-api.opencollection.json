@@ -1,0 +1,118 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities profiles API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "profiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add custom profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/profiles",
+            "params": [
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new custom user type profile cloned from an existing built-in profile (e.g., Standard). The new profile's name must be unique. Returns 404 if the specified prototype profile does not exist."
+        },
+        {
+          "info": {
+            "name": "Return user type (profile) details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/profiles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the user type (profile) to be retrieved"
+              }
+            ]
+          },
+          "docs": "Returns the details of the current user's own type profile, including its name, built-in status, and cloneability. Returns 403 if the requested profile does not belong to the current user."
+        },
+        {
+          "info": {
+            "name": "Update profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/rest/profiles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the profile to be modified"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the feature settings of the specified user type profile. When disabling collaboration access, optional demotion settings control how existing user data is handled (retained, deleted, or transferred to another user)."
+        },
+        {
+          "info": {
+            "name": "Delete custom profile and set new profile instead of deleted profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/profiles/:id/replace/:new_profile",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the custom profile to be deleted"
+              },
+              {
+                "name": "new_profile",
+                "value": "",
+                "type": "path",
+                "description": "ID of the replacement profile to assign to affected users"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Permanently deletes the specified custom profile and reassigns all affected users to the specified replacement profile. Optional demotion settings control how existing user data is handled during the transition."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

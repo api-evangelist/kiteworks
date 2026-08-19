@@ -160,3 +160,12 @@ tools:
   group: User Operations
   modes:
   - all
+deployment:
+  mode: none
+  endpoint: https://your.kiteworks.domain
+  verified: probed
+  probe: dead
+  note: the endpoint this manifest claimed did not answer; recorded as none rather than deleted so the
+    claim stays auditable
+  checked: '2026-08-12'
+  source: catalog MCP census

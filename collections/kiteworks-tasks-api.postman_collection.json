@@ -1,0 +1,1675 @@
+{
+  "item": [
+    {
+      "id": "0c211ad7-5eaf-4317-a8e5-b1c17f4d6bcc",
+      "name": "tasks",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6007624e-2ffe-4f1f-8681-2d98066fddab",
+          "name": "Get file tasks",
+          "request": {
+            "name": "Get file tasks",
+            "description": {
+              "content": "Gets a list of tasks assigned to the specified file. **Requires `task_view` permission on the file's parent folder.**",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "files",
+                ":id",
+                "tasks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "assigneeId",
+                  "value": "<string>",
+                  "description": "Assigned User unique identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "assigneeId:in",
+                  "value": "<string>",
+                  "description": "Assigned User unique identifier. Search for results that match any of the specified values for this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "due",
+                  "value": "<date>",
+                  "description": "Task due date"
+                },
+                {
+                  "disabled": false,
+                  "key": "due:gt",
+                  "value": "<date>",
+                  "description": "Task due date. Search for results where this parameter value is greater than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "due:gte",
+                  "value": "<date>",
+                  "description": "Task due date. Search for results where this parameter value is greater than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "due:lt",
+                  "value": "<date>",
+                  "description": "Task due date. Search for results where this parameter value is less than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "due:lte",
+                  "value": "<date>",
+                  "description": "Task due date. Search for results where this parameter value is less than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "parentId",
+                  "value": "<integer>",
+                  "description": "Parent Comment identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "parentId:in",
+                  "value": "<integer>",
+                  "description": "Parent Comment identifier. Search for results that match any of the specified values for this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "userId",
+                  "value": "<string>",
+                  "description": "Identifier of User who created a Task"
+                },
+                {
+                  "disabled": false,
+                  "key": "userId:in",
+                  "value": "<string>",
+                  "description": "Identifier of User who created a Task. Search for results that match any of the specified values for this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "created",
+                  "value": "<date>",
+                  "description": "Task creation date"
+                },
+                {
+                  "disabled": false,
+                  "key": "created:gt",
+                  "value": "<date>",
+                  "description": "Task creation date. Search for results where this parameter value is greater than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "created:gte",
+                  "value": "<date>",
+                  "description": "Task creation date. Search for results where this parameter value is greater than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "created:lt",
+                  "value": "<date>",
+                  "description": "Task creation date. Search for results where this parameter value is less than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "created:lte",
+                  "value": "<date>",
+                  "description": "Task creation date. Search for results where this parameter value is less than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified",
+                  "value": "<date>",
+                  "description": "Task modification date"
+                },
+                {
+                  "disabled": false,
+                  "key": "modified:gt",
+                  "value": "<date>",
+                  "description": "Task modification date. Search for results where this parameter value is greater than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified:gte",
+                  "value": "<date>",
+                  "description": "Task modification date. Search for results where this parameter value is greater than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified:lt",
+                  "value": "<date>",
+                  "description": "Task modification date. Search for results where this parameter value is less than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified:lte",
+                  "value": "<date>",
+                  "description": "Task modification date. Search for results where this parameter value is less than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "contents:contains",
+                  "value": "<string>",
+                  "description": "Task content. Search for results that contain the specified characters in this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "D",
+                  "description": "Filter tasks by status. Accepted values: `D`, `P`, `C`."
+                },
+                {
+                  "disabled": false,
+                  "key": "deleted",
+                  "value": "<boolean>",
+                  "description": "Whether the task has been deleted"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "id:asc",
+                  "description": "Sorting options"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit"
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "With parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier (UUID) of the file."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "728f5618-6350-4d43-9fec-0d288040ce77",
+              "name": "Returns a paginated list of tasks associated with the specified file.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    ":id",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "assigneeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assigneeId:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "due",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "due:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "due:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "due:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "due:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "parentId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "parentId:in",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "userId:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "contents:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "P"
+                    },
+                    {
+                      "key": "deleted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "due:desc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the file."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 15,\n      \"object_id\": 7,\n      \"parent_id\": 0,\n      \"user_id\": 3,\n      \"assignee_id\": 5,\n      \"contents\": \"Review the quarterly report for accuracy.\",\n      \"status\": \"P\",\n      \"due\": \"2024-04-01T00:00:00+00:00\",\n      \"created\": \"2024-03-15T10:00:00+00:00\",\n      \"modified\": \"2024-03-16T08:30:00+00:00\",\n      \"deleted\": false,\n      \"folder_id\": 3\n    }\n  ],\n  \"total\": 1,\n  \"page\": 1,\n  \"pageSize\": 20\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97f2c30b-e44c-4c65-9e74-2b82def0476d",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    ":id",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "assigneeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assigneeId:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "due",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "due:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "due:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "due:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "due:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "parentId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "parentId:in",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "userId:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "contents:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "P"
+                    },
+                    {
+                      "key": "deleted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "due:desc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the file."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5e66bc4c-5de9-4393-85a9-ea77ed7e55e4",
+          "name": "Create file task",
+          "request": {
+            "name": "Create file task",
+            "description": {
+              "content": "Creates a task for the specified file and assigns it to a user. The assignee must have at least `properties_view` permission on the file's parent folder. **Requires `task_add` permission on the file's parent folder.**",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "files",
+                ":id",
+                "tasks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "returnEntity",
+                  "value": "<boolean>",
+                  "description": "If set to `true`, returns information about the newly created entity."
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Object ID of the file task is created on"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"assigneeId\": \"<integer>\",\n  \"due\": \"<date>\",\n  \"contents\": \"<string>\",\n  \"parentId\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "89dec1b2-8788-411f-a72f-c614aaeb7e5d",
+              "name": "Returns the newly created task record.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    ":id",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Object ID of the file task is created on"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assigneeId\": \"<integer>\",\n  \"due\": \"<date>\",\n  \"contents\": \"<string>\",\n  \"parentId\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 15,\n  \"object_id\": 7,\n  \"parent_id\": 0,\n  \"user_id\": 3,\n  \"assignee_id\": 5,\n  \"contents\": \"Review the quarterly report for accuracy.\",\n  \"status\": \"D\",\n  \"due\": \"2024-04-01T00:00:00+00:00\",\n  \"created\": \"2024-03-15T10:00:00+00:00\",\n  \"modified\": \"2024-03-15T10:00:00+00:00\",\n  \"deleted\": false,\n  \"folder_id\": 3\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ec823a8-15b0-46af-ad22-8bffdd7f14eb",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    ":id",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Object ID of the file task is created on"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assigneeId\": \"<integer>\",\n  \"due\": \"<date>\",\n  \"contents\": \"<string>\",\n  \"parentId\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_ACCESS_USER\",\n    \"message\": \"Insufficient access permissions\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a976e513-2b4a-4f99-b949-46e9faef9751",
+              "name": "Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_REQUIRED, ERR_INPUT_DATE_NOT_AFTER, ERR_INPUT_HTML_TAGS_INVALID",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    ":id",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Object ID of the file task is created on"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assigneeId\": \"<integer>\",\n  \"due\": \"<date>\",\n  \"contents\": \"<string>\",\n  \"parentId\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": {\n    \"code\": \"ERR_INPUT_REQUIRED\",\n    \"message\": \"Field is required\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7dd26c7-456a-4f3b-9bdb-0c7e9a66721c",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    ":id",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Object ID of the file task is created on"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"assigneeId\": \"<integer>\",\n  \"due\": \"<date>\",\n  \"contents\": \"<string>\",\n  \"parentId\": \"<integer>\",\n  \"addLinks\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b715ce6d-1624-48fe-8309-276556e6ea72",
+          "name": "Get tasks for a folder",
+          "request": {
+            "name": "Get tasks for a folder",
+            "description": {
+              "content": "Gets a list of tasks associated with all files in the specified folder. **Requires `task_view` permission on the folder.**",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "folders",
+                ":id",
+                "tasks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "assigneeId",
+                  "value": "<string>",
+                  "description": "Assigned User unique identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "assigneeId:in",
+                  "value": "<string>",
+                  "description": "Assigned User unique identifier. Search for results that match any of the specified values for this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "due",
+                  "value": "<date>",
+                  "description": "Task due date"
+                },
+                {
+                  "disabled": false,
+                  "key": "due:gt",
+                  "value": "<date>",
+                  "description": "Task due date. Search for results where this parameter value is greater than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "due:gte",
+                  "value": "<date>",
+                  "description": "Task due date. Search for results where this parameter value is greater than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "due:lt",
+                  "value": "<date>",
+                  "description": "Task due date. Search for results where this parameter value is less than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "due:lte",
+                  "value": "<date>",
+                  "description": "Task due date. Search for results where this parameter value is less than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "parentId",
+                  "value": "<integer>",
+                  "description": "Parent Comment identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "parentId:in",
+                  "value": "<integer>",
+                  "description": "Parent Comment identifier. Search for results that match any of the specified values for this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "userId",
+                  "value": "<string>",
+                  "description": "Identifier of User who created a Task"
+                },
+                {
+                  "disabled": false,
+                  "key": "userId:in",
+                  "value": "<string>",
+                  "description": "Identifier of User who created a Task. Search for results that match any of the specified values for this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "created",
+                  "value": "<date>",
+                  "description": "Task creation date"
+                },
+                {
+                  "disabled": false,
+                  "key": "created:gt",
+                  "value": "<date>",
+                  "description": "Task creation date. Search for results where this parameter value is greater than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "created:gte",
+                  "value": "<date>",
+                  "description": "Task creation date. Search for results where this parameter value is greater than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "created:lt",
+                  "value": "<date>",
+                  "description": "Task creation date. Search for results where this parameter value is less than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "created:lte",
+                  "value": "<date>",
+                  "description": "Task creation date. Search for results where this parameter value is less than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified",
+                  "value": "<date>",
+                  "description": "Task modification date"
+                },
+                {
+                  "disabled": false,
+                  "key": "modified:gt",
+                  "value": "<date>",
+                  "description": "Task modification date. Search for results where this parameter value is greater than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified:gte",
+                  "value": "<date>",
+                  "description": "Task modification date. Search for results where this parameter value is greater than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified:lt",
+                  "value": "<date>",
+                  "description": "Task modification date. Search for results where this parameter value is less than the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "modified:lte",
+                  "value": "<date>",
+                  "description": "Task modification date. Search for results where this parameter value is less than or equal to the specified value."
+                },
+                {
+                  "disabled": false,
+                  "key": "contents:contains",
+                  "value": "<string>",
+                  "description": "Task content. Search for results that contain the specified characters in this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "D",
+                  "description": "Filter tasks by status. Accepted values: `D`, `P`, `C`."
+                },
+                {
+                  "disabled": false,
+                  "key": "deleted",
+                  "value": "<boolean>",
+                  "description": "Whether the task has been deleted"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "id:asc",
+                  "description": "Sorting options"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit"
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "With parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier (UUID) of the folder."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b8ea622f-2afd-4eb8-b7af-0d40684f5ea3",
+              "name": "Returns a paginated list of tasks for all files within the specified folder.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "folders",
+                    ":id",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "assigneeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assigneeId:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "due",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "due:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "due:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "due:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "due:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "parentId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "parentId:in",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "userId:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "contents:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "P"
+                    },
+                    {
+                      "key": "deleted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "due:desc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the folder."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 15,\n      \"object_id\": 7,\n      \"parent_id\": 0,\n      \"user_id\": 3,\n      \"assignee_id\": 5,\n      \"contents\": \"Review the quarterly report for accuracy.\",\n      \"status\": \"P\",\n      \"due\": \"2024-04-01T00:00:00+00:00\",\n      \"created\": \"2024-03-15T10:00:00+00:00\",\n      \"modified\": \"2024-03-16T08:30:00+00:00\",\n      \"deleted\": false,\n      \"folder_id\": 3\n    },\n    {\n      \"id\": 16,\n      \"object_id\": 8,\n      \"parent_id\": 0,\n      \"user_id\": 3,\n      \"assignee_id\": 3,\n      \"contents\": \"Update the budget spreadsheet with Q1 actuals.\",\n      \"status\": \"D\",\n      \"due\": \"2024-04-15T00:00:00+00:00\",\n      \"created\": \"2024-03-16T09:00:00+00:00\",\n      \"modified\": \"2024-03-16T09:00:00+00:00\",\n      \"deleted\": false,\n      \"folder_id\": 3\n    }\n  ],\n  \"total\": 2,\n  \"page\": 1,\n  \"pageSize\": 20\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3cc11886-c459-4cd2-b9cf-57375dad9e68",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "folders",
+                    ":id",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "assigneeId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "assigneeId:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "due",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "due:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "due:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "due:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "due:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "parentId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "parentId:in",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "userId:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "created:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:gt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:gte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:lt",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "modified:lte",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "contents:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "P"
+                    },
+                    {
+                      "key": "deleted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "due:desc"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the folder."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "017dc3d3-7e1b-4729-8dfe-5a4b5ebb6c25",
+          "name": "Return the list of permissions available on a task",
+          "request": {
+            "name": "Return the list of permissions available on a task",
+            "description": {
+              "content": "Returns the list of actions the current user is allowed to perform on the specified task, such as completing or deleting it.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "permissions",
+                "task",
+                ":task_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<integer>",
+                  "description": "Unique action identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "id:in",
+                  "value": "<integer>",
+                  "description": "Unique action identifier. Search for results that match any of the specified values for this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Action name"
+                },
+                {
+                  "disabled": false,
+                  "key": "name:contains",
+                  "value": "<string>",
+                  "description": "Action name. Search for results that contain the specified characters in this parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "allowed",
+                  "value": "<boolean>",
+                  "description": "Determines if one has permissions to perform action"
+                },
+                {
+                  "disabled": false,
+                  "key": "enabled",
+                  "value": "<boolean>",
+                  "description": "Determines if the given action is available considering the current object state (locked, deleted, etc.)."
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "With parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "task_id",
+                  "description": "(Required) ID of the task"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0a57d811-1741-4714-8914-f69c314c2a06",
+              "name": "Task permissions retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "permissions",
+                    "task",
+                    ":task_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "id:in",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "allowed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "enabled",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "task_id",
+                      "description": "(Required) ID of the task"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"TASK_COMPLETE\",\n      \"name\": \"Complete Task\",\n      \"allowed\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7d21a526-ffa0-4446-8f62-90774373641b",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "permissions",
+                    "task",
+                    ":task_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "id:in",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name:contains",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "allowed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "enabled",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "task_id",
+                      "description": "(Required) ID of the task"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d445d6fe-2bb0-4512-afcd-095fd210df3b",
+    "name": "Kiteworks API Documentation activities tasks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

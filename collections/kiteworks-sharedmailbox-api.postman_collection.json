@@ -1,0 +1,2413 @@
+{
+  "item": [
+    {
+      "id": "5e1ee746-2426-4714-9ea5-12f104820811",
+      "name": "sharedMailbox",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b1979990-4d46-460b-924f-080a584ede1f",
+          "name": "Update current user's shared mailbox active status",
+          "request": {
+            "name": "Update current user's shared mailbox active status",
+            "description": {
+              "content": "### Description:\n  Updates the active status of one or more shared mailboxes for the current user.\n### Precondition:\n  The user must be authenticated and belong to an internal domain.\n### Response:\n  The updated list of shared mailboxes is returned.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "sharedMailboxes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": [\n    {\n      \"active\": \"<boolean>\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"id\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6821d10e-3ef7-461c-b994-9db489fa545b",
+              "name": "The shared mailbox status is updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "sharedMailboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"active\": \"<boolean>\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"id\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"active\": false,\n      \"user\": {\n        \"id\": \"string\",\n        \"email\": \"string\",\n        \"name\": \"string\",\n        \"profileIcon\": \"string\"\n      },\n      \"members\": [\n        {\n          \"id\": \"string\",\n          \"email\": \"string\",\n          \"name\": \"string\",\n          \"profileIcon\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"email\": \"string\",\n          \"name\": \"string\",\n          \"profileIcon\": \"string\"\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"active\": true,\n      \"user\": {\n        \"id\": \"string\",\n        \"email\": \"string\",\n        \"name\": \"string\",\n        \"profileIcon\": \"string\"\n      },\n      \"members\": [\n        {\n          \"id\": \"string\",\n          \"email\": \"string\",\n          \"name\": \"string\",\n          \"profileIcon\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"email\": \"string\",\n          \"name\": \"string\",\n          \"profileIcon\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"metadata\": {\n    \"total\": 2293,\n    \"limit\": 2012,\n    \"offset\": 9745\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53f7226e-a79d-4a0d-8102-1f4cceb7c752",
+              "name": "Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "sharedMailboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"active\": \"<boolean>\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"id\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_AUTH_INVALID_CSRF\",\n      \"message\": \"Invalid CSRF Authentication\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7e202a1-413a-4c0c-8b8b-bd26b8655e5c",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_NOT_INTERNAL_DOMAIN",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "sharedMailboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"active\": \"<boolean>\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"id\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_ACCESS_USER\",\n      \"message\": \"Insufficient access permissions\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a6fefe5-9963-48f5-b977-96e08113826e",
+              "name": "Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_MAX_ACTIVED_SHAREDMAILBOX",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "sharedMailboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"active\": \"<boolean>\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"id\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_MAX_ACTIVED_SHAREDMAILBOX\",\n      \"message\": \"Maximum activated shared mailbox reached\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e83fc6f-5079-4a40-800a-dbba0fc2719e",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "sharedMailboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"active\": \"<boolean>\",\n      \"id\": \"<string>\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"id\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7bc5a830-a5d7-40b5-9729-20be7f8743f6",
+          "name": "Return current user's shared mailboxes",
+          "request": {
+            "name": "Return current user's shared mailboxes",
+            "description": {
+              "content": "### Description:\n  Returns a paginated list of shared mailboxes available to the current user.\n### Precondition:\n  The user must be authenticated and belong to an internal domain.\n### Response:\n  A list of shared mailboxes is returned.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "sharedMailboxes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "<string>",
+                  "description": "Sort order for the results.<br>Allowed values: `modified:asc`, `modified:desc`, `active:asc`, `active:desc`."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of results to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Number of items to skip before returning results, for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<boolean>",
+                  "description": "Filter by active status. If true, returns only active shared mailboxes; if false, returns only inactive ones."
+                },
+                {
+                  "disabled": false,
+                  "key": "id:in",
+                  "value": "<string>",
+                  "description": "Comma-separated list of shared mailbox user IDs to filter by.  (Recommended request size <= 100)"
+                },
+                {
+                  "disabled": false,
+                  "key": "id:in",
+                  "value": "<string>",
+                  "description": "Comma-separated list of shared mailbox user IDs to filter by.  (Recommended request size <= 100)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aee1adfe-9899-4692-902d-c96b8fddde76",
+              "name": "The shared mailboxes are returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "sharedMailboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"active\": false,\n      \"user\": {\n        \"id\": \"string\",\n        \"email\": \"string\",\n        \"name\": \"string\",\n        \"profileIcon\": \"string\"\n      },\n      \"members\": [\n        {\n          \"id\": \"string\",\n          \"email\": \"string\",\n          \"name\": \"string\",\n          \"profileIcon\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"email\": \"string\",\n          \"name\": \"string\",\n          \"profileIcon\": \"string\"\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"active\": true,\n      \"user\": {\n        \"id\": \"string\",\n        \"email\": \"string\",\n        \"name\": \"string\",\n        \"profileIcon\": \"string\"\n      },\n      \"members\": [\n        {\n          \"id\": \"string\",\n          \"email\": \"string\",\n          \"name\": \"string\",\n          \"profileIcon\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"email\": \"string\",\n          \"name\": \"string\",\n          \"profileIcon\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"metadata\": {\n    \"total\": 6483,\n    \"limit\": 8190,\n    \"offset\": 4464\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6bd1b29b-905d-47cc-a7ca-dc9388332bfd",
+              "name": "Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "sharedMailboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_AUTH_INVALID_CSRF\",\n      \"message\": \"Invalid CSRF Authentication\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b14ba2b-a2a5-45d8-91ab-2f5ae6378927",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_NOT_INTERNAL_DOMAIN",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "sharedMailboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_NOT_INTERNAL_DOMAIN\",\n      \"message\": \"The email is not internal domain\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d436aa4-0b74-4909-9add-3dca29d11ff3",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "sharedMailboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "158e84a3-3b24-4fa7-a3fb-533a7884e3e4",
+          "name": "Return current user's shared mailbox counters",
+          "request": {
+            "name": "Return current user's shared mailbox counters",
+            "description": {
+              "content": "### Description:\n  Returns unread message counters for the current user's active shared mailboxes.\n### Precondition:\n  The user must be authenticated.\n### Response:\n  A list of mail counters for each active shared mailbox is returned.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "sharedMailboxes",
+                "mail",
+                "actions",
+                "counters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id:in",
+                  "value": "<string>",
+                  "description": "Comma-separated list of shared mailbox user IDs to filter by.  (Recommended request size <= 100)"
+                },
+                {
+                  "disabled": false,
+                  "key": "id:in",
+                  "value": "<string>",
+                  "description": "Comma-separated list of shared mailbox user IDs to filter by.  (Recommended request size <= 100)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2548924e-be69-48fe-afa8-7ac0f349e3b6",
+              "name": "The shared mailbox counters are returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "sharedMailboxes",
+                    "mail",
+                    "actions",
+                    "counters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"counters\": {\n        \"draft\": 6368,\n        \"inbox\": 7940,\n        \"inboxUnread\": 6833,\n        \"outgoing\": 6424,\n        \"outgoingError\": 2770,\n        \"outgoingQueued\": 1787,\n        \"outgoingTransferring\": 4794,\n        \"outgoingTransferringIds\": [\n          \"string\",\n          \"string\"\n        ],\n        \"trash\": 1186\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"counters\": {\n        \"draft\": 3954,\n        \"inbox\": 4177,\n        \"inboxUnread\": 5353,\n        \"outgoing\": 8304,\n        \"outgoingError\": 2812,\n        \"outgoingQueued\": 4862,\n        \"outgoingTransferring\": 4983,\n        \"outgoingTransferringIds\": [\n          \"string\",\n          \"string\"\n        ],\n        \"trash\": 6785\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "685a1e4d-cefa-402a-bb2e-1336cce76023",
+              "name": "Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "sharedMailboxes",
+                    "mail",
+                    "actions",
+                    "counters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_AUTH_INVALID_CSRF\",\n      \"message\": \"Invalid CSRF Authentication\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae5e60b0-c0cc-4fde-817d-a864781aa71a",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "sharedMailboxes",
+                    "mail",
+                    "actions",
+                    "counters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_ACCESS_USER\",\n      \"message\": \"Insufficient access permissions\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d739385e-b735-4423-b71f-492e96dc9c3c",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "sharedMailboxes",
+                    "mail",
+                    "actions",
+                    "counters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e747d976-3724-45e8-ad64-064b1a1cb299",
+          "name": "Return shared mailbox settings",
+          "request": {
+            "name": "Return shared mailbox settings",
+            "description": {
+              "content": "### Description:\n  Returns the application settings for the specified shared mailbox.\n### Precondition:\n  The user must be authenticated and the specified shared mailbox must be active.\n### Response:\n  The shared mailbox settings are returned.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "sharedMailboxes",
+                ":id",
+                "settings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier (UUID) of the user."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2c6ba2f7-9346-4bc0-8f3d-7e7c4b808967",
+              "name": "The shared mailbox settings are returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "sharedMailboxes",
+                    ":id",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"fileFilterExclusionGroups\": [\n    \"string\",\n    \"string\"\n  ],\n  \"sendOptionEnabled\": {\n    \"linkExpiry\": false,\n    \"ACL\": 9747\n  },\n  \"ACL\": [\n    \"string\",\n    \"string\"\n  ],\n  \"maxLinkExpiration\": 1512,\n  \"returnReceiptDefault\": false,\n  \"zipLimit\": 275,\n  \"sendFileLimit\": 2672,\n  \"selfCopy\": \"string\",\n  \"defaultLinkExpiry\": 1975,\n  \"aclDefault\": \"string\",\n  \"fileFilterCustomFileTypes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"watermarkEnabled\": false,\n  \"returnReceipt\": \"string\",\n  \"mailExpirationNotification\": \"string\",\n  \"includeFingerprintDefault\": true,\n  \"includeFingerprint\": \"string\",\n  \"secureMessageBody\": \"string\",\n  \"selfCopyDefault\": false,\n  \"allowedFileExtensions\": [\n    \"string\",\n    \"string\"\n  ],\n  \"excludedFileExtensions\": [\n    \"string\",\n    \"string\"\n  ],\n  \"secureMessageBodyDefault\": false,\n  \"watermarkPreview\": \"string\",\n  \"sendExternal\": true,\n  \"defaultForm\": \"string\",\n  \"defaultCountryCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15e30ed8-cef6-4b26-943f-11862661fcac",
+              "name": "Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "sharedMailboxes",
+                    ":id",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_AUTH_INVALID_CSRF\",\n      \"message\": \"Invalid CSRF Authentication\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "18cc4621-9b37-4360-88cd-7eb7cb0d8a85",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "sharedMailboxes",
+                    ":id",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_ACCESS_USER\",\n      \"message\": \"Insufficient access permissions\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bcd5d002-658f-4724-acc0-312b24a1eb42",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "sharedMailboxes",
+                    ":id",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the user."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a5329e54-ec46-4d29-9377-b1fd6a3db11a",
+          "name": "List web forms available to a shared mailbox",
+          "request": {
+            "name": "List web forms available to a shared mailbox",
+            "description": {
+              "content": "### Description:\n  Returns a list of web forms available to the specified shared mailbox.\n### Precondition:\n  The user must be authenticated and the specified shared mailbox must be active.\n### Response:\n  A list of web forms is returned.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "sharedMailboxes",
+                ":id",
+                "webForms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "returnEntity",
+                  "value": "<boolean>",
+                  "description": "If true, includes the entity in the response body."
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "Specifies additional fields to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier (UUID) of the user."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aa85629f-44e3-4773-82f7-cd07e1962f94",
+              "name": "The web forms are returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "sharedMailboxes",
+                    ":id",
+                    "webForms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"lastModified\": \"1981-12-27\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"url\": \"string\",\n      \"enabled\": false,\n      \"authRequired\": true,\n      \"embedded\": true,\n      \"standalone\": false,\n      \"profiles\": [\n        {\n          \"webFormId\": \"string\",\n          \"profileId\": 7073\n        },\n        {\n          \"webFormId\": \"string\",\n          \"profileId\": 1198\n        }\n      ],\n      \"fields\": [\n        {\n          \"id\": \"string\",\n          \"sequence\": 7286,\n          \"label\": \"string\",\n          \"type\": \"string\",\n          \"specialType\": \"string\",\n          \"placeholder\": \"string\",\n          \"defaultValue\": \"string\",\n          \"optionValues\": \"string\",\n          \"mandatory\": false,\n          \"editable\": true\n        },\n        {\n          \"id\": \"string\",\n          \"sequence\": 3360,\n          \"label\": \"string\",\n          \"type\": \"string\",\n          \"specialType\": \"string\",\n          \"placeholder\": \"string\",\n          \"defaultValue\": \"string\",\n          \"optionValues\": \"string\",\n          \"mandatory\": false,\n          \"editable\": true\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"lastModified\": \"2017-10-29\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"url\": \"string\",\n      \"enabled\": true,\n      \"authRequired\": false,\n      \"embedded\": false,\n      \"standalone\": true,\n      \"profiles\": [\n        {\n          \"webFormId\": \"string\",\n          \"profileId\": 3785\n        },\n        {\n          \"webFormId\": \"string\",\n          \"profileId\": 3150\n        }\n      ],\n      \"fields\": [\n        {\n          \"id\": \"string\",\n          \"sequence\": 8126,\n          \"label\": \"string\",\n          \"type\": \"string\",\n          \"specialType\": \"string\",\n          \"placeholder\": \"string\",\n          \"defaultValue\": \"string\",\n          \"optionValues\": \"string\",\n          \"mandatory\": true,\n          \"editable\": true\n        },\n        {\n          \"id\": \"string\",\n          \"sequence\": 7030,\n          \"label\": \"string\",\n          \"type\": \"string\",\n          \"specialType\": \"string\",\n          \"placeholder\": \"string\",\n          \"defaultValue\": \"string\",\n          \"optionValues\": \"string\",\n          \"mandatory\": true,\n          \"editable\": true\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ff16f73-feea-45ed-bc28-8d96e795e9af",
+              "name": "Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "sharedMailboxes",
+                    ":id",
+                    "webForms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_AUTH_INVALID_CSRF\",\n      \"message\": \"Invalid CSRF Authentication\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e67728c-b700-428c-8ee8-cdbb39b26d15",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "sharedMailboxes",
+                    ":id",
+                    "webForms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_ACCESS_USER\",\n      \"message\": \"Insufficient access permissions\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9262447d-7cf1-493e-b143-cf92c25c8cf7",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "sharedMailboxes",
+                    ":id",
+                    "webForms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the user."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2e62ca3b-ab16-43d8-9875-16b1916bea88",
+          "name": "Create a shared mailbox",
+          "request": {
+            "name": "Create a shared mailbox",
+            "description": {
+              "content": "### Description:\n  Converts the specified user account into a shared mailbox and assigns the specified members.\n### Precondition:\n  Caller must have system, application, or helpdesk admin role.\n### Response:\n  The shared mailbox is created and its details are returned.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "admin",
+                "sharedMailboxes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"memberIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"remoteWipe\": \"<boolean>\",\n  \"deleteUnsharedData\": \"<boolean>\",\n  \"retainData\": \"<boolean>\",\n  \"retainToUser\": \"<string>\",\n  \"retainPermissionToSharedData\": \"<boolean>\",\n  \"retainToAdvancedFormUser\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e2b661e4-f433-4359-a221-40046cf6e7c2",
+              "name": "The shared mailbox has been created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "admin",
+                    "sharedMailboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"remoteWipe\": \"<boolean>\",\n  \"deleteUnsharedData\": \"<boolean>\",\n  \"retainData\": \"<boolean>\",\n  \"retainToUser\": \"<string>\",\n  \"retainPermissionToSharedData\": \"<boolean>\",\n  \"retainToAdvancedFormUser\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"active\": true,\n  \"user\": {\n    \"id\": \"string\",\n    \"email\": \"string\",\n    \"name\": \"string\",\n    \"profileIcon\": \"string\"\n  },\n  \"members\": [\n    {\n      \"id\": \"string\",\n      \"email\": \"string\",\n      \"name\": \"string\",\n      \"profileIcon\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"email\": \"string\",\n      \"name\": \"string\",\n      \"profileIcon\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e227a3e-8998-44f9-90cf-d2916933a456",
+              "name": "Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "admin",
+                    "sharedMailboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"remoteWipe\": \"<boolean>\",\n  \"deleteUnsharedData\": \"<boolean>\",\n  \"retainData\": \"<boolean>\",\n  \"retainToUser\": \"<string>\",\n  \"retainPermissionToSharedData\": \"<boolean>\",\n  \"retainToAdvancedFormUser\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_AUTH_INVALID_CSRF\",\n      \"message\": \"Invalid CSRF Authentication\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5323d1d-4d50-4e28-bd85-d4149aad140e",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_ADMIN, ERR_ACCESS_USER, ERR_ADMIN_ROLE_RANK_RESTRICTED, ERR_NOT_INTERNAL_DOMAIN",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "admin",
+                    "sharedMailboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"remoteWipe\": \"<boolean>\",\n  \"deleteUnsharedData\": \"<boolean>\",\n  \"retainData\": \"<boolean>\",\n  \"retainToUser\": \"<string>\",\n  \"retainPermissionToSharedData\": \"<boolean>\",\n  \"retainToAdvancedFormUser\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_ACCESS_ADMIN\",\n      \"message\": \"Insufficient admin access permissions\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af548131-82af-4bd7-93a1-ef5e73d57f85",
+              "name": "Content Too Large<br /><br /><i>Possible error codes: </i>ERR_SYSTEM_NO_STORAGE_AVAILABLE",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "admin",
+                    "sharedMailboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"remoteWipe\": \"<boolean>\",\n  \"deleteUnsharedData\": \"<boolean>\",\n  \"retainData\": \"<boolean>\",\n  \"retainToUser\": \"<string>\",\n  \"retainPermissionToSharedData\": \"<boolean>\",\n  \"retainToAdvancedFormUser\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_SYSTEM_NO_STORAGE_AVAILABLE\",\n      \"message\": \"Folder owner's remaining storage quota does not permit for a file upload of this size.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0bf2868-492f-407c-9388-3b9d95bd0d97",
+              "name": "Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INVALID_PARAMETER, ERR_CANNOT_RETAIN_DATA_TO_THE_SAME_USER, ERR_USER_IS_NOT_INTERNAL_DL_OR_INTERNAL_ACCOUNT, ERR_CANNOT_RETAIN_DATA_TO_UNVERIFIED_USER",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "admin",
+                    "sharedMailboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"remoteWipe\": \"<boolean>\",\n  \"deleteUnsharedData\": \"<boolean>\",\n  \"retainData\": \"<boolean>\",\n  \"retainToUser\": \"<string>\",\n  \"retainPermissionToSharedData\": \"<boolean>\",\n  \"retainToAdvancedFormUser\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_INVALID_PARAMETER\",\n      \"message\": \"Invalid Parameter Exception\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60cdb271-f74a-4432-9271-49a7a3108370",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "admin",
+                    "sharedMailboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberIds\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userId\": \"<string>\",\n  \"remoteWipe\": \"<boolean>\",\n  \"deleteUnsharedData\": \"<boolean>\",\n  \"retainData\": \"<boolean>\",\n  \"retainToUser\": \"<string>\",\n  \"retainPermissionToSharedData\": \"<boolean>\",\n  \"retainToAdvancedFormUser\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1522f33f-8e89-4564-9aa7-cd9add3c2a0e",
+          "name": "Return shared mailbox list",
+          "request": {
+            "name": "Return shared mailbox list",
+            "description": {
+              "content": "### Description:\n  Returns a paginated list of shared mailboxes, optionally filtered by user IDs.\n### Precondition:\n  Caller must have system, application, or helpdesk admin role.\n### Response:\n  A list of shared mailboxes is returned.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "admin",
+                "sharedMailboxes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "<string>",
+                  "description": "Sort order for the results.<br>`modified:asc` – Sort by last modified date, ascending.<br>`modified:desc` – Sort by last modified date, descending.<br>`active:asc` – Sort by active status, ascending.<br>`active:desc` – Sort by active status, descending."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of results to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Number of results to skip before returning, for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "active",
+                  "value": "<boolean>",
+                  "description": "Filter by active status. If true, returns only active shared mailboxes; if false, returns only inactive ones."
+                },
+                {
+                  "disabled": false,
+                  "key": "id:in",
+                  "value": "<string>",
+                  "description": "Comma-separated list of shared mailbox user UUIDs to filter by.  (Recommended request size <= 100)"
+                },
+                {
+                  "disabled": false,
+                  "key": "id:in",
+                  "value": "<string>",
+                  "description": "Comma-separated list of shared mailbox user UUIDs to filter by.  (Recommended request size <= 100)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2f5e54ef-1056-49e4-ac05-f7f24b156374",
+              "name": "The shared mailboxes have been successfully returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "admin",
+                    "sharedMailboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"active\": false,\n      \"user\": {\n        \"id\": \"string\",\n        \"email\": \"string\",\n        \"name\": \"string\",\n        \"profileIcon\": \"string\"\n      },\n      \"members\": [\n        {\n          \"id\": \"string\",\n          \"email\": \"string\",\n          \"name\": \"string\",\n          \"profileIcon\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"email\": \"string\",\n          \"name\": \"string\",\n          \"profileIcon\": \"string\"\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"active\": true,\n      \"user\": {\n        \"id\": \"string\",\n        \"email\": \"string\",\n        \"name\": \"string\",\n        \"profileIcon\": \"string\"\n      },\n      \"members\": [\n        {\n          \"id\": \"string\",\n          \"email\": \"string\",\n          \"name\": \"string\",\n          \"profileIcon\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"email\": \"string\",\n          \"name\": \"string\",\n          \"profileIcon\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"metadata\": {\n    \"total\": 6483,\n    \"limit\": 8190,\n    \"offset\": 4464\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f69e030-abc7-4104-814d-41e6b3708884",
+              "name": "Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "admin",
+                    "sharedMailboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_AUTH_INVALID_CSRF\",\n      \"message\": \"Invalid CSRF Authentication\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "354eb9be-a4ee-4483-a248-35492ebfd090",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "admin",
+                    "sharedMailboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "active",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "03ad1301-3990-4ca2-945d-91c8abb9e1a2",
+          "name": "Delete shared mailboxes",
+          "request": {
+            "name": "Delete shared mailboxes",
+            "description": {
+              "content": "### Description:\n  Deletes the specified shared mailboxes and restores the associated user accounts.\n### Precondition:\n  Caller must have system, application, or helpdesk admin role.\n### Response:\n  The shared mailboxes are deleted successfully.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "admin",
+                "sharedMailboxes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id:in",
+                  "value": "<string>",
+                  "description": "Comma-separated list of shared mailbox user UUIDs to delete.  (Recommended request size <= 100)"
+                },
+                {
+                  "disabled": false,
+                  "key": "id:in",
+                  "value": "<string>",
+                  "description": "Comma-separated list of shared mailbox user UUIDs to delete.  (Recommended request size <= 100)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6b8df9bb-d19d-4bf5-8485-227549b4c672",
+              "name": "The shared mailboxes have been deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "admin",
+                    "sharedMailboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a566c5e7-d2bb-43ae-92a0-a7c814a40bbc",
+              "name": "Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED, ERR_ENTITY_NOT_FOUND",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "admin",
+                    "sharedMailboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_AUTH_INVALID_CSRF\",\n      \"message\": \"Invalid CSRF Authentication\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d99a06ec-7744-4334-b921-fcac36857363",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_ADMIN, ERR_ACCESS_USER, ERR_ADMIN_ROLE_RANK_RESTRICTED, ERR_LICENSE_MAX_USERS_COUNT_REACHED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "admin",
+                    "sharedMailboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_ACCESS_ADMIN\",\n      \"message\": \"Insufficient admin access permissions\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec82b7a8-117a-4456-9d2a-c7214f136c24",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "admin",
+                    "sharedMailboxes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id:in",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "524cd23b-bf17-4633-a780-cc34f7d43d02",
+          "name": "Update shared mailbox members",
+          "request": {
+            "name": "Update shared mailbox members",
+            "description": {
+              "content": "### Description:\n  Updates the member list of the specified shared mailbox.\n### Precondition:\n  Caller must have system, application, or helpdesk admin role.\n### Response:\n  The shared mailbox is updated and its details are returned.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "admin",
+                "sharedMailboxes",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier (UUID) of the user."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"memberIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d847e5ba-ef45-41f4-814e-c4ca60e01ea4",
+              "name": "The shared mailbox has been updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "admin",
+                    "sharedMailboxes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"active\": true,\n  \"user\": {\n    \"id\": \"string\",\n    \"email\": \"string\",\n    \"name\": \"string\",\n    \"profileIcon\": \"string\"\n  },\n  \"members\": [\n    {\n      \"id\": \"string\",\n      \"email\": \"string\",\n      \"name\": \"string\",\n      \"profileIcon\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"email\": \"string\",\n      \"name\": \"string\",\n      \"profileIcon\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52b04b8e-2fe0-4f95-b88d-78f5470619cb",
+              "name": "Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "admin",
+                    "sharedMailboxes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_AUTH_INVALID_CSRF\",\n      \"message\": \"Invalid CSRF Authentication\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea3f6434-a756-4240-be42-d42bea2d4605",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_ADMIN, ERR_ACCESS_USER, ERR_ADMIN_ROLE_RANK_RESTRICTED, ERR_NOT_INTERNAL_DOMAIN",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "admin",
+                    "sharedMailboxes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the user."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_ACCESS_ADMIN\",\n      \"message\": \"Insufficient admin access permissions\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "695f7dc7-8b0c-419e-82a8-f9fa83ac0985",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "admin",
+                    "sharedMailboxes",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the user."
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"memberIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5d3dde05-c920-4c65-ba7c-af33a5e2234f",
+    "name": "Kiteworks API Documentation activities sharedMailbox API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

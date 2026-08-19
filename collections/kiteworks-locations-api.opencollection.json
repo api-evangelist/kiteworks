@@ -1,0 +1,116 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities locations API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "locations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/locations",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of locations to return. Must be between 1 and 10000."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of locations to skip before returning results, for pagination."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for the results. Default is `name:asc`.<br>Allowed values: `name`, `name:asc`, `name:desc`."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Returns a paginated list of available locations.\n### Precondition:\n  User must be authenticated.\n### Response:\n  Returns the list of locations.\n"
+        },
+        {
+          "info": {
+            "name": "Create a location entry.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/locations",
+            "params": [
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new location entry with a name and optional domain. Requires system admin privileges."
+        },
+        {
+          "info": {
+            "name": "Return location name.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/locations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the location to be retrieved"
+              }
+            ]
+          },
+          "docs": "Returns the details of the specified location, including its name and DNS URL."
+        },
+        {
+          "info": {
+            "name": "Delete a location.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/locations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the location to remove from"
+              }
+            ]
+          },
+          "docs": "Permanently deletes the specified location. Requires system admin privileges."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

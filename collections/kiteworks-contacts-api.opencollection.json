@@ -1,0 +1,137 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities contacts API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "contacts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List contacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/contacts",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter contacts by exact name match."
+              },
+              {
+                "name": "name:contains",
+                "value": "",
+                "type": "query",
+                "description": "Filter contacts whose name contains the specified string."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort order for the results. Default is `name:asc`.<br>Allowed values: `id:asc`, `id:desc`, `name:asc`, `name:desc`, `lastContactDate:asc`, `lastContactDate:desc`."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of contacts to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of contacts to skip before returning results, for pagination."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Returns a paginated list of the current user's contacts, with optional name filtering and sort order.\n### Precondition:\n  User must be authenticated.\n### Response:\n  Returns the list of contacts matching the specified filters.\n"
+        },
+        {
+          "info": {
+            "name": "Create a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/contacts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Creates a new contact entry for the current user, associating a display name with one or more email addresses.\n### Precondition:\n  User must be authenticated.\n### Response:\n  Returns the newly created contact.\n"
+        },
+        {
+          "info": {
+            "name": "Get a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/contacts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the entity."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Returns the details of the specified contact, including its display name and associated email addresses.\n### Precondition:\n  User must be authenticated and must own the contact.\n### Response:\n  Returns the contact details.\n"
+        },
+        {
+          "info": {
+            "name": "Update a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/rest/contacts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the entity."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Updates the display name and associated email addresses of the specified contact.\n### Precondition:\n  User must be authenticated and must own the contact.\n### Response:\n  The contact has been updated.\n"
+        },
+        {
+          "info": {
+            "name": "Delete a contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/contacts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the entity."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Permanently removes the specified contact from the current user's contact list.\n### Precondition:\n  User must be authenticated and must own the contact.\n### Response:\n  The contact has been deleted.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

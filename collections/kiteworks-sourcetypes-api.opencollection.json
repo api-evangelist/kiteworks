@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities sourceTypes API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "sourceTypes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all ECM source types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/sourceTypes",
+            "params": [
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Filter source types by mode flag."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              }
+            ]
+          },
+          "docs": "Returns a list of available ECM source types, including each type's name and whether users can configure sources of that type."
+        },
+        {
+          "info": {
+            "name": "Returns requested ECM source type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/sourceTypes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the sourceType to be retrieved"
+              }
+            ]
+          },
+          "docs": "Returns the details of the specified ECM source type, including its name and whether users can configure sources of that type."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

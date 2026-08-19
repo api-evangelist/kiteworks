@@ -1,0 +1,1067 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities dli API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "dli",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Return the list of all exports for all users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/dli/exports",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of user"
+              },
+              {
+                "name": "user_id:in",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of user. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status of the generated report"
+              },
+              {
+                "name": "status:contains",
+                "value": "",
+                "type": "query",
+                "description": "Status of the generated report. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of all data exports across all users, including each export's status, type, date range, and download URL. Requires admin privileges."
+        },
+        {
+          "info": {
+            "name": "Start generating export for the specified user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/dli/exports/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the user"
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates one or more data export jobs for the specified user based on the requested report types and date range. Returns the newly created export record(s) in a pending state. Requires admin privileges."
+        },
+        {
+          "info": {
+            "name": "Return information of an export such as status, download url, user ID, etc.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/dli/exports/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the export"
+              }
+            ]
+          },
+          "docs": "Returns the details of a specific export job, including its status, type, date range, the user it belongs to, and the download URL when the export is complete. Requires admin privileges."
+        },
+        {
+          "info": {
+            "name": "Delete the specified export.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/dli/exports/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the export"
+              }
+            ]
+          },
+          "docs": "Permanently deletes the specified export record and its associated data. Requires admin privileges."
+        },
+        {
+          "info": {
+            "name": "Download the generated export.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/dli/exports/:id/content",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the export"
+              }
+            ]
+          },
+          "docs": "Downloads the generated export file as a binary stream. The export must be in a completed state before it can be downloaded. Requires admin privileges."
+        },
+        {
+          "info": {
+            "name": "Return the list of Activities for this file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/dli/files/:fileId/users/:userId/activities",
+            "params": [
+              {
+                "name": "fileId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the file"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the user."
+              },
+              {
+                "name": "noDayBack",
+                "value": "",
+                "type": "query",
+                "description": "Number of days back to search"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End date"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter activities by scope. Accepted values: `all`, `my`."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search by mail body, subject and sender/recipients"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter activities by type. Accepted values: `all`, `folder_changes`, `file_changes`, `user_preferences`, `mail`, `tasks`, `comments`, `kitepoint`."
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "query",
+                "description": "Transaction ID associated with the activities"
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns all activities performed by the specified user on the specified file. Each activity includes the affected object, a human-readable message, the acting user, and whether the action was successful. Requires admin privileges."
+        },
+        {
+          "info": {
+            "name": "Retrieve information about the file specified.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/dli/files/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the file"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns metadata for the specified file, including its name, size, MIME type, content fingerprint, creation and modification dates, deletion status, and lock state."
+        },
+        {
+          "info": {
+            "name": "Read file content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/dli/files/:id/content",
+            "headers": [
+              {
+                "name": "Range",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the file"
+              }
+            ]
+          },
+          "docs": "Downloads the binary content of the specified file. Supports partial downloads via the Range header."
+        },
+        {
+          "info": {
+            "name": "Get file path",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/dli/files/:id/path",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the file"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns the full ancestor path of the specified file as an ordered list of folder nodes, from the workspace root down to the file's parent folder."
+        },
+        {
+          "info": {
+            "name": "Retrieve information about the file preview.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/dli/files/:id/preview",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the file"
+              }
+            ]
+          },
+          "docs": "Returns preview access links and processing status for the specified file."
+        },
+        {
+          "info": {
+            "name": "List versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/dli/files/:id/versions",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Object id of file to retrieve versions for"
+              },
+              {
+                "name": "created",
+                "value": "",
+                "type": "query",
+                "description": "File Version creation date"
+              },
+              {
+                "name": "created:gt",
+                "value": "",
+                "type": "query",
+                "description": "File Version creation date. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "created:gte",
+                "value": "",
+                "type": "query",
+                "description": "File Version creation date. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "created:lt",
+                "value": "",
+                "type": "query",
+                "description": "File Version creation date. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "created:lte",
+                "value": "",
+                "type": "query",
+                "description": "File Version creation date. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "locate_id",
+                "value": "",
+                "type": "query",
+                "description": "If specified, \"offset\" parameter will be ignored\n                                            and the page containing entity with this Id will be returned."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of all versions for the specified file. Each version includes its name, size, MIME type, creation date, creator, and content fingerprint."
+        },
+        {
+          "info": {
+            "name": "Allow DLI admin to get specified version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/dli/files/:id/versions/:version_id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Object id of file to retrieve versions for"
+              },
+              {
+                "name": "version_id",
+                "value": "",
+                "type": "path",
+                "description": "version ID"
+              }
+            ]
+          },
+          "docs": "Returns the metadata for a specific version of a file, including its name, size, MIME type, creation date, creator, and content fingerprint."
+        },
+        {
+          "info": {
+            "name": "Download specified version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/dli/files/:id/versions/:version_id/content",
+            "headers": [
+              {
+                "name": "Range",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the file"
+              },
+              {
+                "name": "version_id",
+                "value": "",
+                "type": "path",
+                "description": "version ID for which to retrieve content"
+              }
+            ]
+          },
+          "docs": "Downloads the binary content of the specified file version. Supports partial downloads via the Range header."
+        },
+        {
+          "info": {
+            "name": "Return the list of activities for this folder of the specified user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/dli/folders/:folderId/users/:userId/activities",
+            "params": [
+              {
+                "name": "folderId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the folder."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the user."
+              },
+              {
+                "name": "noDayBack",
+                "value": "",
+                "type": "query",
+                "description": "Number of days back to search"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End date"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter activities by scope. Accepted values: `all`, `my`."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search by mail body, subject and sender/recipients"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter activities by type. Accepted values: `all`, `folder_changes`, `file_changes`, `user_preferences`, `mail`, `tasks`, `comments`, `kitepoint`."
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "query",
+                "description": "Transaction ID associated with the activities"
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns all activities performed by the specified user on the specified folder. Each activity includes the affected object, a human-readable message, the acting user, and whether the action was successful. Requires admin privileges."
+        },
+        {
+          "info": {
+            "name": "Retrieve folder information.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/dli/folders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the folder."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns metadata for the specified folder, including its name, creation date, deletion status, and permalink."
+        },
+        {
+          "info": {
+            "name": "List email attachments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/dli/mail/:id/attachments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the email containing the attachment."
+              },
+              {
+                "name": "ref",
+                "value": "",
+                "type": "query",
+                "description": "The reference code for the email. Required if the email can be accessed without authentication."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "locate_id",
+                "value": "",
+                "type": "query",
+                "description": "If specified, \"offset\" parameter will be ignored\n                                            and the page containing entity with this Id will be returned."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of all attachments for the specified email, including each attachment's ID, name, size, MIME type, and content fingerprint."
+        },
+        {
+          "info": {
+            "name": "List Recipients",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/dli/mail/:id/recipients",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the email"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter recipients by type. Accepted values: `0`, `1`, `2`."
+              },
+              {
+                "name": "ref",
+                "value": "",
+                "type": "query",
+                "description": "The reference ID of the email (Mandatory if the email can be accessed without authentication)."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "locate_id",
+                "value": "",
+                "type": "query",
+                "description": "If specified, \"offset\" parameter will be ignored\n                                            and the page containing entity with this Id will be returned."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of all recipients (To, CC, and BCC) for the specified email, including each recipient's user ID, email address, and recipient type."
+        },
+        {
+          "info": {
+            "name": "Return the list of all activities of the specified user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/dli/users/:id/activities",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the user"
+              },
+              {
+                "name": "noDayBack",
+                "value": "",
+                "type": "query",
+                "description": "Number of days back to search"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "Start date"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "End date"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter activities by scope. Accepted values: `all`, `my`."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search by mail body, subject and sender/recipients"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter activities by type. Accepted values: `all`, `folder_changes`, `file_changes`, `user_preferences`, `mail`, `tasks`, `comments`, `kitepoint`."
+              },
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "query",
+                "description": "Transaction ID associated with the activities"
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns all activities performed by or on behalf of the specified user. Each activity includes the affected object, a human-readable message, the acting user, and whether the action was successful. Requires admin privileges."
+        },
+        {
+          "info": {
+            "name": "Retrieve information about the mail specified be a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/dli/users/:id/mail",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the user"
+              },
+              {
+                "name": "senderId",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of User who sent Email"
+              },
+              {
+                "name": "senderId:in",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of User who sent Email. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "isRecipient",
+                "value": "",
+                "type": "query",
+                "description": "Filter emails where the current user is a recipient."
+              },
+              {
+                "name": "read",
+                "value": "",
+                "type": "query",
+                "description": "Whether the email is read or not by the current user."
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "Email creation date"
+              },
+              {
+                "name": "date:gt",
+                "value": "",
+                "type": "query",
+                "description": "Email creation date. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "date:gte",
+                "value": "",
+                "type": "query",
+                "description": "Email creation date. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "date:lt",
+                "value": "",
+                "type": "query",
+                "description": "Email creation date. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "date:lte",
+                "value": "",
+                "type": "query",
+                "description": "Email creation date. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "modified_date",
+                "value": "",
+                "type": "query",
+                "description": "Email modification date"
+              },
+              {
+                "name": "modified_date:gt",
+                "value": "",
+                "type": "query",
+                "description": "Email modification date. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "modified_date:gte",
+                "value": "",
+                "type": "query",
+                "description": "Email modification date. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "modified_date:lt",
+                "value": "",
+                "type": "query",
+                "description": "Email modification date. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "modified_date:lte",
+                "value": "",
+                "type": "query",
+                "description": "Email modification date. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "deleted",
+                "value": "",
+                "type": "query",
+                "description": "Filter emails based on whether they have been deleted."
+              },
+              {
+                "name": "emailPackageId",
+                "value": "",
+                "type": "query",
+                "description": "Email Package unique identifier"
+              },
+              {
+                "name": "emailPackageId:in",
+                "value": "",
+                "type": "query",
+                "description": "Email Package unique identifier. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "templateId",
+                "value": "",
+                "type": "query",
+                "description": "Email Template unique identifier"
+              },
+              {
+                "name": "templateId:in",
+                "value": "",
+                "type": "query",
+                "description": "Email Template unique identifier. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter emails by status. Accepted values: `sent`, `draft`, `queued`, `error`, `self_send`, `transferring`."
+              },
+              {
+                "name": "isPreview",
+                "value": "",
+                "type": "query",
+                "description": "Whether the email is a preview email"
+              },
+              {
+                "name": "isUserSent",
+                "value": "",
+                "type": "query",
+                "description": "Whether the email was sent by some user"
+              },
+              {
+                "name": "bucket",
+                "value": "",
+                "type": "query",
+                "description": "Filter emails by bucket. Accepted values: `draft`, `inbox`, `outgoing`, `sent`, `trash`."
+              },
+              {
+                "name": "returnCustomWebForm",
+                "value": "",
+                "type": "query",
+                "description": "Return all emails including those with the custom web form."
+              },
+              {
+                "name": "customWebFormOnly",
+                "value": "",
+                "type": "query",
+                "description": "Return only emails with the custom web form"
+              },
+              {
+                "name": "webFormId",
+                "value": "",
+                "type": "query",
+                "description": "Email web form ID"
+              },
+              {
+                "name": "webFormId:contains",
+                "value": "",
+                "type": "query",
+                "description": "Email web form ID. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "locate_id",
+                "value": "",
+                "type": "query",
+                "description": "If specified, \"offset\" parameter will be ignored\n                                            and the page containing entity with this Id will be returned."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of all emails sent or received by the specified user, including emails where the user is the sender and emails where the user appears as a recipient."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

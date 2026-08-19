@@ -1,0 +1,4206 @@
+{
+  "item": [
+    {
+      "id": "a47d0dfe-84e7-4654-9122-c799883bccbd",
+      "name": "uploads",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b082077f-94bc-4096-ae6f-e8836839719c",
+          "name": "Retrieve all user upload sessions",
+          "request": {
+            "name": "Retrieve all user upload sessions",
+            "description": {
+              "content": "Returns all active (not yet completed) upload sessions associated with the authenticated user. Each record includes the session ID, file name, total and uploaded sizes, chunk counts, and upload URI.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "uploads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit"
+                },
+                {
+                  "disabled": false,
+                  "key": "locate_id",
+                  "value": "<integer>",
+                  "description": "If specified, \"offset\" parameter will be ignored\n                                            and the page containing entity with this Id will be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "With parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c89e0673-079a-4270-88af-415a08ef40b4",
+              "name": "Upload sessions retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "uploads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locate_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 101,\n      \"userId\": 42,\n      \"timestamp\": \"2024-03-01T10:00:00+00:00\",\n      \"uploadedSize\": 1048576,\n      \"uploadedChunks\": 1,\n      \"error\": null,\n      \"finished\": false,\n      \"fileUrl\": null\n    }\n  ],\n  \"metadata\": {\n    \"total\": 1,\n    \"limit\": 50,\n    \"offset\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b118330f-1ad6-45a5-bbf5-eae5e9e8c3ca",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "uploads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locate_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c092cfa3-3fe1-49f0-b814-fca732d0f602",
+          "name": "Get upload server configuration",
+          "request": {
+            "name": "Get upload server configuration",
+            "description": {
+              "content": "Returns the configuration of the upload server, including its active status and the maximum allowed chunk size.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "uploads",
+                "config"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8ee5442f-74f9-4d96-84de-f5573cf4a38f",
+              "name": "Upload server configuration retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "uploads",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"active\": 1,\n  \"uploadChunkMax\": 10485760\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e6b0cf4-afe2-4bbe-9f40-feb87ecc4fbc",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "uploads",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d88453c7-be88-464c-b373-b8e7cb79c4e5",
+          "name": "Get upload session",
+          "request": {
+            "name": "Get upload session",
+            "description": {
+              "content": "Returns the details of the specified upload session, including its progress, file size, chunk counts, and upload URI.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "uploads",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "With parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the upload session"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cd04574a-d81f-41aa-9975-70693f738d4c",
+              "name": "Upload session details retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "uploads",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the upload session"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 101,\n  \"userId\": 42,\n  \"timestamp\": \"2024-03-01T10:00:00+00:00\",\n  \"uploadedSize\": 1048576,\n  \"uploadedChunks\": 1,\n  \"error\": null,\n  \"finished\": false,\n  \"fileUrl\": null\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ecb3ae45-de05-4829-988f-b97829cd26fc",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "uploads",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the upload session"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "75151528-c3e7-452f-bd9a-1b0dbfd21050",
+          "name": "Terminate upload session",
+          "request": {
+            "name": "Terminate upload session",
+            "description": {
+              "content": "Terminates the specified upload session and discards any uploaded chunks. If the session resides on a different upload node, the termination request is forwarded to that node.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "uploads",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the upload session."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "adff4dfb-dce1-4f85-9507-0047059c03ec",
+              "name": "Upload session terminated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "uploads",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the upload session."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "11fb15ae-5cf6-4f55-9010-46f5c2feb529",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "uploads",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the upload session."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0f165796-fdca-4753-9af8-c2d4a3af649b",
+          "name": "Initiate a ZIP archive upload session for a folder",
+          "request": {
+            "name": "Initiate a ZIP archive upload session for a folder",
+            "description": {
+              "content": "### Description:\n  Creates an upload session for a ZIP archive to be uploaded to the specified folder. The archive will be automatically extracted after all chunks are received. Once the session is created, an upload link is returned which can be used to upload the archive in chunks.\n### Precondition:\n  The user must have `file_add` permission for the folder.\n### Response:\n  The upload session is created and an upload link is returned for subsequent chunk uploads.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "folders",
+                ":id",
+                "actions",
+                "initiateUpload",
+                "zip"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier (UUID) of the entity."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filename\": \"<string>\",\n  \"uncompressedSize\": \"<integer>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9de6faf2-a406-4c35-bf22-e0f934f62c71",
+              "name": "Upload session successfully created and an upload link returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "folders",
+                    ":id",
+                    "actions",
+                    "initiateUpload",
+                    "zip"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"uncompressedSize\": \"<integer>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 4448,\n  \"userId\": \"string\",\n  \"timestamp\": \"2025-02-03\",\n  \"totalSize\": 8428,\n  \"totalChunks\": 9049,\n  \"clientName\": \"string\",\n  \"svrUploadTime\": 9769,\n  \"uploadedSize\": 5490,\n  \"lastTimestamp\": \"1957-03-15\",\n  \"error\": \"string\",\n  \"uri\": {},\n  \"completeOk\": 6708,\n  \"fileUrl\": \"string\",\n  \"replaceId\": \"string\",\n  \"backend\": \"string\",\n  \"finished\": true,\n  \"clientCreated\": \"1970-06-03\",\n  \"clientModified\": \"2017-10-05\",\n  \"requestFileId\": 9611,\n  \"emailId\": 2737,\n  \"uploadedChunks\": 1647,\n  \"location\": \"string\",\n  \"uploadUrl\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6225d562-ad24-45d4-a270-c0388a32aa9c",
+              "name": "Bad Request<br /><br /><i>Possible error codes: </i>ERR_REQUEST_INVALID_JSON",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "folders",
+                    ":id",
+                    "actions",
+                    "initiateUpload",
+                    "zip"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"uncompressedSize\": \"<integer>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_REQUEST_INVALID_JSON\",\n      \"message\": \"Invalid json provided\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e473d1b7-d44e-44d9-b2f0-79fd84ea5595",
+              "name": "Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "folders",
+                    ":id",
+                    "actions",
+                    "initiateUpload",
+                    "zip"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"uncompressedSize\": \"<integer>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_AUTH_INVALID_CSRF\",\n      \"message\": \"Invalid CSRF Authentication\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88de19e7-6dec-4c17-acd6-76db9613126e",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_ENTITY_DLP_LOCKED, ERR_ENTITY_IS_BASE_DIR, ERR_ENTITY_NOT_SCANNED, ERR_ENTITY_RESTRICTED_EXTENSION, ERR_ENTITY_VIRUS_FOUND",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "folders",
+                    ":id",
+                    "actions",
+                    "initiateUpload",
+                    "zip"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"uncompressedSize\": \"<integer>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_ACCESS_USER\",\n      \"message\": \"Insufficient access permissions\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9f1f6da-0ca5-444b-9ea5-f0a249087585",
+              "name": "Content Too Large<br /><br /><i>Possible error codes: </i>ERR_SYSTEM_NO_STORAGE_AVAILABLE",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "folders",
+                    ":id",
+                    "actions",
+                    "initiateUpload",
+                    "zip"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"uncompressedSize\": \"<integer>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_SYSTEM_NO_STORAGE_AVAILABLE\",\n      \"message\": \"Folder owner's remaining storage quota does not permit for a file upload of this size.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce62c4a0-e072-42cf-9007-1c56412e0f38",
+              "name": "Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_INVALID_DATE, ERR_INPUT_INVALID_FORMAT, ERR_INPUT_MAX_VALUE, ERR_INPUT_MIN_VALUE, ERR_INVALID_PARAMETER, ERR_SYSTEM_NO_STORAGE_AVAILABLE, ERR_SYSTEM_NO_AVAILABLE_STORAGE_HOSTS",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "folders",
+                    ":id",
+                    "actions",
+                    "initiateUpload",
+                    "zip"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"uncompressedSize\": \"<integer>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_INPUT_INVALID_DATE\",\n      \"message\": \"The input is not a valid date.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a06ca422-a607-4605-8cd3-cb7e269b8cf7",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "folders",
+                    ":id",
+                    "actions",
+                    "initiateUpload",
+                    "zip"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"uncompressedSize\": \"<integer>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ac024120-b93f-46ba-bec9-c14e791cc181",
+          "name": "Initiate a file upload session for a folder",
+          "request": {
+            "name": "Initiate a file upload session for a folder",
+            "description": {
+              "content": "### Description:\n  Creates an upload session for a file to be added to the specified folder. Once the session is created, an upload link is returned which can be used to upload the file in chunks.\n### Precondition:\n  The user must have `file_add` permission for the folder.\n### Response:\n  The upload session is created and an upload link is returned for subsequent chunk uploads.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "folders",
+                ":id",
+                "actions",
+                "initiateUpload"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier (UUID) of the entity."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b372d69f-2f48-4f56-bb6e-3b4af4e8cf2f",
+              "name": "Upload session successfully created and an upload link returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "folders",
+                    ":id",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 4448,\n  \"userId\": \"string\",\n  \"timestamp\": \"2025-02-03\",\n  \"totalSize\": 8428,\n  \"totalChunks\": 9049,\n  \"clientName\": \"string\",\n  \"svrUploadTime\": 9769,\n  \"uploadedSize\": 5490,\n  \"lastTimestamp\": \"1957-03-15\",\n  \"error\": \"string\",\n  \"uri\": {},\n  \"completeOk\": 6708,\n  \"fileUrl\": \"string\",\n  \"replaceId\": \"string\",\n  \"backend\": \"string\",\n  \"finished\": true,\n  \"clientCreated\": \"1970-06-03\",\n  \"clientModified\": \"2017-10-05\",\n  \"requestFileId\": 9611,\n  \"emailId\": 2737,\n  \"uploadedChunks\": 1647,\n  \"location\": \"string\",\n  \"uploadUrl\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f94a0f0f-36dc-4d6c-8621-04a5a561592f",
+              "name": "Bad Request<br /><br /><i>Possible error codes: </i>ERR_REQUEST_INVALID_JSON",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "folders",
+                    ":id",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_REQUEST_INVALID_JSON\",\n      \"message\": \"Invalid json provided\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "44994ae3-00b6-4911-952d-e4c50bdeb95d",
+              "name": "Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "folders",
+                    ":id",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_AUTH_INVALID_CSRF\",\n      \"message\": \"Invalid CSRF Authentication\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08cc3a4b-fd40-431d-81af-d8f4e4a85bef",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_ENTITY_DLP_LOCKED, ERR_ENTITY_IS_BASE_DIR, ERR_ENTITY_NOT_SCANNED, ERR_ENTITY_RESTRICTED_EXTENSION, ERR_ENTITY_VIRUS_FOUND",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "folders",
+                    ":id",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_ACCESS_USER\",\n      \"message\": \"Insufficient access permissions\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d1c4336-de9b-4867-b7c4-bed041156511",
+              "name": "Content Too Large<br /><br /><i>Possible error codes: </i>ERR_SYSTEM_NO_STORAGE_AVAILABLE",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "folders",
+                    ":id",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_SYSTEM_NO_STORAGE_AVAILABLE\",\n      \"message\": \"Folder owner's remaining storage quota does not permit for a file upload of this size.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "186b69dd-0e08-4063-840a-c003457ac352",
+              "name": "Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_INVALID_DATE, ERR_INPUT_INVALID_FORMAT, ERR_INPUT_MAX_VALUE, ERR_INPUT_MIN_VALUE, ERR_INVALID_PARAMETER, ERR_SYSTEM_NO_STORAGE_AVAILABLE, ERR_SYSTEM_NO_AVAILABLE_STORAGE_HOSTS",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "folders",
+                    ":id",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_INPUT_INVALID_DATE\",\n      \"message\": \"The input is not a valid date.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "23d0c22d-cebb-462f-96e2-395f42339c46",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "folders",
+                    ":id",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5df2fb6d-3bed-44e9-8dd2-f3cf8ca84980",
+          "name": "Initiate a file upload session for a request file",
+          "request": {
+            "name": "Initiate a file upload session for a request file",
+            "description": {
+              "content": "### Description:\n  Creates an upload session for a file to be uploaded to a request file. Once the session is created, an upload link is returned which can be used to upload the file in chunks.\n### Precondition:\n  The caller must have access to the request file for uploading.\n### Response:\n  The upload session is created and an upload link is returned for subsequent chunk uploads.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "requestFile",
+                ":ref",
+                "actions",
+                "initiateUpload"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ref",
+                  "description": "(Required) The unique reference of the Request File upload link."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c0b71908-7d27-457a-9fc7-5e16c627a32b",
+              "name": "Upload session successfully created and an upload link returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 4448,\n  \"userId\": \"string\",\n  \"timestamp\": \"2025-02-03\",\n  \"totalSize\": 8428,\n  \"totalChunks\": 9049,\n  \"clientName\": \"string\",\n  \"svrUploadTime\": 9769,\n  \"uploadedSize\": 5490,\n  \"lastTimestamp\": \"1957-03-15\",\n  \"error\": \"string\",\n  \"uri\": {},\n  \"completeOk\": 6708,\n  \"fileUrl\": \"string\",\n  \"replaceId\": \"string\",\n  \"backend\": \"string\",\n  \"finished\": true,\n  \"clientCreated\": \"1970-06-03\",\n  \"clientModified\": \"2017-10-05\",\n  \"requestFileId\": 9611,\n  \"emailId\": 2737,\n  \"uploadedChunks\": 1647,\n  \"location\": \"string\",\n  \"uploadUrl\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e127d1b7-ba95-4676-a1e5-55f5aef7b2ec",
+              "name": "Bad Request<br /><br /><i>Possible error codes: </i>ERR_REQUEST_INVALID_JSON",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_REQUEST_INVALID_JSON\",\n      \"message\": \"Invalid json provided\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "291e983e-a5f3-4166-aa52-63d530d54736",
+              "name": "Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_AUTH_INVALID_CSRF\",\n      \"message\": \"Invalid CSRF Authentication\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ceaeeff-e57f-4a47-9e91-716f59320363",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_ENTITY_IS_BASE_DIR, ERR_ENTITY_REQUEST_FILE_UPLOAD_LIMIT_REACHED, ERR_ENTITY_RESTRICTED_EXTENSION",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_ACCESS_USER\",\n      \"message\": \"Insufficient access permissions\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4708b8a7-68c0-47a2-aba1-2ccbd8e1e4c6",
+              "name": "Content Too Large<br /><br /><i>Possible error codes: </i>ERR_SYSTEM_NO_STORAGE_AVAILABLE",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_SYSTEM_NO_STORAGE_AVAILABLE\",\n      \"message\": \"Folder owner's remaining storage quota does not permit for a file upload of this size.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0fc7d0cc-472b-4555-8df1-46f318536032",
+              "name": "Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_INVALID_DATE, ERR_INPUT_INVALID_FORMAT, ERR_INPUT_MAX_VALUE, ERR_INPUT_MIN_VALUE, ERR_INVALID_PARAMETER, ERR_SYSTEM_NO_AVAILABLE_STORAGE_HOSTS",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_INPUT_INVALID_DATE\",\n      \"message\": \"The input is not a valid date.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e763e5f5-a0bf-4f48-8aaa-1211335b7b59",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "requestFile",
+                    ":ref",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ref",
+                      "description": "(Required) The unique reference of the Request File upload link."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "92752e0e-cca7-46e1-9c75-0af83d389693",
+          "name": "Initiate a file upload session for an email attachment",
+          "request": {
+            "name": "Initiate a file upload session for an email attachment",
+            "description": {
+              "content": "### Description:\n  Creates an upload session for a file to be attached to an email. Once the session is created, an upload link is returned which can be used to upload the attachment in chunks.\n### Precondition:\n  The user must be the sender of the email.\n### Response:\n  The upload session is created and an upload link is returned for subsequent chunk uploads.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "mail",
+                ":id",
+                "actions",
+                "initiateUpload"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier (UUID) of the email."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c7d8c944-a345-4d5a-bbfc-9aac13f09918",
+              "name": "Upload session successfully created and an upload link returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "mail",
+                    ":id",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the email."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 4448,\n  \"userId\": \"string\",\n  \"timestamp\": \"2025-02-03\",\n  \"totalSize\": 8428,\n  \"totalChunks\": 9049,\n  \"clientName\": \"string\",\n  \"svrUploadTime\": 9769,\n  \"uploadedSize\": 5490,\n  \"lastTimestamp\": \"1957-03-15\",\n  \"error\": \"string\",\n  \"uri\": {},\n  \"completeOk\": 6708,\n  \"fileUrl\": \"string\",\n  \"replaceId\": \"string\",\n  \"backend\": \"string\",\n  \"finished\": true,\n  \"clientCreated\": \"1970-06-03\",\n  \"clientModified\": \"2017-10-05\",\n  \"requestFileId\": 9611,\n  \"emailId\": 2737,\n  \"uploadedChunks\": 1647,\n  \"location\": \"string\",\n  \"uploadUrl\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa45794a-ccc4-4a21-83b4-87e75bfcfd12",
+              "name": "Bad Request<br /><br /><i>Possible error codes: </i>ERR_REQUEST_INVALID_JSON",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "mail",
+                    ":id",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the email."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_REQUEST_INVALID_JSON\",\n      \"message\": \"Invalid json provided\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43f822b3-39c1-4abf-96ca-c8668713994c",
+              "name": "Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "mail",
+                    ":id",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the email."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_AUTH_INVALID_CSRF\",\n      \"message\": \"Invalid CSRF Authentication\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "809dce25-b94e-4fb6-af4d-be990072d597",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_ENTITY_IS_BASE_DIR, ERR_ENTITY_RESTRICTED_EXTENSION",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "mail",
+                    ":id",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the email."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_ACCESS_USER\",\n      \"message\": \"Insufficient access permissions\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f4b0c78-52b8-4e1e-b79c-94ceeedc6d31",
+              "name": "Content Too Large<br /><br /><i>Possible error codes: </i>ERR_SYSTEM_NO_STORAGE_AVAILABLE",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "mail",
+                    ":id",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the email."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_SYSTEM_NO_STORAGE_AVAILABLE\",\n      \"message\": \"Folder owner's remaining storage quota does not permit for a file upload of this size.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c71062e4-72fc-4ff7-93c8-461ea9f4e70d",
+              "name": "Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_INVALID_DATE, ERR_INPUT_INVALID_FORMAT, ERR_INPUT_MAX_VALUE, ERR_INPUT_MIN_VALUE, ERR_INVALID_PARAMETER, ERR_SYSTEM_NO_AVAILABLE_STORAGE_HOSTS",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "mail",
+                    ":id",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the email."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_INPUT_INVALID_DATE\",\n      \"message\": \"The input is not a valid date.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e72bf59c-5091-4eb9-acad-8b3114302cab",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "mail",
+                    ":id",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the email."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1589d026-e602-46dc-abf3-4470e1b71d91",
+          "name": "Initiate an unauthenticated file upload session for an email attachment",
+          "request": {
+            "name": "Initiate an unauthenticated file upload session for an email attachment",
+            "description": {
+              "content": "### Description:\n  Creates an upload session for a file to be attached to an email, without requiring full authentication. Once the session is created, an upload link is returned which can be used to upload the attachment in chunks.\n### Precondition:\n  The caller must have a valid unauthenticated access context for the specified email.\n### Response:\n  The upload session is created and an upload link is returned for subsequent chunk uploads.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "public",
+                "mail",
+                ":id",
+                "actions",
+                "initiateUpload"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier (UUID) of the email."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1a58deac-0203-4ed3-8dc3-5afaf2c94a12",
+              "name": "Upload session successfully created and an upload link returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "public",
+                    "mail",
+                    ":id",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the email."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 4448,\n  \"userId\": \"string\",\n  \"timestamp\": \"2025-02-03\",\n  \"totalSize\": 8428,\n  \"totalChunks\": 9049,\n  \"clientName\": \"string\",\n  \"svrUploadTime\": 9769,\n  \"uploadedSize\": 5490,\n  \"lastTimestamp\": \"1957-03-15\",\n  \"error\": \"string\",\n  \"uri\": {},\n  \"completeOk\": 6708,\n  \"fileUrl\": \"string\",\n  \"replaceId\": \"string\",\n  \"backend\": \"string\",\n  \"finished\": true,\n  \"clientCreated\": \"1970-06-03\",\n  \"clientModified\": \"2017-10-05\",\n  \"requestFileId\": 9611,\n  \"emailId\": 2737,\n  \"uploadedChunks\": 1647,\n  \"location\": \"string\",\n  \"uploadUrl\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc2ec7dd-828e-4f76-8c5c-00a7a016bea6",
+              "name": "Bad Request<br /><br /><i>Possible error codes: </i>ERR_REQUEST_INVALID_JSON",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "public",
+                    "mail",
+                    ":id",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the email."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_REQUEST_INVALID_JSON\",\n      \"message\": \"Invalid json provided\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20d9efe1-7908-4558-a531-4c2bfadab4f8",
+              "name": "Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "public",
+                    "mail",
+                    ":id",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the email."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_AUTH_INVALID_CSRF\",\n      \"message\": \"Invalid CSRF Authentication\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6d7f05d-9d08-4779-909a-a19a68e213ab",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_ENTITY_IS_BASE_DIR, ERR_ENTITY_RESTRICTED_EXTENSION",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "public",
+                    "mail",
+                    ":id",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the email."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_ACCESS_USER\",\n      \"message\": \"Insufficient access permissions\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5219746-8c7c-4c37-a33a-a76c506f0c8a",
+              "name": "Content Too Large<br /><br /><i>Possible error codes: </i>ERR_SYSTEM_NO_STORAGE_AVAILABLE",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "public",
+                    "mail",
+                    ":id",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the email."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_SYSTEM_NO_STORAGE_AVAILABLE\",\n      \"message\": \"Folder owner's remaining storage quota does not permit for a file upload of this size.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2782b0b-8770-4afb-8bc3-7b6927415279",
+              "name": "Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_INVALID_DATE, ERR_INPUT_INVALID_FORMAT, ERR_INPUT_MAX_VALUE, ERR_INPUT_MIN_VALUE, ERR_INVALID_PARAMETER, ERR_SYSTEM_NO_AVAILABLE_STORAGE_HOSTS",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "public",
+                    "mail",
+                    ":id",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the email."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_INPUT_INVALID_DATE\",\n      \"message\": \"The input is not a valid date.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90ce897e-e974-44e5-826f-99be85308aa9",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "public",
+                    "mail",
+                    ":id",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the email."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f1bceee8-3218-4131-84b4-35ce8618b64d",
+          "name": "Initiate an upload session for a new file version",
+          "request": {
+            "name": "Initiate an upload session for a new file version",
+            "description": {
+              "content": "### Description:\n  Creates an upload session to add a new version of an existing file. Once the session is created, an upload link is returned which can be used to upload the new version in chunks.\n### Precondition:\n  The user must have `version_created` permission for the specified file.\n### Response:\n  The upload session is created and an upload link is returned for subsequent chunk uploads.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "files",
+                ":id",
+                "actions",
+                "initiateUpload"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier (UUID) of the entity."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "baeccf59-a601-4c76-a755-eb0b209076a6",
+              "name": "Upload session successfully created and an upload link returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    ":id",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 4448,\n  \"userId\": \"string\",\n  \"timestamp\": \"2025-02-03\",\n  \"totalSize\": 8428,\n  \"totalChunks\": 9049,\n  \"clientName\": \"string\",\n  \"svrUploadTime\": 9769,\n  \"uploadedSize\": 5490,\n  \"lastTimestamp\": \"1957-03-15\",\n  \"error\": \"string\",\n  \"uri\": {},\n  \"completeOk\": 6708,\n  \"fileUrl\": \"string\",\n  \"replaceId\": \"string\",\n  \"backend\": \"string\",\n  \"finished\": true,\n  \"clientCreated\": \"1970-06-03\",\n  \"clientModified\": \"2017-10-05\",\n  \"requestFileId\": 9611,\n  \"emailId\": 2737,\n  \"uploadedChunks\": 1647,\n  \"location\": \"string\",\n  \"uploadUrl\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90a589b7-394a-4c6c-8c99-9d89f321661b",
+              "name": "Bad Request<br /><br /><i>Possible error codes: </i>ERR_REQUEST_INVALID_JSON",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    ":id",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_REQUEST_INVALID_JSON\",\n      \"message\": \"Invalid json provided\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9ca5b38-1880-44a9-bfca-6bf37131d7eb",
+              "name": "Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    ":id",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_AUTH_INVALID_CSRF\",\n      \"message\": \"Invalid CSRF Authentication\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1eab29c-c234-495a-8c22-7aa3991cb647",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_ENTITY_DLP_LOCKED, ERR_ENTITY_IS_BASE_DIR, ERR_ENTITY_NOT_SCANNED, ERR_ENTITY_RESTRICTED_EXTENSION, ERR_ENTITY_VIRUS_FOUND",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    ":id",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_ACCESS_USER\",\n      \"message\": \"Insufficient access permissions\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77f570b4-7655-4c0c-8c6e-5661af50ef59",
+              "name": "Content Too Large<br /><br /><i>Possible error codes: </i>ERR_SYSTEM_NO_STORAGE_AVAILABLE",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    ":id",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_SYSTEM_NO_STORAGE_AVAILABLE\",\n      \"message\": \"Folder owner's remaining storage quota does not permit for a file upload of this size.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9cf3f0cd-c3ef-47be-91d8-07d9d2b79e7a",
+              "name": "Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_INVALID_DATE, ERR_INPUT_INVALID_FORMAT, ERR_INPUT_MAX_VALUE, ERR_INPUT_MIN_VALUE, ERR_INVALID_PARAMETER, ERR_SYSTEM_NO_AVAILABLE_STORAGE_HOSTS",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    ":id",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_INPUT_INVALID_DATE\",\n      \"message\": \"The input is not a valid date.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a93adb0-158d-4c4b-887b-0bbb3e220061",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "files",
+                    ":id",
+                    "actions",
+                    "initiateUpload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier (UUID) of the entity."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"totalSize\": \"<integer>\",\n  \"totalChunks\": \"<integer>\",\n  \"clientCreated\": \"<date>\",\n  \"clientModified\": \"<date>\",\n  \"proximateHost\": \"<string>\",\n  \"tracking_id\": \"<uuid>\",\n  \"resume\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aabc82b7-2e98-4396-81be-77c166bcf64b",
+          "name": "Upload a file chunk",
+          "request": {
+            "name": "Upload a file chunk",
+            "description": {
+              "content": "### Description:\n  Uploads a single chunk of a file to the server using the upload link obtained from an initiate-upload call. The file is reconstructed server-side once all chunks are received.\n### Precondition:\n  * The caller must hold a valid upload link.\n  * The client must split the file into chunks before uploading.\n  * Chunks must be uploaded sequentially, starting from index 1.\n### Response:\n  Returns the updated upload session after each intermediate chunk, and the completed file record after the final chunk.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":host_name",
+                "rest",
+                "uploads",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "returnEntity",
+                  "value": "<boolean>",
+                  "description": "If true, includes the entity in the response body."
+                },
+                {
+                  "disabled": false,
+                  "key": "with",
+                  "value": "<string>",
+                  "description": "Specifies additional fields to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "Determines the detail level of the response body."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "host_name",
+                  "description": "(Required) The upload host name, which can be retrieved from GET /uploads/{id} or the initiateUpload response."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the upload."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "compressionMode",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) The compression mode used for the chunk. Options include \"NORMAL\", \"GZIP\", and \"ZLIB\". (This can only be one of NORMAL,GZIP,ZLIB)"
+                },
+                {
+                  "key": "compressionSize",
+                  "value": "<long>",
+                  "type": "text",
+                  "description": "(Required) The size of the chunk after compression."
+                },
+                {
+                  "key": "originalSize",
+                  "value": "<long>",
+                  "type": "text",
+                  "description": "(Required) The size of the chunk before compression."
+                },
+                {
+                  "key": "content",
+                  "type": "file",
+                  "description": "(Required) The binary content of the chunk."
+                },
+                {
+                  "key": "index",
+                  "value": "<long>",
+                  "type": "text",
+                  "description": "The sequential index of the chunk (starts from 1)."
+                },
+                {
+                  "key": "lastChunk",
+                  "value": "<long>",
+                  "type": "text",
+                  "description": "Indicates if this is the last chunk of the file (1 if last, 0 otherwise)."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3176ab8e-2428-4b80-8032-6efefe7dbb63",
+              "name": "The current chunk upload is successfully received but not yet registered to the server.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":host_name",
+                    "rest",
+                    "uploads",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "host_name",
+                      "description": "(Required) The upload host name, which can be retrieved from GET /uploads/{id} or the initiateUpload response."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the upload."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The compression mode used for the chunk. Options include \"NORMAL\", \"GZIP\", and \"ZLIB\". (This can only be one of NORMAL,GZIP,ZLIB)",
+                        "type": "text/plain"
+                      },
+                      "key": "compressionMode",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The size of the chunk after compression.",
+                        "type": "text/plain"
+                      },
+                      "key": "compressionSize",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The size of the chunk before compression.",
+                        "type": "text/plain"
+                      },
+                      "key": "originalSize",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The binary content of the chunk.",
+                        "type": "text/plain"
+                      },
+                      "key": "content",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The sequential index of the chunk (starts from 1).",
+                        "type": "text/plain"
+                      },
+                      "key": "index",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Indicates if this is the last chunk of the file (1 if last, 0 otherwise).",
+                        "type": "text/plain"
+                      },
+                      "key": "lastChunk",
+                      "value": "<long>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 4448,\n  \"userId\": \"string\",\n  \"timestamp\": \"2025-02-03\",\n  \"totalSize\": 8428,\n  \"totalChunks\": 9049,\n  \"clientName\": \"string\",\n  \"svrUploadTime\": 9769,\n  \"uploadedSize\": 5490,\n  \"lastTimestamp\": \"1957-03-15\",\n  \"error\": \"string\",\n  \"uri\": {},\n  \"completeOk\": 6708,\n  \"fileUrl\": \"string\",\n  \"replaceId\": \"string\",\n  \"backend\": \"string\",\n  \"finished\": true,\n  \"clientCreated\": \"1970-06-03\",\n  \"clientModified\": \"2017-10-05\",\n  \"requestFileId\": 9611,\n  \"emailId\": 2737,\n  \"uploadedChunks\": 1647,\n  \"location\": \"string\",\n  \"uploadUrl\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9e34e79-dc83-4531-8bf3-6423a60c8176",
+              "name": "File uploaded successfully and is registered to the server after the last chunk is received.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":host_name",
+                    "rest",
+                    "uploads",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "host_name",
+                      "description": "(Required) The upload host name, which can be retrieved from GET /uploads/{id} or the initiateUpload response."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the upload."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The compression mode used for the chunk. Options include \"NORMAL\", \"GZIP\", and \"ZLIB\". (This can only be one of NORMAL,GZIP,ZLIB)",
+                        "type": "text/plain"
+                      },
+                      "key": "compressionMode",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The size of the chunk after compression.",
+                        "type": "text/plain"
+                      },
+                      "key": "compressionSize",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The size of the chunk before compression.",
+                        "type": "text/plain"
+                      },
+                      "key": "originalSize",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The binary content of the chunk.",
+                        "type": "text/plain"
+                      },
+                      "key": "content",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The sequential index of the chunk (starts from 1).",
+                        "type": "text/plain"
+                      },
+                      "key": "index",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Indicates if this is the last chunk of the file (1 if last, 0 otherwise).",
+                        "type": "text/plain"
+                      },
+                      "key": "lastChunk",
+                      "value": "<long>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"e0b7ec77-41f3-6102-98b7-c59c0097396a\",\n  \"parentId\": \"b4bcf30c-1624-fbe2-8b1f-6ade96d96373\",\n  \"name\": \"string\",\n  \"type\": \"string\",\n  \"userId\": \"a1c43453-c063-e55e-f6e7-5adb9f098b1d\",\n  \"creator\": {\n    \"id\": \"string\",\n    \"email\": \"string\",\n    \"name\": \"string\",\n    \"profileIcon\": \"string\"\n  },\n  \"created\": \"2005-08-29\",\n  \"modified\": \"1967-11-23\",\n  \"expire\": \"1979-06-09\",\n  \"permissions\": [\n    {\n      \"id\": 241,\n      \"name\": \"string\",\n      \"allowed\": true\n    },\n    {\n      \"id\": 730,\n      \"name\": \"string\",\n      \"allowed\": true\n    }\n  ],\n  \"deleted\": true,\n  \"permDeleted\": false,\n  \"permalink\": \"string\",\n  \"path\": \"string\",\n  \"members\": [\n    {\n      \"objectId\": \"string\",\n      \"roleId\": 2611,\n      \"userId\": \"string\",\n      \"groupId\": 633,\n      \"user\": {\n        \"id\": \"string\",\n        \"email\": \"string\",\n        \"name\": \"string\",\n        \"profileIcon\": \"string\"\n      },\n      \"role\": {\n        \"id\": 8037,\n        \"name\": \"string\",\n        \"rank\": 8293,\n        \"type\": \"string\"\n      },\n      \"group\": {\n        \"id\": 9004,\n        \"name\": \"string\",\n        \"dn\": \"string\",\n        \"email\": \"string\",\n        \"description\": \"string\"\n      },\n      \"sharedBy\": {\n        \"id\": \"string\",\n        \"email\": \"string\",\n        \"name\": \"string\",\n        \"profileIcon\": \"string\"\n      },\n      \"created\": \"1961-08-07\",\n      \"inheritRoleId\": 1064,\n      \"allowedFolderRoleId\": [\n        3244,\n        8039\n      ],\n      \"email\": \"string\",\n      \"rank\": 8819,\n      \"originFolder\": {}\n    },\n    {\n      \"objectId\": \"string\",\n      \"roleId\": 953,\n      \"userId\": \"string\",\n      \"groupId\": 2844,\n      \"user\": {\n        \"id\": \"string\",\n        \"email\": \"string\",\n        \"name\": \"string\",\n        \"profileIcon\": \"string\"\n      },\n      \"role\": {\n        \"id\": 9756,\n        \"name\": \"string\",\n        \"rank\": 1135,\n        \"type\": \"string\"\n      },\n      \"group\": {\n        \"id\": 5647,\n        \"name\": \"string\",\n        \"dn\": \"string\",\n        \"email\": \"string\",\n        \"description\": \"string\"\n      },\n      \"sharedBy\": {\n        \"id\": \"string\",\n        \"email\": \"string\",\n        \"name\": \"string\",\n        \"profileIcon\": \"string\"\n      },\n      \"created\": \"1978-12-22\",\n      \"inheritRoleId\": 9993,\n      \"allowedFolderRoleId\": [\n        2319,\n        5877\n      ],\n      \"email\": \"string\",\n      \"rank\": 7318,\n      \"originFolder\": {}\n    }\n  ],\n  \"vendorDocId\": \"string\",\n  \"vendorDocName\": \"string\",\n  \"secure\": true,\n  \"source\": 4400,\n  \"modifier\": {\n    \"id\": \"string\",\n    \"email\": \"string\",\n    \"name\": \"string\",\n    \"profileIcon\": \"string\"\n  },\n  \"size\": 5559,\n  \"mime\": \"string\",\n  \"fingerprint\": \"string\",\n  \"fingerprints\": [\n    {\n      \"algo\": \"string\",\n      \"hash\": \"string\"\n    },\n    {\n      \"algo\": \"string\",\n      \"hash\": \"string\"\n    }\n  ],\n  \"clientCreated\": \"1984-10-18\",\n  \"clientModified\": \"1963-04-30\",\n  \"overriddenExpire\": true,\n  \"sharedBy\": {\n    \"id\": \"string\",\n    \"email\": \"string\",\n    \"name\": \"string\",\n    \"profileIcon\": \"string\"\n  },\n  \"sharedTime\": \"1951-07-15\",\n  \"parent\": {\n    \"id\": \"b735cc01-62a9-0375-8225-d9dedd19b3ee\",\n    \"parentId\": \"47d54a69-812c-33e3-cd5d-e330b9cf7ad3\",\n    \"name\": \"string\",\n    \"type\": \"string\",\n    \"userId\": \"e98da7d6-a2e7-c0bf-f5dc-a280dd861a74\",\n    \"creator\": {\n      \"id\": \"string\",\n      \"email\": \"string\",\n      \"name\": \"string\",\n      \"profileIcon\": \"string\"\n    },\n    \"created\": \"1974-07-12\",\n    \"modified\": \"1949-10-07\",\n    \"expire\": \"1988-11-30\",\n    \"permissions\": [\n      {\n        \"id\": 9739,\n        \"name\": \"string\",\n        \"allowed\": false\n      },\n      {\n        \"id\": 6011,\n        \"name\": \"string\",\n        \"allowed\": true\n      }\n    ],\n    \"deleted\": false,\n    \"permDeleted\": true,\n    \"permalink\": \"string\",\n    \"path\": \"string\",\n    \"members\": [\n      {\n        \"objectId\": \"string\",\n        \"roleId\": 3094,\n        \"userId\": \"string\",\n        \"groupId\": 5627,\n        \"user\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"profileIcon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"role\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"rank\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"group\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"dn\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"sharedBy\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"profileIcon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"created\": \"2013-11-09\",\n        \"inheritRoleId\": 843,\n        \"allowedFolderRoleId\": [\n          9906,\n          1403\n        ],\n        \"email\": \"string\",\n        \"rank\": 3576,\n        \"originFolder\": {}\n      },\n      {\n        \"objectId\": \"string\",\n        \"roleId\": 3401,\n        \"userId\": \"string\",\n        \"groupId\": 9070,\n        \"user\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"profileIcon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"role\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"rank\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"group\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"dn\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"description\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"sharedBy\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"email\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"profileIcon\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"created\": \"2021-11-06\",\n        \"inheritRoleId\": 108,\n        \"allowedFolderRoleId\": [\n          8234,\n          8293\n        ],\n        \"email\": \"string\",\n        \"rank\": 5771,\n        \"originFolder\": {}\n      }\n    ],\n    \"vendorDocId\": \"string\",\n    \"vendorDocName\": \"string\",\n    \"secure\": true,\n    \"source\": 1185,\n    \"isShared\": true,\n    \"syncable\": true,\n    \"fileLifetime\": 4017,\n    \"description\": \"string\",\n    \"isFavorite\": true,\n    \"pushedFilesCount\": 9688,\n    \"currentUserRole\": {\n      \"id\": 7579,\n      \"name\": \"string\",\n      \"rank\": 5200,\n      \"type\": \"string\"\n    },\n    \"avStatus\": \"string\",\n    \"dlpStatus\": \"string\",\n    \"totalMembersCount\": 5705,\n    \"totalFoldersCount\": 6156,\n    \"totalFilesCount\": 8253,\n    \"maxFolderExpiration\": \"1984-06-22\",\n    \"maxFileLifetime\": 5503,\n    \"isLdapGroupMember\": true,\n    \"isUnderMyFolder\": false,\n    \"pathIds\": \"string\",\n    \"isRoot\": false,\n    \"rootId\": \"4fa05a61-5114-4000-ac31-c2afb82d096d\",\n    \"useFolderQuota\": false,\n    \"quota\": 1904,\n    \"size\": 2684,\n    \"freeSpace\": 4407,\n    \"inheritanceEnabled\": false\n  },\n  \"originalFileId\": \"33fc2065-ad84-8b77-ee1b-3eebc22acf2f\",\n  \"avStatus\": \"string\",\n  \"dlpStatus\": \"string\",\n  \"adminQuarantineStatus\": \"string\",\n  \"locked\": false,\n  \"lockUser\": {\n    \"id\": \"string\",\n    \"email\": \"string\",\n    \"name\": \"string\",\n    \"profileIcon\": \"string\"\n  },\n  \"isShared\": true,\n  \"lastModifiedBy\": {\n    \"id\": \"string\",\n    \"email\": \"string\",\n    \"name\": \"string\",\n    \"profileIcon\": \"string\"\n  },\n  \"pushedObject\": {\n    \"objectId\": \"string\",\n    \"userId\": \"string\",\n    \"created\": \"1961-02-22\",\n    \"user\": {\n      \"id\": \"string\",\n      \"email\": \"string\",\n      \"name\": \"string\",\n      \"profileIcon\": \"string\"\n    }\n  },\n  \"pathIds\": \"6aaf1550-7604-e8c4-5303-213a8d3218cd\",\n  \"wopiapp\": {\n    \"wopiSrc\": \"string\",\n    \"userId\": \"string\",\n    \"service\": \"string\",\n    \"scheme\": \"string\",\n    \"schemeSupport\": \"string\"\n  },\n  \"pushed\": true,\n  \"tags\": [\n    {\n      \"guid\": \"4d3be3d9-92ea-34cb-b0c9-cea64ee0ec1f\",\n      \"name\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"guid\": \"10bde7b4-bd2c-4cd1-dad1-f2f43c8f3dca\",\n      \"name\": \"string\",\n      \"type\": \"string\"\n    }\n  ],\n  \"safeEdit\": {\n    \"safeEditLocked\": true,\n    \"user\": {\n      \"id\": \"string\",\n      \"email\": \"string\",\n      \"name\": \"string\",\n      \"profileIcon\": \"string\"\n    }\n  },\n  \"versionsCount\": 3726,\n  \"tracking_id\": \"c440ff02-db6f-5a37-5644-38486af0d0e7\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed0d610b-11d4-4afb-896b-e4af8032c3d0",
+              "name": "Bad Request<br /><br /><i>Possible error codes: </i>ERR_REQUEST_INVALID_JSON",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":host_name",
+                    "rest",
+                    "uploads",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "host_name",
+                      "description": "(Required) The upload host name, which can be retrieved from GET /uploads/{id} or the initiateUpload response."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the upload."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The compression mode used for the chunk. Options include \"NORMAL\", \"GZIP\", and \"ZLIB\". (This can only be one of NORMAL,GZIP,ZLIB)",
+                        "type": "text/plain"
+                      },
+                      "key": "compressionMode",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The size of the chunk after compression.",
+                        "type": "text/plain"
+                      },
+                      "key": "compressionSize",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The size of the chunk before compression.",
+                        "type": "text/plain"
+                      },
+                      "key": "originalSize",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The binary content of the chunk.",
+                        "type": "text/plain"
+                      },
+                      "key": "content",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The sequential index of the chunk (starts from 1).",
+                        "type": "text/plain"
+                      },
+                      "key": "index",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Indicates if this is the last chunk of the file (1 if last, 0 otherwise).",
+                        "type": "text/plain"
+                      },
+                      "key": "lastChunk",
+                      "value": "<long>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_REQUEST_INVALID_JSON\",\n      \"message\": \"Invalid json provided\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6065d3e-6392-4f02-a77a-238af6912fa5",
+              "name": "Unauthorized<br /><br /><i>Possible error codes: </i>ERR_AUTH_INVALID_CSRF, ERR_AUTH_UNAUTHORIZED",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":host_name",
+                    "rest",
+                    "uploads",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "host_name",
+                      "description": "(Required) The upload host name, which can be retrieved from GET /uploads/{id} or the initiateUpload response."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the upload."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The compression mode used for the chunk. Options include \"NORMAL\", \"GZIP\", and \"ZLIB\". (This can only be one of NORMAL,GZIP,ZLIB)",
+                        "type": "text/plain"
+                      },
+                      "key": "compressionMode",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The size of the chunk after compression.",
+                        "type": "text/plain"
+                      },
+                      "key": "compressionSize",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The size of the chunk before compression.",
+                        "type": "text/plain"
+                      },
+                      "key": "originalSize",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The binary content of the chunk.",
+                        "type": "text/plain"
+                      },
+                      "key": "content",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The sequential index of the chunk (starts from 1).",
+                        "type": "text/plain"
+                      },
+                      "key": "index",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Indicates if this is the last chunk of the file (1 if last, 0 otherwise).",
+                        "type": "text/plain"
+                      },
+                      "key": "lastChunk",
+                      "value": "<long>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_AUTH_INVALID_CSRF\",\n      \"message\": \"Invalid CSRF Authentication\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e3233413-924d-4396-b7db-279b3b5041cb",
+              "name": "Forbidden<br /><br /><i>Possible error codes: </i>ERR_ACCESS_USER, ERR_ENTITY_DLP_LOCKED, ERR_ENTITY_IS_BASE_DIR, ERR_ENTITY_NOT_SCANNED, ERR_ENTITY_REQUEST_FILE_UPLOAD_LIMIT_REACHED, ERR_ENTITY_RESTRICTED_TYPE, ERR_ENTITY_VIRUS_FOUND",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":host_name",
+                    "rest",
+                    "uploads",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "host_name",
+                      "description": "(Required) The upload host name, which can be retrieved from GET /uploads/{id} or the initiateUpload response."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the upload."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The compression mode used for the chunk. Options include \"NORMAL\", \"GZIP\", and \"ZLIB\". (This can only be one of NORMAL,GZIP,ZLIB)",
+                        "type": "text/plain"
+                      },
+                      "key": "compressionMode",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The size of the chunk after compression.",
+                        "type": "text/plain"
+                      },
+                      "key": "compressionSize",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The size of the chunk before compression.",
+                        "type": "text/plain"
+                      },
+                      "key": "originalSize",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The binary content of the chunk.",
+                        "type": "text/plain"
+                      },
+                      "key": "content",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The sequential index of the chunk (starts from 1).",
+                        "type": "text/plain"
+                      },
+                      "key": "index",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Indicates if this is the last chunk of the file (1 if last, 0 otherwise).",
+                        "type": "text/plain"
+                      },
+                      "key": "lastChunk",
+                      "value": "<long>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_ACCESS_USER\",\n      \"message\": \"Insufficient access permissions\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "605f61c8-a533-473d-b4d4-08d889734736",
+              "name": "Unprocessable Content<br /><br /><i>Possible error codes: </i>ERR_INPUT_NOT_IN_LIST, ERR_INVALID_PARAMETER, ERR_LICENSE_MAX_UPLOAD_SIZE",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":host_name",
+                    "rest",
+                    "uploads",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "host_name",
+                      "description": "(Required) The upload host name, which can be retrieved from GET /uploads/{id} or the initiateUpload response."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the upload."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The compression mode used for the chunk. Options include \"NORMAL\", \"GZIP\", and \"ZLIB\". (This can only be one of NORMAL,GZIP,ZLIB)",
+                        "type": "text/plain"
+                      },
+                      "key": "compressionMode",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The size of the chunk after compression.",
+                        "type": "text/plain"
+                      },
+                      "key": "compressionSize",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The size of the chunk before compression.",
+                        "type": "text/plain"
+                      },
+                      "key": "originalSize",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The binary content of the chunk.",
+                        "type": "text/plain"
+                      },
+                      "key": "content",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The sequential index of the chunk (starts from 1).",
+                        "type": "text/plain"
+                      },
+                      "key": "index",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Indicates if this is the last chunk of the file (1 if last, 0 otherwise).",
+                        "type": "text/plain"
+                      },
+                      "key": "lastChunk",
+                      "value": "<long>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"ERR_INPUT_NOT_IN_LIST\",\n      \"message\": \"The specified input is not allowed.\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d051cc62-9c06-4398-8dc0-8fe0b8b1a03e",
+              "name": "Request blocked by WAF",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":host_name",
+                    "rest",
+                    "uploads",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "returnEntity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "with",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "host_name",
+                      "description": "(Required) The upload host name, which can be retrieved from GET /uploads/{id} or the initiateUpload response."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the upload."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The compression mode used for the chunk. Options include \"NORMAL\", \"GZIP\", and \"ZLIB\". (This can only be one of NORMAL,GZIP,ZLIB)",
+                        "type": "text/plain"
+                      },
+                      "key": "compressionMode",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The size of the chunk after compression.",
+                        "type": "text/plain"
+                      },
+                      "key": "compressionSize",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The size of the chunk before compression.",
+                        "type": "text/plain"
+                      },
+                      "key": "originalSize",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) The binary content of the chunk.",
+                        "type": "text/plain"
+                      },
+                      "key": "content",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The sequential index of the chunk (starts from 1).",
+                        "type": "text/plain"
+                      },
+                      "key": "index",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "Indicates if this is the last chunk of the file (1 if last, 0 otherwise).",
+                        "type": "text/plain"
+                      },
+                      "key": "lastChunk",
+                      "value": "<long>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "code": 490,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5dec0e0a-4f39-4765-8af9-8aa377dc9c6f",
+    "name": "Kiteworks API Documentation activities uploads API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

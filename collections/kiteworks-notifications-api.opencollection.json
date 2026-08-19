@@ -1,0 +1,163 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities notifications API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "notifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Set/Update notifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/rest/folders/:id/actions/setNotifications",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the folder."
+              },
+              {
+                "name": "includeNested",
+                "value": "",
+                "type": "query",
+                "description": "Set notification for nested folders as well"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or updates the current user's notification subscription for the specified folder. Optionally applies the same settings to all nested subfolders. Returns HTTP 201 if a new subscription was created, or HTTP 200 if an existing one was updated."
+        },
+        {
+          "info": {
+            "name": "List notifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/notifications",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query",
+                "description": "Filter notifications by the ID of the user who receives them."
+              },
+              {
+                "name": "userId:in",
+                "value": "",
+                "type": "query",
+                "description": "Filter notifications by the ID of the user who receives them.. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "objectId",
+                "value": "",
+                "type": "query",
+                "description": "Filter notifications by the ID of the folder they are associated with."
+              },
+              {
+                "name": "objectId:in",
+                "value": "",
+                "type": "query",
+                "description": "Filter notifications by the ID of the folder they are associated with.. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "fileAdded",
+                "value": "",
+                "type": "query",
+                "description": "Filter notifications triggered when a file is added."
+              },
+              {
+                "name": "commentAdded",
+                "value": "",
+                "type": "query",
+                "description": "Filter notifications triggered when a comment is added."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of notification subscriptions for the current user, including the folder each subscription is for and the enabled notification types."
+        },
+        {
+          "info": {
+            "name": "Remove notification options",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/notifications/:object_id",
+            "params": [
+              {
+                "name": "object_id",
+                "value": "",
+                "type": "path",
+                "description": "Object ID of the folder to remove notification options"
+              }
+            ]
+          },
+          "docs": "Unsubscribes the current user from all notifications for the specified folder."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

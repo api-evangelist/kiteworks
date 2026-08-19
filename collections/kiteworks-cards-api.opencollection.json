@@ -1,0 +1,101 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities cards API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "cards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get list of cards",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/admin/cards",
+            "params": [
+              {
+                "name": "type:in",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of card types to retrieve.<br>`content_encryption` – Content encryption card.<br>`email_json_migration` – Email JSON migration card.<br>`system_security_scanning` – System security scanning card.<br>`events_table_monitor` – Events table monitor card.<br>`appadmin_db` – Application admin database card.<br>`sysadmin_db` – System admin database card.<br>`sysadmin_hosts` – System admin hosts card.<br>`epg_warnings` – EPG warnings card.<br>`safe_edit_server_health` – Safe edit server health card."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Returns the list of admin dashboard cards filtered by the specified card types.\n### Precondition:\n  The user must be an administrator.\n### Response:\n  Returns the list of cards matching the specified types.\n"
+        },
+        {
+          "info": {
+            "name": "Get card details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/admin/cards/details",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of card to retrieve details for.<br>`content_encryption` – Content encryption card.<br>`email_json_migration` – Email JSON migration card.<br>`system_security_scanning` – System security scanning card.<br>`events_table_monitor` – Events table monitor card.<br>`appadmin_db` – Application admin database card.<br>`sysadmin_db` – System admin database card.<br>`sysadmin_hosts` – System admin hosts card.<br>`epg_warnings` – EPG warnings card.<br>`safe_edit_server_health` – Safe edit server health card."
+              },
+              {
+                "name": "hostId",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of the host to filter card data by."
+              },
+              {
+                "name": "volume",
+                "value": "",
+                "type": "query",
+                "description": "Filter results to a specific storage volume."
+              },
+              {
+                "name": "storageType",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by storage type.<br>`user_files` – User file storage.<br>`replication_files` – Replication file storage."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of error detail records to return. Error details are not returned if not set or set to 0."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of error detail records to skip before returning results, for pagination."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Returns the detailed information for a specific admin dashboard card.\n### Precondition:\n  The user must be an administrator with System or Application role.\n### Response:\n  Returns the details of the specified card.\n"
+        },
+        {
+          "info": {
+            "name": "Perform an action on a card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/admin/cards/actions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Submits an action to perform on a specific admin dashboard card.\n### Precondition:\n  The user must be an administrator with System or Application role.\n### Response:\n  The action has been accepted and will be processed.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

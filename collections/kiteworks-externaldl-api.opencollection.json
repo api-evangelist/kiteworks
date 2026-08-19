@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities externalDL API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "externalDL",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List external distribution lists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/externalDL",
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search term to filter external distribution lists by email address."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Returns the list of external distribution lists for the current user.\n### Precondition:\n  User must be authenticated.\n### Response:\n  The list of external distribution lists is returned.\n"
+        },
+        {
+          "info": {
+            "name": "Add external distribution lists",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/externalDL",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Adds one or more email addresses to the current user's external distribution lists.\n### Precondition:\n  User must be authenticated.\n### Response:\n  The external distribution lists are created and returned.\n"
+        },
+        {
+          "info": {
+            "name": "Delete external distribution lists",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/externalDL",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "### Description:\n  Removes one or more email addresses from the current user's external distribution lists.\n### Precondition:\n  User must be authenticated.\n### Response:\n  The specified external distribution lists are deleted.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

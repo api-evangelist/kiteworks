@@ -1,0 +1,166 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities system API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "system",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get node health status for system monitoring",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/nodeHealth/status"
+          },
+          "docs": "### Description:\n  Retrieves node health status information for system components including MariaDB cluster status, required services status, memory usage, and system load average.\n### Precondition:\n  This endpoint is restricted by IP whitelist and rate limiting.\n### Response:\n  Returns the overall node health status.\n"
+        },
+        {
+          "info": {
+            "name": "Upload EPGDB backup chunk for database restore",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/system/epgdb/import/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The upload session ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Endpoint for uploading a chunk to an existing EPGDB backup upload session, identified by its session ID."
+        },
+        {
+          "info": {
+            "name": "Get EPGDB import status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/system/epgdb/import"
+          },
+          "docs": "Endpoint for polling the status of the import"
+        },
+        {
+          "info": {
+            "name": "Upload EPGDB backup for database restore",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/system/epgdb/import",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Endpoint for uploading an EPGDB backup for restoring the database. Starts a new upload session."
+        },
+        {
+          "info": {
+            "name": "Cancel active EPGDB import session",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/system/epgdb/import"
+          },
+          "docs": "Endpoint for cancelling the current active import session"
+        },
+        {
+          "info": {
+            "name": "Download EPGDB export file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/system/epgdb/export/:filename",
+            "params": [
+              {
+                "name": "filename",
+                "value": "",
+                "type": "path",
+                "description": "The name of the EPGDB export file to download."
+              }
+            ]
+          },
+          "docs": "Get EPGDB export download"
+        },
+        {
+          "info": {
+            "name": "Get EPGDB export status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/system/epgdb/export"
+          },
+          "docs": "Get EPGDB export status"
+        },
+        {
+          "info": {
+            "name": "Start EPGDB export",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/system/epgdb/export"
+          },
+          "docs": "Start EPGDB export with precheck validation"
+        },
+        {
+          "info": {
+            "name": "Perform cleanup for EPGDB export",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/system/epgdb/export"
+          },
+          "docs": "Perform cleanup for EPGDB export"
+        },
+        {
+          "info": {
+            "name": "Get node health metrics for specified metric type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/nodeHealth/:node_id/metrics/:metric_name",
+            "params": [
+              {
+                "name": "node_id",
+                "value": "",
+                "type": "path",
+                "description": "Kiteworks node id to retrieve metrics from."
+              },
+              {
+                "name": "metric_name",
+                "value": "",
+                "type": "path",
+                "description": "The type of metric to retrieve."
+              }
+            ]
+          },
+          "docs": "### Description:\n  Retrieves health metrics for database, web requests, job queue, SFTP, system resources, or all metrics.\n### Precondition:\n  The user must be an administrator with access to `System Services`.\n### Response:\n  Returns the list of metrics for the specified metric type.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

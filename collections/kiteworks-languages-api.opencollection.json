@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities languages API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "languages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List languages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/languages",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Language name"
+              },
+              {
+                "name": "name:contains",
+                "value": "",
+                "type": "query",
+                "description": "Language name. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "symbol",
+                "value": "",
+                "type": "query",
+                "description": "Language symbol"
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns a list of available languages."
+        },
+        {
+          "info": {
+            "name": "Get a language",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/languages/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the language to be retrieved"
+              }
+            ]
+          },
+          "docs": "Returns the details of a specified language, including its name and symbol."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

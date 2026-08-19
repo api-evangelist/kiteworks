@@ -1,0 +1,471 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities comments API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "comments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/comments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the comment."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns the details of the specified comment, including the file it is attached to and the comment text. **Requires `comment_view` permission on the associated file.**"
+        },
+        {
+          "info": {
+            "name": "Update a comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/rest/comments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the comment."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the text of the specified comment. **Requires `comment_edit` permission on the associated file.** Only the comment author or a folder manager may update the comment."
+        },
+        {
+          "info": {
+            "name": "Delete a comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/rest/comments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the comment."
+              }
+            ]
+          },
+          "docs": "Deletes the specified comment. **Requires `comment_delete` permission on the associated file.** Only the comment author or a folder manager may delete the comment."
+        },
+        {
+          "info": {
+            "name": "Get file comments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/files/:id/comments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the file."
+              },
+              {
+                "name": "parentId",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the parent comment"
+              },
+              {
+                "name": "parentId:in",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the parent comment. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the comment author"
+              },
+              {
+                "name": "userId:in",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the comment author. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "created",
+                "value": "",
+                "type": "query",
+                "description": "The creation date of the comment."
+              },
+              {
+                "name": "created:gt",
+                "value": "",
+                "type": "query",
+                "description": "The creation date of the comment.. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "created:gte",
+                "value": "",
+                "type": "query",
+                "description": "The creation date of the comment.. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "created:lt",
+                "value": "",
+                "type": "query",
+                "description": "The creation date of the comment.. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "created:lte",
+                "value": "",
+                "type": "query",
+                "description": "The creation date of the comment.. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "modified",
+                "value": "",
+                "type": "query",
+                "description": "The last modification date of the comment."
+              },
+              {
+                "name": "modified:gt",
+                "value": "",
+                "type": "query",
+                "description": "The last modification date of the comment.. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "modified:gte",
+                "value": "",
+                "type": "query",
+                "description": "The last modification date of the comment.. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "modified:lt",
+                "value": "",
+                "type": "query",
+                "description": "The last modification date of the comment.. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "modified:lte",
+                "value": "",
+                "type": "query",
+                "description": "The last modification date of the comment.. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "contents:contains",
+                "value": "",
+                "type": "query",
+                "description": "Content of the comment. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns a list of comments on the specified file. **Requires `comment_view` permission on the file.**"
+        },
+        {
+          "info": {
+            "name": "Add file comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/files/:id/comments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the file."
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a comment to the specified file. To reply to an existing comment, include a `parentId` in the request body. **Requires `comment_add` permission on the file.**"
+        },
+        {
+          "info": {
+            "name": "List comments for the folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/folders/:id/comments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the folder."
+              },
+              {
+                "name": "parentId",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the parent comment"
+              },
+              {
+                "name": "parentId:in",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the parent comment. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the comment author"
+              },
+              {
+                "name": "userId:in",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the comment author. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "created",
+                "value": "",
+                "type": "query",
+                "description": "The creation date of the comment."
+              },
+              {
+                "name": "created:gt",
+                "value": "",
+                "type": "query",
+                "description": "The creation date of the comment.. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "created:gte",
+                "value": "",
+                "type": "query",
+                "description": "The creation date of the comment.. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "created:lt",
+                "value": "",
+                "type": "query",
+                "description": "The creation date of the comment.. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "created:lte",
+                "value": "",
+                "type": "query",
+                "description": "The creation date of the comment.. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "modified",
+                "value": "",
+                "type": "query",
+                "description": "The last modification date of the comment."
+              },
+              {
+                "name": "modified:gt",
+                "value": "",
+                "type": "query",
+                "description": "The last modification date of the comment.. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "modified:gte",
+                "value": "",
+                "type": "query",
+                "description": "The last modification date of the comment.. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "modified:lt",
+                "value": "",
+                "type": "query",
+                "description": "The last modification date of the comment.. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "modified:lte",
+                "value": "",
+                "type": "query",
+                "description": "The last modification date of the comment.. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "contents:contains",
+                "value": "",
+                "type": "query",
+                "description": "Content of the comment. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns all comments on files within the specified folder. **Requires `comment_view` permission on the folder.**"
+        },
+        {
+          "info": {
+            "name": "Return the list of permissions available on a comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/permissions/comment/:comment_id",
+            "params": [
+              {
+                "name": "comment_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the comment"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Unique action identifier"
+              },
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "Unique action identifier. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Action name"
+              },
+              {
+                "name": "name:contains",
+                "value": "",
+                "type": "query",
+                "description": "Action name. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "allowed",
+                "value": "",
+                "type": "query",
+                "description": "Determines if one has permissions to perform action"
+              },
+              {
+                "name": "enabled",
+                "value": "",
+                "type": "query",
+                "description": "Determines if the given action is available considering the current object state (locked, deleted, etc.)."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns the list of actions the current user is allowed to perform on the specified comment, such as editing or deleting it."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

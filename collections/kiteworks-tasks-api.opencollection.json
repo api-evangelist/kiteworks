@@ -1,0 +1,506 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kiteworks API Documentation activities tasks API",
+    "version": "28"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get file tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/files/:id/tasks",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the file."
+              },
+              {
+                "name": "assigneeId",
+                "value": "",
+                "type": "query",
+                "description": "Assigned User unique identifier"
+              },
+              {
+                "name": "assigneeId:in",
+                "value": "",
+                "type": "query",
+                "description": "Assigned User unique identifier. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "due",
+                "value": "",
+                "type": "query",
+                "description": "Task due date"
+              },
+              {
+                "name": "due:gt",
+                "value": "",
+                "type": "query",
+                "description": "Task due date. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "due:gte",
+                "value": "",
+                "type": "query",
+                "description": "Task due date. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "due:lt",
+                "value": "",
+                "type": "query",
+                "description": "Task due date. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "due:lte",
+                "value": "",
+                "type": "query",
+                "description": "Task due date. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "parentId",
+                "value": "",
+                "type": "query",
+                "description": "Parent Comment identifier"
+              },
+              {
+                "name": "parentId:in",
+                "value": "",
+                "type": "query",
+                "description": "Parent Comment identifier. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of User who created a Task"
+              },
+              {
+                "name": "userId:in",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of User who created a Task. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "created",
+                "value": "",
+                "type": "query",
+                "description": "Task creation date"
+              },
+              {
+                "name": "created:gt",
+                "value": "",
+                "type": "query",
+                "description": "Task creation date. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "created:gte",
+                "value": "",
+                "type": "query",
+                "description": "Task creation date. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "created:lt",
+                "value": "",
+                "type": "query",
+                "description": "Task creation date. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "created:lte",
+                "value": "",
+                "type": "query",
+                "description": "Task creation date. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "modified",
+                "value": "",
+                "type": "query",
+                "description": "Task modification date"
+              },
+              {
+                "name": "modified:gt",
+                "value": "",
+                "type": "query",
+                "description": "Task modification date. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "modified:gte",
+                "value": "",
+                "type": "query",
+                "description": "Task modification date. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "modified:lt",
+                "value": "",
+                "type": "query",
+                "description": "Task modification date. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "modified:lte",
+                "value": "",
+                "type": "query",
+                "description": "Task modification date. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "contents:contains",
+                "value": "",
+                "type": "query",
+                "description": "Task content. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter tasks by status. Accepted values: `D`, `P`, `C`."
+              },
+              {
+                "name": "deleted",
+                "value": "",
+                "type": "query",
+                "description": "Whether the task has been deleted"
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Gets a list of tasks assigned to the specified file. **Requires `task_view` permission on the file's parent folder.**"
+        },
+        {
+          "info": {
+            "name": "Create file task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/rest/files/:id/tasks",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Object ID of the file task is created on"
+              },
+              {
+                "name": "returnEntity",
+                "value": "",
+                "type": "query",
+                "description": "If set to `true`, returns information about the newly created entity."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a task for the specified file and assigns it to a user. The assignee must have at least `properties_view` permission on the file's parent folder. **Requires `task_add` permission on the file's parent folder.**"
+        },
+        {
+          "info": {
+            "name": "Get tasks for a folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/folders/:id/tasks",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UUID) of the folder."
+              },
+              {
+                "name": "assigneeId",
+                "value": "",
+                "type": "query",
+                "description": "Assigned User unique identifier"
+              },
+              {
+                "name": "assigneeId:in",
+                "value": "",
+                "type": "query",
+                "description": "Assigned User unique identifier. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "due",
+                "value": "",
+                "type": "query",
+                "description": "Task due date"
+              },
+              {
+                "name": "due:gt",
+                "value": "",
+                "type": "query",
+                "description": "Task due date. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "due:gte",
+                "value": "",
+                "type": "query",
+                "description": "Task due date. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "due:lt",
+                "value": "",
+                "type": "query",
+                "description": "Task due date. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "due:lte",
+                "value": "",
+                "type": "query",
+                "description": "Task due date. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "parentId",
+                "value": "",
+                "type": "query",
+                "description": "Parent Comment identifier"
+              },
+              {
+                "name": "parentId:in",
+                "value": "",
+                "type": "query",
+                "description": "Parent Comment identifier. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of User who created a Task"
+              },
+              {
+                "name": "userId:in",
+                "value": "",
+                "type": "query",
+                "description": "Identifier of User who created a Task. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "created",
+                "value": "",
+                "type": "query",
+                "description": "Task creation date"
+              },
+              {
+                "name": "created:gt",
+                "value": "",
+                "type": "query",
+                "description": "Task creation date. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "created:gte",
+                "value": "",
+                "type": "query",
+                "description": "Task creation date. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "created:lt",
+                "value": "",
+                "type": "query",
+                "description": "Task creation date. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "created:lte",
+                "value": "",
+                "type": "query",
+                "description": "Task creation date. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "modified",
+                "value": "",
+                "type": "query",
+                "description": "Task modification date"
+              },
+              {
+                "name": "modified:gt",
+                "value": "",
+                "type": "query",
+                "description": "Task modification date. Search for results where this parameter value is greater than the specified value."
+              },
+              {
+                "name": "modified:gte",
+                "value": "",
+                "type": "query",
+                "description": "Task modification date. Search for results where this parameter value is greater than or equal to the specified value."
+              },
+              {
+                "name": "modified:lt",
+                "value": "",
+                "type": "query",
+                "description": "Task modification date. Search for results where this parameter value is less than the specified value."
+              },
+              {
+                "name": "modified:lte",
+                "value": "",
+                "type": "query",
+                "description": "Task modification date. Search for results where this parameter value is less than or equal to the specified value."
+              },
+              {
+                "name": "contents:contains",
+                "value": "",
+                "type": "query",
+                "description": "Task content. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter tasks by status. Accepted values: `D`, `P`, `C`."
+              },
+              {
+                "name": "deleted",
+                "value": "",
+                "type": "query",
+                "description": "Whether the task has been deleted"
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Sorting options"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit"
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Gets a list of tasks associated with all files in the specified folder. **Requires `task_view` permission on the folder.**"
+        },
+        {
+          "info": {
+            "name": "Return the list of permissions available on a task",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/rest/permissions/task/:task_id",
+            "params": [
+              {
+                "name": "task_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the task"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Unique action identifier"
+              },
+              {
+                "name": "id:in",
+                "value": "",
+                "type": "query",
+                "description": "Unique action identifier. Search for results that match any of the specified values for this parameter."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Action name"
+              },
+              {
+                "name": "name:contains",
+                "value": "",
+                "type": "query",
+                "description": "Action name. Search for results that contain the specified characters in this parameter."
+              },
+              {
+                "name": "allowed",
+                "value": "",
+                "type": "query",
+                "description": "Determines if one has permissions to perform action"
+              },
+              {
+                "name": "enabled",
+                "value": "",
+                "type": "query",
+                "description": "Determines if the given action is available considering the current object state (locked, deleted, etc.)."
+              },
+              {
+                "name": "with",
+                "value": "",
+                "type": "query",
+                "description": "With parameters"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Determines the detail level of the response body."
+              }
+            ]
+          },
+          "docs": "Returns the list of actions the current user is allowed to perform on the specified task, such as completing or deleting it."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
