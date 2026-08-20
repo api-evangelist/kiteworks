@@ -49,6 +49,8 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
+  - Activities
+  tags_raw:
   - activities
   properties:
   - type: OpenAPI
@@ -65,6 +67,8 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
+  - Admin
+  tags_raw:
   - admin
   properties:
   - type: OpenAPI
@@ -81,6 +85,8 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
+  - Admin - Roles
+  tags_raw:
   - adminRoles
   properties:
   - type: OpenAPI
@@ -96,7 +102,8 @@ apis:
   description: The advancedForms API from Kiteworks — 1 operation(s) for advancedforms.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
-  tags:
+  tags: []
+  tags_raw:
   - advancedForms
   properties:
   - type: OpenAPI
@@ -113,6 +120,8 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
+  - Cards
+  tags_raw:
   - cards
   properties:
   - type: OpenAPI
@@ -128,7 +137,8 @@ apis:
   description: The clientEventLogs API from Kiteworks — 1 operation(s) for clienteventlogs.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
-  tags:
+  tags: []
+  tags_raw:
   - clientEventLogs
   properties:
   - type: OpenAPI
@@ -145,6 +155,8 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
+  - Clients
+  tags_raw:
   - clients
   properties:
   - type: OpenAPI
@@ -161,6 +173,8 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
+  - Comments
+  tags_raw:
   - comments
   properties:
   - type: OpenAPI
@@ -177,6 +191,8 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
+  - Contacts
+  tags_raw:
   - contacts
   properties:
   - type: OpenAPI
@@ -193,6 +209,8 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
+  - Devices
+  tags_raw:
   - devices
   properties:
   - type: OpenAPI
@@ -241,6 +259,8 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
+  - Favorites
+  tags_raw:
   - favorites
   properties:
   - type: OpenAPI
@@ -257,6 +277,8 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
+  - File
+  tags_raw:
   - files
   properties:
   - type: OpenAPI
@@ -273,6 +295,8 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
+  - Folders
+  tags_raw:
   - folders
   properties:
   - type: OpenAPI
@@ -289,6 +313,8 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
+  - Group
+  tags_raw:
   - groups
   properties:
   - type: OpenAPI
@@ -305,6 +331,8 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
+  - Internal
+  tags_raw:
   - internal
   properties:
   - type: OpenAPI
@@ -321,6 +349,8 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
+  - Language
+  tags_raw:
   - languages
   properties:
   - type: OpenAPI
@@ -336,7 +366,8 @@ apis:
   description: The ldapGroups API from Kiteworks — 2 operation(s) for ldapgroups.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
-  tags:
+  tags: []
+  tags_raw:
   - ldapGroups
   properties:
   - type: OpenAPI
@@ -353,6 +384,8 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
+  - Locations
+  tags_raw:
   - locations
   properties:
   - type: OpenAPI
@@ -369,6 +402,8 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
+  - Mail
+  tags_raw:
   - mail
   properties:
   - type: OpenAPI
@@ -384,7 +419,8 @@ apis:
   description: The mobileSync API from Kiteworks — 5 operation(s) for mobilesync.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
-  tags:
+  tags: []
+  tags_raw:
   - mobileSync
   properties:
   - type: OpenAPI
@@ -401,6 +437,8 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
+  - Notification
+  tags_raw:
   - notifications
   properties:
   - type: OpenAPI
@@ -417,6 +455,8 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
+  - Permissions
+  tags_raw:
   - permissions
   properties:
   - type: OpenAPI
@@ -433,6 +473,8 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
+  - Profiles
+  tags_raw:
   - profiles
   properties:
   - type: OpenAPI
@@ -448,7 +490,8 @@ apis:
   description: The requestFile API from Kiteworks — 13 operation(s) for requestfile.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
-  tags:
+  tags: []
+  tags_raw:
   - requestFile
   properties:
   - type: OpenAPI
@@ -465,6 +508,8 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
+  - Roles
+  tags_raw:
   - roles
   properties:
   - type: OpenAPI
@@ -481,6 +526,8 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
+  - SCIM
+  tags_raw:
   - scim
   properties:
   - type: OpenAPI
@@ -497,6 +544,8 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
+  - Search
+  tags_raw:
   - search
   properties:
   - type: OpenAPI
@@ -513,6 +562,8 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
+  - Settings
+  tags_raw:
   - settings
   properties:
   - type: OpenAPI
@@ -528,7 +579,8 @@ apis:
   description: The sharedMailbox API from Kiteworks — 6 operation(s) for sharedmailbox.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
-  tags:
+  tags: []
+  tags_raw:
   - sharedMailbox
   properties:
   - type: OpenAPI
@@ -545,6 +597,8 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
+  - Short Links
+  tags_raw:
   - shortLinks
   properties:
   - type: OpenAPI
@@ -561,6 +615,8 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
+  - Sources
+  tags_raw:
   - sources
   properties:
   - type: OpenAPI
@@ -577,6 +633,8 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
+  - Source Types
+  tags_raw:
   - sourceTypes
   properties:
   - type: OpenAPI
@@ -593,6 +651,8 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
+  - System
+  tags_raw:
   - system
   properties:
   - type: OpenAPI
@@ -609,6 +669,8 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
+  - Task
+  tags_raw:
   - tasks
   properties:
   - type: OpenAPI
@@ -625,6 +687,8 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
+  - Uploads
+  tags_raw:
   - uploads
   properties:
   - type: OpenAPI
@@ -641,6 +705,8 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
+  - User
+  tags_raw:
   - users
   properties:
   - type: OpenAPI
@@ -656,7 +722,8 @@ apis:
   description: The userSshPublicKeys API from Kiteworks — 7 operation(s) for usersshpublickeys.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
-  tags:
+  tags: []
+  tags_raw:
   - userSshPublicKeys
   properties:
   - type: OpenAPI
@@ -673,6 +740,8 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
+  - Web Forms
+  tags_raw:
   - webForms
   properties:
   - type: OpenAPI
@@ -689,6 +758,8 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
+  - Webhook
+  tags_raw:
   - webhook
   properties:
   - type: OpenAPI
