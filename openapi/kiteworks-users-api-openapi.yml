@@ -1,7 +1,7 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   version: '28'
-  title: Kiteworks API Documentation activities users API
+  title: Kiteworks API Documentation Users API
 tags:
 - name: users
 paths:
@@ -1923,186 +1923,6 @@ paths:
           description: Request blocked by WAF
 components:
   schemas:
-    UserMobileNumberPassword.Put:
-      description: Class UserPassword
-      required:
-      - password
-      - mobileNumber
-      properties:
-        password:
-          description: The current password of the user
-          type: string
-        mobileNumber:
-          description: The user's new mobile number
-          type: string
-        testOnly:
-          description: If true, a short message will be sent to the number, and the number will not be saved
-          type: boolean
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    Settings:
-      description: Class Settings
-      properties:
-        languageId:
-          description: Language identifier of the user the settings represent
-          type: integer
-        locationId:
-          description: Location identifier for user settings. User's personal default location for file send and uploads
-          type: integer
-        signature:
-          description: Email message signature
-          type: string
-        storageUsed:
-          description: Storage used by the user across the folders they own
-          type: integer
-        storageQuota:
-          description: Storage quota allocated to the user across all the folders they own
-          type: integer
-        mobileKeyStore:
-          description: Encrypted key store data used by the mobile client for secure operations
-          type: string
-        mobileNumber:
-          description: User's mobile number
-          type: string
-        mobileNumberVerified:
-          description: Indicates whether the mobile number is verified
-          type: boolean
-        links:
-          description: HATEOAS links associated with the entity
-          type: array
-          items:
-            type: string
-    RecentObject:
-      type: object
-      properties:
-        id:
-          type: string
-          description: UUID of the recently accessed file or folder.
-        lastAccessed:
-          type: string
-          format: date
-          description: Timestamp of when the object was last accessed by the user.
-      required:
-      - id
-      - lastAccessed
-    PushedObject:
-      type: object
-      properties:
-        objectId:
-          type: string
-          description: Unique identifier (UUID) for the pushed object.
-        userId:
-          type: string
-          description: Unique identifier (UUID) for the user who pushed the object.
-        created:
-          type: string
-          format: date
-          description: The date and time when the object was pushed.
-        user:
-          description: Details of the user who pushed the object.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-    UserTfaTotpVerifySecret.Post:
-      description: Class UserTfaTotpVerifySecret
-      required:
-      - otp
-      properties:
-        otp:
-          description: OTP
-          type: string
-        referral:
-          description: referral
-          type: string
-    Tag:
-      type: object
-      properties:
-        guid:
-          type: string
-          format: uuid
-          description: Unique identifier (UUID) for the tag.
-        name:
-          type: string
-          description: Display name of the tag.
-        type:
-          type: string
-          description: Type category of the tag.
-    AdminDeleteTOTPSecretRequest:
-      type: object
-      properties:
-        ids:
-          type: array
-          minItems: 1
-          maxItems: 100
-          description: List of user UUIDs whose TOTP secrets should be deleted. Must contain between 1 and 100 IDs.
-          items:
-            type: string
-      required:
-      - ids
-    UserMe:
-      description: Class UserMe
-      required:
-      - basedirId
-      - email
-      - id
-      - mydirId
-      - name
-      - syncdirId
-      properties:
-        id:
-          description: The unique identifier of the user
-          type: string
-        basedirId:
-          description: The unique identifier of the user's root Kiteworks directory.
-          type: string
-        created:
-          description: Date and time the user account was created
-          type: string
-          format: date
-        email:
-          description: The user's email
-          type: string
-        mydirId:
-          description: The unique identifier of the user's mydir system directory.
-          type: string
-        name:
-          description: The name of the user
-          type: string
-        syncdirId:
-          description: The unique identifier of the user's 'My Folder'.
-          type: string
-        userTypeId:
-          description: The unique identifier of the user type (profile).
-          type: integer
-        internal:
-          description: Indicates whether the user is an internal user
-          type: boolean
-        profileIcon:
-          description: URL to the user's profile icon image
-          type: string
-        extDL:
-          description: Indicates whether the user is an External Distribution List
-          type: boolean
-        metadata:
-          description: List of user's metadata
-          type: array
-          items:
-            $ref: '#/components/schemas/UserMetadata'
-        adminRoleId:
-          description: The ID of the admin role assigned to the user.
-          type: integer
-        links:
-          description: HATEOAS links associated with the entity
-          type: array
-          items:
-            type: string
-        serviceName:
-          description: Name of the Kiteworks service instance the user is connected to
-          type: string
     AdminUserImportError:
       type: object
       properties:
@@ -2112,189 +1932,6 @@ components:
         message:
           type: string
           description: Description of the error.
-    Settings.Put:
-      description: Class Settings
-      properties:
-        languageId:
-          description: Language identifier for user settings
-          type: integer
-        locationId:
-          description: Location identifier for user settings. User's personal default location for file send and uploads
-          type: integer
-        signature:
-          description: Email message signature
-          type: string
-        mobileKeyStore:
-          description: Encrypted key store data used by the mobile client for secure operations
-          type: string
-        addLinks:
-          description: Indicates whether HATEOAS links should be included in the response
-          type: boolean
-    UserBasic:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier (UUID) for the user.
-        email:
-          type: string
-          description: Email address associated with the user.
-        name:
-          type: string
-          description: Full name of the user.
-        profileIcon:
-          type: string
-          description: URL or identifier for the user's profile icon.
-    AuthRedirectResponse:
-      description: Represents the success response for authentication flow endpoints that advance the user to the next step.
-      properties:
-        redirectUrl:
-          description: The URL to redirect to for the next step in the flow.
-          type: string
-    UserMetadata:
-      description: Class UserMetadata
-      properties:
-        name:
-          description: Key name of the custom metadata attribute associated with the user
-          type: string
-        value:
-          description: Value assigned to the custom metadata attribute for the user
-          type: string
-    UserTfaTotpResetSecret.Post:
-      description: Class UserTfaTotpResetSecret
-      required:
-      - password
-      properties:
-        password:
-          description: The user's password
-          type: string
-        otp:
-          description: OTP to verify the new secret
-          type: string
-    UserNamePassword.Put:
-      description: Class UserNamePassword
-      properties:
-        password:
-          description: The user's password
-          type: string
-        previousPassword:
-          description: The user's previous password
-          type: string
-        name:
-          description: The user's name
-          type: string
-    UserRegister.Post:
-      description: Class UserRegister
-      required:
-      - email
-      - password
-      properties:
-        email:
-          description: User's email
-          type: string
-        password:
-          description: Password
-          type: string
-        link:
-          description: Ref link
-          type: string
-        activationCode:
-          description: activation code
-          type: string
-        redirect:
-          description: Special handling for redirect (sharedfiles)
-          type: string
-    TosResponse:
-      description: Represents the Terms of Service content returned for the current user.
-      properties:
-        type:
-          description: The type of Terms of Service.
-          type: string
-        data:
-          description: The full Terms of Service content.
-          type: string
-        acceptanceText:
-          description: The text to display on the acceptance button or checkbox.
-          type: string
-        occurrence:
-          description: How often the Terms of Service is shown to the user.
-          type: string
-        isRequired:
-          description: Indicates whether the user is required to accept the Terms of Service.
-          type: boolean
-    SystemFolders:
-      type: object
-      properties:
-        current_num_sys_folders:
-          type: integer
-          description: Current number of system folders.
-        max_num_sys_folders:
-          type: integer
-          description: Maximum allowed number of system folders.
-        per_folder_quota_options:
-          type: array
-          description: List of available quota options per folder.
-          items:
-            type: integer
-        per_folder_default_quota:
-          type: integer
-          description: Default quota assigned to each folder.
-    UserMePinsPostRequest:
-      type: object
-      properties:
-        ids:
-          type: array
-          description: List of entity IDs to pin or unpin.
-          items:
-            type: string
-        type:
-          type: string
-          description: The type of entity being pinned or unpinned.<br>`source` – An external content source.
-      required:
-      - ids
-      - type
-    UserTos.Post:
-      description: Class UserTos
-      required:
-      - accept
-      properties:
-        accept:
-          description: accept
-          type: boolean
-        referral:
-          description: referral
-          type: string
-    LdapSearchResults:
-      description: Class LdapSearchResults
-      required:
-      - matches
-      properties:
-        matches:
-          description: Search matches
-          type: array
-          items:
-            $ref: '#/components/schemas/LdapSearchResultUser'
-    Permission:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique identifier for the permission.
-        name:
-          type: string
-          description: Name of the permission.
-        allowed:
-          type: boolean
-          description: Indicates whether the permission is granted (True) or denied (False).
-    LdapSearchResultUser:
-      description: Class LdapSearchResultUser
-      properties:
-        email:
-          description: User's email
-          type: string
-        displayName:
-          description: Users's display name
-          type: string
     Folder:
       type: object
       properties:
@@ -2441,30 +2078,217 @@ components:
         inheritanceEnabled:
           type: boolean
           description: Indicates if a folder inherits permissions from the parent folder
-    Error:
+    Member:
       type: object
       properties:
-        code:
+        objectId:
           type: string
-          description: Error code
-        message:
+          description: Unique identifier (UUID) of the associated object (file or folder).
+        roleId:
+          type: integer
+          description: Role assigned to the member.
+        userId:
           type: string
-          description: Error message
-    Role:
+          description: Unique identifier (UUID) of the user.
+        groupId:
+          type: integer
+          description: Unique identifier of the LDAP group.
+        user:
+          description: User details of the member.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        role:
+          description: Role details assigned to the member.
+          allOf:
+          - $ref: '#/components/schemas/Role'
+        group:
+          description: Group details if the member belongs to a group.
+          allOf:
+          - $ref: '#/components/schemas/Group'
+        sharedBy:
+          description: Details of the user who shared the file or folder.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        created:
+          type: string
+          format: date
+          description: Date when the file or folder was shared.
+        inheritRoleId:
+          type: integer
+          description: Inherited role ID from the parent folder, if applicable.
+        allowedFolderRoleId:
+          type: array
+          description: List of allowed folder role IDs.
+          items:
+            type: integer
+        email:
+          type: string
+          description: Email associated with the member.
+        rank:
+          type: integer
+          description: Rank of the member role.
+        originFolder:
+          readOnly: true
+    UserDistributionLists:
+      type: object
+      properties:
+        data:
+          description: List of distribution list entries.
+          type: array
+          items:
+            $ref: '#/components/schemas/UserDistributionList'
+    UserMetadata:
+      description: Class UserMetadata
+      properties:
+        name:
+          description: Key name of the custom metadata attribute associated with the user
+          type: string
+        value:
+          description: Value assigned to the custom metadata attribute for the user
+          type: string
+    SafeEdit:
+      type: object
+      properties:
+        safeEditLocked:
+          type: boolean
+          description: Indicates if the file is locked through a SafeEdit session.
+        user:
+          description: The user responsible for locking the file via SafeEdit.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+    TfaChallengeResponse:
+      description: Represents the success response for TFA challenge and auth endpoints. Exactly one of the two properties is present in any given response.
+      properties:
+        redirectUrl:
+          description: The URL to redirect to for the next step in the authentication flow. Present when TFA is accepted; mutually exclusive with challengeMsg.
+          type: string
+        challengeMsg:
+          description: A message from the TFA module to display to the user (for example, instructions to check their phone). Present when a challenge is in progress; mutually exclusive with redirectUrl.
+          type: string
+    RecentObject:
       type: object
       properties:
         id:
-          type: integer
-          description: Role ID
+          type: string
+          description: UUID of the recently accessed file or folder.
+        lastAccessed:
+          type: string
+          format: date
+          description: Timestamp of when the object was last accessed by the user.
+      required:
+      - id
+      - lastAccessed
+    PushedObject:
+      type: object
+      properties:
+        objectId:
+          type: string
+          description: Unique identifier (UUID) for the pushed object.
+        userId:
+          type: string
+          description: Unique identifier (UUID) for the user who pushed the object.
+        created:
+          type: string
+          format: date
+          description: The date and time when the object was pushed.
+        user:
+          description: Details of the user who pushed the object.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+    MobileInfo:
+      type: object
+      properties:
+        wopiSrc:
+          type: string
+          description: The WOPI (Web Application Open Platform Interface) source URL for the mobile application.
+        userId:
+          type: string
+          description: Unique identifier of the user.
+        service:
+          type: string
+          description: The WOPI service ID.
+        scheme:
+          type: string
+          description: URI scheme used by the mobile application to handle the file.
+        schemeSupport:
+          type: string
+          description: Indicates the level of support the mobile app has for the URI scheme.
+    UserDistributionList:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Email address of the distribution list or individual contact.
+        isDl:
+          type: boolean
+          description: Indicates whether the entry is a distribution list.
+    TotpSetupResponse:
+      description: Represents the success response when initiating a TOTP secret setup.
+      properties:
+        username:
+          description: The username associated with the TOTP secret.
+          type: string
+        issuer:
+          description: The issuer name used in the TOTP URI, typically the server hostname.
+          type: string
+        secret:
+          description: The base32-encoded TOTP secret key to be stored in the authenticator app.
+          type: string
+        image:
+          description: A base64-encoded QR code image encoding the TOTP URI for scanning with an authenticator app.
+          type: string
+        setup_instruction_1:
+          description: Optional first setup instruction. Only present when provided by the authentication backend.
+          type: string
+        setup_instruction_2:
+          description: Optional second setup instruction. Only present when provided by the authentication backend.
+          type: string
+    Tag:
+      type: object
+      properties:
+        guid:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) for the tag.
         name:
           type: string
-          description: Role name
-        rank:
-          type: integer
-          description: Role rank
+          description: Display name of the tag.
         type:
           type: string
-          description: Role type
+          description: Type category of the tag.
+    UserRequestPasswordReset.Post:
+      description: Class UserRequestPasswordReset
+      required:
+      - email
+      properties:
+        email:
+          description: User's email
+          type: string
+    UserLogin.Post:
+      description: Class UserLogin
+      required:
+      - username
+      - password
+      properties:
+        username:
+          description: The username of the user attempting to log in.
+          type: string
+        password:
+          description: The password of the user. It must be kept confidential and securely stored.
+          type: string
+        referral:
+          description: The URL that referred the user to this login action.
+          type: string
+    UserMeConcurrentChallenge:
+      type: object
+      properties:
+        created:
+          type: string
+          format: date
+        userAgent:
+          type: string
+        location:
+          type: string
     File:
       type: object
       properties:
@@ -2632,41 +2456,11 @@ components:
           type: integer
           description: The total number of versions for the file.
         tracking_id:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
           description: Tracking identifier associated with the file upload.
-    AdminUserImport:
-      type: object
-      properties:
-        added_users:
-          type: integer
-          description: Number of users successfully added.
-        updated_users:
-          type: integer
-          description: Number of users successfully updated.
-        failed_ids:
-          type: array
-          description: List of user emails that failed during import.
-          items:
-            type: string
-        errors:
-          description: List of error details encountered during import.
-          type: array
-          items:
-            $ref: '#/components/schemas/AdminUserImportError'
-    UserResetPassword.Post:
-      description: Class UserResetPassword
-      required:
-      - link
-      - password
-      properties:
-        link:
-          description: The password reset link
-          type: string
-        password:
-          description: Password
-          type: string
     TfaConfigResponse:
       description: Represents the Two-Factor Authentication configuration for the current user.
       properties:
@@ -2703,42 +2497,122 @@ components:
         allowNumberChange:
           description: Indicates whether the user is allowed to change their mobile number. Present only when the TFA module is SMSOTP.
           type: boolean
-    TfaChallengeResponse:
-      description: Represents the success response for TFA challenge and auth endpoints. Exactly one of the two properties is present in any given response.
+    LdapSearchResults:
+      description: Class LdapSearchResults
+      required:
+      - matches
       properties:
-        redirectUrl:
-          description: The URL to redirect to for the next step in the authentication flow. Present when TFA is accepted; mutually exclusive with challengeMsg.
-          type: string
-        challengeMsg:
-          description: A message from the TFA module to display to the user (for example, instructions to check their phone). Present when a challenge is in progress; mutually exclusive with redirectUrl.
-          type: string
-    Fingerprint:
+        matches:
+          description: Search matches
+          type: array
+          items:
+            $ref: '#/components/schemas/LdapSearchResultUser'
+    Permission:
       type: object
       properties:
-        algo:
+        id:
+          type: integer
+          description: Unique identifier for the permission.
+        name:
           type: string
-          description: The algorithm used to generate the fingerprint (e.g., sha3-256, md5).
-        hash:
+          description: Name of the permission.
+        allowed:
+          type: boolean
+          description: Indicates whether the permission is granted (True) or denied (False).
+    LdapSearchResultUser:
+      description: Class LdapSearchResultUser
+      properties:
+        email:
+          description: User's email
           type: string
-          description: The resulting hash value representing the fingerprint of the file or object.
-    MobileInfo:
+        displayName:
+          description: Users's display name
+          type: string
+    UserPreauth.Post:
+      description: Class UserPreauth
+      required:
+      - username
+      properties:
+        username:
+          description: username
+          type: string
+        referral:
+          description: referral
+          type: string
+    Errors:
       type: object
       properties:
-        wopiSrc:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    UserMePinsPostRequest:
+      type: object
+      properties:
+        ids:
+          type: array
+          description: List of entity IDs to pin or unpin.
+          items:
+            type: string
+        type:
           type: string
-          description: The WOPI (Web Application Open Platform Interface) source URL for the mobile application.
-        userId:
+          description: The type of entity being pinned or unpinned.<br>`source` – An external content source.
+      required:
+      - ids
+      - type
+    UserBasic:
+      type: object
+      properties:
+        id:
           type: string
-          description: Unique identifier of the user.
-        service:
+          description: Unique identifier (UUID) for the user.
+        email:
           type: string
-          description: The WOPI service ID.
-        scheme:
+          description: Email address associated with the user.
+        name:
           type: string
-          description: URI scheme used by the mobile application to handle the file.
-        schemeSupport:
+          description: Full name of the user.
+        profileIcon:
           type: string
-          description: Indicates the level of support the mobile app has for the URI scheme.
+          description: URL or identifier for the user's profile icon.
+    UserTfaTotpVerifySecret.Post:
+      description: Class UserTfaTotpVerifySecret
+      required:
+      - otp
+      properties:
+        otp:
+          description: OTP
+          type: string
+        referral:
+          description: referral
+          type: string
+    UserMobileNumberPassword.Put:
+      description: Class UserPassword
+      required:
+      - password
+      - mobileNumber
+      properties:
+        password:
+          description: The current password of the user
+          type: string
+        mobileNumber:
+          description: The user's new mobile number
+          type: string
+        testOnly:
+          description: If true, a short message will be sent to the number, and the number will not be saved
+          type: boolean
+    UserResetPassword.Post:
+      description: Class UserResetPassword
+      required:
+      - link
+      - password
+      properties:
+        link:
+          description: The password reset link
+          type: string
+        password:
+          description: Password
+          type: string
     PreauthResponse:
       description: Represents the success response for the preauth endpoint.
       properties:
@@ -2754,27 +2628,179 @@ components:
         otp:
           description: Whether the login flow requires OTP authentication.
           type: boolean
-    UserMeConcurrentAuthPostRequest:
-      type: object
+    UserNamePassword.Put:
+      description: Class UserNamePassword
       properties:
-        terminate:
-          type: boolean
-          description: If true, terminates the existing concurrent session and proceeds with the current login. If false, cancels the current login attempt.
-        referral:
+        password:
+          description: The user's password
           type: string
-          description: The referral token from the concurrent session challenge, used to identify the session to terminate.
+        previousPassword:
+          description: The user's previous password
+          type: string
+        name:
+          description: The user's name
+          type: string
+    UserMe:
+      description: Class UserMe
       required:
-      - referral
-      - terminate
-    UserDistributionList:
+      - basedirId
+      - email
+      - id
+      - mydirId
+      - name
+      - syncdirId
+      properties:
+        id:
+          description: The unique identifier of the user
+          type: string
+        basedirId:
+          description: The unique identifier of the user's root Kiteworks directory.
+          type: string
+        created:
+          description: Date and time the user account was created
+          type: string
+          format: date
+        email:
+          description: The user's email
+          type: string
+        mydirId:
+          description: The unique identifier of the user's mydir system directory.
+          type: string
+        name:
+          description: The name of the user
+          type: string
+        syncdirId:
+          description: The unique identifier of the user's 'My Folder'.
+          type: string
+        userTypeId:
+          description: The unique identifier of the user type (profile).
+          type: integer
+        internal:
+          description: Indicates whether the user is an internal user
+          type: boolean
+        profileIcon:
+          description: URL to the user's profile icon image
+          type: string
+        extDL:
+          description: Indicates whether the user is an External Distribution List
+          type: boolean
+        metadata:
+          description: List of user's metadata
+          type: array
+          items:
+            $ref: '#/components/schemas/UserMetadata'
+        adminRoleId:
+          description: The ID of the admin role assigned to the user.
+          type: integer
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+        serviceName:
+          description: Name of the Kiteworks service instance the user is connected to
+          type: string
+    TosResponse:
+      description: Represents the Terms of Service content returned for the current user.
+      properties:
+        type:
+          description: The type of Terms of Service.
+          type: string
+        data:
+          description: The full Terms of Service content.
+          type: string
+        acceptanceText:
+          description: The text to display on the acceptance button or checkbox.
+          type: string
+        occurrence:
+          description: How often the Terms of Service is shown to the user.
+          type: string
+        isRequired:
+          description: Indicates whether the user is required to accept the Terms of Service.
+          type: boolean
+    SystemFolders:
       type: object
       properties:
-        email:
+        current_num_sys_folders:
+          type: integer
+          description: Current number of system folders.
+        max_num_sys_folders:
+          type: integer
+          description: Maximum allowed number of system folders.
+        per_folder_quota_options:
+          type: array
+          description: List of available quota options per folder.
+          items:
+            type: integer
+        per_folder_default_quota:
+          type: integer
+          description: Default quota assigned to each folder.
+    Fingerprint:
+      type: object
+      properties:
+        algo:
           type: string
-          description: Email address of the distribution list or individual contact.
-        isDl:
+          description: The algorithm used to generate the fingerprint (e.g., sha3-256, md5).
+        hash:
+          type: string
+          description: The resulting hash value representing the fingerprint of the file or object.
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    UserTfaTotpResetSecret.Post:
+      description: Class UserTfaTotpResetSecret
+      required:
+      - password
+      properties:
+        password:
+          description: The user's password
+          type: string
+        otp:
+          description: OTP to verify the new secret
+          type: string
+    AdminUserImport:
+      type: object
+      properties:
+        added_users:
+          type: integer
+          description: Number of users successfully added.
+        updated_users:
+          type: integer
+          description: Number of users successfully updated.
+        failed_ids:
+          type: array
+          description: List of user emails that failed during import.
+          items:
+            type: string
+        errors:
+          description: List of error details encountered during import.
+          type: array
+          items:
+            $ref: '#/components/schemas/AdminUserImportError'
+    Settings.Put:
+      description: Class Settings
+      properties:
+        languageId:
+          description: Language identifier for user settings
+          type: integer
+        locationId:
+          description: Location identifier for user settings. User's personal default location for file send and uploads
+          type: integer
+        signature:
+          description: Email message signature
+          type: string
+        mobileKeyStore:
+          description: Encrypted key store data used by the mobile client for secure operations
+          type: string
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
           type: boolean
-          description: Indicates whether the entry is a distribution list.
     UserQuota:
       type: object
       properties:
@@ -2794,140 +2820,6 @@ components:
           description: Details of the system folders quota.
           allOf:
           - $ref: '#/components/schemas/SystemFolders'
-    UserDistributionLists:
-      type: object
-      properties:
-        data:
-          description: List of distribution list entries.
-          type: array
-          items:
-            $ref: '#/components/schemas/UserDistributionList'
-    RecentObjectsPostRequest:
-      type: object
-      properties:
-        objects:
-          type: array
-          description: List of recently accessed objects to record, each containing an object UUID and last-accessed timestamp.
-          items:
-            $ref: '#/components/schemas/RecentObject'
-      required:
-      - objects
-    Member:
-      type: object
-      properties:
-        objectId:
-          type: string
-          description: Unique identifier (UUID) of the associated object (file or folder).
-        roleId:
-          type: integer
-          description: Role assigned to the member.
-        userId:
-          type: string
-          description: Unique identifier (UUID) of the user.
-        groupId:
-          type: integer
-          description: Unique identifier of the LDAP group.
-        user:
-          description: User details of the member.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-        role:
-          description: Role details assigned to the member.
-          allOf:
-          - $ref: '#/components/schemas/Role'
-        group:
-          description: Group details if the member belongs to a group.
-          allOf:
-          - $ref: '#/components/schemas/Group'
-        sharedBy:
-          description: Details of the user who shared the file or folder.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-        created:
-          type: string
-          format: date
-          description: Date when the file or folder was shared.
-        inheritRoleId:
-          type: integer
-          description: Inherited role ID from the parent folder, if applicable.
-        allowedFolderRoleId:
-          type: array
-          description: List of allowed folder role IDs.
-          items:
-            type: integer
-        email:
-          type: string
-          description: Email associated with the member.
-        rank:
-          type: integer
-          description: Rank of the member role.
-        originFolder:
-          readOnly: true
-    SafeEdit:
-      type: object
-      properties:
-        safeEditLocked:
-          type: boolean
-          description: Indicates if the file is locked through a SafeEdit session.
-        user:
-          description: The user responsible for locking the file via SafeEdit.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-    UserMeConcurrentChallenge:
-      type: object
-      properties:
-        created:
-          type: string
-          format: date
-        userAgent:
-          type: string
-        location:
-          type: string
-    UserTfa.Post:
-      description: Class UserTfa
-      required:
-      - otp
-      properties:
-        otp:
-          description: OTP
-          type: string
-        referral:
-          description: referral
-          type: string
-        rememberDevice:
-          description: remember device
-          type: boolean
-    UserForcedPasswordChange.Put:
-      description: Class UserForcedPasswordChange
-      properties:
-        password:
-          description: The user's password
-          type: string
-        previousPassword:
-          description: The user's previous password
-          type: string
-        referral:
-          description: referral
-          type: string
-    UserRequestPasswordReset.Post:
-      description: Class UserRequestPasswordReset
-      required:
-      - email
-      properties:
-        email:
-          description: User's email
-          type: string
-    UserPreauth.Post:
-      description: Class UserPreauth
-      required:
-      - username
-      properties:
-        username:
-          description: username
-          type: string
-        referral:
-          description: referral
-          type: string
     Group:
       type: object
       properties:
@@ -2946,41 +2838,114 @@ components:
         description:
           type: string
           description: LDAP Group description
-    TotpSetupResponse:
-      description: Represents the success response when initiating a TOTP secret setup.
+    RecentObjectsPostRequest:
+      type: object
       properties:
-        username:
-          description: The username associated with the TOTP secret.
-          type: string
-        issuer:
-          description: The issuer name used in the TOTP URI, typically the server hostname.
-          type: string
-        secret:
-          description: The base32-encoded TOTP secret key to be stored in the authenticator app.
-          type: string
-        image:
-          description: A base64-encoded QR code image encoding the TOTP URI for scanning with an authenticator app.
-          type: string
-        setup_instruction_1:
-          description: Optional first setup instruction. Only present when provided by the authentication backend.
-          type: string
-        setup_instruction_2:
-          description: Optional second setup instruction. Only present when provided by the authentication backend.
-          type: string
-    UserLogin.Post:
-      description: Class UserLogin
+        objects:
+          type: array
+          description: List of recently accessed objects to record, each containing an object UUID and last-accessed timestamp.
+          items:
+            $ref: '#/components/schemas/RecentObject'
       required:
-      - username
-      - password
+      - objects
+    UserTos.Post:
+      description: Class UserTos
+      required:
+      - accept
       properties:
-        username:
-          description: The username of the user attempting to log in.
+        accept:
+          description: accept
+          type: boolean
+        referral:
+          description: referral
           type: string
-        password:
-          description: The password of the user. It must be kept confidential and securely stored.
+    UserTfa.Post:
+      description: Class UserTfa
+      required:
+      - otp
+      properties:
+        otp:
+          description: OTP
           type: string
         referral:
-          description: The URL that referred the user to this login action.
+          description: referral
+          type: string
+        rememberDevice:
+          description: remember device
+          type: boolean
+    AuthRedirectResponse:
+      description: Represents the success response for authentication flow endpoints that advance the user to the next step.
+      properties:
+        redirectUrl:
+          description: The URL to redirect to for the next step in the flow.
+          type: string
+    AdminDeleteTOTPSecretRequest:
+      type: object
+      properties:
+        ids:
+          type: array
+          minItems: 1
+          maxItems: 100
+          description: List of user UUIDs whose TOTP secrets should be deleted. Must contain between 1 and 100 IDs.
+          items:
+            type: string
+      required:
+      - ids
+    UserMeConcurrentAuthPostRequest:
+      type: object
+      properties:
+        terminate:
+          type: boolean
+          description: If true, terminates the existing concurrent session and proceeds with the current login. If false, cancels the current login attempt.
+        referral:
+          type: string
+          description: The referral token from the concurrent session challenge, used to identify the session to terminate.
+      required:
+      - referral
+      - terminate
+    Settings:
+      description: Class Settings
+      properties:
+        languageId:
+          description: Language identifier of the user the settings represent
+          type: integer
+        locationId:
+          description: Location identifier for user settings. User's personal default location for file send and uploads
+          type: integer
+        signature:
+          description: Email message signature
+          type: string
+        storageUsed:
+          description: Storage used by the user across the folders they own
+          type: integer
+        storageQuota:
+          description: Storage quota allocated to the user across all the folders they own
+          type: integer
+        mobileKeyStore:
+          description: Encrypted key store data used by the mobile client for secure operations
+          type: string
+        mobileNumber:
+          description: User's mobile number
+          type: string
+        mobileNumberVerified:
+          description: Indicates whether the mobile number is verified
+          type: boolean
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+    UserForcedPasswordChange.Put:
+      description: Class UserForcedPasswordChange
+      properties:
+        password:
+          description: The user's password
+          type: string
+        previousPassword:
+          description: The user's previous password
+          type: string
+        referral:
+          description: referral
           type: string
     LoginResponse:
       description: Represents the success response for the login endpoint.
@@ -2991,6 +2956,21 @@ components:
         redirectUrl:
           description: The URL to redirect to for the next step in the authentication flow.
           type: string
+    Role:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Role ID
+        name:
+          type: string
+          description: Role name
+        rank:
+          type: integer
+          description: Role rank
+        type:
+          type: string
+          description: Role type
     UserTfa.Put:
       description: Class UserTfa
       required:
@@ -3005,3 +2985,24 @@ components:
         rememberDevice:
           description: remember device
           type: boolean
+    UserRegister.Post:
+      description: Class UserRegister
+      required:
+      - email
+      - password
+      properties:
+        email:
+          description: User's email
+          type: string
+        password:
+          description: Password
+          type: string
+        link:
+          description: Ref link
+          type: string
+        activationCode:
+          description: activation code
+          type: string
+        redirect:
+          description: Special handling for redirect (sharedfiles)
+          type: string

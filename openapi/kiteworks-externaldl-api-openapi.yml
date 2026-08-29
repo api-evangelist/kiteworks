@@ -1,7 +1,7 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   version: '28'
-  title: Kiteworks API Documentation activities externalDL API
+  title: Kiteworks API Documentation External DL API
 tags:
 - name: externalDL
 paths:
@@ -196,22 +196,14 @@ paths:
           description: Request blocked by WAF
 components:
   schemas:
-    Errors:
+    ExternalDLs:
       type: object
       properties:
-        error:
+        data:
+          description: List of external distribution list entries.
           type: array
           items:
-            $ref: '#/components/schemas/Error'
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
+            $ref: '#/components/schemas/ExternalDL'
     ExternalDLUpdateRequest:
       type: object
       properties:
@@ -223,17 +215,25 @@ components:
             format: email
       required:
       - emails
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
     ExternalDL:
       type: object
       properties:
         email:
           type: string
           description: Email address of the external distribution list entry.
-    ExternalDLs:
-      type: object
-      properties:
-        data:
-          description: List of external distribution list entries.
-          type: array
-          items:
-            $ref: '#/components/schemas/ExternalDL'

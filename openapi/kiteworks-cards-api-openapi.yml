@@ -1,7 +1,7 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   version: '28'
-  title: Kiteworks API Documentation activities cards API
+  title: Kiteworks API Documentation Cards API
 tags:
 - name: cards
 paths:
@@ -282,13 +282,6 @@ paths:
           description: Request blocked by WAF
 components:
   schemas:
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
     CardActionPostRequest:
       type: object
       properties:
@@ -345,15 +338,6 @@ components:
       required:
       - id
       - name
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
     Card:
       type: object
       properties:
@@ -386,6 +370,22 @@ components:
       - message
       - severity
       - type
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
     CardAction:
       type: object
       properties:

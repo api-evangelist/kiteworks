@@ -1,7 +1,7 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   version: '28'
-  title: Kiteworks API Documentation activities mobileSync API
+  title: Kiteworks API Documentation Mobile Sync API
 tags:
 - name: mobileSync
 paths:
@@ -655,146 +655,6 @@ paths:
           description: Request blocked by WAF
 components:
   schemas:
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    PushedObject:
-      type: object
-      properties:
-        objectId:
-          type: string
-          description: Unique identifier (UUID) for the pushed object.
-        userId:
-          type: string
-          description: Unique identifier (UUID) for the user who pushed the object.
-        created:
-          type: string
-          format: date
-          description: The date and time when the object was pushed.
-        user:
-          description: Details of the user who pushed the object.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-    Tag:
-      type: object
-      properties:
-        guid:
-          type: string
-          format: uuid
-          description: Unique identifier (UUID) for the tag.
-        name:
-          type: string
-          description: Display name of the tag.
-        type:
-          type: string
-          description: Type category of the tag.
-    MobileSync:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique identifier of MobileSync
-        fileId:
-          type: string
-          description: Unique identifier (UUID) of the synced file.
-        userId:
-          type: string
-        pushUserId:
-          type: string
-        created:
-          type: string
-          format: date
-          description: Mobile sync item creation date
-        fingerprint:
-          type: string
-          description: MD5 file fingerprint
-        fingerprints:
-          type: array
-          description: List of all file fingerprints
-          items:
-            $ref: '#/components/schemas/Fingerprint'
-        secure:
-          type: boolean
-          description: Indicates that File is in secure Folder
-        toBeNotified:
-          type: boolean
-          description: Indicates that Email notification for this item was sent
-        pushedObject:
-          description: Details of the push operation for this sync item, if applicable.
-          allOf:
-          - $ref: '#/components/schemas/PushedObject'
-        syncedObject:
-          description: Details of the sync operation for this item, if applicable.
-          allOf:
-          - $ref: '#/components/schemas/SyncedObject'
-        pushUser:
-          description: Details of the user who added this file to the sync list.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-        avStatus:
-          type: string
-          description: Antivirus (AV) scan status of the synced file.
-        dlpStatus:
-          type: string
-          description: Data Loss Prevention (DLP) scan status of the synced file.
-        file:
-          description: Details of the synced file.
-          allOf:
-          - $ref: '#/components/schemas/File'
-    MetaData:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of items available.
-        limit:
-          type: integer
-          description: Maximum number of items returned per page.
-        offset:
-          type: integer
-          description: Number of items skipped before the current page.
-    MobileSync.Post:
-      description: Class MobileSync
-      required:
-      - fileId
-      properties:
-        fileId:
-          description: Unique identifier of File
-          type: integer
-        addLinks:
-          description: Indicates whether HATEOAS links should be included in the response
-          type: boolean
-    UserBasic:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier (UUID) for the user.
-        email:
-          type: string
-          description: Email address associated with the user.
-        name:
-          type: string
-          description: Full name of the user.
-        profileIcon:
-          type: string
-          description: URL or identifier for the user's profile icon.
-    Permission:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique identifier for the permission.
-        name:
-          type: string
-          description: Name of the permission.
-        allowed:
-          type: boolean
-          description: Indicates whether the permission is granted (True) or denied (False).
     Folder:
       type: object
       properties:
@@ -941,30 +801,168 @@ components:
         inheritanceEnabled:
           type: boolean
           description: Indicates if a folder inherits permissions from the parent folder
-    Error:
+    Member:
       type: object
       properties:
-        code:
+        objectId:
           type: string
-          description: Error code
-        message:
+          description: Unique identifier (UUID) of the associated object (file or folder).
+        roleId:
+          type: integer
+          description: Role assigned to the member.
+        userId:
           type: string
-          description: Error message
-    Role:
+          description: Unique identifier (UUID) of the user.
+        groupId:
+          type: integer
+          description: Unique identifier of the LDAP group.
+        user:
+          description: User details of the member.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        role:
+          description: Role details assigned to the member.
+          allOf:
+          - $ref: '#/components/schemas/Role'
+        group:
+          description: Group details if the member belongs to a group.
+          allOf:
+          - $ref: '#/components/schemas/Group'
+        sharedBy:
+          description: Details of the user who shared the file or folder.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        created:
+          type: string
+          format: date
+          description: Date when the file or folder was shared.
+        inheritRoleId:
+          type: integer
+          description: Inherited role ID from the parent folder, if applicable.
+        allowedFolderRoleId:
+          type: array
+          description: List of allowed folder role IDs.
+          items:
+            type: integer
+        email:
+          type: string
+          description: Email associated with the member.
+        rank:
+          type: integer
+          description: Rank of the member role.
+        originFolder:
+          readOnly: true
+    SafeEdit:
+      type: object
+      properties:
+        safeEditLocked:
+          type: boolean
+          description: Indicates if the file is locked through a SafeEdit session.
+        user:
+          description: The user responsible for locking the file via SafeEdit.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+    PushedObject:
+      type: object
+      properties:
+        objectId:
+          type: string
+          description: Unique identifier (UUID) for the pushed object.
+        userId:
+          type: string
+          description: Unique identifier (UUID) for the user who pushed the object.
+        created:
+          type: string
+          format: date
+          description: The date and time when the object was pushed.
+        user:
+          description: Details of the user who pushed the object.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+    MobileInfo:
+      type: object
+      properties:
+        wopiSrc:
+          type: string
+          description: The WOPI (Web Application Open Platform Interface) source URL for the mobile application.
+        userId:
+          type: string
+          description: Unique identifier of the user.
+        service:
+          type: string
+          description: The WOPI service ID.
+        scheme:
+          type: string
+          description: URI scheme used by the mobile application to handle the file.
+        schemeSupport:
+          type: string
+          description: Indicates the level of support the mobile app has for the URI scheme.
+    Tag:
+      type: object
+      properties:
+        guid:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) for the tag.
+        name:
+          type: string
+          description: Display name of the tag.
+        type:
+          type: string
+          description: Type category of the tag.
+    MobileSync:
       type: object
       properties:
         id:
           type: integer
-          description: Role ID
-        name:
+          description: Unique identifier of MobileSync
+        fileId:
           type: string
-          description: Role name
-        rank:
-          type: integer
-          description: Role rank
-        type:
+          description: Unique identifier (UUID) of the synced file.
+        userId:
           type: string
-          description: Role type
+        pushUserId:
+          type: string
+        created:
+          type: string
+          format: date
+          description: Mobile sync item creation date
+        fingerprint:
+          type: string
+          description: MD5 file fingerprint
+        fingerprints:
+          type: array
+          description: List of all file fingerprints
+          items:
+            $ref: '#/components/schemas/Fingerprint'
+        secure:
+          type: boolean
+          description: Indicates that File is in secure Folder
+        toBeNotified:
+          type: boolean
+          description: Indicates that Email notification for this item was sent
+        pushedObject:
+          description: Details of the push operation for this sync item, if applicable.
+          allOf:
+          - $ref: '#/components/schemas/PushedObject'
+        syncedObject:
+          description: Details of the sync operation for this item, if applicable.
+          allOf:
+          - $ref: '#/components/schemas/SyncedObject'
+        pushUser:
+          description: Details of the user who added this file to the sync list.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        avStatus:
+          type: string
+          description: Antivirus (AV) scan status of the synced file.
+        dlpStatus:
+          type: string
+          description: Data Loss Prevention (DLP) scan status of the synced file.
+        file:
+          description: Details of the synced file.
+          allOf:
+          - $ref: '#/components/schemas/File'
     File:
       type: object
       properties:
@@ -1132,37 +1130,77 @@ components:
           type: integer
           description: The total number of versions for the file.
         tracking_id:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
           description: Tracking identifier associated with the file upload.
-    MobileInfo:
+    Permission:
       type: object
       properties:
-        wopiSrc:
+        id:
+          type: integer
+          description: Unique identifier for the permission.
+        name:
           type: string
-          description: The WOPI (Web Application Open Platform Interface) source URL for the mobile application.
-        userId:
-          type: string
-          description: Unique identifier of the user.
-        service:
-          type: string
-          description: The WOPI service ID.
-        scheme:
-          type: string
-          description: URI scheme used by the mobile application to handle the file.
-        schemeSupport:
-          type: string
-          description: Indicates the level of support the mobile app has for the URI scheme.
-    Fingerprint:
+          description: Name of the permission.
+        allowed:
+          type: boolean
+          description: Indicates whether the permission is granted (True) or denied (False).
+    Errors:
       type: object
       properties:
-        algo:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    UserBasic:
+      type: object
+      properties:
+        id:
           type: string
-          description: The algorithm used to generate the fingerprint (e.g., sha3-256, md5).
-        hash:
+          description: Unique identifier (UUID) for the user.
+        email:
           type: string
-          description: The resulting hash value representing the fingerprint of the file or object.
+          description: Email address associated with the user.
+        name:
+          type: string
+          description: Full name of the user.
+        profileIcon:
+          type: string
+          description: URL or identifier for the user's profile icon.
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
+    MobileSync.Post:
+      description: Class MobileSync
+      required:
+      - fileId
+      properties:
+        fileId:
+          description: Unique identifier of File
+          type: integer
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
     SyncedObject:
       type: object
       properties:
@@ -1178,79 +1216,6 @@ components:
           description: The date and time when the object was pushed.
         user:
           description: Details of the user who pushed the object.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-    MobileSyncList:
-      type: object
-      properties:
-        data:
-          description: List of mobile sync items.
-          type: array
-          items:
-            $ref: '#/components/schemas/MobileSync'
-        metadata:
-          description: Pagination metadata for the result set.
-          allOf:
-          - $ref: '#/components/schemas/MetaData'
-    Member:
-      type: object
-      properties:
-        objectId:
-          type: string
-          description: Unique identifier (UUID) of the associated object (file or folder).
-        roleId:
-          type: integer
-          description: Role assigned to the member.
-        userId:
-          type: string
-          description: Unique identifier (UUID) of the user.
-        groupId:
-          type: integer
-          description: Unique identifier of the LDAP group.
-        user:
-          description: User details of the member.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-        role:
-          description: Role details assigned to the member.
-          allOf:
-          - $ref: '#/components/schemas/Role'
-        group:
-          description: Group details if the member belongs to a group.
-          allOf:
-          - $ref: '#/components/schemas/Group'
-        sharedBy:
-          description: Details of the user who shared the file or folder.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-        created:
-          type: string
-          format: date
-          description: Date when the file or folder was shared.
-        inheritRoleId:
-          type: integer
-          description: Inherited role ID from the parent folder, if applicable.
-        allowedFolderRoleId:
-          type: array
-          description: List of allowed folder role IDs.
-          items:
-            type: integer
-        email:
-          type: string
-          description: Email associated with the member.
-        rank:
-          type: integer
-          description: Rank of the member role.
-        originFolder:
-          readOnly: true
-    SafeEdit:
-      type: object
-      properties:
-        safeEditLocked:
-          type: boolean
-          description: Indicates if the file is locked through a SafeEdit session.
-        user:
-          description: The user responsible for locking the file via SafeEdit.
           allOf:
           - $ref: '#/components/schemas/UserBasic'
     Group:
@@ -1271,3 +1236,39 @@ components:
         description:
           type: string
           description: LDAP Group description
+    MobileSyncList:
+      type: object
+      properties:
+        data:
+          description: List of mobile sync items.
+          type: array
+          items:
+            $ref: '#/components/schemas/MobileSync'
+        metadata:
+          description: Pagination metadata for the result set.
+          allOf:
+          - $ref: '#/components/schemas/MetaData'
+    Role:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Role ID
+        name:
+          type: string
+          description: Role name
+        rank:
+          type: integer
+          description: Role rank
+        type:
+          type: string
+          description: Role type
+    Fingerprint:
+      type: object
+      properties:
+        algo:
+          type: string
+          description: The algorithm used to generate the fingerprint (e.g., sha3-256, md5).
+        hash:
+          type: string
+          description: The resulting hash value representing the fingerprint of the file or object.

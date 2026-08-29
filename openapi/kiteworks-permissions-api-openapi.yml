@@ -1,7 +1,7 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   version: '28'
-  title: Kiteworks API Documentation activities permissions API
+  title: Kiteworks API Documentation Permissions API
 tags:
 - name: permissions
 paths:
@@ -329,16 +329,6 @@ paths:
           - compact
 components:
   schemas:
-    FilePermissions:
-      description: Class FilePermissions
-      properties:
-        fileId:
-          description: Id of file
-          type: string
-        permissions:
-          type: array
-          items:
-            type: string
     Permission:
       type: object
       properties:
@@ -351,3 +341,13 @@ components:
         allowed:
           type: boolean
           description: Indicates whether the permission is granted (True) or denied (False).
+    FilePermissions:
+      description: Class FilePermissions
+      properties:
+        fileId:
+          description: Id of file
+          type: string
+        permissions:
+          type: array
+          items:
+            type: string

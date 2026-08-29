@@ -1,7 +1,7 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   version: '28'
-  title: Kiteworks API Documentation activities clients API
+  title: Kiteworks API Documentation Clients API
 tags:
 - name: clients
 paths:
@@ -410,30 +410,18 @@ paths:
           - full
 components:
   schemas:
-    Errors:
+    MetaData:
       type: object
       properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    ClientScopesResponse:
-      description: Represents the success response for the client scopes endpoint.
-      properties:
-        data:
-          description: List of API resource scope strings the client is authorized to access (e.g. 'folders/*', 'files/*').
-          type: array
-          items:
-            type: string
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
     Client:
       description: Class Client
       required:
@@ -508,6 +496,94 @@ components:
           type: array
           items:
             type: string
+    Client.Post:
+      description: Class Client
+      required:
+      - name
+      - description
+      - redirectUri
+      - scope
+      properties:
+        name:
+          description: Display name of the client application
+          type: string
+        description:
+          description: Human-readable description of the client application and its purpose
+          type: string
+        redirectUri:
+          description: "Where the server send the code that client can redeem access token.\n                        e.g. https://HOST/rest/callback.html"
+          type: string
+        scope:
+          description: API entities which this client can access
+          type: string
+        signatureKey:
+          description: Secret key used to sign requests made by this client
+          type: string
+        accessTokenLifetime:
+          description: Life time for access token of client in hours. e.g. 5=5 hours
+          type: integer
+        refreshTokenLifetime:
+          description: Life time for refresh token of client in hours
+          type: integer
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
+    ClientScopesResponse:
+      description: Represents the success response for the client scopes endpoint.
+      properties:
+        data:
+          description: List of API resource scope strings the client is authorized to access (e.g. 'folders/*', 'files/*').
+          type: array
+          items:
+            type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    Client.Put:
+      description: Class Client
+      required:
+      - name
+      - description
+      - redirectUri
+      - scope
+      properties:
+        name:
+          description: Display name of the client application
+          type: string
+        description:
+          description: Human-readable description of the client application and its purpose
+          type: string
+        redirectUri:
+          description: "Where the server send the code that client can redeem access token.\n                        e.g. https://HOST/rest/callback.html"
+          type: string
+        scope:
+          description: API entities which this client can access
+          type: string
+        signatureKey:
+          description: Secret key used to sign requests made by this client
+          type: string
+        accessTokenLifetime:
+          description: Life time for access token of client in hours. e.g. 5=5 hours
+          type: integer
+        refreshTokenLifetime:
+          description: Life time for refresh token of client in hours
+          type: integer
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
     ClientNew:
       description: Class ClientNew
       required:
@@ -585,79 +661,3 @@ components:
         clientSecret:
           description: Plain-text client secret returned only at creation time
           type: string
-    Client.Put:
-      description: Class Client
-      required:
-      - name
-      - description
-      - redirectUri
-      - scope
-      properties:
-        name:
-          description: Display name of the client application
-          type: string
-        description:
-          description: Human-readable description of the client application and its purpose
-          type: string
-        redirectUri:
-          description: "Where the server send the code that client can redeem access token.\n                        e.g. https://HOST/rest/callback.html"
-          type: string
-        scope:
-          description: API entities which this client can access
-          type: string
-        signatureKey:
-          description: Secret key used to sign requests made by this client
-          type: string
-        accessTokenLifetime:
-          description: Life time for access token of client in hours. e.g. 5=5 hours
-          type: integer
-        refreshTokenLifetime:
-          description: Life time for refresh token of client in hours
-          type: integer
-        addLinks:
-          description: Indicates whether HATEOAS links should be included in the response
-          type: boolean
-    Client.Post:
-      description: Class Client
-      required:
-      - name
-      - description
-      - redirectUri
-      - scope
-      properties:
-        name:
-          description: Display name of the client application
-          type: string
-        description:
-          description: Human-readable description of the client application and its purpose
-          type: string
-        redirectUri:
-          description: "Where the server send the code that client can redeem access token.\n                        e.g. https://HOST/rest/callback.html"
-          type: string
-        scope:
-          description: API entities which this client can access
-          type: string
-        signatureKey:
-          description: Secret key used to sign requests made by this client
-          type: string
-        accessTokenLifetime:
-          description: Life time for access token of client in hours. e.g. 5=5 hours
-          type: integer
-        refreshTokenLifetime:
-          description: Life time for refresh token of client in hours
-          type: integer
-        addLinks:
-          description: Indicates whether HATEOAS links should be included in the response
-          type: boolean
-    MetaData:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of items available.
-        limit:
-          type: integer
-          description: Maximum number of items returned per page.
-        offset:
-          type: integer
-          description: Number of items skipped before the current page.

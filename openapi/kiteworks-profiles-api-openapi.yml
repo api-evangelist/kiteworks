@@ -1,7 +1,7 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   version: '28'
-  title: Kiteworks API Documentation activities profiles API
+  title: Kiteworks API Documentation Profiles API
 tags:
 - name: profiles
 paths:
@@ -273,181 +273,6 @@ paths:
               $ref: '#/components/schemas/UserDemoteOptions.Post'
 components:
   schemas:
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    FeaturesList.Put:
-      description: Class FeaturesList
-      properties:
-        allowSftp:
-          description: Indicates whether SFTP access is allowed
-          type: boolean
-        maxStorage:
-          description: Max storage in bytes
-          type: integer
-        storageQuota:
-          description: Maximum storage space that user is entitled to
-          type: integer
-        setExpirationLower:
-          description: Allow to modify file secure link expiration
-          type: boolean
-        sendExternal:
-          description: Allow sending files to external users
-          type: integer
-        linkExpiration:
-          description: Link expiration date in days
-          type: integer
-        ldapMapping:
-          description: LDAP Mapping value to determine the user profile type
-          type: string
-        folderCreate:
-          description: Allow to create top level folders
-          type: integer
-        sysFolderCreate:
-          description: Allow to create system quota folders
-          type: integer
-        sysFolderMaxQuota:
-          description: Set the maximum quota for a system folder
-          type: integer
-        sysFolderMaxCount:
-          description: Set the maximum number of system folders
-          type: integer
-        sysFolderDefaultQuota:
-          description: Set the default quota for a system folder
-          type: integer
-        maxLinkExpiration:
-          description: Upper limit allowed for secure link expiration
-          type: integer
-        acNoAuth:
-          description: Who can download file via the secure link
-          type: boolean
-        acVerifyRecipient:
-          description: Who can download file via the secure link
-          type: boolean
-        excludedFileExtensions:
-          description: Set excluded file extensions
-          type: array
-          items:
-            type: string
-        fileFilterExclusionGroups:
-          description: Set excluded file groups
-          type: array
-          items:
-            type: string
-        fileFilterCustomFileTypes:
-          description: Set custom file types
-          type: array
-          items:
-            type: string
-        secureMessageBody:
-          type: string
-        secureMessageBodyDefault:
-          type: boolean
-        secureContainerRequired:
-          type: boolean
-        returnReceipt:
-          type: string
-        returnReceiptDefault:
-          type: boolean
-        selfCopy:
-          type: string
-        selfCopyDefault:
-          type: boolean
-        includeFingerprint:
-          type: string
-        includeFingerprintDefault:
-          type: boolean
-        requestFile:
-          type: boolean
-        requestFileAllowViewableFile:
-          type: boolean
-        requestFileUploadAuth:
-          type: string
-        requestFileAuthDefault:
-          type: string
-        requestFileExpiration:
-          type: integer
-        requestFileExpirationUserDecide:
-          type: boolean
-        requestFileExpirationMax:
-          type: integer
-        requestFileUploadLimit:
-          type: integer
-        requestFileUploadLimitUserDecide:
-          type: boolean
-        requestFileUploadsMax:
-          type: integer
-        twoFactorAuth:
-          type: string
-        inactiveExpiration:
-          type: integer
-        userCanReactivate:
-          type: string
-        cleanupInactiveAccount:
-          type: boolean
-        withdrawInactiveAccountFileLinks:
-          type: boolean
-        allowCollaboration:
-          description: Indicates whether Collaboration and Shared Folders are allowed
-          type: boolean
-        sendFileLimit:
-          description: Upper limit allowed for number of attachments per mail.
-          type: integer
-        remoteWipe:
-          description: 'Disallow Collaboration: Wipe remote devices'
-          type: boolean
-        deleteUnsharedData:
-          description: 'Disallow Collaboration: Delete all data owned by the user'
-          type: boolean
-        retainData:
-          description: 'Disallow Collaboration: retain the data owned by the user'
-          type: boolean
-        retainToUser:
-          description: 'Disallow Collaboration: re-assign the data to the following user'
-          type: string
-        retainPermissionToSharedData:
-          description: 'Disallow Collaboration: retain all permission to shared data'
-          type: boolean
-    UserDemoteOptions.Post:
-      description: Class UserDemoteOptions
-      properties:
-        remoteWipe:
-          description: Indicates whether to remotely wipe data from both desktop and mobile devices.
-          type: boolean
-        deleteUnsharedData:
-          description: Indicates whether data owned by the user should be deleted. This is required and must be set to True if `retainData` is False, and vice versa.
-          type: boolean
-        retainData:
-          description: Indicates whether data should be retained and transferred to another user. This is required and must be True if `deleteUnsharedData` is False, and vice versa.
-          type: boolean
-        retainToUser:
-          description: The ID of the new owner to whom the data will be transferred, applicable when `retainData` and/or `retainPermissionToSharedData` are set to true.
-          type: string
-        retainToAdvancedFormUser:
-          description: The ID of the user to whom the advanced form data will be transferred, similar to retainToUser but specifically for advanced form components.
-          type: string
-        retainPermissionToSharedData:
-          description: Indicates whether permissions to shared folder should be retained.
-          type: boolean
-        withdrawRequestFiles:
-          description: Indicates whether request files should be withdrawn.
-          type: boolean
-        withdrawFileLinks:
-          description: Indicates whether sent files should be withdrawn.
-          type: boolean
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
     FeaturesList:
       description: Class FeaturesList
       required:
@@ -615,6 +440,33 @@ components:
         fileLifetime:
           description: Get profile max file lifetime
           type: integer
+    UserDemoteOptions.Post:
+      description: Class UserDemoteOptions
+      properties:
+        remoteWipe:
+          description: Indicates whether to remotely wipe data from both desktop and mobile devices.
+          type: boolean
+        deleteUnsharedData:
+          description: Indicates whether data owned by the user should be deleted. This is required and must be set to True if `retainData` is False, and vice versa.
+          type: boolean
+        retainData:
+          description: Indicates whether data should be retained and transferred to another user. This is required and must be True if `deleteUnsharedData` is False, and vice versa.
+          type: boolean
+        retainToUser:
+          description: The ID of the new owner to whom the data will be transferred, applicable when `retainData` and/or `retainPermissionToSharedData` are set to true.
+          type: string
+        retainToAdvancedFormUser:
+          description: The ID of the user to whom the advanced form data will be transferred, similar to retainToUser but specifically for advanced form components.
+          type: string
+        retainPermissionToSharedData:
+          description: Indicates whether permissions to shared folder should be retained.
+          type: boolean
+        withdrawRequestFiles:
+          description: Indicates whether request files should be withdrawn.
+          type: boolean
+        withdrawFileLinks:
+          description: Indicates whether sent files should be withdrawn.
+          type: boolean
     Profile:
       description: Class Profile
       required:
@@ -655,3 +507,151 @@ components:
         prototype:
           description: Id of the prototype profile to be cloned. If not passed, the Standard profile will be used
           type: integer
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    FeaturesList.Put:
+      description: Class FeaturesList
+      properties:
+        allowSftp:
+          description: Indicates whether SFTP access is allowed
+          type: boolean
+        maxStorage:
+          description: Max storage in bytes
+          type: integer
+        storageQuota:
+          description: Maximum storage space that user is entitled to
+          type: integer
+        setExpirationLower:
+          description: Allow to modify file secure link expiration
+          type: boolean
+        sendExternal:
+          description: Allow sending files to external users
+          type: integer
+        linkExpiration:
+          description: Link expiration date in days
+          type: integer
+        ldapMapping:
+          description: LDAP Mapping value to determine the user profile type
+          type: string
+        folderCreate:
+          description: Allow to create top level folders
+          type: integer
+        sysFolderCreate:
+          description: Allow to create system quota folders
+          type: integer
+        sysFolderMaxQuota:
+          description: Set the maximum quota for a system folder
+          type: integer
+        sysFolderMaxCount:
+          description: Set the maximum number of system folders
+          type: integer
+        sysFolderDefaultQuota:
+          description: Set the default quota for a system folder
+          type: integer
+        maxLinkExpiration:
+          description: Upper limit allowed for secure link expiration
+          type: integer
+        acNoAuth:
+          description: Who can download file via the secure link
+          type: boolean
+        acVerifyRecipient:
+          description: Who can download file via the secure link
+          type: boolean
+        excludedFileExtensions:
+          description: Set excluded file extensions
+          type: array
+          items:
+            type: string
+        fileFilterExclusionGroups:
+          description: Set excluded file groups
+          type: array
+          items:
+            type: string
+        fileFilterCustomFileTypes:
+          description: Set custom file types
+          type: array
+          items:
+            type: string
+        secureMessageBody:
+          type: string
+        secureMessageBodyDefault:
+          type: boolean
+        secureContainerRequired:
+          type: boolean
+        returnReceipt:
+          type: string
+        returnReceiptDefault:
+          type: boolean
+        selfCopy:
+          type: string
+        selfCopyDefault:
+          type: boolean
+        includeFingerprint:
+          type: string
+        includeFingerprintDefault:
+          type: boolean
+        requestFile:
+          type: boolean
+        requestFileAllowViewableFile:
+          type: boolean
+        requestFileUploadAuth:
+          type: string
+        requestFileAuthDefault:
+          type: string
+        requestFileExpiration:
+          type: integer
+        requestFileExpirationUserDecide:
+          type: boolean
+        requestFileExpirationMax:
+          type: integer
+        requestFileUploadLimit:
+          type: integer
+        requestFileUploadLimitUserDecide:
+          type: boolean
+        requestFileUploadsMax:
+          type: integer
+        twoFactorAuth:
+          type: string
+        inactiveExpiration:
+          type: integer
+        userCanReactivate:
+          type: string
+        cleanupInactiveAccount:
+          type: boolean
+        withdrawInactiveAccountFileLinks:
+          type: boolean
+        allowCollaboration:
+          description: Indicates whether Collaboration and Shared Folders are allowed
+          type: boolean
+        sendFileLimit:
+          description: Upper limit allowed for number of attachments per mail.
+          type: integer
+        remoteWipe:
+          description: 'Disallow Collaboration: Wipe remote devices'
+          type: boolean
+        deleteUnsharedData:
+          description: 'Disallow Collaboration: Delete all data owned by the user'
+          type: boolean
+        retainData:
+          description: 'Disallow Collaboration: retain the data owned by the user'
+          type: boolean
+        retainToUser:
+          description: 'Disallow Collaboration: re-assign the data to the following user'
+          type: string
+        retainPermissionToSharedData:
+          description: 'Disallow Collaboration: retain all permission to shared data'
+          type: boolean

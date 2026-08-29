@@ -1,7 +1,7 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   version: '28'
-  title: Kiteworks API Documentation activities groups API
+  title: Kiteworks API Documentation Groups API
 tags:
 - name: groups
 paths:
@@ -364,34 +364,21 @@ paths:
           description: Request blocked by WAF
 components:
   schemas:
-    Errors:
+    GroupCreate:
       type: object
       properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    ContactList:
-      type: object
-      properties:
-        metadata:
-          description: Pagination metadata for the result set.
-          allOf:
-          - $ref: '#/components/schemas/MetaData'
-        data:
-          type: array
-          description: List of contacts.
-          items:
-            $ref: '#/components/schemas/Contact'
-    Error:
-      type: object
-      properties:
-        code:
+        name:
           type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
+          description: The name of the group.
+        items:
+          type: array
+          minItems: 1
+          description: List of group members, each specified by their email address. At least one member is required.
+          items:
+            $ref: '#/components/schemas/GroupEmail'
+      required:
+      - items
+      - name
     GroupEmail:
       type: object
       properties:
@@ -441,6 +428,22 @@ components:
           description: List of email addresses or distribution lists for this contact.
           items:
             $ref: '#/components/schemas/ContactItem'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
     MetaData:
       type: object
       properties:
@@ -453,18 +456,15 @@ components:
         offset:
           type: integer
           description: Number of items skipped before the current page.
-    GroupCreate:
+    ContactList:
       type: object
       properties:
-        name:
-          type: string
-          description: The name of the group.
-        items:
+        metadata:
+          description: Pagination metadata for the result set.
+          allOf:
+          - $ref: '#/components/schemas/MetaData'
+        data:
           type: array
-          minItems: 1
-          description: List of group members, each specified by their email address. At least one member is required.
+          description: List of contacts.
           items:
-            $ref: '#/components/schemas/GroupEmail'
-      required:
-      - items
-      - name
+            $ref: '#/components/schemas/Contact'

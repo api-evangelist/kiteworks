@@ -1,7 +1,7 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   version: '28'
-  title: Kiteworks API Documentation activities adminRoles API
+  title: Kiteworks API Documentation Admin Roles API
 tags:
 - name: adminRoles
 paths:
@@ -425,22 +425,6 @@ paths:
           type: string
 components:
   schemas:
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
     UserMetadata:
       description: Class UserMetadata
       properties:
@@ -450,6 +434,18 @@ components:
         value:
           description: Value assigned to the custom metadata attribute for the user
           type: string
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
     User:
       description: Class User
       required:
@@ -533,17 +529,6 @@ components:
           description: The exact timestamp when the user's password will expire
           type: string
           format: date
-    UserAdminRole:
-      description: Class UserAdminRole
-      required:
-      - userId
-      properties:
-        userId:
-          description: User unique identifier
-          type: string
-        adminRole:
-          description: 'Admin role unique identifier. Possible values are: 1: System admin, 2: Application admin'
-          type: string
     AdminRole:
       description: Class AdminRole
       required:
@@ -564,15 +549,30 @@ components:
           type: array
           items:
             type: string
-    MetaData:
+    Error:
       type: object
       properties:
-        total:
-          type: integer
-          description: Total number of items available.
-        limit:
-          type: integer
-          description: Maximum number of items returned per page.
-        offset:
-          type: integer
-          description: Number of items skipped before the current page.
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    UserAdminRole:
+      description: Class UserAdminRole
+      required:
+      - userId
+      properties:
+        userId:
+          description: User unique identifier
+          type: string
+        adminRole:
+          description: 'Admin role unique identifier. Possible values are: 1: System admin, 2: Application admin'
+          type: string

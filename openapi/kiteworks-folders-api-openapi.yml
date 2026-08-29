@@ -1,7 +1,7 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   version: '28'
-  title: Kiteworks API Documentation activities folders API
+  title: Kiteworks API Documentation Folders API
 tags:
 - name: folders
 paths:
@@ -4825,33 +4825,17 @@ paths:
           description: Request blocked by WAF
 components:
   schemas:
-    BulkOperationMoveFolders:
-      type: object
-      properties:
-        errors:
-          description: List of errors.
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorString'
-        successIds:
-          type: array
-          description: List of successfully moved folder IDs.
-          items:
-            type: string
-        data:
-          description: Details of moved folders.
-          type: array
-          items:
-            $ref: '#/components/schemas/Folder1'
-    Requirement:
+    Folder:
       type: object
       properties:
         id:
           type: string
-          description: Requirement ID
+          format: uuid
+          description: Unique identifier (UUID) of the folder.
         parentId:
-          type: integer
-          description: Unique identifier of the parent object.
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) of the parent object.
         name:
           type: string
           description: Name of the object.
@@ -4861,7 +4845,7 @@ components:
         userId:
           type: string
           format: uuid
-          description: Unique identifier (UUID) who created the object.
+          description: Unique identifier (UUID) who created the folder.
         creator:
           description: Details of the user who created the object.
           allOf:
@@ -4894,7 +4878,7 @@ components:
           description: Permanent URL link to access the object.
         path:
           type: string
-          description: Path to the object in the hierarchy.
+          description: Path to the folder in the hierarchy.
         members:
           description: List of members who have access to the object.
           type: array
@@ -4912,40 +4896,400 @@ components:
         source:
           type: integer
           description: ID representing the source of the object (1 - Salesforce, 2 - Teams).
-        approvers:
-          description: List of approvers for the requirement
-        asset_class:
-          description: Asset class associated with the requirement
+        isShared:
+          type: boolean
+          description: Indicates if the folder is shared with other users.
+        syncable:
+          type: boolean
+          description: Indicates if the folder can be synced by Desktop Sync Client.
+        fileLifetime:
+          type: integer
+          description: Time duration (in days) for which the files in this folder are kept after being added to the folder.
+        description:
+          type: string
+          description: The description of the folder.
+        isFavorite:
+          type: boolean
+          description: Indicates if the folder is marked as a favorite by the user.
+        pushedFilesCount:
+          type: integer
+          description: The number of files that have been pushed to mobile apps in this folder.
+        currentUserRole:
+          description: The role of the current user in this folder.
           allOf:
-          - $ref: '#/components/schemas/RiskPolicy'
-        matched_recipients:
+          - $ref: '#/components/schemas/Role'
+        avStatus:
+          type: string
+          description: The Antivirus (AV) status of the folder.
+        dlpStatus:
+          type: string
+          description: The Data Loss Prevention (DLP) status of the folder.
+        totalMembersCount:
+          type: integer
+          description: Total number of members who have access to this folder.
+        totalFoldersCount:
+          type: integer
+          description: Total number of subfolders within this folder.
+        totalFilesCount:
+          type: integer
+          description: Total number of files within this folder.
+        maxFolderExpiration:
+          type: string
+          format: date
+          description: The maximum expiration date allowed for files in this folder.
+        maxFileLifetime:
+          type: integer
+          description: The maximum duration (in days) that files in this folder can be kept after being added to the folder.
+        isLdapGroupMember:
+          type: boolean
+          description: Indicates if the folder is part of an LDAP group.
+        isUnderMyFolder:
+          type: boolean
+          description: Indicates if this folder is a subfolder of the user's "My Folder".
+        pathIds:
+          type: string
+          description: A list of IDs representing the path of the folder within the folder hierarchy.
+        isRoot:
+          type: boolean
+          description: Indicates if this folder is a root folder.
+        rootId:
+          type: string
+          format: uuid
+          description: The ID of the root folder if this is a subfolder.
+        useFolderQuota:
+          type: boolean
+          description: Indicates if a folder quota is applied to this folder.
+        quota:
+          type: integer
+          description: The storage quota for the folder (in bytes).
+        size:
+          type: integer
+          description: The total storage size used by the folder (in bytes).
+        freeSpace:
+          type: integer
+          description: The amount of free space available in the folder (in bytes).
+        inheritanceEnabled:
+          type: boolean
+          description: Indicates if a folder inherits permissions from the parent folder
+    Favorite:
+      description: Class Favorite
+      required:
+      - id
+      - objectId
+      - userId
+      properties:
+        id:
+          description: Unique identifier of Favorite
+          type: integer
+        objectId:
+          description: Unique identifier of the favorited folder or file
+          type: string
+        userId:
+          description: Unique identifier of the user who created this favorite
+          type: string
+        creator:
+          description: User who created this favorite (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/UserBasicInfo'
+        object:
+          description: Favorited folder object (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/Folder'
+        links:
+          description: HATEOAS links associated with the entity
           type: array
-          description: List of succeeded recipient emails.
           items:
             type: string
-    Errors:
+    Member:
       type: object
       properties:
-        error:
+        objectId:
+          type: string
+          description: Unique identifier (UUID) of the associated object (file or folder).
+        roleId:
+          type: integer
+          description: Role assigned to the member.
+        userId:
+          type: string
+          description: Unique identifier (UUID) of the user.
+        groupId:
+          type: integer
+          description: Unique identifier of the LDAP group.
+        user:
+          description: User details of the member.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        role:
+          description: Role details assigned to the member.
+          allOf:
+          - $ref: '#/components/schemas/Role'
+        group:
+          description: Group details if the member belongs to a group.
+          allOf:
+          - $ref: '#/components/schemas/Group'
+        sharedBy:
+          description: Details of the user who shared the file or folder.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        created:
+          type: string
+          format: date
+          description: Date when the file or folder was shared.
+        inheritRoleId:
+          type: integer
+          description: Inherited role ID from the parent folder, if applicable.
+        allowedFolderRoleId:
           type: array
+          description: List of allowed folder role IDs.
           items:
-            $ref: '#/components/schemas/Error'
-    FolderFileAddMembers:
+            type: integer
+        email:
+          type: string
+          description: Email associated with the member.
+        rank:
+          type: integer
+          description: Rank of the member role.
+        originFolder:
+          readOnly: true
+    ActivityList:
       type: object
       properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorStringSchemaAccessVerifications'
-        successIds:
-          type: array
-          description: List of succeeded IDs.
-          items:
-            type: string
         data:
           type: array
+          description: List of activity events.
           items:
-            $ref: '#/components/schemas/Member'
+            $ref: '#/components/schemas/Activity'
+    UserMetadata:
+      description: Class UserMetadata
+      properties:
+        name:
+          description: Key name of the custom metadata attribute associated with the user
+          type: string
+        value:
+          description: Value assigned to the custom metadata attribute for the user
+          type: string
+    AdminFolderPutRequest:
+      type: object
+      properties:
+        ids:
+          type: array
+          description: List of folder object IDs to be updated.
+          items:
+            type: string
+        expire:
+          type: string
+          format: date
+          description: Expiration date for the folder.
+        applyTo:
+          type: string
+          enum:
+          - folders_only
+          - files_only
+          - folders_and_files
+          description: Defines the scope of the expiration update.<br>`folders` – Apply expiration to folders only.<br>`files` – Apply expiration to files only.<br>`folders_and_files` – Apply expiration to both folders and files.
+        quota:
+          type: integer
+          enum:
+          - 1073741824
+          - 2147483648
+          - 5368709120
+          - 10737418240
+          - 53687091200
+          - -1
+          description: 'Storage quota for the folder in bytes. Must be one of the permitted sizes: 1 GB (1,073,741,824), 2 GB (2,147,483,648), 5 GB (5,368,709,120), 10 GB (10,737,418,240), 50 GB (53,687,091,200), or -1 for unlimited.'
+        applyToNestedFiles:
+          type: boolean
+          description: If set to `true`, expiration will also apply to files in child folders.
+      required:
+      - ids
+    Task:
+      description: Class Task
+      required:
+      - assigneeId
+      - created
+      - due
+      - id
+      - status
+      - userId
+      properties:
+        id:
+          description: Task unique identifier
+          type: integer
+        assigneeId:
+          description: Assigned User unique identifier
+          type: string
+        assignee:
+          description: User assigned to complete the task (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/User'
+        due:
+          description: Date and time by which the task must be completed
+          type: string
+          format: date
+        parentId:
+          description: Parent Comment identifier
+          type: integer
+        objectId:
+          description: Object identifier Task belongs to
+          type: string
+        userId:
+          description: Identifier of User who created a Task
+          type: string
+        user:
+          description: User who created the task (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/User'
+        created:
+          description: Date and time the task was created
+          type: string
+          format: date
+        modified:
+          description: Date and time the task was last modified
+          type: string
+          format: date
+        contents:
+          description: Body text of the task
+          type: string
+        deleted:
+          description: Indicates whether the task is deleted
+          type: boolean
+        folderId:
+          description: Identifier of Object's parent Folder
+          type: string
+        status:
+          description: 'Task status. Accepted values: `D` (Defined), `P` (In Progress), `C` (Completed)'
+          type: string
+        file:
+          description: File the task is tied to (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/File'
+        permissions:
+          description: Current user's permissions (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+    FolderUpdatePutRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 255
+          description: New name for the folder (maximum 255 characters).
+        description:
+          type: string
+          description: Updated description for the folder.
+        syncable:
+          type: boolean
+          description: Indicates whether the folder can be synced by the Desktop Sync Client. Can only be set on top-level folders.
+        expire:
+          type: string
+          format: date
+          description: The folder expiration date. Applicable to top-level folders only.
+        fileLifetime:
+          type:
+          - integer
+          - 'null'
+          minimum: 0
+          description: Number of days files are retained in this folder before expiring. Set to 0 for no expiration.
+        applyFileLifetimeToFiles:
+          type: boolean
+          description: If true, applies the updated `fileLifetime` setting to all existing files in this folder.
+        applyFileLifetimeToNested:
+          type: boolean
+          description: If true, applies the updated `fileLifetime` setting to all nested subfolders.
+        secure:
+          type: boolean
+          description: Marks the folder as secure, restricting access to authorised recipients only. Can only be set on top-level folders under the user's root folder.
+        clientId:
+          type: string
+          description: Client application identifier used to associate the folder with a specific plugin or integration.
+        vendorDocId:
+          type: string
+          description: External vendor document ID to link this folder to a document in a third-party system.
+        vendorDocName:
+          type: string
+          description: Display name of the linked vendor document.
+        useFolderQuota:
+          type: boolean
+          description: Indicates whether this is a system folder with its own dedicated storage quota.
+        quota:
+          type: integer
+          enum:
+          - 1073741824
+          - 2147483648
+          - 5368709120
+          - 10737418240
+          - 53687091200
+          - -1
+          description: 'Storage quota for the folder in bytes. Must be one of the permitted sizes: 1 GB (1,073,741,824), 2 GB (2,147,483,648), 5 GB (5,368,709,120), 10 GB (10,737,418,240), 50 GB (53,687,091,200), or -1 for unlimited.'
+        breakInheritance:
+          type: boolean
+          description: If true, breaks permission inheritance from the parent folder, making this folder's members independent. Only `true` is accepted; passing `false` is invalid.
+    SafeEdit:
+      type: object
+      properties:
+        safeEditLocked:
+          type: boolean
+          description: Indicates if the file is locked through a SafeEdit session.
+        user:
+          description: The user responsible for locking the file via SafeEdit.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+    Folders:
+      type: object
+      properties:
+        data:
+          description: List of folders.
+          type: array
+          items:
+            $ref: '#/components/schemas/Folder1'
+        metadata:
+          description: Pagination metadata for the result set.
+          allOf:
+          - $ref: '#/components/schemas/FoldersMetaData'
+    DestinationFolderIdRequest:
+      type: object
+      properties:
+        destinationFolderId:
+          type: string
+          description: The ID of the destination folder where the item will be copied/moved.
+        addVersion:
+          type: boolean
+          description: If a file with the same name exists, create a new version instead of overwriting it. Default is True.
+      required:
+      - destinationFolderId
+    ActivityUser:
+      type: object
+      properties:
+        userId:
+          type: string
+        name:
+          type: string
+          description: Full name of the user.
+        email:
+          type: string
+          description: Email address associated with the user.
+        profileIcon:
+          type: string
+          description: URL or identifier for the user's profile icon.
+    FoldersMetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
+        totalDeletedFoldersCount:
+          type: integer
+          description: Total number of deleted folders.
+        totalDeletedFilesCount:
+          type: integer
+          description: Total number of deleted files.
     PushedObject:
       type: object
       properties:
@@ -4963,73 +5307,6 @@ components:
           description: Details of the user who pushed the object.
           allOf:
           - $ref: '#/components/schemas/UserBasic'
-    Tag:
-      type: object
-      properties:
-        guid:
-          type: string
-          format: uuid
-          description: Unique identifier (UUID) for the tag.
-        name:
-          type: string
-          description: Display name of the tag.
-        type:
-          type: string
-          description: Type category of the tag.
-    TrackingAccessRecipient:
-      type: object
-      properties:
-        userId:
-          type: string
-          description: Unique identifier of the user associated with the recipient.
-        type:
-          type: integer
-          description: Recipient type.<br>`0` – To.<br>`1` – CC.<br>`2` – BCC.
-        email:
-          type: string
-          description: Email address of the recipient.
-        isDistributionList:
-          type: boolean
-          description: Indicates if the recipient is a distribution list rather than an individual user.
-        user:
-          description: Details of the user associated with the recipient.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-        revoked:
-          type: boolean
-          description: Indicates whether the recipient's tracking access has been revoked.
-    Member.Put:
-      description: Class Member
-      required:
-      - roleId
-      properties:
-        roleId:
-          description: Unique identifier of the role to assign to this member
-          type: integer
-        notifyFileAdded:
-          description: Indicates whether the member should be notified when a file is added
-          type: boolean
-        addLinks:
-          description: Indicates whether HATEOAS links should be included in the response
-          type: boolean
-        notify:
-          description: Indicates whether user would like to receive emails when new member is added into folder
-          type: boolean
-          default: true
-    MemberGroup.Put:
-      description: Class MemberGroup
-      required:
-      - roleId
-      properties:
-        roleId:
-          description: Unique identifier of the role to assign to this member
-          type: integer
-        notifyFileAdded:
-          description: Indicates whether the member should be notified when a file is added
-          type: boolean
-        addLinks:
-          description: Indicates whether HATEOAS links should be included in the response
-          type: boolean
     Folder1:
       type: object
       properties:
@@ -5180,578 +5457,25 @@ components:
         inheritanceEnabled:
           type: boolean
           description: Indicates if a folder inherits permissions from the parent folder
-    MetaData:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of items available.
-        limit:
-          type: integer
-          description: Maximum number of items returned per page.
-        offset:
-          type: integer
-          description: Number of items skipped before the current page.
-    UserBasic:
+    RiskPolicy:
       type: object
       properties:
         id:
           type: string
-          description: Unique identifier (UUID) for the user.
-        email:
-          type: string
-          description: Email address associated with the user.
-        name:
-          type: string
-          description: Full name of the user.
-        profileIcon:
-          type: string
-          description: URL or identifier for the user's profile icon.
-    Attachment:
-      type: object
-      properties:
-        emailPackageId:
-          type: string
-          format: uuid
-          description: Unique identifier for the email package containing the attachment.
-        attachmentId:
-          type: string
-          description: Unique identifier for the attachment.
-        withdrawn:
-          type: boolean
-          description: Indicates whether the attachment has been withdrawn.
-        drmFile:
-          description: Details of the DRM-protected file associated with the attachment.
-          allOf:
-          - $ref: '#/components/schemas/DrmFile'
-        accessType:
-          type: integer
-          description: Access type for the attachment (e.g., read-only, editable).
-        tags:
-          description: List of tags associated with the attachment.
-          type: array
-          items:
-            $ref: '#/components/schemas/Tag'
-        permissions:
-          type: array
-          description: List of permissions associated with the attachment.
-          items:
-            $ref: '#/components/schemas/Permission'
-        objectId:
-          type: string
-          format: uuid
-          description: Unique identifier for the file associated with the attachment.
-        name:
-          type: string
-          description: Name of the attachment file.
-        size:
-          type: integer
-          description: Size of the attachment file in bytes.
-        mime:
-          type: string
-          description: The MIME type of the attachment file.
-        created:
-          type: string
-          format: date
-          description: Date when the attachment file was created.
-        deleted:
-          type: boolean
-          description: Indicates if the attachment has been deleted.
-        fingerprint:
-          type: string
-          description: A unique hash identifying the file version.
-        fingerprintAlgo:
-          type: string
-          description: The algorithm used for generating the file version fingerprint. (e.g., sha3-256, md5).
-        fingerprints:
-          description: List of alternative fingerprints for the attachment file.
-          type: array
-          items:
-            $ref: '#/components/schemas/Fingerprint'
-        adminQuarantineStatus:
-          type: string
-          description: Status of the attachment in the admin quarantine system.
-        avStatus:
-          type: string
-          description: Antivirus (AV) scan status of the attachment.
-        dlpStatus:
-          type: string
-          description: Data Loss Prevention (DLP) status of the attachment.
-    FolderPermissions:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
-    UserMetadata:
-      description: Class UserMetadata
-      properties:
-        name:
-          description: Key name of the custom metadata attribute associated with the user
-          type: string
-        value:
-          description: Value assigned to the custom metadata attribute for the user
-          type: string
-    Task:
-      description: Class Task
-      required:
-      - assigneeId
-      - created
-      - due
-      - id
-      - status
-      - userId
-      properties:
-        id:
-          description: Task unique identifier
-          type: integer
-        assigneeId:
-          description: Assigned User unique identifier
-          type: string
-        assignee:
-          description: User assigned to complete the task (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/User'
-        due:
-          description: Date and time by which the task must be completed
-          type: string
-          format: date
+          description: Risk Policy ID
         parentId:
-          description: Parent Comment identifier
           type: integer
-        objectId:
-          description: Object identifier Task belongs to
-          type: string
-        userId:
-          description: Identifier of User who created a Task
-          type: string
-        user:
-          description: User who created the task (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/User'
-        created:
-          description: Date and time the task was created
-          type: string
-          format: date
-        modified:
-          description: Date and time the task was last modified
-          type: string
-          format: date
-        contents:
-          description: Body text of the task
-          type: string
-        deleted:
-          description: Indicates whether the task is deleted
-          type: boolean
-        folderId:
-          description: Identifier of Object's parent Folder
-          type: string
-        status:
-          description: 'Task status. Accepted values: `D` (Defined), `P` (In Progress), `C` (Completed)'
-          type: string
-        file:
-          description: File the task is tied to (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/File'
-        permissions:
-          description: Current user's permissions (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
-        links:
-          description: HATEOAS links associated with the entity
-          type: array
-          items:
-            type: string
-    Mail:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier of the email.
-        senderId:
-          type: string
-          description: Unique identifier of the sender.
-        templateId:
-          type: integer
-          description: Unique identifier of the email template used.
-        status:
-          type: string
-          description: Current status of the email (e.g., sent, draft, error, etc.).
-        type:
-          type: string
-          description: Type of the email (e.g., original, reply, forward, etc.).
-        date:
-          type: string
-          format: date
-          description: Date the email was last modified or sent.
-        deleted:
-          type: boolean
-          description: Indicates if the email has been deleted.
-        withdrawnDate:
-          type: string
-          format: date
-          description: Date when the email was withdrawn, if applicable.
-        emailPackageId:
-          type: string
-          description: Unique identifier of the associated email package.
-        isPreview:
-          type: boolean
-          description: Indicates whether the email is a view-only version, typically used for previewing attachments without enabling downloading.
-        isUserSent:
-          type: boolean
-          description: Indicates whether the email was sent by the current user or another user.
-        watermark:
-          type: string
-          description: Text watermark applied to the email attachments (applicable only for view-only version).
-        variables:
-          description: List of dynamic variables used in the email.
-          type: array
-          items:
-            $ref: '#/components/schemas/Variables'
-        recipients:
-          description: List of recipients for the email.
-          type: array
-          items:
-            $ref: '#/components/schemas/Recipient'
-        secureBody:
-          type: boolean
-          description: Indicates if the email body is secured.
-        modifiedDate:
-          type: string
-          format: date
-          description: Date the email was last modified.
-        parentEmailId:
-          type: string
-          description: Unique identifier of the parent email, if applicable.
-        emailReturnReceipt:
-          description: List of recipients who requested return receipts.
-          type: array
-          items:
-            $ref: '#/components/schemas/EmailReturnRecipient'
-        error:
-          type: string
-          description: Error message associated with the email, if any.
-        subject:
-          type: string
-          description: Subject line of the email.
-        attachmentCount:
-          type: integer
-          description: Number of attachments in the email.
-        expirationDate:
-          type: string
-          format: date
-          description: Expiration date of the email package, if applicable.
-        avStatus:
-          type: string
-          description: Antivirus (AV) scan status of the email.
-        dlpStatus:
-          type: string
-          description: Data Loss Prevention (DLP) scan status of the email.
-        hasTrackingAccess:
-          type: boolean
-          description: Indicates if tracking access is enabled for the email.
-        trackingAccess:
-          description: List of recipients with tracking access.
-          type: array
-          items:
-            $ref: '#/components/schemas/TrackingAccessRecipient'
-        policyDirective:
-          type: integer
-          description: Indicates the restriction type applied to the email
-        isRead:
-          type: boolean
-          description: Indicates if the email has been read.
-        bucket:
-          type: string
-          description: The bucket where the email is stored. (e.g. inbox, sent, trash)
-        body:
-          type: string
-          description: The body of the email.
-        package:
-          description: Details of the associated email package.
-          allOf:
-          - $ref: '#/components/schemas/Package'
-        rawBody:
-          type: string
-          description: Raw email body content without HTML markup.
-        headline:
-          type: string
-          description: Headline or main title of the email.
-        notice:
-          type: string
-          description: Notice part of the email.
-        fullHtmlBody:
-          type: string
-          description: Full HTML body of the email.
-        emailFrom:
-          type: string
-          description: The email address from which the email was sent.
-        templateBody:
-          type: string
-          description: Body content generated from the email template.
-        webFormId:
-          type: string
-          description: Unique identifier of the web form associated with the email.
-        webFormFields:
-          description: Fields included in the associated web form with the mail.
-        sender:
-          description: Details of the sender.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-        sharedMailboxId:
-          type: string
-          description: Unique identifier of the shared mailbox, if applicable.
-        htmlBody:
-          type: string
-          description: HTML version of the email body.
-        actor:
-          description: The user responsible for sending the email, applicable when the email is sent on behalf of a shared mailbox.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-        darkModeStyle:
-          type: string
-          description: CSS styles applied for dark mode.
-        exists:
-          type: boolean
-          description: Indicates whether the email already exists in the system.
-    Recipient:
-      type: object
-      properties:
-        userId:
-          type: string
-          description: Unique identifier of the user associated with the recipient.
-        type:
-          type: integer
-          description: Recipient type.<br>`0` – To.<br>`1` – CC.<br>`2` – BCC.
-        email:
-          type: string
-          description: Email address of the recipient.
-        isDistributionList:
-          type: boolean
-          description: Indicates if the recipient is a distribution list rather than an individual user.
-        user:
-          description: Details of the user associated with the recipient.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-    FolderChildrenFiles:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/File'
-        metadata:
-          $ref: '#/components/schemas/MetaData'
-    FolderUpdatePutRequest:
-      type: object
-      properties:
+          description: Unique identifier of the parent object.
         name:
           type: string
-          maxLength: 255
-          description: New name for the folder (maximum 255 characters).
-        description:
-          type: string
-          description: Updated description for the folder.
-        syncable:
-          type: boolean
-          description: Indicates whether the folder can be synced by the Desktop Sync Client. Can only be set on top-level folders.
-        expire:
-          type: string
-          format: date
-          description: The folder expiration date. Applicable to top-level folders only.
-        fileLifetime:
-          type: integer
-          nullable: true
-          minimum: 0
-          description: Number of days files are retained in this folder before expiring. Set to 0 for no expiration.
-        applyFileLifetimeToFiles:
-          type: boolean
-          description: If true, applies the updated `fileLifetime` setting to all existing files in this folder.
-        applyFileLifetimeToNested:
-          type: boolean
-          description: If true, applies the updated `fileLifetime` setting to all nested subfolders.
-        secure:
-          type: boolean
-          description: Marks the folder as secure, restricting access to authorised recipients only. Can only be set on top-level folders under the user's root folder.
-        clientId:
-          type: string
-          description: Client application identifier used to associate the folder with a specific plugin or integration.
-        vendorDocId:
-          type: string
-          description: External vendor document ID to link this folder to a document in a third-party system.
-        vendorDocName:
-          type: string
-          description: Display name of the linked vendor document.
-        useFolderQuota:
-          type: boolean
-          description: Indicates whether this is a system folder with its own dedicated storage quota.
-        quota:
-          type: integer
-          enum:
-          - 1073741824
-          - 2147483648
-          - 5368709120
-          - 10737418240
-          - 53687091200
-          - -1
-          description: 'Storage quota for the folder in bytes. Must be one of the permitted sizes: 1 GB (1,073,741,824), 2 GB (2,147,483,648), 5 GB (5,368,709,120), 10 GB (10,737,418,240), 50 GB (53,687,091,200), or -1 for unlimited.'
-        breakInheritance:
-          type: boolean
-          description: If true, breaks permission inheritance from the parent folder, making this folder's members independent. Only `true` is accepted; passing `false` is invalid.
-    ErrorStringSchemaAccessVerifications:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
-        field:
-          type: string
-          description: Associated field, if applicable.
-        failedIds:
-          type: array
-          description: List of failed IDs.
-          items:
-            type: string
-        accessVerification:
-          description: Access Verification details
-          allOf:
-          - $ref: '#/components/schemas/AccessVerificationApproval'
-        referenceId:
-          type: string
-          description: Reference ID for the error
-    FolderSendMessageRequest:
-      type: object
-      properties:
-        to:
-          type: array
-          description: List of recipient user UUIDs (To field).
-          items:
-            type: string
-        cc:
-          type: array
-          description: List of recipient user UUIDs (CC field).
-          items:
-            type: string
-        bcc:
-          type: array
-          description: List of recipient user UUIDs (BCC field).
-          items:
-            type: string
-        secureBody:
-          type: boolean
-          description: If true, the message body is hidden from the notification email and is only visible to recipients when they open the secure link.
-        body:
-          type: string
-          description: The body content of the email.
-        subject:
-          type: string
-          maxLength: 998
-          description: 'The subject of the email (maximum length: 998 characters).'
-      required:
-      - subject
-    DestinationFolderIdRequest:
-      type: object
-      properties:
-        destinationFolderId:
-          type: string
-          description: The ID of the destination folder where the item will be copied/moved.
-        addVersion:
-          type: boolean
-          description: If a file with the same name exists, create a new version instead of overwriting it. Default is True.
-      required:
-      - destinationFolderId
-    Members:
-      type: object
-      properties:
-        data:
-          description: List of members with access to the object.
-          type: array
-          items:
-            $ref: '#/components/schemas/Member'
-        metadata:
-          description: Pagination metadata for the result set.
-          allOf:
-          - $ref: '#/components/schemas/MetaData'
-    Permission:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique identifier for the permission.
-        name:
-          type: string
-          description: Name of the permission.
-        allowed:
-          type: boolean
-          description: Indicates whether the permission is granted (True) or denied (False).
-    UserBasicInfo:
-      required:
-      - email
-      - id
-      - name
-      properties:
-        id:
-          description: The unique identifier of the user
-          type: string
-        name:
-          description: The name of the user
-          type: string
-        email:
-          description: The user's email
-          type: string
-        profileIcon:
-          description: URL to the user's profile icon image
-          type: string
-    Favorite:
-      description: Class Favorite
-      required:
-      - id
-      - objectId
-      - userId
-      properties:
-        id:
-          description: Unique identifier of Favorite
-          type: integer
-        objectId:
-          description: Unique identifier of the favorited folder or file
-          type: string
-        userId:
-          description: Unique identifier of the user who created this favorite
-          type: string
-        creator:
-          description: User who created this favorite (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/UserBasicInfo'
-        object:
-          description: Favorited folder object (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/Folder'
-        links:
-          description: HATEOAS links associated with the entity
-          type: array
-          items:
-            type: string
-    Folder:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Unique identifier (UUID) of the folder.
-        parentId:
-          type: string
-          format: uuid
-          description: Unique identifier (UUID) of the parent object.
-        name:
-          type: string
-          description: Name of the object.
+          description: Risk Policy Name
         type:
           type: string
           description: Type of the object.<br>`f` – File.<br>`d` – Folder.
         userId:
           type: string
           format: uuid
-          description: Unique identifier (UUID) who created the folder.
+          description: Unique identifier (UUID) who created the object.
         creator:
           description: Details of the user who created the object.
           allOf:
@@ -5784,7 +5508,7 @@ components:
           description: Permanent URL link to access the object.
         path:
           type: string
-          description: Path to the folder in the hierarchy.
+          description: Path to the object in the hierarchy.
         members:
           description: List of members who have access to the object.
           type: array
@@ -5802,82 +5526,122 @@ components:
         source:
           type: integer
           description: ID representing the source of the object (1 - Salesforce, 2 - Teams).
-        isShared:
+        message:
+          type: string
+          description: Risk Policy Message
+    MobileInfo:
+      type: object
+      properties:
+        wopiSrc:
+          type: string
+          description: The WOPI (Web Application Open Platform Interface) source URL for the mobile application.
+        userId:
+          type: string
+          description: Unique identifier of the user.
+        service:
+          type: string
+          description: The WOPI service ID.
+        scheme:
+          type: string
+          description: URI scheme used by the mobile application to handle the file.
+        schemeSupport:
+          type: string
+          description: Indicates the level of support the mobile app has for the URI scheme.
+    FolderCreatePostRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 255
+          description: The name of the new folder (maximum 255 characters).
+        secure:
           type: boolean
-          description: Indicates if the folder is shared with other users.
+          description: Marks the folder as secure, restricting access to authorised recipients only. Can only be set on top-level folders under the user's root folder.
         syncable:
           type: boolean
-          description: Indicates if the folder can be synced by Desktop Sync Client.
-        fileLifetime:
-          type: integer
-          description: Time duration (in days) for which the files in this folder are kept after being added to the folder.
-        description:
-          type: string
-          description: The description of the folder.
-        isFavorite:
-          type: boolean
-          description: Indicates if the folder is marked as a favorite by the user.
-        pushedFilesCount:
-          type: integer
-          description: The number of files that have been pushed to mobile apps in this folder.
-        currentUserRole:
-          description: The role of the current user in this folder.
-          allOf:
-          - $ref: '#/components/schemas/Role'
-        avStatus:
-          type: string
-          description: The Antivirus (AV) status of the folder.
-        dlpStatus:
-          type: string
-          description: The Data Loss Prevention (DLP) status of the folder.
-        totalMembersCount:
-          type: integer
-          description: Total number of members who have access to this folder.
-        totalFoldersCount:
-          type: integer
-          description: Total number of subfolders within this folder.
-        totalFilesCount:
-          type: integer
-          description: Total number of files within this folder.
-        maxFolderExpiration:
+          description: Indicates whether the folder can be synced by the Desktop Sync Client. Can only be set on top-level folders.
+        expire:
           type: string
           format: date
-          description: The maximum expiration date allowed for files in this folder.
-        maxFileLifetime:
-          type: integer
-          description: The maximum duration (in days) that files in this folder can be kept after being added to the folder.
-        isLdapGroupMember:
+          description: The folder expiration date. Applicable to top-level folders only.
+        fileLifetime:
+          type:
+          - integer
+          - 'null'
+          minimum: 0
+          description: Number of days files are retained in this folder before expiring. Set to 0 for no expiration. Applicable to top-level folders.
+        rename:
           type: boolean
-          description: Indicates if the folder is part of an LDAP group.
-        isUnderMyFolder:
-          type: boolean
-          description: Indicates if this folder is a subfolder of the user's "My Folder".
-        pathIds:
+          description: If true, automatically renames the folder if a folder with the same name already exists in the destination.
+        description:
           type: string
-          description: A list of IDs representing the path of the folder within the folder hierarchy.
-        isRoot:
-          type: boolean
-          description: Indicates if this folder is a root folder.
-        rootId:
+          description: Optional description for the folder.
+        clientId:
           type: string
-          format: uuid
-          description: The ID of the root folder if this is a subfolder.
+          description: Client application identifier used to associate the folder with a specific plugin or integration.
+        vendorDocId:
+          type:
+          - string
+          - 'null'
+          description: External vendor document ID to link this folder to a document in a third-party system.
+        vendorDocName:
+          type:
+          - string
+          - 'null'
+          description: Display name of the linked vendor document.
+        isFolderUpload:
+          type: boolean
+          description: Indicates whether this folder is being created as part of a folder upload operation. For internal use only.
         useFolderQuota:
           type: boolean
-          description: Indicates if a folder quota is applied to this folder.
+          description: Indicates whether this is a system folder with its own dedicated storage quota.
         quota:
           type: integer
-          description: The storage quota for the folder (in bytes).
-        size:
-          type: integer
-          description: The total storage size used by the folder (in bytes).
-        freeSpace:
-          type: integer
-          description: The amount of free space available in the folder (in bytes).
+          enum:
+          - 1073741824
+          - 2147483648
+          - 5368709120
+          - 10737418240
+          - 53687091200
+          - -1
+          description: 'Storage quota for the folder in bytes. Must be one of the permitted sizes: 1 GB (1,073,741,824), 2 GB (2,147,483,648), 5 GB (5,368,709,120), 10 GB (10,737,418,240), 50 GB (53,687,091,200), or -1 for unlimited.'
         inheritanceEnabled:
           type: boolean
-          description: Indicates if a folder inherits permissions from the parent folder
-    Error:
+          description: Indicates whether the folder inherits member permissions from its parent folder.
+      required:
+      - name
+    FolderChildrenFiles:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+        metadata:
+          $ref: '#/components/schemas/MetaData'
+    TrackingAccessRecipient:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: Unique identifier of the user associated with the recipient.
+        type:
+          type: integer
+          description: Recipient type.<br>`0` – To.<br>`1` – CC.<br>`2` – BCC.
+        email:
+          type: string
+          description: Email address of the recipient.
+        isDistributionList:
+          type: boolean
+          description: Indicates if the recipient is a distribution list rather than an individual user.
+        user:
+          description: Details of the user associated with the recipient.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        revoked:
+          type: boolean
+          description: Indicates whether the recipient's tracking access has been revoked.
+    ErrorString:
       type: object
       properties:
         code:
@@ -5886,73 +5650,247 @@ components:
         message:
           type: string
           description: Error message
-    ActivityUser:
+        field:
+          type: string
+          description: Associated field, if applicable.
+        failedIds:
+          type: array
+          description: List of failed IDs.
+          items:
+            type: string
+    FolderMemberPostRequest:
       type: object
       properties:
-        userId:
-          type: string
-        name:
-          type: string
-          description: Full name of the user.
-        email:
-          type: string
-          description: Email address associated with the user.
-        profileIcon:
-          type: string
-          description: URL or identifier for the user's profile icon.
-    MemberGroup:
-      description: Class MemberGroup
+        notify:
+          type: boolean
+          description: If set to `true`, notifies the user being invited to the folder via email.
+        emails:
+          type: array
+          description: List of email addresses for new members.
+          items:
+            type: string
+            format: email
+        userIds:
+          type: array
+          description: List of user IDs for new members.
+          items:
+            type: string
+        ldapGroupIds:
+          type: array
+          description: List of LDAP group IDs for new members.
+          items:
+            type: integer
+        roleId:
+          type: integer
+          description: The role ID to assign to the new members.
+        notifyFileAdded:
+          type: boolean
+          description: If set to `true`, subscribes the user to notifications for file additions.
       required:
-      - groupId
-      - objectId
+      - roleId
+    Member.Put:
+      description: Class Member
+      required:
       - roleId
       properties:
-        objectId:
-          description: Unique identifier of the folder this member belongs to
-          type: string
         roleId:
-          description: Unique identifier of the role assigned to this member
+          description: Unique identifier of the role to assign to this member
           type: integer
-        group:
-          description: Details of the LDAP group that is a member (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/LdapGroup'
-        role:
-          description: Details of the role assigned to this member (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/Role'
-        inheritRoleId:
-          description: Unique identifier of the role inherited from the parent folder (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: integer
-        allowedFolderRoleId:
-          description: List of role identifiers that are permitted for this folder membership (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: array
-          items:
-            type: string
-        links:
-          description: HATEOAS links associated with the entity
-          type: array
-          items:
-            type: string
-        groupId:
-          description: Unique identifier of the LDAP group assigned as a member
-          type: integer
-        user:
-          description: Details of the user who is a member (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/User'
-    Role:
+        notifyFileAdded:
+          description: Indicates whether the member should be notified when a file is added
+          type: boolean
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
+        notify:
+          description: Indicates whether user would like to receive emails when new member is added into folder
+          type: boolean
+          default: true
+    Tag:
+      type: object
+      properties:
+        guid:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) for the tag.
+        name:
+          type: string
+          description: Display name of the tag.
+        type:
+          type: string
+          description: Type category of the tag.
+    Requirement:
       type: object
       properties:
         id:
+          type: string
+          description: Requirement ID
+        parentId:
           type: integer
-          description: Role ID
+          description: Unique identifier of the parent object.
         name:
           type: string
-          description: Role name
-        rank:
-          type: integer
-          description: Role rank
+          description: Name of the object.
         type:
           type: string
-          description: Role type
+          description: Type of the object.<br>`f` – File.<br>`d` – Folder.
+        userId:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) who created the object.
+        creator:
+          description: Details of the user who created the object.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        created:
+          type: string
+          format: date
+          description: The date and time when the object was created.
+        modified:
+          type: string
+          format: date
+          description: The date and time when the object was last modified.
+        expire:
+          type: string
+          format: date
+          description: Expiration timestamp of the object, if applicable.
+        permissions:
+          description: List of permissions associated with the object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        deleted:
+          type: boolean
+          description: Indicates whether the object has been deleted.
+        permDeleted:
+          type: boolean
+          description: Indicates whether the object has been permanently deleted.
+        permalink:
+          type: string
+          description: Permanent URL link to access the object.
+        path:
+          type: string
+          description: Path to the object in the hierarchy.
+        members:
+          description: List of members who have access to the object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Member'
+        vendorDocId:
+          type: string
+          description: Vendor document ID associated with the object.
+        vendorDocName:
+          type: string
+          description: Name of the vendor document associated with the object.
+        secure:
+          type: boolean
+          description: Indicates whether the folder or the parent folder containing the file is marked as secure.
+        source:
+          type: integer
+          description: ID representing the source of the object (1 - Salesforce, 2 - Teams).
+        approvers:
+          description: List of approvers for the requirement
+        asset_class:
+          description: Asset class associated with the requirement
+          allOf:
+          - $ref: '#/components/schemas/RiskPolicy'
+        matched_recipients:
+          type: array
+          description: List of succeeded recipient emails.
+          items:
+            type: string
+    BulkOperationMoveFolders:
+      type: object
+      properties:
+        errors:
+          description: List of errors.
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorString'
+        successIds:
+          type: array
+          description: List of successfully moved folder IDs.
+          items:
+            type: string
+        data:
+          description: Details of moved folders.
+          type: array
+          items:
+            $ref: '#/components/schemas/Folder1'
+    AccessVerificationApproval:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Access Verification ID
+        parentId:
+          type: integer
+          description: Unique identifier of the parent object.
+        name:
+          type: string
+          description: Name of the object.
+        type:
+          type: string
+          description: Type of the object.<br>`f` – File.<br>`d` – Folder.
+        userId:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) who created the object.
+        creator:
+          description: Details of the user who created the object.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        created:
+          type: string
+          format: date
+          description: The date and time when the object was created.
+        modified:
+          type: string
+          format: date
+          description: The date and time when the object was last modified.
+        expire:
+          type: string
+          format: date
+          description: Expiration timestamp of the object, if applicable.
+        permissions:
+          description: List of permissions associated with the object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        deleted:
+          type: boolean
+          description: Indicates whether the object has been deleted.
+        permDeleted:
+          type: boolean
+          description: Indicates whether the object has been permanently deleted.
+        permalink:
+          type: string
+          description: Permanent URL link to access the object.
+        path:
+          type: string
+          description: Path to the object in the hierarchy.
+        members:
+          description: List of members who have access to the object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Member'
+        vendorDocId:
+          type: string
+          description: Vendor document ID associated with the object.
+        vendorDocName:
+          type: string
+          description: Name of the vendor document associated with the object.
+        secure:
+          type: boolean
+          description: Indicates whether the folder or the parent folder containing the file is marked as secure.
+        source:
+          type: integer
+          description: ID representing the source of the object (1 - Salesforce, 2 - Teams).
+        requirements:
+          type: array
+          description: List of requirements for access verification
+          items:
+            $ref: '#/components/schemas/Requirement'
     File:
       type: object
       properties:
@@ -6120,49 +6058,11 @@ components:
           type: integer
           description: The total number of versions for the file.
         tracking_id:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
           description: Tracking identifier associated with the file upload.
-    DrmFile:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the DRM-protected file.
-        size:
-          type: integer
-          description: Size of the DRM-protected file in bytes.
-    FolderMemberPostRequest:
-      type: object
-      properties:
-        notify:
-          type: boolean
-          description: If set to `true`, notifies the user being invited to the folder via email.
-        emails:
-          type: array
-          description: List of email addresses for new members.
-          items:
-            type: string
-            format: email
-        userIds:
-          type: array
-          description: List of user IDs for new members.
-          items:
-            type: string
-        ldapGroupIds:
-          type: array
-          description: List of LDAP group IDs for new members.
-          items:
-            type: integer
-        roleId:
-          type: integer
-          description: The role ID to assign to the new members.
-        notifyFileAdded:
-          type: boolean
-          description: If set to `true`, subscribes the user to notifications for file additions.
-      required:
-      - roleId
     LdapGroup:
       description: Class LdapGroup
       required:
@@ -6186,96 +6086,424 @@ components:
           type: array
           items:
             type: string
-    RiskPolicy:
+    Permission:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the permission.
+        name:
+          type: string
+          description: Name of the permission.
+        allowed:
+          type: boolean
+          description: Indicates whether the permission is granted (True) or denied (False).
+    ErrorStringSchemaAccessVerifications:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+        field:
+          type: string
+          description: Associated field, if applicable.
+        failedIds:
+          type: array
+          description: List of failed IDs.
+          items:
+            type: string
+        accessVerification:
+          description: Access Verification details
+          allOf:
+          - $ref: '#/components/schemas/AccessVerificationApproval'
+        referenceId:
+          type: string
+          description: Reference ID for the error
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    Mail:
       type: object
       properties:
         id:
           type: string
-          description: Risk Policy ID
-        parentId:
-          type: integer
-          description: Unique identifier of the parent object.
-        name:
+          description: Unique identifier of the email.
+        senderId:
           type: string
-          description: Risk Policy Name
+          description: Unique identifier of the sender.
+        templateId:
+          type: integer
+          description: Unique identifier of the email template used.
+        status:
+          type: string
+          description: Current status of the email (e.g., sent, draft, error, etc.).
         type:
           type: string
-          description: Type of the object.<br>`f` – File.<br>`d` – Folder.
-        userId:
+          description: Type of the email (e.g., original, reply, forward, etc.).
+        date:
           type: string
-          format: uuid
-          description: Unique identifier (UUID) who created the object.
-        creator:
-          description: Details of the user who created the object.
+          format: date
+          description: Date the email was last modified or sent.
+        deleted:
+          type: boolean
+          description: Indicates if the email has been deleted.
+        withdrawnDate:
+          type: string
+          format: date
+          description: Date when the email was withdrawn, if applicable.
+        emailPackageId:
+          type: string
+          description: Unique identifier of the associated email package.
+        isPreview:
+          type: boolean
+          description: Indicates whether the email is a view-only version, typically used for previewing attachments without enabling downloading.
+        isUserSent:
+          type: boolean
+          description: Indicates whether the email was sent by the current user or another user.
+        watermark:
+          type: string
+          description: Text watermark applied to the email attachments (applicable only for view-only version).
+        variables:
+          description: List of dynamic variables used in the email.
+          type: array
+          items:
+            $ref: '#/components/schemas/Variables'
+        recipients:
+          description: List of recipients for the email.
+          type: array
+          items:
+            $ref: '#/components/schemas/Recipient'
+        secureBody:
+          type: boolean
+          description: Indicates if the email body is secured.
+        modifiedDate:
+          type: string
+          format: date
+          description: Date the email was last modified.
+        parentEmailId:
+          type: string
+          description: Unique identifier of the parent email, if applicable.
+        emailReturnReceipt:
+          description: List of recipients who requested return receipts.
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailReturnRecipient'
+        error:
+          type: string
+          description: Error message associated with the email, if any.
+        subject:
+          type: string
+          description: Subject line of the email.
+        attachmentCount:
+          type: integer
+          description: Number of attachments in the email.
+        expirationDate:
+          type: string
+          format: date
+          description: Expiration date of the email package, if applicable.
+        avStatus:
+          type: string
+          description: Antivirus (AV) scan status of the email.
+        dlpStatus:
+          type: string
+          description: Data Loss Prevention (DLP) scan status of the email.
+        hasTrackingAccess:
+          type: boolean
+          description: Indicates if tracking access is enabled for the email.
+        trackingAccess:
+          description: List of recipients with tracking access.
+          type: array
+          items:
+            $ref: '#/components/schemas/TrackingAccessRecipient'
+        policyDirective:
+          type: integer
+          description: Indicates the restriction type applied to the email
+        isRead:
+          type: boolean
+          description: Indicates if the email has been read.
+        bucket:
+          type: string
+          description: The bucket where the email is stored. (e.g. inbox, sent, trash)
+        body:
+          type: string
+          description: The body of the email.
+        package:
+          description: Details of the associated email package.
+          allOf:
+          - $ref: '#/components/schemas/Package'
+        rawBody:
+          type: string
+          description: Raw email body content without HTML markup.
+        headline:
+          type: string
+          description: Headline or main title of the email.
+        notice:
+          type: string
+          description: Notice part of the email.
+        fullHtmlBody:
+          type: string
+          description: Full HTML body of the email.
+        emailFrom:
+          type: string
+          description: The email address from which the email was sent.
+        templateBody:
+          type: string
+          description: Body content generated from the email template.
+        webFormId:
+          type: string
+          description: Unique identifier of the web form associated with the email.
+        webFormFields:
+          description: Fields included in the associated web form with the mail.
+        sender:
+          description: Details of the sender.
           allOf:
           - $ref: '#/components/schemas/UserBasic'
+        sharedMailboxId:
+          type: string
+          description: Unique identifier of the shared mailbox, if applicable.
+        htmlBody:
+          type: string
+          description: HTML version of the email body.
+        actor:
+          description: The user responsible for sending the email, applicable when the email is sent on behalf of a shared mailbox.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        darkModeStyle:
+          type: string
+          description: CSS styles applied for dark mode.
+        exists:
+          type: boolean
+          description: Indicates whether the email already exists in the system.
+    UserBasic:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier (UUID) for the user.
+        email:
+          type: string
+          description: Email address associated with the user.
+        name:
+          type: string
+          description: Full name of the user.
+        profileIcon:
+          type: string
+          description: URL or identifier for the user's profile icon.
+    UserBasicInfo:
+      required:
+      - email
+      - id
+      - name
+      properties:
+        id:
+          description: The unique identifier of the user
+          type: string
+        name:
+          description: The name of the user
+          type: string
+        email:
+          description: The user's email
+          type: string
+        profileIcon:
+          description: URL to the user's profile icon image
+          type: string
+    Comment:
+      description: Class Comment
+      required:
+      - contents
+      - id
+      - objectId
+      - parentId
+      - userId
+      properties:
+        id:
+          description: Comment unique identifier
+          type: integer
+        parentId:
+          description: Unique identifier of the parent comment, if the comment is a reply
+          type: integer
+        objectId:
+          description: Unique identifier (UUID) of the file being commented on
+          type: string
+        folderId:
+          description: Unique identifier (UUID) of the folder containing the object being commented on
+          type: string
+        userId:
+          description: Unique identifier (UUID) of the user who authored the comment
+          type: string
         created:
+          description: Date and time when the comment was created
           type: string
           format: date
-          description: The date and time when the object was created.
         modified:
+          description: Date and time when the comment was last modified
           type: string
           format: date
-          description: The date and time when the object was last modified.
-        expire:
+        contents:
+          description: Text content of the comment
           type: string
-          format: date
-          description: Expiration timestamp of the object, if applicable.
+        deleted:
+          description: Indicates whether the comment has been deleted
+          type: boolean
+        isComment:
+          description: Indicates whether the item is a comment
+          type: boolean
+        object:
+          description: File being commented on (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/BaseObject'
+        author:
+          description: Author of the comment (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/UserBasicInfo'
+        parent:
+          description: The comment this reply is responding to, if applicable (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/Comment'
         permissions:
-          description: List of permissions associated with the object.
+          description: Permissions of the current user regarding the comment (Explicit field. May be retrieved only if mentioned in "with" parameter)
           type: array
           items:
             $ref: '#/components/schemas/Permission'
-        deleted:
-          type: boolean
-          description: Indicates whether the object has been deleted.
-        permDeleted:
-          type: boolean
-          description: Indicates whether the object has been permanently deleted.
-        permalink:
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+    MultipleFolderIdRequest:
+      type: object
+      properties:
+        folderIds:
+          type: array
+          description: A list of folder IDs to be processed.
+          items:
+            type: string
+        destinationFolderId:
           type: string
-          description: Permanent URL link to access the object.
-        path:
-          type: string
-          description: Path to the object in the hierarchy.
-        members:
-          description: List of members who have access to the object.
+          description: The destination folder
+      required:
+      - destinationFolderId
+      - folderIds
+    Members:
+      type: object
+      properties:
+        data:
+          description: List of members with access to the object.
           type: array
           items:
             $ref: '#/components/schemas/Member'
-        vendorDocId:
-          type: string
-          description: Vendor document ID associated with the object.
-        vendorDocName:
-          type: string
-          description: Name of the vendor document associated with the object.
-        secure:
-          type: boolean
-          description: Indicates whether the folder or the parent folder containing the file is marked as secure.
-        source:
-          type: integer
-          description: ID representing the source of the object (1 - Salesforce, 2 - Teams).
-        message:
-          type: string
-          description: Risk Policy Message
-    MobileInfo:
-      type: object
+        metadata:
+          description: Pagination metadata for the result set.
+          allOf:
+          - $ref: '#/components/schemas/MetaData'
+    MemberGroup:
+      description: Class MemberGroup
+      required:
+      - groupId
+      - objectId
+      - roleId
       properties:
-        wopiSrc:
+        objectId:
+          description: Unique identifier of the folder this member belongs to
           type: string
-          description: The WOPI (Web Application Open Platform Interface) source URL for the mobile application.
+        roleId:
+          description: Unique identifier of the role assigned to this member
+          type: integer
+        group:
+          description: Details of the LDAP group that is a member (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/LdapGroup'
+        role:
+          description: Details of the role assigned to this member (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/Role'
+        inheritRoleId:
+          description: Unique identifier of the role inherited from the parent folder (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: integer
+        allowedFolderRoleId:
+          description: List of role identifiers that are permitted for this folder membership (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: array
+          items:
+            type: string
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+        groupId:
+          description: Unique identifier of the LDAP group assigned as a member
+          type: integer
+        user:
+          description: Details of the user who is a member (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/User'
+    BaseObject:
+      description: Class Object
+      required:
+      - id
+      - name
+      - parentId
+      - userId
+      properties:
+        id:
+          description: Unique identifier of object
+          type: string
+        created:
+          description: Date and time when the object was created
+          type: string
+          format: date-time
+        deleted:
+          description: Indicates whether the object is deleted
+          type: boolean
+        permDeleted:
+          description: Indicates whether the object is permanently deleted
+          type: boolean
+        expire:
+          description: Date and time when the object expires and becomes inaccessible
+          type: string
+          format: date-time
+        modified:
+          description: Date and time when the object was last modified
+          type: string
+          format: date-time
+        name:
+          description: Display name of the object
+          type: string
+        parentId:
+          description: Parent Folder identifier
+          type: string
         userId:
+          description: Unique identifier of Object creator
           type: string
-          description: Unique identifier of the user.
-        service:
+        parent:
+          description: Folder that directly contains this object (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/Folder'
+        permalink:
+          description: Permanent URL for accessing the object in the web application
           type: string
-          description: The WOPI service ID.
-        scheme:
+        creator:
+          description: Basic profile information of the user who created the object (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/UserBasicInfo'
+        permissions:
+          description: Current user's permissions (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        vendorDocId:
+          description: Identifier of the corresponding document in the external vendor system (Explicit field. May be retrieved only if mentioned in "with" parameter)
           type: string
-          description: URI scheme used by the mobile application to handle the file.
-        schemeSupport:
+        vendorDocName:
+          description: Display name of the corresponding document in the external vendor system (Explicit field. May be retrieved only if mentioned in "with" parameter)
           type: string
-          description: Indicates the level of support the mobile app has for the URI scheme.
+        source:
+          description: Numeric code identifying the external system that originated this object (e.g. Salesforce, Teams)
+          type: integer
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
     Fingerprint:
       type: object
       properties:
@@ -6285,47 +6513,204 @@ components:
         hash:
           type: string
           description: The resulting hash value representing the fingerprint of the file or object.
-    FolderQuota:
+    Variables:
       type: object
       properties:
-        quota_allowance:
-          type: integer
-          description: Quota allowance allocated to the folder in bytes.
-        storage_available:
-          type: integer
-          description: Storage available for the folder in bytes.
-        storage_quota:
-          type: integer
-          description: Total storage quota assigned to the folder in bytes.
-        storage_used:
-          type: integer
-          description: Storage currently used by the folder in bytes.
-        folder_size:
-          type: integer
-          description: Total size of all files in the folder in bytes.
-        owner_sys_folder_quota_options:
+        variable:
+          type: string
+          description: The variable name
+        value:
+          description: The variable value
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    FolderPermissions:
+      type: object
+      properties:
+        data:
           type: array
-          description: List of available quota option values (in bytes) for system folders.
           items:
-            type: integer
-    FoldersMetaData:
+            $ref: '#/components/schemas/Permission'
+    Package:
       type: object
       properties:
-        total:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of the email package.
+        selfCopy:
+          type: boolean
+          description: Indicates whether the package includes a copy for the sender.
+        includeFingerprint:
+          type: boolean
+          description: Indicates whether a fingerprint (hash) of the package should be included for verification.
+        expire:
           type: integer
-          description: Total number of items available.
-        limit:
+          description: Expiration time of the package in seconds from creation.
+        fileCount:
+          readOnly: true
+          description: Count of the files attached to the package.
+        deleted:
+          type: boolean
+          description: Indicates whether the package has been marked as deleted.
+        acl:
+          type: string
+          description: Access control list (ACL) associated with the package, specifying who can access it.
+        attachments:
+          description: List of attachments included in the package.
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+        downloadLink:
+          type: string
+          description: Link for accessing the email.
+    Activity:
+      type: object
+      properties:
+        id:
           type: integer
-          description: Maximum number of items returned per page.
-        offset:
+          description: Unique identifier of the activity event.
+        created:
+          type: string
+          format: date
+          description: Date and time when the activity event was recorded.
+        event:
+          type: string
+          description: Name of the activity event.
+        message:
+          type: string
+          description: Human-readable summary of the activity event.
+        type:
+          type: string
+          description: Type category of the activity event.
+        successful:
+          type: boolean
+          description: Indicates whether the activity completed successfully.
+        user:
+          description: Details of the user who performed the activity.
+          allOf:
+          - $ref: '#/components/schemas/ActivityUser'
+        permissions:
+          type: array
+          description: List of permissions required for the activity.
+          items:
+            type: string
+        data:
+          readOnly: true
+          description: Additional event-specific data associated with the activity.
+    Attachment:
+      type: object
+      properties:
+        emailPackageId:
+          type: string
+          format: uuid
+          description: Unique identifier for the email package containing the attachment.
+        attachmentId:
+          type: string
+          description: Unique identifier for the attachment.
+        withdrawn:
+          type: boolean
+          description: Indicates whether the attachment has been withdrawn.
+        drmFile:
+          description: Details of the DRM-protected file associated with the attachment.
+          allOf:
+          - $ref: '#/components/schemas/DrmFile'
+        accessType:
           type: integer
-          description: Number of items skipped before the current page.
-        totalDeletedFoldersCount:
+          description: Access type for the attachment (e.g., read-only, editable).
+        tags:
+          description: List of tags associated with the attachment.
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        permissions:
+          type: array
+          description: List of permissions associated with the attachment.
+          items:
+            $ref: '#/components/schemas/Permission'
+        objectId:
+          type: string
+          format: uuid
+          description: Unique identifier for the file associated with the attachment.
+        name:
+          type: string
+          description: Name of the attachment file.
+        size:
           type: integer
-          description: Total number of deleted folders.
-        totalDeletedFilesCount:
+          description: Size of the attachment file in bytes.
+        mime:
+          type: string
+          description: The MIME type of the attachment file.
+        created:
+          type: string
+          format: date
+          description: Date when the attachment file was created.
+        deleted:
+          type: boolean
+          description: Indicates if the attachment has been deleted.
+        fingerprint:
+          type: string
+          description: A unique hash identifying the file version.
+        fingerprintAlgo:
+          type: string
+          description: The algorithm used for generating the file version fingerprint. (e.g., sha3-256, md5).
+        fingerprints:
+          description: List of alternative fingerprints for the attachment file.
+          type: array
+          items:
+            $ref: '#/components/schemas/Fingerprint'
+        adminQuarantineStatus:
+          type: string
+          description: Status of the attachment in the admin quarantine system.
+        avStatus:
+          type: string
+          description: Antivirus (AV) scan status of the attachment.
+        dlpStatus:
+          type: string
+          description: Data Loss Prevention (DLP) status of the attachment.
+    FolderTreeItem:
+      description: Represents a single node in a folder's ancestor chain, from root down to the target folder.
+      properties:
+        id:
+          description: The unique identifier of the folder node.
+          type: string
+        name:
+          description: The display name of the folder node.
+          type: string
+    Group:
+      type: object
+      properties:
+        id:
           type: integer
-          description: Total number of deleted files.
+          description: LDAP Group ID
+        name:
+          type: string
+          description: LDAP Group name
+        dn:
+          type: string
+          description: LDAP Group domain name
+        email:
+          type: string
+          description: LDAP Group email
+        description:
+          type: string
+          description: LDAP Group description
+    EmailReturnRecipient:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: Unique identifier of the user who requested the return receipt.
+        user:
+          description: Details of the user who requested the return receipt.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
     User:
       description: Class User
       required:
@@ -6409,521 +6794,141 @@ components:
           description: The exact timestamp when the user's password will expire
           type: string
           format: date
-    ErrorString:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
-        field:
-          type: string
-          description: Associated field, if applicable.
-        failedIds:
-          type: array
-          description: List of failed IDs.
-          items:
-            type: string
-    ActivityList:
-      type: object
-      properties:
-        data:
-          type: array
-          description: List of activity events.
-          items:
-            $ref: '#/components/schemas/Activity'
-    MultipleFolderIdRequest:
-      type: object
-      properties:
-        folderIds:
-          type: array
-          description: A list of folder IDs to be processed.
-          items:
-            type: string
-        destinationFolderId:
-          type: string
-          description: The destination folder
+    MemberGroup.Put:
+      description: Class MemberGroup
       required:
-      - destinationFolderId
-      - folderIds
-    EmailReturnRecipient:
-      type: object
+      - roleId
       properties:
-        userId:
-          type: string
-          description: Unique identifier of the user who requested the return receipt.
-        user:
-          description: Details of the user who requested the return receipt.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-    Folders:
-      type: object
-      properties:
-        data:
-          description: List of folders.
-          type: array
-          items:
-            $ref: '#/components/schemas/Folder1'
-        metadata:
-          description: Pagination metadata for the result set.
-          allOf:
-          - $ref: '#/components/schemas/FoldersMetaData'
-    Member:
-      type: object
-      properties:
-        objectId:
-          type: string
-          description: Unique identifier (UUID) of the associated object (file or folder).
         roleId:
+          description: Unique identifier of the role to assign to this member
           type: integer
-          description: Role assigned to the member.
-        userId:
-          type: string
-          description: Unique identifier (UUID) of the user.
-        groupId:
-          type: integer
-          description: Unique identifier of the LDAP group.
-        user:
-          description: User details of the member.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-        role:
-          description: Role details assigned to the member.
-          allOf:
-          - $ref: '#/components/schemas/Role'
-        group:
-          description: Group details if the member belongs to a group.
-          allOf:
-          - $ref: '#/components/schemas/Group'
-        sharedBy:
-          description: Details of the user who shared the file or folder.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-        created:
-          type: string
-          format: date
-          description: Date when the file or folder was shared.
-        inheritRoleId:
-          type: integer
-          description: Inherited role ID from the parent folder, if applicable.
-        allowedFolderRoleId:
-          type: array
-          description: List of allowed folder role IDs.
-          items:
-            type: integer
-        email:
-          type: string
-          description: Email associated with the member.
-        rank:
-          type: integer
-          description: Rank of the member role.
-        originFolder:
-          readOnly: true
-    FolderTreeItem:
-      description: Represents a single node in a folder's ancestor chain, from root down to the target folder.
-      properties:
-        id:
-          description: The unique identifier of the folder node.
-          type: string
-        name:
-          description: The display name of the folder node.
-          type: string
-    AdminFolderPutRequest:
+        notifyFileAdded:
+          description: Indicates whether the member should be notified when a file is added
+          type: boolean
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
+    FolderSendMessageRequest:
       type: object
       properties:
-        ids:
+        to:
           type: array
-          description: List of folder object IDs to be updated.
+          description: List of recipient user UUIDs (To field).
           items:
             type: string
-        expire:
-          type: string
-          format: date
-          description: Expiration date for the folder.
-        applyTo:
-          type: string
-          enum:
-          - folders_only
-          - files_only
-          - folders_and_files
-          description: Defines the scope of the expiration update.<br>`folders` – Apply expiration to folders only.<br>`files` – Apply expiration to files only.<br>`folders_and_files` – Apply expiration to both folders and files.
-        quota:
-          type: integer
-          enum:
-          - 1073741824
-          - 2147483648
-          - 5368709120
-          - 10737418240
-          - 53687091200
-          - -1
-          description: 'Storage quota for the folder in bytes. Must be one of the permitted sizes: 1 GB (1,073,741,824), 2 GB (2,147,483,648), 5 GB (5,368,709,120), 10 GB (10,737,418,240), 50 GB (53,687,091,200), or -1 for unlimited.'
-        applyToNestedFiles:
+        cc:
+          type: array
+          description: List of recipient user UUIDs (CC field).
+          items:
+            type: string
+        bcc:
+          type: array
+          description: List of recipient user UUIDs (BCC field).
+          items:
+            type: string
+        secureBody:
           type: boolean
-          description: If set to `true`, expiration will also apply to files in child folders.
+          description: If true, the message body is hidden from the notification email and is only visible to recipients when they open the secure link.
+        body:
+          type: string
+          description: The body content of the email.
+        subject:
+          type: string
+          maxLength: 998
+          description: 'The subject of the email (maximum length: 998 characters).'
       required:
-      - ids
-    FolderCreatePostRequest:
+      - subject
+    Recipient:
       type: object
       properties:
-        name:
+        userId:
           type: string
-          maxLength: 255
-          description: The name of the new folder (maximum 255 characters).
-        secure:
-          type: boolean
-          description: Marks the folder as secure, restricting access to authorised recipients only. Can only be set on top-level folders under the user's root folder.
-        syncable:
-          type: boolean
-          description: Indicates whether the folder can be synced by the Desktop Sync Client. Can only be set on top-level folders.
-        expire:
-          type: string
-          format: date
-          description: The folder expiration date. Applicable to top-level folders only.
-        fileLifetime:
+          description: Unique identifier of the user associated with the recipient.
+        type:
           type: integer
-          nullable: true
-          minimum: 0
-          description: Number of days files are retained in this folder before expiring. Set to 0 for no expiration. Applicable to top-level folders.
-        rename:
-          type: boolean
-          description: If true, automatically renames the folder if a folder with the same name already exists in the destination.
-        description:
+          description: Recipient type.<br>`0` – To.<br>`1` – CC.<br>`2` – BCC.
+        email:
           type: string
-          description: Optional description for the folder.
-        clientId:
-          type: string
-          description: Client application identifier used to associate the folder with a specific plugin or integration.
-        vendorDocId:
-          type: string
-          nullable: true
-          description: External vendor document ID to link this folder to a document in a third-party system.
-        vendorDocName:
-          type: string
-          nullable: true
-          description: Display name of the linked vendor document.
-        isFolderUpload:
+          description: Email address of the recipient.
+        isDistributionList:
           type: boolean
-          description: Indicates whether this folder is being created as part of a folder upload operation. For internal use only.
-        useFolderQuota:
-          type: boolean
-          description: Indicates whether this is a system folder with its own dedicated storage quota.
-        quota:
-          type: integer
-          enum:
-          - 1073741824
-          - 2147483648
-          - 5368709120
-          - 10737418240
-          - 53687091200
-          - -1
-          description: 'Storage quota for the folder in bytes. Must be one of the permitted sizes: 1 GB (1,073,741,824), 2 GB (2,147,483,648), 5 GB (5,368,709,120), 10 GB (10,737,418,240), 50 GB (53,687,091,200), or -1 for unlimited.'
-        inheritanceEnabled:
-          type: boolean
-          description: Indicates whether the folder inherits member permissions from its parent folder.
-      required:
-      - name
-    SafeEdit:
-      type: object
-      properties:
-        safeEditLocked:
-          type: boolean
-          description: Indicates if the file is locked through a SafeEdit session.
+          description: Indicates if the recipient is a distribution list rather than an individual user.
         user:
-          description: The user responsible for locking the file via SafeEdit.
+          description: Details of the user associated with the recipient.
           allOf:
           - $ref: '#/components/schemas/UserBasic'
-    Package:
+    FolderFileAddMembers:
       type: object
       properties:
-        id:
-          type: string
-          format: uuid
-          description: Unique identifier of the email package.
-        selfCopy:
-          type: boolean
-          description: Indicates whether the package includes a copy for the sender.
-        includeFingerprint:
-          type: boolean
-          description: Indicates whether a fingerprint (hash) of the package should be included for verification.
-        expire:
-          type: integer
-          description: Expiration time of the package in seconds from creation.
-        fileCount:
-          readOnly: true
-          description: Count of the files attached to the package.
-        deleted:
-          type: boolean
-          description: Indicates whether the package has been marked as deleted.
-        acl:
-          type: string
-          description: Access control list (ACL) associated with the package, specifying who can access it.
-        attachments:
-          description: List of attachments included in the package.
+        errors:
           type: array
           items:
-            $ref: '#/components/schemas/Attachment'
-        downloadLink:
-          type: string
-          description: Link for accessing the email.
-    Activity:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique identifier of the activity event.
-        created:
-          type: string
-          format: date
-          description: Date and time when the activity event was recorded.
-        event:
-          type: string
-          description: Name of the activity event.
-        message:
-          type: string
-          description: Human-readable summary of the activity event.
-        type:
-          type: string
-          description: Type category of the activity event.
-        successful:
-          type: boolean
-          description: Indicates whether the activity completed successfully.
-        user:
-          description: Details of the user who performed the activity.
-          allOf:
-          - $ref: '#/components/schemas/ActivityUser'
-        permissions:
+            $ref: '#/components/schemas/ErrorStringSchemaAccessVerifications'
+        successIds:
           type: array
-          description: List of permissions required for the activity.
+          description: List of succeeded IDs.
           items:
             type: string
         data:
-          readOnly: true
-          description: Additional event-specific data associated with the activity.
-    Variables:
-      type: object
-      properties:
-        variable:
-          type: string
-          description: The variable name
-        value:
-          description: The variable value
-    Group:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: LDAP Group ID
-        name:
-          type: string
-          description: LDAP Group name
-        dn:
-          type: string
-          description: LDAP Group domain name
-        email:
-          type: string
-          description: LDAP Group email
-        description:
-          type: string
-          description: LDAP Group description
-    BaseObject:
-      description: Class Object
-      required:
-      - id
-      - name
-      - parentId
-      - userId
-      properties:
-        id:
-          description: Unique identifier of object
-          type: string
-        created:
-          description: Date and time when the object was created
-          type: string
-          format: date-time
-        deleted:
-          description: Indicates whether the object is deleted
-          type: boolean
-        permDeleted:
-          description: Indicates whether the object is permanently deleted
-          type: boolean
-        expire:
-          description: Date and time when the object expires and becomes inaccessible
-          type: string
-          format: date-time
-        modified:
-          description: Date and time when the object was last modified
-          type: string
-          format: date-time
-        name:
-          description: Display name of the object
-          type: string
-        parentId:
-          description: Parent Folder identifier
-          type: string
-        userId:
-          description: Unique identifier of Object creator
-          type: string
-        parent:
-          description: Folder that directly contains this object (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/Folder'
-        permalink:
-          description: Permanent URL for accessing the object in the web application
-          type: string
-        creator:
-          description: Basic profile information of the user who created the object (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/UserBasicInfo'
-        permissions:
-          description: Current user's permissions (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
-        vendorDocId:
-          description: Identifier of the corresponding document in the external vendor system (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: string
-        vendorDocName:
-          description: Display name of the corresponding document in the external vendor system (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: string
-        source:
-          description: Numeric code identifying the external system that originated this object (e.g. Salesforce, Teams)
-          type: integer
-        links:
-          description: HATEOAS links associated with the entity
-          type: array
-          items:
-            type: string
-    AccessVerificationApproval:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Access Verification ID
-        parentId:
-          type: integer
-          description: Unique identifier of the parent object.
-        name:
-          type: string
-          description: Name of the object.
-        type:
-          type: string
-          description: Type of the object.<br>`f` – File.<br>`d` – Folder.
-        userId:
-          type: string
-          format: uuid
-          description: Unique identifier (UUID) who created the object.
-        creator:
-          description: Details of the user who created the object.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-        created:
-          type: string
-          format: date
-          description: The date and time when the object was created.
-        modified:
-          type: string
-          format: date
-          description: The date and time when the object was last modified.
-        expire:
-          type: string
-          format: date
-          description: Expiration timestamp of the object, if applicable.
-        permissions:
-          description: List of permissions associated with the object.
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
-        deleted:
-          type: boolean
-          description: Indicates whether the object has been deleted.
-        permDeleted:
-          type: boolean
-          description: Indicates whether the object has been permanently deleted.
-        permalink:
-          type: string
-          description: Permanent URL link to access the object.
-        path:
-          type: string
-          description: Path to the object in the hierarchy.
-        members:
-          description: List of members who have access to the object.
           type: array
           items:
             $ref: '#/components/schemas/Member'
-        vendorDocId:
+    DrmFile:
+      type: object
+      properties:
+        name:
           type: string
-          description: Vendor document ID associated with the object.
-        vendorDocName:
-          type: string
-          description: Name of the vendor document associated with the object.
-        secure:
-          type: boolean
-          description: Indicates whether the folder or the parent folder containing the file is marked as secure.
-        source:
+          description: Name of the DRM-protected file.
+        size:
           type: integer
-          description: ID representing the source of the object (1 - Salesforce, 2 - Teams).
-        requirements:
-          type: array
-          description: List of requirements for access verification
-          items:
-            $ref: '#/components/schemas/Requirement'
-    Comment:
-      description: Class Comment
-      required:
-      - contents
-      - id
-      - objectId
-      - parentId
-      - userId
+          description: Size of the DRM-protected file in bytes.
+    Role:
+      type: object
       properties:
         id:
-          description: Comment unique identifier
           type: integer
-        parentId:
-          description: Unique identifier of the parent comment, if the comment is a reply
+          description: Role ID
+        name:
+          type: string
+          description: Role name
+        rank:
           type: integer
-        objectId:
-          description: Unique identifier (UUID) of the file being commented on
+          description: Role rank
+        type:
           type: string
-        folderId:
-          description: Unique identifier (UUID) of the folder containing the object being commented on
-          type: string
-        userId:
-          description: Unique identifier (UUID) of the user who authored the comment
-          type: string
-        created:
-          description: Date and time when the comment was created
-          type: string
-          format: date
-        modified:
-          description: Date and time when the comment was last modified
-          type: string
-          format: date
-        contents:
-          description: Text content of the comment
-          type: string
-        deleted:
-          description: Indicates whether the comment has been deleted
-          type: boolean
-        isComment:
-          description: Indicates whether the item is a comment
-          type: boolean
-        object:
-          description: File being commented on (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/BaseObject'
-        author:
-          description: Author of the comment (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/UserBasicInfo'
-        parent:
-          description: The comment this reply is responding to, if applicable (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/Comment'
-        permissions:
-          description: Permissions of the current user regarding the comment (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          description: Role type
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
+    FolderQuota:
+      type: object
+      properties:
+        quota_allowance:
+          type: integer
+          description: Quota allowance allocated to the folder in bytes.
+        storage_available:
+          type: integer
+          description: Storage available for the folder in bytes.
+        storage_quota:
+          type: integer
+          description: Total storage quota assigned to the folder in bytes.
+        storage_used:
+          type: integer
+          description: Storage currently used by the folder in bytes.
+        folder_size:
+          type: integer
+          description: Total size of all files in the folder in bytes.
+        owner_sys_folder_quota_options:
           type: array
+          description: List of available quota option values (in bytes) for system folders.
           items:
-            $ref: '#/components/schemas/Permission'
-        links:
-          description: HATEOAS links associated with the entity
-          type: array
-          items:
-            type: string
+            type: integer

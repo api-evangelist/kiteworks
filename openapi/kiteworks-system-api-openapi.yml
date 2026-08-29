@@ -1,7 +1,7 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   version: '28'
-  title: Kiteworks API Documentation activities system API
+  title: Kiteworks API Documentation System API
 tags:
 - name: system
 paths:
@@ -762,13 +762,58 @@ paths:
           description: Request blocked by WAF
 components:
   schemas:
-    Errors:
+    SftpMetric:
       type: object
       properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
+        active_connection_count:
+          type: integer
+          description: Number of active SFTP connections.
+        memory_usage_mb:
+          type: integer
+          description: Total RSS memory usage by SFTP processes in MB.
+    EpgdbImportPost:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Upload session ID
+    NodeHealthStatusResponse:
+      type: object
+      properties:
+        ok:
+          type: integer
+          description: Overall health status indicator. `1` means all components are healthy; `0` means one or more components are unhealthy.
+    NodeHealthMetricResponse:
+      type: object
+      properties:
+        kw_database:
+          description: Database health metrics. Present when `metric_name` is `kwDatabase` or `allMetrics`.
+          allOf:
+          - $ref: '#/components/schemas/KwDatabaseMetric'
+        web_requests:
+          description: Web request health metrics. Present when `metric_name` is `webRequests` or `allMetrics`.
+          allOf:
+          - $ref: '#/components/schemas/WebRequestsMetric'
+        jobqueued:
+          description: Job queue health metrics. Present when `metric_name` is `jobqueued` or `allMetrics`.
+          allOf:
+          - $ref: '#/components/schemas/JobQueuedMetric'
+        sftp:
+          description: SFTP health metrics. Present when `metric_name` is `sftp` or `allMetrics`.
+          allOf:
+          - $ref: '#/components/schemas/SftpMetric'
+        system_resources:
+          description: System resource metrics. Present when `metric_name` is `systemResources` or `allMetrics`.
+          allOf:
+          - $ref: '#/components/schemas/SystemResourcesMetric'
+    EpgdbImportRequest:
+      type: object
+      properties:
+        filename:
+          type: string
+          description: The filename of the EPGDB backup file being uploaded.
+      required:
+      - filename
     WebRequestsMetric:
       type: object
       properties:
@@ -796,105 +841,27 @@ components:
         avg_requests_per_connection:
           type: number
           description: Ratio of total requests to handled connections.
-    NodeHealthMetricResponse:
+    SystemResourcesMetric:
       type: object
       properties:
-        kw_database:
-          nullable: true
-          description: Database health metrics. Present when `metric_name` is `kwDatabase` or `allMetrics`.
-          allOf:
-          - $ref: '#/components/schemas/KwDatabaseMetric'
-        web_requests:
-          nullable: true
-          description: Web request health metrics. Present when `metric_name` is `webRequests` or `allMetrics`.
-          allOf:
-          - $ref: '#/components/schemas/WebRequestsMetric'
-        jobqueued:
-          nullable: true
-          description: Job queue health metrics. Present when `metric_name` is `jobqueued` or `allMetrics`.
-          allOf:
-          - $ref: '#/components/schemas/JobQueuedMetric'
-        sftp:
-          nullable: true
-          description: SFTP health metrics. Present when `metric_name` is `sftp` or `allMetrics`.
-          allOf:
-          - $ref: '#/components/schemas/SftpMetric'
-        system_resources:
-          nullable: true
-          description: System resource metrics. Present when `metric_name` is `systemResources` or `allMetrics`.
-          allOf:
-          - $ref: '#/components/schemas/SystemResourcesMetric'
-    EpgdbImportPost:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Upload session ID
-    NodeHealthStatusResponse:
-      type: object
-      properties:
-        ok:
+        total_memory_usage_mb:
           type: integer
-          description: Overall health status indicator. `1` means all components are healthy; `0` means one or more components are unhealthy.
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
-    JobQueuedMetric:
-      type: object
-      properties:
-        service_status:
-          type: string
-          enum:
-          - unknown
-          - abnormal
-          - warn
-          - running
-          - stopped
-          description: The job queue service status.<br>`active` – Service is running.<br>`inactive` – Service is not running.
-        memory_usage_mb:
+          description: Total system RSS memory usage in MB.
+        total_swap_usage_mb:
           type: integer
-          description: RSS memory usage of the job queue service in MB.
-        queue_jq_acfs_conv:
-          type: integer
-          description: Number of jobs in the file preview queue.
-        queue_jq_scan:
-          type: integer
-          description: Number of jobs in the antivirus scan queue.
-        queue_jq_acfs:
-          type: integer
-          description: Number of fingerprint jobs queued to be executed on the ACFS node.
-        current_queued_job_count:
-          type: integer
-          description: Real-time number of jobs currently waiting in the queue.
-        current_working_job_count:
-          type: integer
-          description: Real-time number of jobs currently being processed.
-        current_failed_job_count:
-          type: integer
-          description: Real-time number of jobs that have failed.
-    SftpMetric:
-      type: object
-      properties:
-        active_connection_count:
-          type: integer
-          description: Number of active SFTP connections.
-        memory_usage_mb:
-          type: integer
-          description: Total RSS memory usage by SFTP processes in MB.
-    EpgdbImportRequest:
-      type: object
-      properties:
-        filename:
-          type: string
-          description: The filename of the EPGDB backup file being uploaded.
-      required:
-      - filename
+          description: Total system swap usage in MB.
+        total_cpu_usage_percent:
+          type: number
+          description: Total system CPU usage as a percentage.
+        system_load_average_1min:
+          type: number
+          description: System load average over the last 1 minute.
+        system_load_average_5min:
+          type: number
+          description: System load average over the last 5 minutes.
+        system_load_average_15min:
+          type: number
+          description: System load average over the last 15 minutes.
     KwDatabaseMetric:
       type: object
       properties:
@@ -931,24 +898,52 @@ components:
         db_partition_used_mb:
           type: integer
           description: Used space on the database partition in MB.
-    SystemResourcesMetric:
+    Error:
       type: object
       properties:
-        total_memory_usage_mb:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    JobQueuedMetric:
+      type: object
+      properties:
+        service_status:
+          type: string
+          enum:
+          - unknown
+          - abnormal
+          - warn
+          - running
+          - stopped
+          description: The job queue service status.<br>`active` – Service is running.<br>`inactive` – Service is not running.
+        memory_usage_mb:
           type: integer
-          description: Total system RSS memory usage in MB.
-        total_swap_usage_mb:
+          description: RSS memory usage of the job queue service in MB.
+        queue_jq_acfs_conv:
           type: integer
-          description: Total system swap usage in MB.
-        total_cpu_usage_percent:
-          type: number
-          description: Total system CPU usage as a percentage.
-        system_load_average_1min:
-          type: number
-          description: System load average over the last 1 minute.
-        system_load_average_5min:
-          type: number
-          description: System load average over the last 5 minutes.
-        system_load_average_15min:
-          type: number
-          description: System load average over the last 15 minutes.
+          description: Number of jobs in the file preview queue.
+        queue_jq_scan:
+          type: integer
+          description: Number of jobs in the antivirus scan queue.
+        queue_jq_acfs:
+          type: integer
+          description: Number of fingerprint jobs queued to be executed on the ACFS node.
+        current_queued_job_count:
+          type: integer
+          description: Real-time number of jobs currently waiting in the queue.
+        current_working_job_count:
+          type: integer
+          description: Real-time number of jobs currently being processed.
+        current_failed_job_count:
+          type: integer
+          description: Real-time number of jobs that have failed.

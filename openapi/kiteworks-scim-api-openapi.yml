@@ -1,7 +1,7 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   version: '28'
-  title: Kiteworks API Documentation activities scim API
+  title: Kiteworks API Documentation SCIM API
 tags:
 - name: scim
 paths:
@@ -697,17 +697,19 @@ paths:
         required: false
         description: If true, permanently deletes data that is not shared with other users.
         schema:
-          type: boolean
+          type:
+          - boolean
+          - 'null'
           default: null
-          nullable: true
       - in: query
         name: retainData
         required: false
         description: If true, retains the user data after deletion.
         schema:
-          type: boolean
+          type:
+          - boolean
+          - 'null'
           default: null
-          nullable: true
       - in: query
         name: retainPermissionToSharedData
         required: false
@@ -899,17 +901,19 @@ paths:
         required: false
         description: If true, permanently deletes data that is not shared with other users.
         schema:
-          type: boolean
+          type:
+          - boolean
+          - 'null'
           default: null
-          nullable: true
       - in: query
         name: retainData
         required: false
         description: If true, retains the user data after deletion.
         schema:
-          type: boolean
+          type:
+          - boolean
+          - 'null'
           default: null
-          nullable: true
       - in: query
         name: retainPermissionToSharedData
         required: false
@@ -1032,6 +1036,52 @@ paths:
           description: Request blocked by WAF
 components:
   schemas:
+    ScimUsersPostRequest:
+      type: object
+      properties:
+        schemas:
+          type: array
+          minItems: 1
+          description: List of SCIM schema URNs applicable to this resource. Must include `urn:ietf:params:scim:schemas:core:2.0:User`.
+          items:
+            type: string
+        password:
+          type: string
+          description: The user's password.
+        displayName:
+          type: string
+          pattern: ^[^<>]+$
+          description: The user's display name. Must not contain `<` or `>` characters.
+        userType:
+          type: string
+          pattern: ^[A-Za-z0-9_-]+$
+          description: The user's type identifier (alphanumeric characters, underscores, and hyphens only).
+        phoneNumbers:
+          type: array
+          description: List of phone numbers associated with the user.
+          items:
+            $ref: '#/components/schemas/ScimMultiValueMobile'
+        roles:
+          type: array
+          maxItems: 1
+          description: List of roles assigned to the user. At most one role may be specified.
+          items:
+            $ref: '#/components/schemas/ScimMultiValue'
+        userName:
+          type: string
+          format: email
+          description: The user's email address, used as the unique username.
+        notify:
+          type: boolean
+          default: false
+          description: If true, sends a notification email to the user upon account creation.
+        userMustChange:
+          type: boolean
+          default: false
+          description: If true, requires the user to change their password on first login.
+      required:
+      - schemas
+      - userName
     ScimMeta:
       type: object
       properties:
@@ -1049,6 +1099,43 @@ components:
         location:
           type: string
           description: URI of the SCIM resource.
+    ScimMultiValueMobile:
+      type: object
+      properties:
+        primary:
+          type: boolean
+          description: If true, designates this entry as the primary value.
+        value:
+          type: string
+          description: The phone number value.
+        type:
+          type: string
+          description: The type of phone number (e.g., `mobile`, `work`, `home`).
+      required:
+      - type
+      - value
+    ScimUsers:
+      type: object
+      properties:
+        schemas:
+          type: array
+          description: List of SCIM schema URIs applicable to this response.
+          items:
+            type: string
+        totalResults:
+          type: integer
+          description: Total number of matching SCIM users.
+        itemsPerPage:
+          type: integer
+          description: Number of users returned per page.
+        startIndex:
+          type: integer
+          description: 1-based index of the first result in the current page.
+        Resources:
+          description: List of SCIM user resources.
+          type: array
+          items:
+            $ref: '#/components/schemas/ScimUser'
     ScimMultiValue1:
       type: object
       properties:
@@ -1069,14 +1156,16 @@ components:
           default: false
           description: If true, triggers a remote wipe of the user data from all registered devices.
         deleteUnsharedData:
-          type: boolean
+          type:
+          - boolean
+          - 'null'
           default: null
-          nullable: true
           description: If true, permanently deletes data that is not shared with other users.
         retainData:
-          type: boolean
+          type:
+          - boolean
+          - 'null'
           default: null
-          nullable: true
           description: If true, retains the user data after deletion.
         retainPermissionToSharedData:
           type: boolean
@@ -1086,21 +1175,6 @@ components:
           type: string
           default: false
           description: UUID of the user who will receive ownership of the deleted user data.
-    ScimMultiValueMobile:
-      type: object
-      properties:
-        primary:
-          type: boolean
-          description: If true, designates this entry as the primary value.
-        value:
-          type: string
-          description: The phone number value.
-        type:
-          type: string
-          description: The type of phone number (e.g., `mobile`, `work`, `home`).
-      required:
-      - type
-      - value
     ScimUser:
       type: object
       properties:
@@ -1151,81 +1225,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ScimMultiValue1'
-    ScimUsersPostRequest:
-      type: object
-      properties:
-        schemas:
-          type: array
-          minItems: 1
-          description: List of SCIM schema URNs applicable to this resource. Must include `urn:ietf:params:scim:schemas:core:2.0:User`.
-          items:
-            type: string
-        password:
-          type: string
-          description: The user's password.
-        displayName:
-          type: string
-          pattern: ^[^<>]+$
-          description: The user's display name. Must not contain `<` or `>` characters.
-        userType:
-          type: string
-          pattern: ^[A-Za-z0-9_-]+$
-          description: The user's type identifier (alphanumeric characters, underscores, and hyphens only).
-        phoneNumbers:
-          type: array
-          description: List of phone numbers associated with the user.
-          items:
-            $ref: '#/components/schemas/ScimMultiValueMobile'
-        roles:
-          type: array
-          maxItems: 1
-          description: List of roles assigned to the user. At most one role may be specified.
-          items:
-            $ref: '#/components/schemas/ScimMultiValue'
-        userName:
-          type: string
-          format: email
-          description: The user's email address, used as the unique username.
-        notify:
-          type: boolean
-          default: false
-          description: If true, sends a notification email to the user upon account creation.
-        userMustChange:
-          type: boolean
-          default: false
-          description: If true, requires the user to change their password on first login.
-      required:
-      - schemas
-      - userName
-    ScimUsers:
-      type: object
-      properties:
-        schemas:
-          type: array
-          description: List of SCIM schema URIs applicable to this response.
-          items:
-            type: string
-        totalResults:
-          type: integer
-          description: Total number of matching SCIM users.
-        itemsPerPage:
-          type: integer
-          description: Number of users returned per page.
-        startIndex:
-          type: integer
-          description: 1-based index of the first result in the current page.
-        Resources:
-          description: List of SCIM user resources.
-          type: array
-          items:
-            $ref: '#/components/schemas/ScimUser'
-    ScimMultiValue:
-      type: object
-      properties:
-        value:
-          type: string
-          pattern: ^[A-Za-z0-9 _-]+$
-          description: The value of the multi-valued attribute.
     ScimUsersPutRequest:
       type: object
       properties:
@@ -1266,3 +1265,10 @@ components:
           - $ref: '#/components/schemas/DataRetentionOption'
       required:
       - schemas
+    ScimMultiValue:
+      type: object
+      properties:
+        value:
+          type: string
+          pattern: ^[A-Za-z0-9 _-]+$
+          description: The value of the multi-valued attribute.

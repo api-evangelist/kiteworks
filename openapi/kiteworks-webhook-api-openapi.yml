@@ -1,7 +1,17 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  version: '28'
-  title: Kiteworks API Documentation activities webhook API
+  title: PubSub Consumer Webhook API
+  description: This is the API documentation for the PubSub consumer service.
+  version: 1.0.0
+  contact:
+    name: Blue Light Team
+    email: team.blue.light.germany@kiteworks.com
+  license:
+    name: Kiteworks
+    url: https://www.kiteworks.com/legal/
+servers:
+- url: http://localhost:8080/pubsub-ext
+  description: Local development server
 tags:
 - name: webhook
 paths:
@@ -394,43 +404,39 @@ paths:
                 message: '[Internal Server Error] could not delete webhook'
 components:
   schemas:
-    WebhookPatchRequest:
+    WebhookList:
       type: object
-      description: Partial webhook payload — all fields are optional; only provided fields are updated
+      required:
+      - items
+      - totalItems
       properties:
-        url:
-          type: string
-          description: URL contains the webhook URL
-          example: https://example.com/webhook
-        token:
-          type: string
-          description: Token contains the webhook Token (if provided must not be empty or whitespace-only)
-          example: my-token
-        secret:
-          type: string
-          description: Secret contains the webhook Secret
-          example: my-secret
-        enabled:
-          type: boolean
-          description: Enabled is the value of the webhook enable/disable
-          example: true
-        subscriptions:
+        items:
           type: array
           items:
-            type: string
-          description: Subscriptions is a list of NATS subject filter patterns associated with the webhook.
-          example:
-          - filesystem.file.create
-          - filesystem.>
-    Error:
-      type: object
-      properties:
-        code:
+            $ref: '#/components/schemas/WebhookResponse'
+          description: Items is the list of webhook items in the current set
+        totalItems:
           type: integer
-          description: Code is the HTTP status code returned by the API.
-        message:
+          description: TotalItems is the total number of items across all sets
+          example: 150
+    Status:
+      type: object
+      required:
+      - status
+      - description
+      properties:
+        status:
           type: string
-          description: Message is a human-readable message in the format "[StatusText] detail" explaining the result.
+          description: Status value
+          enum:
+          - UNKNOWN
+          - SUCCESS
+          - ERROR
+          example: UNKNOWN
+        description:
+          type: string
+          description: Status description
+          example: unknown
     WebhookResponse:
       type: object
       required:
@@ -476,21 +482,34 @@ components:
         status:
           $ref: '#/components/schemas/Status'
           description: Status is a status data associated with the webhook.
-    WebhookList:
+    WebhookPatchRequest:
       type: object
-      required:
-      - items
-      - totalItems
+      description: Partial webhook payload — all fields are optional; only provided fields are updated
       properties:
-        items:
+        url:
+          type: string
+          description: URL contains the webhook URL
+          example: https://example.com/webhook
+        token:
+          type: string
+          description: Token contains the webhook Token (if provided must not be empty or whitespace-only)
+          example: my-token
+        secret:
+          type: string
+          description: Secret contains the webhook Secret
+          example: my-secret
+        enabled:
+          type: boolean
+          description: Enabled is the value of the webhook enable/disable
+          example: true
+        subscriptions:
           type: array
           items:
-            $ref: '#/components/schemas/WebhookResponse'
-          description: Items is the list of webhook items in the current set
-        totalItems:
-          type: integer
-          description: TotalItems is the total number of items across all sets
-          example: 150
+            type: string
+          description: Subscriptions is a list of NATS subject filter patterns associated with the webhook.
+          example:
+          - filesystem.file.create
+          - filesystem.>
     WebhookRequest:
       type: object
       required:
@@ -522,21 +541,12 @@ components:
           example:
           - filesystem.file.create
           - filesystem.>
-    Status:
+    Error:
       type: object
-      required:
-      - status
-      - description
       properties:
-        status:
+        code:
+          type: integer
+          description: Code is the HTTP status code returned by the API.
+        message:
           type: string
-          description: Status value
-          enum:
-          - UNKNOWN
-          - SUCCESS
-          - ERROR
-          example: UNKNOWN
-        description:
-          type: string
-          description: Status description
-          example: unknown
+          description: Message is a human-readable message in the format "[StatusText] detail" explaining the result.

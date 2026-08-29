@@ -1,7 +1,7 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   version: '28'
-  title: Kiteworks API Documentation activities mail API
+  title: Kiteworks API Documentation Mail API
 tags:
 - name: mail
 paths:
@@ -2945,482 +2945,6 @@ paths:
           description: Request blocked by WAF
 components:
   schemas:
-    MailWithdrawRequest:
-      type: object
-      properties:
-        ids:
-          type: array
-          description: List of email UUIDs to withdraw. Withdrawing an email revokes recipient access to its attachments.
-          items:
-            type: string
-      required:
-      - ids
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    PushedObject:
-      type: object
-      properties:
-        objectId:
-          type: string
-          description: Unique identifier (UUID) for the pushed object.
-        userId:
-          type: string
-          description: Unique identifier (UUID) for the user who pushed the object.
-        created:
-          type: string
-          format: date
-          description: The date and time when the object was pushed.
-        user:
-          description: Details of the user who pushed the object.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-    Tag:
-      type: object
-      properties:
-        guid:
-          type: string
-          format: uuid
-          description: Unique identifier (UUID) for the tag.
-        name:
-          type: string
-          description: Display name of the tag.
-        type:
-          type: string
-          description: Type category of the tag.
-    TrackingAccessRecipient:
-      type: object
-      properties:
-        userId:
-          type: string
-          description: Unique identifier of the user associated with the recipient.
-        type:
-          type: integer
-          description: Recipient type.<br>`0` – To.<br>`1` – CC.<br>`2` – BCC.
-        email:
-          type: string
-          description: Email address of the recipient.
-        isDistributionList:
-          type: boolean
-          description: Indicates if the recipient is a distribution list rather than an individual user.
-        user:
-          description: Details of the user associated with the recipient.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-        revoked:
-          type: boolean
-          description: Indicates whether the recipient's tracking access has been revoked.
-    Preview:
-      description: Class Preview
-      properties:
-        link:
-          description: Preview link for the file
-          type: string
-        pdf:
-          description: PDF file for the preview
-          type: string
-        viewUrl:
-          description: URL for viewing the preview
-          type: string
-        status:
-          description: 'Preview processing status. Accepted values: `processing`, `preview`, `failed`'
-          type: string
-        type:
-          description: Format of the generated preview, such as image or PDF
-          type: string
-        metadata:
-          description: Additional metadata about the preview, such as dimensions or page count
-          type: string
-        mime:
-          description: MIME type of the preview file
-          type: string
-        native:
-          description: Indicates whether the preview is a native render
-          type: boolean
-        watermark:
-          description: Watermark applied to the preview
-          type: string
-        tdfOriginalExtension:
-          description: Original file extension for TDF files
-          type: string
-    MetaData:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of items available.
-        limit:
-          type: integer
-          description: Maximum number of items returned per page.
-        offset:
-          type: integer
-          description: Number of items skipped before the current page.
-    UserBasic:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier (UUID) for the user.
-        email:
-          type: string
-          description: Email address associated with the user.
-        name:
-          type: string
-          description: Full name of the user.
-        profileIcon:
-          type: string
-          description: URL or identifier for the user's profile icon.
-    AttachmentDownloadEvent:
-      description: Represents a single download or interaction event recorded for an email attachment.
-      properties:
-        created_time:
-          description: Unix timestamp of when the event occurred.
-          type: integer
-        event_name:
-          description: The name of the event action (e.g. download_email, view_file, copy_file, file_withdrawn).
-          type: string
-        username:
-          description: Email address of the user who performed the action.
-          type: string
-        successful:
-          description: Indicates whether the action was completed successfully.
-          type: boolean
-        withdrawn:
-          description: Indicates whether the attachment was withdrawn at the time of the event.
-          type: boolean
-        file_id:
-          description: The unique identifier of the attachment file. Present only when the event is associated with a specific file.
-          type: string
-        file_name:
-          description: The name of the attachment file. Present only when the event is associated with a specific file.
-          type: string
-        event_type:
-          description: A secondary classification of the event type. Present only when applicable.
-          type: string
-    Attachment:
-      type: object
-      properties:
-        emailPackageId:
-          type: string
-          format: uuid
-          description: Unique identifier for the email package containing the attachment.
-        attachmentId:
-          type: string
-          description: Unique identifier for the attachment.
-        withdrawn:
-          type: boolean
-          description: Indicates whether the attachment has been withdrawn.
-        drmFile:
-          description: Details of the DRM-protected file associated with the attachment.
-          allOf:
-          - $ref: '#/components/schemas/DrmFile'
-        accessType:
-          type: integer
-          description: Access type for the attachment (e.g., read-only, editable).
-        tags:
-          description: List of tags associated with the attachment.
-          type: array
-          items:
-            $ref: '#/components/schemas/Tag'
-        permissions:
-          type: array
-          description: List of permissions associated with the attachment.
-          items:
-            $ref: '#/components/schemas/Permission'
-        objectId:
-          type: string
-          format: uuid
-          description: Unique identifier for the file associated with the attachment.
-        name:
-          type: string
-          description: Name of the attachment file.
-        size:
-          type: integer
-          description: Size of the attachment file in bytes.
-        mime:
-          type: string
-          description: The MIME type of the attachment file.
-        created:
-          type: string
-          format: date
-          description: Date when the attachment file was created.
-        deleted:
-          type: boolean
-          description: Indicates if the attachment has been deleted.
-        fingerprint:
-          type: string
-          description: A unique hash identifying the file version.
-        fingerprintAlgo:
-          type: string
-          description: The algorithm used for generating the file version fingerprint. (e.g., sha3-256, md5).
-        fingerprints:
-          description: List of alternative fingerprints for the attachment file.
-          type: array
-          items:
-            $ref: '#/components/schemas/Fingerprint'
-        adminQuarantineStatus:
-          type: string
-          description: Status of the attachment in the admin quarantine system.
-        avStatus:
-          type: string
-          description: Antivirus (AV) scan status of the attachment.
-        dlpStatus:
-          type: string
-          description: Data Loss Prevention (DLP) status of the attachment.
-    Recipient:
-      type: object
-      properties:
-        userId:
-          type: string
-          description: Unique identifier of the user associated with the recipient.
-        type:
-          type: integer
-          description: Recipient type.<br>`0` – To.<br>`1` – CC.<br>`2` – BCC.
-        email:
-          type: string
-          description: Email address of the recipient.
-        isDistributionList:
-          type: boolean
-          description: Indicates if the recipient is a distribution list rather than an individual user.
-        user:
-          description: Details of the user associated with the recipient.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-    Mail:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier of the email.
-        senderId:
-          type: string
-          description: Unique identifier of the sender.
-        templateId:
-          type: integer
-          description: Unique identifier of the email template used.
-        status:
-          type: string
-          description: Current status of the email (e.g., sent, draft, error, etc.).
-        type:
-          type: string
-          description: Type of the email (e.g., original, reply, forward, etc.).
-        date:
-          type: string
-          format: date
-          description: Date the email was last modified or sent.
-        deleted:
-          type: boolean
-          description: Indicates if the email has been deleted.
-        withdrawnDate:
-          type: string
-          format: date
-          description: Date when the email was withdrawn, if applicable.
-        emailPackageId:
-          type: string
-          description: Unique identifier of the associated email package.
-        isPreview:
-          type: boolean
-          description: Indicates whether the email is a view-only version, typically used for previewing attachments without enabling downloading.
-        isUserSent:
-          type: boolean
-          description: Indicates whether the email was sent by the current user or another user.
-        watermark:
-          type: string
-          description: Text watermark applied to the email attachments (applicable only for view-only version).
-        variables:
-          description: List of dynamic variables used in the email.
-          type: array
-          items:
-            $ref: '#/components/schemas/Variables'
-        recipients:
-          description: List of recipients for the email.
-          type: array
-          items:
-            $ref: '#/components/schemas/Recipient'
-        secureBody:
-          type: boolean
-          description: Indicates if the email body is secured.
-        modifiedDate:
-          type: string
-          format: date
-          description: Date the email was last modified.
-        parentEmailId:
-          type: string
-          description: Unique identifier of the parent email, if applicable.
-        emailReturnReceipt:
-          description: List of recipients who requested return receipts.
-          type: array
-          items:
-            $ref: '#/components/schemas/EmailReturnRecipient'
-        error:
-          type: string
-          description: Error message associated with the email, if any.
-        subject:
-          type: string
-          description: Subject line of the email.
-        attachmentCount:
-          type: integer
-          description: Number of attachments in the email.
-        expirationDate:
-          type: string
-          format: date
-          description: Expiration date of the email package, if applicable.
-        avStatus:
-          type: string
-          description: Antivirus (AV) scan status of the email.
-        dlpStatus:
-          type: string
-          description: Data Loss Prevention (DLP) scan status of the email.
-        hasTrackingAccess:
-          type: boolean
-          description: Indicates if tracking access is enabled for the email.
-        trackingAccess:
-          description: List of recipients with tracking access.
-          type: array
-          items:
-            $ref: '#/components/schemas/TrackingAccessRecipient'
-        policyDirective:
-          type: integer
-          description: Indicates the restriction type applied to the email
-        isRead:
-          type: boolean
-          description: Indicates if the email has been read.
-        bucket:
-          type: string
-          description: The bucket where the email is stored. (e.g. inbox, sent, trash)
-        body:
-          type: string
-          description: The body of the email.
-        package:
-          description: Details of the associated email package.
-          allOf:
-          - $ref: '#/components/schemas/Package'
-        rawBody:
-          type: string
-          description: Raw email body content without HTML markup.
-        headline:
-          type: string
-          description: Headline or main title of the email.
-        notice:
-          type: string
-          description: Notice part of the email.
-        fullHtmlBody:
-          type: string
-          description: Full HTML body of the email.
-        emailFrom:
-          type: string
-          description: The email address from which the email was sent.
-        templateBody:
-          type: string
-          description: Body content generated from the email template.
-        webFormId:
-          type: string
-          description: Unique identifier of the web form associated with the email.
-        webFormFields:
-          description: Fields included in the associated web form with the mail.
-        sender:
-          description: Details of the sender.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-        sharedMailboxId:
-          type: string
-          description: Unique identifier of the shared mailbox, if applicable.
-        htmlBody:
-          type: string
-          description: HTML version of the email body.
-        actor:
-          description: The user responsible for sending the email, applicable when the email is sent on behalf of a shared mailbox.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-        darkModeStyle:
-          type: string
-          description: CSS styles applied for dark mode.
-        exists:
-          type: boolean
-          description: Indicates whether the email already exists in the system.
-    DistributionList:
-      description: Class DistributionList
-      required:
-      - isDistributionList
-      properties:
-        isDistributionList:
-          description: Indicates whether the email belongs to a distribution list
-          type: boolean
-        members:
-          description: List of members in the distribution list
-          type: array
-          items:
-            type: string
-    DestinationFolderIdRequest:
-      type: object
-      properties:
-        destinationFolderId:
-          type: string
-          description: The ID of the destination folder where the item will be copied/moved.
-        addVersion:
-          type: boolean
-          description: If a file with the same name exists, create a new version instead of overwriting it. Default is True.
-      required:
-      - destinationFolderId
-    SendMailSettingPutRequest:
-      type: object
-      properties:
-        trackingAccess:
-          type: array
-          description: List of email addresses to grant access to the email's download tracking dashboard.
-          items:
-            type: string
-            format: email
-    UserAttachment:
-      type: object
-      properties:
-        emailId:
-          type: string
-        subject:
-          type: string
-          description: Subject line of the email containing this attachment.
-        size:
-          type: string
-          description: Size of the attachment in bytes.
-        name:
-          type: string
-          description: File name of the attachment.
-        sentDate:
-          type: string
-          format: date
-          description: Date and time when the email was sent.
-        modifiedDate:
-          type: string
-          format: date
-          description: Date and time when the attachment was last modified.
-        attachmentId:
-          type: string
-          description: Unique identifier (UUID) of the attachment.
-        mime:
-          type: string
-          description: MIME type of the attachment.
-        webFormId:
-          type: string
-          description: Identifier of the web form associated with the attachment, if any.
-        type:
-          type: string
-          description: Type of the attachment.
-    Permission:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique identifier for the permission.
-        name:
-          type: string
-          description: Name of the permission.
-        allowed:
-          type: boolean
-          description: Indicates whether the permission is granted (True) or denied (False).
     Folder:
       type: object
       properties:
@@ -3567,78 +3091,393 @@ components:
         inheritanceEnabled:
           type: boolean
           description: Indicates if a folder inherits permissions from the parent folder
-    ErrorInteger:
+    Member:
       type: object
       properties:
-        code:
+        objectId:
           type: string
-          description: Error code
-        message:
+          description: Unique identifier (UUID) of the associated object (file or folder).
+        roleId:
+          type: integer
+          description: Role assigned to the member.
+        userId:
           type: string
-          description: Error message
-        field:
+          description: Unique identifier (UUID) of the user.
+        groupId:
+          type: integer
+          description: Unique identifier of the LDAP group.
+        user:
+          description: User details of the member.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        role:
+          description: Role details assigned to the member.
+          allOf:
+          - $ref: '#/components/schemas/Role'
+        group:
+          description: Group details if the member belongs to a group.
+          allOf:
+          - $ref: '#/components/schemas/Group'
+        sharedBy:
+          description: Details of the user who shared the file or folder.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        created:
           type: string
-          description: Associated field, if applicable.
-        failedIds:
+          format: date
+          description: Date when the file or folder was shared.
+        inheritRoleId:
+          type: integer
+          description: Inherited role ID from the parent folder, if applicable.
+        allowedFolderRoleId:
           type: array
-          description: List of failed IDs.
+          description: List of allowed folder role IDs.
           items:
             type: integer
-    MailCounters:
-      type: object
-      properties:
-        draft:
-          type: integer
-          description: Number of draft emails.
-        inbox:
-          type: integer
-          description: Number of emails in the inbox.
-        inboxUnread:
-          type: integer
-          description: Number of unread emails in the inbox.
-        outgoing:
-          type: integer
-          description: Number of outgoing emails.
-        outgoingError:
-          type: integer
-          description: Number of outgoing emails that encountered an error.
-        outgoingQueued:
-          type: integer
-          description: Number of outgoing emails queued for sending.
-        outgoingTransferring:
-          type: integer
-          description: Number of outgoing emails currently being transferred.
-        outgoingTransferringIds:
-          type: array
-          items:
-            type: string
-        trash:
-          type: integer
-          description: Number of emails in the trash.
-    Error:
-      type: object
-      properties:
-        code:
+        email:
           type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
-    Role:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Role ID
-        name:
-          type: string
-          description: Role name
+          description: Email associated with the member.
         rank:
           type: integer
-          description: Role rank
+          description: Rank of the member role.
+        originFolder:
+          readOnly: true
+    BaseSendMailPostRequest:
+      type: object
+      properties:
+        to:
+          type: array
+          description: List of recipients' email addresses (To field).
+          items:
+            type: string
+            format: email
+        cc:
+          type: array
+          description: List of recipients' email addresses (CC field).
+          items:
+            type: string
+            format: email
+        bcc:
+          type: array
+          description: List of recipients' email addresses (BCC field).
+          items:
+            type: string
+            format: email
+        files:
+          type: array
+          description: List of file UUIDs to attach to the email.
+          items:
+            type: string
+        acl:
+          type: string
+          enum:
+          - verify_recipient
+          - no_auth
+          - otp
+          - internal
+          - anyone_auth
+          - email_otp
+          description: Defines the access control level for the email.<br>`verify_recipient` – Accessible only to specified recipients.<br>`no_auth` – Public access, no authentication required.<br>`otp` – Accessible to recipients; allows one-time passcode (OTP) via SMS for authentication.<br>`internal` – Accessible to recipients and users within the organization.<br>`anyone_auth` – Accessible to recipients and any authenticated user.<br>`email_otp` – Accessible to recipients; allows one-time passcode (OTP) via email for authentication.
+        expire:
+          type: string
+          format: date
+          description: The expiration date of the email.
+        draft:
+          type: boolean
+          description: Indicates if the email is being saved as a draft.
+        preview:
+          type: boolean
+          description: Indicates if the email is a view-only version.
+        watermark:
+          type: string
+          description: Text watermark applied to the email attachments (only applicable when `preview` is enabled).
+        secureBody:
+          type: boolean
+          description: If true, the email body is hidden from the notification email and is only visible to authenticated recipients when they open the secure link.
+        selfCopy:
+          type: boolean
+          description: Indicates if the sender should receive a copy of the email.
+        includeFingerprint:
+          type: boolean
+          description: If true, a cryptographic hash (fingerprint) of each attached file is included in the notification email, allowing recipients to verify file integrity.
+        parentEmailId:
+          type: string
+          description: The parent email ID used for email threading. Applicable only for `forward` or `reply` types.
+        isSelfReturnReceipt:
+          type: boolean
+          description: (Deprecated) Send download notification to the sender. Use 'returnReceipts' instead.
+        returnReceipts:
+          type: array
+          description: List of recipients who should receive a download notification.
+          items:
+            type: string
+            format: email
         type:
           type: string
-          description: Role type
+          enum:
+          - original
+          - forward
+          - reply
+          - resend
+          description: The type of email. Defaults to `original`.<br>`original` – A new email.<br>`forward` – Forwarding an existing email to new recipients.<br>`reply` – A reply to an existing email.<br>`resend` – Resending a previously sent email.
+        uploading:
+          type: boolean
+          description: Indicates whether file upload is still in progress. Prevents sending if set to `true`.
+        body:
+          type: string
+          description: The body content of the email.
+        subject:
+          type: string
+          maxLength: 998
+          description: 'The subject of the email (maximum length: 998 characters).'
+        webFormId:
+          type: string
+          description: The web form ID associated with the email.
+        webFormFields:
+          type: object
+          description: Custom web form fields associated with the email.
+        notifyExpired:
+          type: boolean
+          description: Indicates whether to send a notification email to the sender when the email expires.
+        sharedMailboxId:
+          type: string
+          description: UUID of the shared mailbox to send from. When set, the email is sent on behalf of the shared mailbox rather than the individual user.
+        trackingAccess:
+          type: array
+          description: List of email addresses to grant access to the email's download tracking dashboard.
+          items:
+            type: string
+            format: email
+    AttachmentDownloadEvent:
+      description: Represents a single download or interaction event recorded for an email attachment.
+      properties:
+        created_time:
+          description: Unix timestamp of when the event occurred.
+          type: integer
+        event_name:
+          description: The name of the event action (e.g. download_email, view_file, copy_file, file_withdrawn).
+          type: string
+        username:
+          description: Email address of the user who performed the action.
+          type: string
+        successful:
+          description: Indicates whether the action was completed successfully.
+          type: boolean
+        withdrawn:
+          description: Indicates whether the attachment was withdrawn at the time of the event.
+          type: boolean
+        file_id:
+          description: The unique identifier of the attachment file. Present only when the event is associated with a specific file.
+          type: string
+        file_name:
+          description: The name of the attachment file. Present only when the event is associated with a specific file.
+          type: string
+        event_type:
+          description: A secondary classification of the event type. Present only when applicable.
+          type: string
+    AttachmentDownloadReport:
+      description: Represents the download tracking report for the attachments of a specific email.
+      properties:
+        downloads:
+          description: List of download and interaction events recorded for the email's attachments.
+          type: array
+          items:
+            $ref: '#/components/schemas/AttachmentDownloadEvent'
+        sent_time:
+          description: Unix timestamp of when the email was sent.
+          type: integer
+        subject:
+          description: Subject line of the email.
+          type: string
+    SafeEdit:
+      type: object
+      properties:
+        safeEditLocked:
+          type: boolean
+          description: Indicates if the file is locked through a SafeEdit session.
+        user:
+          description: The user responsible for locking the file via SafeEdit.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+    UserAttachment:
+      type: object
+      properties:
+        emailId:
+          type: string
+        subject:
+          type: string
+          description: Subject line of the email containing this attachment.
+        size:
+          type: string
+          description: Size of the attachment in bytes.
+        name:
+          type: string
+          description: File name of the attachment.
+        sentDate:
+          type: string
+          format: date
+          description: Date and time when the email was sent.
+        modifiedDate:
+          type: string
+          format: date
+          description: Date and time when the attachment was last modified.
+        attachmentId:
+          type: string
+          description: Unique identifier (UUID) of the attachment.
+        mime:
+          type: string
+          description: MIME type of the attachment.
+        webFormId:
+          type: string
+          description: Identifier of the web form associated with the attachment, if any.
+        type:
+          type: string
+          description: Type of the attachment.
+    DestinationFolderIdRequest:
+      type: object
+      properties:
+        destinationFolderId:
+          type: string
+          description: The ID of the destination folder where the item will be copied/moved.
+        addVersion:
+          type: boolean
+          description: If a file with the same name exists, create a new version instead of overwriting it. Default is True.
+      required:
+      - destinationFolderId
+    Mails:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Mail1'
+        metadata:
+          $ref: '#/components/schemas/MetaData'
+    Preview:
+      description: Class Preview
+      properties:
+        link:
+          description: Preview link for the file
+          type: string
+        pdf:
+          description: PDF file for the preview
+          type: string
+        viewUrl:
+          description: URL for viewing the preview
+          type: string
+        status:
+          description: 'Preview processing status. Accepted values: `processing`, `preview`, `failed`'
+          type: string
+        type:
+          description: Format of the generated preview, such as image or PDF
+          type: string
+        metadata:
+          description: Additional metadata about the preview, such as dimensions or page count
+          type: string
+        mime:
+          description: MIME type of the preview file
+          type: string
+        native:
+          description: Indicates whether the preview is a native render
+          type: boolean
+        watermark:
+          description: Watermark applied to the preview
+          type: string
+        tdfOriginalExtension:
+          description: Original file extension for TDF files
+          type: string
+    BulkOperationInteger:
+      type: object
+      properties:
+        errors:
+          description: List of errors
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorInteger'
+        successIds:
+          type: array
+          description: List of succeeded IDs.
+          items:
+            type: integer
+    PushedObject:
+      type: object
+      properties:
+        objectId:
+          type: string
+          description: Unique identifier (UUID) for the pushed object.
+        userId:
+          type: string
+          description: Unique identifier (UUID) for the user who pushed the object.
+        created:
+          type: string
+          format: date
+          description: The date and time when the object was pushed.
+        user:
+          description: Details of the user who pushed the object.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+    MobileInfo:
+      type: object
+      properties:
+        wopiSrc:
+          type: string
+          description: The WOPI (Web Application Open Platform Interface) source URL for the mobile application.
+        userId:
+          type: string
+          description: Unique identifier of the user.
+        service:
+          type: string
+          description: The WOPI service ID.
+        scheme:
+          type: string
+          description: URI scheme used by the mobile application to handle the file.
+        schemeSupport:
+          type: string
+          description: Indicates the level of support the mobile app has for the URI scheme.
+    TrackingAccessRecipient:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: Unique identifier of the user associated with the recipient.
+        type:
+          type: integer
+          description: Recipient type.<br>`0` – To.<br>`1` – CC.<br>`2` – BCC.
+        email:
+          type: string
+          description: Email address of the recipient.
+        isDistributionList:
+          type: boolean
+          description: Indicates if the recipient is a distribution list rather than an individual user.
+        user:
+          description: Details of the user associated with the recipient.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        revoked:
+          type: boolean
+          description: Indicates whether the recipient's tracking access has been revoked.
+    Tag:
+      type: object
+      properties:
+        guid:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) for the tag.
+        name:
+          type: string
+          description: Display name of the tag.
+        type:
+          type: string
+          description: Type category of the tag.
+    DrmFile:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the DRM-protected file.
+        size:
+          type: integer
+          description: Size of the DRM-protected file in bytes.
     File:
       type: object
       properties:
@@ -3806,19 +3645,436 @@ components:
           type: integer
           description: The total number of versions for the file.
         tracking_id:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
           description: Tracking identifier associated with the file upload.
-    DrmFile:
+    Permission:
       type: object
       properties:
+        id:
+          type: integer
+          description: Unique identifier for the permission.
         name:
           type: string
-          description: Name of the DRM-protected file.
+          description: Name of the permission.
+        allowed:
+          type: boolean
+          description: Indicates whether the permission is granted (True) or denied (False).
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    Mail:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the email.
+        senderId:
+          type: string
+          description: Unique identifier of the sender.
+        templateId:
+          type: integer
+          description: Unique identifier of the email template used.
+        status:
+          type: string
+          description: Current status of the email (e.g., sent, draft, error, etc.).
+        type:
+          type: string
+          description: Type of the email (e.g., original, reply, forward, etc.).
+        date:
+          type: string
+          format: date
+          description: Date the email was last modified or sent.
+        deleted:
+          type: boolean
+          description: Indicates if the email has been deleted.
+        withdrawnDate:
+          type: string
+          format: date
+          description: Date when the email was withdrawn, if applicable.
+        emailPackageId:
+          type: string
+          description: Unique identifier of the associated email package.
+        isPreview:
+          type: boolean
+          description: Indicates whether the email is a view-only version, typically used for previewing attachments without enabling downloading.
+        isUserSent:
+          type: boolean
+          description: Indicates whether the email was sent by the current user or another user.
+        watermark:
+          type: string
+          description: Text watermark applied to the email attachments (applicable only for view-only version).
+        variables:
+          description: List of dynamic variables used in the email.
+          type: array
+          items:
+            $ref: '#/components/schemas/Variables'
+        recipients:
+          description: List of recipients for the email.
+          type: array
+          items:
+            $ref: '#/components/schemas/Recipient'
+        secureBody:
+          type: boolean
+          description: Indicates if the email body is secured.
+        modifiedDate:
+          type: string
+          format: date
+          description: Date the email was last modified.
+        parentEmailId:
+          type: string
+          description: Unique identifier of the parent email, if applicable.
+        emailReturnReceipt:
+          description: List of recipients who requested return receipts.
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailReturnRecipient'
+        error:
+          type: string
+          description: Error message associated with the email, if any.
+        subject:
+          type: string
+          description: Subject line of the email.
+        attachmentCount:
+          type: integer
+          description: Number of attachments in the email.
+        expirationDate:
+          type: string
+          format: date
+          description: Expiration date of the email package, if applicable.
+        avStatus:
+          type: string
+          description: Antivirus (AV) scan status of the email.
+        dlpStatus:
+          type: string
+          description: Data Loss Prevention (DLP) scan status of the email.
+        hasTrackingAccess:
+          type: boolean
+          description: Indicates if tracking access is enabled for the email.
+        trackingAccess:
+          description: List of recipients with tracking access.
+          type: array
+          items:
+            $ref: '#/components/schemas/TrackingAccessRecipient'
+        policyDirective:
+          type: integer
+          description: Indicates the restriction type applied to the email
+        isRead:
+          type: boolean
+          description: Indicates if the email has been read.
+        bucket:
+          type: string
+          description: The bucket where the email is stored. (e.g. inbox, sent, trash)
+        body:
+          type: string
+          description: The body of the email.
+        package:
+          description: Details of the associated email package.
+          allOf:
+          - $ref: '#/components/schemas/Package'
+        rawBody:
+          type: string
+          description: Raw email body content without HTML markup.
+        headline:
+          type: string
+          description: Headline or main title of the email.
+        notice:
+          type: string
+          description: Notice part of the email.
+        fullHtmlBody:
+          type: string
+          description: Full HTML body of the email.
+        emailFrom:
+          type: string
+          description: The email address from which the email was sent.
+        templateBody:
+          type: string
+          description: Body content generated from the email template.
+        webFormId:
+          type: string
+          description: Unique identifier of the web form associated with the email.
+        webFormFields:
+          description: Fields included in the associated web form with the mail.
+        sender:
+          description: Details of the sender.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        sharedMailboxId:
+          type: string
+          description: Unique identifier of the shared mailbox, if applicable.
+        htmlBody:
+          type: string
+          description: HTML version of the email body.
+        actor:
+          description: The user responsible for sending the email, applicable when the email is sent on behalf of a shared mailbox.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        darkModeStyle:
+          type: string
+          description: CSS styles applied for dark mode.
+        exists:
+          type: boolean
+          description: Indicates whether the email already exists in the system.
+    SendMailSettingPutRequest:
+      type: object
+      properties:
+        trackingAccess:
+          type: array
+          description: List of email addresses to grant access to the email's download tracking dashboard.
+          items:
+            type: string
+            format: email
+    UserBasic:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier (UUID) for the user.
+        email:
+          type: string
+          description: Email address associated with the user.
+        name:
+          type: string
+          description: Full name of the user.
+        profileIcon:
+          type: string
+          description: URL or identifier for the user's profile icon.
+    Attachments:
+      type: object
+      properties:
+        data:
+          description: List of attachments.
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+        metadata:
+          description: Pagination metadata for the result set.
+          allOf:
+          - $ref: '#/components/schemas/MetaData'
+    Role:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Role ID
+        name:
+          type: string
+          description: Role name
+        rank:
+          type: integer
+          description: Role rank
+        type:
+          type: string
+          description: Role type
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
+    MailAttachments:
+      type: object
+      properties:
+        data:
+          description: List of email attachments.
+          type: array
+          items:
+            $ref: '#/components/schemas/UserAttachment'
+        metadata:
+          description: Pagination metadata for the result set.
+          allOf:
+          - $ref: '#/components/schemas/MetaData'
+    MailWithdrawRequest:
+      type: object
+      properties:
+        ids:
+          type: array
+          description: List of email UUIDs to withdraw. Withdrawing an email revokes recipient access to its attachments.
+          items:
+            type: string
+      required:
+      - ids
+    Variables:
+      type: object
+      properties:
+        variable:
+          type: string
+          description: The variable name
+        value:
+          description: The variable value
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    Package:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of the email package.
+        selfCopy:
+          type: boolean
+          description: Indicates whether the package includes a copy for the sender.
+        includeFingerprint:
+          type: boolean
+          description: Indicates whether a fingerprint (hash) of the package should be included for verification.
+        expire:
+          type: integer
+          description: Expiration time of the package in seconds from creation.
+        fileCount:
+          readOnly: true
+          description: Count of the files attached to the package.
+        deleted:
+          type: boolean
+          description: Indicates whether the package has been marked as deleted.
+        acl:
+          type: string
+          description: Access control list (ACL) associated with the package, specifying who can access it.
+        attachments:
+          description: List of attachments included in the package.
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+        downloadLink:
+          type: string
+          description: Link for accessing the email.
+    Attachment:
+      type: object
+      properties:
+        emailPackageId:
+          type: string
+          format: uuid
+          description: Unique identifier for the email package containing the attachment.
+        attachmentId:
+          type: string
+          description: Unique identifier for the attachment.
+        withdrawn:
+          type: boolean
+          description: Indicates whether the attachment has been withdrawn.
+        drmFile:
+          description: Details of the DRM-protected file associated with the attachment.
+          allOf:
+          - $ref: '#/components/schemas/DrmFile'
+        accessType:
+          type: integer
+          description: Access type for the attachment (e.g., read-only, editable).
+        tags:
+          description: List of tags associated with the attachment.
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        permissions:
+          type: array
+          description: List of permissions associated with the attachment.
+          items:
+            $ref: '#/components/schemas/Permission'
+        objectId:
+          type: string
+          format: uuid
+          description: Unique identifier for the file associated with the attachment.
+        name:
+          type: string
+          description: Name of the attachment file.
         size:
           type: integer
-          description: Size of the DRM-protected file in bytes.
+          description: Size of the attachment file in bytes.
+        mime:
+          type: string
+          description: The MIME type of the attachment file.
+        created:
+          type: string
+          format: date
+          description: Date when the attachment file was created.
+        deleted:
+          type: boolean
+          description: Indicates if the attachment has been deleted.
+        fingerprint:
+          type: string
+          description: A unique hash identifying the file version.
+        fingerprintAlgo:
+          type: string
+          description: The algorithm used for generating the file version fingerprint. (e.g., sha3-256, md5).
+        fingerprints:
+          description: List of alternative fingerprints for the attachment file.
+          type: array
+          items:
+            $ref: '#/components/schemas/Fingerprint'
+        adminQuarantineStatus:
+          type: string
+          description: Status of the attachment in the admin quarantine system.
+        avStatus:
+          type: string
+          description: Antivirus (AV) scan status of the attachment.
+        dlpStatus:
+          type: string
+          description: Data Loss Prevention (DLP) status of the attachment.
+    Group:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: LDAP Group ID
+        name:
+          type: string
+          description: LDAP Group name
+        dn:
+          type: string
+          description: LDAP Group domain name
+        email:
+          type: string
+          description: LDAP Group email
+        description:
+          type: string
+          description: LDAP Group description
+    MailCounters:
+      type: object
+      properties:
+        draft:
+          type: integer
+          description: Number of draft emails.
+        inbox:
+          type: integer
+          description: Number of emails in the inbox.
+        inboxUnread:
+          type: integer
+          description: Number of unread emails in the inbox.
+        outgoing:
+          type: integer
+          description: Number of outgoing emails.
+        outgoingError:
+          type: integer
+          description: Number of outgoing emails that encountered an error.
+        outgoingQueued:
+          type: integer
+          description: Number of outgoing emails queued for sending.
+        outgoingTransferring:
+          type: integer
+          description: Number of outgoing emails currently being transferred.
+        outgoingTransferringIds:
+          type: array
+          items:
+            type: string
+        trash:
+          type: integer
+          description: Number of emails in the trash.
     Mail1:
       type: object
       properties:
@@ -3966,57 +4222,38 @@ components:
         exists:
           type: boolean
           description: Indicates whether the email already exists in the system.
-    MailAttachments:
+    Recipient:
       type: object
       properties:
-        data:
-          description: List of email attachments.
-          type: array
-          items:
-            $ref: '#/components/schemas/UserAttachment'
-        metadata:
-          description: Pagination metadata for the result set.
-          allOf:
-          - $ref: '#/components/schemas/MetaData'
-    MobileInfo:
-      type: object
-      properties:
-        wopiSrc:
-          type: string
-          description: The WOPI (Web Application Open Platform Interface) source URL for the mobile application.
         userId:
           type: string
-          description: Unique identifier of the user.
-        service:
+          description: Unique identifier of the user associated with the recipient.
+        type:
+          type: integer
+          description: Recipient type.<br>`0` – To.<br>`1` – CC.<br>`2` – BCC.
+        email:
           type: string
-          description: The WOPI service ID.
-        scheme:
-          type: string
-          description: URI scheme used by the mobile application to handle the file.
-        schemeSupport:
-          type: string
-          description: Indicates the level of support the mobile app has for the URI scheme.
-    Fingerprint:
-      type: object
+          description: Email address of the recipient.
+        isDistributionList:
+          type: boolean
+          description: Indicates if the recipient is a distribution list rather than an individual user.
+        user:
+          description: Details of the user associated with the recipient.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+    DistributionList:
+      description: Class DistributionList
+      required:
+      - isDistributionList
       properties:
-        algo:
-          type: string
-          description: The algorithm used to generate the fingerprint (e.g., sha3-256, md5).
-        hash:
-          type: string
-          description: The resulting hash value representing the fingerprint of the file or object.
-    Attachments:
-      type: object
-      properties:
-        data:
-          description: List of attachments.
+        isDistributionList:
+          description: Indicates whether the email belongs to a distribution list
+          type: boolean
+        members:
+          description: List of members in the distribution list
           type: array
           items:
-            $ref: '#/components/schemas/Attachment'
-        metadata:
-          description: Pagination metadata for the result set.
-          allOf:
-          - $ref: '#/components/schemas/MetaData'
+            type: string
     EmailReturnRecipient:
       type: object
       properties:
@@ -4027,265 +4264,29 @@ components:
           description: Details of the user who requested the return receipt.
           allOf:
           - $ref: '#/components/schemas/UserBasic'
-    Member:
+    Fingerprint:
       type: object
       properties:
-        objectId:
+        algo:
           type: string
-          description: Unique identifier (UUID) of the associated object (file or folder).
-        roleId:
-          type: integer
-          description: Role assigned to the member.
-        userId:
+          description: The algorithm used to generate the fingerprint (e.g., sha3-256, md5).
+        hash:
           type: string
-          description: Unique identifier (UUID) of the user.
-        groupId:
-          type: integer
-          description: Unique identifier of the LDAP group.
-        user:
-          description: User details of the member.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-        role:
-          description: Role details assigned to the member.
-          allOf:
-          - $ref: '#/components/schemas/Role'
-        group:
-          description: Group details if the member belongs to a group.
-          allOf:
-          - $ref: '#/components/schemas/Group'
-        sharedBy:
-          description: Details of the user who shared the file or folder.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-        created:
+          description: The resulting hash value representing the fingerprint of the file or object.
+    ErrorInteger:
+      type: object
+      properties:
+        code:
           type: string
-          format: date
-          description: Date when the file or folder was shared.
-        inheritRoleId:
-          type: integer
-          description: Inherited role ID from the parent folder, if applicable.
-        allowedFolderRoleId:
+          description: Error code
+        message:
+          type: string
+          description: Error message
+        field:
+          type: string
+          description: Associated field, if applicable.
+        failedIds:
           type: array
-          description: List of allowed folder role IDs.
+          description: List of failed IDs.
           items:
             type: integer
-        email:
-          type: string
-          description: Email associated with the member.
-        rank:
-          type: integer
-          description: Rank of the member role.
-        originFolder:
-          readOnly: true
-    BulkOperationInteger:
-      type: object
-      properties:
-        errors:
-          description: List of errors
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorInteger'
-        successIds:
-          type: array
-          description: List of succeeded IDs.
-          items:
-            type: integer
-    AttachmentDownloadReport:
-      description: Represents the download tracking report for the attachments of a specific email.
-      properties:
-        downloads:
-          description: List of download and interaction events recorded for the email's attachments.
-          type: array
-          items:
-            $ref: '#/components/schemas/AttachmentDownloadEvent'
-        sent_time:
-          description: Unix timestamp of when the email was sent.
-          type: integer
-        subject:
-          description: Subject line of the email.
-          type: string
-    BaseSendMailPostRequest:
-      type: object
-      properties:
-        to:
-          type: array
-          description: List of recipients' email addresses (To field).
-          items:
-            type: string
-            format: email
-        cc:
-          type: array
-          description: List of recipients' email addresses (CC field).
-          items:
-            type: string
-            format: email
-        bcc:
-          type: array
-          description: List of recipients' email addresses (BCC field).
-          items:
-            type: string
-            format: email
-        files:
-          type: array
-          description: List of file UUIDs to attach to the email.
-          items:
-            type: string
-        acl:
-          type: string
-          enum:
-          - verify_recipient
-          - no_auth
-          - otp
-          - internal
-          - anyone_auth
-          - email_otp
-          description: Defines the access control level for the email.<br>`verify_recipient` – Accessible only to specified recipients.<br>`no_auth` – Public access, no authentication required.<br>`otp` – Accessible to recipients; allows one-time passcode (OTP) via SMS for authentication.<br>`internal` – Accessible to recipients and users within the organization.<br>`anyone_auth` – Accessible to recipients and any authenticated user.<br>`email_otp` – Accessible to recipients; allows one-time passcode (OTP) via email for authentication.
-        expire:
-          type: string
-          format: date
-          description: The expiration date of the email.
-        draft:
-          type: boolean
-          description: Indicates if the email is being saved as a draft.
-        preview:
-          type: boolean
-          description: Indicates if the email is a view-only version.
-        watermark:
-          type: string
-          description: Text watermark applied to the email attachments (only applicable when `preview` is enabled).
-        secureBody:
-          type: boolean
-          description: If true, the email body is hidden from the notification email and is only visible to authenticated recipients when they open the secure link.
-        selfCopy:
-          type: boolean
-          description: Indicates if the sender should receive a copy of the email.
-        includeFingerprint:
-          type: boolean
-          description: If true, a cryptographic hash (fingerprint) of each attached file is included in the notification email, allowing recipients to verify file integrity.
-        parentEmailId:
-          type: string
-          description: The parent email ID used for email threading. Applicable only for `forward` or `reply` types.
-        isSelfReturnReceipt:
-          type: boolean
-          description: (Deprecated) Send download notification to the sender. Use 'returnReceipts' instead.
-        returnReceipts:
-          type: array
-          description: List of recipients who should receive a download notification.
-          items:
-            type: string
-            format: email
-        type:
-          type: string
-          enum:
-          - original
-          - forward
-          - reply
-          - resend
-          description: The type of email. Defaults to `original`.<br>`original` – A new email.<br>`forward` – Forwarding an existing email to new recipients.<br>`reply` – A reply to an existing email.<br>`resend` – Resending a previously sent email.
-        uploading:
-          type: boolean
-          description: Indicates whether file upload is still in progress. Prevents sending if set to `true`.
-        body:
-          type: string
-          description: The body content of the email.
-        subject:
-          type: string
-          maxLength: 998
-          description: 'The subject of the email (maximum length: 998 characters).'
-        webFormId:
-          type: string
-          description: The web form ID associated with the email.
-        webFormFields:
-          type: object
-          description: Custom web form fields associated with the email.
-        notifyExpired:
-          type: boolean
-          description: Indicates whether to send a notification email to the sender when the email expires.
-        sharedMailboxId:
-          type: string
-          description: UUID of the shared mailbox to send from. When set, the email is sent on behalf of the shared mailbox rather than the individual user.
-        trackingAccess:
-          type: array
-          description: List of email addresses to grant access to the email's download tracking dashboard.
-          items:
-            type: string
-            format: email
-    SafeEdit:
-      type: object
-      properties:
-        safeEditLocked:
-          type: boolean
-          description: Indicates if the file is locked through a SafeEdit session.
-        user:
-          description: The user responsible for locking the file via SafeEdit.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-    Package:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Unique identifier of the email package.
-        selfCopy:
-          type: boolean
-          description: Indicates whether the package includes a copy for the sender.
-        includeFingerprint:
-          type: boolean
-          description: Indicates whether a fingerprint (hash) of the package should be included for verification.
-        expire:
-          type: integer
-          description: Expiration time of the package in seconds from creation.
-        fileCount:
-          readOnly: true
-          description: Count of the files attached to the package.
-        deleted:
-          type: boolean
-          description: Indicates whether the package has been marked as deleted.
-        acl:
-          type: string
-          description: Access control list (ACL) associated with the package, specifying who can access it.
-        attachments:
-          description: List of attachments included in the package.
-          type: array
-          items:
-            $ref: '#/components/schemas/Attachment'
-        downloadLink:
-          type: string
-          description: Link for accessing the email.
-    Mails:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Mail1'
-        metadata:
-          $ref: '#/components/schemas/MetaData'
-    Variables:
-      type: object
-      properties:
-        variable:
-          type: string
-          description: The variable name
-        value:
-          description: The variable value
-    Group:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: LDAP Group ID
-        name:
-          type: string
-          description: LDAP Group name
-        dn:
-          type: string
-          description: LDAP Group domain name
-        email:
-          type: string
-          description: LDAP Group email
-        description:
-          type: string
-          description: LDAP Group description

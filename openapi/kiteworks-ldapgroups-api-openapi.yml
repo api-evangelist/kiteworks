@@ -1,7 +1,7 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   version: '28'
-  title: Kiteworks API Documentation activities ldapGroups API
+  title: Kiteworks API Documentation Ldap Groups API
 tags:
 - name: ldapGroups
 paths:
@@ -279,39 +279,6 @@ paths:
           type: integer
 components:
   schemas:
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
-    LdapGroup.Post:
-      description: Class LdapGroup
-      required:
-      - dn
-      properties:
-        dn:
-          description: LDAP distinguished name (DN)
-          type: string
-        email:
-          description: LDAP group email address
-          type: string
-        description:
-          description: LDAP group description
-          type: string
-        addLinks:
-          description: Indicates whether HATEOAS links should be included in the response
-          type: boolean
     LdapGroup.Put:
       description: Class LdapGroup
       properties:
@@ -347,6 +314,39 @@ components:
           type: array
           items:
             type: string
+    LdapGroup.Post:
+      description: Class LdapGroup
+      required:
+      - dn
+      properties:
+        dn:
+          description: LDAP distinguished name (DN)
+          type: string
+        email:
+          description: LDAP group email address
+          type: string
+        description:
+          description: LDAP group description
+          type: string
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
     MetaData:
       type: object
       properties:

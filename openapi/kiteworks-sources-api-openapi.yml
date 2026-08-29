@@ -1,7 +1,7 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   version: '28'
-  title: Kiteworks API Documentation activities sources API
+  title: Kiteworks API Documentation Sources API
 tags:
 - name: sources
 paths:
@@ -1463,98 +1463,6 @@ components:
         profileIcon:
           description: URL to the user's profile icon image
           type: string
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    Source:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier of the external content source.
-        name:
-          type: string
-          description: Display name of the external content source.
-        description:
-          type: string
-          description: Description of the external content source.
-        sourceUrl:
-          type: string
-          description: URL of the external content source.
-        sourceTypeId:
-          type: integer
-          description: Numeric identifier of the source type.
-        sourceByUser:
-          type: boolean
-          description: Indicates whether this source was added by the user.
-        pinned:
-          type: boolean
-          description: Indicates whether the source is pinned.
-        pinnedTime:
-          type: string
-          format: date
-          description: Date and time when the source was pinned.
-    RefreshToken:
-      description: Class RefreshToken
-      required:
-      - refreshToken
-      - scope
-      properties:
-        userId:
-          description: Unique identifier of the user to whom the refresh token belongs
-          type: integer
-        expire:
-          description: Date and time after which the refresh token is no longer valid
-          type: string
-          format: date-time
-        scope:
-          description: OAuth scope of the refresh token
-          type: string
-        refreshToken:
-          description: Refresh token value
-          type: string
-    OnPremiseSourceLogin.Post:
-      description: Class OnPremiseSourceLogin
-      required:
-      - login
-      - password
-      properties:
-        login:
-          description: Login
-          type: string
-        password:
-          description: Password
-          type: string
-    EcmAuth:
-      description: Class EcmAuth
-      properties:
-        redirect:
-          description: OAuth redirect URL for the cloud source
-          type: string
-        clientId:
-          description: Cloud source OAuth client unique identifier
-          type: string
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
-    Sources:
-      type: object
-      properties:
-        data:
-          description: List of external content sources.
-          type: array
-          items:
-            $ref: '#/components/schemas/Source'
     SourceFolder:
       required:
       - id
@@ -1669,99 +1577,25 @@ components:
         dlpStatus:
           description: 'DLP scan status. Accepted values: `allowed`, `disallowed`, `scanning`'
           type: string
-    CloudSourceLogin.Post:
-      description: Class CloudSourceLogin
+    RefreshToken:
+      description: Class RefreshToken
       required:
-      - code
-      - state
+      - refreshToken
+      - scope
       properties:
-        client:
-          description: ID of the client, from redirect url
-          type: string
-        code:
-          description: Code from redirect url
-          type: string
-        state:
-          description: Anti-CSRF state token returned by the OAuth provider in the redirect URL
-          type: string
-        sessionState:
-          description: Optional field needed for SharePoint Online and OneDrive
-          type: string
-    SourceContent:
-      description: Class SourceContent - if you need true EAPI entity use App\Entity\ECObject
-      required:
-      - id
-      - name
-      - parentId
-      - type
-      - wopiapp
-      properties:
-        id:
-          description: Unique SourceContent identifier
-          type: string
-        name:
-          description: Display name of the source content item
-          type: string
-        parentId:
-          description: Parent source content unique identifier
-          type: string
-        type:
-          description: 'Source content type. Accepted values: \`d\` (folder), \`f\` (file)'
-          type: string
-        created:
-          description: Creation timestamp of the source content in UTC
-          type: string
-          format: date
-        modified:
-          description: Last modification timestamp of the source content in UTC
-          type: string
-          format: date
-        status:
-          description: Current availability status of the source content item
-          type: string
-        deleted:
-          description: Indicates whether the source content is deleted
-          type: boolean
-        path:
-          description: Full path of the source content
-          type: string
-        userRoleId:
-          description: Current user role id (Explicit field. May be retrieved only if mentioned in "with" parameter)
+        userId:
+          description: Unique identifier of the user to whom the refresh token belongs
           type: integer
-        creator:
-          description: File's creator (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/UserBasicInfo'
-        permissions:
-          description: Current user's permissions (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
-        wopiapp:
-          description: WOPI info for iOS app
-          type: boolean
-        rootId:
-          description: Unique identifier of the root-level source content ancestor (Explicit field. May be retrieved only if mentioned in "with" parameter)
+        expire:
+          description: Date and time after which the refresh token is no longer valid
           type: string
-        pathIds:
-          description: Ordered list of ancestor identifiers representing the full path from root to this source content item (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          format: date-time
+        scope:
+          description: OAuth scope of the refresh token
           type: string
-        sourceTypeId:
-          description: Unique identifier of the ECM source type this content belongs to (Explicit field. May be retrieved only if mentioned in "with" parameter)
+        refreshToken:
+          description: Refresh token value
           type: string
-        totalFilesCount:
-          description: Total number of files in the source content (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: string
-        totalFoldersCount:
-          description: Total number of folders in the source content (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: string
-        parent:
-          description: Parent source content item (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/SourceContent'
-        links:
-          description: HATEOAS links associated with the entity
-          type: array
-          items:
-            type: string
     SourcePreviewStatus:
       description: Represents the preview generation status for a file in a Repositories Gateway source. Returned by the GET /sources/{id}/preview endpoint (v15+).
       properties:
@@ -1774,6 +1608,33 @@ components:
         link:
           description: The URL path to retrieve the preview file. Populated only when status is `ready`; otherwise null.
           type: string
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    Sources:
+      type: object
+      properties:
+        data:
+          description: List of external content sources.
+          type: array
+          items:
+            $ref: '#/components/schemas/Source'
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
     SourceFile:
       required:
       - id
@@ -1875,6 +1736,33 @@ components:
         lockUser:
           description: User who locked the file
           $ref: '#/components/schemas/UserBasicInfo'
+    CloudSourceLogin.Post:
+      description: Class CloudSourceLogin
+      required:
+      - code
+      - state
+      properties:
+        client:
+          description: ID of the client, from redirect url
+          type: string
+        code:
+          description: Code from redirect url
+          type: string
+        state:
+          description: Anti-CSRF state token returned by the OAuth provider in the redirect URL
+          type: string
+        sessionState:
+          description: Optional field needed for SharePoint Online and OneDrive
+          type: string
+    EcmAuth:
+      description: Class EcmAuth
+      properties:
+        redirect:
+          description: OAuth redirect URL for the cloud source
+          type: string
+        clientId:
+          description: Cloud source OAuth client unique identifier
+          type: string
     Source.Post:
       description: Class Source
       required:
@@ -1918,15 +1806,127 @@ components:
         allowed:
           type: boolean
           description: Indicates whether the permission is granted (True) or denied (False).
-    MetaData:
+    Error:
       type: object
       properties:
-        total:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    Source:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the external content source.
+        name:
+          type: string
+          description: Display name of the external content source.
+        description:
+          type: string
+          description: Description of the external content source.
+        sourceUrl:
+          type: string
+          description: URL of the external content source.
+        sourceTypeId:
           type: integer
-          description: Total number of items available.
-        limit:
+          description: Numeric identifier of the source type.
+        sourceByUser:
+          type: boolean
+          description: Indicates whether this source was added by the user.
+        pinned:
+          type: boolean
+          description: Indicates whether the source is pinned.
+        pinnedTime:
+          type: string
+          format: date
+          description: Date and time when the source was pinned.
+    OnPremiseSourceLogin.Post:
+      description: Class OnPremiseSourceLogin
+      required:
+      - login
+      - password
+      properties:
+        login:
+          description: Login
+          type: string
+        password:
+          description: Password
+          type: string
+    SourceContent:
+      description: Class SourceContent - if you need true EAPI entity use App\Entity\ECObject
+      required:
+      - id
+      - name
+      - parentId
+      - type
+      - wopiapp
+      properties:
+        id:
+          description: Unique SourceContent identifier
+          type: string
+        name:
+          description: Display name of the source content item
+          type: string
+        parentId:
+          description: Parent source content unique identifier
+          type: string
+        type:
+          description: 'Source content type. Accepted values: \`d\` (folder), \`f\` (file)'
+          type: string
+        created:
+          description: Creation timestamp of the source content in UTC
+          type: string
+          format: date
+        modified:
+          description: Last modification timestamp of the source content in UTC
+          type: string
+          format: date
+        status:
+          description: Current availability status of the source content item
+          type: string
+        deleted:
+          description: Indicates whether the source content is deleted
+          type: boolean
+        path:
+          description: Full path of the source content
+          type: string
+        userRoleId:
+          description: Current user role id (Explicit field. May be retrieved only if mentioned in "with" parameter)
           type: integer
-          description: Maximum number of items returned per page.
-        offset:
-          type: integer
-          description: Number of items skipped before the current page.
+        creator:
+          description: File's creator (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/UserBasicInfo'
+        permissions:
+          description: Current user's permissions (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        wopiapp:
+          description: WOPI info for iOS app
+          type: boolean
+        rootId:
+          description: Unique identifier of the root-level source content ancestor (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        pathIds:
+          description: Ordered list of ancestor identifiers representing the full path from root to this source content item (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        sourceTypeId:
+          description: Unique identifier of the ECM source type this content belongs to (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        totalFilesCount:
+          description: Total number of files in the source content (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        totalFoldersCount:
+          description: Total number of folders in the source content (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        parent:
+          description: Parent source content item (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/SourceContent'
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string

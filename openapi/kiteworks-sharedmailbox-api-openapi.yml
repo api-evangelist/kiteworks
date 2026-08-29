@@ -1,7 +1,7 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   version: '28'
-  title: Kiteworks API Documentation activities sharedMailbox API
+  title: Kiteworks API Documentation Shared Mailbox API
 tags:
 - name: sharedMailbox
 paths:
@@ -744,13 +744,47 @@ paths:
           description: Request blocked by WAF
 components:
   schemas:
-    Errors:
+    WebForm:
       type: object
       properties:
-        error:
+        id:
+          type: string
+          description: Unique identifier of the web form.
+        lastModified:
+          type: string
+          format: date
+          description: Date and time when the web form was last modified.
+        name:
+          type: string
+          description: Display name of the web form.
+        description:
+          type: string
+          description: Description of the web form.
+        url:
+          type: string
+          description: URL where the web form is accessible.
+        enabled:
+          type: boolean
+          description: Indicates whether the web form is active.
+        authRequired:
+          type: boolean
+          description: Indicates whether authentication is required to submit the web form.
+        embedded:
+          type: boolean
+          description: Indicates whether the web form can be embedded in external pages.
+        standalone:
+          type: boolean
+          description: Indicates whether the web form can be used as a standalone page.
+        profiles:
+          description: List of user profiles that have access to this web form.
           type: array
           items:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/WebFormProfile'
+        fields:
+          description: List of fields in the web form.
+          type: array
+          items:
+            $ref: '#/components/schemas/WebFormField'
     SharedMailboxSetting:
       type: object
       properties:
@@ -840,105 +874,6 @@ components:
         defaultCountryCode:
           type: string
           description: Default country code used for phone number formatting.
-    WebForm:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier of the web form.
-        lastModified:
-          type: string
-          format: date
-          description: Date and time when the web form was last modified.
-        name:
-          type: string
-          description: Display name of the web form.
-        description:
-          type: string
-          description: Description of the web form.
-        url:
-          type: string
-          description: URL where the web form is accessible.
-        enabled:
-          type: boolean
-          description: Indicates whether the web form is active.
-        authRequired:
-          type: boolean
-          description: Indicates whether authentication is required to submit the web form.
-        embedded:
-          type: boolean
-          description: Indicates whether the web form can be embedded in external pages.
-        standalone:
-          type: boolean
-          description: Indicates whether the web form can be used as a standalone page.
-        profiles:
-          description: List of user profiles that have access to this web form.
-          type: array
-          items:
-            $ref: '#/components/schemas/WebFormProfile'
-        fields:
-          description: List of fields in the web form.
-          type: array
-          items:
-            $ref: '#/components/schemas/WebFormField'
-    SharedMailboxMemberStatusPatchRequest:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The UUID of the shared mailbox user.
-        active:
-          type: boolean
-          description: The new active status for the shared mailbox.
-      required:
-      - active
-      - id
-    MetaData:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of items available.
-        limit:
-          type: integer
-          description: Maximum number of items returned per page.
-        offset:
-          type: integer
-          description: Number of items skipped before the current page.
-    WebFormProfile:
-      type: object
-      properties:
-        webFormId:
-          type: string
-          description: Unique identifier of the web form.
-        profileId:
-          type: integer
-          description: Unique identifier of the user profile associated with the web form.
-    UserBasic:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier (UUID) for the user.
-        email:
-          type: string
-          description: Email address associated with the user.
-        name:
-          type: string
-          description: Full name of the user.
-        profileIcon:
-          type: string
-          description: URL or identifier for the user's profile icon.
-    SharedMailboxStatusPatchRequest:
-      type: object
-      properties:
-        data:
-          description: List of shared mailbox status updates to apply.
-          type: array
-          items:
-            $ref: '#/components/schemas/SharedMailboxMemberStatusPatchRequest'
-      required:
-      - data
     WebFormField:
       type: object
       properties:
@@ -972,15 +907,13 @@ components:
         editable:
           type: boolean
           description: Indicates whether the field can be edited by the user.
-    MailIdCounters:
+    WebFormList:
       type: object
       properties:
-        id:
-          type: string
-        counters:
-          description: Email counters for this mail entity.
-          allOf:
-          - $ref: '#/components/schemas/MailCounters'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebForm'
     SharedMailboxList:
       type: object
       properties:
@@ -993,15 +926,6 @@ components:
           description: Pagination metadata for the result set.
           allOf:
           - $ref: '#/components/schemas/MetaData'
-    SendOption:
-      type: object
-      properties:
-        linkExpiry:
-          type: boolean
-          description: Indicates whether link expiry is enabled for sent files.
-        ACL:
-          type: integer
-          description: Access control level applied to sent files.
     MailCountersList:
       type: object
       properties:
@@ -1010,23 +934,50 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/MailIdCounters'
-    SharedMailbox:
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    UserBasic:
       type: object
       properties:
         id:
           type: string
+          description: Unique identifier (UUID) for the user.
+        email:
+          type: string
+          description: Email address associated with the user.
+        name:
+          type: string
+          description: Full name of the user.
+        profileIcon:
+          type: string
+          description: URL or identifier for the user's profile icon.
+    SharedMailboxMemberStatusPatchRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The UUID of the shared mailbox user.
         active:
           type: boolean
-          description: Indicates whether the shared mailbox is active.
-        user:
-          description: Details of the shared mailbox user account.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-        members:
-          description: List of users who are members of the shared mailbox.
+          description: The new active status for the shared mailbox.
+      required:
+      - active
+      - id
+    SharedMailboxPatchRequest:
+      type: object
+      properties:
+        memberIds:
           type: array
+          description: List of member ids  (Recommended request size <= 100)
           items:
-            $ref: '#/components/schemas/UserBasic'
+            type: string
+      required:
+      - memberIds
     Error:
       type: object
       properties:
@@ -1036,44 +987,6 @@ components:
         message:
           type: string
           description: Error message
-    MailCounters:
-      type: object
-      properties:
-        draft:
-          type: integer
-          description: Number of draft emails.
-        inbox:
-          type: integer
-          description: Number of emails in the inbox.
-        inboxUnread:
-          type: integer
-          description: Number of unread emails in the inbox.
-        outgoing:
-          type: integer
-          description: Number of outgoing emails.
-        outgoingError:
-          type: integer
-          description: Number of outgoing emails that encountered an error.
-        outgoingQueued:
-          type: integer
-          description: Number of outgoing emails queued for sending.
-        outgoingTransferring:
-          type: integer
-          description: Number of outgoing emails currently being transferred.
-        outgoingTransferringIds:
-          type: array
-          items:
-            type: string
-        trash:
-          type: integer
-          description: Number of emails in the trash.
-    WebFormList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/WebForm'
     SharedMailboxPostRequest:
       type: object
       properties:
@@ -1106,13 +1019,100 @@ components:
       required:
       - memberIds
       - userId
-    SharedMailboxPatchRequest:
+    SharedMailboxStatusPatchRequest:
       type: object
       properties:
-        memberIds:
+        data:
+          description: List of shared mailbox status updates to apply.
           type: array
-          description: List of member ids  (Recommended request size <= 100)
+          items:
+            $ref: '#/components/schemas/SharedMailboxMemberStatusPatchRequest'
+      required:
+      - data
+    MailIdCounters:
+      type: object
+      properties:
+        id:
+          type: string
+        counters:
+          description: Email counters for this mail entity.
+          allOf:
+          - $ref: '#/components/schemas/MailCounters'
+    SharedMailbox:
+      type: object
+      properties:
+        id:
+          type: string
+        active:
+          type: boolean
+          description: Indicates whether the shared mailbox is active.
+        user:
+          description: Details of the shared mailbox user account.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        members:
+          description: List of users who are members of the shared mailbox.
+          type: array
+          items:
+            $ref: '#/components/schemas/UserBasic'
+    MailCounters:
+      type: object
+      properties:
+        draft:
+          type: integer
+          description: Number of draft emails.
+        inbox:
+          type: integer
+          description: Number of emails in the inbox.
+        inboxUnread:
+          type: integer
+          description: Number of unread emails in the inbox.
+        outgoing:
+          type: integer
+          description: Number of outgoing emails.
+        outgoingError:
+          type: integer
+          description: Number of outgoing emails that encountered an error.
+        outgoingQueued:
+          type: integer
+          description: Number of outgoing emails queued for sending.
+        outgoingTransferring:
+          type: integer
+          description: Number of outgoing emails currently being transferred.
+        outgoingTransferringIds:
+          type: array
           items:
             type: string
-      required:
-      - memberIds
+        trash:
+          type: integer
+          description: Number of emails in the trash.
+    WebFormProfile:
+      type: object
+      properties:
+        webFormId:
+          type: string
+          description: Unique identifier of the web form.
+        profileId:
+          type: integer
+          description: Unique identifier of the user profile associated with the web form.
+    SendOption:
+      type: object
+      properties:
+        linkExpiry:
+          type: boolean
+          description: Indicates whether link expiry is enabled for sent files.
+        ACL:
+          type: integer
+          description: Access control level applied to sent files.
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.

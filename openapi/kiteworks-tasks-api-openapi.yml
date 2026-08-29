@@ -1,7 +1,7 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   version: '28'
-  title: Kiteworks API Documentation activities tasks API
+  title: Kiteworks API Documentation Tasks API
 tags:
 - name: tasks
 paths:
@@ -652,159 +652,6 @@ paths:
           - compact
 components:
   schemas:
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    PushedObject:
-      type: object
-      properties:
-        objectId:
-          type: string
-          description: Unique identifier (UUID) for the pushed object.
-        userId:
-          type: string
-          description: Unique identifier (UUID) for the user who pushed the object.
-        created:
-          type: string
-          format: date
-          description: The date and time when the object was pushed.
-        user:
-          description: Details of the user who pushed the object.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-    Tag:
-      type: object
-      properties:
-        guid:
-          type: string
-          format: uuid
-          description: Unique identifier (UUID) for the tag.
-        name:
-          type: string
-          description: Display name of the tag.
-        type:
-          type: string
-          description: Type category of the tag.
-    MetaData:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of items available.
-        limit:
-          type: integer
-          description: Maximum number of items returned per page.
-        offset:
-          type: integer
-          description: Number of items skipped before the current page.
-    UserBasic:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier (UUID) for the user.
-        email:
-          type: string
-          description: Email address associated with the user.
-        name:
-          type: string
-          description: Full name of the user.
-        profileIcon:
-          type: string
-          description: URL or identifier for the user's profile icon.
-    UserMetadata:
-      description: Class UserMetadata
-      properties:
-        name:
-          description: Key name of the custom metadata attribute associated with the user
-          type: string
-        value:
-          description: Value assigned to the custom metadata attribute for the user
-          type: string
-    Task:
-      description: Class Task
-      required:
-      - assigneeId
-      - created
-      - due
-      - id
-      - status
-      - userId
-      properties:
-        id:
-          description: Task unique identifier
-          type: integer
-        assigneeId:
-          description: Assigned User unique identifier
-          type: string
-        assignee:
-          description: User assigned to complete the task (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/User'
-        due:
-          description: Date and time by which the task must be completed
-          type: string
-          format: date
-        parentId:
-          description: Parent Comment identifier
-          type: integer
-        objectId:
-          description: Object identifier Task belongs to
-          type: string
-        userId:
-          description: Identifier of User who created a Task
-          type: string
-        user:
-          description: User who created the task (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/User'
-        created:
-          description: Date and time the task was created
-          type: string
-          format: date
-        modified:
-          description: Date and time the task was last modified
-          type: string
-          format: date
-        contents:
-          description: Body text of the task
-          type: string
-        deleted:
-          description: Indicates whether the task is deleted
-          type: boolean
-        folderId:
-          description: Identifier of Object's parent Folder
-          type: string
-        status:
-          description: 'Task status. Accepted values: `D` (Defined), `P` (In Progress), `C` (Completed)'
-          type: string
-        file:
-          description: File the task is tied to (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/File'
-        permissions:
-          description: Current user's permissions (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
-        links:
-          description: HATEOAS links associated with the entity
-          type: array
-          items:
-            type: string
-    Permission:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique identifier for the permission.
-        name:
-          type: string
-          description: Name of the permission.
-        allowed:
-          type: boolean
-          description: Indicates whether the permission is granted (True) or denied (False).
     Folder:
       type: object
       properties:
@@ -951,16 +798,85 @@ components:
         inheritanceEnabled:
           type: boolean
           description: Indicates if a folder inherits permissions from the parent folder
-    Task.Post:
+    Member:
+      type: object
+      properties:
+        objectId:
+          type: string
+          description: Unique identifier (UUID) of the associated object (file or folder).
+        roleId:
+          type: integer
+          description: Role assigned to the member.
+        userId:
+          type: string
+          description: Unique identifier (UUID) of the user.
+        groupId:
+          type: integer
+          description: Unique identifier of the LDAP group.
+        user:
+          description: User details of the member.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        role:
+          description: Role details assigned to the member.
+          allOf:
+          - $ref: '#/components/schemas/Role'
+        group:
+          description: Group details if the member belongs to a group.
+          allOf:
+          - $ref: '#/components/schemas/Group'
+        sharedBy:
+          description: Details of the user who shared the file or folder.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        created:
+          type: string
+          format: date
+          description: Date when the file or folder was shared.
+        inheritRoleId:
+          type: integer
+          description: Inherited role ID from the parent folder, if applicable.
+        allowedFolderRoleId:
+          type: array
+          description: List of allowed folder role IDs.
+          items:
+            type: integer
+        email:
+          type: string
+          description: Email associated with the member.
+        rank:
+          type: integer
+          description: Rank of the member role.
+        originFolder:
+          readOnly: true
+    UserMetadata:
+      description: Class UserMetadata
+      properties:
+        name:
+          description: Key name of the custom metadata attribute associated with the user
+          type: string
+        value:
+          description: Value assigned to the custom metadata attribute for the user
+          type: string
+    Task:
       description: Class Task
       required:
       - assigneeId
+      - created
       - due
-      - contents
+      - id
+      - status
+      - userId
       properties:
-        assigneeId:
-          description: Assignee user unique identifier
+        id:
+          description: Task unique identifier
           type: integer
+        assigneeId:
+          description: Assigned User unique identifier
+          type: string
+        assignee:
+          description: User assigned to complete the task (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/User'
         due:
           description: Date and time by which the task must be completed
           type: string
@@ -968,36 +884,106 @@ components:
         parentId:
           description: Parent Comment identifier
           type: integer
+        objectId:
+          description: Object identifier Task belongs to
+          type: string
+        userId:
+          description: Identifier of User who created a Task
+          type: string
+        user:
+          description: User who created the task (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/User'
+        created:
+          description: Date and time the task was created
+          type: string
+          format: date
+        modified:
+          description: Date and time the task was last modified
+          type: string
+          format: date
         contents:
           description: Body text of the task
           type: string
-        addLinks:
-          description: Indicates whether HATEOAS links should be included in the response
+        deleted:
+          description: Indicates whether the task is deleted
           type: boolean
-    Error:
+        folderId:
+          description: Identifier of Object's parent Folder
+          type: string
+        status:
+          description: 'Task status. Accepted values: `D` (Defined), `P` (In Progress), `C` (Completed)'
+          type: string
+        file:
+          description: File the task is tied to (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/File'
+        permissions:
+          description: Current user's permissions (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+    SafeEdit:
       type: object
       properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
-    Role:
+        safeEditLocked:
+          type: boolean
+          description: Indicates if the file is locked through a SafeEdit session.
+        user:
+          description: The user responsible for locking the file via SafeEdit.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+    PushedObject:
       type: object
       properties:
-        id:
-          type: integer
-          description: Role ID
+        objectId:
+          type: string
+          description: Unique identifier (UUID) for the pushed object.
+        userId:
+          type: string
+          description: Unique identifier (UUID) for the user who pushed the object.
+        created:
+          type: string
+          format: date
+          description: The date and time when the object was pushed.
+        user:
+          description: Details of the user who pushed the object.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+    MobileInfo:
+      type: object
+      properties:
+        wopiSrc:
+          type: string
+          description: The WOPI (Web Application Open Platform Interface) source URL for the mobile application.
+        userId:
+          type: string
+          description: Unique identifier of the user.
+        service:
+          type: string
+          description: The WOPI service ID.
+        scheme:
+          type: string
+          description: URI scheme used by the mobile application to handle the file.
+        schemeSupport:
+          type: string
+          description: Indicates the level of support the mobile app has for the URI scheme.
+    Tag:
+      type: object
+      properties:
+        guid:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) for the tag.
         name:
           type: string
-          description: Role name
-        rank:
-          type: integer
-          description: Role rank
+          description: Display name of the tag.
         type:
           type: string
-          description: Role type
+          description: Type category of the tag.
     File:
       type: object
       properties:
@@ -1165,37 +1151,107 @@ components:
           type: integer
           description: The total number of versions for the file.
         tracking_id:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
           description: Tracking identifier associated with the file upload.
-    MobileInfo:
+    Permission:
       type: object
       properties:
-        wopiSrc:
+        id:
+          type: integer
+          description: Unique identifier for the permission.
+        name:
           type: string
-          description: The WOPI (Web Application Open Platform Interface) source URL for the mobile application.
-        userId:
-          type: string
-          description: Unique identifier of the user.
-        service:
-          type: string
-          description: The WOPI service ID.
-        scheme:
-          type: string
-          description: URI scheme used by the mobile application to handle the file.
-        schemeSupport:
-          type: string
-          description: Indicates the level of support the mobile app has for the URI scheme.
-    Fingerprint:
+          description: Name of the permission.
+        allowed:
+          type: boolean
+          description: Indicates whether the permission is granted (True) or denied (False).
+    Errors:
       type: object
       properties:
-        algo:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    UserBasic:
+      type: object
+      properties:
+        id:
           type: string
-          description: The algorithm used to generate the fingerprint (e.g., sha3-256, md5).
-        hash:
+          description: Unique identifier (UUID) for the user.
+        email:
           type: string
-          description: The resulting hash value representing the fingerprint of the file or object.
+          description: Email address associated with the user.
+        name:
+          type: string
+          description: Full name of the user.
+        profileIcon:
+          type: string
+          description: URL or identifier for the user's profile icon.
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
+    Task.Post:
+      description: Class Task
+      required:
+      - assigneeId
+      - due
+      - contents
+      properties:
+        assigneeId:
+          description: Assignee user unique identifier
+          type: integer
+        due:
+          description: Date and time by which the task must be completed
+          type: string
+          format: date
+        parentId:
+          description: Parent Comment identifier
+          type: integer
+        contents:
+          description: Body text of the task
+          type: string
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    Group:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: LDAP Group ID
+        name:
+          type: string
+          description: LDAP Group name
+        dn:
+          type: string
+          description: LDAP Group domain name
+        email:
+          type: string
+          description: LDAP Group email
+        description:
+          type: string
+          description: LDAP Group description
     User:
       description: Class User
       required:
@@ -1279,82 +1335,27 @@ components:
           description: The exact timestamp when the user's password will expire
           type: string
           format: date
-    Member:
-      type: object
-      properties:
-        objectId:
-          type: string
-          description: Unique identifier (UUID) of the associated object (file or folder).
-        roleId:
-          type: integer
-          description: Role assigned to the member.
-        userId:
-          type: string
-          description: Unique identifier (UUID) of the user.
-        groupId:
-          type: integer
-          description: Unique identifier of the LDAP group.
-        user:
-          description: User details of the member.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-        role:
-          description: Role details assigned to the member.
-          allOf:
-          - $ref: '#/components/schemas/Role'
-        group:
-          description: Group details if the member belongs to a group.
-          allOf:
-          - $ref: '#/components/schemas/Group'
-        sharedBy:
-          description: Details of the user who shared the file or folder.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-        created:
-          type: string
-          format: date
-          description: Date when the file or folder was shared.
-        inheritRoleId:
-          type: integer
-          description: Inherited role ID from the parent folder, if applicable.
-        allowedFolderRoleId:
-          type: array
-          description: List of allowed folder role IDs.
-          items:
-            type: integer
-        email:
-          type: string
-          description: Email associated with the member.
-        rank:
-          type: integer
-          description: Rank of the member role.
-        originFolder:
-          readOnly: true
-    SafeEdit:
-      type: object
-      properties:
-        safeEditLocked:
-          type: boolean
-          description: Indicates if the file is locked through a SafeEdit session.
-        user:
-          description: The user responsible for locking the file via SafeEdit.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-    Group:
+    Role:
       type: object
       properties:
         id:
           type: integer
-          description: LDAP Group ID
+          description: Role ID
         name:
           type: string
-          description: LDAP Group name
-        dn:
+          description: Role name
+        rank:
+          type: integer
+          description: Role rank
+        type:
           type: string
-          description: LDAP Group domain name
-        email:
+          description: Role type
+    Fingerprint:
+      type: object
+      properties:
+        algo:
           type: string
-          description: LDAP Group email
-        description:
+          description: The algorithm used to generate the fingerprint (e.g., sha3-256, md5).
+        hash:
           type: string
-          description: LDAP Group description
+          description: The resulting hash value representing the fingerprint of the file or object.

@@ -1,7 +1,7 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   version: '28'
-  title: Kiteworks API Documentation activities devices API
+  title: Kiteworks API Documentation Devices API
 tags:
 - name: devices
 paths:
@@ -463,13 +463,24 @@ paths:
           description: Request blocked by WAF
 components:
   schemas:
-    Errors:
+    Logout:
       type: object
       properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
+        redirectUri:
+          type: string
+          description: URL to redirect to after logout.
+    Device.Put:
+      description: Class Device
+      properties:
+        mobileKeyStore:
+          description: Key to encrypt files on this device
+          type: string
+        registrationToken:
+          description: Set the token for messaging registration
+          type: string
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
     Device.Post:
       description: Class Device
       properties:
@@ -491,6 +502,34 @@ components:
         addLinks:
           description: Indicates whether HATEOAS links should be included in the response
           type: boolean
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
     Device:
       description: Class Device
       required:
@@ -525,42 +564,3 @@ components:
           type: array
           items:
             type: string
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
-    Device.Put:
-      description: Class Device
-      properties:
-        mobileKeyStore:
-          description: Key to encrypt files on this device
-          type: string
-        registrationToken:
-          description: Set the token for messaging registration
-          type: string
-        addLinks:
-          description: Indicates whether HATEOAS links should be included in the response
-          type: boolean
-    Logout:
-      type: object
-      properties:
-        redirectUri:
-          type: string
-          description: URL to redirect to after logout.
-    MetaData:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of items available.
-        limit:
-          type: integer
-          description: Maximum number of items returned per page.
-        offset:
-          type: integer
-          description: Number of items skipped before the current page.

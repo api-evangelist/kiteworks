@@ -1,7 +1,7 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   version: '28'
-  title: Kiteworks API Documentation activities contacts API
+  title: Kiteworks API Documentation Contacts API
 tags:
 - name: contacts
 paths:
@@ -371,43 +371,6 @@ paths:
           description: Request blocked by WAF
 components:
   schemas:
-    ContactEmail:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
-          description: Email address of the contact.
-      required:
-      - email
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    ContactList:
-      type: object
-      properties:
-        metadata:
-          description: Pagination metadata for the result set.
-          allOf:
-          - $ref: '#/components/schemas/MetaData'
-        data:
-          type: array
-          description: List of contacts.
-          items:
-            $ref: '#/components/schemas/Contact'
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
     ContactItem:
       type: object
       properties:
@@ -420,6 +383,15 @@ components:
         profileIcon:
           type: string
           description: URL or identifier of the contact's profile icon.
+    ContactEmail:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          description: Email address of the contact.
+      required:
+      - email
     Contact:
       type: object
       properties:
@@ -448,18 +420,6 @@ components:
           description: List of email addresses or distribution lists for this contact.
           items:
             $ref: '#/components/schemas/ContactItem'
-    MetaData:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of items available.
-        limit:
-          type: integer
-          description: Maximum number of items returned per page.
-        offset:
-          type: integer
-          description: Number of items skipped before the current page.
     ContactCreate:
       type: object
       properties:
@@ -474,3 +434,43 @@ components:
             $ref: '#/components/schemas/ContactEmail'
       required:
       - name
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
+    ContactList:
+      type: object
+      properties:
+        metadata:
+          description: Pagination metadata for the result set.
+          allOf:
+          - $ref: '#/components/schemas/MetaData'
+        data:
+          type: array
+          description: List of contacts.
+          items:
+            $ref: '#/components/schemas/Contact'

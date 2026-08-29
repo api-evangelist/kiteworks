@@ -1,7 +1,7 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   version: '28'
-  title: Kiteworks API Documentation activities locations API
+  title: Kiteworks API Documentation Locations API
 tags:
 - name: locations
 paths:
@@ -235,13 +235,15 @@ paths:
           type: integer
 components:
   schemas:
-    Errors:
+    LocationList:
       type: object
       properties:
-        error:
+        data:
           type: array
           items:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/Location'
+        metadata:
+          $ref: '#/components/schemas/MetaData'
     Location.Post:
       description: Class Location
       required:
@@ -266,15 +268,25 @@ components:
         message:
           type: string
           description: Error message
-    LocationList:
+    Errors:
       type: object
       properties:
-        data:
+        error:
           type: array
           items:
-            $ref: '#/components/schemas/Location'
-        metadata:
-          $ref: '#/components/schemas/MetaData'
+            $ref: '#/components/schemas/Error'
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
     Location:
       type: object
       properties:
@@ -290,15 +302,3 @@ components:
         tenantId:
           type: integer
           description: Tenant ID
-    MetaData:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of items available.
-        limit:
-          type: integer
-          description: Maximum number of items returned per page.
-        offset:
-          type: integer
-          description: Number of items skipped before the current page.

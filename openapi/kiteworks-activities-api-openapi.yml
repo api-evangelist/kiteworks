@@ -1,7 +1,7 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   version: '28'
-  title: Kiteworks API Documentation activities API
+  title: Kiteworks API Documentation Activities API
 tags:
 - name: activities
 paths:
@@ -287,20 +287,6 @@ paths:
           - compact
 components:
   schemas:
-    ActivityUser:
-      type: object
-      properties:
-        userId:
-          type: string
-        name:
-          type: string
-          description: Full name of the user.
-        email:
-          type: string
-          description: Email address associated with the user.
-        profileIcon:
-          type: string
-          description: URL or identifier for the user's profile icon.
     Activity:
       type: object
       properties:
@@ -335,3 +321,17 @@ components:
         data:
           readOnly: true
           description: Additional event-specific data associated with the activity.
+    ActivityUser:
+      type: object
+      properties:
+        userId:
+          type: string
+        name:
+          type: string
+          description: Full name of the user.
+        email:
+          type: string
+          description: Email address associated with the user.
+        profileIcon:
+          type: string
+          description: URL or identifier for the user's profile icon.

@@ -1,7 +1,7 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   version: '28'
-  title: Kiteworks API Documentation activities userSshPublicKeys API
+  title: Kiteworks API Documentation User Ssh Public Keys API
 tags:
 - name: userSshPublicKeys
 paths:
@@ -592,26 +592,15 @@ paths:
           description: Request blocked by WAF
 components:
   schemas:
-    Errors:
+    UserGeneratedSshPublicKeyKey:
       type: object
       properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    UserSshPublicKeysPostCreateRequest:
-      type: object
-      properties:
-        name:
+        privateKey:
           type: string
-          maxLength: 50
-          description: The display name for the SSH public key (maximum 50 characters).
+          description: Generated SSH private key.
         publicKey:
           type: string
-          description: The SSH public key string to register.
-      required:
-      - name
-      - publicKey
+          description: Generated SSH public key.
     UserSshPublicKeysPostGenerateRequest:
       type: object
       properties:
@@ -624,58 +613,6 @@ components:
           description: Optional passphrase to protect the generated private key.
       required:
       - name
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
-    AdminUserSshPublicKeyList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserSshPublicKey1'
-    UserSshPublicKey:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique identifier of the SSH public key.
-        userId:
-          type: string
-        publicKey:
-          type: string
-          description: SSH public key string.
-        name:
-          type: string
-          description: Display name for the SSH public key.
-        active:
-          type: boolean
-          description: Indicates whether the SSH public key is active and can be used for authentication.
-        adminActive:
-          type: boolean
-          description: Indicates whether an administrator has enabled this SSH public key.
-    UserGeneratedSshPublicKeyKey:
-      type: object
-      properties:
-        privateKey:
-          type: string
-          description: Generated SSH private key.
-        publicKey:
-          type: string
-          description: Generated SSH public key.
-    UserSshPublicKeyList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserSshPublicKey'
     UserSshPublicKey1:
       type: object
       properties:
@@ -699,3 +636,66 @@ components:
         deleted:
           type: boolean
           description: Indicates whether the SSH public key has been deleted.
+    UserSshPublicKeyList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserSshPublicKey'
+    UserSshPublicKey:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the SSH public key.
+        userId:
+          type: string
+        publicKey:
+          type: string
+          description: SSH public key string.
+        name:
+          type: string
+          description: Display name for the SSH public key.
+        active:
+          type: boolean
+          description: Indicates whether the SSH public key is active and can be used for authentication.
+        adminActive:
+          type: boolean
+          description: Indicates whether an administrator has enabled this SSH public key.
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    UserSshPublicKeysPostCreateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 50
+          description: The display name for the SSH public key (maximum 50 characters).
+        publicKey:
+          type: string
+          description: The SSH public key string to register.
+      required:
+      - name
+      - publicKey
+    AdminUserSshPublicKeyList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserSshPublicKey1'
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'

@@ -1,7 +1,7 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   version: '28'
-  title: Kiteworks API Documentation activities shortLinks API
+  title: Kiteworks API Documentation Short Links API
 tags:
 - name: shortLinks
 paths:
