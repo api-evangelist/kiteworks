@@ -10,6 +10,18 @@ description: Kiteworks operates a Private Data Network (PDN) that unifies secure
   SCIM provisioning, and search across roughly 400 endpoints, plus a PubSub webhook service for
   real-time event delivery and an Apache-2.0 licensed Model Context Protocol (MCP) server that lets AI
   assistants operate on Kiteworks content under OAuth 2.1. The company was formerly known as Accellion.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
@@ -776,6 +788,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/kiteworks-capability-edges.yml
+  name: Kiteworks Business Capability Map
 - type: Overlay
   url: overlays/kiteworks-core-overlay.yaml
 - type: AgenticAccess
