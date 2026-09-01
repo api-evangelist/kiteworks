@@ -96,7 +96,8 @@ apis:
   description: The adminRoles API from Kiteworks — 4 operation(s) for adminroles.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
-  tags: []
+  tags:
+  - Admin - Roles
   tags_raw:
   - adminRoles
   properties:
@@ -131,7 +132,7 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
-  - cards
+  - Cards
   tags_raw:
   - cards
   properties:
@@ -306,7 +307,7 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
-  - folders
+  - Folders
   tags_raw:
   - folders
   properties:
@@ -360,7 +361,7 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
-  - languages
+  - Language
   tags_raw:
   - languages
   properties:
@@ -607,7 +608,8 @@ apis:
   description: The shortLinks API from Kiteworks — 1 operation(s) for shortlinks.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
-  tags: []
+  tags:
+  - Short Links
   tags_raw:
   - shortLinks
   properties:
@@ -642,7 +644,8 @@ apis:
   description: The sourceTypes API from Kiteworks — 2 operation(s) for sourcetypes.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
-  tags: []
+  tags:
+  - Source Types
   tags_raw:
   - sourceTypes
   properties:
@@ -696,7 +699,7 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
-  - uploads
+  - Uploads
   tags_raw:
   - uploads
   properties:
@@ -748,7 +751,8 @@ apis:
   description: The webForms API from Kiteworks — 2 operation(s) for webforms.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
-  tags: []
+  tags:
+  - Web Forms
   tags_raw:
   - webForms
   properties:
