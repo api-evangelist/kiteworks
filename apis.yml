@@ -91,24 +91,6 @@ apis:
     url: https://developer.kiteworks.com/api-reference.html
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
-- aid: kiteworks:kiteworks-adminroles-api
-  name: Kiteworks adminRoles API
-  description: The adminRoles API from Kiteworks — 4 operation(s) for adminroles.
-  humanURL: https://developer.kiteworks.com/api-endpoints.html
-  baseURL: https://your.kiteworks.domain/rest
-  tags:
-  - Admin - Roles
-  tags_raw:
-  - adminRoles
-  properties:
-  - type: OpenAPI
-    url: openapi/kiteworks-adminroles-api-openapi.yml
-  - type: Documentation
-    url: https://developer.kiteworks.com/api-endpoints.html
-  - type: APIReference
-    url: https://developer.kiteworks.com/api-reference.html
-  - type: Documentation
-    url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-advancedforms-api
   name: Kiteworks advancedForms API
   description: The advancedForms API from Kiteworks — 1 operation(s) for advancedforms.
@@ -603,24 +585,6 @@ apis:
     url: https://developer.kiteworks.com/api-reference.html
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
-- aid: kiteworks:kiteworks-shortlinks-api
-  name: Kiteworks shortLinks API
-  description: The shortLinks API from Kiteworks — 1 operation(s) for shortlinks.
-  humanURL: https://developer.kiteworks.com/api-endpoints.html
-  baseURL: https://your.kiteworks.domain/rest
-  tags:
-  - Short Links
-  tags_raw:
-  - shortLinks
-  properties:
-  - type: OpenAPI
-    url: openapi/kiteworks-shortlinks-api-openapi.yml
-  - type: Documentation
-    url: https://developer.kiteworks.com/api-endpoints.html
-  - type: APIReference
-    url: https://developer.kiteworks.com/api-reference.html
-  - type: Documentation
-    url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-sources-api
   name: Kiteworks sources API
   description: The sources API from Kiteworks — 15 operation(s) for sources.
@@ -633,24 +597,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/kiteworks-sources-api-openapi.yml
-  - type: Documentation
-    url: https://developer.kiteworks.com/api-endpoints.html
-  - type: APIReference
-    url: https://developer.kiteworks.com/api-reference.html
-  - type: Documentation
-    url: https://developer.kiteworks.com/pubsub-quick-start.html
-- aid: kiteworks:kiteworks-sourcetypes-api
-  name: Kiteworks sourceTypes API
-  description: The sourceTypes API from Kiteworks — 2 operation(s) for sourcetypes.
-  humanURL: https://developer.kiteworks.com/api-endpoints.html
-  baseURL: https://your.kiteworks.domain/rest
-  tags:
-  - Source Types
-  tags_raw:
-  - sourceTypes
-  properties:
-  - type: OpenAPI
-    url: openapi/kiteworks-sourcetypes-api-openapi.yml
   - type: Documentation
     url: https://developer.kiteworks.com/api-endpoints.html
   - type: APIReference
@@ -776,6 +722,54 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/kiteworks-webhook-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-admin-roles-api
+  name: Kiteworks Admin Roles API
+  description: The Admin Roles API from Kiteworks — 4 operation(s) for admin roles.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - Admin Roles
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-admin-roles-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-short-links-api
+  name: Kiteworks Short Links API
+  description: The Short Links API from Kiteworks — 1 operation(s) for short links.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - Short Links
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-short-links-api-openapi.yml
+  - type: Documentation
+    url: https://developer.kiteworks.com/api-endpoints.html
+  - type: APIReference
+    url: https://developer.kiteworks.com/api-reference.html
+  - type: Documentation
+    url: https://developer.kiteworks.com/pubsub-quick-start.html
+- aid: kiteworks:kiteworks-source-types-api
+  name: Kiteworks Source Types API
+  description: The Source Types API from Kiteworks — 2 operation(s) for source types.
+  humanURL: https://developer.kiteworks.com/api-endpoints.html
+  baseURL: https://your.kiteworks.domain/rest
+  tags:
+  - Source Types
+  properties:
+  - type: OpenAPI
+    url: openapi/kiteworks-source-types-api-openapi.yml
   - type: Documentation
     url: https://developer.kiteworks.com/api-endpoints.html
   - type: APIReference
