@@ -378,7 +378,7 @@ apis:
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
   tags:
-  - Locations
+  - Location
   tags_raw:
   - locations
   properties:
