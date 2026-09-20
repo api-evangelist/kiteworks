@@ -1,0 +1,70 @@
+slug: kiteworks
+provider: Kiteworks
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 5
+edges:
+- tag: adminRoles
+  spec_file: kiteworks-adminroles-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.85
+  evidence: PUT /rest/adminRoles/{id}/users/{user_id} "Assign an admin role to a user"; DELETE ... "Remove
+    an admin role from a user"; schema UserAdminRole
+  reason: Operations manage administrative roles and their assignment/removal for users — role-based access
+    control, i.e. identity and access management.
+- tag: users
+  spec_file: kiteworks-users-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: POST /rest/users/actions/login User login; POST /rest/users/me/tfa/auth Two Factor Authentication;
+    GET /rest/users/ldapSearch Find users in LDAP by input supplied; POST /rest/users/me/forcedPasswordChange
+    Change the password for current user after expired
+  reason: Operations cover authentication, two-factor auth, password lifecycle, LDAP directory lookup
+    and user provisioning/deletion — squarely identity and access management for the appliance, not HR
+    employee records.
+- tag: scim
+  spec_file: kiteworks-scim-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.78
+  evidence: POST /rest/scim/users — "Create a user"; DELETE /rest/scim/users/{id} — "Delete a user"; GET
+    /rest/scim/ServiceProviderConfig
+  reason: Standards-based SCIM user provisioning and deprovisioning (joiners-movers-leavers) against the
+    platform's directory — squarely Identity & Access Management. Not mapped to tenant identity federation
+    because Kiteworks is a single-customer hardened appliance rather than a multi-tenant fleet.
+- tag: userSshPublicKeys
+  spec_file: kiteworks-usersshpublickeys-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.75
+  evidence: POST /rest/userSshPublicKeys/create Register an SSH public key for the current user; POST
+    /rest/admin/users/{id}/userSshPublicKeys/generate Generate an SSH key pair for a user
+  reason: Issuance, generation, listing and revocation of per-user SSH credentials (including admin-on-behalf-of-user)
+    is authentication credential lifecycle management, i.e. identity and access management. Some ambiguity
+    vs. generic secrets management, hence 0.75.
+- tag: clients
+  spec_file: kiteworks-clients-api-openapi.yml
+  capability_id: BC-4270.40
+  capability_id_l1: BC-4270
+  capability_name: Developer Identity & Credential Management
+  confidence: 0.7
+  evidence: POST /rest/clients "Create a client"; GET /rest/clients/{id}/scopes "List scopes of a client";
+    schema ClientScopesResponse
+  reason: CRUD over API client registrations with OAuth scopes indicates management of developer/application
+    credentials on the platform. Moderate confidence as 'clients' could conceivably mean installed client
+    apps rather than OAuth clients, but the scopes surface points to credential management.
