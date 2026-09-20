@@ -14,7 +14,8 @@ capability_model:
 edge_count: 5
 edges:
 - tag: adminRoles
-  spec_file: kiteworks-adminroles-api-openapi.yml
+  spec_file: kiteworks-admin-roles-api-openapi.yml
+  reanchored_from: kiteworks-adminroles-api-openapi.yml
   capability_id: BC-620.20
   capability_id_l1: BC-620
   capability_name: Identity & Access Management
