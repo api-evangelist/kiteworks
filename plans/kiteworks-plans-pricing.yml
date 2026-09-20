@@ -1,0 +1,26 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-09-20'
+method: searched
+source: https://www.kiteworks.com/get-started/
+sources:
+- https://www.kiteworks.com/get-started/
+- https://www.kiteworks.com/pricing/
+provenance:
+  tool: planning/api-economics/harvest_pricing.py
+  run: 20260920T120546
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: negotiated
+published: false
+note: No numeric price is published on the pricing page; Feature comparison page for Business vs Enterprise
+  editions; no numeric prices shown, Enterprise is 'CALL FOR PRICING'.
+plan_count: 2
+plans:
+- name: Business
+  price_text: BUY NOW
+  period: none
+  included_quota: 5 to 500 users, File Size Maximum 2 GB
+- name: Enterprise
+  price_text: CALL FOR PRICING
+  period: none
+  included_quota: Unlimited license package sizes, 16 Terabytes file size maximum
