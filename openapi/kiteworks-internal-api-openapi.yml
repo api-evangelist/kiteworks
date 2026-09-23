@@ -3,14 +3,26 @@ info:
   version: '28'
   title: Kiteworks API Documentation Internal API
 tags:
-- name: internal
+- name: Internal
 paths:
   /rest/advancedForms/{id}/submissions:
     post:
       summary: Create an upload link for an Advanced Form submission
-      description: "### Description:\n  Creates a subfolder under the form owner's folder for the submission, then returns an upload link that the Advanced Form client can use to upload the submitted files.\n### Precondition:\n  Caller must be an Advanced Forms client.\n  The authenticated user must be the form owner.\n### Response:\n  Returns an upload link pointing to the newly created submission subfolder.\n"
+      description: '### Description:
+
+        Creates a subfolder under the form owner''s folder for the submission, then returns an upload link that the Advanced Form client can use to upload the submitted files.
+
+        ### Precondition:
+
+        Caller must be an Advanced Forms client.
+
+        The authenticated user must be the form owner.
+
+        ### Response:
+
+        Returns an upload link pointing to the newly created submission subfolder.'
       tags:
-      - internal
+      - Internal
       parameters:
       - in: path
         name: id
@@ -103,8 +115,33 @@ paths:
                       message: The input is invalid.
         '490':
           description: Request blocked by WAF
+      operationId: postRestAdvancedFormsByIdSubmissions
+      x-operation-id-source: derived
 components:
   schemas:
+    UploadLink:
+      type: object
+      properties:
+        ref:
+          type: string
+          format: uuid
+          description: Upload ref
+        created:
+          type: string
+          format: date
+          description: Date and time when the upload link was created.
+        parentId:
+          type: integer
+          description: Unique identifier of the parent folder where files will be uploaded.
+        totalSize:
+          type: integer
+          description: Total size of the upload in bytes.
+        uri:
+          type: string
+          description: Relative URI of the upload link.
+        uploadUrl:
+          type: string
+          description: The complete URL for the upload link.
     Errors:
       type: object
       properties:
@@ -136,26 +173,3 @@ components:
         message:
           type: string
           description: Error message
-    UploadLink:
-      type: object
-      properties:
-        ref:
-          type: string
-          format: uuid
-          description: Upload ref
-        created:
-          type: string
-          format: date
-          description: Date and time when the upload link was created.
-        parentId:
-          type: integer
-          description: Unique identifier of the parent folder where files will be uploaded.
-        totalSize:
-          type: integer
-          description: Total size of the upload in bytes.
-        uri:
-          type: string
-          description: Relative URI of the upload link.
-        uploadUrl:
-          type: string
-          description: The complete URL for the upload link.

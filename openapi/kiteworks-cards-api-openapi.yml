@@ -3,14 +3,24 @@ info:
   version: '28'
   title: Kiteworks API Documentation Cards API
 tags:
-- name: cards
+- name: Cards
 paths:
   /rest/admin/cards:
     get:
       summary: Get list of cards
-      description: "### Description:\n  Returns the list of admin dashboard cards filtered by the specified card types.\n### Precondition:\n  The user must be an administrator.\n### Response:\n  Returns the list of cards matching the specified types.\n"
+      description: '### Description:
+
+        Returns the list of admin dashboard cards filtered by the specified card types.
+
+        ### Precondition:
+
+        The user must be an administrator.
+
+        ### Response:
+
+        Returns the list of cards matching the specified types.'
       tags:
-      - cards
+      - Cards
       parameters:
       - in: query
         name: type:in
@@ -90,12 +100,24 @@ paths:
                       message: Invalid Parameter Exception
         '490':
           description: Request blocked by WAF
+      operationId: getRestAdminCards
+      x-operation-id-source: derived
   /rest/admin/cards/details:
     get:
       summary: Get card details
-      description: "### Description:\n  Returns the detailed information for a specific admin dashboard card.\n### Precondition:\n  The user must be an administrator with System or Application role.\n### Response:\n  Returns the details of the specified card.\n"
+      description: '### Description:
+
+        Returns the detailed information for a specific admin dashboard card.
+
+        ### Precondition:
+
+        The user must be an administrator with System or Application role.
+
+        ### Response:
+
+        Returns the details of the specified card.'
       tags:
-      - cards
+      - Cards
       parameters:
       - in: query
         name: type
@@ -201,12 +223,24 @@ paths:
                       message: Invalid Parameter Exception
         '490':
           description: Request blocked by WAF
+      operationId: getRestAdminCardsDetails
+      x-operation-id-source: derived
   /rest/admin/cards/actions:
     post:
       summary: Perform an action on a card
-      description: "### Description:\n  Submits an action to perform on a specific admin dashboard card.\n### Precondition:\n  The user must be an administrator with System or Application role.\n### Response:\n  The action has been accepted and will be processed.\n"
+      description: '### Description:
+
+        Submits an action to perform on a specific admin dashboard card.
+
+        ### Precondition:
+
+        The user must be an administrator with System or Application role.
+
+        ### Response:
+
+        The action has been accepted and will be processed.'
       tags:
-      - cards
+      - Cards
       requestBody:
         content:
           application/json:
@@ -280,52 +314,28 @@ paths:
                       message: Invalid Parameter Exception
         '490':
           description: Request blocked by WAF
+      operationId: postRestAdminCardsActions
+      x-operation-id-source: derived
 components:
   schemas:
-    CardActionPostRequest:
+    CardAction:
       type: object
       properties:
-        action:
-          type: string
-          enum:
-          - retry
-          - delete
-          description: The action to perform on the card.<br>`retry` – Retry the failed operation.<br>`delete` – Delete the card or related records.
         type:
           type: string
-          enum:
-          - content_encryption
-          - email_json_migration
-          - system_security_scanning
-          - events_table_monitor
-          - appadmin_db
-          - sysadmin_db
-          - sysadmin_hosts
-          - epg_warnings
-          - safe_edit_server_health
-          description: The type of card to perform the action on.<br>`content_encryption` – Content encryption card.<br>`email_json_migration` – Email JSON migration card.<br>`system_security_scanning` – System security scanning card.<br>`events_table_monitor` – Events table monitor card.<br>`appadmin_db` – Application admin database card.<br>`sysadmin_db` – System admin database card.<br>`sysadmin_hosts` – System admin hosts card.<br>`epg_warnings` – EPG warnings card.<br>`safe_edit_server_health` – Safe edit server health card.
-        hostId:
+          description: Type of card action.
+        url:
           type: string
-          description: The unique identifier of the host associated with the card.
-        storageType:
-          type: string
-          description: The storage type for the files to process.<br>`user_files` – User file storage.<br>`replication_files` – Replication file storage.
-        volume:
-          type: string
-          description: The storage volume containing the files to process.
-        fileId:
-          type: array
-          description: List of file IDs to retry content encryption for.
-          items:
-            type: integer
-        emailId:
-          type: array
-          description: List of email IDs to retry migrating to JSON format.
-          items:
-            type: integer
+          description: URL the card action links to.
       required:
-      - action
       - type
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
     CardHost:
       type: object
       properties:
@@ -370,6 +380,50 @@ components:
       - message
       - severity
       - type
+    CardActionPostRequest:
+      type: object
+      properties:
+        action:
+          type: string
+          enum:
+          - retry
+          - delete
+          description: The action to perform on the card.<br>`retry` – Retry the failed operation.<br>`delete` – Delete the card or related records.
+        type:
+          type: string
+          enum:
+          - content_encryption
+          - email_json_migration
+          - system_security_scanning
+          - events_table_monitor
+          - appadmin_db
+          - sysadmin_db
+          - sysadmin_hosts
+          - epg_warnings
+          - safe_edit_server_health
+          description: The type of card to perform the action on.<br>`content_encryption` – Content encryption card.<br>`email_json_migration` – Email JSON migration card.<br>`system_security_scanning` – System security scanning card.<br>`events_table_monitor` – Events table monitor card.<br>`appadmin_db` – Application admin database card.<br>`sysadmin_db` – System admin database card.<br>`sysadmin_hosts` – System admin hosts card.<br>`epg_warnings` – EPG warnings card.<br>`safe_edit_server_health` – Safe edit server health card.
+        hostId:
+          type: string
+          description: The unique identifier of the host associated with the card.
+        storageType:
+          type: string
+          description: The storage type for the files to process.<br>`user_files` – User file storage.<br>`replication_files` – Replication file storage.
+        volume:
+          type: string
+          description: The storage volume containing the files to process.
+        fileId:
+          type: array
+          description: List of file IDs to retry content encryption for.
+          items:
+            type: integer
+        emailId:
+          type: array
+          description: List of email IDs to retry migrating to JSON format.
+          items:
+            type: integer
+      required:
+      - action
+      - type
     Error:
       type: object
       properties:
@@ -379,21 +433,3 @@ components:
         message:
           type: string
           description: Error message
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    CardAction:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Type of card action.
-        url:
-          type: string
-          description: URL the card action links to.
-      required:
-      - type

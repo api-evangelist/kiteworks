@@ -3,12 +3,12 @@ info:
   version: '28'
   title: Kiteworks API Documentation Short Links API
 tags:
-- name: shortLinks
+- name: Short Links
 paths:
   /rest/shortLinks/{ref}:
     get:
       tags:
-      - shortLinks
+      - Short Links
       summary: Short Link
       description: Returns the properties of the specified short link, including the associated entity ID, entity type, and expiration date. Access to email-package short links is allowed without authentication when the package access control is set to no-auth.
       responses:
@@ -44,6 +44,8 @@ paths:
           enum:
           - full_with_links
           - full
+      operationId: getRestShortLinksByRef
+      x-operation-id-source: derived
 components:
   schemas:
     Shortlink:

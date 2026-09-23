@@ -8,7 +8,17 @@ paths:
   /rest/folders/{id}/actions/requestFile:
     post:
       summary: Send a Request File to Folder request
-      description: "### Description:\n  Initiates a Request File to Folder.\n### Precondition:\n  The user profile must have the necessary access rights to request files to the folder.\n### Response:\n  Successfully creates a request file and returns the request file details.\n"
+      description: '### Description:
+
+        Initiates a Request File to Folder.
+
+        ### Precondition:
+
+        The user profile must have the necessary access rights to request files to the folder.
+
+        ### Response:
+
+        Successfully creates a request file and returns the request file details.'
       tags:
       - requestFile
       parameters:
@@ -176,6 +186,8 @@ paths:
                       message: Invalid Parameter Exception
         '490':
           description: Request blocked by WAF
+      operationId: postRestFoldersByIdActionsRequestFile
+      x-operation-id-source: derived
   /rest/requestFile/{ref}:
     delete:
       tags:
@@ -209,9 +221,21 @@ paths:
         required: true
         schema:
           type: string
+      operationId: deleteRestRequestFileByRef
+      x-operation-id-source: derived
     get:
       summary: Returns Request File Info by ref
-      description: "### Description:\n  Retrieves detailed information about a Request File using the provided reference (ref).\n### Precondition:\n  The user must have valid authentication and appropriate access to view the request file information.\n### Response:\n  Returns the details of the specified request file, including its associated metadata and status.\n"
+      description: '### Description:
+
+        Retrieves detailed information about a Request File using the provided reference (ref).
+
+        ### Precondition:
+
+        The user must have valid authentication and appropriate access to view the request file information.
+
+        ### Response:
+
+        Returns the details of the specified request file, including its associated metadata and status.'
       tags:
       - requestFile
       parameters:
@@ -292,12 +316,26 @@ paths:
                       message: The request file has expired
         '490':
           description: Request blocked by WAF
+      operationId: getRestRequestFileByRef
+      x-operation-id-source: derived
   /rest/requestFile/{ref}/actions/file:
     post:
       tags:
       - requestFile
       summary: Upload a file requested by user
-      description: "Uploads a file to a folder or inbox in response to a file request from another user.\n                       Access is granted via the request file reference link (`ref`). If the request requires\n                       authentication (`require_auth`), the caller must be logged in. The uploaded file is\n                       renamed to include the uploader's email address.\\n\\nThe request link must not be expired\n                       or have reached its upload limit. Sufficient storage must be available in the target\n                       folder. The file extension and MIME type must not be excluded by the requestor's system\n                       policy."
+      description: 'Uploads a file to a folder or inbox in response to a file request from another user.
+
+        Access is granted via the request file reference link (`ref`). If the request requires
+
+        authentication (`require_auth`), the caller must be logged in. The uploaded file is
+
+        renamed to include the uploader''s email address.\n\nThe request link must not be expired
+
+        or have reached its upload limit. Sufficient storage must be available in the target
+
+        folder. The file extension and MIME type must not be excluded by the requestor''s system
+
+        policy.'
       responses:
         '200':
           description: Returns the uploaded file metadata.
@@ -416,6 +454,8 @@ paths:
                   type: string
               required:
               - body
+      operationId: postRestRequestFileByRefActionsFile
+      x-operation-id-source: derived
   /rest/requestFile/{ref}/comment/{object_id}:
     post:
       tags:
@@ -512,6 +552,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Comment.Post'
+      operationId: postRestRequestFileByRefCommentByObjectId
+      x-operation-id-source: derived
   /rest/requestFile/{ref}/preview/{object_id}:
     get:
       tags:
@@ -578,6 +620,8 @@ paths:
         required: true
         schema:
           type: string
+      operationId: getRestRequestFileByRefPreviewByObjectId
+      x-operation-id-source: derived
   /rest/requestFile/{ref}/sources:
     get:
       tags:
@@ -648,6 +692,8 @@ paths:
         required: true
         schema:
           type: string
+      operationId: getRestRequestFileByRefSources
+      x-operation-id-source: derived
   /rest/requestFile/{ref}/sources/{object_id}:
     get:
       tags:
@@ -718,12 +764,22 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestRequestFileByRefSourcesByObjectId
+      x-operation-id-source: derived
   /rest/requestFile/{ref}/sources/{object_id}/content:
     get:
       tags:
       - requestFile
       summary: Download files from folder in request files to folder message
-      description: "Downloads a file that was made available to recipients as a source attachment in a\n                       request files to folder message. Access is granted via the request file reference link\n                       (`ref`).\\n\\nThe request link must be valid and not expired. If the request requires\n                       authentication, the caller must be logged in. The file must not be deleted, infected,\n                       or DLP-locked."
+      description: 'Downloads a file that was made available to recipients as a source attachment in a
+
+        request files to folder message. Access is granted via the request file reference link
+
+        (`ref`).\n\nThe request link must be valid and not expired. If the request requires
+
+        authentication, the caller must be logged in. The file must not be deleted, infected,
+
+        or DLP-locked.'
       responses:
         '200':
           description: Returns the binary file content as a downloadable stream.
@@ -762,6 +818,8 @@ paths:
         description: Range of bytes to download. e.g. `bytes=0-1024`
         schema:
           type: string
+      operationId: getRestRequestFileByRefSourcesByObjectIdContent
+      x-operation-id-source: derived
   /rest/requestFile/{ref}/uploads:
     get:
       tags:
@@ -824,6 +882,8 @@ paths:
         required: true
         schema:
           type: string
+      operationId: getRestRequestFileByRefUploads
+      x-operation-id-source: derived
   /rest/requestFile/{ref}/uploads/{object_id}:
     get:
       tags:
@@ -894,6 +954,8 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestRequestFileByRefUploadsByObjectId
+      x-operation-id-source: derived
     delete:
       tags:
       - requestFile
@@ -939,12 +1001,20 @@ paths:
         required: true
         schema:
           type: string
+      operationId: deleteRestRequestFileByRefUploadsByObjectId
+      x-operation-id-source: derived
   /rest/requestFile/{ref}/uploads/{object_id}/content:
     get:
       tags:
       - requestFile
       summary: Download files uploaded to request files to folder or inbox message
-      description: "Downloads a file that was uploaded to a request files to folder or inbox message. Access\n                       is granted via the request file reference link (`ref`).\\n\\n**Authentication is required**\n                       — guest access is not permitted for this endpoint. The file must be associated with the\n                       specified request link, must not be deleted, and must not be infected or DLP-locked."
+      description: 'Downloads a file that was uploaded to a request files to folder or inbox message. Access
+
+        is granted via the request file reference link (`ref`).\n\n**Authentication is required**
+
+        — guest access is not permitted for this endpoint. The file must be associated with the
+
+        specified request link, must not be deleted, and must not be infected or DLP-locked.'
       responses:
         '200':
           description: Returns the binary file content as a downloadable stream.
@@ -983,10 +1053,22 @@ paths:
         description: Range of bytes to download. e.g. `bytes=0-1024`
         schema:
           type: string
+      operationId: getRestRequestFileByRefUploadsByObjectIdContent
+      x-operation-id-source: derived
   /rest/mail/actions/requestFile:
     post:
       summary: Request files to inbox
-      description: "### Description:\n  Sends a request files to inbox message.\n### Precondition:\n  Must be assigned a user profile with the ability to request files to inbox.\n### Response:\n  Sends the message requesting files to your inbox.\n"
+      description: '### Description:
+
+        Sends a request files to inbox message.
+
+        ### Precondition:
+
+        Must be assigned a user profile with the ability to request files to inbox.
+
+        ### Response:
+
+        Sends the message requesting files to your inbox.'
       tags:
       - requestFile
       parameters:
@@ -1142,10 +1224,22 @@ paths:
                       message: Invalid Parameter Exception
         '490':
           description: Request blocked by WAF
+      operationId: postRestMailActionsRequestFile
+      x-operation-id-source: derived
   /rest/requestFile/{ref}/reply:
     post:
       summary: Reply to Request File
-      description: "### Description:\n  Processes a reply to a specific Request File.\n### Precondition:\n  The user must be authenticated and have the proper access to reply to the specified request file.\n### Response:\n  The reply to the request file is processed, and a successful response is returned with the status of the action.\n"
+      description: '### Description:
+
+        Processes a reply to a specific Request File.
+
+        ### Precondition:
+
+        The user must be authenticated and have the proper access to reply to the specified request file.
+
+        ### Response:
+
+        The reply to the request file is processed, and a successful response is returned with the status of the action.'
       tags:
       - requestFile
       parameters:
@@ -1235,8 +1329,217 @@ paths:
                       message: Not allowed hyperlink domain. Hyperlink domain should not different from anchored text domain.
         '490':
           description: Request blocked by WAF
+      operationId: postRestRequestFileByRefReply
+      x-operation-id-source: derived
 components:
   schemas:
+    Comment.Post:
+      description: Class Comment
+      required:
+      - contents
+      properties:
+        parentId:
+          description: Unique identifier of the parent comment. Set this value when replying to an existing comment
+          type: integer
+        contents:
+          description: Text content of the comment
+          type: string
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
+    Mail2:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the email.
+        subject:
+          type: string
+          description: Subject line of the email.
+        body:
+          type: string
+          description: The body of the email.
+        fullHtmlBody:
+          type: string
+          description: Full HTML body of the email.
+        parentEmailId:
+          type: string
+          description: Unique identifier of the parent email, if applicable.
+        emailPackageId:
+          type: string
+          description: Unique identifier of the associated email package.
+        senderId:
+          type: string
+          description: Unique identifier of the sender.
+        sharedMailboxId:
+          type: string
+          description: Unique identifier of the shared mailbox, if applicable.
+    UserBasic1:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier (UUID) for the user.
+        email:
+          type: string
+          description: Email address associated with the user.
+    Group:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: LDAP Group ID
+        name:
+          type: string
+          description: LDAP Group name
+        dn:
+          type: string
+          description: LDAP Group domain name
+        email:
+          type: string
+          description: LDAP Group email
+        description:
+          type: string
+          description: LDAP Group description
+    SafeEdit:
+      type: object
+      properties:
+        safeEditLocked:
+          type: boolean
+          description: Indicates if the file is locked through a SafeEdit session.
+        user:
+          description: The user responsible for locking the file via SafeEdit.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+    BaseObject:
+      description: Class Object
+      required:
+      - id
+      - name
+      - parentId
+      - userId
+      properties:
+        id:
+          description: Unique identifier of object
+          type: string
+        created:
+          description: Date and time when the object was created
+          type: string
+          format: date-time
+        deleted:
+          description: Indicates whether the object is deleted
+          type: boolean
+        permDeleted:
+          description: Indicates whether the object is permanently deleted
+          type: boolean
+        expire:
+          description: Date and time when the object expires and becomes inaccessible
+          type: string
+          format: date-time
+        modified:
+          description: Date and time when the object was last modified
+          type: string
+          format: date-time
+        name:
+          description: Display name of the object
+          type: string
+        parentId:
+          description: Parent Folder identifier
+          type: string
+        userId:
+          description: Unique identifier of Object creator
+          type: string
+        parent:
+          description: Folder that directly contains this object (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/Folder'
+        permalink:
+          description: Permanent URL for accessing the object in the web application
+          type: string
+        creator:
+          description: Basic profile information of the user who created the object (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/UserBasicInfo'
+        permissions:
+          description: Current user's permissions (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        vendorDocId:
+          description: Identifier of the corresponding document in the external vendor system (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        vendorDocName:
+          description: Display name of the corresponding document in the external vendor system (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        source:
+          description: Numeric code identifying the external system that originated this object (e.g. Salesforce, Teams)
+          type: integer
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+    RequestFileSource:
+      description: Class RequestFileSource
+      properties:
+        fileId:
+          description: The unique identifier of the source file
+          type: integer
+        requestFileId:
+          description: The unique identifier of the associated request file
+          type: integer
+        actionId:
+          description: The available permissions on the source file for the uploader
+          type: integer
+        permissions:
+          description: Request file permissions for the source file
+          type: array
+          items:
+            $ref: '#/components/schemas/RequestFilePermission'
+    RequestFileToFolderPostRequest:
+      type: object
+      properties:
+        to:
+          type: array
+          description: List of email addresses to send the files to.
+          items:
+            type: string
+            format: email
+        subject:
+          type: string
+          minLength: 1
+          maxLength: 998
+          description: Subject of the email. Must be between 1 and 998 characters.
+        body:
+          type: string
+          description: The body of the email.
+        expire:
+          type: string
+          format: date
+          description: The expiration date of the request file link.
+        count:
+          type: integer
+          minimum: 0
+          description: The maximum number of files to attach.
+        requireAuth:
+          type: boolean
+          description: Indicates if authentication is required to access the files.
+        files:
+          type: array
+          description: List of object GUIDs representing the files to be sent.
+          items:
+            type: string
+        actionId:
+          type: integer
+          minimum: 1
+          maximum: 2
+          description: The action to allow recipients to perform on viewable files.<br>`1` – View only.<br>`2` – View and download.
+        showToken:
+          type: integer
+          minimum: 0
+          maximum: 1
+          description: Whether to include the request file token in the response.<br>`0` – Do not include the token.<br>`1` – Include the token.
+      required:
+      - subject
+      - to
     Folder:
       type: object
       properties:
@@ -1383,58 +1686,82 @@ components:
         inheritanceEnabled:
           type: boolean
           description: Indicates if a folder inherits permissions from the parent folder
-    Member:
+    UserBasic:
       type: object
       properties:
-        objectId:
+        id:
           type: string
-          description: Unique identifier (UUID) of the associated object (file or folder).
-        roleId:
-          type: integer
-          description: Role assigned to the member.
-        userId:
-          type: string
-          description: Unique identifier (UUID) of the user.
-        groupId:
-          type: integer
-          description: Unique identifier of the LDAP group.
-        user:
-          description: User details of the member.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-        role:
-          description: Role details assigned to the member.
-          allOf:
-          - $ref: '#/components/schemas/Role'
-        group:
-          description: Group details if the member belongs to a group.
-          allOf:
-          - $ref: '#/components/schemas/Group'
-        sharedBy:
-          description: Details of the user who shared the file or folder.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-        created:
-          type: string
-          format: date
-          description: Date when the file or folder was shared.
-        inheritRoleId:
-          type: integer
-          description: Inherited role ID from the parent folder, if applicable.
-        allowedFolderRoleId:
-          type: array
-          description: List of allowed folder role IDs.
-          items:
-            type: integer
+          description: Unique identifier (UUID) for the user.
         email:
           type: string
-          description: Email associated with the member.
-        rank:
+          description: Email address associated with the user.
+        name:
+          type: string
+          description: Full name of the user.
+        profileIcon:
+          type: string
+          description: URL or identifier for the user's profile icon.
+    Comment:
+      description: Class Comment
+      required:
+      - contents
+      - id
+      - objectId
+      - parentId
+      - userId
+      properties:
+        id:
+          description: Comment unique identifier
           type: integer
-          description: Rank of the member role.
-        originFolder:
-          readOnly: true
-    RequestFileToFolderPostRequest:
+        parentId:
+          description: Unique identifier of the parent comment, if the comment is a reply
+          type: integer
+        objectId:
+          description: Unique identifier (UUID) of the file being commented on
+          type: string
+        folderId:
+          description: Unique identifier (UUID) of the folder containing the object being commented on
+          type: string
+        userId:
+          description: Unique identifier (UUID) of the user who authored the comment
+          type: string
+        created:
+          description: Date and time when the comment was created
+          type: string
+          format: date
+        modified:
+          description: Date and time when the comment was last modified
+          type: string
+          format: date
+        contents:
+          description: Text content of the comment
+          type: string
+        deleted:
+          description: Indicates whether the comment has been deleted
+          type: boolean
+        isComment:
+          description: Indicates whether the item is a comment
+          type: boolean
+        object:
+          description: File being commented on (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/BaseObject'
+        author:
+          description: Author of the comment (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/UserBasicInfo'
+        parent:
+          description: The comment this reply is responding to, if applicable (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/Comment'
+        permissions:
+          description: Permissions of the current user regarding the comment (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+    RequestFileToInboxPostRequest:
       type: object
       properties:
         to:
@@ -1455,41 +1782,25 @@ components:
           type: string
           format: date
           description: The expiration date of the request file link.
-        count:
+        fileLimit:
           type: integer
           minimum: 0
           description: The maximum number of files to attach.
         requireAuth:
           type: boolean
           description: Indicates if authentication is required to access the files.
-        files:
+        returnReceipts:
           type: array
-          description: List of object GUIDs representing the files to be sent.
+          description: List of email addresses to send read receipts to.
           items:
             type: string
-        actionId:
-          type: integer
-          minimum: 1
-          maximum: 2
-          description: The action to allow recipients to perform on viewable files.<br>`1` – View only.<br>`2` – View and download.
-        showToken:
-          type: integer
-          minimum: 0
-          maximum: 1
-          description: Whether to include the request file token in the response.<br>`0` – Do not include the token.<br>`1` – Include the token.
+            format: email
+        sharedMailboxId:
+          type: string
+          description: Unique identifier for the Shared Mailbox. Used to search for results belonging to this Shared Mailbox.
       required:
       - subject
       - to
-    SafeEdit:
-      type: object
-      properties:
-        safeEditLocked:
-          type: boolean
-          description: Indicates if the file is locked through a SafeEdit session.
-        user:
-          description: The user responsible for locking the file via SafeEdit.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
     Preview:
       description: Class Preview
       properties:
@@ -1523,6 +1834,24 @@ components:
         tdfOriginalExtension:
           description: Original file extension for TDF files
           type: string
+    UserBasicInfo:
+      required:
+      - email
+      - id
+      - name
+      properties:
+        id:
+          description: The unique identifier of the user
+          type: string
+        name:
+          description: The name of the user
+          type: string
+        email:
+          description: The user's email
+          type: string
+        profileIcon:
+          description: URL to the user's profile icon image
+          type: string
     PushedObject:
       type: object
       properties:
@@ -1540,71 +1869,29 @@ components:
           description: Details of the user who pushed the object.
           allOf:
           - $ref: '#/components/schemas/UserBasic'
-    MobileInfo:
+    RequestFileUpload:
+      description: Class RequestFileUpload
+      properties:
+        fileId:
+          description: The unique identifier of the uploaded file
+          type: string
+        requestFileId:
+          description: The unique identifier of the associated request file
+          type: integer
+    RequestFileReplyPostRequest:
       type: object
       properties:
-        wopiSrc:
+        body:
           type: string
-          description: The WOPI (Web Application Open Platform Interface) source URL for the mobile application.
-        userId:
-          type: string
-          description: Unique identifier of the user.
-        service:
-          type: string
-          description: The WOPI service ID.
-        scheme:
-          type: string
-          description: URI scheme used by the mobile application to handle the file.
-        schemeSupport:
-          type: string
-          description: Indicates the level of support the mobile app has for the URI scheme.
-    RequestFile:
+          description: The body of the reply. This field is optional.
+    RequestFileConfig:
       type: object
       properties:
-        id:
-          type: integer
-          description: Unique identifier for the request file.
-        type:
-          type: string
-          description: The type of the request file.
-        requestor:
-          description: Information about the requestor (user who initiated the request).
-          allOf:
-          - $ref: '#/components/schemas/UserBasic1'
-        recipient:
-          description: Information about the recipient (user to whom the file is sent).
-          allOf:
-          - $ref: '#/components/schemas/UserBasic1'
-        remaining:
-          type: integer
-          description: The number of remaining files or actions.
-        fileLimit:
-          type: integer
-          description: The maximum number of files allowed for this request.
-        email:
-          description: Details of the email associated with the request file.
-          allOf:
-          - $ref: '#/components/schemas/Mail2'
-        message:
-          type: string
-          description: Message or note associated with the request file.
-        requireAuth:
-          type: boolean
-          description: Indicates whether authentication is required to access the request file.
-        expire:
-          type: string
-          format: date
-          description: The expiration date of the request file.
-        config:
-          description: Configuration details for the request file.
-          allOf:
-          - $ref: '#/components/schemas/RequestFileConfig'
-        uploadLink:
-          type: string
-          description: Link for uploading the request file.
-        ref:
-          type: string
-          description: Reference or identifier for the request file.
+        excludedFileExtensions:
+          type: array
+          description: List of file extensions not allowed for upload via this file request.
+          items:
+            type: string
     Tag:
       type: object
       properties:
@@ -1618,23 +1905,35 @@ components:
         type:
           type: string
           description: Type category of the tag.
-    RequestFileSource:
-      description: Class RequestFileSource
+    Fingerprint:
+      type: object
       properties:
-        fileId:
-          description: The unique identifier of the source file
+        algo:
+          type: string
+          description: The algorithm used to generate the fingerprint (e.g., sha3-256, md5).
+        hash:
+          type: string
+          description: The resulting hash value representing the fingerprint of the file or object.
+    RequestFilePermission:
+      properties:
+        name:
+          description: Action name
+          type: string
+        enabled:
+          description: Determines if action is valid
+          type: boolean
+    Permission:
+      type: object
+      properties:
+        id:
           type: integer
-        requestFileId:
-          description: The unique identifier of the associated request file
-          type: integer
-        actionId:
-          description: The available permissions on the source file for the uploader
-          type: integer
-        permissions:
-          description: Request file permissions for the source file
-          type: array
-          items:
-            $ref: '#/components/schemas/RequestFilePermission'
+          description: Unique identifier for the permission.
+        name:
+          type: string
+          description: Name of the permission.
+        allowed:
+          type: boolean
+          description: Indicates whether the permission is granted (True) or denied (False).
     File:
       type: object
       properties:
@@ -1807,64 +2106,6 @@ components:
           - 'null'
           format: uuid
           description: Tracking identifier associated with the file upload.
-    RequestFileToInboxPostRequest:
-      type: object
-      properties:
-        to:
-          type: array
-          description: List of email addresses to send the files to.
-          items:
-            type: string
-            format: email
-        subject:
-          type: string
-          minLength: 1
-          maxLength: 998
-          description: Subject of the email. Must be between 1 and 998 characters.
-        body:
-          type: string
-          description: The body of the email.
-        expire:
-          type: string
-          format: date
-          description: The expiration date of the request file link.
-        fileLimit:
-          type: integer
-          minimum: 0
-          description: The maximum number of files to attach.
-        requireAuth:
-          type: boolean
-          description: Indicates if authentication is required to access the files.
-        returnReceipts:
-          type: array
-          description: List of email addresses to send read receipts to.
-          items:
-            type: string
-            format: email
-        sharedMailboxId:
-          type: string
-          description: Unique identifier for the Shared Mailbox. Used to search for results belonging to this Shared Mailbox.
-      required:
-      - subject
-      - to
-    Permission:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique identifier for the permission.
-        name:
-          type: string
-          description: Name of the permission.
-        allowed:
-          type: boolean
-          description: Indicates whether the permission is granted (True) or denied (False).
-    RequestFileReplyPostRequest:
-      type: object
-      properties:
-        body:
-          type: string
-          description: The body of the reply. This field is optional.
     Errors:
       type: object
       properties:
@@ -1872,279 +2113,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Error'
-    UserBasic:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier (UUID) for the user.
-        email:
-          type: string
-          description: Email address associated with the user.
-        name:
-          type: string
-          description: Full name of the user.
-        profileIcon:
-          type: string
-          description: URL or identifier for the user's profile icon.
-    UserBasicInfo:
-      required:
-      - email
-      - id
-      - name
-      properties:
-        id:
-          description: The unique identifier of the user
-          type: string
-        name:
-          description: The name of the user
-          type: string
-        email:
-          description: The user's email
-          type: string
-        profileIcon:
-          description: URL to the user's profile icon image
-          type: string
-    RequestFileConfig:
-      type: object
-      properties:
-        excludedFileExtensions:
-          type: array
-          description: List of file extensions not allowed for upload via this file request.
-          items:
-            type: string
-    Mail2:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier of the email.
-        subject:
-          type: string
-          description: Subject line of the email.
-        body:
-          type: string
-          description: The body of the email.
-        fullHtmlBody:
-          type: string
-          description: Full HTML body of the email.
-        parentEmailId:
-          type: string
-          description: Unique identifier of the parent email, if applicable.
-        emailPackageId:
-          type: string
-          description: Unique identifier of the associated email package.
-        senderId:
-          type: string
-          description: Unique identifier of the sender.
-        sharedMailboxId:
-          type: string
-          description: Unique identifier of the shared mailbox, if applicable.
-    Comment:
-      description: Class Comment
-      required:
-      - contents
-      - id
-      - objectId
-      - parentId
-      - userId
-      properties:
-        id:
-          description: Comment unique identifier
-          type: integer
-        parentId:
-          description: Unique identifier of the parent comment, if the comment is a reply
-          type: integer
-        objectId:
-          description: Unique identifier (UUID) of the file being commented on
-          type: string
-        folderId:
-          description: Unique identifier (UUID) of the folder containing the object being commented on
-          type: string
-        userId:
-          description: Unique identifier (UUID) of the user who authored the comment
-          type: string
-        created:
-          description: Date and time when the comment was created
-          type: string
-          format: date
-        modified:
-          description: Date and time when the comment was last modified
-          type: string
-          format: date
-        contents:
-          description: Text content of the comment
-          type: string
-        deleted:
-          description: Indicates whether the comment has been deleted
-          type: boolean
-        isComment:
-          description: Indicates whether the item is a comment
-          type: boolean
-        object:
-          description: File being commented on (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/BaseObject'
-        author:
-          description: Author of the comment (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/UserBasicInfo'
-        parent:
-          description: The comment this reply is responding to, if applicable (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/Comment'
-        permissions:
-          description: Permissions of the current user regarding the comment (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
-        links:
-          description: HATEOAS links associated with the entity
-          type: array
-          items:
-            type: string
-    MetaData:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of items available.
-        limit:
-          type: integer
-          description: Maximum number of items returned per page.
-        offset:
-          type: integer
-          description: Number of items skipped before the current page.
-    BaseObject:
-      description: Class Object
-      required:
-      - id
-      - name
-      - parentId
-      - userId
-      properties:
-        id:
-          description: Unique identifier of object
-          type: string
-        created:
-          description: Date and time when the object was created
-          type: string
-          format: date-time
-        deleted:
-          description: Indicates whether the object is deleted
-          type: boolean
-        permDeleted:
-          description: Indicates whether the object is permanently deleted
-          type: boolean
-        expire:
-          description: Date and time when the object expires and becomes inaccessible
-          type: string
-          format: date-time
-        modified:
-          description: Date and time when the object was last modified
-          type: string
-          format: date-time
-        name:
-          description: Display name of the object
-          type: string
-        parentId:
-          description: Parent Folder identifier
-          type: string
-        userId:
-          description: Unique identifier of Object creator
-          type: string
-        parent:
-          description: Folder that directly contains this object (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/Folder'
-        permalink:
-          description: Permanent URL for accessing the object in the web application
-          type: string
-        creator:
-          description: Basic profile information of the user who created the object (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/UserBasicInfo'
-        permissions:
-          description: Current user's permissions (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
-        vendorDocId:
-          description: Identifier of the corresponding document in the external vendor system (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: string
-        vendorDocName:
-          description: Display name of the corresponding document in the external vendor system (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: string
-        source:
-          description: Numeric code identifying the external system that originated this object (e.g. Salesforce, Teams)
-          type: integer
-        links:
-          description: HATEOAS links associated with the entity
-          type: array
-          items:
-            type: string
-    RequestFileUpload:
-      description: Class RequestFileUpload
-      properties:
-        fileId:
-          description: The unique identifier of the uploaded file
-          type: string
-        requestFileId:
-          description: The unique identifier of the associated request file
-          type: integer
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
-    Group:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: LDAP Group ID
-        name:
-          type: string
-          description: LDAP Group name
-        dn:
-          type: string
-          description: LDAP Group domain name
-        email:
-          type: string
-          description: LDAP Group email
-        description:
-          type: string
-          description: LDAP Group description
-    RequestFilePermission:
-      properties:
-        name:
-          description: Action name
-          type: string
-        enabled:
-          description: Determines if action is valid
-          type: boolean
-    UserBasic1:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier (UUID) for the user.
-        email:
-          type: string
-          description: Email address associated with the user.
-    Comment.Post:
-      description: Class Comment
-      required:
-      - contents
-      properties:
-        parentId:
-          description: Unique identifier of the parent comment. Set this value when replying to an existing comment
-          type: integer
-        contents:
-          description: Text content of the comment
-          type: string
-        addLinks:
-          description: Indicates whether HATEOAS links should be included in the response
-          type: boolean
     Role:
       type: object
       properties:
@@ -2160,12 +2128,140 @@ components:
         type:
           type: string
           description: Role type
-    Fingerprint:
+    Member:
       type: object
       properties:
-        algo:
+        objectId:
           type: string
-          description: The algorithm used to generate the fingerprint (e.g., sha3-256, md5).
-        hash:
+          description: Unique identifier (UUID) of the associated object (file or folder).
+        roleId:
+          type: integer
+          description: Role assigned to the member.
+        userId:
           type: string
-          description: The resulting hash value representing the fingerprint of the file or object.
+          description: Unique identifier (UUID) of the user.
+        groupId:
+          type: integer
+          description: Unique identifier of the LDAP group.
+        user:
+          description: User details of the member.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        role:
+          description: Role details assigned to the member.
+          allOf:
+          - $ref: '#/components/schemas/Role'
+        group:
+          description: Group details if the member belongs to a group.
+          allOf:
+          - $ref: '#/components/schemas/Group'
+        sharedBy:
+          description: Details of the user who shared the file or folder.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        created:
+          type: string
+          format: date
+          description: Date when the file or folder was shared.
+        inheritRoleId:
+          type: integer
+          description: Inherited role ID from the parent folder, if applicable.
+        allowedFolderRoleId:
+          type: array
+          description: List of allowed folder role IDs.
+          items:
+            type: integer
+        email:
+          type: string
+          description: Email associated with the member.
+        rank:
+          type: integer
+          description: Rank of the member role.
+        originFolder:
+          readOnly: true
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    RequestFile:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the request file.
+        type:
+          type: string
+          description: The type of the request file.
+        requestor:
+          description: Information about the requestor (user who initiated the request).
+          allOf:
+          - $ref: '#/components/schemas/UserBasic1'
+        recipient:
+          description: Information about the recipient (user to whom the file is sent).
+          allOf:
+          - $ref: '#/components/schemas/UserBasic1'
+        remaining:
+          type: integer
+          description: The number of remaining files or actions.
+        fileLimit:
+          type: integer
+          description: The maximum number of files allowed for this request.
+        email:
+          description: Details of the email associated with the request file.
+          allOf:
+          - $ref: '#/components/schemas/Mail2'
+        message:
+          type: string
+          description: Message or note associated with the request file.
+        requireAuth:
+          type: boolean
+          description: Indicates whether authentication is required to access the request file.
+        expire:
+          type: string
+          format: date
+          description: The expiration date of the request file.
+        config:
+          description: Configuration details for the request file.
+          allOf:
+          - $ref: '#/components/schemas/RequestFileConfig'
+        uploadLink:
+          type: string
+          description: Link for uploading the request file.
+        ref:
+          type: string
+          description: Reference or identifier for the request file.
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
+    MobileInfo:
+      type: object
+      properties:
+        wopiSrc:
+          type: string
+          description: The WOPI (Web Application Open Platform Interface) source URL for the mobile application.
+        userId:
+          type: string
+          description: Unique identifier of the user.
+        service:
+          type: string
+          description: The WOPI service ID.
+        scheme:
+          type: string
+          description: URI scheme used by the mobile application to handle the file.
+        schemeSupport:
+          type: string
+          description: Indicates the level of support the mobile app has for the URI scheme.

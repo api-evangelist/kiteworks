@@ -3,14 +3,18 @@ info:
   version: '28'
   title: Kiteworks API Documentation Files API
 tags:
-- name: files
+- name: Files
 paths:
   /rest/files:
     delete:
       tags:
-      - files
+      - Files
       summary: Delete files
-      description: "Deletes the specified files. Depending on the system retention policy, the files may be\n                       recoverable until permanently deleted by the system.\\n\\n**Requires `file_delete` permission\n                       on the parent folder for each file.**"
+      description: 'Deletes the specified files. Depending on the system retention policy, the files may be
+
+        recoverable until permanently deleted by the system.\n\n**Requires `file_delete` permission
+
+        on the parent folder for each file.**'
       responses:
         '204':
           description: Files successfully deleted.
@@ -51,12 +55,24 @@ paths:
           enum:
           - full_with_links
           - full
+      operationId: deleteRestFiles
+      x-operation-id-source: derived
   /rest/files/actions/copy:
     post:
       summary: Copy files
-      description: "### Description:\n  Copies the specified files to a folder.\n### Precondition:\n  Must be assigned the `file_copy` permission for the files being copied and `file_add` permission for the destination folder.\n### Response:\n  Copies the files to the folder. If duplicate files exist, appends a number to copied file names.\n"
+      description: '### Description:
+
+        Copies the specified files to a folder.
+
+        ### Precondition:
+
+        Must be assigned the `file_copy` permission for the files being copied and `file_add` permission for the destination folder.
+
+        ### Response:
+
+        Copies the files to the folder. If duplicate files exist, appends a number to copied file names.'
       tags:
-      - files
+      - Files
       parameters:
       - in: query
         name: returnEntity
@@ -245,12 +261,24 @@ paths:
                       message: Folder owner's remaining storage quota does not permit for a file upload of this size.
         '490':
           description: Request blocked by WAF
+      operationId: postRestFilesActionsCopy
+      x-operation-id-source: derived
   /rest/files/actions/lock:
     patch:
       summary: Lock files
-      description: "### Description:\n  Locks the specified files, preventing others from performing actions such as editing, moving, and deleting the files.\n### Precondition:\n  Must be assigned the `lock` permission for the files.\n### Response:\n  Locks the files.\n"
+      description: '### Description:
+
+        Locks the specified files, preventing others from performing actions such as editing, moving, and deleting the files.
+
+        ### Precondition:
+
+        Must be assigned the `lock` permission for the files.
+
+        ### Response:
+
+        Locks the files.'
       tags:
-      - files
+      - Files
       parameters:
       - in: query
         name: id:in
@@ -389,12 +417,16 @@ paths:
                       message: Invalid Parameter Exception
         '490':
           description: Request blocked by WAF
+      operationId: patchRestFilesActionsLock
+      x-operation-id-source: derived
   /rest/files/actions/mobileSyncItems:
     post:
       tags:
-      - files
+      - Files
       summary: Add multiple files to mobile sync list
-      description: "Adds multiple files to the current user's mobile sync list in a single request. Supports partial success, meaning valid items are processed even if some fail. This operation will not return location headers for each entity created, if the inserted records are\n        required, returnEntity should be set to true."
+      description: 'Adds multiple files to the current user''s mobile sync list in a single request. Supports partial success, meaning valid items are processed even if some fail. This operation will not return location headers for each entity created, if the inserted records are
+
+        required, returnEntity should be set to true.'
       responses:
         '200':
           description: Mobile sync items created successfully.
@@ -468,9 +500,11 @@ paths:
           enum:
           - full_with_links
           - full
+      operationId: postRestFilesActionsMobileSyncItems
+      x-operation-id-source: derived
     delete:
       tags:
-      - files
+      - Files
       summary: Delete multiple files from user mobile sync list
       description: Removes multiple files from the current user's mobile sync list in a single request. Supports partial success, meaning valid items are processed even if some fail.
       responses:
@@ -513,12 +547,24 @@ paths:
           enum:
           - full_with_links
           - full
+      operationId: deleteRestFilesActionsMobileSyncItems
+      x-operation-id-source: derived
   /rest/files/actions/move:
     post:
       summary: Move files
-      description: "### Description:\n  Moves the specified files to a folder.\n### Precondition:\n  Must be assigned the `file_move` permission for the files being moved and the `file_add` permission for the destination folder.\n### Response:\n  Moves the files to the folder.\n"
+      description: '### Description:
+
+        Moves the specified files to a folder.
+
+        ### Precondition:
+
+        Must be assigned the `file_move` permission for the files being moved and the `file_add` permission for the destination folder.
+
+        ### Response:
+
+        Moves the files to the folder.'
       tags:
-      - files
+      - Files
       parameters:
       - in: query
         name: returnEntity
@@ -707,12 +753,18 @@ paths:
                       message: Folder owner's remaining storage quota does not permit for a file upload of this size.
         '490':
           description: Request blocked by WAF
+      operationId: postRestFilesActionsMove
+      x-operation-id-source: derived
   /rest/files/actions/permanent:
     delete:
       tags:
-      - files
+      - Files
       summary: Delete files permanently
-      description: "Permanently deletes the specified files. Files cannot be recovered after this operation.\\n\\n\n                       **Requires `permanent delete` permission on the parent folder for each file.** Each file must\n                       already be in the deleted state and must not be locked."
+      description: 'Permanently deletes the specified files. Files cannot be recovered after this operation.\n\n
+
+        **Requires `permanent delete` permission on the parent folder for each file.** Each file must
+
+        already be in the deleted state and must not be locked.'
       responses:
         '204':
           description: All specified files permanently deleted.
@@ -753,12 +805,16 @@ paths:
           enum:
           - full_with_links
           - full
+      operationId: deleteRestFilesActionsPermanent
+      x-operation-id-source: derived
   /rest/files/actions/push:
     post:
       tags:
-      - files
+      - Files
       summary: Push files list to mobile sync list
-      description: "Adds multiple files to the mobile sync list for all members of the files' parent folder. Requires mobile sync to be enabled. Supports partial success, meaning valid items are processed even if some fail. This operation will not return location headers for each entity created, if the inserted records are\n        required, returnEntity should be set to true."
+      description: 'Adds multiple files to the mobile sync list for all members of the files'' parent folder. Requires mobile sync to be enabled. Supports partial success, meaning valid items are processed even if some fail. This operation will not return location headers for each entity created, if the inserted records are
+
+        required, returnEntity should be set to true.'
       responses:
         '200':
           description: Files pushed to mobile sync list successfully.
@@ -815,9 +871,11 @@ paths:
           enum:
           - full_with_links
           - full
+      operationId: postRestFilesActionsPush
+      x-operation-id-source: derived
     delete:
       tags:
-      - files
+      - Files
       summary: Un-Push multiple files
       description: Removes multiple files from all folder members' mobile sync list in a single request. Requires mobile sync to be enabled. Supports partial success, meaning valid items are processed even if some fail.
       responses:
@@ -846,12 +904,18 @@ paths:
           enum:
           - full_with_links
           - full
+      operationId: deleteRestFilesActionsPush
+      x-operation-id-source: derived
   /rest/files/actions/recover:
     patch:
       tags:
-      - files
+      - Files
       summary: Recover deleted files
-      description: "Recovers the specified deleted files, restoring them to their parent folders.\\n\\n**Requires\n                       `file_recover` permission on the parent folder for each file.** Each file must be in the\n                       deleted state and must not be permanently deleted."
+      description: 'Recovers the specified deleted files, restoring them to their parent folders.\n\n**Requires
+
+        `file_recover` permission on the parent folder for each file.** Each file must be in the
+
+        deleted state and must not be permanently deleted.'
       responses:
         '200':
           description: Returns the recovered files with their restored status.
@@ -914,12 +978,20 @@ paths:
           enum:
           - full_with_links
           - full
+      operationId: patchRestFilesActionsRecover
+      x-operation-id-source: derived
   /rest/files/actions/scan:
     post:
       tags:
-      - files
+      - Files
       summary: Scan files for security
-      description: "Queues security scans for the specified files. Depending on system scan policies, files are\n                       scanned for anti-virus threats, data loss prevention (DLP) violations, and advanced threat\n                       protection. Scans run asynchronously.\\n\\n**Requires `view` permission on each file.** Files\n                       must not be deleted."
+      description: 'Queues security scans for the specified files. Depending on system scan policies, files are
+
+        scanned for anti-virus threats, data loss prevention (DLP) violations, and advanced threat
+
+        protection. Scans run asynchronously.\n\n**Requires `view` permission on each file.** Files
+
+        must not be deleted.'
       responses:
         '200':
           description: Returns the files for which security scans were queued.
@@ -982,12 +1054,24 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: postRestFilesActionsScan
+      x-operation-id-source: derived
   /rest/files/actions/unlock:
     patch:
       summary: Unlock files
-      description: "### Description:\n  Unlocks the specified files, enabling others to perform actions such as edit, move, and delete the files.\n### Precondition:\n  Must be assigned the `unlock` permission for the files.\n### Response:\n  Unlocks the files.\n"
+      description: '### Description:
+
+        Unlocks the specified files, enabling others to perform actions such as edit, move, and delete the files.
+
+        ### Precondition:
+
+        Must be assigned the `unlock` permission for the files.
+
+        ### Response:
+
+        Unlocks the files.'
       tags:
-      - files
+      - Files
       parameters:
       - in: query
         name: id:in
@@ -1126,12 +1210,18 @@ paths:
                       message: Invalid Parameter Exception
         '490':
           description: Request blocked by WAF
+      operationId: patchRestFilesActionsUnlock
+      x-operation-id-source: derived
   /rest/files/actions/zip:
     get:
       tags:
-      - files
+      - Files
       summary: Download files and folders in ZIP format
-      description: "Downloads the specified files and folders as a ZIP archive. Folder contents are included\n                       recursively. Optionally filtered by file extension.\\n\\n**Requires `download` permission on\n                       each file and folder.** Files must not be deleted, infected, or DLP-locked."
+      description: 'Downloads the specified files and folders as a ZIP archive. Folder contents are included
+
+        recursively. Optionally filtered by file extension.\n\n**Requires `download` permission on
+
+        each file and folder.** Files must not be deleted, infected, or DLP-locked.'
       responses:
         '200':
           description: Returns a binary ZIP archive containing the requested files and folders.
@@ -1196,12 +1286,24 @@ paths:
           enum:
           - full_with_links
           - full
+      operationId: getRestFilesActionsZip
+      x-operation-id-source: derived
   /rest/files/actions/zipStatus:
     get:
       summary: Get file and folder security status
-      description: "### Description:\n  Gets the security scan results of specified files and folders in preparation for downloading them in ZIP format.\n### Precondition:\n  Must be assigned the `download` permission for the files and folders.\n### Response:\n  Returns an empty response if all files are safe for download.\n"
+      description: '### Description:
+
+        Gets the security scan results of specified files and folders in preparation for downloading them in ZIP format.
+
+        ### Precondition:
+
+        Must be assigned the `download` permission for the files and folders.
+
+        ### Response:
+
+        Returns an empty response if all files are safe for download.'
       tags:
-      - files
+      - Files
       parameters:
       - in: query
         name: fileId:in
@@ -1349,12 +1451,24 @@ paths:
                       message: License has expired
         '490':
           description: Request blocked by WAF
+      operationId: getRestFilesActionsZipStatus
+      x-operation-id-source: derived
   /rest/files/{id}:
     get:
       summary: Get file metadata
-      description: "### Description:\n  Gets metadata for specified files, such as file owner, creation date, digital fingerprint, and security scan status.\n### Precondition:\n  Must be assigned the `properties_view` permission for the file.\n### Response:\n  Returns the file metadata.\n"
+      description: '### Description:
+
+        Gets metadata for specified files, such as file owner, creation date, digital fingerprint, and security scan status.
+
+        ### Precondition:
+
+        Must be assigned the `properties_view` permission for the file.
+
+        ### Response:
+
+        Returns the file metadata.'
       tags:
-      - files
+      - Files
       parameters:
       - in: path
         name: id
@@ -1443,11 +1557,23 @@ paths:
                       redirectUrl: /login?code=3317
         '490':
           description: Request blocked by WAF
+      operationId: getRestFilesById
+      x-operation-id-source: derived
     put:
       summary: Update a file
-      description: "### Description:\n  Updates a file's properties such as name and expiration date.\n### Precondition:\n  User must have `properties_edit` permission for the file.\n### Response:\n  The file is updated.\n"
+      description: '### Description:
+
+        Updates a file''s properties such as name and expiration date.
+
+        ### Precondition:
+
+        User must have `properties_edit` permission for the file.
+
+        ### Response:
+
+        The file is updated.'
       tags:
-      - files
+      - Files
       parameters:
       - in: path
         name: id
@@ -1602,11 +1728,17 @@ paths:
                       message: Entity exists
         '490':
           description: Request blocked by WAF
+      operationId: putRestFilesById
+      x-operation-id-source: derived
     delete:
       tags:
-      - files
+      - Files
       summary: Delete a file
-      description: "Deletes the specified file. Depending on the system retention policy, the file may be\n                       recoverable until permanently deleted by the system.\\n\\n**Requires `delete` permission on\n                       the parent folder.** The file must not be locked."
+      description: 'Deletes the specified file. Depending on the system retention policy, the file may be
+
+        recoverable until permanently deleted by the system.\n\n**Requires `delete` permission on
+
+        the parent folder.** The file must not be locked.'
       responses:
         '204':
           description: File successfully deleted.
@@ -1634,9 +1766,11 @@ paths:
         required: true
         schema:
           type: string
+      operationId: deleteRestFilesById
+      x-operation-id-source: derived
     post:
       tags:
-      - files
+      - Files
       summary: Upload a file version
       description: Uploads a new version of the specified file. The uploaded content becomes the new current version (version 0), and the previous current version is incremented. **Requires `version_create` permission on the file.**
       responses:
@@ -1755,12 +1889,18 @@ paths:
                   type: string
               required:
               - body
+      operationId: postRestFilesById
+      x-operation-id-source: derived
   /rest/files/{id}/actions/lock:
     patch:
       tags:
-      - files
+      - Files
       summary: Lock a file
-      description: "Locks the specified file, preventing other users from editing, moving, or deleting it until\n                       the lock is released.\\n\\n**Requires `lock` permission on the file.** The file must not already\n                       be locked or deleted."
+      description: 'Locks the specified file, preventing other users from editing, moving, or deleting it until
+
+        the lock is released.\n\n**Requires `lock` permission on the file.** The file must not already
+
+        be locked or deleted.'
       responses:
         '200':
           description: Returns the file with its updated lock status.
@@ -1818,12 +1958,28 @@ paths:
           enum:
           - full_with_links
           - full
+      operationId: patchRestFilesByIdActionsLock
+      x-operation-id-source: derived
   /rest/files/{id}/actions/permanent:
     delete:
       summary: Permanently delete a file
-      description: "### Description:\n  Permanently deletes the specified file. The file must have been soft-deleted first.\n### Precondition:\n  The user must be the owner, manager, or collaborator of the file.\n  The file must not be locked or safe-edit locked, unless the user is an admin.\n  The file must have been soft-deleted via `DELETE /rest/files/{id}`.\n### Response:\n  The file is permanently deleted and its content cannot be retrieved.\n"
+      description: '### Description:
+
+        Permanently deletes the specified file. The file must have been soft-deleted first.
+
+        ### Precondition:
+
+        The user must be the owner, manager, or collaborator of the file.
+
+        The file must not be locked or safe-edit locked, unless the user is an admin.
+
+        The file must have been soft-deleted via `DELETE /rest/files/{id}`.
+
+        ### Response:
+
+        The file is permanently deleted and its content cannot be retrieved.'
       tags:
-      - files
+      - Files
       parameters:
       - in: path
         name: id
@@ -1886,10 +2042,12 @@ paths:
                       message: File is under SafeEDIT by another user
         '490':
           description: Request blocked by WAF
+      operationId: deleteRestFilesByIdActionsPermanent
+      x-operation-id-source: derived
   /rest/files/{id}/actions/push:
     post:
       tags:
-      - files
+      - Files
       summary: Push file to mobile sync list
       description: Adds the specified file to the mobile sync list for all members of the file's parent folder. Requires mobile sync to be enabled.
       responses:
@@ -1943,9 +2101,11 @@ paths:
           enum:
           - full_with_links
           - full
+      operationId: postRestFilesByIdActionsPush
+      x-operation-id-source: derived
     delete:
       tags:
-      - files
+      - Files
       summary: Un-Push file from mobile sync list
       description: Removes the specified file from all folder members' mobile sync list. Requires mobile sync to be enabled.
       responses:
@@ -1974,12 +2134,18 @@ paths:
           enum:
           - full_with_links
           - full
+      operationId: deleteRestFilesByIdActionsPush
+      x-operation-id-source: derived
   /rest/files/{id}/actions/recover:
     patch:
       tags:
-      - files
-      summary: Recover a file.
-      description: "Recovers the specified deleted file, restoring it to its parent folder.\\n\\n**Requires\n                       `recover` permission on the parent folder.** The file must be in the deleted state and must\n                       not be permanently deleted."
+      - Files
+      summary: Recover a file
+      description: 'Recovers the specified deleted file, restoring it to its parent folder.\n\n**Requires
+
+        `recover` permission on the parent folder.** The file must be in the deleted state and must
+
+        not be permanently deleted.'
       responses:
         '200':
           description: Returns the recovered file with its restored status.
@@ -2023,12 +2189,24 @@ paths:
           enum:
           - full_with_links
           - full
+      operationId: patchRestFilesByIdActionsRecover
+      x-operation-id-source: derived
   /rest/files/{id}/actions/return:
     patch:
       tags:
-      - files
+      - Files
       summary: Check file into Repositories Gateway source
-      description: "Checks the specified file back into its Repositories Gateway source. The local copy of\n                       the file is permanently deleted after a successful check-in. If the file is locked in\n                       the Repositories Gateway source and the caller has `unlock` permission, the lock is\n                       released automatically.\\n\\n**Requires `view` permission on the parent folder.** The file\n                       must be eligible to return to source (i.e., it was originally checked out) and must not\n                       be infected."
+      description: 'Checks the specified file back into its Repositories Gateway source. The local copy of
+
+        the file is permanently deleted after a successful check-in. If the file is locked in
+
+        the Repositories Gateway source and the caller has `unlock` permission, the lock is
+
+        released automatically.\n\n**Requires `view` permission on the parent folder.** The file
+
+        must be eligible to return to source (i.e., it was originally checked out) and must not
+
+        be infected.'
       responses:
         '200':
           description: Returns the updated file metadata from the Repositories Gateway source after check-in.
@@ -2076,12 +2254,20 @@ paths:
           enum:
           - full_with_links
           - full
+      operationId: patchRestFilesByIdActionsReturn
+      x-operation-id-source: derived
   /rest/files/{id}/actions/scan:
     post:
       tags:
-      - files
+      - Files
       summary: Scan a file for security
-      description: "Queues a security scan for the specified file. Depending on system scan policies, the file\n                       is scanned for anti-virus threats, data loss prevention (DLP) violations, and advanced threat\n                       protection. The scan runs asynchronously.\\n\\n**Requires `view` permission on the file.**\n                       The file must not be deleted."
+      description: 'Queues a security scan for the specified file. Depending on system scan policies, the file
+
+        is scanned for anti-virus threats, data loss prevention (DLP) violations, and advanced threat
+
+        protection. The scan runs asynchronously.\n\n**Requires `view` permission on the file.**
+
+        The file must not be deleted.'
       responses:
         '200':
           description: Returns the file for which the security scan was queued.
@@ -2124,12 +2310,16 @@ paths:
           enum:
           - full_with_links
           - full
+      operationId: postRestFilesByIdActionsScan
+      x-operation-id-source: derived
   /rest/files/{id}/actions/unlock:
     patch:
       tags:
-      - files
+      - Files
       summary: Unlock a file
-      description: "Unlocks the specified file, allowing other users to edit, move, and delete it.\\n\\n\n                       **Requires `unlock` permission on the file.** The file must currently be locked."
+      description: 'Unlocks the specified file, allowing other users to edit, move, and delete it.\n\n
+
+        **Requires `unlock` permission on the file.** The file must currently be locked.'
       responses:
         '200':
           description: Returns the file with its updated lock status.
@@ -2194,10 +2384,12 @@ paths:
           enum:
           - full_with_links
           - full
+      operationId: patchRestFilesByIdActionsUnlock
+      x-operation-id-source: derived
   /rest/files/{id}/comments:
     get:
       tags:
-      - files
+      - Files
       summary: Get file comments
       description: Returns a list of comments on the specified file. **Requires `comment_view` permission on the file.**
       responses:
@@ -2377,9 +2569,11 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestFilesByIdComments
+      x-operation-id-source: derived
     post:
       tags:
-      - files
+      - Files
       summary: Add file comment
       description: Adds a comment to the specified file. To reply to an existing comment, include a `parentId` in the request body. **Requires `comment_add` permission on the file.**
       responses:
@@ -2466,12 +2660,24 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Comment.Post'
+      operationId: postRestFilesByIdComments
+      x-operation-id-source: derived
   /rest/files/{id}/content:
     get:
       summary: Download a file
-      description: "### Description:\n  Downloads the specified file.\n### Precondition:\n  Must be assigned the `download` permission for the file.\n### Response:\n  Downloads the file to the specified location.\n"
+      description: '### Description:
+
+        Downloads the specified file.
+
+        ### Precondition:
+
+        Must be assigned the `download` permission for the file.
+
+        ### Response:
+
+        Downloads the file to the specified location.'
       tags:
-      - files
+      - Files
       parameters:
       - in: path
         name: id
@@ -2566,12 +2772,20 @@ paths:
                       message: File is infected
         '490':
           description: Request blocked by WAF
+      operationId: getRestFilesByIdContent
+      x-operation-id-source: derived
   /rest/files/{id}/externalEdit:
     get:
       tags:
-      - files
-      summary: Get access token for external file edit.
-      description: "Retrieves a short-lived refresh token scoped to the specified file, authorizing an external\n                       editor to download the current version and upload a new version.\\n\\n**Requires `file_add`\n                       permission on the parent folder.** The file must not be permanently deleted. Users with\n                       Collaborator, Downloader, or Viewer roles cannot edit files in restricted folders."
+      - Files
+      summary: Get access token for external file edit
+      description: 'Retrieves a short-lived refresh token scoped to the specified file, authorizing an external
+
+        editor to download the current version and upload a new version.\n\n**Requires `file_add`
+
+        permission on the parent folder.** The file must not be permanently deleted. Users with
+
+        Collaborator, Downloader, or Viewer roles cannot edit files in restricted folders.'
       responses:
         '200':
           description: Returns a short-lived refresh token with the scope and expiration required for external file editing.
@@ -2612,12 +2826,45 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestFilesByIdExternalEdit
+      x-operation-id-source: derived
   /rest/files/{id}/members:
     get:
       summary: Get users with access to a shared file
-      description: "### Description:\n  Gets a list of users with access to the specified shared file. Also gets the file metadata, providing context and information about the shared file such as each user's role for accessing the file and the user who shared the file.\n### Precondition:\n  File sharing must be activated on the system. Must be assigned the `user_view` permission for the shared file.\n### Response:\n  Returns the list of users with access to the shared file, along with metadata about the shared file.\n### Sorting:\n  Sort string syntax `FIELD_NAME:ORDER`.\n\n  ORDER can be `asc` or `desc`.\n### Sorting options:\n  | FIELD_NAME | Description |\n  |------------|-------------|\n  | id         | The member ID |\n  | userId     | The user ID |\n  | groupId    | The group ID |\n  | roleId     | The role ID |\n"
+      description: '### Description:
+
+        Gets a list of users with access to the specified shared file. Also gets the file metadata, providing context and information about the shared file such as each user''s role for accessing the file and the user who shared the file.
+
+        ### Precondition:
+
+        File sharing must be activated on the system. Must be assigned the `user_view` permission for the shared file.
+
+        ### Response:
+
+        Returns the list of users with access to the shared file, along with metadata about the shared file.
+
+        ### Sorting:
+
+        Sort string syntax `FIELD_NAME:ORDER`.
+
+
+        ORDER can be `asc` or `desc`.
+
+        ### Sorting options:
+
+        | FIELD_NAME | Description |
+
+        |------------|-------------|
+
+        | id | The member ID |
+
+        | userId | The user ID |
+
+        | groupId | The group ID |
+
+        | roleId | The role ID |'
       tags:
-      - files
+      - Files
       parameters:
       - in: path
         name: id
@@ -2826,11 +3073,23 @@ paths:
                       message: License has expired
         '490':
           description: Request blocked by WAF
+      operationId: getRestFilesByIdMembers
+      x-operation-id-source: derived
     delete:
       summary: Remove all access to a shared file
-      description: "### Description:\n  Removes user access to the specified shared file.\n### Precondition:\n  Must be assigned the `user_add` permission for the folder containing the shared file.\n### Response:\n  Removes user access to the shared file.\n"
+      description: '### Description:
+
+        Removes user access to the specified shared file.
+
+        ### Precondition:
+
+        Must be assigned the `user_add` permission for the folder containing the shared file.
+
+        ### Response:
+
+        Removes user access to the shared file.'
       tags:
-      - files
+      - Files
       parameters:
       - in: path
         name: id
@@ -2900,10 +3159,12 @@ paths:
                       message: Invalid Parameter Exception
         '490':
           description: Request blocked by WAF
+      operationId: deleteRestFilesByIdMembers
+      x-operation-id-source: derived
   /rest/files/{id}/members/ldapGroup:
     get:
       tags:
-      - files
+      - Files
       summary: List LDAP groups with access to a shared file
       description: Returns a list of LDAP groups and their assigned roles for the folder containing the specified file. Requires the `user_view` permission on the shared file.
       responses:
@@ -2995,10 +3256,12 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestFilesByIdMembersLdapGroup
+      x-operation-id-source: derived
   /rest/files/{id}/members/ldapGroup/{ldap_group_id}:
     get:
       tags:
-      - files
+      - Files
       summary: Get a specific LDAP group's access to a shared file
       description: Returns the access grant record for the specified LDAP group on the folder containing the file, including the group's assigned role. Requires the `user_view` permission on the shared file.
       responses:
@@ -3045,11 +3308,13 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestFilesByIdMembersLdapGroupByLdapGroupId
+      x-operation-id-source: derived
   /rest/files/{id}/members/{member_user_id}:
     get:
       tags:
-      - files
-      summary: Returns the specified user member associated with the file.
+      - Files
+      summary: Returns the specified user member associated with the file
       description: Returns the name of the specified user with access to the specified shared file. Also gets metadata, providing context and information about the user such as their ID, email address, and role for accessing the file. Must be assigned the `user_view` permission for the shared file.
       responses:
         '200':
@@ -3095,11 +3360,23 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestFilesByIdMembersByMemberUserId
+      x-operation-id-source: derived
     put:
       summary: Update file member
-      description: "### Description:\n  Changes the role assigned to the specified user for accessing the specified shared file.\n### Precondition:\n  Must be assigned the `user_add` permission for the folder containing the file.\n### Response:\n  Changes the user's role to the specified role.\n"
+      description: '### Description:
+
+        Changes the role assigned to the specified user for accessing the specified shared file.
+
+        ### Precondition:
+
+        Must be assigned the `user_add` permission for the folder containing the file.
+
+        ### Response:
+
+        Changes the user''s role to the specified role.'
       tags:
-      - files
+      - Files
       parameters:
       - in: path
         name: id
@@ -3232,11 +3509,23 @@ paths:
                       message: Invalid Parameter Exception
         '490':
           description: Request blocked by WAF
+      operationId: putRestFilesByIdMembersByMemberUserId
+      x-operation-id-source: derived
     delete:
       summary: Remove a user's access to a shared file
-      description: "### Description:\n  Removes the specified user's access to the specified shared file.\n### Precondition:\n  Must be assigned the `user_add` permission for the folder containing the shared file.\n### Response:\n  Removes the user's access to the shared file.\n"
+      description: '### Description:
+
+        Removes the specified user''s access to the specified shared file.
+
+        ### Precondition:
+
+        Must be assigned the `user_add` permission for the folder containing the shared file.
+
+        ### Response:
+
+        Removes the user''s access to the shared file.'
       tags:
-      - files
+      - Files
       parameters:
       - in: path
         name: id
@@ -3313,12 +3602,18 @@ paths:
                       message: Invalid Parameter Exception
         '490':
           description: Request blocked by WAF
+      operationId: deleteRestFilesByIdMembersByMemberUserId
+      x-operation-id-source: derived
   /rest/files/{id}/path:
     get:
       tags:
-      - files
+      - Files
       summary: Get file path
-      description: "Returns the full ancestor path of the specified file, from the workspace root down to the\n                       file's parent folder. Each element in the path represents a folder node with its ID and\n                       name.\\n\\n**Requires `properties_view` permission on the file.**"
+      description: 'Returns the full ancestor path of the specified file, from the workspace root down to the
+
+        file''s parent folder. Each element in the path represents a folder node with its ID and
+
+        name.\n\n**Requires `properties_view` permission on the file.**'
       responses:
         '200':
           description: Returns the full ancestor path of the file as an ordered list of folder nodes.
@@ -3356,12 +3651,24 @@ paths:
           enum:
           - full_with_links
           - full
+      operationId: getRestFilesByIdPath
+      x-operation-id-source: derived
   /rest/files/{id}/preview:
     get:
       summary: Get file preview metadata
-      description: "### Description:\n  Gets file preview metadata about the specified file, such as the permalink for previewing the file and if the file contains a watermark.\n### Precondition:\n  Must be assigned the `view` permission for the file.\n### Response:\n  Returns the file preview metadata.\n"
+      description: '### Description:
+
+        Gets file preview metadata about the specified file, such as the permalink for previewing the file and if the file contains a watermark.
+
+        ### Precondition:
+
+        Must be assigned the `view` permission for the file.
+
+        ### Response:
+
+        Returns the file preview metadata.'
       tags:
-      - files
+      - Files
       parameters:
       - in: path
         name: id
@@ -3439,10 +3746,12 @@ paths:
                       message: Entity is deleted
         '490':
           description: Request blocked by WAF
+      operationId: getRestFilesByIdPreview
+      x-operation-id-source: derived
   /rest/files/{id}/tasks:
     get:
       tags:
-      - files
+      - Files
       summary: Get file tasks
       description: Gets a list of tasks assigned to the specified file. **Requires `task_view` permission on the file's parent folder.**
       responses:
@@ -3670,9 +3979,11 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestFilesByIdTasks
+      x-operation-id-source: derived
     post:
       tags:
-      - files
+      - Files
       summary: Create file task
       description: Creates a task for the specified file and assigns it to a user. The assignee must have at least `properties_view` permission on the file's parent folder. **Requires `task_add` permission on the file's parent folder.**
       responses:
@@ -3761,10 +4072,12 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Task.Post'
+      operationId: postRestFilesByIdTasks
+      x-operation-id-source: derived
   /rest/files/{id}/versions:
     post:
       tags:
-      - files
+      - Files
       summary: Upload a file version
       description: Uploads a new version of the specified file using streaming upload, where the file content is sent in the request body. Requires the `version_create` permission on the target file. Returns the updated file entity.
       responses:
@@ -3881,9 +4194,11 @@ paths:
                   format: binary
               required:
               - body
+      operationId: postRestFilesByIdVersions
+      x-operation-id-source: derived
     get:
       tags:
-      - files
+      - Files
       summary: Get file versions
       description: Gets a list of file versions for the specified file. Also gets the file metadata, such as its owner, creation date, digital fingerprint, and security scan status. **Requires `version_view` permission on the file.**
       responses:
@@ -4014,10 +4329,12 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestFilesByIdVersions
+      x-operation-id-source: derived
   /rest/files/{id}/versions/{version_id}:
     get:
       tags:
-      - files
+      - Files
       summary: Get a file version
       description: Gets file metadata for the specified file version, such as the date it was added, its expiration date, and any tags applied to the file. **Requires `version_view` permission on the file.**
       responses:
@@ -4073,9 +4390,11 @@ paths:
         required: true
         schema:
           type: string
+      operationId: getRestFilesByIdVersionsByVersionId
+      x-operation-id-source: derived
     delete:
       tags:
-      - files
+      - Files
       summary: Delete a file version
       description: Deletes the specified version of the file. Cannot delete the last remaining version of a file. **Requires `version_delete` permission on the file.**
       responses:
@@ -4118,10 +4437,12 @@ paths:
         required: true
         schema:
           type: string
+      operationId: deleteRestFilesByIdVersionsByVersionId
+      x-operation-id-source: derived
   /rest/files/{id}/versions/{version_id}/actions/promote:
     post:
       tags:
-      - files
+      - Files
       summary: Promote a file version
       description: Makes the specified version of the file the current version of the file. The promoted version is assigned version number 0 (current), and all lower-numbered versions are incremented. Also updates the file name to match the promoted version. **Requires `version_promote` permission on the file.**
       responses:
@@ -4199,10 +4520,12 @@ paths:
           enum:
           - full_with_links
           - full
+      operationId: postRestFilesByIdVersionsByVersionIdActionsPromote
+      x-operation-id-source: derived
   /rest/files/{id}/versions/{version_id}/actions/scan:
     post:
       tags:
-      - files
+      - Files
       summary: Scan a file version for security
       description: Triggers a security scan on the specified file version. Depending on system scan policies, the scan may include anti-virus, data loss prevention, and advanced threat protection checks. **Requires `version_view` permission on the file.**
       responses:
@@ -4281,10 +4604,12 @@ paths:
           enum:
           - full_with_links
           - full
+      operationId: postRestFilesByIdVersionsByVersionIdActionsScan
+      x-operation-id-source: derived
   /rest/files/{id}/versions/{version_id}/content:
     get:
       tags:
-      - files
+      - Files
       summary: Download a file version
       description: Downloads the binary content of the specified file version. **Requires `download` permission on the file.** Users assigned the Downloader or Viewer role can only download the current version (version 0); attempting to download an older version returns a 403.
       responses:
@@ -4325,10 +4650,12 @@ paths:
         description: Range of bytes to download. e.g. `bytes=0-1024`
         schema:
           type: string
+      operationId: getRestFilesByIdVersionsByVersionIdContent
+      x-operation-id-source: derived
   /rest/files/{id}/versions/{version_id}/preview:
     get:
       tags:
-      - files
+      - Files
       summary: Get file preview metadata for a file version
       description: Gets file preview metadata for the specified file version, such as the permalink for previewing the file and if the file contains a watermark. **Requires `view` permission on the file.**
       responses:
@@ -4391,12 +4718,22 @@ paths:
         required: true
         schema:
           type: string
+      operationId: getRestFilesByIdVersionsByVersionIdPreview
+      x-operation-id-source: derived
   /rest/folders/{id}/actions/file:
     post:
       tags:
-      - files
+      - Files
       summary: Upload a file using multipart form data
-      description: "Uploads a file to the specified folder using multipart form data. If a file with the same\n                       name already exists, a new version is created unless `disableAutoVersion` is set.\\n\\n\n                       **Requires `file_add` permission on the target folder** (or `version_create` if a file with\n                       the same name already exists). The folder must not be deleted. Sufficient storage must be\n                       available. The file extension and MIME type must not be excluded by the system policy."
+      description: 'Uploads a file to the specified folder using multipart form data. If a file with the same
+
+        name already exists, a new version is created unless `disableAutoVersion` is set.\n\n
+
+        **Requires `file_add` permission on the target folder** (or `version_create` if a file with
+
+        the same name already exists). The folder must not be deleted. Sufficient storage must be
+
+        available. The file extension and MIME type must not be excluded by the system policy.'
       responses:
         '200':
           description: Returns the uploaded file metadata.
@@ -4535,12 +4872,24 @@ paths:
                   type: boolean
               required:
               - body
+      operationId: postRestFoldersByIdActionsFile
+      x-operation-id-source: derived
   /rest/folders/{id}/actions/fileBase64Encoded:
     post:
       tags:
-      - files
+      - Files
       summary: Upload a base64-encoded file
-      description: "Uploads a base64-encoded file to the specified folder. If a file with the same name already\n                       exists, a new version is created unless `disableAutoVersion` is set.\\n\\n**Requires\n                       `file_add` permission on the target folder** (or `version_create` if a file with the same\n                       name already exists). The file content must be valid base64. The file size must not exceed\n                       the system-configured upload size limit. The file extension must not be excluded by the\n                       system policy."
+      description: 'Uploads a base64-encoded file to the specified folder. If a file with the same name already
+
+        exists, a new version is created unless `disableAutoVersion` is set.\n\n**Requires
+
+        `file_add` permission on the target folder** (or `version_create` if a file with the same
+
+        name already exists). The file content must be valid base64. The file size must not exceed
+
+        the system-configured upload size limit. The file extension must not be excluded by the
+
+        system policy.'
       responses:
         '200':
           description: Returns the uploaded file metadata.
@@ -4654,12 +5003,18 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Content.Post'
+      operationId: postRestFoldersByIdActionsFileBase64Encoded
+      x-operation-id-source: derived
   /rest/folders/{parent_id}/actions/fileFromTemplate:
     post:
       tags:
-      - files
+      - Files
       summary: Create Microsoft Office document from template
-      description: "Creates a new, blank Microsoft Office document from a template in the specified folder.\\n\\n\n                       **Requires `file_add` permission on the target folder.** The folder must not be deleted.\n                       The file name must not contain invalid characters."
+      description: 'Creates a new, blank Microsoft Office document from a template in the specified folder.\n\n
+
+        **Requires `file_add` permission on the target folder.** The folder must not be deleted.
+
+        The file name must not contain invalid characters.'
       responses:
         '200':
           description: Returns the newly created file.
@@ -4759,10 +5114,12 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/FileNameRequest.Post'
+      operationId: postRestFoldersByParentIdActionsFileFromTemplate
+      x-operation-id-source: derived
   /rest/folders/{parent}/files:
     post:
       tags:
-      - files
+      - Files
       summary: Upload a file
       description: Uploads a file to the specified folder using streaming upload, where the file content is sent in the request body and metadata is provided via request headers. Requires the `file_add` permission on the target folder. Returns the created file entity.
       responses:
@@ -4884,10 +5241,12 @@ paths:
                   format: binary
               required:
               - body
+      operationId: postRestFoldersByParentFiles
+      x-operation-id-source: derived
   /rest/permissions/file/{file_id}:
     get:
       tags:
-      - files
+      - Files
       summary: Get file permissions
       description: Returns the list of actions the current user is allowed to perform on the specified file, such as downloading, editing, or commenting.
       responses:
@@ -4964,10 +5323,12 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestPermissionsFileByFileId
+      x-operation-id-source: derived
   /rest/permissions/files:
     get:
       tags:
-      - files
+      - Files
       summary: Get file permissions for a set of files
       description: Returns the current user's allowed actions for each of the specified files. File IDs are passed as request parameters. Returns 400 if no file IDs are provided.
       responses:
@@ -5046,12 +5407,26 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestPermissionsFiles
+      x-operation-id-source: derived
   /rest/requestFile/{ref}/actions/file:
     post:
       tags:
-      - files
+      - Files
       summary: Upload a file requested by user
-      description: "Uploads a file to a folder or inbox in response to a file request from another user.\n                       Access is granted via the request file reference link (`ref`). If the request requires\n                       authentication (`require_auth`), the caller must be logged in. The uploaded file is\n                       renamed to include the uploader's email address.\\n\\nThe request link must not be expired\n                       or have reached its upload limit. Sufficient storage must be available in the target\n                       folder. The file extension and MIME type must not be excluded by the requestor's system\n                       policy."
+      description: 'Uploads a file to a folder or inbox in response to a file request from another user.
+
+        Access is granted via the request file reference link (`ref`). If the request requires
+
+        authentication (`require_auth`), the caller must be logged in. The uploaded file is
+
+        renamed to include the uploader''s email address.\n\nThe request link must not be expired
+
+        or have reached its upload limit. Sufficient storage must be available in the target
+
+        folder. The file extension and MIME type must not be excluded by the requestor''s system
+
+        policy.'
       responses:
         '200':
           description: Returns the uploaded file metadata.
@@ -5170,10 +5545,12 @@ paths:
                   type: string
               required:
               - body
+      operationId: postRestRequestFileByRefActionsFile
+      x-operation-id-source: derived
   /rest/requestFile/{ref}/comment/{object_id}:
     post:
       tags:
-      - files
+      - Files
       summary: Add a comment to an uploaded file
       description: Adds a comment to a file that was uploaded through the request file link. Only accessible when the link requires authentication (`require_auth=true`) and has not expired.
       responses:
@@ -5266,12 +5643,22 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Comment.Post'
+      operationId: postRestRequestFileByRefCommentByObjectId
+      x-operation-id-source: derived
   /rest/requestFile/{ref}/sources/{object_id}/content:
     get:
       tags:
-      - files
+      - Files
       summary: Download files from folder in request files to folder message
-      description: "Downloads a file that was made available to recipients as a source attachment in a\n                       request files to folder message. Access is granted via the request file reference link\n                       (`ref`).\\n\\nThe request link must be valid and not expired. If the request requires\n                       authentication, the caller must be logged in. The file must not be deleted, infected,\n                       or DLP-locked."
+      description: 'Downloads a file that was made available to recipients as a source attachment in a
+
+        request files to folder message. Access is granted via the request file reference link
+
+        (`ref`).\n\nThe request link must be valid and not expired. If the request requires
+
+        authentication, the caller must be logged in. The file must not be deleted, infected,
+
+        or DLP-locked.'
       responses:
         '200':
           description: Returns the binary file content as a downloadable stream.
@@ -5310,12 +5697,20 @@ paths:
         description: Range of bytes to download. e.g. `bytes=0-1024`
         schema:
           type: string
+      operationId: getRestRequestFileByRefSourcesByObjectIdContent
+      x-operation-id-source: derived
   /rest/requestFile/{ref}/uploads/{object_id}/content:
     get:
       tags:
-      - files
+      - Files
       summary: Download files uploaded to request files to folder or inbox message
-      description: "Downloads a file that was uploaded to a request files to folder or inbox message. Access\n                       is granted via the request file reference link (`ref`).\\n\\n**Authentication is required**\n                       — guest access is not permitted for this endpoint. The file must be associated with the\n                       specified request link, must not be deleted, and must not be infected or DLP-locked."
+      description: 'Downloads a file that was uploaded to a request files to folder or inbox message. Access
+
+        is granted via the request file reference link (`ref`).\n\n**Authentication is required**
+
+        — guest access is not permitted for this endpoint. The file must be associated with the
+
+        specified request link, must not be deleted, and must not be infected or DLP-locked.'
       responses:
         '200':
           description: Returns the binary file content as a downloadable stream.
@@ -5354,12 +5749,20 @@ paths:
         description: Range of bytes to download. e.g. `bytes=0-1024`
         schema:
           type: string
+      operationId: getRestRequestFileByRefUploadsByObjectIdContent
+      x-operation-id-source: derived
   /rest/sources/actions/downloadByTransaction:
     get:
       tags:
-      - files
+      - Files
       summary: Download a file from Repositories Gateway source by transaction ID
-      description: "Downloads a file from its Repositories Gateway source using the transaction ID obtained\n                       from `POST /sources/{id}/actions/initiateDownload`. The transfer must have completed\n                       successfully before calling this endpoint.\\n\\n**Requires `download` permission on the\n                       file.**"
+      description: 'Downloads a file from its Repositories Gateway source using the transaction ID obtained
+
+        from `POST /sources/{id}/actions/initiateDownload`. The transfer must have completed
+
+        successfully before calling this endpoint.\n\n**Requires `download` permission on the
+
+        file.**'
       responses:
         '200':
           description: Returns the binary file content as a downloadable stream.
@@ -5380,12 +5783,20 @@ paths:
           enum:
           - full_with_links
           - full
+      operationId: getRestSourcesActionsDownloadByTransaction
+      x-operation-id-source: derived
   /rest/sources/actions/files/{id}:
     post:
       tags:
-      - files
+      - Files
       summary: Upload a file version to Repositories Gateway source
-      description: "Uploads a new version of the specified file to its Repositories Gateway source. Returns a\n                       transfer status record reflecting the result of the upload operation.\\n\\n**Requires\n                       `file_add` permission on the Repositories Gateway parent folder of the file.** The file\n                       extension and MIME type must not be excluded by the system policy."
+      description: 'Uploads a new version of the specified file to its Repositories Gateway source. Returns a
+
+        transfer status record reflecting the result of the upload operation.\n\n**Requires
+
+        `file_add` permission on the Repositories Gateway parent folder of the file.** The file
+
+        extension and MIME type must not be excluded by the system policy.'
       responses:
         '200':
           description: Returns the transfer status record for the upload operation.
@@ -5483,12 +5894,20 @@ paths:
                   format: binary
               required:
               - body
+      operationId: postRestSourcesActionsFilesById
+      x-operation-id-source: derived
   /rest/sources/{id}/actions/file:
     post:
       tags:
-      - files
+      - Files
       summary: Upload a file to Repositories Gateway source
-      description: "Uploads a file to the specified Repositories Gateway source folder. Returns a transfer\n                       status record that reflects the result of the upload operation.\\n\\n**Requires `file_add`\n                       permission on the target Repositories Gateway folder.** The file extension and MIME type\n                       must not be excluded by the system policy."
+      description: 'Uploads a file to the specified Repositories Gateway source folder. Returns a transfer
+
+        status record that reflects the result of the upload operation.\n\n**Requires `file_add`
+
+        permission on the target Repositories Gateway folder.** The file extension and MIME type
+
+        must not be excluded by the system policy.'
       responses:
         '200':
           description: Returns the transfer status record for the upload operation.
@@ -5586,12 +6005,20 @@ paths:
                   format: binary
               required:
               - body
+      operationId: postRestSourcesByIdActionsFile
+      x-operation-id-source: derived
   /rest/sources/{id}/actions/initiateDownload:
     post:
       tags:
-      - files
+      - Files
       summary: Download a file asynchronously from Repositories Gateway source
-      description: "Initiates an asynchronous download of the specified file from its Repositories Gateway\n                       source. Returns a transfer status record that can be polled via\n                       `GET /sources/actions/downloadByTransaction` until the transfer completes.\\n\\n\n                       **Requires `download` permission on the file.**"
+      description: 'Initiates an asynchronous download of the specified file from its Repositories Gateway
+
+        source. Returns a transfer status record that can be polled via
+
+        `GET /sources/actions/downloadByTransaction` until the transfer completes.\n\n
+
+        **Requires `download` permission on the file.**'
       responses:
         '200':
           description: Returns the transfer status record for the initiated download, including the transaction ID used to poll for completion.
@@ -5636,12 +6063,16 @@ paths:
         required: true
         schema:
           type: integer
+      operationId: postRestSourcesByIdActionsInitiateDownload
+      x-operation-id-source: derived
   /rest/sources/{id}/content:
     get:
       tags:
-      - files
+      - Files
       summary: Download a file from repositories gateway source
-      description: "Downloads the binary content of the specified file from its Repositories Gateway source.\\n\\n\n                       **Requires `download` permission on the file.**"
+      description: 'Downloads the binary content of the specified file from its Repositories Gateway source.\n\n
+
+        **Requires `download` permission on the file.**'
       responses:
         '200':
           description: Returns the binary file content as a downloadable stream.
@@ -5655,12 +6086,20 @@ paths:
         required: true
         schema:
           type: integer
+      operationId: getRestSourcesByIdContent
+      x-operation-id-source: derived
   /rest/sources/{id}/preview:
     get:
       tags:
-      - files
+      - Files
       summary: Get file preview metadata for a file in Repositories Gateway source
-      description: "Gets the current preview generation status for the specified file in a Repositories Gateway\n                       source. When the preview is ready, the response includes the MIME type and a link to retrieve\n                       it. If the file is empty, infected, or DLP-locked, an appropriate error status is returned\n                       instead.\\n\\n**Requires `view` permission on the file.**"
+      description: 'Gets the current preview generation status for the specified file in a Repositories Gateway
+
+        source. When the preview is ready, the response includes the MIME type and a link to retrieve
+
+        it. If the file is empty, infected, or DLP-locked, an appropriate error status is returned
+
+        instead.\n\n**Requires `view` permission on the file.**'
       responses:
         '200':
           description: Returns the current preview status for the file. When `status` is `ready`, the `mime` and `link` fields are populated.
@@ -5711,12 +6150,24 @@ paths:
         required: true
         schema:
           type: integer
+      operationId: getRestSourcesByIdPreview
+      x-operation-id-source: derived
   /rest/files/actions/content/link/{ref}:
     get:
       summary: Download a file via a reference link
-      description: "### Description:\n  Downloads the file identified by the provided reference link.\n### Precondition:\n  Must be assigned the `download` permission for the file.\n### Response:\n  The file content is streamed to the user.\n"
+      description: '### Description:
+
+        Downloads the file identified by the provided reference link.
+
+        ### Precondition:
+
+        Must be assigned the `download` permission for the file.
+
+        ### Response:
+
+        The file content is streamed to the user.'
       tags:
-      - files
+      - Files
       parameters:
       - in: path
         name: ref
@@ -5798,12 +6249,24 @@ paths:
                       message: File is infected
         '490':
           description: Request blocked by WAF
+      operationId: getRestFilesActionsContentLinkByRef
+      x-operation-id-source: derived
   /preview/file/{id}:
     get:
       summary: Preview a file
-      description: "### Description:\n  Returns the preview content for the specified file via the Repositories Gateway.\n### Precondition:\n  User must have the `view` permission for the file.\n### Response:\n  The preview content is returned.\n"
+      description: '### Description:
+
+        Returns the preview content for the specified file via the Repositories Gateway.
+
+        ### Precondition:
+
+        User must have the `view` permission for the file.
+
+        ### Response:
+
+        The preview content is returned.'
       tags:
-      - files
+      - Files
       parameters:
       - in: path
         name: id
@@ -5844,12 +6307,24 @@ paths:
                       message: Target user has insufficient access permissions
         '490':
           description: Request blocked by WAF
+      operationId: getPreviewFileById
+      x-operation-id-source: derived
   /rest/files/members:
     post:
       summary: Share files
-      description: "### Description:\n  Shares specified files with multiple users.\n### Precondition:\n  Must be assigned the `user_add` permission for the folder.\n### Response:\n  Shares the files with the specified users.\n"
+      description: '### Description:
+
+        Shares specified files with multiple users.
+
+        ### Precondition:
+
+        Must be assigned the `user_add` permission for the folder.
+
+        ### Response:
+
+        Shares the files with the specified users.'
       tags:
-      - files
+      - Files
       parameters:
       - in: query
         name: updateIfExists
@@ -6059,12 +6534,42 @@ paths:
                       message: Cannot assign already assigned role
         '490':
           description: Request blocked by WAF
+      operationId: postRestFilesMembers
+      x-operation-id-source: derived
   /rest/files/shared:
     get:
       summary: Get shared files
-      description: "### Description:\n  Gets a list of files that have been shared with the user. For each file, the file name, size, and date the file was shared is returned.\n### Precondition:\n  If the user is assigned the Restricted profile, the \"Collaboration Allowed\" setting must be turned on to get results.\n### Response:\n  Returns the list of files that have been shared with the user.\n### Sorting:\n  Sorting can be applied using two query parameters: `orderBy` for the field name,\n  and `orderType` for the sort order, which can be either `asc` or `desc`.\n### Sorting field options:\n  | FIELD_NAME | Description |\n  |------------|-------------|\n  | name       | The name of the file |\n  | size       | The size of the file |\n  | shared     | The datetime when the file was shared |\n"
+      description: '### Description:
+
+        Gets a list of files that have been shared with the user. For each file, the file name, size, and date the file was shared is returned.
+
+        ### Precondition:
+
+        If the user is assigned the Restricted profile, the "Collaboration Allowed" setting must be turned on to get results.
+
+        ### Response:
+
+        Returns the list of files that have been shared with the user.
+
+        ### Sorting:
+
+        Sorting can be applied using two query parameters: `orderBy` for the field name,
+
+        and `orderType` for the sort order, which can be either `asc` or `desc`.
+
+        ### Sorting field options:
+
+        | FIELD_NAME | Description |
+
+        |------------|-------------|
+
+        | name | The name of the file |
+
+        | size | The size of the file |
+
+        | shared | The datetime when the file was shared |'
       tags:
-      - files
+      - Files
       parameters:
       - in: query
         name: orderBy
@@ -6164,12 +6669,24 @@ paths:
                       message: Invalid Parameter Exception
         '490':
           description: Request blocked by WAF
+      operationId: getRestFilesShared
+      x-operation-id-source: derived
   /rest/files/{id}/members/me:
     delete:
       summary: Remove access to shared file
-      description: "### Description:\n  Removes the current user's access to the specified file that was shared with them.\n### Precondition:\n  The file must have been shared with the user.\n### Response:\n  Removes the user's access to the shared file.\n"
+      description: '### Description:
+
+        Removes the current user''s access to the specified file that was shared with them.
+
+        ### Precondition:
+
+        The file must have been shared with the user.
+
+        ### Response:
+
+        Removes the user''s access to the shared file.'
       tags:
-      - files
+      - Files
       parameters:
       - in: path
         name: id
@@ -6239,12 +6756,24 @@ paths:
                       message: Invalid Parameter Exception
         '490':
           description: Request blocked by WAF
+      operationId: deleteRestFilesByIdMembersMe
+      x-operation-id-source: derived
   /rest/files/previewSupport:
     get:
       summary: Get file preview status
-      description: "### Description:\n  Gets the status of the specified file to determine if the file type is supported for preview.\n### Precondition:\n  Must be assigned the `view` permission for the folder.\n### Response:\n  Returns confirmation as to whether the file type is supported for preview.\n"
+      description: '### Description:
+
+        Gets the status of the specified file to determine if the file type is supported for preview.
+
+        ### Precondition:
+
+        Must be assigned the `view` permission for the folder.
+
+        ### Response:
+
+        Returns confirmation as to whether the file type is supported for preview.'
       tags:
-      - files
+      - Files
       parameters:
       - in: query
         name: id:in
@@ -6300,12 +6829,26 @@ paths:
                       message: Unauthorized
         '490':
           description: Request blocked by WAF
+      operationId: getRestFilesPreviewSupport
+      x-operation-id-source: derived
   /rest/files/actions/downloadLink:
     post:
       summary: Get link for downloading files and folders
-      description: "### Description:\n  Generates a link for downloading specified folders and files.\n### Precondition:\n  Must be assigned the download permission for the specified files and folders.\n### Response:\n  A download link is generated and returned.\n  Returns the link for downloading the files and folders, once files complete security scans. Depending on system scan policies, files will be scanned for anti-virus, data loss prevention, and advanced threat protection.\n"
+      description: '### Description:
+
+        Generates a link for downloading specified folders and files.
+
+        ### Precondition:
+
+        Must be assigned the download permission for the specified files and folders.
+
+        ### Response:
+
+        A download link is generated and returned.
+
+        Returns the link for downloading the files and folders, once files complete security scans. Depending on system scan policies, files will be scanned for anti-virus, data loss prevention, and advanced threat protection.'
       tags:
-      - files
+      - Files
       parameters:
       - in: query
         name: partialSuccess
@@ -6379,12 +6922,24 @@ paths:
                       message: Invalid Parameter Exception
         '490':
           description: Request blocked by WAF
+      operationId: postRestFilesActionsDownloadLink
+      x-operation-id-source: derived
   /rest/admin/files:
     put:
       summary: Update files
-      description: "### Description:\n  Updates the metadata of multiple files at the same time.\n### Precondition:\n  Must be an administrator with access to the Files and Folders page in the Kiteworks PDN Admin.\n### Response:\n  Updates the selected files.\n"
+      description: '### Description:
+
+        Updates the metadata of multiple files at the same time.
+
+        ### Precondition:
+
+        Must be an administrator with access to the Files and Folders page in the Kiteworks PDN Admin.
+
+        ### Response:
+
+        Updates the selected files.'
       tags:
-      - files
+      - Files
       parameters:
       - in: query
         name: returnEntity
@@ -6528,12 +7083,24 @@ paths:
                       message: Extending file expiration is not allowed
         '490':
           description: Request blocked by WAF
+      operationId: putRestAdminFiles
+      x-operation-id-source: derived
   /rest/admin/files/{id}/actions/rescan:
     post:
       summary: Scan a file for security
-      description: "### Description:\n  Runs a security scan on the specified file.\n### Precondition:\n  Must authenticate as an administrator with a role allowing for manually scanning files for security.\n### Response:\n  Scans the selected file for security. Depending on system scan policies, the file is scanned for anti-virus, data loss prevention, and advanced threat protection.\n"
+      description: '### Description:
+
+        Runs a security scan on the specified file.
+
+        ### Precondition:
+
+        Must authenticate as an administrator with a role allowing for manually scanning files for security.
+
+        ### Response:
+
+        Scans the selected file for security. Depending on system scan policies, the file is scanned for anti-virus, data loss prevention, and advanced threat protection.'
       tags:
-      - files
+      - Files
       parameters:
       - in: path
         name: id
@@ -6658,8 +7225,489 @@ paths:
                       message: Invalid Parameter Exception
         '490':
           description: Request blocked by WAF
+      operationId: postRestAdminFilesByIdActionsRescan
+      x-operation-id-source: derived
 components:
   schemas:
+    Comment.Post:
+      description: Class Comment
+      required:
+      - contents
+      properties:
+        parentId:
+          description: Unique identifier of the parent comment. Set this value when replying to an existing comment
+          type: integer
+        contents:
+          description: Text content of the comment
+          type: string
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
+    PostFileZipStatusBodyRequest:
+      type: object
+      properties:
+        fileIds:
+          type: array
+          maxItems: 1000
+          description: List of file UUIDs to include in the bulk download. Maximum 1000 entries.
+          items:
+            type: string
+        folderIds:
+          type: array
+          maxItems: 100
+          description: List of folder UUIDs to include in the bulk download. Maximum 100 entries.
+          items:
+            type: string
+        fileId:
+          type: string
+          description: UUID of a single file to download. Use this for single-file downloads instead of `fileIds`.
+        versionId:
+          type: string
+          description: The version ID of the specified file.
+    FileNameRequest.Post:
+      properties:
+        fileType:
+          description: The file type
+          type: string
+        fileName:
+          description: The file name
+          type: string
+    LdapGroup:
+      description: Class LdapGroup
+      required:
+      - id
+      - name
+      properties:
+        id:
+          description: LDAP group unique identifier
+          type: integer
+        name:
+          description: Display name of the LDAP group
+          type: string
+        email:
+          description: LDAP group email address
+          type: string
+        description:
+          description: LDAP group description
+          type: string
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+    Group:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: LDAP Group ID
+        name:
+          type: string
+          description: LDAP Group name
+        dn:
+          type: string
+          description: LDAP Group domain name
+        email:
+          type: string
+          description: LDAP Group email
+        description:
+          type: string
+          description: LDAP Group description
+    Files:
+      type: object
+      properties:
+        data:
+          description: List of files.
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+    Version:
+      description: Class Version
+      required:
+      - id
+      - name
+      - objectId
+      - userId
+      - versionNumber
+      properties:
+        id:
+          description: The unique identifier of the file version.
+          type: string
+        versionNumber:
+          description: The version number of the file.
+          type: integer
+        deleted:
+          description: Indicates whether this version of the file has been deleted.
+          type: boolean
+        created:
+          description: The creation date of this file version.
+          type: string
+          format: date
+        userId:
+          description: The unique identifier of the user who created this file version.
+          type: string
+        size:
+          description: The size of the file content in bytes.
+          type: integer
+        fingerprint:
+          description: A unique hash identifying the file.
+          type: string
+        fingerprintAlgo:
+          description: The algorithm used to generate the fingerprint (e.g., sha3-256, md5).
+          type: string
+        backend:
+          description: The backend system associated with the file version.
+          type: string
+        mime:
+          description: The MIME type of the file version.
+          type: string
+        name:
+          description: The name of the file version.
+          type: string
+        creator:
+          description: The user who created the file version. (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/UserBasicInfo'
+        objectId:
+          description: The object ID (UUID) for the file version.
+          type: string
+        clientCreated:
+          description: The date and time the file version was created on the client side.
+          type: string
+          format: date
+        clientModified:
+          description: The date and time the file version was last modified on the client side.
+          type: string
+          format: date
+        avStatus:
+          description: Indicates the file version's availability status based on Antivirus (AV) settings and whether it has been scanned or detected as infected.
+          type: string
+        dlpStatus:
+          description: Indicates the file version's availability status based on Data Loss Prevention (DLP) settings and whether it has been scanned or detected as infected.
+          type: string
+        adminQuarantineStatus:
+          description: 'Indicates the file version\''s availability status based on the administrator\''s quarantine status. '
+          type: string
+        storageAvailable:
+          description: Indicates whether the file is accessible on any storage volume.
+          type: boolean
+        fingerprints:
+          description: A list of fingerprints associated with the file version.
+          type: array
+          items:
+            type: string
+        tags:
+          description: List of tags associated with the file.
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+    FileMovePostBodyRequest:
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: List of file UUIDs to move. Cannot be used together with `id:in` in the query string.
+        destinationFolderId:
+          type: string
+          description: UUID of the destination folder to move the files into.
+        replace:
+          type: boolean
+          description: If true, overwrites existing files in the destination folder if they share the same name.
+      required:
+      - destinationFolderId
+    AdminFileRescan:
+      type: object
+      properties:
+        msg:
+          type: string
+          description: The successful response message
+    FilePreviewSupport:
+      type: object
+      properties:
+        supportedIds:
+          type: array
+          description: Unique identifier (UUID) of the supported files
+          items:
+            type: string
+    SafeEdit:
+      type: object
+      properties:
+        safeEditLocked:
+          type: boolean
+          description: Indicates if the file is locked through a SafeEdit session.
+        user:
+          description: The user responsible for locking the file via SafeEdit.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+    User:
+      description: Class User
+      required:
+      - basedirId
+      - email
+      - id
+      - mydirId
+      - name
+      - syncdirId
+      properties:
+        id:
+          description: The unique identifier of the user
+          type: string
+        basedirId:
+          description: The unique identifier of the user's root Kiteworks directory.
+          type: string
+        created:
+          description: Date and time the user account was created
+          type: string
+          format: date
+        email:
+          description: The user's email
+          type: string
+        mydirId:
+          description: The unique identifier of the user's mydir system directory.
+          type: string
+        name:
+          description: The name of the user
+          type: string
+        syncdirId:
+          description: The unique identifier of the user's 'My Folder'.
+          type: string
+        userTypeId:
+          description: The unique identifier of the user type (profile).
+          type: integer
+        internal:
+          description: Indicates whether the user is an internal user
+          type: boolean
+        profileIcon:
+          description: URL to the user's profile icon image
+          type: string
+        extDL:
+          description: Indicates whether the user is an External Distribution List
+          type: boolean
+        metadata:
+          description: List of user's metadata
+          type: array
+          items:
+            $ref: '#/components/schemas/UserMetadata'
+        adminRoleId:
+          description: The ID of the admin role assigned to the user.
+          type: integer
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+        active:
+          description: Indicates whether the user is an actual kitework user
+          type: boolean
+        suspended:
+          description: Indicates whether the user is suspended
+          type: boolean
+        deleted:
+          description: Indicates whether the user has been deleted
+          type: boolean
+        flags:
+          description: "Authentication type.\n     *                  0: No authentication,\n     *                  1: Authentication by kiteworks,\n     *                  2: Authentication by LDAP,\n     *                  4: Authentication by SSO"
+          type: integer
+        verified:
+          description: Indicates whether the user is verified
+          type: boolean
+        deactivated:
+          description: Indicates whether the user has been deactivated
+          type: boolean
+        lastActivityDateTime:
+          description: User's last activity datetime
+          type: string
+          format: date
+        passwordExpirationDateTime:
+          description: The exact timestamp when the user's password will expire
+          type: string
+          format: date
+    BaseObject:
+      description: Class Object
+      required:
+      - id
+      - name
+      - parentId
+      - userId
+      properties:
+        id:
+          description: Unique identifier of object
+          type: string
+        created:
+          description: Date and time when the object was created
+          type: string
+          format: date-time
+        deleted:
+          description: Indicates whether the object is deleted
+          type: boolean
+        permDeleted:
+          description: Indicates whether the object is permanently deleted
+          type: boolean
+        expire:
+          description: Date and time when the object expires and becomes inaccessible
+          type: string
+          format: date-time
+        modified:
+          description: Date and time when the object was last modified
+          type: string
+          format: date-time
+        name:
+          description: Display name of the object
+          type: string
+        parentId:
+          description: Parent Folder identifier
+          type: string
+        userId:
+          description: Unique identifier of Object creator
+          type: string
+        parent:
+          description: Folder that directly contains this object (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/Folder'
+        permalink:
+          description: Permanent URL for accessing the object in the web application
+          type: string
+        creator:
+          description: Basic profile information of the user who created the object (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/UserBasicInfo'
+        permissions:
+          description: Current user's permissions (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        vendorDocId:
+          description: Identifier of the corresponding document in the external vendor system (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        vendorDocName:
+          description: Display name of the corresponding document in the external vendor system (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        source:
+          description: Numeric code identifying the external system that originated this object (e.g. Salesforce, Teams)
+          type: integer
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+    Members:
+      type: object
+      properties:
+        data:
+          description: List of members with access to the object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Member'
+        metadata:
+          description: Pagination metadata for the result set.
+          allOf:
+          - $ref: '#/components/schemas/MetaData'
+    SourceFile:
+      required:
+      - id
+      - name
+      - parentId
+      - type
+      - wopiapp
+      properties:
+        id:
+          description: Unique SourceContent identifier
+          type: string
+        name:
+          description: Display name of the source content item
+          type: string
+        parentId:
+          description: Parent source content unique identifier
+          type: string
+        type:
+          description: 'Source content type. Accepted values: \`d\` (folder), \`f\` (file)'
+          type: string
+        created:
+          description: Creation timestamp of the source content in UTC
+          type: string
+          format: date
+        modified:
+          description: Last modification timestamp of the source content in UTC
+          type: string
+          format: date
+        status:
+          description: Current availability status of the source content item
+          type: string
+        deleted:
+          description: Indicates whether the source content is deleted
+          type: boolean
+        path:
+          description: Full path of the source content
+          type: string
+        userRoleId:
+          description: Current user role id (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: integer
+        creator:
+          description: File's creator (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/UserBasicInfo'
+        permissions:
+          description: Current user's permissions (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        wopiapp:
+          description: WOPI info for iOS app
+          type: boolean
+        rootId:
+          description: Unique identifier of the root-level source content ancestor (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        pathIds:
+          description: Ordered list of ancestor identifiers representing the full path from root to this source content item (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        sourceTypeId:
+          description: Unique identifier of the ECM source type this content belongs to (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        totalFilesCount:
+          description: Total number of files in the source content (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        totalFoldersCount:
+          description: Total number of folders in the source content (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        parent:
+          description: Parent source content item (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/SourceContent'
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+        locked:
+          description: Indicates whether the file is locked
+          type: boolean
+        size:
+          description: Size of the source file in bytes
+          type: integer
+        fingerprint:
+          description: File content fingerprint
+          type: string
+        expire:
+          description: Date and time after which the source file expires and becomes unavailable
+          type: string
+        mime:
+          description: File MIME type
+          type: string
+        avStatus:
+          description: Check file availability status according to AV settings and file scanned/infected status
+          type: string
+        dlpStatus:
+          description: Check file availability status according to DLP settings and file scanned/infected status
+          type: string
+        lockedUserName:
+          description: Username/email of user who locked the file
+          type: string
+        lockUser:
+          description: User who locked the file
+          $ref: '#/components/schemas/UserBasicInfo'
     Folder:
       type: object
       properties:
@@ -6806,142 +7854,6 @@ components:
         inheritanceEnabled:
           type: boolean
           description: Indicates if a folder inherits permissions from the parent folder
-    Member:
-      type: object
-      properties:
-        objectId:
-          type: string
-          description: Unique identifier (UUID) of the associated object (file or folder).
-        roleId:
-          type: integer
-          description: Role assigned to the member.
-        userId:
-          type: string
-          description: Unique identifier (UUID) of the user.
-        groupId:
-          type: integer
-          description: Unique identifier of the LDAP group.
-        user:
-          description: User details of the member.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-        role:
-          description: Role details assigned to the member.
-          allOf:
-          - $ref: '#/components/schemas/Role'
-        group:
-          description: Group details if the member belongs to a group.
-          allOf:
-          - $ref: '#/components/schemas/Group'
-        sharedBy:
-          description: Details of the user who shared the file or folder.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-        created:
-          type: string
-          format: date
-          description: Date when the file or folder was shared.
-        inheritRoleId:
-          type: integer
-          description: Inherited role ID from the parent folder, if applicable.
-        allowedFolderRoleId:
-          type: array
-          description: List of allowed folder role IDs.
-          items:
-            type: integer
-        email:
-          type: string
-          description: Email associated with the member.
-        rank:
-          type: integer
-          description: Rank of the member role.
-        originFolder:
-          readOnly: true
-    Files:
-      type: object
-      properties:
-        data:
-          description: List of files.
-          type: array
-          items:
-            $ref: '#/components/schemas/File'
-    UserMetadata:
-      description: Class UserMetadata
-      properties:
-        name:
-          description: Key name of the custom metadata attribute associated with the user
-          type: string
-        value:
-          description: Value assigned to the custom metadata attribute for the user
-          type: string
-    Task:
-      description: Class Task
-      required:
-      - assigneeId
-      - created
-      - due
-      - id
-      - status
-      - userId
-      properties:
-        id:
-          description: Task unique identifier
-          type: integer
-        assigneeId:
-          description: Assigned User unique identifier
-          type: string
-        assignee:
-          description: User assigned to complete the task (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/User'
-        due:
-          description: Date and time by which the task must be completed
-          type: string
-          format: date
-        parentId:
-          description: Parent Comment identifier
-          type: integer
-        objectId:
-          description: Object identifier Task belongs to
-          type: string
-        userId:
-          description: Identifier of User who created a Task
-          type: string
-        user:
-          description: User who created the task (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/User'
-        created:
-          description: Date and time the task was created
-          type: string
-          format: date
-        modified:
-          description: Date and time the task was last modified
-          type: string
-          format: date
-        contents:
-          description: Body text of the task
-          type: string
-        deleted:
-          description: Indicates whether the task is deleted
-          type: boolean
-        folderId:
-          description: Identifier of Object's parent Folder
-          type: string
-        status:
-          description: 'Task status. Accepted values: `D` (Defined), `P` (In Progress), `C` (Completed)'
-          type: string
-        file:
-          description: File the task is tied to (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/File'
-        permissions:
-          description: Current user's permissions (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
-        links:
-          description: HATEOAS links associated with the entity
-          type: array
-          items:
-            type: string
     BulkOperationLockFile:
       type: object
       properties:
@@ -6960,22 +7872,79 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/File'
-    SafeEdit:
+    UserBasic:
       type: object
       properties:
-        safeEditLocked:
+        id:
+          type: string
+          description: Unique identifier (UUID) for the user.
+        email:
+          type: string
+          description: Email address associated with the user.
+        name:
+          type: string
+          description: Full name of the user.
+        profileIcon:
+          type: string
+          description: URL or identifier for the user's profile icon.
+    Comment:
+      description: Class Comment
+      required:
+      - contents
+      - id
+      - objectId
+      - parentId
+      - userId
+      properties:
+        id:
+          description: Comment unique identifier
+          type: integer
+        parentId:
+          description: Unique identifier of the parent comment, if the comment is a reply
+          type: integer
+        objectId:
+          description: Unique identifier (UUID) of the file being commented on
+          type: string
+        folderId:
+          description: Unique identifier (UUID) of the folder containing the object being commented on
+          type: string
+        userId:
+          description: Unique identifier (UUID) of the user who authored the comment
+          type: string
+        created:
+          description: Date and time when the comment was created
+          type: string
+          format: date
+        modified:
+          description: Date and time when the comment was last modified
+          type: string
+          format: date
+        contents:
+          description: Text content of the comment
+          type: string
+        deleted:
+          description: Indicates whether the comment has been deleted
           type: boolean
-          description: Indicates if the file is locked through a SafeEdit session.
-        user:
-          description: The user responsible for locking the file via SafeEdit.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-    FilePreviewSupport:
-      type: object
-      properties:
-        supportedIds:
+        isComment:
+          description: Indicates whether the item is a comment
+          type: boolean
+        object:
+          description: File being commented on (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/BaseObject'
+        author:
+          description: Author of the comment (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/UserBasicInfo'
+        parent:
+          description: The comment this reply is responding to, if applicable (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/Comment'
+        permissions:
+          description: Permissions of the current user regarding the comment (Explicit field. May be retrieved only if mentioned in "with" parameter)
           type: array
-          description: Unique identifier (UUID) of the supported files
+          items:
+            $ref: '#/components/schemas/Permission'
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
           items:
             type: string
     Preview:
@@ -7011,405 +7980,6 @@ components:
         tdfOriginalExtension:
           description: Original file extension for TDF files
           type: string
-    PushedObject:
-      type: object
-      properties:
-        objectId:
-          type: string
-          description: Unique identifier (UUID) for the pushed object.
-        userId:
-          type: string
-          description: Unique identifier (UUID) for the user who pushed the object.
-        created:
-          type: string
-          format: date
-          description: The date and time when the object was pushed.
-        user:
-          description: Details of the user who pushed the object.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-    RiskPolicy:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Risk Policy ID
-        parentId:
-          type: integer
-          description: Unique identifier of the parent object.
-        name:
-          type: string
-          description: Risk Policy Name
-        type:
-          type: string
-          description: Type of the object.<br>`f` – File.<br>`d` – Folder.
-        userId:
-          type: string
-          format: uuid
-          description: Unique identifier (UUID) who created the object.
-        creator:
-          description: Details of the user who created the object.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-        created:
-          type: string
-          format: date
-          description: The date and time when the object was created.
-        modified:
-          type: string
-          format: date
-          description: The date and time when the object was last modified.
-        expire:
-          type: string
-          format: date
-          description: Expiration timestamp of the object, if applicable.
-        permissions:
-          description: List of permissions associated with the object.
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
-        deleted:
-          type: boolean
-          description: Indicates whether the object has been deleted.
-        permDeleted:
-          type: boolean
-          description: Indicates whether the object has been permanently deleted.
-        permalink:
-          type: string
-          description: Permanent URL link to access the object.
-        path:
-          type: string
-          description: Path to the object in the hierarchy.
-        members:
-          description: List of members who have access to the object.
-          type: array
-          items:
-            $ref: '#/components/schemas/Member'
-        vendorDocId:
-          type: string
-          description: Vendor document ID associated with the object.
-        vendorDocName:
-          type: string
-          description: Name of the vendor document associated with the object.
-        secure:
-          type: boolean
-          description: Indicates whether the folder or the parent folder containing the file is marked as secure.
-        source:
-          type: integer
-          description: ID representing the source of the object (1 - Salesforce, 2 - Teams).
-        message:
-          type: string
-          description: Risk Policy Message
-    FileLockPostRequest:
-      type: object
-      properties:
-        ids:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: A list of file object IDs to be locked/unlocked.
-    MobileInfo:
-      type: object
-      properties:
-        wopiSrc:
-          type: string
-          description: The WOPI (Web Application Open Platform Interface) source URL for the mobile application.
-        userId:
-          type: string
-          description: Unique identifier of the user.
-        service:
-          type: string
-          description: The WOPI service ID.
-        scheme:
-          type: string
-          description: URI scheme used by the mobile application to handle the file.
-        schemeSupport:
-          type: string
-          description: Indicates the level of support the mobile app has for the URI scheme.
-    SourcePreviewStatus:
-      description: Represents the preview generation status for a file in a Repositories Gateway source. Returned by the GET /sources/{id}/preview endpoint (v15+).
-      properties:
-        status:
-          description: 'The current preview generation status. Possible values: `ready`, `processing`, `failed`, `transfer_failed`, `not_supported_empty`.'
-          type: string
-        mime:
-          description: The MIME type of the preview file. Populated only when status is `ready`; otherwise null.
-          type: string
-        link:
-          description: The URL path to retrieve the preview file. Populated only when status is `ready`; otherwise null.
-          type: string
-    ErrorString:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
-        field:
-          type: string
-          description: Associated field, if applicable.
-        failedIds:
-          type: array
-          description: List of failed IDs.
-          items:
-            type: string
-    Version:
-      description: Class Version
-      required:
-      - id
-      - name
-      - objectId
-      - userId
-      - versionNumber
-      properties:
-        id:
-          description: The unique identifier of the file version.
-          type: string
-        versionNumber:
-          description: The version number of the file.
-          type: integer
-        deleted:
-          description: Indicates whether this version of the file has been deleted.
-          type: boolean
-        created:
-          description: The creation date of this file version.
-          type: string
-          format: date
-        userId:
-          description: The unique identifier of the user who created this file version.
-          type: string
-        size:
-          description: The size of the file content in bytes.
-          type: integer
-        fingerprint:
-          description: A unique hash identifying the file.
-          type: string
-        fingerprintAlgo:
-          description: The algorithm used to generate the fingerprint (e.g., sha3-256, md5).
-          type: string
-        backend:
-          description: The backend system associated with the file version.
-          type: string
-        mime:
-          description: The MIME type of the file version.
-          type: string
-        name:
-          description: The name of the file version.
-          type: string
-        creator:
-          description: The user who created the file version. (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/UserBasicInfo'
-        objectId:
-          description: The object ID (UUID) for the file version.
-          type: string
-        clientCreated:
-          description: The date and time the file version was created on the client side.
-          type: string
-          format: date
-        clientModified:
-          description: The date and time the file version was last modified on the client side.
-          type: string
-          format: date
-        avStatus:
-          description: Indicates the file version's availability status based on Antivirus (AV) settings and whether it has been scanned or detected as infected.
-          type: string
-        dlpStatus:
-          description: Indicates the file version's availability status based on Data Loss Prevention (DLP) settings and whether it has been scanned or detected as infected.
-          type: string
-        adminQuarantineStatus:
-          description: 'Indicates the file version\''s availability status based on the administrator\''s quarantine status. '
-          type: string
-        storageAvailable:
-          description: Indicates whether the file is accessible on any storage volume.
-          type: boolean
-        fingerprints:
-          description: A list of fingerprints associated with the file version.
-          type: array
-          items:
-            type: string
-        tags:
-          description: List of tags associated with the file.
-          type: array
-          items:
-            $ref: '#/components/schemas/Tag'
-        links:
-          description: HATEOAS links associated with the entity
-          type: array
-          items:
-            type: string
-    RefreshToken:
-      description: Class RefreshToken
-      required:
-      - refreshToken
-      - scope
-      properties:
-        userId:
-          description: Unique identifier of the user to whom the refresh token belongs
-          type: integer
-        expire:
-          description: Date and time after which the refresh token is no longer valid
-          type: string
-          format: date-time
-        scope:
-          description: OAuth scope of the refresh token
-          type: string
-        refreshToken:
-          description: Refresh token value
-          type: string
-    KPTransferStatus:
-      description: Class KPTransferStatus
-      required:
-      - errCode
-      - fileHandle
-      - id
-      - kPObjectId
-      - transactionId
-      - userId
-      properties:
-        id:
-          description: KP transfer status unique identifier
-          type: string
-        transactionId:
-          description: Unique transaction identifier for tracking the Repositories Gateway file transfer
-          type: string
-        kPObjectId:
-          description: Unique identifier of the Repositories Gateway object being transferred
-          type: string
-        fileHandle:
-          description: File handle used to reference the temporary file during the transfer process
-          type: string
-        userId:
-          description: The unique identifier of the user.
-          type: string
-        errCode:
-          description: Numeric error code returned when the file transfer fails
-          type: string
-        status:
-          description: 'Current status of the Repositories Gateway file transfer. Accepted values: `0` (received request), `1` (in progress), `2` (completed successfully), `99` (transfer failed)'
-          type: string
-        avStatus:
-          description: 'AV scan status. Accepted values: `allowed`, `disallowed`, `scanning`'
-          type: string
-        dlpStatus:
-          description: 'DLP scan status. Accepted values: `allowed`, `disallowed`, `scanning`'
-          type: string
-    Tag:
-      type: object
-      properties:
-        guid:
-          type: string
-          format: uuid
-          description: Unique identifier (UUID) for the tag.
-        name:
-          type: string
-          description: Display name of the tag.
-        type:
-          type: string
-          description: Type category of the tag.
-    Requirement:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Requirement ID
-        parentId:
-          type: integer
-          description: Unique identifier of the parent object.
-        name:
-          type: string
-          description: Name of the object.
-        type:
-          type: string
-          description: Type of the object.<br>`f` – File.<br>`d` – Folder.
-        userId:
-          type: string
-          format: uuid
-          description: Unique identifier (UUID) who created the object.
-        creator:
-          description: Details of the user who created the object.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-        created:
-          type: string
-          format: date
-          description: The date and time when the object was created.
-        modified:
-          type: string
-          format: date
-          description: The date and time when the object was last modified.
-        expire:
-          type: string
-          format: date
-          description: Expiration timestamp of the object, if applicable.
-        permissions:
-          description: List of permissions associated with the object.
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
-        deleted:
-          type: boolean
-          description: Indicates whether the object has been deleted.
-        permDeleted:
-          type: boolean
-          description: Indicates whether the object has been permanently deleted.
-        permalink:
-          type: string
-          description: Permanent URL link to access the object.
-        path:
-          type: string
-          description: Path to the object in the hierarchy.
-        members:
-          description: List of members who have access to the object.
-          type: array
-          items:
-            $ref: '#/components/schemas/Member'
-        vendorDocId:
-          type: string
-          description: Vendor document ID associated with the object.
-        vendorDocName:
-          type: string
-          description: Name of the vendor document associated with the object.
-        secure:
-          type: boolean
-          description: Indicates whether the folder or the parent folder containing the file is marked as secure.
-        source:
-          type: integer
-          description: ID representing the source of the object (1 - Salesforce, 2 - Teams).
-        approvers:
-          description: List of approvers for the requirement
-        asset_class:
-          description: Asset class associated with the requirement
-          allOf:
-          - $ref: '#/components/schemas/RiskPolicy'
-        matched_recipients:
-          type: array
-          description: List of succeeded recipient emails.
-          items:
-            type: string
-    FileCopyPostBodyRequest:
-      type: object
-      properties:
-        ids:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: List of file UUIDs to copy. Cannot be used together with `id:in` in the query string.
-        destinationFolderId:
-          type: string
-          description: UUID of the destination folder to copy the files into.
-        replace:
-          type: boolean
-          description: If true, overwrites existing files in the destination folder if they share the same name.
-        newFileName:
-          type: string
-          maxLength: 255
-          description: New name for the copied file. Only applicable when copying a single file into the same folder to avoid a name conflict.
-      required:
-      - destinationFolderId
     AccessVerificationApproval:
       type: object
       properties:
@@ -7484,6 +8054,24 @@ components:
           description: List of requirements for access verification
           items:
             $ref: '#/components/schemas/Requirement'
+    UserBasicInfo:
+      required:
+      - email
+      - id
+      - name
+      properties:
+        id:
+          description: The unique identifier of the user
+          type: string
+        name:
+          description: The name of the user
+          type: string
+        email:
+          description: The user's email
+          type: string
+        profileIcon:
+          description: URL to the user's profile icon image
+          type: string
     MobileSync:
       type: object
       properties:
@@ -7537,107 +8125,23 @@ components:
           description: Details of the synced file.
           allOf:
           - $ref: '#/components/schemas/File'
-    SourceFile:
-      required:
-      - id
-      - name
-      - parentId
-      - type
-      - wopiapp
+    PushedObject:
+      type: object
       properties:
-        id:
-          description: Unique SourceContent identifier
+        objectId:
           type: string
-        name:
-          description: Display name of the source content item
+          description: Unique identifier (UUID) for the pushed object.
+        userId:
           type: string
-        parentId:
-          description: Parent source content unique identifier
-          type: string
-        type:
-          description: 'Source content type. Accepted values: \`d\` (folder), \`f\` (file)'
-          type: string
+          description: Unique identifier (UUID) for the user who pushed the object.
         created:
-          description: Creation timestamp of the source content in UTC
           type: string
           format: date
-        modified:
-          description: Last modification timestamp of the source content in UTC
-          type: string
-          format: date
-        status:
-          description: Current availability status of the source content item
-          type: string
-        deleted:
-          description: Indicates whether the source content is deleted
-          type: boolean
-        path:
-          description: Full path of the source content
-          type: string
-        userRoleId:
-          description: Current user role id (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: integer
-        creator:
-          description: File's creator (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/UserBasicInfo'
-        permissions:
-          description: Current user's permissions (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
-        wopiapp:
-          description: WOPI info for iOS app
-          type: boolean
-        rootId:
-          description: Unique identifier of the root-level source content ancestor (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: string
-        pathIds:
-          description: Ordered list of ancestor identifiers representing the full path from root to this source content item (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: string
-        sourceTypeId:
-          description: Unique identifier of the ECM source type this content belongs to (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: string
-        totalFilesCount:
-          description: Total number of files in the source content (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: string
-        totalFoldersCount:
-          description: Total number of folders in the source content (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: string
-        parent:
-          description: Parent source content item (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/SourceContent'
-        links:
-          description: HATEOAS links associated with the entity
-          type: array
-          items:
-            type: string
-        locked:
-          description: Indicates whether the file is locked
-          type: boolean
-        size:
-          description: Size of the source file in bytes
-          type: integer
-        fingerprint:
-          description: File content fingerprint
-          type: string
-        expire:
-          description: Date and time after which the source file expires and becomes unavailable
-          type: string
-        mime:
-          description: File MIME type
-          type: string
-        avStatus:
-          description: Check file availability status according to AV settings and file scanned/infected status
-          type: string
-        dlpStatus:
-          description: Check file availability status according to DLP settings and file scanned/infected status
-          type: string
-        lockedUserName:
-          description: Username/email of user who locked the file
-          type: string
-        lockUser:
-          description: User who locked the file
-          $ref: '#/components/schemas/UserBasicInfo'
+          description: The date and time when the object was pushed.
+        user:
+          description: Details of the user who pushed the object.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
     AdminFilePutRequest:
       type: object
       properties:
@@ -7652,6 +8156,94 @@ components:
           description: New expiration date for the selected files.
       required:
       - ids
+    KPTransferStatus:
+      description: Class KPTransferStatus
+      required:
+      - errCode
+      - fileHandle
+      - id
+      - kPObjectId
+      - transactionId
+      - userId
+      properties:
+        id:
+          description: KP transfer status unique identifier
+          type: string
+        transactionId:
+          description: Unique transaction identifier for tracking the Repositories Gateway file transfer
+          type: string
+        kPObjectId:
+          description: Unique identifier of the Repositories Gateway object being transferred
+          type: string
+        fileHandle:
+          description: File handle used to reference the temporary file during the transfer process
+          type: string
+        userId:
+          description: The unique identifier of the user.
+          type: string
+        errCode:
+          description: Numeric error code returned when the file transfer fails
+          type: string
+        status:
+          description: 'Current status of the Repositories Gateway file transfer. Accepted values: `0` (received request), `1` (in progress), `2` (completed successfully), `99` (transfer failed)'
+          type: string
+        avStatus:
+          description: 'AV scan status. Accepted values: `allowed`, `disallowed`, `scanning`'
+          type: string
+        dlpStatus:
+          description: 'DLP scan status. Accepted values: `allowed`, `disallowed`, `scanning`'
+          type: string
+    SyncedObject:
+      type: object
+      properties:
+        objectId:
+          type: string
+          description: Unique identifier (UUID) for the synced object.
+        userId:
+          type: string
+          description: Unique identifier (UUID) for the user who synced the object.
+        created:
+          type: string
+          format: date
+          description: The date and time when the object was pushed.
+        user:
+          description: Details of the user who pushed the object.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+    Tag:
+      type: object
+      properties:
+        guid:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) for the tag.
+        name:
+          type: string
+          description: Display name of the tag.
+        type:
+          type: string
+          description: Type category of the tag.
+    Fingerprint:
+      type: object
+      properties:
+        algo:
+          type: string
+          description: The algorithm used to generate the fingerprint (e.g., sha3-256, md5).
+        hash:
+          type: string
+          description: The resulting hash value representing the fingerprint of the file or object.
+    Permission:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the permission.
+        name:
+          type: string
+          description: Name of the permission.
+        allowed:
+          type: boolean
+          description: Indicates whether the permission is granted (True) or denied (False).
     File:
       type: object
       properties:
@@ -7824,58 +8416,44 @@ components:
           - 'null'
           format: uuid
           description: Tracking identifier associated with the file upload.
-    FileNameRequest.Post:
+    FolderFileAddMembers:
+      type: object
       properties:
-        fileType:
-          description: The file type
-          type: string
-        fileName:
-          description: The file name
-          type: string
-    LdapGroup:
-      description: Class LdapGroup
-      required:
-      - id
-      - name
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorStringSchemaAccessVerifications'
+        successIds:
+          type: array
+          description: List of succeeded IDs.
+          items:
+            type: string
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Member'
+    FileCopyPostBodyRequest:
+      type: object
       properties:
-        id:
-          description: LDAP group unique identifier
-          type: integer
-        name:
-          description: Display name of the LDAP group
-          type: string
-        email:
-          description: LDAP group email address
-          type: string
-        description:
-          description: LDAP group description
-          type: string
-        links:
-          description: HATEOAS links associated with the entity
+        ids:
           type: array
           items:
             type: string
-    DownloadLink:
-      type: object
-      properties:
-        downloadLinks:
-          type: array
-          description: List of download URLs for the requested files.
-          items:
-            type: string
-    Permission:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique identifier for the permission.
-        name:
+            format: uuid
+          description: List of file UUIDs to copy. Cannot be used together with `id:in` in the query string.
+        destinationFolderId:
           type: string
-          description: Name of the permission.
-        allowed:
+          description: UUID of the destination folder to copy the files into.
+        replace:
           type: boolean
-          description: Indicates whether the permission is granted (True) or denied (False).
-    ErrorStringSchemaAccessVerifications:
+          description: If true, overwrites existing files in the destination folder if they share the same name.
+        newFileName:
+          type: string
+          maxLength: 255
+          description: New name for the copied file. Only applicable when copying a single file into the same folder to avoid a name conflict.
+      required:
+      - destinationFolderId
+    ErrorString:
       type: object
       properties:
         code:
@@ -7892,351 +8470,78 @@ components:
           description: List of failed IDs.
           items:
             type: string
-        accessVerification:
-          description: Access Verification details
-          allOf:
-          - $ref: '#/components/schemas/AccessVerificationApproval'
-        referenceId:
-          type: string
-          description: Reference ID for the error
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    UserBasic:
+    RiskPolicy:
       type: object
       properties:
         id:
           type: string
-          description: Unique identifier (UUID) for the user.
-        email:
-          type: string
-          description: Email address associated with the user.
-        name:
-          type: string
-          description: Full name of the user.
-        profileIcon:
-          type: string
-          description: URL or identifier for the user's profile icon.
-    UserBasicInfo:
-      required:
-      - email
-      - id
-      - name
-      properties:
-        id:
-          description: The unique identifier of the user
-          type: string
-        name:
-          description: The name of the user
-          type: string
-        email:
-          description: The user's email
-          type: string
-        profileIcon:
-          description: URL to the user's profile icon image
-          type: string
-    Content.Post:
-      description: Class Content
-      required:
-      - content
-      - name
-      properties:
-        addLinks:
-          description: Indicates whether HATEOAS links should be included in the response
-          type: boolean
-        name:
-          description: Display name of the file
-          type: string
-        content:
-          description: Raw content body of the file being created
-          type: string
-        clientCreated:
-          description: Date and time when the file was created on the client side
-          type: integer
-        clientModified:
-          description: Date and time when the file was last modified on the client side
-          type: integer
-        note:
-          description: Indicates whether the file should be uploaded as a note
-          type: integer
-        disableAutoVersion:
-          description: Indicates whether the file should be prevented from being saved as a new version
-          type: boolean
-    Comment:
-      description: Class Comment
-      required:
-      - contents
-      - id
-      - objectId
-      - parentId
-      - userId
-      properties:
-        id:
-          description: Comment unique identifier
-          type: integer
+          description: Risk Policy ID
         parentId:
-          description: Unique identifier of the parent comment, if the comment is a reply
           type: integer
-        objectId:
-          description: Unique identifier (UUID) of the file being commented on
+          description: Unique identifier of the parent object.
+        name:
           type: string
-        folderId:
-          description: Unique identifier (UUID) of the folder containing the object being commented on
+          description: Risk Policy Name
+        type:
           type: string
+          description: Type of the object.<br>`f` – File.<br>`d` – Folder.
         userId:
-          description: Unique identifier (UUID) of the user who authored the comment
           type: string
+          format: uuid
+          description: Unique identifier (UUID) who created the object.
+        creator:
+          description: Details of the user who created the object.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
         created:
-          description: Date and time when the comment was created
           type: string
           format: date
+          description: The date and time when the object was created.
         modified:
-          description: Date and time when the comment was last modified
           type: string
           format: date
-        contents:
-          description: Text content of the comment
+          description: The date and time when the object was last modified.
+        expire:
           type: string
-        deleted:
-          description: Indicates whether the comment has been deleted
-          type: boolean
-        isComment:
-          description: Indicates whether the item is a comment
-          type: boolean
-        object:
-          description: File being commented on (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/BaseObject'
-        author:
-          description: Author of the comment (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/UserBasicInfo'
-        parent:
-          description: The comment this reply is responding to, if applicable (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/Comment'
+          format: date
+          description: Expiration timestamp of the object, if applicable.
         permissions:
-          description: Permissions of the current user regarding the comment (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          description: List of permissions associated with the object.
           type: array
           items:
             $ref: '#/components/schemas/Permission'
-        links:
-          description: HATEOAS links associated with the entity
-          type: array
-          items:
-            type: string
-    Members:
-      type: object
-      properties:
-        data:
-          description: List of members with access to the object.
+        deleted:
+          type: boolean
+          description: Indicates whether the object has been deleted.
+        permDeleted:
+          type: boolean
+          description: Indicates whether the object has been permanently deleted.
+        permalink:
+          type: string
+          description: Permanent URL link to access the object.
+        path:
+          type: string
+          description: Path to the object in the hierarchy.
+        members:
+          description: List of members who have access to the object.
           type: array
           items:
             $ref: '#/components/schemas/Member'
-        metadata:
-          description: Pagination metadata for the result set.
-          allOf:
-          - $ref: '#/components/schemas/MetaData'
-    MemberGroup:
-      description: Class MemberGroup
-      required:
-      - groupId
-      - objectId
-      - roleId
-      properties:
-        objectId:
-          description: Unique identifier of the folder this member belongs to
-          type: string
-        roleId:
-          description: Unique identifier of the role assigned to this member
-          type: integer
-        group:
-          description: Details of the LDAP group that is a member (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/LdapGroup'
-        role:
-          description: Details of the role assigned to this member (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/Role'
-        inheritRoleId:
-          description: Unique identifier of the role inherited from the parent folder (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: integer
-        allowedFolderRoleId:
-          description: List of role identifiers that are permitted for this folder membership (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: array
-          items:
-            type: string
-        links:
-          description: HATEOAS links associated with the entity
-          type: array
-          items:
-            type: string
-        groupId:
-          description: Unique identifier of the LDAP group assigned as a member
-          type: integer
-        user:
-          description: Details of the user who is a member (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/User'
-    BaseObject:
-      description: Class Object
-      required:
-      - id
-      - name
-      - parentId
-      - userId
-      properties:
-        id:
-          description: Unique identifier of object
-          type: string
-        created:
-          description: Date and time when the object was created
-          type: string
-          format: date-time
-        deleted:
-          description: Indicates whether the object is deleted
-          type: boolean
-        permDeleted:
-          description: Indicates whether the object is permanently deleted
-          type: boolean
-        expire:
-          description: Date and time when the object expires and becomes inaccessible
-          type: string
-          format: date-time
-        modified:
-          description: Date and time when the object was last modified
-          type: string
-          format: date-time
-        name:
-          description: Display name of the object
-          type: string
-        parentId:
-          description: Parent Folder identifier
-          type: string
-        userId:
-          description: Unique identifier of Object creator
-          type: string
-        parent:
-          description: Folder that directly contains this object (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/Folder'
-        permalink:
-          description: Permanent URL for accessing the object in the web application
-          type: string
-        creator:
-          description: Basic profile information of the user who created the object (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/UserBasicInfo'
-        permissions:
-          description: Current user's permissions (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
         vendorDocId:
-          description: Identifier of the corresponding document in the external vendor system (Explicit field. May be retrieved only if mentioned in "with" parameter)
           type: string
+          description: Vendor document ID associated with the object.
         vendorDocName:
-          description: Display name of the corresponding document in the external vendor system (Explicit field. May be retrieved only if mentioned in "with" parameter)
           type: string
+          description: Name of the vendor document associated with the object.
+        secure:
+          type: boolean
+          description: Indicates whether the folder or the parent folder containing the file is marked as secure.
         source:
-          description: Numeric code identifying the external system that originated this object (e.g. Salesforce, Teams)
           type: integer
-        links:
-          description: HATEOAS links associated with the entity
-          type: array
-          items:
-            type: string
-    FileUpdateRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          maxLength: 255
-          description: The new name for the file.
-        expire:
-          type: string
-          format: date
-          description: The updated expiration date for the file.
-        replace:
-          type: boolean
-          description: Indicates whether to replace the existing file if one with the same name already exists.
-    FilePermissions:
-      description: Class FilePermissions
-      properties:
-        fileId:
-          description: Id of file
-          type: string
-        permissions:
-          type: array
-          items:
-            type: string
-    Fingerprint:
-      type: object
-      properties:
-        algo:
-          type: string
-          description: The algorithm used to generate the fingerprint (e.g., sha3-256, md5).
-        hash:
-          type: string
-          description: The resulting hash value representing the fingerprint of the file or object.
-    Task.Post:
-      description: Class Task
-      required:
-      - assigneeId
-      - due
-      - contents
-      properties:
-        assigneeId:
-          description: Assignee user unique identifier
-          type: integer
-        due:
-          description: Date and time by which the task must be completed
-          type: string
-          format: date
-        parentId:
-          description: Parent Comment identifier
-          type: integer
-        contents:
-          description: Body text of the task
-          type: string
-        addLinks:
-          description: Indicates whether HATEOAS links should be included in the response
-          type: boolean
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
+          description: ID representing the source of the object (1 - Salesforce, 2 - Teams).
         message:
           type: string
-          description: Error message
-    FileMovePostBodyRequest:
-      type: object
-      properties:
-        ids:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: List of file UUIDs to move. Cannot be used together with `id:in` in the query string.
-        destinationFolderId:
-          type: string
-          description: UUID of the destination folder to move the files into.
-        replace:
-          type: boolean
-          description: If true, overwrites existing files in the destination folder if they share the same name.
-      required:
-      - destinationFolderId
-    FilePathResponse:
-      description: Represents the full ancestor path of a file, from the workspace root down to the file's parent folder. Returned by the GET /files/{id}/path endpoint.
-      properties:
-        data:
-          description: Ordered list of folder nodes representing the path from the workspace root to the file's parent folder.
-          type: array
-          items:
-            $ref: FolderTreeItem
-        links:
-          description: Optional HATEOAS links. Present only when the request includes link options.
-          type: array
-          items:
-            $ref: HateoasLink
+          description: Risk Policy Message
     SourceContent:
       description: Class SourceContent - if you need true EAPI entity use App\Entity\ECObject
       required:
@@ -8312,181 +8617,13 @@ components:
           type: array
           items:
             type: string
-    SyncedObject:
+    Errors:
       type: object
       properties:
-        objectId:
-          type: string
-          description: Unique identifier (UUID) for the synced object.
-        userId:
-          type: string
-          description: Unique identifier (UUID) for the user who synced the object.
-        created:
-          type: string
-          format: date
-          description: The date and time when the object was pushed.
-        user:
-          description: Details of the user who pushed the object.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-    Group:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: LDAP Group ID
-        name:
-          type: string
-          description: LDAP Group name
-        dn:
-          type: string
-          description: LDAP Group domain name
-        email:
-          type: string
-          description: LDAP Group email
-        description:
-          type: string
-          description: LDAP Group description
-    User:
-      description: Class User
-      required:
-      - basedirId
-      - email
-      - id
-      - mydirId
-      - name
-      - syncdirId
-      properties:
-        id:
-          description: The unique identifier of the user
-          type: string
-        basedirId:
-          description: The unique identifier of the user's root Kiteworks directory.
-          type: string
-        created:
-          description: Date and time the user account was created
-          type: string
-          format: date
-        email:
-          description: The user's email
-          type: string
-        mydirId:
-          description: The unique identifier of the user's mydir system directory.
-          type: string
-        name:
-          description: The name of the user
-          type: string
-        syncdirId:
-          description: The unique identifier of the user's 'My Folder'.
-          type: string
-        userTypeId:
-          description: The unique identifier of the user type (profile).
-          type: integer
-        internal:
-          description: Indicates whether the user is an internal user
-          type: boolean
-        profileIcon:
-          description: URL to the user's profile icon image
-          type: string
-        extDL:
-          description: Indicates whether the user is an External Distribution List
-          type: boolean
-        metadata:
-          description: List of user's metadata
+        error:
           type: array
           items:
-            $ref: '#/components/schemas/UserMetadata'
-        adminRoleId:
-          description: The ID of the admin role assigned to the user.
-          type: integer
-        links:
-          description: HATEOAS links associated with the entity
-          type: array
-          items:
-            type: string
-        active:
-          description: Indicates whether the user is an actual kitework user
-          type: boolean
-        suspended:
-          description: Indicates whether the user is suspended
-          type: boolean
-        deleted:
-          description: Indicates whether the user has been deleted
-          type: boolean
-        flags:
-          description: "Authentication type.\n     *                  0: No authentication,\n     *                  1: Authentication by kiteworks,\n     *                  2: Authentication by LDAP,\n     *                  4: Authentication by SSO"
-          type: integer
-        verified:
-          description: Indicates whether the user is verified
-          type: boolean
-        deactivated:
-          description: Indicates whether the user has been deactivated
-          type: boolean
-        lastActivityDateTime:
-          description: User's last activity datetime
-          type: string
-          format: date
-        passwordExpirationDateTime:
-          description: The exact timestamp when the user's password will expire
-          type: string
-          format: date
-    PostFileZipStatusBodyRequest:
-      type: object
-      properties:
-        fileIds:
-          type: array
-          maxItems: 1000
-          description: List of file UUIDs to include in the bulk download. Maximum 1000 entries.
-          items:
-            type: string
-        folderIds:
-          type: array
-          maxItems: 100
-          description: List of folder UUIDs to include in the bulk download. Maximum 100 entries.
-          items:
-            type: string
-        fileId:
-          type: string
-          description: UUID of a single file to download. Use this for single-file downloads instead of `fileIds`.
-        versionId:
-          type: string
-          description: The version ID of the specified file.
-    AdminFileRescan:
-      type: object
-      properties:
-        msg:
-          type: string
-          description: The successful response message
-    FolderFileAddMembers:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/ErrorStringSchemaAccessVerifications'
-        successIds:
-          type: array
-          description: List of succeeded IDs.
-          items:
-            type: string
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Member'
-    Comment.Post:
-      description: Class Comment
-      required:
-      - contents
-      properties:
-        parentId:
-          description: Unique identifier of the parent comment. Set this value when replying to an existing comment
-          type: integer
-        contents:
-          description: Text content of the comment
-          type: string
-        addLinks:
-          description: Indicates whether HATEOAS links should be included in the response
-          type: boolean
+            $ref: '#/components/schemas/Error'
     Role:
       type: object
       properties:
@@ -8502,18 +8639,16 @@ components:
         type:
           type: string
           description: Role type
-    MetaData:
-      type: object
+    FilePermissions:
+      description: Class FilePermissions
       properties:
-        total:
-          type: integer
-          description: Total number of items available.
-        limit:
-          type: integer
-          description: Maximum number of items returned per page.
-        offset:
-          type: integer
-          description: Number of items skipped before the current page.
+        fileId:
+          description: Id of file
+          type: string
+        permissions:
+          type: array
+          items:
+            type: string
     FileMembersPostRequest:
       type: object
       properties:
@@ -8547,3 +8682,437 @@ components:
           description: Optional message to include with the file sharing.
       required:
       - roleId
+    Member:
+      type: object
+      properties:
+        objectId:
+          type: string
+          description: Unique identifier (UUID) of the associated object (file or folder).
+        roleId:
+          type: integer
+          description: Role assigned to the member.
+        userId:
+          type: string
+          description: Unique identifier (UUID) of the user.
+        groupId:
+          type: integer
+          description: Unique identifier of the LDAP group.
+        user:
+          description: User details of the member.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        role:
+          description: Role details assigned to the member.
+          allOf:
+          - $ref: '#/components/schemas/Role'
+        group:
+          description: Group details if the member belongs to a group.
+          allOf:
+          - $ref: '#/components/schemas/Group'
+        sharedBy:
+          description: Details of the user who shared the file or folder.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        created:
+          type: string
+          format: date
+          description: Date when the file or folder was shared.
+        inheritRoleId:
+          type: integer
+          description: Inherited role ID from the parent folder, if applicable.
+        allowedFolderRoleId:
+          type: array
+          description: List of allowed folder role IDs.
+          items:
+            type: integer
+        email:
+          type: string
+          description: Email associated with the member.
+        rank:
+          type: integer
+          description: Rank of the member role.
+        originFolder:
+          readOnly: true
+    SourcePreviewStatus:
+      description: Represents the preview generation status for a file in a Repositories Gateway source. Returned by the GET /sources/{id}/preview endpoint (v15+).
+      properties:
+        status:
+          description: 'The current preview generation status. Possible values: `ready`, `processing`, `failed`, `transfer_failed`, `not_supported_empty`.'
+          type: string
+        mime:
+          description: The MIME type of the preview file. Populated only when status is `ready`; otherwise null.
+          type: string
+        link:
+          description: The URL path to retrieve the preview file. Populated only when status is `ready`; otherwise null.
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    Requirement:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Requirement ID
+        parentId:
+          type: integer
+          description: Unique identifier of the parent object.
+        name:
+          type: string
+          description: Name of the object.
+        type:
+          type: string
+          description: Type of the object.<br>`f` – File.<br>`d` – Folder.
+        userId:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) who created the object.
+        creator:
+          description: Details of the user who created the object.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        created:
+          type: string
+          format: date
+          description: The date and time when the object was created.
+        modified:
+          type: string
+          format: date
+          description: The date and time when the object was last modified.
+        expire:
+          type: string
+          format: date
+          description: Expiration timestamp of the object, if applicable.
+        permissions:
+          description: List of permissions associated with the object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        deleted:
+          type: boolean
+          description: Indicates whether the object has been deleted.
+        permDeleted:
+          type: boolean
+          description: Indicates whether the object has been permanently deleted.
+        permalink:
+          type: string
+          description: Permanent URL link to access the object.
+        path:
+          type: string
+          description: Path to the object in the hierarchy.
+        members:
+          description: List of members who have access to the object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Member'
+        vendorDocId:
+          type: string
+          description: Vendor document ID associated with the object.
+        vendorDocName:
+          type: string
+          description: Name of the vendor document associated with the object.
+        secure:
+          type: boolean
+          description: Indicates whether the folder or the parent folder containing the file is marked as secure.
+        source:
+          type: integer
+          description: ID representing the source of the object (1 - Salesforce, 2 - Teams).
+        approvers:
+          description: List of approvers for the requirement
+        asset_class:
+          description: Asset class associated with the requirement
+          allOf:
+          - $ref: '#/components/schemas/RiskPolicy'
+        matched_recipients:
+          type: array
+          description: List of succeeded recipient emails.
+          items:
+            type: string
+    FilePathResponse:
+      description: Represents the full ancestor path of a file, from the workspace root down to the file's parent folder. Returned by the GET /files/{id}/path endpoint.
+      properties:
+        data:
+          description: Ordered list of folder nodes representing the path from the workspace root to the file's parent folder.
+          type: array
+          items:
+            $ref: FolderTreeItem
+        links:
+          description: Optional HATEOAS links. Present only when the request includes link options.
+          type: array
+          items:
+            $ref: HateoasLink
+    RefreshToken:
+      description: Class RefreshToken
+      required:
+      - refreshToken
+      - scope
+      properties:
+        userId:
+          description: Unique identifier of the user to whom the refresh token belongs
+          type: integer
+        expire:
+          description: Date and time after which the refresh token is no longer valid
+          type: string
+          format: date-time
+        scope:
+          description: OAuth scope of the refresh token
+          type: string
+        refreshToken:
+          description: Refresh token value
+          type: string
+    FileUpdateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 255
+          description: The new name for the file.
+        expire:
+          type: string
+          format: date
+          description: The updated expiration date for the file.
+        replace:
+          type: boolean
+          description: Indicates whether to replace the existing file if one with the same name already exists.
+    Task:
+      description: Class Task
+      required:
+      - assigneeId
+      - created
+      - due
+      - id
+      - status
+      - userId
+      properties:
+        id:
+          description: Task unique identifier
+          type: integer
+        assigneeId:
+          description: Assigned User unique identifier
+          type: string
+        assignee:
+          description: User assigned to complete the task (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/User'
+        due:
+          description: Date and time by which the task must be completed
+          type: string
+          format: date
+        parentId:
+          description: Parent Comment identifier
+          type: integer
+        objectId:
+          description: Object identifier Task belongs to
+          type: string
+        userId:
+          description: Identifier of User who created a Task
+          type: string
+        user:
+          description: User who created the task (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/User'
+        created:
+          description: Date and time the task was created
+          type: string
+          format: date
+        modified:
+          description: Date and time the task was last modified
+          type: string
+          format: date
+        contents:
+          description: Body text of the task
+          type: string
+        deleted:
+          description: Indicates whether the task is deleted
+          type: boolean
+        folderId:
+          description: Identifier of Object's parent Folder
+          type: string
+        status:
+          description: 'Task status. Accepted values: `D` (Defined), `P` (In Progress), `C` (Completed)'
+          type: string
+        file:
+          description: File the task is tied to (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/File'
+        permissions:
+          description: Current user's permissions (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+    MemberGroup:
+      description: Class MemberGroup
+      required:
+      - groupId
+      - objectId
+      - roleId
+      properties:
+        objectId:
+          description: Unique identifier of the folder this member belongs to
+          type: string
+        roleId:
+          description: Unique identifier of the role assigned to this member
+          type: integer
+        group:
+          description: Details of the LDAP group that is a member (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/LdapGroup'
+        role:
+          description: Details of the role assigned to this member (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/Role'
+        inheritRoleId:
+          description: Unique identifier of the role inherited from the parent folder (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: integer
+        allowedFolderRoleId:
+          description: List of role identifiers that are permitted for this folder membership (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: array
+          items:
+            type: string
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+        groupId:
+          description: Unique identifier of the LDAP group assigned as a member
+          type: integer
+        user:
+          description: Details of the user who is a member (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/User'
+    Task.Post:
+      description: Class Task
+      required:
+      - assigneeId
+      - due
+      - contents
+      properties:
+        assigneeId:
+          description: Assignee user unique identifier
+          type: integer
+        due:
+          description: Date and time by which the task must be completed
+          type: string
+          format: date
+        parentId:
+          description: Parent Comment identifier
+          type: integer
+        contents:
+          description: Body text of the task
+          type: string
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
+    ErrorStringSchemaAccessVerifications:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+        field:
+          type: string
+          description: Associated field, if applicable.
+        failedIds:
+          type: array
+          description: List of failed IDs.
+          items:
+            type: string
+        accessVerification:
+          description: Access Verification details
+          allOf:
+          - $ref: '#/components/schemas/AccessVerificationApproval'
+        referenceId:
+          type: string
+          description: Reference ID for the error
+    FileLockPostRequest:
+      type: object
+      properties:
+        ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: A list of file object IDs to be locked/unlocked.
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
+    Content.Post:
+      description: Class Content
+      required:
+      - content
+      - name
+      properties:
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
+        name:
+          description: Display name of the file
+          type: string
+        content:
+          description: Raw content body of the file being created
+          type: string
+        clientCreated:
+          description: Date and time when the file was created on the client side
+          type: integer
+        clientModified:
+          description: Date and time when the file was last modified on the client side
+          type: integer
+        note:
+          description: Indicates whether the file should be uploaded as a note
+          type: integer
+        disableAutoVersion:
+          description: Indicates whether the file should be prevented from being saved as a new version
+          type: boolean
+    DownloadLink:
+      type: object
+      properties:
+        downloadLinks:
+          type: array
+          description: List of download URLs for the requested files.
+          items:
+            type: string
+    MobileInfo:
+      type: object
+      properties:
+        wopiSrc:
+          type: string
+          description: The WOPI (Web Application Open Platform Interface) source URL for the mobile application.
+        userId:
+          type: string
+          description: Unique identifier of the user.
+        service:
+          type: string
+          description: The WOPI service ID.
+        scheme:
+          type: string
+          description: URI scheme used by the mobile application to handle the file.
+        schemeSupport:
+          type: string
+          description: Indicates the level of support the mobile app has for the URI scheme.
+    UserMetadata:
+      description: Class UserMetadata
+      properties:
+        name:
+          description: Key name of the custom metadata attribute associated with the user
+          type: string
+        value:
+          description: Value assigned to the custom metadata attribute for the user
+          type: string

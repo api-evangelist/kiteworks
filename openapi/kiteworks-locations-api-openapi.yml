@@ -3,13 +3,13 @@ info:
   version: '28'
   title: Kiteworks API Documentation Locations API
 tags:
-- name: locations
+- name: Locations
 paths:
   /rest/locations:
     post:
       tags:
-      - locations
-      summary: Create a location entry.
+      - Locations
+      summary: Create a location entry
       description: Creates a new location entry with a name and optional domain. Requires system admin privileges.
       responses:
         '200':
@@ -89,11 +89,23 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Location.Post'
+      operationId: postRestLocations
+      x-operation-id-source: derived
     get:
       summary: Get locations
-      description: "### Description:\n  Returns a paginated list of available locations.\n### Precondition:\n  User must be authenticated.\n### Response:\n  Returns the list of locations.\n"
+      description: '### Description:
+
+        Returns a paginated list of available locations.
+
+        ### Precondition:
+
+        User must be authenticated.
+
+        ### Response:
+
+        Returns the list of locations.'
       tags:
-      - locations
+      - Locations
       parameters:
       - in: query
         name: limit
@@ -164,11 +176,13 @@ paths:
                       message: The input is invalid.
         '490':
           description: Request blocked by WAF
+      operationId: getRestLocations
+      x-operation-id-source: derived
   /rest/locations/{id}:
     get:
       tags:
-      - locations
-      summary: Return location name.
+      - Locations
+      summary: Return location name
       description: Returns the details of the specified location, including its name and DNS URL.
       responses:
         '200':
@@ -194,10 +208,12 @@ paths:
         required: true
         schema:
           type: integer
+      operationId: getRestLocationsById
+      x-operation-id-source: derived
     delete:
       tags:
-      - locations
-      summary: Delete a location.
+      - Locations
+      summary: Delete a location
       description: Permanently deletes the specified location. Requires system admin privileges.
       responses:
         '204':
@@ -233,6 +249,8 @@ paths:
         required: true
         schema:
           type: integer
+      operationId: deleteRestLocationsById
+      x-operation-id-source: derived
 components:
   schemas:
     LocationList:
@@ -259,22 +277,6 @@ components:
         addLinks:
           description: Indicates whether HATEOAS links should be included in the response
           type: boolean
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
     MetaData:
       type: object
       properties:
@@ -287,6 +289,13 @@ components:
         offset:
           type: integer
           description: Number of items skipped before the current page.
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
     Location:
       type: object
       properties:
@@ -302,3 +311,12 @@ components:
         tenantId:
           type: integer
           description: Tenant ID
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message

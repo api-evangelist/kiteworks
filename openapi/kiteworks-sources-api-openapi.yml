@@ -3,12 +3,12 @@ info:
   version: '28'
   title: Kiteworks API Documentation Sources API
 tags:
-- name: sources
+- name: Sources
 paths:
   /rest/sources:
     post:
       tags:
-      - sources
+      - Sources
       summary: Add user ECM source
       description: Creates a new ECM source for the current user with the provided name, URL, and source type. Returns 422 if a source with the same name or URL already exists for this user.
       responses:
@@ -48,11 +48,23 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Source.Post'
+      operationId: postRestSources
+      x-operation-id-source: derived
     get:
       summary: Return user's sources
-      description: "### Description:\n  Returns a list of sources available to the current user, such as external cloud storage or SharePoint connections.\n### Precondition:\n  User must be authenticated and have access to at least one source.\n### Response:\n  A list of the user's sources is returned.\n"
+      description: '### Description:
+
+        Returns a list of sources available to the current user, such as external cloud storage or SharePoint connections.
+
+        ### Precondition:
+
+        User must be authenticated and have access to at least one source.
+
+        ### Response:
+
+        A list of the user''s sources is returned.'
       tags:
-      - sources
+      - Sources
       parameters:
       - in: query
         name: include_kw
@@ -142,10 +154,12 @@ paths:
                       message: Target user has insufficient access permissions
         '490':
           description: Request blocked by WAF
+      operationId: getRestSources
+      x-operation-id-source: derived
   /rest/sources/actions/lock:
     patch:
       tags:
-      - sources
+      - Sources
       summary: Lock Repositories Gateway files
       description: Locks one or more Repositories Gateway files. Supports partial success — if some files cannot be locked, the operation continues for the remaining files.
       responses:
@@ -174,10 +188,12 @@ paths:
           enum:
           - full_with_links
           - full
+      operationId: patchRestSourcesActionsLock
+      x-operation-id-source: derived
   /rest/sources/actions/unlock:
     patch:
       tags:
-      - sources
+      - Sources
       summary: Unlock Repositories Gateway files
       description: Unlocks one or more Repositories Gateway files. Supports partial success — if some files cannot be unlocked, the operation continues for the remaining files.
       responses:
@@ -206,10 +222,12 @@ paths:
           enum:
           - full_with_links
           - full
+      operationId: patchRestSourcesActionsUnlock
+      x-operation-id-source: derived
   /rest/sources/auth:
     post:
       tags:
-      - sources
+      - Sources
       summary: Login to cloud source
       description: Completes the cloud ECM authentication flow by submitting the code and state values returned by the ECM provider's redirect URL. Returns 200 on success or an error if the credentials are invalid.
       responses:
@@ -237,11 +255,13 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CloudSourceLogin.Post'
+      operationId: postRestSourcesAuth
+      x-operation-id-source: derived
   /rest/sources/files/actions/transferStatus:
     get:
       tags:
-      - sources
-      summary: Get kp transfer status.
+      - Sources
+      summary: Get kp transfer status
       description: Returns the status of one or more file transfer operations to Repositories Gateway, including transaction ID, file name, user ID, error code, transfer status, and AV/DLP scan results.
       responses:
         '200':
@@ -289,11 +309,13 @@ paths:
           enum:
           - full_with_links
           - full
+      operationId: getRestSourcesFilesActionsTransferStatus
+      x-operation-id-source: derived
   /rest/sources/files/{id}:
     get:
       tags:
-      - sources
-      summary: Get info of an Repositories Gateway file.
+      - Sources
+      summary: Get info of an Repositories Gateway file
       description: Returns the details of the specified Repositories Gateway file, including its name, parent ID, type, timestamps, and the current user's permissions on it.
       responses:
         '200':
@@ -337,10 +359,12 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestSourcesFilesById
+      x-operation-id-source: derived
     delete:
       tags:
-      - sources
-      summary: Delete an Repositories Gateway file.
+      - Sources
+      summary: Delete an Repositories Gateway file
       description: Permanently deletes the specified Repositories Gateway file. When the `forceDelete` query parameter is set to true, the file can be deleted even if it is currently in use by the requesting user. Deleting a file in use by another user is not permitted.
       responses:
         '200':
@@ -389,11 +413,13 @@ paths:
           enum:
           - full_with_links
           - full
+      operationId: deleteRestSourcesFilesById
+      x-operation-id-source: derived
   /rest/sources/folders/{id}:
     get:
       tags:
-      - sources
-      summary: Get info of an Repositories Gateway folder.
+      - Sources
+      summary: Get info of an Repositories Gateway folder
       description: Returns the details of the specified Repositories Gateway folder, including its name, parent, type, timestamps, and child counts.
       responses:
         '200':
@@ -438,10 +464,12 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestSourcesFoldersById
+      x-operation-id-source: derived
     delete:
       tags:
-      - sources
-      summary: Delete an Repositories Gateway folder.
+      - Sources
+      summary: Delete an Repositories Gateway folder
       description: Permanently deletes the specified Repositories Gateway folder.
       responses:
         '200':
@@ -456,10 +484,12 @@ paths:
         required: true
         schema:
           type: string
+      operationId: deleteRestSourcesFoldersById
+      x-operation-id-source: derived
   /rest/sources/{id}:
     get:
       tags:
-      - sources
+      - Sources
       summary: Returns requested ECM source
       description: Returns the details of the specified ECM source, including its name, description, URL, source type, pinned status, and the current user's permissions on it.
       responses:
@@ -504,9 +534,11 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestSourcesById
+      x-operation-id-source: derived
     delete:
       tags:
-      - sources
+      - Sources
       summary: Deletes specified source
       description: Removes the specified ECM source from the current user's source list.
       responses:
@@ -536,10 +568,12 @@ paths:
         required: true
         schema:
           type: string
+      operationId: deleteRestSourcesById
+      x-operation-id-source: derived
   /rest/sources/{id}/auth:
     get:
       tags:
-      - sources
+      - Sources
       summary: Get url with redirect to cloud ECM auth
       description: Returns the authentication redirect URL and client ID for the specified cloud ECM source. The caller should redirect the user to the returned URL to complete the authentication flow with the ECM provider.
       responses:
@@ -579,9 +613,11 @@ paths:
         required: true
         schema:
           type: integer
+      operationId: getRestSourcesByIdAuth
+      x-operation-id-source: derived
     post:
       tags:
-      - sources
+      - Sources
       summary: Login to on-premise source
       description: Authenticates the current user to the specified on-premise ECM source using a login and password. Returns 200 on success or an error if the credentials are invalid.
       responses:
@@ -630,10 +666,12 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OnPremiseSourceLogin.Post'
+      operationId: postRestSourcesByIdAuth
+      x-operation-id-source: derived
   /rest/sources/{id}/authStatus:
     get:
       tags:
-      - sources
+      - Sources
       summary: Get cloud ECM auth status
       description: Checks whether the current user is authenticated to the specified cloud ECM source by attempting to list its contents. Returns HTTP 200 if authenticated, or an error if authentication is required.
       responses:
@@ -649,10 +687,12 @@ paths:
         required: true
         schema:
           type: integer
+      operationId: getRestSourcesByIdAuthStatus
+      x-operation-id-source: derived
   /rest/sources/{id}/children:
     get:
       tags:
-      - sources
+      - Sources
       summary: Returns the content of the specified ECM source
       description: Returns a paginated list of both files and subfolders within the specified ECM source folder, including each item's name, parent ID, type, timestamps, and permissions.
       responses:
@@ -831,11 +871,13 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestSourcesByIdChildren
+      x-operation-id-source: derived
   /rest/sources/{id}/externalEdit:
     get:
       tags:
-      - sources
-      summary: Get access token for external file edit.
+      - Sources
+      summary: Get access token for external file edit
       description: Returns a short-lived refresh token (expires after 300 seconds) scoped to the specified Repositories Gateway file, enabling an external editor to download and re-upload the file.
       responses:
         '200':
@@ -1029,10 +1071,12 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestSourcesByIdExternalEdit
+      x-operation-id-source: derived
   /rest/sources/{id}/folders:
     get:
       tags:
-      - sources
+      - Sources
       summary: Returns the list of folders of the specified ECM folder
       description: Returns a paginated list of subfolders within the specified ECM source folder, including each folder's name, parent ID, type, timestamps, and permissions.
       responses:
@@ -1201,12 +1245,20 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestSourcesByIdFolders
+      x-operation-id-source: derived
   /rest/sources/{id}/preview:
     get:
       tags:
-      - sources
+      - Sources
       summary: Get file preview metadata for a file in Repositories Gateway source
-      description: "Gets the current preview generation status for the specified file in a Repositories Gateway\n                       source. When the preview is ready, the response includes the MIME type and a link to retrieve\n                       it. If the file is empty, infected, or DLP-locked, an appropriate error status is returned\n                       instead.\\n\\n**Requires `view` permission on the file.**"
+      description: 'Gets the current preview generation status for the specified file in a Repositories Gateway
+
+        source. When the preview is ready, the response includes the MIME type and a link to retrieve
+
+        it. If the file is empty, infected, or DLP-locked, an appropriate error status is returned
+
+        instead.\n\n**Requires `view` permission on the file.**'
       responses:
         '200':
           description: Returns the current preview status for the file. When `status` is `ready`, the `mime` and `link` fields are populated.
@@ -1257,10 +1309,12 @@ paths:
         required: true
         schema:
           type: integer
+      operationId: getRestSourcesByIdPreview
+      x-operation-id-source: derived
   /rest/sources/{parent}/files:
     get:
       tags:
-      - sources
+      - Sources
       summary: Returns the list of files of the specified ECM folder
       description: Returns a paginated list of files within the specified ECM source folder, including each file's name, parent ID, type, timestamps, and permissions.
       responses:
@@ -1443,140 +1497,18 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestSourcesByParentFiles
+      x-operation-id-source: derived
 components:
   schemas:
-    UserBasicInfo:
-      required:
-      - email
-      - id
-      - name
+    Sources:
+      type: object
       properties:
-        id:
-          description: The unique identifier of the user
-          type: string
-        name:
-          description: The name of the user
-          type: string
-        email:
-          description: The user's email
-          type: string
-        profileIcon:
-          description: URL to the user's profile icon image
-          type: string
-    SourceFolder:
-      required:
-      - id
-      - name
-      - parentId
-      - type
-      - wopiapp
-      properties:
-        id:
-          description: Unique SourceContent identifier
-          type: string
-        name:
-          description: Display name of the source content item
-          type: string
-        parentId:
-          description: Parent source content unique identifier
-          type: string
-        type:
-          description: 'Source content type. Accepted values: \`d\` (folder), \`f\` (file)'
-          type: string
-        created:
-          description: Creation timestamp of the source content in UTC
-          type: string
-          format: date
-        modified:
-          description: Last modification timestamp of the source content in UTC
-          type: string
-          format: date
-        status:
-          description: Current availability status of the source content item
-          type: string
-        deleted:
-          description: Indicates whether the source content is deleted
-          type: boolean
-        path:
-          description: Full path of the source content
-          type: string
-        userRoleId:
-          description: Current user role id (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: integer
-        creator:
-          description: File's creator (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/UserBasicInfo'
-        permissions:
-          description: Current user's permissions (Explicit field. May be retrieved only if mentioned in "with" parameter)
+        data:
+          description: List of external content sources.
           type: array
           items:
-            $ref: '#/components/schemas/Permission'
-        wopiapp:
-          description: WOPI info for iOS app
-          type: boolean
-        rootId:
-          description: Unique identifier of the root-level source content ancestor (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: string
-        pathIds:
-          description: Ordered list of ancestor identifiers representing the full path from root to this source content item (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: string
-        sourceTypeId:
-          description: Unique identifier of the ECM source type this content belongs to (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: string
-        totalFilesCount:
-          description: Total number of files in the source content (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: string
-        totalFoldersCount:
-          description: Total number of folders in the source content (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: string
-        parent:
-          description: Parent source content item (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/SourceContent'
-        links:
-          description: HATEOAS links associated with the entity
-          type: array
-          items:
-            type: string
-        isFavorite:
-          description: Indicates that Folder is marked as favorite for current user
-          type: boolean
-    KPTransferStatus:
-      description: Class KPTransferStatus
-      required:
-      - errCode
-      - fileHandle
-      - id
-      - kPObjectId
-      - transactionId
-      - userId
-      properties:
-        id:
-          description: KP transfer status unique identifier
-          type: string
-        transactionId:
-          description: Unique transaction identifier for tracking the Repositories Gateway file transfer
-          type: string
-        kPObjectId:
-          description: Unique identifier of the Repositories Gateway object being transferred
-          type: string
-        fileHandle:
-          description: File handle used to reference the temporary file during the transfer process
-          type: string
-        userId:
-          description: The unique identifier of the user.
-          type: string
-        errCode:
-          description: Numeric error code returned when the file transfer fails
-          type: string
-        status:
-          description: 'Current status of the Repositories Gateway file transfer. Accepted values: `0` (received request), `1` (in progress), `2` (completed successfully), `99` (transfer failed)'
-          type: string
-        avStatus:
-          description: 'AV scan status. Accepted values: `allowed`, `disallowed`, `scanning`'
-          type: string
-        dlpStatus:
-          description: 'DLP scan status. Accepted values: `allowed`, `disallowed`, `scanning`'
-          type: string
+            $ref: '#/components/schemas/Source'
     RefreshToken:
       description: Class RefreshToken
       required:
@@ -1596,45 +1528,15 @@ components:
         refreshToken:
           description: Refresh token value
           type: string
-    SourcePreviewStatus:
-      description: Represents the preview generation status for a file in a Repositories Gateway source. Returned by the GET /sources/{id}/preview endpoint (v15+).
+    EcmAuth:
+      description: Class EcmAuth
       properties:
-        status:
-          description: 'The current preview generation status. Possible values: `ready`, `processing`, `failed`, `transfer_failed`, `not_supported_empty`.'
+        redirect:
+          description: OAuth redirect URL for the cloud source
           type: string
-        mime:
-          description: The MIME type of the preview file. Populated only when status is `ready`; otherwise null.
+        clientId:
+          description: Cloud source OAuth client unique identifier
           type: string
-        link:
-          description: The URL path to retrieve the preview file. Populated only when status is `ready`; otherwise null.
-          type: string
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    Sources:
-      type: object
-      properties:
-        data:
-          description: List of external content sources.
-          type: array
-          items:
-            $ref: '#/components/schemas/Source'
-    MetaData:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of items available.
-        limit:
-          type: integer
-          description: Maximum number of items returned per page.
-        offset:
-          type: integer
-          description: Number of items skipped before the current page.
     SourceFile:
       required:
       - id
@@ -1754,46 +1656,6 @@ components:
         sessionState:
           description: Optional field needed for SharePoint Online and OneDrive
           type: string
-    EcmAuth:
-      description: Class EcmAuth
-      properties:
-        redirect:
-          description: OAuth redirect URL for the cloud source
-          type: string
-        clientId:
-          description: Cloud source OAuth client unique identifier
-          type: string
-    Source.Post:
-      description: Class Source
-      required:
-      - name
-      - sourceUrl
-      - sourceTypeId
-      properties:
-        name:
-          description: Display name of the source
-          type: string
-        description:
-          description: Optional description of the source providing additional context about its contents or purpose
-          type: string
-        sourceUrl:
-          description: URL of the external source system to connect to
-          type: string
-        sourceTypeId:
-          description: Unique identifier of source type
-          type: string
-        username:
-          description: Username for authenticating with the external source system
-          type: string
-        password:
-          description: Password for authenticating with the external source system
-          type: string
-        repository:
-          description: Name of the repository within the external source system to connect to
-          type: string
-        addLinks:
-          description: Indicates whether HATEOAS links should be included in the response
-          type: boolean
     Permission:
       type: object
       properties:
@@ -1806,15 +1668,6 @@ components:
         allowed:
           type: boolean
           description: Indicates whether the permission is granted (True) or denied (False).
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
     Source:
       type: object
       properties:
@@ -1855,6 +1708,55 @@ components:
         password:
           description: Password
           type: string
+    UserBasicInfo:
+      required:
+      - email
+      - id
+      - name
+      properties:
+        id:
+          description: The unique identifier of the user
+          type: string
+        name:
+          description: The name of the user
+          type: string
+        email:
+          description: The user's email
+          type: string
+        profileIcon:
+          description: URL to the user's profile icon image
+          type: string
+    Source.Post:
+      description: Class Source
+      required:
+      - name
+      - sourceUrl
+      - sourceTypeId
+      properties:
+        name:
+          description: Display name of the source
+          type: string
+        description:
+          description: Optional description of the source providing additional context about its contents or purpose
+          type: string
+        sourceUrl:
+          description: URL of the external source system to connect to
+          type: string
+        sourceTypeId:
+          description: Unique identifier of source type
+          type: string
+        username:
+          description: Username for authenticating with the external source system
+          type: string
+        password:
+          description: Password for authenticating with the external source system
+          type: string
+        repository:
+          description: Name of the repository within the external source system to connect to
+          type: string
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
     SourceContent:
       description: Class SourceContent - if you need true EAPI entity use App\Entity\ECObject
       required:
@@ -1930,3 +1832,157 @@ components:
           type: array
           items:
             type: string
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    SourceFolder:
+      required:
+      - id
+      - name
+      - parentId
+      - type
+      - wopiapp
+      properties:
+        id:
+          description: Unique SourceContent identifier
+          type: string
+        name:
+          description: Display name of the source content item
+          type: string
+        parentId:
+          description: Parent source content unique identifier
+          type: string
+        type:
+          description: 'Source content type. Accepted values: \`d\` (folder), \`f\` (file)'
+          type: string
+        created:
+          description: Creation timestamp of the source content in UTC
+          type: string
+          format: date
+        modified:
+          description: Last modification timestamp of the source content in UTC
+          type: string
+          format: date
+        status:
+          description: Current availability status of the source content item
+          type: string
+        deleted:
+          description: Indicates whether the source content is deleted
+          type: boolean
+        path:
+          description: Full path of the source content
+          type: string
+        userRoleId:
+          description: Current user role id (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: integer
+        creator:
+          description: File's creator (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/UserBasicInfo'
+        permissions:
+          description: Current user's permissions (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        wopiapp:
+          description: WOPI info for iOS app
+          type: boolean
+        rootId:
+          description: Unique identifier of the root-level source content ancestor (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        pathIds:
+          description: Ordered list of ancestor identifiers representing the full path from root to this source content item (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        sourceTypeId:
+          description: Unique identifier of the ECM source type this content belongs to (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        totalFilesCount:
+          description: Total number of files in the source content (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        totalFoldersCount:
+          description: Total number of folders in the source content (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        parent:
+          description: Parent source content item (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/SourceContent'
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+        isFavorite:
+          description: Indicates that Folder is marked as favorite for current user
+          type: boolean
+    KPTransferStatus:
+      description: Class KPTransferStatus
+      required:
+      - errCode
+      - fileHandle
+      - id
+      - kPObjectId
+      - transactionId
+      - userId
+      properties:
+        id:
+          description: KP transfer status unique identifier
+          type: string
+        transactionId:
+          description: Unique transaction identifier for tracking the Repositories Gateway file transfer
+          type: string
+        kPObjectId:
+          description: Unique identifier of the Repositories Gateway object being transferred
+          type: string
+        fileHandle:
+          description: File handle used to reference the temporary file during the transfer process
+          type: string
+        userId:
+          description: The unique identifier of the user.
+          type: string
+        errCode:
+          description: Numeric error code returned when the file transfer fails
+          type: string
+        status:
+          description: 'Current status of the Repositories Gateway file transfer. Accepted values: `0` (received request), `1` (in progress), `2` (completed successfully), `99` (transfer failed)'
+          type: string
+        avStatus:
+          description: 'AV scan status. Accepted values: `allowed`, `disallowed`, `scanning`'
+          type: string
+        dlpStatus:
+          description: 'DLP scan status. Accepted values: `allowed`, `disallowed`, `scanning`'
+          type: string
+    SourcePreviewStatus:
+      description: Represents the preview generation status for a file in a Repositories Gateway source. Returned by the GET /sources/{id}/preview endpoint (v15+).
+      properties:
+        status:
+          description: 'The current preview generation status. Possible values: `ready`, `processing`, `failed`, `transfer_failed`, `not_supported_empty`.'
+          type: string
+        mime:
+          description: The MIME type of the preview file. Populated only when status is `ready`; otherwise null.
+          type: string
+        link:
+          description: The URL path to retrieve the preview file. Populated only when status is `ready`; otherwise null.
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message

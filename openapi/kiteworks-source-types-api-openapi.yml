@@ -3,12 +3,12 @@ info:
   version: '28'
   title: Kiteworks API Documentation Source Types API
 tags:
-- name: sourceTypes
+- name: Source Types
 paths:
   /rest/sourceTypes:
     get:
       tags:
-      - sourceTypes
+      - Source Types
       summary: List all ECM source types
       description: Returns a list of available ECM source types, including each type's name and whether users can configure sources of that type.
       responses:
@@ -55,10 +55,12 @@ paths:
           - id:desc
           - name:asc
           - name:desc
+      operationId: getRestSourceTypes
+      x-operation-id-source: derived
   /rest/sourceTypes/{id}:
     get:
       tags:
-      - sourceTypes
+      - Source Types
       summary: Returns requested ECM source type
       description: Returns the details of the specified ECM source type, including its name and whether users can configure sources of that type.
       responses:
@@ -85,6 +87,8 @@ paths:
         required: true
         schema:
           type: integer
+      operationId: getRestSourceTypesById
+      x-operation-id-source: derived
 components:
   schemas:
     SourceType:

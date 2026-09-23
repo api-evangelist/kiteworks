@@ -1,18 +1,26 @@
 generated: '2026-07-19'
 method: searched
 host: https://www.kiteworks.com
-documents:
-- path: /.well-known/security.txt
-  status: 200
-  file: kiteworks-security.txt
-  note: RFC 9116, PGP-signed. Contact + Policy both point at https://security.kiteworks.com; expires 2026-12-31.
-- path: /.well-known/openid-configuration
-  status: 404
-- path: /.well-known/oauth-authorization-server
-  status: 404
-- path: /.well-known/api-catalog
-  status: 404
-- path: /.well-known/ai-plugin.json
-  status: 404
 note: OAuth discovery documents are not published on the marketing host because Kiteworks OAuth endpoints
   are per-tenant (https://{instance}/oauth/authorize, /oauth/token).
+hosts:
+- host: https://www.kiteworks.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: kiteworks-security.txt
+    note: RFC 9116, PGP-signed. Contact + Policy both point at https://security.kiteworks.com; expires
+      2026-12-31.
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+x-shape-fix:
+  converted: '2026-08-20'
+  from: documents
+  note: Rewritten into hosts[] -> documents[], the only shape well_known_docs() in score.rb reads. A served
+    .well-known surface recorded in any other shape scores as absent.

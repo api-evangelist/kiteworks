@@ -3,12 +3,12 @@ info:
   version: '28'
   title: Kiteworks API Documentation Admin Roles API
 tags:
-- name: adminRoles
+- name: Admin Roles
 paths:
   /rest/adminRoles:
     get:
       tags:
-      - adminRoles
+      - Admin Roles
       summary: List admin roles
       description: Returns a list of admin roles available in Kiteworks (e.g. System Admin, Application Admin).
       responses:
@@ -63,10 +63,12 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestAdminRoles
+      x-operation-id-source: derived
   /rest/adminRoles/{id}:
     get:
       tags:
-      - adminRoles
+      - Admin Roles
       summary: Get an admin role
       description: Returns the details of the specified admin role.
       responses:
@@ -93,10 +95,12 @@ paths:
         required: true
         schema:
           type: integer
+      operationId: getRestAdminRolesById
+      x-operation-id-source: derived
   /rest/adminRoles/{id}/users:
     get:
       tags:
-      - adminRoles
+      - Admin Roles
       summary: List users with an admin role
       description: Returns the list of users who have been assigned the specified admin role.
       responses:
@@ -288,10 +292,12 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestAdminRolesByIdUsers
+      x-operation-id-source: derived
   /rest/adminRoles/{id}/users/{user_id}:
     put:
       tags:
-      - adminRoles
+      - Admin Roles
       summary: Assign an admin role to a user
       description: Assigns the specified admin role to a user, replacing any previously assigned role. If the user's current role has advanced form access and the new role does not, you must specify how to handle the advanced form data via `deleteAdvancedFormData` and optionally `retainToAdvancedFormUser`.
       responses:
@@ -368,9 +374,11 @@ paths:
         description: User ID to retain advanced form data to when deleteAdvancedFormData is false. Required when deleteAdvancedFormData is false.
         schema:
           type: string
+      operationId: putRestAdminRolesByIdUsersByUserId
+      x-operation-id-source: derived
     delete:
       tags:
-      - adminRoles
+      - Admin Roles
       summary: Remove an admin role from a user
       description: Removes the specified admin role from a user. The user account itself is not deleted. If the role being removed has advanced form access, you must specify how to handle the advanced form data via `deleteAdvancedFormData` and optionally `retainToAdvancedFormUser`.
       responses:
@@ -423,16 +431,20 @@ paths:
         description: User ID to retain advanced form data to when deleteAdvancedFormData is false. Required when deleteAdvancedFormData is false.
         schema:
           type: string
+      operationId: deleteRestAdminRolesByIdUsersByUserId
+      x-operation-id-source: derived
 components:
   schemas:
-    UserMetadata:
-      description: Class UserMetadata
+    UserAdminRole:
+      description: Class UserAdminRole
+      required:
+      - userId
       properties:
-        name:
-          description: Key name of the custom metadata attribute associated with the user
+        userId:
+          description: User unique identifier
           type: string
-        value:
-          description: Value assigned to the custom metadata attribute for the user
+        adminRole:
+          description: 'Admin role unique identifier. Possible values are: 1: System admin, 2: Application admin'
           type: string
     MetaData:
       type: object
@@ -446,6 +458,33 @@ components:
         offset:
           type: integer
           description: Number of items skipped before the current page.
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    AdminRole:
+      description: Class AdminRole
+      required:
+      - id
+      - name
+      properties:
+        id:
+          description: Admin role unique identifier
+          type: integer
+        name:
+          description: Display name of the admin role
+          type: string
+        guid:
+          description: Admin role globally unique identifier
+          type: string
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
     User:
       description: Class User
       required:
@@ -529,26 +568,15 @@ components:
           description: The exact timestamp when the user's password will expire
           type: string
           format: date
-    AdminRole:
-      description: Class AdminRole
-      required:
-      - id
-      - name
+    UserMetadata:
+      description: Class UserMetadata
       properties:
-        id:
-          description: Admin role unique identifier
-          type: integer
         name:
-          description: Display name of the admin role
+          description: Key name of the custom metadata attribute associated with the user
           type: string
-        guid:
-          description: Admin role globally unique identifier
+        value:
+          description: Value assigned to the custom metadata attribute for the user
           type: string
-        links:
-          description: HATEOAS links associated with the entity
-          type: array
-          items:
-            type: string
     Error:
       type: object
       properties:
@@ -558,21 +586,3 @@ components:
         message:
           type: string
           description: Error message
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    UserAdminRole:
-      description: Class UserAdminRole
-      required:
-      - userId
-      properties:
-        userId:
-          description: User unique identifier
-          type: string
-        adminRole:
-          description: 'Admin role unique identifier. Possible values are: 1: System admin, 2: Application admin'
-          type: string

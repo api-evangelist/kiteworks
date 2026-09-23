@@ -8,7 +8,17 @@ paths:
   /rest/externalDL:
     post:
       summary: Add external distribution lists
-      description: "### Description:\n  Adds one or more email addresses to the current user's external distribution lists.\n### Precondition:\n  User must be authenticated.\n### Response:\n  The external distribution lists are created and returned.\n"
+      description: '### Description:
+
+        Adds one or more email addresses to the current user''s external distribution lists.
+
+        ### Precondition:
+
+        User must be authenticated.
+
+        ### Response:
+
+        The external distribution lists are created and returned.'
       tags:
       - externalDL
       requestBody:
@@ -68,9 +78,21 @@ paths:
                       redirectUrl: /login?code=3317
         '490':
           description: Request blocked by WAF
+      operationId: postRestExternalDL
+      x-operation-id-source: derived
     get:
       summary: List external distribution lists
-      description: "### Description:\n  Returns the list of external distribution lists for the current user.\n### Precondition:\n  User must be authenticated.\n### Response:\n  The list of external distribution lists is returned.\n"
+      description: '### Description:
+
+        Returns the list of external distribution lists for the current user.
+
+        ### Precondition:
+
+        User must be authenticated.
+
+        ### Response:
+
+        The list of external distribution lists is returned.'
       tags:
       - externalDL
       parameters:
@@ -132,9 +154,21 @@ paths:
                       redirectUrl: /login?code=3317
         '490':
           description: Request blocked by WAF
+      operationId: getRestExternalDL
+      x-operation-id-source: derived
     delete:
       summary: Delete external distribution lists
-      description: "### Description:\n  Removes one or more email addresses from the current user's external distribution lists.\n### Precondition:\n  User must be authenticated.\n### Response:\n  The specified external distribution lists are deleted.\n"
+      description: '### Description:
+
+        Removes one or more email addresses from the current user''s external distribution lists.
+
+        ### Precondition:
+
+        User must be authenticated.
+
+        ### Response:
+
+        The specified external distribution lists are deleted.'
       tags:
       - externalDL
       requestBody:
@@ -194,16 +228,10 @@ paths:
                       redirectUrl: /login?code=3317
         '490':
           description: Request blocked by WAF
+      operationId: deleteRestExternalDL
+      x-operation-id-source: derived
 components:
   schemas:
-    ExternalDLs:
-      type: object
-      properties:
-        data:
-          description: List of external distribution list entries.
-          type: array
-          items:
-            $ref: '#/components/schemas/ExternalDL'
     ExternalDLUpdateRequest:
       type: object
       properties:
@@ -215,6 +243,27 @@ components:
             format: email
       required:
       - emails
+    ExternalDL:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Email address of the external distribution list entry.
+    ExternalDLs:
+      type: object
+      properties:
+        data:
+          description: List of external distribution list entries.
+          type: array
+          items:
+            $ref: '#/components/schemas/ExternalDL'
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
     Error:
       type: object
       properties:
@@ -224,16 +273,3 @@ components:
         message:
           type: string
           description: Error message
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    ExternalDL:
-      type: object
-      properties:
-        email:
-          type: string
-          description: Email address of the external distribution list entry.

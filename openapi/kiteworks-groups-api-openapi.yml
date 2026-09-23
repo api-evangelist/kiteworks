@@ -3,14 +3,24 @@ info:
   version: '28'
   title: Kiteworks API Documentation Groups API
 tags:
-- name: groups
+- name: Groups
 paths:
   /rest/groups:
     post:
       summary: Create a group entry
-      description: "### Description:\n  Creates a new Kiteworks group of users.\n### Precondition:\n  User must be authenticated.\n### Response:\n  Returns the newly created group.\n"
+      description: '### Description:
+
+        Creates a new Kiteworks group of users.
+
+        ### Precondition:
+
+        User must be authenticated.
+
+        ### Response:
+
+        Returns the newly created group.'
       tags:
-      - groups
+      - Groups
       requestBody:
         content:
           application/json:
@@ -81,11 +91,23 @@ paths:
                       message: Invalid Parameter Exception
         '490':
           description: Request blocked by WAF
+      operationId: postRestGroups
+      x-operation-id-source: derived
     get:
       summary: List Kiteworks groups
-      description: "### Description:\n  Returns the list of Kiteworks groups for the current user, including the email address of each member in the group.\n### Precondition:\n  User must be authenticated.\n### Response:\n  Returns the list of groups.\n"
+      description: '### Description:
+
+        Returns the list of Kiteworks groups for the current user, including the email address of each member in the group.
+
+        ### Precondition:
+
+        User must be authenticated.
+
+        ### Response:
+
+        Returns the list of groups.'
       tags:
-      - groups
+      - Groups
       parameters:
       - in: query
         name: name
@@ -173,12 +195,24 @@ paths:
                       message: Unauthorized
         '490':
           description: Request blocked by WAF
+      operationId: getRestGroups
+      x-operation-id-source: derived
   /rest/groups/{id}:
     put:
       summary: Update a group entry
-      description: "### Description:\n  Updates the specified group's name and members.\n### Precondition:\n  User must be the owner of the group.\n### Response:\n  The group is updated.\n"
+      description: '### Description:
+
+        Updates the specified group''s name and members.
+
+        ### Precondition:
+
+        User must be the owner of the group.
+
+        ### Response:
+
+        The group is updated.'
       tags:
-      - groups
+      - Groups
       parameters:
       - in: path
         name: id
@@ -254,11 +288,23 @@ paths:
                       message: Invalid Parameter Exception
         '490':
           description: Request blocked by WAF
+      operationId: putRestGroupsById
+      x-operation-id-source: derived
     get:
       summary: Return users for the specified group
-      description: "### Description:\n  Returns the list of users for the specified group.\n### Precondition:\n  User must be authenticated.\n### Response:\n  Returns the group details including its members.\n"
+      description: '### Description:
+
+        Returns the list of users for the specified group.
+
+        ### Precondition:
+
+        User must be authenticated.
+
+        ### Response:
+
+        Returns the group details including its members.'
       tags:
-      - groups
+      - Groups
       parameters:
       - in: path
         name: id
@@ -310,11 +356,23 @@ paths:
                       message: Insufficient access permissions
         '490':
           description: Request blocked by WAF
+      operationId: getRestGroupsById
+      x-operation-id-source: derived
     delete:
       summary: Delete a group entry
-      description: "### Description:\n  Deletes the specified group.\n### Precondition:\n  User must be the owner of the group.\n### Response:\n  The group is deleted.\n"
+      description: '### Description:
+
+        Deletes the specified group.
+
+        ### Precondition:
+
+        User must be the owner of the group.
+
+        ### Response:
+
+        The group is deleted.'
       tags:
-      - groups
+      - Groups
       parameters:
       - in: path
         name: id
@@ -362,8 +420,22 @@ paths:
                       message: Insufficient access permissions
         '490':
           description: Request blocked by WAF
+      operationId: deleteRestGroupsById
+      x-operation-id-source: derived
 components:
   schemas:
+    ContactItem:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Email address of the contact.
+        isDistributionList:
+          type: boolean
+          description: Indicates whether the contact is a distribution list.
+        profileIcon:
+          type: string
+          description: URL or identifier of the contact's profile icon.
     GroupCreate:
       type: object
       properties:
@@ -388,18 +460,37 @@ components:
           description: Email address of the group member.
       required:
       - email
-    ContactItem:
+    MetaData:
       type: object
       properties:
-        email:
-          type: string
-          description: Email address of the contact.
-        isDistributionList:
-          type: boolean
-          description: Indicates whether the contact is a distribution list.
-        profileIcon:
-          type: string
-          description: URL or identifier of the contact's profile icon.
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    ContactList:
+      type: object
+      properties:
+        metadata:
+          description: Pagination metadata for the result set.
+          allOf:
+          - $ref: '#/components/schemas/MetaData'
+        data:
+          type: array
+          description: List of contacts.
+          items:
+            $ref: '#/components/schemas/Contact'
     Contact:
       type: object
       properties:
@@ -437,34 +528,3 @@ components:
         message:
           type: string
           description: Error message
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    MetaData:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of items available.
-        limit:
-          type: integer
-          description: Maximum number of items returned per page.
-        offset:
-          type: integer
-          description: Number of items skipped before the current page.
-    ContactList:
-      type: object
-      properties:
-        metadata:
-          description: Pagination metadata for the result set.
-          allOf:
-          - $ref: '#/components/schemas/MetaData'
-        data:
-          type: array
-          description: List of contacts.
-          items:
-            $ref: '#/components/schemas/Contact'

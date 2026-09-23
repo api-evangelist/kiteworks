@@ -3,12 +3,12 @@ info:
   version: '28'
   title: Kiteworks API Documentation Notifications API
 tags:
-- name: notifications
+- name: Notifications
 paths:
   /rest/folders/{id}/actions/setNotifications:
     put:
       tags:
-      - notifications
+      - Notifications
       summary: Set/Update notifications
       description: Creates or updates the current user's notification subscription for the specified folder. Optionally applies the same settings to all nested subfolders. Returns HTTP 201 if a new subscription was created, or HTTP 200 if an existing one was updated.
       responses:
@@ -78,10 +78,12 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UserNotification.Post'
+      operationId: putRestFoldersByIdActionsSetNotifications
+      x-operation-id-source: derived
   /rest/notifications:
     get:
       tags:
-      - notifications
+      - Notifications
       summary: List notifications
       description: Returns a paginated list of notification subscriptions for the current user, including the folder each subscription is for and the enabled notification types.
       responses:
@@ -185,10 +187,12 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestNotifications
+      x-operation-id-source: derived
   /rest/notifications/{object_id}:
     delete:
       tags:
-      - notifications
+      - Notifications
       summary: Remove notification options
       description: Unsubscribes the current user from all notifications for the specified folder.
       responses:
@@ -218,6 +222,8 @@ paths:
         required: true
         schema:
           type: integer
+      operationId: deleteRestNotificationsByObjectId
+      x-operation-id-source: derived
 components:
   schemas:
     UserNotification:
@@ -254,22 +260,6 @@ components:
         addLinks:
           description: Indicates whether HATEOAS links should be included in the response
           type: boolean
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
     MetaData:
       type: object
       properties:
@@ -282,3 +272,19 @@ components:
         offset:
           type: integer
           description: Number of items skipped before the current page.
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message

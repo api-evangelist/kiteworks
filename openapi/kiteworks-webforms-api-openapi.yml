@@ -3,12 +3,12 @@ info:
   version: '28'
   title: Kiteworks API Documentation Web Forms API
 tags:
-- name: webForms
+- name: Webforms
 paths:
   /rest/webForms:
     get:
       tags:
-      - webForms
+      - Webforms
       summary: List web forms
       description: Returns a list of web forms available to the authenticated user's profile, including each form's name, URL, authentication requirement, and enabled state.
       responses:
@@ -76,10 +76,12 @@ paths:
           enum:
           - full_with_links
           - full
+      operationId: getRestWebForms
+      x-operation-id-source: derived
   /rest/webForms/{id}:
     get:
       tags:
-      - webForms
+      - Webforms
       summary: Get a web form
       description: Returns the details of the specified web form, including its name, URL, authentication requirement, enabled state, and associated fields. Accessible by both authenticated and unauthenticated users, subject to the form's access rules.
       responses:
@@ -139,6 +141,8 @@ paths:
           enum:
           - full_with_links
           - full
+      operationId: getRestWebFormsById
+      x-operation-id-source: derived
 components:
   schemas:
     WebForm:
@@ -182,6 +186,22 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/WebFormField'
+    WebFormProfile:
+      type: object
+      properties:
+        webFormId:
+          type: string
+          description: Unique identifier of the web form.
+        profileId:
+          type: integer
+          description: Unique identifier of the user profile associated with the web form.
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
     WebFormField:
       type: object
       properties:
@@ -215,15 +235,6 @@ components:
         editable:
           type: boolean
           description: Indicates whether the field can be edited by the user.
-    WebFormProfile:
-      type: object
-      properties:
-        webFormId:
-          type: string
-          description: Unique identifier of the web form.
-        profileId:
-          type: integer
-          description: Unique identifier of the user profile associated with the web form.
     Error:
       type: object
       properties:
@@ -233,10 +244,3 @@ components:
         message:
           type: string
           description: Error message
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'

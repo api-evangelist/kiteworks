@@ -8,7 +8,17 @@ paths:
   /rest/userSshPublicKeys/create:
     post:
       summary: Register an SSH public key for the current user
-      description: "### Description:\n  Registers an existing SSH public key for the current user.\n### Precondition:\n  SFTP access must be enabled for the user's profile and role.\n### Response:\n  The SSH public key is registered.\n"
+      description: '### Description:
+
+        Registers an existing SSH public key for the current user.
+
+        ### Precondition:
+
+        SFTP access must be enabled for the user''s profile and role.
+
+        ### Response:
+
+        The SSH public key is registered.'
       tags:
       - userSshPublicKeys
       requestBody:
@@ -91,10 +101,22 @@ paths:
                       message: Same ssh public key name exists
         '490':
           description: Request blocked by WAF
+      operationId: postRestUserSshPublicKeysCreate
+      x-operation-id-source: derived
   /rest/userSshPublicKeys/generate:
     post:
       summary: Generate a new SSH public/private key pair
-      description: "### Description:\n  Generates a new SSH public/private key pair for the current user and registers the public key.\n### Precondition:\n  SFTP access must be enabled for the user's profile and role.\n### Response:\n  The generated SSH public/private key pair is returned.\n"
+      description: '### Description:
+
+        Generates a new SSH public/private key pair for the current user and registers the public key.
+
+        ### Precondition:
+
+        SFTP access must be enabled for the user''s profile and role.
+
+        ### Response:
+
+        The generated SSH public/private key pair is returned.'
       tags:
       - userSshPublicKeys
       requestBody:
@@ -181,10 +203,22 @@ paths:
                       message: Same ssh public key name exists
         '490':
           description: Request blocked by WAF
+      operationId: postRestUserSshPublicKeysGenerate
+      x-operation-id-source: derived
   /rest/userSshPublicKeys/{id}:
     delete:
       summary: Delete an SSH public key
-      description: "### Description:\n  Deletes the specified SSH public key belonging to the current user.\n### Precondition:\n  SFTP access must be enabled for the user's profile and role.\n### Response:\n  The SSH public key is deleted.\n"
+      description: '### Description:
+
+        Deletes the specified SSH public key belonging to the current user.
+
+        ### Precondition:
+
+        SFTP access must be enabled for the user''s profile and role.
+
+        ### Response:
+
+        The SSH public key is deleted.'
       tags:
       - userSshPublicKeys
       parameters:
@@ -255,10 +289,22 @@ paths:
                       message: SFTP role is not enabled on server
         '490':
           description: Request blocked by WAF
+      operationId: deleteRestUserSshPublicKeysById
+      x-operation-id-source: derived
   /rest/userSshPublicKeys:
     get:
       summary: List the current user's SSH public keys
-      description: "### Description:\n  Returns the list of SSH public keys registered for the current user.\n### Precondition:\n  SFTP access must be enabled for the user's profile and role.\n### Response:\n  A list of SSH public key records is returned.\n"
+      description: '### Description:
+
+        Returns the list of SSH public keys registered for the current user.
+
+        ### Precondition:
+
+        SFTP access must be enabled for the user''s profile and role.
+
+        ### Response:
+
+        A list of SSH public key records is returned.'
       tags:
       - userSshPublicKeys
       parameters:
@@ -326,10 +372,22 @@ paths:
                       message: SFTP role is not enabled on server
         '490':
           description: Request blocked by WAF
+      operationId: getRestUserSshPublicKeys
+      x-operation-id-source: derived
   /rest/admin/users/{id}/userSshPublicKeys:
     get:
       summary: List SSH public keys for a user
-      description: "### Description:\n  Returns all SSH public keys associated with the specified user.\n### Precondition:\n  The user must be an administrator. SFTP must be enabled for the user's profile and system role.\n### Response:\n  A list of SSH public keys for the specified user is returned.\n"
+      description: '### Description:
+
+        Returns all SSH public keys associated with the specified user.
+
+        ### Precondition:
+
+        The user must be an administrator. SFTP must be enabled for the user''s profile and system role.
+
+        ### Response:
+
+        A list of SSH public keys for the specified user is returned.'
       tags:
       - userSshPublicKeys
       parameters:
@@ -398,10 +456,22 @@ paths:
                       message: SFTP role is not enabled on server
         '490':
           description: Request blocked by WAF
+      operationId: getRestAdminUsersByIdUserSshPublicKeys
+      x-operation-id-source: derived
   /rest/admin/users/{id}/userSshPublicKeys/create:
     post:
       summary: Create an SSH public key for a user
-      description: "### Description:\n  Creates a new SSH public key record for the specified user using a provided public key string.\n### Precondition:\n  The user must be an administrator. SFTP must be enabled for the user's profile and system role.\n### Response:\n  The SSH public key record is created successfully.\n"
+      description: '### Description:
+
+        Creates a new SSH public key record for the specified user using a provided public key string.
+
+        ### Precondition:
+
+        The user must be an administrator. SFTP must be enabled for the user''s profile and system role.
+
+        ### Response:
+
+        The SSH public key record is created successfully.'
       tags:
       - userSshPublicKeys
       parameters:
@@ -492,10 +562,22 @@ paths:
                       message: Same ssh public key name exists
         '490':
           description: Request blocked by WAF
+      operationId: postRestAdminUsersByIdUserSshPublicKeysCreate
+      x-operation-id-source: derived
   /rest/admin/users/{id}/userSshPublicKeys/generate:
     post:
       summary: Generate an SSH key pair for a user
-      description: "### Description:\n  Generates a new SSH public/private key pair for the specified user and stores the public key.\n### Precondition:\n  The user must be an administrator. SFTP must be enabled for the user's profile and system role.\n### Response:\n  The newly generated public/private key pair is returned.\n"
+      description: '### Description:
+
+        Generates a new SSH public/private key pair for the specified user and stores the public key.
+
+        ### Precondition:
+
+        The user must be an administrator. SFTP must be enabled for the user''s profile and system role.
+
+        ### Response:
+
+        The newly generated public/private key pair is returned.'
       tags:
       - userSshPublicKeys
       parameters:
@@ -590,6 +672,8 @@ paths:
                       message: Same ssh public key name exists
         '490':
           description: Request blocked by WAF
+      operationId: postRestAdminUsersByIdUserSshPublicKeysGenerate
+      x-operation-id-source: derived
 components:
   schemas:
     UserGeneratedSshPublicKeyKey:
@@ -601,18 +685,33 @@ components:
         publicKey:
           type: string
           description: Generated SSH public key.
-    UserSshPublicKeysPostGenerateRequest:
+    UserSshPublicKey:
       type: object
       properties:
+        id:
+          type: integer
+          description: Unique identifier of the SSH public key.
+        userId:
+          type: string
+        publicKey:
+          type: string
+          description: SSH public key string.
         name:
           type: string
-          maxLength: 50
-          description: The display name for the SSH public key (maximum 50 characters).
-        passphrase:
-          type: string
-          description: Optional passphrase to protect the generated private key.
-      required:
-      - name
+          description: Display name for the SSH public key.
+        active:
+          type: boolean
+          description: Indicates whether the SSH public key is active and can be used for authentication.
+        adminActive:
+          type: boolean
+          description: Indicates whether an administrator has enabled this SSH public key.
+    AdminUserSshPublicKeyList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserSshPublicKey1'
     UserSshPublicKey1:
       type: object
       properties:
@@ -636,6 +735,25 @@ components:
         deleted:
           type: boolean
           description: Indicates whether the SSH public key has been deleted.
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    UserSshPublicKeysPostGenerateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 50
+          description: The display name for the SSH public key (maximum 50 characters).
+        passphrase:
+          type: string
+          description: Optional passphrase to protect the generated private key.
+      required:
+      - name
     UserSshPublicKeyList:
       type: object
       properties:
@@ -643,35 +761,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UserSshPublicKey'
-    UserSshPublicKey:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique identifier of the SSH public key.
-        userId:
-          type: string
-        publicKey:
-          type: string
-          description: SSH public key string.
-        name:
-          type: string
-          description: Display name for the SSH public key.
-        active:
-          type: boolean
-          description: Indicates whether the SSH public key is active and can be used for authentication.
-        adminActive:
-          type: boolean
-          description: Indicates whether an administrator has enabled this SSH public key.
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
     UserSshPublicKeysPostCreateRequest:
       type: object
       properties:
@@ -685,17 +774,12 @@ components:
       required:
       - name
       - publicKey
-    AdminUserSshPublicKeyList:
+    Error:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserSshPublicKey1'
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message

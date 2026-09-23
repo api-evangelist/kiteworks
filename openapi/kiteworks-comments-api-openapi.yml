@@ -3,12 +3,12 @@ info:
   version: '28'
   title: Kiteworks API Documentation Comments API
 tags:
-- name: comments
+- name: Comments
 paths:
   /rest/comments/{id}:
     get:
       tags:
-      - comments
+      - Comments
       summary: Get a comment
       description: Returns the details of the specified comment, including the file it is attached to and the comment text. **Requires `comment_view` permission on the associated file.**
       responses:
@@ -56,9 +56,11 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestCommentsById
+      x-operation-id-source: derived
     put:
       tags:
-      - comments
+      - Comments
       summary: Update a comment
       description: Updates the text of the specified comment. **Requires `comment_edit` permission on the associated file.** Only the comment author or a folder manager may update the comment.
       responses:
@@ -118,9 +120,11 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Comment.Put'
+      operationId: putRestCommentsById
+      x-operation-id-source: derived
     delete:
       tags:
-      - comments
+      - Comments
       summary: Delete a comment
       description: Deletes the specified comment. **Requires `comment_delete` permission on the associated file.** Only the comment author or a folder manager may delete the comment.
       responses:
@@ -136,10 +140,12 @@ paths:
         required: true
         schema:
           type: integer
+      operationId: deleteRestCommentsById
+      x-operation-id-source: derived
   /rest/files/{id}/comments:
     get:
       tags:
-      - comments
+      - Comments
       summary: Get file comments
       description: Returns a list of comments on the specified file. **Requires `comment_view` permission on the file.**
       responses:
@@ -319,9 +325,11 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestFilesByIdComments
+      x-operation-id-source: derived
     post:
       tags:
-      - comments
+      - Comments
       summary: Add file comment
       description: Adds a comment to the specified file. To reply to an existing comment, include a `parentId` in the request body. **Requires `comment_add` permission on the file.**
       responses:
@@ -408,10 +416,12 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Comment.Post'
+      operationId: postRestFilesByIdComments
+      x-operation-id-source: derived
   /rest/folders/{id}/comments:
     get:
       tags:
-      - comments
+      - Comments
       summary: List comments for the folder
       description: Returns all comments on files within the specified folder. **Requires `comment_view` permission on the folder.**
       responses:
@@ -591,10 +601,12 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestFoldersByIdComments
+      x-operation-id-source: derived
   /rest/permissions/comment/{comment_id}:
     get:
       tags:
-      - comments
+      - Comments
       summary: Return the list of permissions available on a comment
       description: Returns the list of actions the current user is allowed to perform on the specified comment, such as editing or deleting it.
       responses:
@@ -671,26 +683,24 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestPermissionsCommentByCommentId
+      x-operation-id-source: derived
 components:
   schemas:
-    UserBasicInfo:
+    Comment.Post:
+      description: Class Comment
       required:
-      - email
-      - id
-      - name
+      - contents
       properties:
-        id:
-          description: The unique identifier of the user
+        parentId:
+          description: Unique identifier of the parent comment. Set this value when replying to an existing comment
+          type: integer
+        contents:
+          description: Text content of the comment
           type: string
-        name:
-          description: The name of the user
-          type: string
-        email:
-          description: The user's email
-          type: string
-        profileIcon:
-          description: URL to the user's profile icon image
-          type: string
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
     Folder:
       type: object
       properties:
@@ -837,6 +847,51 @@ components:
         inheritanceEnabled:
           type: boolean
           description: Indicates if a folder inherits permissions from the parent folder
+    Permission:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the permission.
+        name:
+          type: string
+          description: Name of the permission.
+        allowed:
+          type: boolean
+          description: Indicates whether the permission is granted (True) or denied (False).
+    Group:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: LDAP Group ID
+        name:
+          type: string
+          description: LDAP Group name
+        dn:
+          type: string
+          description: LDAP Group domain name
+        email:
+          type: string
+          description: LDAP Group email
+        description:
+          type: string
+          description: LDAP Group description
+    UserBasic:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier (UUID) for the user.
+        email:
+          type: string
+          description: Email address associated with the user.
+        name:
+          type: string
+          description: Full name of the user.
+        profileIcon:
+          type: string
+          description: URL or identifier for the user's profile icon.
     Comment:
       description: Class Comment
       required:
@@ -897,6 +952,58 @@ components:
           type: array
           items:
             type: string
+    UserBasicInfo:
+      required:
+      - email
+      - id
+      - name
+      properties:
+        id:
+          description: The unique identifier of the user
+          type: string
+        name:
+          description: The name of the user
+          type: string
+        email:
+          description: The user's email
+          type: string
+        profileIcon:
+          description: URL to the user's profile icon image
+          type: string
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    Role:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Role ID
+        name:
+          type: string
+          description: Role name
+        rank:
+          type: integer
+          description: Role rank
+        type:
+          type: string
+          description: Role type
     Member:
       type: object
       properties:
@@ -948,36 +1055,6 @@ components:
           description: Rank of the member role.
         originFolder:
           readOnly: true
-    Group:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: LDAP Group ID
-        name:
-          type: string
-          description: LDAP Group name
-        dn:
-          type: string
-          description: LDAP Group domain name
-        email:
-          type: string
-          description: LDAP Group email
-        description:
-          type: string
-          description: LDAP Group description
-    MetaData:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of items available.
-        limit:
-          type: integer
-          description: Maximum number of items returned per page.
-        offset:
-          type: integer
-          description: Number of items skipped before the current page.
     BaseObject:
       description: Class Object
       required:
@@ -1044,63 +1121,6 @@ components:
           type: array
           items:
             type: string
-    Permission:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique identifier for the permission.
-        name:
-          type: string
-          description: Name of the permission.
-        allowed:
-          type: boolean
-          description: Indicates whether the permission is granted (True) or denied (False).
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
-    Comment.Post:
-      description: Class Comment
-      required:
-      - contents
-      properties:
-        parentId:
-          description: Unique identifier of the parent comment. Set this value when replying to an existing comment
-          type: integer
-        contents:
-          description: Text content of the comment
-          type: string
-        addLinks:
-          description: Indicates whether HATEOAS links should be included in the response
-          type: boolean
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    Role:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Role ID
-        name:
-          type: string
-          description: Role name
-        rank:
-          type: integer
-          description: Role rank
-        type:
-          type: string
-          description: Role type
     Comment.Put:
       description: Class Comment
       required:
@@ -1112,18 +1132,12 @@ components:
         addLinks:
           description: Indicates whether HATEOAS links should be included in the response
           type: boolean
-    UserBasic:
+    Error:
       type: object
       properties:
-        id:
+        code:
           type: string
-          description: Unique identifier (UUID) for the user.
-        email:
+          description: Error code
+        message:
           type: string
-          description: Email address associated with the user.
-        name:
-          type: string
-          description: Full name of the user.
-        profileIcon:
-          type: string
-          description: URL or identifier for the user's profile icon.
+          description: Error message

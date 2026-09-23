@@ -8,7 +8,17 @@ paths:
   /rest/sharedMailboxes:
     patch:
       summary: Update current user's shared mailbox active status
-      description: "### Description:\n  Updates the active status of one or more shared mailboxes for the current user.\n### Precondition:\n  The user must be authenticated and belong to an internal domain.\n### Response:\n  The updated list of shared mailboxes is returned.\n"
+      description: '### Description:
+
+        Updates the active status of one or more shared mailboxes for the current user.
+
+        ### Precondition:
+
+        The user must be authenticated and belong to an internal domain.
+
+        ### Response:
+
+        The updated list of shared mailboxes is returned.'
       tags:
       - sharedMailbox
       requestBody:
@@ -81,9 +91,21 @@ paths:
                       message: Maximum activated shared mailbox reached
         '490':
           description: Request blocked by WAF
+      operationId: patchRestSharedMailboxes
+      x-operation-id-source: derived
     get:
       summary: Return current user's shared mailboxes
-      description: "### Description:\n  Returns a paginated list of shared mailboxes available to the current user.\n### Precondition:\n  The user must be authenticated and belong to an internal domain.\n### Response:\n  A list of shared mailboxes is returned.\n"
+      description: '### Description:
+
+        Returns a paginated list of shared mailboxes available to the current user.
+
+        ### Precondition:
+
+        The user must be authenticated and belong to an internal domain.
+
+        ### Response:
+
+        A list of shared mailboxes is returned.'
       tags:
       - sharedMailbox
       parameters:
@@ -172,10 +194,22 @@ paths:
                       message: The email is not internal domain
         '490':
           description: Request blocked by WAF
+      operationId: getRestSharedMailboxes
+      x-operation-id-source: derived
   /rest/sharedMailboxes/mail/actions/counters:
     get:
       summary: Return current user's shared mailbox counters
-      description: "### Description:\n  Returns unread message counters for the current user's active shared mailboxes.\n### Precondition:\n  The user must be authenticated.\n### Response:\n  A list of mail counters for each active shared mailbox is returned.\n"
+      description: '### Description:
+
+        Returns unread message counters for the current user''s active shared mailboxes.
+
+        ### Precondition:
+
+        The user must be authenticated.
+
+        ### Response:
+
+        A list of mail counters for each active shared mailbox is returned.'
       tags:
       - sharedMailbox
       parameters:
@@ -233,10 +267,22 @@ paths:
                       message: Insufficient access permissions
         '490':
           description: Request blocked by WAF
+      operationId: getRestSharedMailboxesMailActionsCounters
+      x-operation-id-source: derived
   /rest/sharedMailboxes/{id}/settings:
     get:
       summary: Return shared mailbox settings
-      description: "### Description:\n  Returns the application settings for the specified shared mailbox.\n### Precondition:\n  The user must be authenticated and the specified shared mailbox must be active.\n### Response:\n  The shared mailbox settings are returned.\n"
+      description: '### Description:
+
+        Returns the application settings for the specified shared mailbox.
+
+        ### Precondition:
+
+        The user must be authenticated and the specified shared mailbox must be active.
+
+        ### Response:
+
+        The shared mailbox settings are returned.'
       tags:
       - sharedMailbox
       parameters:
@@ -291,10 +337,22 @@ paths:
                       message: Insufficient access permissions
         '490':
           description: Request blocked by WAF
+      operationId: getRestSharedMailboxesByIdSettings
+      x-operation-id-source: derived
   /rest/sharedMailboxes/{id}/webForms:
     get:
       summary: List web forms available to a shared mailbox
-      description: "### Description:\n  Returns a list of web forms available to the specified shared mailbox.\n### Precondition:\n  The user must be authenticated and the specified shared mailbox must be active.\n### Response:\n  A list of web forms is returned.\n"
+      description: '### Description:
+
+        Returns a list of web forms available to the specified shared mailbox.
+
+        ### Precondition:
+
+        The user must be authenticated and the specified shared mailbox must be active.
+
+        ### Response:
+
+        A list of web forms is returned.'
       tags:
       - sharedMailbox
       parameters:
@@ -372,10 +430,22 @@ paths:
                       message: Insufficient access permissions
         '490':
           description: Request blocked by WAF
+      operationId: getRestSharedMailboxesByIdWebForms
+      x-operation-id-source: derived
   /rest/admin/sharedMailboxes:
     post:
       summary: Create a shared mailbox
-      description: "### Description:\n  Converts the specified user account into a shared mailbox and assigns the specified members.\n### Precondition:\n  Caller must have system, application, or helpdesk admin role.\n### Response:\n  The shared mailbox is created and its details are returned.\n"
+      description: '### Description:
+
+        Converts the specified user account into a shared mailbox and assigns the specified members.
+
+        ### Precondition:
+
+        Caller must have system, application, or helpdesk admin role.
+
+        ### Response:
+
+        The shared mailbox is created and its details are returned.'
       tags:
       - sharedMailbox
       requestBody:
@@ -497,9 +567,21 @@ paths:
                       message: 'Cannot retain data: selected user is unverified. Please select a verified user before proceeding.'
         '490':
           description: Request blocked by WAF
+      operationId: postRestAdminSharedMailboxes
+      x-operation-id-source: derived
     get:
       summary: Return shared mailbox list
-      description: "### Description:\n  Returns a paginated list of shared mailboxes, optionally filtered by user IDs.\n### Precondition:\n  Caller must have system, application, or helpdesk admin role.\n### Response:\n  A list of shared mailboxes is returned.\n"
+      description: '### Description:
+
+        Returns a paginated list of shared mailboxes, optionally filtered by user IDs.
+
+        ### Precondition:
+
+        Caller must have system, application, or helpdesk admin role.
+
+        ### Response:
+
+        A list of shared mailboxes is returned.'
       tags:
       - sharedMailbox
       parameters:
@@ -574,9 +656,21 @@ paths:
                       message: Unauthorized
         '490':
           description: Request blocked by WAF
+      operationId: getRestAdminSharedMailboxes
+      x-operation-id-source: derived
     delete:
       summary: Delete shared mailboxes
-      description: "### Description:\n  Deletes the specified shared mailboxes and restores the associated user accounts.\n### Precondition:\n  Caller must have system, application, or helpdesk admin role.\n### Response:\n  The shared mailboxes are deleted successfully.\n"
+      description: '### Description:
+
+        Deletes the specified shared mailboxes and restores the associated user accounts.
+
+        ### Precondition:
+
+        Caller must have system, application, or helpdesk admin role.
+
+        ### Response:
+
+        The shared mailboxes are deleted successfully.'
       tags:
       - sharedMailbox
       parameters:
@@ -658,10 +752,22 @@ paths:
                       message: License count has been reached
         '490':
           description: Request blocked by WAF
+      operationId: deleteRestAdminSharedMailboxes
+      x-operation-id-source: derived
   /rest/admin/sharedMailboxes/{id}:
     patch:
       summary: Update shared mailbox members
-      description: "### Description:\n  Updates the member list of the specified shared mailbox.\n### Precondition:\n  Caller must have system, application, or helpdesk admin role.\n### Response:\n  The shared mailbox is updated and its details are returned.\n"
+      description: '### Description:
+
+        Updates the member list of the specified shared mailbox.
+
+        ### Precondition:
+
+        Caller must have system, application, or helpdesk admin role.
+
+        ### Response:
+
+        The shared mailbox is updated and its details are returned.'
       tags:
       - sharedMailbox
       parameters:
@@ -742,49 +848,193 @@ paths:
                       message: The email is not internal domain
         '490':
           description: Request blocked by WAF
+      operationId: patchRestAdminSharedMailboxesById
+      x-operation-id-source: derived
 components:
   schemas:
-    WebForm:
+    SharedMailboxPostRequest:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: The UUID of the user to convert into a shared mailbox.
+        memberIds:
+          type: array
+          description: List of member UUIDs to add to the shared mailbox.  (Recommended request size <= 100)
+          items:
+            type: string
+        remoteWipe:
+          type: boolean
+          description: If true, remotely wipes all devices associated with the user being converted.
+        deleteUnsharedData:
+          type: boolean
+          description: If true, deletes any data that is not shared with other users after conversion.
+        retainData:
+          type: boolean
+          description: If true, retains the user's data and transfers it to the specified `retainToUser`.
+        retainToUser:
+          type: string
+          description: The UUID of the user who will receive the retained data.
+        retainPermissionToSharedData:
+          type: boolean
+          description: If true, the `retainToUser` will also receive permissions to the shared data.
+        retainToAdvancedFormUser:
+          type: string
+          description: The UUID of an alternate user for advanced data retention scenarios.
+      required:
+      - memberIds
+      - userId
+    WebFormList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebForm'
+    MailCounters:
+      type: object
+      properties:
+        draft:
+          type: integer
+          description: Number of draft emails.
+        inbox:
+          type: integer
+          description: Number of emails in the inbox.
+        inboxUnread:
+          type: integer
+          description: Number of unread emails in the inbox.
+        outgoing:
+          type: integer
+          description: Number of outgoing emails.
+        outgoingError:
+          type: integer
+          description: Number of outgoing emails that encountered an error.
+        outgoingQueued:
+          type: integer
+          description: Number of outgoing emails queued for sending.
+        outgoingTransferring:
+          type: integer
+          description: Number of outgoing emails currently being transferred.
+        outgoingTransferringIds:
+          type: array
+          items:
+            type: string
+        trash:
+          type: integer
+          description: Number of emails in the trash.
+    SendOption:
+      type: object
+      properties:
+        linkExpiry:
+          type: boolean
+          description: Indicates whether link expiry is enabled for sent files.
+        ACL:
+          type: integer
+          description: Access control level applied to sent files.
+    UserBasic:
       type: object
       properties:
         id:
           type: string
-          description: Unique identifier of the web form.
-        lastModified:
+          description: Unique identifier (UUID) for the user.
+        email:
           type: string
-          format: date
-          description: Date and time when the web form was last modified.
+          description: Email address associated with the user.
         name:
           type: string
-          description: Display name of the web form.
-        description:
+          description: Full name of the user.
+        profileIcon:
           type: string
-          description: Description of the web form.
-        url:
+          description: URL or identifier for the user's profile icon.
+    SharedMailboxPatchRequest:
+      type: object
+      properties:
+        memberIds:
+          type: array
+          description: List of member ids  (Recommended request size <= 100)
+          items:
+            type: string
+      required:
+      - memberIds
+    WebFormProfile:
+      type: object
+      properties:
+        webFormId:
           type: string
-          description: URL where the web form is accessible.
-        enabled:
+          description: Unique identifier of the web form.
+        profileId:
+          type: integer
+          description: Unique identifier of the user profile associated with the web form.
+    SharedMailboxMemberStatusPatchRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The UUID of the shared mailbox user.
+        active:
           type: boolean
-          description: Indicates whether the web form is active.
-        authRequired:
+          description: The new active status for the shared mailbox.
+      required:
+      - active
+      - id
+    WebFormField:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the web form field.
+        sequence:
+          type: integer
+          description: Display order of the field within the form.
+        label:
+          type: string
+          description: Display label of the field.
+        type:
+          type: string
+          description: Input type of the field (e.g., text, select, checkbox).
+        specialType:
+          type: string
+          description: Special processing type for the field, if applicable.
+        placeholder:
+          type: string
+          description: Placeholder text shown in the field before input.
+        defaultValue:
+          type: string
+          description: Default value pre-populated in the field.
+        optionValues:
+          type: string
+          description: Available option values for select-type fields.
+        mandatory:
           type: boolean
-          description: Indicates whether authentication is required to submit the web form.
-        embedded:
+          description: Indicates whether the field is required.
+        editable:
           type: boolean
-          description: Indicates whether the web form can be embedded in external pages.
-        standalone:
-          type: boolean
-          description: Indicates whether the web form can be used as a standalone page.
-        profiles:
-          description: List of user profiles that have access to this web form.
+          description: Indicates whether the field can be edited by the user.
+    MailCountersList:
+      type: object
+      properties:
+        data:
+          description: List of mail counter entries.
           type: array
           items:
-            $ref: '#/components/schemas/WebFormProfile'
-        fields:
-          description: List of fields in the web form.
+            $ref: '#/components/schemas/MailIdCounters'
+    SharedMailboxStatusPatchRequest:
+      type: object
+      properties:
+        data:
+          description: List of shared mailbox status updates to apply.
           type: array
           items:
-            $ref: '#/components/schemas/WebFormField'
+            $ref: '#/components/schemas/SharedMailboxMemberStatusPatchRequest'
+      required:
+      - data
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
     SharedMailboxSetting:
       type: object
       properties:
@@ -874,110 +1124,6 @@ components:
         defaultCountryCode:
           type: string
           description: Default country code used for phone number formatting.
-    WebFormField:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier of the web form field.
-        sequence:
-          type: integer
-          description: Display order of the field within the form.
-        label:
-          type: string
-          description: Display label of the field.
-        type:
-          type: string
-          description: Input type of the field (e.g., text, select, checkbox).
-        specialType:
-          type: string
-          description: Special processing type for the field, if applicable.
-        placeholder:
-          type: string
-          description: Placeholder text shown in the field before input.
-        defaultValue:
-          type: string
-          description: Default value pre-populated in the field.
-        optionValues:
-          type: string
-          description: Available option values for select-type fields.
-        mandatory:
-          type: boolean
-          description: Indicates whether the field is required.
-        editable:
-          type: boolean
-          description: Indicates whether the field can be edited by the user.
-    WebFormList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/WebForm'
-    SharedMailboxList:
-      type: object
-      properties:
-        data:
-          description: List of shared mailboxes.
-          type: array
-          items:
-            $ref: '#/components/schemas/SharedMailbox'
-        metadata:
-          description: Pagination metadata for the result set.
-          allOf:
-          - $ref: '#/components/schemas/MetaData'
-    MailCountersList:
-      type: object
-      properties:
-        data:
-          description: List of mail counter entries.
-          type: array
-          items:
-            $ref: '#/components/schemas/MailIdCounters'
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    UserBasic:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier (UUID) for the user.
-        email:
-          type: string
-          description: Email address associated with the user.
-        name:
-          type: string
-          description: Full name of the user.
-        profileIcon:
-          type: string
-          description: URL or identifier for the user's profile icon.
-    SharedMailboxMemberStatusPatchRequest:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The UUID of the shared mailbox user.
-        active:
-          type: boolean
-          description: The new active status for the shared mailbox.
-      required:
-      - active
-      - id
-    SharedMailboxPatchRequest:
-      type: object
-      properties:
-        memberIds:
-          type: array
-          description: List of member ids  (Recommended request size <= 100)
-          items:
-            type: string
-      required:
-      - memberIds
     Error:
       type: object
       properties:
@@ -987,57 +1133,47 @@ components:
         message:
           type: string
           description: Error message
-    SharedMailboxPostRequest:
-      type: object
-      properties:
-        userId:
-          type: string
-          description: The UUID of the user to convert into a shared mailbox.
-        memberIds:
-          type: array
-          description: List of member UUIDs to add to the shared mailbox.  (Recommended request size <= 100)
-          items:
-            type: string
-        remoteWipe:
-          type: boolean
-          description: If true, remotely wipes all devices associated with the user being converted.
-        deleteUnsharedData:
-          type: boolean
-          description: If true, deletes any data that is not shared with other users after conversion.
-        retainData:
-          type: boolean
-          description: If true, retains the user's data and transfers it to the specified `retainToUser`.
-        retainToUser:
-          type: string
-          description: The UUID of the user who will receive the retained data.
-        retainPermissionToSharedData:
-          type: boolean
-          description: If true, the `retainToUser` will also receive permissions to the shared data.
-        retainToAdvancedFormUser:
-          type: string
-          description: The UUID of an alternate user for advanced data retention scenarios.
-      required:
-      - memberIds
-      - userId
-    SharedMailboxStatusPatchRequest:
-      type: object
-      properties:
-        data:
-          description: List of shared mailbox status updates to apply.
-          type: array
-          items:
-            $ref: '#/components/schemas/SharedMailboxMemberStatusPatchRequest'
-      required:
-      - data
-    MailIdCounters:
+    WebForm:
       type: object
       properties:
         id:
           type: string
-        counters:
-          description: Email counters for this mail entity.
-          allOf:
-          - $ref: '#/components/schemas/MailCounters'
+          description: Unique identifier of the web form.
+        lastModified:
+          type: string
+          format: date
+          description: Date and time when the web form was last modified.
+        name:
+          type: string
+          description: Display name of the web form.
+        description:
+          type: string
+          description: Description of the web form.
+        url:
+          type: string
+          description: URL where the web form is accessible.
+        enabled:
+          type: boolean
+          description: Indicates whether the web form is active.
+        authRequired:
+          type: boolean
+          description: Indicates whether authentication is required to submit the web form.
+        embedded:
+          type: boolean
+          description: Indicates whether the web form can be embedded in external pages.
+        standalone:
+          type: boolean
+          description: Indicates whether the web form can be used as a standalone page.
+        profiles:
+          description: List of user profiles that have access to this web form.
+          type: array
+          items:
+            $ref: '#/components/schemas/WebFormProfile'
+        fields:
+          description: List of fields in the web form.
+          type: array
+          items:
+            $ref: '#/components/schemas/WebFormField'
     SharedMailbox:
       type: object
       properties:
@@ -1055,55 +1191,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UserBasic'
-    MailCounters:
-      type: object
-      properties:
-        draft:
-          type: integer
-          description: Number of draft emails.
-        inbox:
-          type: integer
-          description: Number of emails in the inbox.
-        inboxUnread:
-          type: integer
-          description: Number of unread emails in the inbox.
-        outgoing:
-          type: integer
-          description: Number of outgoing emails.
-        outgoingError:
-          type: integer
-          description: Number of outgoing emails that encountered an error.
-        outgoingQueued:
-          type: integer
-          description: Number of outgoing emails queued for sending.
-        outgoingTransferring:
-          type: integer
-          description: Number of outgoing emails currently being transferred.
-        outgoingTransferringIds:
-          type: array
-          items:
-            type: string
-        trash:
-          type: integer
-          description: Number of emails in the trash.
-    WebFormProfile:
-      type: object
-      properties:
-        webFormId:
-          type: string
-          description: Unique identifier of the web form.
-        profileId:
-          type: integer
-          description: Unique identifier of the user profile associated with the web form.
-    SendOption:
-      type: object
-      properties:
-        linkExpiry:
-          type: boolean
-          description: Indicates whether link expiry is enabled for sent files.
-        ACL:
-          type: integer
-          description: Access control level applied to sent files.
     MetaData:
       type: object
       properties:
@@ -1116,3 +1203,24 @@ components:
         offset:
           type: integer
           description: Number of items skipped before the current page.
+    SharedMailboxList:
+      type: object
+      properties:
+        data:
+          description: List of shared mailboxes.
+          type: array
+          items:
+            $ref: '#/components/schemas/SharedMailbox'
+        metadata:
+          description: Pagination metadata for the result set.
+          allOf:
+          - $ref: '#/components/schemas/MetaData'
+    MailIdCounters:
+      type: object
+      properties:
+        id:
+          type: string
+        counters:
+          description: Email counters for this mail entity.
+          allOf:
+          - $ref: '#/components/schemas/MailCounters'

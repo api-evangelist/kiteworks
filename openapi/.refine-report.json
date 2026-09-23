@@ -47,7 +47,9 @@
     "kiteworks-webforms-api-openapi.yml",
     "kiteworks-webhook-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 3 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
@@ -94,12 +96,14 @@
     "kiteworks-core-openapi-original.json: declared missing tag: users",
     "kiteworks-core-openapi-original.json: declared missing tag: webForms",
     "kiteworks-pubsub-openapi-original.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "kiteworks-pubsub-openapi-original.yml: declared missing tag: webhook"
+    "kiteworks-pubsub-openapi-original.yml: declared missing tag: webhook",
+    "superseded outputs removed: kiteworks-admin-roles-api-openapi.yml, kiteworks-short-links-api-openapi.yml, kiteworks-source-types-api-openapi.yml",
+    "apis.yml register: written (+3 apis, 41 total)"
   ],
   "skipped": [
     "kiteworks-activities-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "kiteworks-admin-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "kiteworks-adminroles-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kiteworks-admin-roles-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "kiteworks-advancedforms-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "kiteworks-cards-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "kiteworks-clienteventlogs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
@@ -128,9 +132,9 @@
     "kiteworks-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "kiteworks-settings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "kiteworks-sharedmailbox-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "kiteworks-shortlinks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kiteworks-short-links-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kiteworks-source-types-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "kiteworks-sources-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "kiteworks-sourcetypes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "kiteworks-system-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "kiteworks-tasks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "kiteworks-uploads-api-openapi.yml: previously refined output, superseded by openapi/_original/",

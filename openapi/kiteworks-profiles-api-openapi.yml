@@ -3,12 +3,12 @@ info:
   version: '28'
   title: Kiteworks API Documentation Profiles API
 tags:
-- name: profiles
+- name: Profiles
 paths:
   /rest/profiles:
     post:
       tags:
-      - profiles
+      - Profiles
       summary: Add custom profile
       description: Creates a new custom user type profile cloned from an existing built-in profile (e.g., Standard). The new profile's name must be unique. Returns 404 if the specified prototype profile does not exist.
       responses:
@@ -91,10 +91,12 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Profile.Post'
+      operationId: postRestProfiles
+      x-operation-id-source: derived
   /rest/profiles/{id}:
     get:
       tags:
-      - profiles
+      - Profiles
       summary: Return user type (profile) details
       description: Returns the details of the current user's own type profile, including its name, built-in status, and cloneability. Returns 403 if the requested profile does not belong to the current user.
       responses:
@@ -122,9 +124,11 @@ paths:
         required: true
         schema:
           type: integer
+      operationId: getRestProfilesById
+      x-operation-id-source: derived
     put:
       tags:
-      - profiles
+      - Profiles
       summary: Update profile
       description: Updates the feature settings of the specified user type profile. When disabling collaboration access, optional demotion settings control how existing user data is handled (retained, deleted, or transferred to another user).
       responses:
@@ -206,10 +210,12 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/FeaturesList.Put'
+      operationId: putRestProfilesById
+      x-operation-id-source: derived
   /rest/profiles/{id}/replace/{new_profile}:
     delete:
       tags:
-      - profiles
+      - Profiles
       summary: Delete custom profile and set new profile instead of deleted profile
       description: Permanently deletes the specified custom profile and reassigns all affected users to the specified replacement profile. Optional demotion settings control how existing user data is handled during the transition.
       responses:
@@ -271,6 +277,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UserDemoteOptions.Post'
+      operationId: deleteRestProfilesByIdReplaceByNewProfile
+      x-operation-id-source: derived
 components:
   schemas:
     FeaturesList:
@@ -440,33 +448,6 @@ components:
         fileLifetime:
           description: Get profile max file lifetime
           type: integer
-    UserDemoteOptions.Post:
-      description: Class UserDemoteOptions
-      properties:
-        remoteWipe:
-          description: Indicates whether to remotely wipe data from both desktop and mobile devices.
-          type: boolean
-        deleteUnsharedData:
-          description: Indicates whether data owned by the user should be deleted. This is required and must be set to True if `retainData` is False, and vice versa.
-          type: boolean
-        retainData:
-          description: Indicates whether data should be retained and transferred to another user. This is required and must be True if `deleteUnsharedData` is False, and vice versa.
-          type: boolean
-        retainToUser:
-          description: The ID of the new owner to whom the data will be transferred, applicable when `retainData` and/or `retainPermissionToSharedData` are set to true.
-          type: string
-        retainToAdvancedFormUser:
-          description: The ID of the user to whom the advanced form data will be transferred, similar to retainToUser but specifically for advanced form components.
-          type: string
-        retainPermissionToSharedData:
-          description: Indicates whether permissions to shared folder should be retained.
-          type: boolean
-        withdrawRequestFiles:
-          description: Indicates whether request files should be withdrawn.
-          type: boolean
-        withdrawFileLinks:
-          description: Indicates whether sent files should be withdrawn.
-          type: boolean
     Profile:
       description: Class Profile
       required:
@@ -496,6 +477,40 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/FeaturesList'
+    UserDemoteOptions.Post:
+      description: Class UserDemoteOptions
+      properties:
+        remoteWipe:
+          description: Indicates whether to remotely wipe data from both desktop and mobile devices.
+          type: boolean
+        deleteUnsharedData:
+          description: Indicates whether data owned by the user should be deleted. This is required and must be set to True if `retainData` is False, and vice versa.
+          type: boolean
+        retainData:
+          description: Indicates whether data should be retained and transferred to another user. This is required and must be True if `deleteUnsharedData` is False, and vice versa.
+          type: boolean
+        retainToUser:
+          description: The ID of the new owner to whom the data will be transferred, applicable when `retainData` and/or `retainPermissionToSharedData` are set to true.
+          type: string
+        retainToAdvancedFormUser:
+          description: The ID of the user to whom the advanced form data will be transferred, similar to retainToUser but specifically for advanced form components.
+          type: string
+        retainPermissionToSharedData:
+          description: Indicates whether permissions to shared folder should be retained.
+          type: boolean
+        withdrawRequestFiles:
+          description: Indicates whether request files should be withdrawn.
+          type: boolean
+        withdrawFileLinks:
+          description: Indicates whether sent files should be withdrawn.
+          type: boolean
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
     Profile.Post:
       description: Class Profile
       required:
@@ -507,22 +522,6 @@ components:
         prototype:
           description: Id of the prototype profile to be cloned. If not passed, the Standard profile will be used
           type: integer
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
     FeaturesList.Put:
       description: Class FeaturesList
       properties:
@@ -655,3 +654,12 @@ components:
         retainPermissionToSharedData:
           description: 'Disallow Collaboration: retain all permission to shared data'
           type: boolean
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message

@@ -3,12 +3,12 @@ info:
   version: '28'
   title: Kiteworks API Documentation Roles API
 tags:
-- name: roles
+- name: Roles
 paths:
   /rest/roles:
     get:
       tags:
-      - roles
+      - Roles
       summary: List user roles
       description: Returns a list of available user roles (e.g., Manager, Collaborator, Downloader, Viewer, Uploader), including each role's name, rank, and type.
       responses:
@@ -91,10 +91,12 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestRoles
+      x-operation-id-source: derived
   /rest/roles/{id}:
     get:
       tags:
-      - roles
+      - Roles
       summary: Get a role
       description: Returns the details of the specified role, including its name, rank, and type.
       responses:
@@ -122,6 +124,8 @@ paths:
         required: true
         schema:
           type: integer
+      operationId: getRestRolesById
+      x-operation-id-source: derived
 components:
   schemas:
     Role:

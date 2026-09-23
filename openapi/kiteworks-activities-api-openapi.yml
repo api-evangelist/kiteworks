@@ -3,12 +3,12 @@ info:
   version: '28'
   title: Kiteworks API Documentation Activities API
 tags:
-- name: activities
+- name: Activities
 paths:
   /rest/activities:
     get:
       tags:
-      - activities
+      - Activities
       summary: Get all activities
       description: Returns the activity log for the authenticated user across all files and folders they have access to.
       responses:
@@ -142,10 +142,12 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestActivities
+      x-operation-id-source: derived
   /rest/files/{file_id}/activities:
     get:
       tags:
-      - activities
+      - Activities
       summary: Get file activities
       description: Returns the activity log for the specified file, scoped to the authenticated user. **Requires `user_view` permission on the file.** For Repositories Gateway source files, `view` permission is required instead.
       responses:
@@ -285,8 +287,24 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestFilesByFileIdActivities
+      x-operation-id-source: derived
 components:
   schemas:
+    ActivityUser:
+      type: object
+      properties:
+        userId:
+          type: string
+        name:
+          type: string
+          description: Full name of the user.
+        email:
+          type: string
+          description: Email address associated with the user.
+        profileIcon:
+          type: string
+          description: URL or identifier for the user's profile icon.
     Activity:
       type: object
       properties:
@@ -321,17 +339,3 @@ components:
         data:
           readOnly: true
           description: Additional event-specific data associated with the activity.
-    ActivityUser:
-      type: object
-      properties:
-        userId:
-          type: string
-        name:
-          type: string
-          description: Full name of the user.
-        email:
-          type: string
-          description: Email address associated with the user.
-        profileIcon:
-          type: string
-          description: URL or identifier for the user's profile icon.

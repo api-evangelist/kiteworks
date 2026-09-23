@@ -8,7 +8,17 @@ paths:
   /rest/clients/action/eventLog:
     post:
       summary: Submit client event logs
-      description: "### Description:\n  Submits one or more event log entries from the client for recording on the server.\n### Precondition:\n  User must be authenticated.\n### Response:\n  Returns the created event log entries.\n"
+      description: '### Description:
+
+        Submits one or more event log entries from the client for recording on the server.
+
+        ### Precondition:
+
+        User must be authenticated.
+
+        ### Response:
+
+        Returns the created event log entries.'
       tags:
       - clientEventLogs
       requestBody:
@@ -74,8 +84,23 @@ paths:
                       message: Invalid Parameter Exception
         '490':
           description: Request blocked by WAF
+      operationId: postRestClientsActionEventLog
+      x-operation-id-source: derived
 components:
   schemas:
+    ClientCustomEventLog:
+      type: object
+      properties:
+        successIds:
+          type: array
+          description: List of event IDs successfully logged.
+          items:
+            type: string
+        failedIds:
+          type: array
+          description: List of event IDs that failed to log.
+          items:
+            type: string
     BulkClientEventLogsPostRequest:
       type: object
       properties:
@@ -111,19 +136,13 @@ components:
       - eventName
       - singleLine
       - successful
-    ClientCustomEventLog:
+    Errors:
       type: object
       properties:
-        successIds:
+        error:
           type: array
-          description: List of event IDs successfully logged.
           items:
-            type: string
-        failedIds:
-          type: array
-          description: List of event IDs that failed to log.
-          items:
-            type: string
+            $ref: '#/components/schemas/Error'
     Error:
       type: object
       properties:
@@ -133,10 +152,3 @@ components:
         message:
           type: string
           description: Error message
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'

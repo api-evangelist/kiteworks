@@ -3,12 +3,12 @@ info:
   version: '28'
   title: Kiteworks API Documentation Favorites API
 tags:
-- name: favorites
+- name: Favorites
 paths:
   /rest/favorites:
     post:
       tags:
-      - favorites
+      - Favorites
       summary: Add a favorite
       description: Marks the specified folder as a favorite for the current user.
       responses:
@@ -75,11 +75,23 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Favorite.Post'
+      operationId: postRestFavorites
+      x-operation-id-source: derived
     get:
       summary: List favorites
-      description: "### Description:\n  Returns the list of favorites for the current user.\n### Precondition:\n  User must be authenticated.\n### Response:\n  The list of favorited files and folders is returned.\n"
+      description: '### Description:
+
+        Returns the list of favorites for the current user.
+
+        ### Precondition:
+
+        User must be authenticated.
+
+        ### Response:
+
+        The list of favorited files and folders is returned.'
       tags:
-      - favorites
+      - Favorites
       parameters:
       - in: query
         name: returnEntity
@@ -205,10 +217,12 @@ paths:
                       redirectUrl: /login?code=3317
         '490':
           description: Request blocked by WAF
+      operationId: getRestFavorites
+      x-operation-id-source: derived
   /rest/favorites/{id}:
     delete:
       tags:
-      - favorites
+      - Favorites
       summary: Remove a favorite
       description: Removes the specified favorite from the current user's favorites list.
       responses:
@@ -238,10 +252,12 @@ paths:
         required: true
         schema:
           type: integer
+      operationId: deleteRestFavoritesById
+      x-operation-id-source: derived
   /rest/folders/actions/favorite:
     post:
       tags:
-      - favorites
+      - Favorites
       summary: Set multiple folders as favorite
       description: Marks multiple folders as favorites for the current user in a single request. Supports partial success, meaning valid items are processed even if some fail.
       responses:
@@ -311,9 +327,11 @@ paths:
           enum:
           - full_with_links
           - full
+      operationId: postRestFoldersActionsFavorite
+      x-operation-id-source: derived
     delete:
       tags:
-      - favorites
+      - Favorites
       summary: Removes specified folders from favorites
       description: Removes multiple folders from the current user's favorites list in a single request. Supports partial success, meaning valid items are processed even if some fail.
       responses:
@@ -356,26 +374,49 @@ paths:
           enum:
           - full_with_links
           - full
+      operationId: deleteRestFoldersActionsFavorite
+      x-operation-id-source: derived
 components:
   schemas:
-    UserBasicInfo:
+    FavoriteListOpenAPI2:
+      type: object
+      properties:
+        data:
+          description: List of favorite entries.
+          type: array
+          items:
+            $ref: '#/components/schemas/FavoriteOpenAPI2'
+        metadata:
+          description: Pagination metadata for the result set.
+          allOf:
+          - $ref: '#/components/schemas/MetaData'
+    Favorite:
+      description: Class Favorite
       required:
-      - email
       - id
-      - name
+      - objectId
+      - userId
       properties:
         id:
-          description: The unique identifier of the user
+          description: Unique identifier of Favorite
+          type: integer
+        objectId:
+          description: Unique identifier of the favorited folder or file
           type: string
-        name:
-          description: The name of the user
+        userId:
+          description: Unique identifier of the user who created this favorite
           type: string
-        email:
-          description: The user's email
-          type: string
-        profileIcon:
-          description: URL to the user's profile icon image
-          type: string
+        creator:
+          description: User who created this favorite (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/UserBasicInfo'
+        object:
+          description: Favorited folder object (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/Folder'
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
     Folder:
       type: object
       properties:
@@ -522,84 +563,18 @@ components:
         inheritanceEnabled:
           type: boolean
           description: Indicates if a folder inherits permissions from the parent folder
-    Favorite:
-      description: Class Favorite
-      required:
-      - id
-      - objectId
-      - userId
-      properties:
-        id:
-          description: Unique identifier of Favorite
-          type: integer
-        objectId:
-          description: Unique identifier of the favorited folder or file
-          type: string
-        userId:
-          description: Unique identifier of the user who created this favorite
-          type: string
-        creator:
-          description: User who created this favorite (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/UserBasicInfo'
-        object:
-          description: Favorited folder object (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/Folder'
-        links:
-          description: HATEOAS links associated with the entity
-          type: array
-          items:
-            type: string
-    Member:
+    Permission:
       type: object
       properties:
-        objectId:
-          type: string
-          description: Unique identifier (UUID) of the associated object (file or folder).
-        roleId:
+        id:
           type: integer
-          description: Role assigned to the member.
-        userId:
+          description: Unique identifier for the permission.
+        name:
           type: string
-          description: Unique identifier (UUID) of the user.
-        groupId:
-          type: integer
-          description: Unique identifier of the LDAP group.
-        user:
-          description: User details of the member.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-        role:
-          description: Role details assigned to the member.
-          allOf:
-          - $ref: '#/components/schemas/Role'
-        group:
-          description: Group details if the member belongs to a group.
-          allOf:
-          - $ref: '#/components/schemas/Group'
-        sharedBy:
-          description: Details of the user who shared the file or folder.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-        created:
-          type: string
-          format: date
-          description: Date when the file or folder was shared.
-        inheritRoleId:
-          type: integer
-          description: Inherited role ID from the parent folder, if applicable.
-        allowedFolderRoleId:
-          type: array
-          description: List of allowed folder role IDs.
-          items:
-            type: integer
-        email:
-          type: string
-          description: Email associated with the member.
-        rank:
-          type: integer
-          description: Rank of the member role.
-        originFolder:
-          readOnly: true
+          description: Name of the permission.
+        allowed:
+          type: boolean
+          description: Indicates whether the permission is granted (True) or denied (False).
     Group:
       type: object
       properties:
@@ -618,17 +593,21 @@ components:
         description:
           type: string
           description: LDAP Group description
-    Favorite.Post:
-      description: Class Favorite
-      required:
-      - objectId
+    UserBasic:
+      type: object
       properties:
-        objectId:
-          description: Unique identifier of the favorited folder or file
-          type: integer
-        addLinks:
-          description: Indicates whether HATEOAS links should be included in the response
-          type: boolean
+        id:
+          type: string
+          description: Unique identifier (UUID) for the user.
+        email:
+          type: string
+          description: Email address associated with the user.
+        name:
+          type: string
+          description: Full name of the user.
+        profileIcon:
+          type: string
+          description: URL or identifier for the user's profile icon.
     FavoriteOpenAPI2:
       type: object
       properties:
@@ -645,27 +624,47 @@ components:
           description: Details of the favorited object (folder or external content folder).
           allOf:
           - $ref: '#/components/schemas/Folder1'
-    Permission:
-      type: object
+    UserBasicInfo:
+      required:
+      - email
+      - id
+      - name
       properties:
         id:
-          type: integer
-          description: Unique identifier for the permission.
-        name:
+          description: The unique identifier of the user
           type: string
-          description: Name of the permission.
-        allowed:
+        name:
+          description: The name of the user
+          type: string
+        email:
+          description: The user's email
+          type: string
+        profileIcon:
+          description: URL to the user's profile icon image
+          type: string
+    Favorite.Post:
+      description: Class Favorite
+      required:
+      - objectId
+      properties:
+        objectId:
+          description: Unique identifier of the favorited folder or file
+          type: integer
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
           type: boolean
-          description: Indicates whether the permission is granted (True) or denied (False).
-    Error:
+    MetaData:
       type: object
       properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
     Errors:
       type: object
       properties:
@@ -688,45 +687,6 @@ components:
         type:
           type: string
           description: Role type
-    MetaData:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of items available.
-        limit:
-          type: integer
-          description: Maximum number of items returned per page.
-        offset:
-          type: integer
-          description: Number of items skipped before the current page.
-    UserBasic:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier (UUID) for the user.
-        email:
-          type: string
-          description: Email address associated with the user.
-        name:
-          type: string
-          description: Full name of the user.
-        profileIcon:
-          type: string
-          description: URL or identifier for the user's profile icon.
-    FavoriteListOpenAPI2:
-      type: object
-      properties:
-        data:
-          description: List of favorite entries.
-          type: array
-          items:
-            $ref: '#/components/schemas/FavoriteOpenAPI2'
-        metadata:
-          description: Pagination metadata for the result set.
-          allOf:
-          - $ref: '#/components/schemas/MetaData'
     Folder1:
       type: object
       properties:
@@ -877,3 +837,63 @@ components:
         inheritanceEnabled:
           type: boolean
           description: Indicates if a folder inherits permissions from the parent folder
+    Member:
+      type: object
+      properties:
+        objectId:
+          type: string
+          description: Unique identifier (UUID) of the associated object (file or folder).
+        roleId:
+          type: integer
+          description: Role assigned to the member.
+        userId:
+          type: string
+          description: Unique identifier (UUID) of the user.
+        groupId:
+          type: integer
+          description: Unique identifier of the LDAP group.
+        user:
+          description: User details of the member.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        role:
+          description: Role details assigned to the member.
+          allOf:
+          - $ref: '#/components/schemas/Role'
+        group:
+          description: Group details if the member belongs to a group.
+          allOf:
+          - $ref: '#/components/schemas/Group'
+        sharedBy:
+          description: Details of the user who shared the file or folder.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        created:
+          type: string
+          format: date
+          description: Date when the file or folder was shared.
+        inheritRoleId:
+          type: integer
+          description: Inherited role ID from the parent folder, if applicable.
+        allowedFolderRoleId:
+          type: array
+          description: List of allowed folder role IDs.
+          items:
+            type: integer
+        email:
+          type: string
+          description: Email associated with the member.
+        rank:
+          type: integer
+          description: Rank of the member role.
+        originFolder:
+          readOnly: true
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message

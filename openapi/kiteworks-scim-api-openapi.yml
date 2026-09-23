@@ -3,14 +3,24 @@ info:
   version: '28'
   title: Kiteworks API Documentation SCIM API
 tags:
-- name: scim
+- name: SCIM
 paths:
   /rest/scim/users:
     post:
       summary: Create a user
-      description: "### Description:\n  Creates a new SCIM user with the specified attributes.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The newly created user is returned.\n"
+      description: '### Description:
+
+        Creates a new SCIM user with the specified attributes.
+
+        ### Precondition:
+
+        The request must be authenticated using a valid SCIM token.
+
+        ### Response:
+
+        The newly created user is returned.'
       tags:
-      - scim
+      - SCIM
       parameters:
       - in: query
         name: attributes
@@ -110,11 +120,23 @@ paths:
           description: Conflict.
         '490':
           description: Request blocked by WAF
+      operationId: postRestScimUsers
+      x-operation-id-source: derived
     get:
       summary: Retrieve users
-      description: "### Description:\n  Returns a paginated list of SCIM users matching the specified filter criteria.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  A list of SCIM users is returned.\n"
+      description: '### Description:
+
+        Returns a paginated list of SCIM users matching the specified filter criteria.
+
+        ### Precondition:
+
+        The request must be authenticated using a valid SCIM token.
+
+        ### Response:
+
+        A list of SCIM users is returned.'
       tags:
-      - scim
+      - SCIM
       parameters:
       - in: query
         name: attributes
@@ -268,12 +290,24 @@ paths:
           description: Forbidden.
         '490':
           description: Request blocked by WAF
+      operationId: getRestScimUsers
+      x-operation-id-source: derived
   /rest/scim/Users:
     post:
       summary: Create a user
-      description: "### Description:\n  Creates a new SCIM user with the specified attributes.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The newly created user is returned.\n"
+      description: '### Description:
+
+        Creates a new SCIM user with the specified attributes.
+
+        ### Precondition:
+
+        The request must be authenticated using a valid SCIM token.
+
+        ### Response:
+
+        The newly created user is returned.'
       tags:
-      - scim
+      - SCIM
       parameters:
       - in: query
         name: attributes
@@ -373,11 +407,23 @@ paths:
           description: Conflict.
         '490':
           description: Request blocked by WAF
+      operationId: postRestScimUsers
+      x-operation-id-source: derived
     get:
       summary: Retrieve users
-      description: "### Description:\n  Returns a paginated list of SCIM users matching the specified filter criteria.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  A list of SCIM users is returned.\n"
+      description: '### Description:
+
+        Returns a paginated list of SCIM users matching the specified filter criteria.
+
+        ### Precondition:
+
+        The request must be authenticated using a valid SCIM token.
+
+        ### Response:
+
+        A list of SCIM users is returned.'
       tags:
-      - scim
+      - SCIM
       parameters:
       - in: query
         name: attributes
@@ -531,12 +577,24 @@ paths:
           description: Forbidden.
         '490':
           description: Request blocked by WAF
+      operationId: getRestScimUsers
+      x-operation-id-source: derived
   /rest/scim/users/{id}:
     put:
       summary: Update a user
-      description: "### Description:\n  Updates the SCIM user corresponding to the provided ID.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The updated user is returned.\n"
+      description: '### Description:
+
+        Updates the SCIM user corresponding to the provided ID.
+
+        ### Precondition:
+
+        The request must be authenticated using a valid SCIM token.
+
+        ### Response:
+
+        The updated user is returned.'
       tags:
-      - scim
+      - SCIM
       parameters:
       - in: path
         name: id
@@ -568,11 +626,23 @@ paths:
           description: ERR_ENTITY_NOT_FOUND
         '490':
           description: Request blocked by WAF
+      operationId: putRestScimUsersById
+      x-operation-id-source: derived
     get:
       summary: Return a user
-      description: "### Description:\n  Returns the SCIM user corresponding to the provided ID.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The user is returned.\n"
+      description: '### Description:
+
+        Returns the SCIM user corresponding to the provided ID.
+
+        ### Precondition:
+
+        The request must be authenticated using a valid SCIM token.
+
+        ### Response:
+
+        The user is returned.'
       tags:
-      - scim
+      - SCIM
       parameters:
       - in: path
         name: id
@@ -672,11 +742,23 @@ paths:
           description: Forbidden.
         '490':
           description: Request blocked by WAF
+      operationId: getRestScimUsersById
+      x-operation-id-source: derived
     delete:
       summary: Delete a user
-      description: "### Description:\n  Deletes the SCIM user corresponding to the provided ID.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The user is deleted.\n"
+      description: '### Description:
+
+        Deletes the SCIM user corresponding to the provided ID.
+
+        ### Precondition:
+
+        The request must be authenticated using a valid SCIM token.
+
+        ### Response:
+
+        The user is deleted.'
       tags:
-      - scim
+      - SCIM
       parameters:
       - in: path
         name: id
@@ -735,12 +817,24 @@ paths:
           description: Forbidden.
         '490':
           description: Request blocked by WAF
+      operationId: deleteRestScimUsersById
+      x-operation-id-source: derived
   /rest/scim/Users/{id}:
     put:
       summary: Update a user
-      description: "### Description:\n  Updates the SCIM user corresponding to the provided ID.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The updated user is returned.\n"
+      description: '### Description:
+
+        Updates the SCIM user corresponding to the provided ID.
+
+        ### Precondition:
+
+        The request must be authenticated using a valid SCIM token.
+
+        ### Response:
+
+        The updated user is returned.'
       tags:
-      - scim
+      - SCIM
       parameters:
       - in: path
         name: id
@@ -772,11 +866,23 @@ paths:
           description: ERR_ENTITY_NOT_FOUND
         '490':
           description: Request blocked by WAF
+      operationId: putRestScimUsersById
+      x-operation-id-source: derived
     get:
       summary: Return a user
-      description: "### Description:\n  Returns the SCIM user corresponding to the provided ID.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The user is returned.\n"
+      description: '### Description:
+
+        Returns the SCIM user corresponding to the provided ID.
+
+        ### Precondition:
+
+        The request must be authenticated using a valid SCIM token.
+
+        ### Response:
+
+        The user is returned.'
       tags:
-      - scim
+      - SCIM
       parameters:
       - in: path
         name: id
@@ -876,11 +982,23 @@ paths:
           description: Forbidden.
         '490':
           description: Request blocked by WAF
+      operationId: getRestScimUsersById
+      x-operation-id-source: derived
     delete:
       summary: Delete a user
-      description: "### Description:\n  Deletes the SCIM user corresponding to the provided ID.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The user is deleted.\n"
+      description: '### Description:
+
+        Deletes the SCIM user corresponding to the provided ID.
+
+        ### Precondition:
+
+        The request must be authenticated using a valid SCIM token.
+
+        ### Response:
+
+        The user is deleted.'
       tags:
-      - scim
+      - SCIM
       parameters:
       - in: path
         name: id
@@ -939,12 +1057,24 @@ paths:
           description: Forbidden.
         '490':
           description: Request blocked by WAF
+      operationId: deleteRestScimUsersById
+      x-operation-id-source: derived
   /rest/scim/ServiceProviderConfig:
     get:
       summary: Return SCIM service provider configuration
-      description: "### Description:\n  Returns the SCIM service provider configuration, including supported features and authentication schemes.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The service provider configuration is returned.\n"
+      description: '### Description:
+
+        Returns the SCIM service provider configuration, including supported features and authentication schemes.
+
+        ### Precondition:
+
+        The request must be authenticated using a valid SCIM token.
+
+        ### Response:
+
+        The service provider configuration is returned.'
       tags:
-      - scim
+      - SCIM
       responses:
         '200':
           description: The service provider configuration is returned successfully.
@@ -954,12 +1084,24 @@ paths:
           description: Forbidden.
         '490':
           description: Request blocked by WAF
+      operationId: getRestScimServiceProviderConfig
+      x-operation-id-source: derived
   /rest/scim/Schemas:
     get:
       summary: Return SCIM schemas
-      description: "### Description:\n  Returns all supported SCIM schemas.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The supported SCIM schemas are returned.\n"
+      description: '### Description:
+
+        Returns all supported SCIM schemas.
+
+        ### Precondition:
+
+        The request must be authenticated using a valid SCIM token.
+
+        ### Response:
+
+        The supported SCIM schemas are returned.'
       tags:
-      - scim
+      - SCIM
       responses:
         '200':
           description: The supported SCIM schemas are returned successfully.
@@ -969,12 +1111,24 @@ paths:
           description: Forbidden.
         '490':
           description: Request blocked by WAF
+      operationId: getRestScimSchemas
+      x-operation-id-source: derived
   /rest/scim/Schemas/{id}:
     get:
       summary: Return a SCIM schema
-      description: "### Description:\n  Returns the SCIM schema corresponding to the provided ID.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The requested SCIM schema is returned if it exists.\n"
+      description: '### Description:
+
+        Returns the SCIM schema corresponding to the provided ID.
+
+        ### Precondition:
+
+        The request must be authenticated using a valid SCIM token.
+
+        ### Response:
+
+        The requested SCIM schema is returned if it exists.'
       tags:
-      - scim
+      - SCIM
       parameters:
       - in: path
         name: id
@@ -994,12 +1148,24 @@ paths:
           description: Forbidden.
         '490':
           description: Request blocked by WAF
+      operationId: getRestScimSchemasById
+      x-operation-id-source: derived
   /rest/scim/ResourceTypes:
     get:
       summary: Return SCIM resource types
-      description: "### Description:\n  Returns all supported SCIM resource types.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The supported SCIM resource types are returned.\n"
+      description: '### Description:
+
+        Returns all supported SCIM resource types.
+
+        ### Precondition:
+
+        The request must be authenticated using a valid SCIM token.
+
+        ### Response:
+
+        The supported SCIM resource types are returned.'
       tags:
-      - scim
+      - SCIM
       responses:
         '200':
           description: The supported SCIM resource types are returned successfully.
@@ -1009,12 +1175,24 @@ paths:
           description: Forbidden.
         '490':
           description: Request blocked by WAF
+      operationId: getRestScimResourceTypes
+      x-operation-id-source: derived
   /rest/scim/ResourceTypes/{id}:
     get:
       summary: Return a SCIM resource type
-      description: "### Description:\n  Returns the SCIM resource type corresponding to the provided ID.\n### Precondition:\n  The request must be authenticated using a valid SCIM token.\n### Response:\n  The requested SCIM resource type is returned if it exists.\n"
+      description: '### Description:
+
+        Returns the SCIM resource type corresponding to the provided ID.
+
+        ### Precondition:
+
+        The request must be authenticated using a valid SCIM token.
+
+        ### Response:
+
+        The requested SCIM resource type is returned if it exists.'
       tags:
-      - scim
+      - SCIM
       parameters:
       - in: path
         name: id
@@ -1034,8 +1212,78 @@ paths:
           description: Forbidden.
         '490':
           description: Request blocked by WAF
+      operationId: getRestScimResourceTypesById
+      x-operation-id-source: derived
 components:
   schemas:
+    DataRetentionOption:
+      type: object
+      properties:
+        remoteWipe:
+          type: boolean
+          default: false
+          description: If true, triggers a remote wipe of the user data from all registered devices.
+        deleteUnsharedData:
+          type:
+          - boolean
+          - 'null'
+          default: null
+          description: If true, permanently deletes data that is not shared with other users.
+        retainData:
+          type:
+          - boolean
+          - 'null'
+          default: null
+          description: If true, retains the user data after deletion.
+        retainPermissionToSharedData:
+          type: boolean
+          default: false
+          description: If true, the specified `retainToUser` will retain access to shared data.
+        retainToUser:
+          type: string
+          default: false
+          description: UUID of the user who will receive ownership of the deleted user data.
+    ScimUsers:
+      type: object
+      properties:
+        schemas:
+          type: array
+          description: List of SCIM schema URIs applicable to this response.
+          items:
+            type: string
+        totalResults:
+          type: integer
+          description: Total number of matching SCIM users.
+        itemsPerPage:
+          type: integer
+          description: Number of users returned per page.
+        startIndex:
+          type: integer
+          description: 1-based index of the first result in the current page.
+        Resources:
+          description: List of SCIM user resources.
+          type: array
+          items:
+            $ref: '#/components/schemas/ScimUser'
+    ScimMultiValue:
+      type: object
+      properties:
+        value:
+          type: string
+          pattern: ^[A-Za-z0-9 _-]+$
+          description: The value of the multi-valued attribute.
+    ScimMultiValue1:
+      type: object
+      properties:
+        value:
+          type: string
+          description: Value of the multi-value attribute (e.g., email address or phone number).
+        type:
+          type: string
+          description: Type label for the value (e.g., work, home).
+        primary:
+          type: boolean
+          description: Indicates whether this is the primary value for the attribute.
     ScimUsersPostRequest:
       type: object
       properties:
@@ -1082,6 +1330,21 @@ components:
       required:
       - schemas
       - userName
+    ScimMultiValueMobile:
+      type: object
+      properties:
+        primary:
+          type: boolean
+          description: If true, designates this entry as the primary value.
+        value:
+          type: string
+          description: The phone number value.
+        type:
+          type: string
+          description: The type of phone number (e.g., `mobile`, `work`, `home`).
+      required:
+      - type
+      - value
     ScimMeta:
       type: object
       properties:
@@ -1099,82 +1362,6 @@ components:
         location:
           type: string
           description: URI of the SCIM resource.
-    ScimMultiValueMobile:
-      type: object
-      properties:
-        primary:
-          type: boolean
-          description: If true, designates this entry as the primary value.
-        value:
-          type: string
-          description: The phone number value.
-        type:
-          type: string
-          description: The type of phone number (e.g., `mobile`, `work`, `home`).
-      required:
-      - type
-      - value
-    ScimUsers:
-      type: object
-      properties:
-        schemas:
-          type: array
-          description: List of SCIM schema URIs applicable to this response.
-          items:
-            type: string
-        totalResults:
-          type: integer
-          description: Total number of matching SCIM users.
-        itemsPerPage:
-          type: integer
-          description: Number of users returned per page.
-        startIndex:
-          type: integer
-          description: 1-based index of the first result in the current page.
-        Resources:
-          description: List of SCIM user resources.
-          type: array
-          items:
-            $ref: '#/components/schemas/ScimUser'
-    ScimMultiValue1:
-      type: object
-      properties:
-        value:
-          type: string
-          description: Value of the multi-value attribute (e.g., email address or phone number).
-        type:
-          type: string
-          description: Type label for the value (e.g., work, home).
-        primary:
-          type: boolean
-          description: Indicates whether this is the primary value for the attribute.
-    DataRetentionOption:
-      type: object
-      properties:
-        remoteWipe:
-          type: boolean
-          default: false
-          description: If true, triggers a remote wipe of the user data from all registered devices.
-        deleteUnsharedData:
-          type:
-          - boolean
-          - 'null'
-          default: null
-          description: If true, permanently deletes data that is not shared with other users.
-        retainData:
-          type:
-          - boolean
-          - 'null'
-          default: null
-          description: If true, retains the user data after deletion.
-        retainPermissionToSharedData:
-          type: boolean
-          default: false
-          description: If true, the specified `retainToUser` will retain access to shared data.
-        retainToUser:
-          type: string
-          default: false
-          description: UUID of the user who will receive ownership of the deleted user data.
     ScimUser:
       type: object
       properties:
@@ -1265,10 +1452,3 @@ components:
           - $ref: '#/components/schemas/DataRetentionOption'
       required:
       - schemas
-    ScimMultiValue:
-      type: object
-      properties:
-        value:
-          type: string
-          pattern: ^[A-Za-z0-9 _-]+$
-          description: The value of the multi-valued attribute.

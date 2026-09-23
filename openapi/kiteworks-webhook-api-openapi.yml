@@ -13,14 +13,14 @@ servers:
 - url: http://localhost:8080/pubsub-ext
   description: Local development server
 tags:
-- name: webhook
+- name: Webhook
 paths:
   /webhooks:
     get:
       summary: Get all webhooks
       description: Retrieves a list of all webhooks with optional pagination
       tags:
-      - webhook
+      - Webhook
       security:
       - {}
       parameters:
@@ -63,11 +63,13 @@ paths:
               example:
                 code: 500
                 message: '[Internal Server Error] could not get webhooks'
+      operationId: getWebhooks
+      x-operation-id-source: derived
     post:
       summary: Create a new webhook
       description: Creates a new webhook based on the body content
       tags:
-      - webhook
+      - Webhook
       security:
       - {}
       requestBody:
@@ -115,12 +117,14 @@ paths:
               example:
                 code: 500
                 message: '[Internal Server Error] could not create webhook'
+      operationId: postWebhooks
+      x-operation-id-source: derived
   /webhooks/{id}:
     get:
       summary: Get a specific webhook
       description: Retrieves a specific webhook by its ID
       tags:
-      - webhook
+      - Webhook
       security:
       - {}
       parameters:
@@ -173,11 +177,13 @@ paths:
               example:
                 code: 500
                 message: '[Internal Server Error] could not get webhook'
+      operationId: getWebhooksById
+      x-operation-id-source: derived
     put:
       summary: Update a webhook
       description: Updates an existing webhook
       tags:
-      - webhook
+      - Webhook
       security:
       - {}
       parameters:
@@ -261,11 +267,13 @@ paths:
               example:
                 code: 500
                 message: '[Internal Server Error] could not update webhook'
+      operationId: putWebhooksById
+      x-operation-id-source: derived
     patch:
       summary: Partially update a webhook
       description: Updates specific fields of an existing webhook without requiring all fields to be present
       tags:
-      - webhook
+      - Webhook
       security:
       - {}
       parameters:
@@ -349,11 +357,13 @@ paths:
               example:
                 code: 500
                 message: '[Internal Server Error] could not patch webhook'
+      operationId: patchWebhooksById
+      x-operation-id-source: derived
     delete:
       summary: Delete a webhook
       description: Deletes an existing webhook by its ID
       tags:
-      - webhook
+      - Webhook
       security:
       - {}
       parameters:
@@ -402,41 +412,38 @@ paths:
               example:
                 code: 500
                 message: '[Internal Server Error] could not delete webhook'
+      operationId: deleteWebhooksById
+      x-operation-id-source: derived
 components:
   schemas:
-    WebhookList:
+    WebhookPatchRequest:
       type: object
-      required:
-      - items
-      - totalItems
+      description: Partial webhook payload — all fields are optional; only provided fields are updated
       properties:
-        items:
+        url:
+          type: string
+          description: URL contains the webhook URL
+          example: https://example.com/webhook
+        token:
+          type: string
+          description: Token contains the webhook Token (if provided must not be empty or whitespace-only)
+          example: my-token
+        secret:
+          type: string
+          description: Secret contains the webhook Secret
+          example: my-secret
+        enabled:
+          type: boolean
+          description: Enabled is the value of the webhook enable/disable
+          example: true
+        subscriptions:
           type: array
           items:
-            $ref: '#/components/schemas/WebhookResponse'
-          description: Items is the list of webhook items in the current set
-        totalItems:
-          type: integer
-          description: TotalItems is the total number of items across all sets
-          example: 150
-    Status:
-      type: object
-      required:
-      - status
-      - description
-      properties:
-        status:
-          type: string
-          description: Status value
-          enum:
-          - UNKNOWN
-          - SUCCESS
-          - ERROR
-          example: UNKNOWN
-        description:
-          type: string
-          description: Status description
-          example: unknown
+            type: string
+          description: Subscriptions is a list of NATS subject filter patterns associated with the webhook.
+          example:
+          - filesystem.file.create
+          - filesystem.>
     WebhookResponse:
       type: object
       required:
@@ -482,34 +489,6 @@ components:
         status:
           $ref: '#/components/schemas/Status'
           description: Status is a status data associated with the webhook.
-    WebhookPatchRequest:
-      type: object
-      description: Partial webhook payload — all fields are optional; only provided fields are updated
-      properties:
-        url:
-          type: string
-          description: URL contains the webhook URL
-          example: https://example.com/webhook
-        token:
-          type: string
-          description: Token contains the webhook Token (if provided must not be empty or whitespace-only)
-          example: my-token
-        secret:
-          type: string
-          description: Secret contains the webhook Secret
-          example: my-secret
-        enabled:
-          type: boolean
-          description: Enabled is the value of the webhook enable/disable
-          example: true
-        subscriptions:
-          type: array
-          items:
-            type: string
-          description: Subscriptions is a list of NATS subject filter patterns associated with the webhook.
-          example:
-          - filesystem.file.create
-          - filesystem.>
     WebhookRequest:
       type: object
       required:
@@ -541,6 +520,39 @@ components:
           example:
           - filesystem.file.create
           - filesystem.>
+    WebhookList:
+      type: object
+      required:
+      - items
+      - totalItems
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookResponse'
+          description: Items is the list of webhook items in the current set
+        totalItems:
+          type: integer
+          description: TotalItems is the total number of items across all sets
+          example: 150
+    Status:
+      type: object
+      required:
+      - status
+      - description
+      properties:
+        status:
+          type: string
+          description: Status value
+          enum:
+          - UNKNOWN
+          - SUCCESS
+          - ERROR
+          example: UNKNOWN
+        description:
+          type: string
+          description: Status description
+          example: unknown
     Error:
       type: object
       properties:

@@ -3,12 +3,12 @@ info:
   version: '28'
   title: Kiteworks API Documentation Settings API
 tags:
-- name: settings
+- name: Settings
 paths:
   /rest/settings/passwordPolicy:
     get:
       tags:
-      - settings
+      - Settings
       summary: Get Password Policy
       description: Returns the system's password policy settings, including minimum length, required character types, and whether the policy is enabled.
       responses:
@@ -32,10 +32,12 @@ paths:
         '490':
           description: Request blocked by WAF
       deprecated: false
+      operationId: getRestSettingsPasswordPolicy
+      x-operation-id-source: derived
   /rest/settings/system:
     get:
       tags:
-      - settings
+      - Settings
       summary: Get system settings
       description: Returns the system-level settings, including language, location, storage quota, and mobile number configuration as configured by the system administrator.
       responses:
@@ -57,6 +59,8 @@ paths:
         '490':
           description: Request blocked by WAF
       deprecated: false
+      operationId: getRestSettingsSystem
+      x-operation-id-source: derived
 components:
   schemas:
     PasswordPolicy:

@@ -3,14 +3,24 @@ info:
   version: '28'
   title: Kiteworks API Documentation Contacts API
 tags:
-- name: contacts
+- name: Contacts
 paths:
   /rest/contacts:
     post:
       summary: Create a contact
-      description: "### Description:\n  Creates a new contact entry for the current user, associating a display name with one or more email addresses.\n### Precondition:\n  User must be authenticated.\n### Response:\n  Returns the newly created contact.\n"
+      description: '### Description:
+
+        Creates a new contact entry for the current user, associating a display name with one or more email addresses.
+
+        ### Precondition:
+
+        User must be authenticated.
+
+        ### Response:
+
+        Returns the newly created contact.'
       tags:
-      - contacts
+      - Contacts
       requestBody:
         content:
           application/json:
@@ -81,11 +91,23 @@ paths:
                       message: Invalid Parameter Exception
         '490':
           description: Request blocked by WAF
+      operationId: postRestContacts
+      x-operation-id-source: derived
     get:
       summary: List contacts
-      description: "### Description:\n  Returns a paginated list of the current user's contacts, with optional name filtering and sort order.\n### Precondition:\n  User must be authenticated.\n### Response:\n  Returns the list of contacts matching the specified filters.\n"
+      description: '### Description:
+
+        Returns a paginated list of the current user''s contacts, with optional name filtering and sort order.
+
+        ### Precondition:
+
+        User must be authenticated.
+
+        ### Response:
+
+        Returns the list of contacts matching the specified filters.'
       tags:
-      - contacts
+      - Contacts
       parameters:
       - in: query
         name: name
@@ -175,12 +197,24 @@ paths:
                       message: Unauthorized
         '490':
           description: Request blocked by WAF
+      operationId: getRestContacts
+      x-operation-id-source: derived
   /rest/contacts/{id}:
     put:
       summary: Update a contact
-      description: "### Description:\n  Updates the display name and associated email addresses of the specified contact.\n### Precondition:\n  User must be authenticated and must own the contact.\n### Response:\n  The contact has been updated.\n"
+      description: '### Description:
+
+        Updates the display name and associated email addresses of the specified contact.
+
+        ### Precondition:
+
+        User must be authenticated and must own the contact.
+
+        ### Response:
+
+        The contact has been updated.'
       tags:
-      - contacts
+      - Contacts
       parameters:
       - in: path
         name: id
@@ -261,11 +295,23 @@ paths:
                       message: Invalid Parameter Exception
         '490':
           description: Request blocked by WAF
+      operationId: putRestContactsById
+      x-operation-id-source: derived
     get:
       summary: Get a contact
-      description: "### Description:\n  Returns the details of the specified contact, including its display name and associated email addresses.\n### Precondition:\n  User must be authenticated and must own the contact.\n### Response:\n  Returns the contact details.\n"
+      description: '### Description:
+
+        Returns the details of the specified contact, including its display name and associated email addresses.
+
+        ### Precondition:
+
+        User must be authenticated and must own the contact.
+
+        ### Response:
+
+        Returns the contact details.'
       tags:
-      - contacts
+      - Contacts
       parameters:
       - in: path
         name: id
@@ -317,11 +363,23 @@ paths:
                       message: Insufficient access permissions
         '490':
           description: Request blocked by WAF
+      operationId: getRestContactsById
+      x-operation-id-source: derived
     delete:
       summary: Delete a contact
-      description: "### Description:\n  Permanently removes the specified contact from the current user's contact list.\n### Precondition:\n  User must be authenticated and must own the contact.\n### Response:\n  The contact has been deleted.\n"
+      description: '### Description:
+
+        Permanently removes the specified contact from the current user''s contact list.
+
+        ### Precondition:
+
+        User must be authenticated and must own the contact.
+
+        ### Response:
+
+        The contact has been deleted.'
       tags:
-      - contacts
+      - Contacts
       parameters:
       - in: path
         name: id
@@ -369,6 +427,8 @@ paths:
                       message: Insufficient access permissions
         '490':
           description: Request blocked by WAF
+      operationId: deleteRestContactsById
+      x-operation-id-source: derived
 components:
   schemas:
     ContactItem:
@@ -392,6 +452,51 @@ components:
           description: Email address of the contact.
       required:
       - email
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    ContactCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Display name for the contact.
+        items:
+          type: array
+          minItems: 1
+          description: List of email addresses associated with this contact. At least one email address is required.
+          items:
+            $ref: '#/components/schemas/ContactEmail'
+      required:
+      - name
+    ContactList:
+      type: object
+      properties:
+        metadata:
+          description: Pagination metadata for the result set.
+          allOf:
+          - $ref: '#/components/schemas/MetaData'
+        data:
+          type: array
+          description: List of contacts.
+          items:
+            $ref: '#/components/schemas/Contact'
     Contact:
       type: object
       properties:
@@ -420,20 +525,6 @@ components:
           description: List of email addresses or distribution lists for this contact.
           items:
             $ref: '#/components/schemas/ContactItem'
-    ContactCreate:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Display name for the contact.
-        items:
-          type: array
-          minItems: 1
-          description: List of email addresses associated with this contact. At least one email address is required.
-          items:
-            $ref: '#/components/schemas/ContactEmail'
-      required:
-      - name
     Error:
       type: object
       properties:
@@ -443,34 +534,3 @@ components:
         message:
           type: string
           description: Error message
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    MetaData:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of items available.
-        limit:
-          type: integer
-          description: Maximum number of items returned per page.
-        offset:
-          type: integer
-          description: Number of items skipped before the current page.
-    ContactList:
-      type: object
-      properties:
-        metadata:
-          description: Pagination metadata for the result set.
-          allOf:
-          - $ref: '#/components/schemas/MetaData'
-        data:
-          type: array
-          description: List of contacts.
-          items:
-            $ref: '#/components/schemas/Contact'

@@ -3,12 +3,12 @@ info:
   version: '28'
   title: Kiteworks API Documentation Permissions API
 tags:
-- name: permissions
+- name: Permissions
 paths:
   /rest/permissions/comment/{comment_id}:
     get:
       tags:
-      - permissions
+      - Permissions
       summary: Return the list of permissions available on a comment
       description: Returns the list of actions the current user is allowed to perform on the specified comment, such as editing or deleting it.
       responses:
@@ -85,10 +85,12 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestPermissionsCommentByCommentId
+      x-operation-id-source: derived
   /rest/permissions/file/{file_id}:
     get:
       tags:
-      - permissions
+      - Permissions
       summary: Get file permissions
       description: Returns the list of actions the current user is allowed to perform on the specified file, such as downloading, editing, or commenting.
       responses:
@@ -165,10 +167,12 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestPermissionsFileByFileId
+      x-operation-id-source: derived
   /rest/permissions/files:
     get:
       tags:
-      - permissions
+      - Permissions
       summary: Get file permissions for a set of files
       description: Returns the current user's allowed actions for each of the specified files. File IDs are passed as request parameters. Returns 400 if no file IDs are provided.
       responses:
@@ -247,10 +251,12 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestPermissionsFiles
+      x-operation-id-source: derived
   /rest/permissions/task/{task_id}:
     get:
       tags:
-      - permissions
+      - Permissions
       summary: Return the list of permissions available on a task
       description: Returns the list of actions the current user is allowed to perform on the specified task, such as completing or deleting it.
       responses:
@@ -327,8 +333,20 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestPermissionsTaskByTaskId
+      x-operation-id-source: derived
 components:
   schemas:
+    FilePermissions:
+      description: Class FilePermissions
+      properties:
+        fileId:
+          description: Id of file
+          type: string
+        permissions:
+          type: array
+          items:
+            type: string
     Permission:
       type: object
       properties:
@@ -341,13 +359,3 @@ components:
         allowed:
           type: boolean
           description: Indicates whether the permission is granted (True) or denied (False).
-    FilePermissions:
-      description: Class FilePermissions
-      properties:
-        fileId:
-          description: Id of file
-          type: string
-        permissions:
-          type: array
-          items:
-            type: string

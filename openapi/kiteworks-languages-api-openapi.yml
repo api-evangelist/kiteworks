@@ -3,12 +3,12 @@ info:
   version: '28'
   title: Kiteworks API Documentation Languages API
 tags:
-- name: languages
+- name: Languages
 paths:
   /rest/languages:
     get:
       tags:
-      - languages
+      - Languages
       summary: List languages
       description: Returns a list of available languages.
       responses:
@@ -75,10 +75,12 @@ paths:
           enum:
           - full_with_links
           - full
+      operationId: getRestLanguages
+      x-operation-id-source: derived
   /rest/languages/{id}:
     get:
       tags:
-      - languages
+      - Languages
       summary: Get a language
       description: Returns the details of a specified language, including its name and symbol.
       responses:
@@ -105,6 +107,8 @@ paths:
         required: true
         schema:
           type: integer
+      operationId: getRestLanguagesById
+      x-operation-id-source: derived
 components:
   schemas:
     Language:

@@ -3,12 +3,12 @@ info:
   version: '28'
   title: Kiteworks API Documentation Devices API
 tags:
-- name: devices
+- name: Devices
 paths:
   /rest/devices:
     get:
       tags:
-      - devices
+      - Devices
       summary: List devices
       description: Returns a list of devices per user that have authenticated on this server. Each record includes the device name (e.g. iPad, iPhone), install tag ID, client ID, and remote wipe flag.
       responses:
@@ -121,9 +121,11 @@ paths:
           - full_with_links
           - full
           - compact
+      operationId: getRestDevices
+      x-operation-id-source: derived
     post:
       tags:
-      - devices
+      - Devices
       summary: Register a device
       description: Registers a new device for a user. Called when a user logs in to Kiteworks to track the device they are using.
       responses:
@@ -208,10 +210,12 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Device.Post'
+      operationId: postRestDevices
+      x-operation-id-source: derived
   /rest/devices/me/actions/wipe:
     patch:
       tags:
-      - devices
+      - Devices
       summary: Report wipe completed
       description: Notifies the server that the current device has completed a requested remote wipe. Updates the wipe flag to completed.
       responses:
@@ -220,10 +224,12 @@ paths:
         '490':
           description: Request blocked by WAF
       deprecated: false
+      operationId: patchRestDevicesMeActionsWipe
+      x-operation-id-source: derived
   /rest/devices/{id}:
     get:
       tags:
-      - devices
+      - Devices
       summary: Get a device
       description: Returns the details of the specified device, including device name, install tag ID, client ID, and remote wipe flag.
       responses:
@@ -254,9 +260,11 @@ paths:
         required: true
         schema:
           type: integer
+      operationId: getRestDevicesById
+      x-operation-id-source: derived
     put:
       tags:
-      - devices
+      - Devices
       summary: Update a device
       description: Updates the details of the specified device. Supports updating the mobile key store and messaging registration token.
       responses:
@@ -320,9 +328,11 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Device.Put'
+      operationId: putRestDevicesById
+      x-operation-id-source: derived
     delete:
       tags:
-      - devices
+      - Devices
       summary: Delete a device
       description: Deletes the specified device.
       responses:
@@ -352,10 +362,12 @@ paths:
         required: true
         schema:
           type: string
+      operationId: deleteRestDevicesById
+      x-operation-id-source: derived
   /rest/devices/{install_tag_id}/wipe:
     get:
       tags:
-      - devices
+      - Devices
       summary: Get the wipe status
       description: Returns the remote wipe status of the specified device, identified by its install tag ID (usually the device serial number).
       responses:
@@ -380,10 +392,12 @@ paths:
         required: true
         schema:
           type: string
+      operationId: getRestDevicesByInstallTagIdWipe
+      x-operation-id-source: derived
   /rest/users/{id}/devices:
     get:
       tags:
-      - devices
+      - Devices
       summary: List devices for a user
       description: Returns a list of devices registered to the specified user.
       responses:
@@ -425,12 +439,24 @@ paths:
         required: true
         schema:
           type: string
+      operationId: getRestUsersByIdDevices
+      x-operation-id-source: derived
   /rest/devices/me/actions/logout:
     delete:
       summary: Log out the current user
-      description: "### Description:\n  Logs out the current user and invalidates the active session.\n### Precondition:\n  User must have an active session.\n### Response:\n  Returns logout confirmation details.\n"
+      description: '### Description:
+
+        Logs out the current user and invalidates the active session.
+
+        ### Precondition:
+
+        User must have an active session.
+
+        ### Response:
+
+        Returns logout confirmation details.'
       tags:
-      - devices
+      - Devices
       responses:
         '200':
           description: The user has been successfully logged out.
@@ -461,14 +487,10 @@ paths:
                       message: Unauthorized
         '490':
           description: Request blocked by WAF
+      operationId: deleteRestDevicesMeActionsLogout
+      x-operation-id-source: derived
 components:
   schemas:
-    Logout:
-      type: object
-      properties:
-        redirectUri:
-          type: string
-          description: URL to redirect to after logout.
     Device.Put:
       description: Class Device
       properties:
@@ -481,55 +503,6 @@ components:
         addLinks:
           description: Indicates whether HATEOAS links should be included in the response
           type: boolean
-    Device.Post:
-      description: Class Device
-      properties:
-        clientId:
-          description: Unique identifier of client for this Device
-          type: string
-        userId:
-          description: Unique identifier of user for this Device
-          type: string
-        installTagId:
-          description: Unique identifier of the install tag for this device. Usually the serial number of the device
-          type: string
-        installName:
-          description: Install Tag name for this Device. e.g. Someone's IPhone
-          type: string
-        mobileKeyStore:
-          description: Key to encrypt files on this device
-          type: string
-        addLinks:
-          description: Indicates whether HATEOAS links should be included in the response
-          type: boolean
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    MetaData:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of items available.
-        limit:
-          type: integer
-          description: Maximum number of items returned per page.
-        offset:
-          type: integer
-          description: Number of items skipped before the current page.
     Device:
       description: Class Device
       required:
@@ -564,3 +537,58 @@ components:
           type: array
           items:
             type: string
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
+    Logout:
+      type: object
+      properties:
+        redirectUri:
+          type: string
+          description: URL to redirect to after logout.
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    Device.Post:
+      description: Class Device
+      properties:
+        clientId:
+          description: Unique identifier of client for this Device
+          type: string
+        userId:
+          description: Unique identifier of user for this Device
+          type: string
+        installTagId:
+          description: Unique identifier of the install tag for this device. Usually the serial number of the device
+          type: string
+        installName:
+          description: Install Tag name for this Device. e.g. Someone's IPhone
+          type: string
+        mobileKeyStore:
+          description: Key to encrypt files on this device
+          type: string
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
