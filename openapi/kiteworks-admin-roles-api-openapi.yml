@@ -435,36 +435,15 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    UserAdminRole:
-      description: Class UserAdminRole
-      required:
-      - userId
+    UserMetadata:
+      description: Class UserMetadata
       properties:
-        userId:
-          description: User unique identifier
+        name:
+          description: Key name of the custom metadata attribute associated with the user
           type: string
-        adminRole:
-          description: 'Admin role unique identifier. Possible values are: 1: System admin, 2: Application admin'
+        value:
+          description: Value assigned to the custom metadata attribute for the user
           type: string
-    MetaData:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of items available.
-        limit:
-          type: integer
-          description: Maximum number of items returned per page.
-        offset:
-          type: integer
-          description: Number of items skipped before the current page.
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
     AdminRole:
       description: Class AdminRole
       required:
@@ -568,14 +547,16 @@ components:
           description: The exact timestamp when the user's password will expire
           type: string
           format: date
-    UserMetadata:
-      description: Class UserMetadata
+    UserAdminRole:
+      description: Class UserAdminRole
+      required:
+      - userId
       properties:
-        name:
-          description: Key name of the custom metadata attribute associated with the user
+        userId:
+          description: User unique identifier
           type: string
-        value:
-          description: Value assigned to the custom metadata attribute for the user
+        adminRole:
+          description: 'Admin role unique identifier. Possible values are: 1: System admin, 2: Application admin'
           type: string
     Error:
       type: object
@@ -586,3 +567,22 @@ components:
         message:
           type: string
           description: Error message
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'

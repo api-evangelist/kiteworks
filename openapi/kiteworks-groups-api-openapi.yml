@@ -424,18 +424,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ContactItem:
-      type: object
-      properties:
-        email:
-          type: string
-          description: Email address of the contact.
-        isDistributionList:
-          type: boolean
-          description: Indicates whether the contact is a distribution list.
-        profileIcon:
-          type: string
-          description: URL or identifier of the contact's profile icon.
     GroupCreate:
       type: object
       properties:
@@ -451,6 +439,43 @@ components:
       required:
       - items
       - name
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    Contact:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the contact.
+        userId:
+          type: string
+        name:
+          type: string
+          description: Display name of the contact.
+        created:
+          type: string
+          format: date
+          description: Date and time when the contact was created.
+        modified:
+          type: string
+          format: date
+          description: Date and time when the contact was last modified.
+        lastContactDate:
+          type: string
+          format: date
+          description: Date and time of the most recent interaction with this contact.
+        items:
+          type: array
+          description: List of email addresses or distribution lists for this contact.
+          items:
+            $ref: '#/components/schemas/ContactItem'
     GroupEmail:
       type: object
       properties:
@@ -491,40 +516,15 @@ components:
           description: List of contacts.
           items:
             $ref: '#/components/schemas/Contact'
-    Contact:
+    ContactItem:
       type: object
       properties:
-        id:
-          type: integer
-          description: Unique identifier of the contact.
-        userId:
+        email:
           type: string
-        name:
+          description: Email address of the contact.
+        isDistributionList:
+          type: boolean
+          description: Indicates whether the contact is a distribution list.
+        profileIcon:
           type: string
-          description: Display name of the contact.
-        created:
-          type: string
-          format: date
-          description: Date and time when the contact was created.
-        modified:
-          type: string
-          format: date
-          description: Date and time when the contact was last modified.
-        lastContactDate:
-          type: string
-          format: date
-          description: Date and time of the most recent interaction with this contact.
-        items:
-          type: array
-          description: List of email addresses or distribution lists for this contact.
-          items:
-            $ref: '#/components/schemas/ContactItem'
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
+          description: URL or identifier of the contact's profile icon.

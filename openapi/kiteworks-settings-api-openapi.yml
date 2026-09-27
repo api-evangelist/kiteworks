@@ -63,38 +63,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    PasswordPolicy:
-      description: Class PasswordPolicy
-      required:
-      - allowAutoFill
-      - enabled
-      - minCharacters
-      - minDigits
-      - minLowerCharacters
-      - minSpecialCharacters
-      - minUpperCharacters
-      properties:
-        allowAutoFill:
-          description: Indicates whether browsers are allowed to fill in the password automatically
-          type: boolean
-        enabled:
-          description: Indicates whether the password policy is enabled
-          type: boolean
-        minCharacters:
-          description: Minimum length of the password
-          type: integer
-        minDigits:
-          description: Minimum number of numeric characters required in the password
-          type: integer
-        minLowerCharacters:
-          description: Minimum number of lowercase characters required in the password
-          type: integer
-        minSpecialCharacters:
-          description: Minimum number of special characters required in the password
-          type: integer
-        minUpperCharacters:
-          description: Minimum number of uppercase characters required in the password
-          type: integer
     Settings:
       description: Class Settings
       properties:
@@ -127,3 +95,35 @@ components:
           type: array
           items:
             type: string
+    PasswordPolicy:
+      description: Class PasswordPolicy
+      required:
+      - allowAutoFill
+      - enabled
+      - minCharacters
+      - minDigits
+      - minLowerCharacters
+      - minSpecialCharacters
+      - minUpperCharacters
+      properties:
+        allowAutoFill:
+          description: Indicates whether browsers are allowed to fill in the password automatically
+          type: boolean
+        enabled:
+          description: Indicates whether the password policy is enabled
+          type: boolean
+        minCharacters:
+          description: Minimum length of the password
+          type: integer
+        minDigits:
+          description: Minimum number of numeric characters required in the password
+          type: integer
+        minLowerCharacters:
+          description: Minimum number of lowercase characters required in the password
+          type: integer
+        minSpecialCharacters:
+          description: Minimum number of special characters required in the password
+          type: integer
+        minUpperCharacters:
+          description: Minimum number of uppercase characters required in the password
+          type: integer

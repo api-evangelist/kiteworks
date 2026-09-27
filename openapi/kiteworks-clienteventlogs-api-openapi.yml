@@ -88,27 +88,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ClientCustomEventLog:
-      type: object
-      properties:
-        successIds:
-          type: array
-          description: List of event IDs successfully logged.
-          items:
-            type: string
-        failedIds:
-          type: array
-          description: List of event IDs that failed to log.
-          items:
-            type: string
-    BulkClientEventLogsPostRequest:
-      type: object
-      properties:
-        events:
-          type: array
-          description: List of client event log entries to submit.
-          items:
-            $ref: '#/components/schemas/ClientEventLogsPostRequest'
     ClientEventLogsPostRequest:
       type: object
       properties:
@@ -136,13 +115,6 @@ components:
       - eventName
       - singleLine
       - successful
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
     Error:
       type: object
       properties:
@@ -152,3 +124,31 @@ components:
         message:
           type: string
           description: Error message
+    ClientCustomEventLog:
+      type: object
+      properties:
+        successIds:
+          type: array
+          description: List of event IDs successfully logged.
+          items:
+            type: string
+        failedIds:
+          type: array
+          description: List of event IDs that failed to log.
+          items:
+            type: string
+    BulkClientEventLogsPostRequest:
+      type: object
+      properties:
+        events:
+          type: array
+          description: List of client event log entries to submit.
+          items:
+            $ref: '#/components/schemas/ClientEventLogsPostRequest'
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'

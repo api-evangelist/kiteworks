@@ -145,6 +145,15 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
     WebForm:
       type: object
       properties:
@@ -186,22 +195,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/WebFormField'
-    WebFormProfile:
-      type: object
-      properties:
-        webFormId:
-          type: string
-          description: Unique identifier of the web form.
-        profileId:
-          type: integer
-          description: Unique identifier of the user profile associated with the web form.
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
     WebFormField:
       type: object
       properties:
@@ -235,12 +228,19 @@ components:
         editable:
           type: boolean
           description: Indicates whether the field can be edited by the user.
-    Error:
+    WebFormProfile:
       type: object
       properties:
-        code:
+        webFormId:
           type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
+          description: Unique identifier of the web form.
+        profileId:
+          type: integer
+          description: Unique identifier of the user profile associated with the web form.
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'

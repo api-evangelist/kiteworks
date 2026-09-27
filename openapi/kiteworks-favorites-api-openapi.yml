@@ -378,45 +378,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    FavoriteListOpenAPI2:
-      type: object
-      properties:
-        data:
-          description: List of favorite entries.
-          type: array
-          items:
-            $ref: '#/components/schemas/FavoriteOpenAPI2'
-        metadata:
-          description: Pagination metadata for the result set.
-          allOf:
-          - $ref: '#/components/schemas/MetaData'
-    Favorite:
-      description: Class Favorite
-      required:
-      - id
-      - objectId
-      - userId
-      properties:
-        id:
-          description: Unique identifier of Favorite
-          type: integer
-        objectId:
-          description: Unique identifier of the favorited folder or file
-          type: string
-        userId:
-          description: Unique identifier of the user who created this favorite
-          type: string
-        creator:
-          description: User who created this favorite (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/UserBasicInfo'
-        object:
-          description: Favorited folder object (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/Folder'
-        links:
-          description: HATEOAS links associated with the entity
-          type: array
-          items:
-            type: string
     Folder:
       type: object
       properties:
@@ -563,51 +524,68 @@ components:
         inheritanceEnabled:
           type: boolean
           description: Indicates if a folder inherits permissions from the parent folder
-    Permission:
+    Role:
       type: object
       properties:
         id:
           type: integer
-          description: Unique identifier for the permission.
+          description: Role ID
         name:
           type: string
-          description: Name of the permission.
-        allowed:
+          description: Role name
+        rank:
+          type: integer
+          description: Role rank
+        type:
+          type: string
+          description: Role type
+    Favorite:
+      description: Class Favorite
+      required:
+      - id
+      - objectId
+      - userId
+      properties:
+        id:
+          description: Unique identifier of Favorite
+          type: integer
+        objectId:
+          description: Unique identifier of the favorited folder or file
+          type: string
+        userId:
+          description: Unique identifier of the user who created this favorite
+          type: string
+        creator:
+          description: User who created this favorite (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/UserBasicInfo'
+        object:
+          description: Favorited folder object (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/Folder'
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    Favorite.Post:
+      description: Class Favorite
+      required:
+      - objectId
+      properties:
+        objectId:
+          description: Unique identifier of the favorited folder or file
+          type: integer
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
           type: boolean
-          description: Indicates whether the permission is granted (True) or denied (False).
-    Group:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: LDAP Group ID
-        name:
-          type: string
-          description: LDAP Group name
-        dn:
-          type: string
-          description: LDAP Group domain name
-        email:
-          type: string
-          description: LDAP Group email
-        description:
-          type: string
-          description: LDAP Group description
-    UserBasic:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier (UUID) for the user.
-        email:
-          type: string
-          description: Email address associated with the user.
-        name:
-          type: string
-          description: Full name of the user.
-        profileIcon:
-          type: string
-          description: URL or identifier for the user's profile icon.
     FavoriteOpenAPI2:
       type: object
       properties:
@@ -642,51 +620,6 @@ components:
         profileIcon:
           description: URL to the user's profile icon image
           type: string
-    Favorite.Post:
-      description: Class Favorite
-      required:
-      - objectId
-      properties:
-        objectId:
-          description: Unique identifier of the favorited folder or file
-          type: integer
-        addLinks:
-          description: Indicates whether HATEOAS links should be included in the response
-          type: boolean
-    MetaData:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of items available.
-        limit:
-          type: integer
-          description: Maximum number of items returned per page.
-        offset:
-          type: integer
-          description: Number of items skipped before the current page.
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    Role:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Role ID
-        name:
-          type: string
-          description: Role name
-        rank:
-          type: integer
-          description: Role rank
-        type:
-          type: string
-          description: Role type
     Folder1:
       type: object
       properties:
@@ -837,6 +770,51 @@ components:
         inheritanceEnabled:
           type: boolean
           description: Indicates if a folder inherits permissions from the parent folder
+    UserBasic:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier (UUID) for the user.
+        email:
+          type: string
+          description: Email address associated with the user.
+        name:
+          type: string
+          description: Full name of the user.
+        profileIcon:
+          type: string
+          description: URL or identifier for the user's profile icon.
+    Group:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: LDAP Group ID
+        name:
+          type: string
+          description: LDAP Group name
+        dn:
+          type: string
+          description: LDAP Group domain name
+        email:
+          type: string
+          description: LDAP Group email
+        description:
+          type: string
+          description: LDAP Group description
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
     Member:
       type: object
       properties:
@@ -888,12 +866,34 @@ components:
           description: Rank of the member role.
         originFolder:
           readOnly: true
-    Error:
+    Errors:
       type: object
       properties:
-        code:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    FavoriteListOpenAPI2:
+      type: object
+      properties:
+        data:
+          description: List of favorite entries.
+          type: array
+          items:
+            $ref: '#/components/schemas/FavoriteOpenAPI2'
+        metadata:
+          description: Pagination metadata for the result set.
+          allOf:
+          - $ref: '#/components/schemas/MetaData'
+    Permission:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the permission.
+        name:
           type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
+          description: Name of the permission.
+        allowed:
+          type: boolean
+          description: Indicates whether the permission is granted (True) or denied (False).

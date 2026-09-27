@@ -301,6 +301,15 @@ components:
         addLinks:
           description: Indicates whether HATEOAS links should be included in the response
           type: boolean
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
     LdapGroup.Post:
       description: Class LdapGroup
       required:
@@ -341,6 +350,13 @@ components:
           type: array
           items:
             type: string
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
     MetaData:
       type: object
       properties:
@@ -353,19 +369,3 @@ components:
         offset:
           type: integer
           description: Number of items skipped before the current page.
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message

@@ -676,42 +676,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    UserGeneratedSshPublicKeyKey:
-      type: object
-      properties:
-        privateKey:
-          type: string
-          description: Generated SSH private key.
-        publicKey:
-          type: string
-          description: Generated SSH public key.
-    UserSshPublicKey:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique identifier of the SSH public key.
-        userId:
-          type: string
-        publicKey:
-          type: string
-          description: SSH public key string.
-        name:
-          type: string
-          description: Display name for the SSH public key.
-        active:
-          type: boolean
-          description: Indicates whether the SSH public key is active and can be used for authentication.
-        adminActive:
-          type: boolean
-          description: Indicates whether an administrator has enabled this SSH public key.
-    AdminUserSshPublicKeyList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserSshPublicKey1'
     UserSshPublicKey1:
       type: object
       properties:
@@ -735,32 +699,31 @@ components:
         deleted:
           type: boolean
           description: Indicates whether the SSH public key has been deleted.
-    Errors:
+    UserGeneratedSshPublicKeyKey:
       type: object
       properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    UserSshPublicKeysPostGenerateRequest:
+        privateKey:
+          type: string
+          description: Generated SSH private key.
+        publicKey:
+          type: string
+          description: Generated SSH public key.
+    Error:
       type: object
       properties:
-        name:
+        code:
           type: string
-          maxLength: 50
-          description: The display name for the SSH public key (maximum 50 characters).
-        passphrase:
+          description: Error code
+        message:
           type: string
-          description: Optional passphrase to protect the generated private key.
-      required:
-      - name
-    UserSshPublicKeyList:
+          description: Error message
+    AdminUserSshPublicKeyList:
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/UserSshPublicKey'
+            $ref: '#/components/schemas/UserSshPublicKey1'
     UserSshPublicKeysPostCreateRequest:
       type: object
       properties:
@@ -774,12 +737,49 @@ components:
       required:
       - name
       - publicKey
-    Error:
+    UserSshPublicKeyList:
       type: object
       properties:
-        code:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserSshPublicKey'
+    UserSshPublicKey:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the SSH public key.
+        userId:
           type: string
-          description: Error code
-        message:
+        publicKey:
           type: string
-          description: Error message
+          description: SSH public key string.
+        name:
+          type: string
+          description: Display name for the SSH public key.
+        active:
+          type: boolean
+          description: Indicates whether the SSH public key is active and can be used for authentication.
+        adminActive:
+          type: boolean
+          description: Indicates whether an administrator has enabled this SSH public key.
+    UserSshPublicKeysPostGenerateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 50
+          description: The display name for the SSH public key (maximum 50 characters).
+        passphrase:
+          type: string
+          description: Optional passphrase to protect the generated private key.
+      required:
+      - name
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'

@@ -491,18 +491,12 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Device.Put:
-      description: Class Device
+    Logout:
+      type: object
       properties:
-        mobileKeyStore:
-          description: Key to encrypt files on this device
+        redirectUri:
           type: string
-        registrationToken:
-          description: Set the token for messaging registration
-          type: string
-        addLinks:
-          description: Indicates whether HATEOAS links should be included in the response
-          type: boolean
+          description: URL to redirect to after logout.
     Device:
       description: Class Device
       required:
@@ -537,31 +531,27 @@ components:
           type: array
           items:
             type: string
-    MetaData:
+    Error:
       type: object
       properties:
-        total:
-          type: integer
-          description: Total number of items available.
-        limit:
-          type: integer
-          description: Maximum number of items returned per page.
-        offset:
-          type: integer
-          description: Number of items skipped before the current page.
-    Logout:
-      type: object
-      properties:
-        redirectUri:
+        code:
           type: string
-          description: URL to redirect to after logout.
-    Errors:
-      type: object
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    Device.Put:
+      description: Class Device
       properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
+        mobileKeyStore:
+          description: Key to encrypt files on this device
+          type: string
+        registrationToken:
+          description: Set the token for messaging registration
+          type: string
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
     Device.Post:
       description: Class Device
       properties:
@@ -583,12 +573,22 @@ components:
         addLinks:
           description: Indicates whether HATEOAS links should be included in the response
           type: boolean
-    Error:
+    MetaData:
       type: object
       properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'

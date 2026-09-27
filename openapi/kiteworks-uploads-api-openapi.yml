@@ -1486,416 +1486,54 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    InitiateUploadPostRequest:
+    BaseChunkUploadRequest:
       type: object
       properties:
-        filename:
+        compressionMode:
           type: string
-          description: Name of the file to be uploaded.
-        totalSize:
+          enum:
+          - NORMAL
+          - GZIP
+          - ZLIB
+          description: The compression algorithm applied to this chunk.<br>`NORMAL` – No compression; the chunk is sent as-is.<br>`GZIP` – Chunk is compressed using GZIP.<br>`ZLIB` – Chunk is compressed using ZLIB.
+        compressionSize:
           type: integer
-          description: Total size of the file to be uploaded, in bytes.
-        totalChunks:
+          description: The size of the chunk after compression.
+        content:
+          type: string
+          description: The content of the chunk. If the request is in JSON format, this will be base64-encoded.
+        originalSize:
           type: integer
-          minimum: 1
-          description: Total number of chunks the file will be split into. Must be at least 1.
-        clientCreated:
-          type: string
-          format: date
-          description: File creation timestamp as reported by the client (e.g. from the OS or browser).
-        clientModified:
-          type: string
-          format: date
-          description: File last-modified timestamp as reported by the client (e.g. from the OS or browser).
-        proximateHost:
-          type: string
-          description: Proximate hostname used to direct client uploads to the nearest available storage endpoint.
-        tracking_id:
-          type: string
-          format: uuid
-          description: Tracking ID for correlating the upload with an external transfer
-        resume:
-          type: boolean
-          description: Indicates whether this is a resumption of a previously interrupted upload. Only applicable when a file with the same name already exists. Currently used internally for SFTP transfers only.
+          description: The original upload content size before compression.
+        index:
+          type: integer
+          description: The sequential index of the chunk (starts from 1).
+        lastChunk:
+          type: integer
+          description: Indicates if this is the last chunk of the file (1 if last, 0 otherwise).
       required:
-      - filename
-    Group:
+      - compressionMode
+      - compressionSize
+      - content
+      - originalSize
+    MobileInfo:
       type: object
       properties:
-        id:
-          type: integer
-          description: LDAP Group ID
-        name:
+        wopiSrc:
           type: string
-          description: LDAP Group name
-        dn:
-          type: string
-          description: LDAP Group domain name
-        email:
-          type: string
-          description: LDAP Group email
-        description:
-          type: string
-          description: LDAP Group description
-    Upload:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique identifier for the upload.
+          description: The WOPI (Web Application Open Platform Interface) source URL for the mobile application.
         userId:
           type: string
-          description: Unique identifier of the user who initiated the upload.
-        timestamp:
+          description: Unique identifier of the user.
+        service:
           type: string
-          format: date
-          description: Timestamp when the upload was initiated.
-        totalSize:
-          type: integer
-          description: Total size of the uploaded file in bytes.
-        totalChunks:
-          type: integer
-          description: Total number of chunks the file was split into.
-        clientName:
+          description: The WOPI service ID.
+        scheme:
           type: string
-          description: Name of the client uploading the file.
-        svrUploadTime:
-          type: integer
-          description: Time taken by the server to process the upload (in milliseconds).
-        uploadedSize:
-          type: integer
-          description: Total size of the uploaded chunks in bytes.
-        lastTimestamp:
+          description: URI scheme used by the mobile application to handle the file.
+        schemeSupport:
           type: string
-          format: date
-          description: Timestamp of the last uploaded chunk.
-        error:
-          type: string
-          description: Error message in case of upload failure.
-        uri:
-          readOnly: true
-          description: The URI for the upload link.
-        completeOk:
-          type: integer
-          description: Flag indicating if the upload was completed successfully (1 for success, 0 otherwise).
-        fileUrl:
-          type: string
-          description: URL where the uploaded file can be accessed.
-        replaceId:
-          type: string
-          description: ID of the file being replaced, if applicable.
-        backend:
-          type: string
-          description: Backend storage system used for the upload.
-        finished:
-          type: boolean
-          description: Indicates whether the upload process has finished.
-        clientCreated:
-          type: string
-          format: date
-          description: Timestamp when the file was created on the client side.
-        clientModified:
-          type: string
-          format: date
-          description: Timestamp when the file was last modified on the client side.
-        requestFileId:
-          type: integer
-          description: ID of the file request associated with the upload.
-        emailId:
-          type: integer
-          description: ID of the email associated with the uploaded file, if applicable.
-        uploadedChunks:
-          type: integer
-          description: Number of chunks successfully uploaded.
-        location:
-          type: string
-          description: The logical storage location of the uploaded file.
-        uploadUrl:
-          readOnly: true
-          description: The complete URL for the upload link.
-    SafeEdit:
-      type: object
-      properties:
-        safeEditLocked:
-          type: boolean
-          description: Indicates if the file is locked through a SafeEdit session.
-        user:
-          description: The user responsible for locking the file via SafeEdit.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-    AcfsConfig:
-      description: Class AcfsConfig
-      properties:
-        acfsDbname:
-          description: ACFS database name
-          type: string
-        active:
-          description: Indicates whether the upload server is active
-          type: integer
-        message:
-          description: ACFS status message
-          type: string
-        minReplication:
-          description: Minimum replication factor required for data stored on this ACFS node
-          type: string
-        uploadChunkMax:
-          description: Maximum size of a single upload chunk in bytes
-          type: integer
-        uploadTimeout:
-          description: Upload timeout in seconds
-          type: integer
-        uploadWipe:
-          description: Indicates whether uploaded data is wiped from temporary storage after processing
-          type: integer
-    Folder:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Unique identifier (UUID) of the folder.
-        parentId:
-          type: string
-          format: uuid
-          description: Unique identifier (UUID) of the parent object.
-        name:
-          type: string
-          description: Name of the object.
-        type:
-          type: string
-          description: Type of the object.<br>`f` – File.<br>`d` – Folder.
-        userId:
-          type: string
-          format: uuid
-          description: Unique identifier (UUID) who created the folder.
-        creator:
-          description: Details of the user who created the object.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-        created:
-          type: string
-          format: date
-          description: The date and time when the object was created.
-        modified:
-          type: string
-          format: date
-          description: The date and time when the object was last modified.
-        expire:
-          type: string
-          format: date
-          description: Expiration timestamp of the object, if applicable.
-        permissions:
-          description: List of permissions associated with the object.
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
-        deleted:
-          type: boolean
-          description: Indicates whether the object has been deleted.
-        permDeleted:
-          type: boolean
-          description: Indicates whether the object has been permanently deleted.
-        permalink:
-          type: string
-          description: Permanent URL link to access the object.
-        path:
-          type: string
-          description: Path to the folder in the hierarchy.
-        members:
-          description: List of members who have access to the object.
-          type: array
-          items:
-            $ref: '#/components/schemas/Member'
-        vendorDocId:
-          type: string
-          description: Vendor document ID associated with the object.
-        vendorDocName:
-          type: string
-          description: Name of the vendor document associated with the object.
-        secure:
-          type: boolean
-          description: Indicates whether the folder or the parent folder containing the file is marked as secure.
-        source:
-          type: integer
-          description: ID representing the source of the object (1 - Salesforce, 2 - Teams).
-        isShared:
-          type: boolean
-          description: Indicates if the folder is shared with other users.
-        syncable:
-          type: boolean
-          description: Indicates if the folder can be synced by Desktop Sync Client.
-        fileLifetime:
-          type: integer
-          description: Time duration (in days) for which the files in this folder are kept after being added to the folder.
-        description:
-          type: string
-          description: The description of the folder.
-        isFavorite:
-          type: boolean
-          description: Indicates if the folder is marked as a favorite by the user.
-        pushedFilesCount:
-          type: integer
-          description: The number of files that have been pushed to mobile apps in this folder.
-        currentUserRole:
-          description: The role of the current user in this folder.
-          allOf:
-          - $ref: '#/components/schemas/Role'
-        avStatus:
-          type: string
-          description: The Antivirus (AV) status of the folder.
-        dlpStatus:
-          type: string
-          description: The Data Loss Prevention (DLP) status of the folder.
-        totalMembersCount:
-          type: integer
-          description: Total number of members who have access to this folder.
-        totalFoldersCount:
-          type: integer
-          description: Total number of subfolders within this folder.
-        totalFilesCount:
-          type: integer
-          description: Total number of files within this folder.
-        maxFolderExpiration:
-          type: string
-          format: date
-          description: The maximum expiration date allowed for files in this folder.
-        maxFileLifetime:
-          type: integer
-          description: The maximum duration (in days) that files in this folder can be kept after being added to the folder.
-        isLdapGroupMember:
-          type: boolean
-          description: Indicates if the folder is part of an LDAP group.
-        isUnderMyFolder:
-          type: boolean
-          description: Indicates if this folder is a subfolder of the user's "My Folder".
-        pathIds:
-          type: string
-          description: A list of IDs representing the path of the folder within the folder hierarchy.
-        isRoot:
-          type: boolean
-          description: Indicates if this folder is a root folder.
-        rootId:
-          type: string
-          format: uuid
-          description: The ID of the root folder if this is a subfolder.
-        useFolderQuota:
-          type: boolean
-          description: Indicates if a folder quota is applied to this folder.
-        quota:
-          type: integer
-          description: The storage quota for the folder (in bytes).
-        size:
-          type: integer
-          description: The total storage size used by the folder (in bytes).
-        freeSpace:
-          type: integer
-          description: The amount of free space available in the folder (in bytes).
-        inheritanceEnabled:
-          type: boolean
-          description: Indicates if a folder inherits permissions from the parent folder
-    UserBasic:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier (UUID) for the user.
-        email:
-          type: string
-          description: Email address associated with the user.
-        name:
-          type: string
-          description: Full name of the user.
-        profileIcon:
-          type: string
-          description: URL or identifier for the user's profile icon.
-    PushedObject:
-      type: object
-      properties:
-        objectId:
-          type: string
-          description: Unique identifier (UUID) for the pushed object.
-        userId:
-          type: string
-          description: Unique identifier (UUID) for the user who pushed the object.
-        created:
-          type: string
-          format: date
-          description: The date and time when the object was pushed.
-        user:
-          description: Details of the user who pushed the object.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-    Tag:
-      type: object
-      properties:
-        guid:
-          type: string
-          format: uuid
-          description: Unique identifier (UUID) for the tag.
-        name:
-          type: string
-          description: Display name of the tag.
-        type:
-          type: string
-          description: Type category of the tag.
-    Fingerprint:
-      type: object
-      properties:
-        algo:
-          type: string
-          description: The algorithm used to generate the fingerprint (e.g., sha3-256, md5).
-        hash:
-          type: string
-          description: The resulting hash value representing the fingerprint of the file or object.
-    InitiateUploadZipPostRequest:
-      type: object
-      properties:
-        filename:
-          type: string
-          description: Name of the file to be uploaded.
-        totalSize:
-          type: integer
-          description: Total size of the file to be uploaded, in bytes.
-        totalChunks:
-          type: integer
-          minimum: 1
-          description: Total number of chunks the file will be split into. Must be at least 1.
-        clientCreated:
-          type: string
-          format: date
-          description: File creation timestamp as reported by the client (e.g. from the OS or browser).
-        clientModified:
-          type: string
-          format: date
-          description: File last-modified timestamp as reported by the client (e.g. from the OS or browser).
-        proximateHost:
-          type: string
-          description: Proximate hostname used to direct client uploads to the nearest available storage endpoint.
-        tracking_id:
-          type: string
-          format: uuid
-          description: Tracking ID for correlating the upload with an external transfer
-        resume:
-          type: boolean
-          description: Indicates whether this is a resumption of a previously interrupted upload. Only applicable when a file with the same name already exists. Currently used internally for SFTP transfers only.
-        uncompressedSize:
-          type: integer
-          description: Total uncompressed size of the archive file, in bytes.
-      required:
-      - filename
-      - uncompressedSize
-    Permission:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique identifier for the permission.
-        name:
-          type: string
-          description: Name of the permission.
-        allowed:
-          type: boolean
-          description: Indicates whether the permission is granted (True) or denied (False).
+          description: Indicates the level of support the mobile app has for the URI scheme.
     File:
       type: object
       properties:
@@ -2068,6 +1706,58 @@ components:
           - 'null'
           format: uuid
           description: Tracking identifier associated with the file upload.
+    Group:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: LDAP Group ID
+        name:
+          type: string
+          description: LDAP Group name
+        dn:
+          type: string
+          description: LDAP Group domain name
+        email:
+          type: string
+          description: LDAP Group email
+        description:
+          type: string
+          description: LDAP Group description
+    SafeEdit:
+      type: object
+      properties:
+        safeEditLocked:
+          type: boolean
+          description: Indicates if the file is locked through a SafeEdit session.
+        user:
+          description: The user responsible for locking the file via SafeEdit.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+    AcfsConfig:
+      description: Class AcfsConfig
+      properties:
+        acfsDbname:
+          description: ACFS database name
+          type: string
+        active:
+          description: Indicates whether the upload server is active
+          type: integer
+        message:
+          description: ACFS status message
+          type: string
+        minReplication:
+          description: Minimum replication factor required for data stored on this ACFS node
+          type: string
+        uploadChunkMax:
+          description: Maximum size of a single upload chunk in bytes
+          type: integer
+        uploadTimeout:
+          description: Upload timeout in seconds
+          type: integer
+        uploadWipe:
+          description: Indicates whether uploaded data is wiped from temporary storage after processing
+          type: integer
     Errors:
       type: object
       properties:
@@ -2075,6 +1765,249 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Error'
+    Fingerprint:
+      type: object
+      properties:
+        algo:
+          type: string
+          description: The algorithm used to generate the fingerprint (e.g., sha3-256, md5).
+        hash:
+          type: string
+          description: The resulting hash value representing the fingerprint of the file or object.
+    Permission:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the permission.
+        name:
+          type: string
+          description: Name of the permission.
+        allowed:
+          type: boolean
+          description: Indicates whether the permission is granted (True) or denied (False).
+    Folder:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) of the folder.
+        parentId:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) of the parent object.
+        name:
+          type: string
+          description: Name of the object.
+        type:
+          type: string
+          description: Type of the object.<br>`f` – File.<br>`d` – Folder.
+        userId:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) who created the folder.
+        creator:
+          description: Details of the user who created the object.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        created:
+          type: string
+          format: date
+          description: The date and time when the object was created.
+        modified:
+          type: string
+          format: date
+          description: The date and time when the object was last modified.
+        expire:
+          type: string
+          format: date
+          description: Expiration timestamp of the object, if applicable.
+        permissions:
+          description: List of permissions associated with the object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        deleted:
+          type: boolean
+          description: Indicates whether the object has been deleted.
+        permDeleted:
+          type: boolean
+          description: Indicates whether the object has been permanently deleted.
+        permalink:
+          type: string
+          description: Permanent URL link to access the object.
+        path:
+          type: string
+          description: Path to the folder in the hierarchy.
+        members:
+          description: List of members who have access to the object.
+          type: array
+          items:
+            $ref: '#/components/schemas/Member'
+        vendorDocId:
+          type: string
+          description: Vendor document ID associated with the object.
+        vendorDocName:
+          type: string
+          description: Name of the vendor document associated with the object.
+        secure:
+          type: boolean
+          description: Indicates whether the folder or the parent folder containing the file is marked as secure.
+        source:
+          type: integer
+          description: ID representing the source of the object (1 - Salesforce, 2 - Teams).
+        isShared:
+          type: boolean
+          description: Indicates if the folder is shared with other users.
+        syncable:
+          type: boolean
+          description: Indicates if the folder can be synced by Desktop Sync Client.
+        fileLifetime:
+          type: integer
+          description: Time duration (in days) for which the files in this folder are kept after being added to the folder.
+        description:
+          type: string
+          description: The description of the folder.
+        isFavorite:
+          type: boolean
+          description: Indicates if the folder is marked as a favorite by the user.
+        pushedFilesCount:
+          type: integer
+          description: The number of files that have been pushed to mobile apps in this folder.
+        currentUserRole:
+          description: The role of the current user in this folder.
+          allOf:
+          - $ref: '#/components/schemas/Role'
+        avStatus:
+          type: string
+          description: The Antivirus (AV) status of the folder.
+        dlpStatus:
+          type: string
+          description: The Data Loss Prevention (DLP) status of the folder.
+        totalMembersCount:
+          type: integer
+          description: Total number of members who have access to this folder.
+        totalFoldersCount:
+          type: integer
+          description: Total number of subfolders within this folder.
+        totalFilesCount:
+          type: integer
+          description: Total number of files within this folder.
+        maxFolderExpiration:
+          type: string
+          format: date
+          description: The maximum expiration date allowed for files in this folder.
+        maxFileLifetime:
+          type: integer
+          description: The maximum duration (in days) that files in this folder can be kept after being added to the folder.
+        isLdapGroupMember:
+          type: boolean
+          description: Indicates if the folder is part of an LDAP group.
+        isUnderMyFolder:
+          type: boolean
+          description: Indicates if this folder is a subfolder of the user's "My Folder".
+        pathIds:
+          type: string
+          description: A list of IDs representing the path of the folder within the folder hierarchy.
+        isRoot:
+          type: boolean
+          description: Indicates if this folder is a root folder.
+        rootId:
+          type: string
+          format: uuid
+          description: The ID of the root folder if this is a subfolder.
+        useFolderQuota:
+          type: boolean
+          description: Indicates if a folder quota is applied to this folder.
+        quota:
+          type: integer
+          description: The storage quota for the folder (in bytes).
+        size:
+          type: integer
+          description: The total storage size used by the folder (in bytes).
+        freeSpace:
+          type: integer
+          description: The amount of free space available in the folder (in bytes).
+        inheritanceEnabled:
+          type: boolean
+          description: Indicates if a folder inherits permissions from the parent folder
+    Upload:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the upload.
+        userId:
+          type: string
+          description: Unique identifier of the user who initiated the upload.
+        timestamp:
+          type: string
+          format: date
+          description: Timestamp when the upload was initiated.
+        totalSize:
+          type: integer
+          description: Total size of the uploaded file in bytes.
+        totalChunks:
+          type: integer
+          description: Total number of chunks the file was split into.
+        clientName:
+          type: string
+          description: Name of the client uploading the file.
+        svrUploadTime:
+          type: integer
+          description: Time taken by the server to process the upload (in milliseconds).
+        uploadedSize:
+          type: integer
+          description: Total size of the uploaded chunks in bytes.
+        lastTimestamp:
+          type: string
+          format: date
+          description: Timestamp of the last uploaded chunk.
+        error:
+          type: string
+          description: Error message in case of upload failure.
+        uri:
+          readOnly: true
+          description: The URI for the upload link.
+        completeOk:
+          type: integer
+          description: Flag indicating if the upload was completed successfully (1 for success, 0 otherwise).
+        fileUrl:
+          type: string
+          description: URL where the uploaded file can be accessed.
+        replaceId:
+          type: string
+          description: ID of the file being replaced, if applicable.
+        backend:
+          type: string
+          description: Backend storage system used for the upload.
+        finished:
+          type: boolean
+          description: Indicates whether the upload process has finished.
+        clientCreated:
+          type: string
+          format: date
+          description: Timestamp when the file was created on the client side.
+        clientModified:
+          type: string
+          format: date
+          description: Timestamp when the file was last modified on the client side.
+        requestFileId:
+          type: integer
+          description: ID of the file request associated with the upload.
+        emailId:
+          type: integer
+          description: ID of the email associated with the uploaded file, if applicable.
+        uploadedChunks:
+          type: integer
+          description: Number of chunks successfully uploaded.
+        location:
+          type: string
+          description: The logical storage location of the uploaded file.
+        uploadUrl:
+          readOnly: true
+          description: The complete URL for the upload link.
     Role:
       type: object
       properties:
@@ -2090,6 +2023,142 @@ components:
         type:
           type: string
           description: Role type
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    PushedObject:
+      type: object
+      properties:
+        objectId:
+          type: string
+          description: Unique identifier (UUID) for the pushed object.
+        userId:
+          type: string
+          description: Unique identifier (UUID) for the user who pushed the object.
+        created:
+          type: string
+          format: date
+          description: The date and time when the object was pushed.
+        user:
+          description: Details of the user who pushed the object.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+    InitiateUploadZipPostRequest:
+      type: object
+      properties:
+        filename:
+          type: string
+          description: Name of the file to be uploaded.
+        totalSize:
+          type: integer
+          description: Total size of the file to be uploaded, in bytes.
+        totalChunks:
+          type: integer
+          minimum: 1
+          description: Total number of chunks the file will be split into. Must be at least 1.
+        clientCreated:
+          type: string
+          format: date
+          description: File creation timestamp as reported by the client (e.g. from the OS or browser).
+        clientModified:
+          type: string
+          format: date
+          description: File last-modified timestamp as reported by the client (e.g. from the OS or browser).
+        proximateHost:
+          type: string
+          description: Proximate hostname used to direct client uploads to the nearest available storage endpoint.
+        tracking_id:
+          type: string
+          format: uuid
+          description: Tracking ID for correlating the upload with an external transfer
+        resume:
+          type: boolean
+          description: Indicates whether this is a resumption of a previously interrupted upload. Only applicable when a file with the same name already exists. Currently used internally for SFTP transfers only.
+        uncompressedSize:
+          type: integer
+          description: Total uncompressed size of the archive file, in bytes.
+      required:
+      - filename
+      - uncompressedSize
+    Tag:
+      type: object
+      properties:
+        guid:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) for the tag.
+        name:
+          type: string
+          description: Display name of the tag.
+        type:
+          type: string
+          description: Type category of the tag.
+    UserBasic:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier (UUID) for the user.
+        email:
+          type: string
+          description: Email address associated with the user.
+        name:
+          type: string
+          description: Full name of the user.
+        profileIcon:
+          type: string
+          description: URL or identifier for the user's profile icon.
+    InitiateUploadPostRequest:
+      type: object
+      properties:
+        filename:
+          type: string
+          description: Name of the file to be uploaded.
+        totalSize:
+          type: integer
+          description: Total size of the file to be uploaded, in bytes.
+        totalChunks:
+          type: integer
+          minimum: 1
+          description: Total number of chunks the file will be split into. Must be at least 1.
+        clientCreated:
+          type: string
+          format: date
+          description: File creation timestamp as reported by the client (e.g. from the OS or browser).
+        clientModified:
+          type: string
+          format: date
+          description: File last-modified timestamp as reported by the client (e.g. from the OS or browser).
+        proximateHost:
+          type: string
+          description: Proximate hostname used to direct client uploads to the nearest available storage endpoint.
+        tracking_id:
+          type: string
+          format: uuid
+          description: Tracking ID for correlating the upload with an external transfer
+        resume:
+          type: boolean
+          description: Indicates whether this is a resumption of a previously interrupted upload. Only applicable when a file with the same name already exists. Currently used internally for SFTP transfers only.
+      required:
+      - filename
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
     Member:
       type: object
       properties:
@@ -2141,72 +2210,3 @@ components:
           description: Rank of the member role.
         originFolder:
           readOnly: true
-    BaseChunkUploadRequest:
-      type: object
-      properties:
-        compressionMode:
-          type: string
-          enum:
-          - NORMAL
-          - GZIP
-          - ZLIB
-          description: The compression algorithm applied to this chunk.<br>`NORMAL` – No compression; the chunk is sent as-is.<br>`GZIP` – Chunk is compressed using GZIP.<br>`ZLIB` – Chunk is compressed using ZLIB.
-        compressionSize:
-          type: integer
-          description: The size of the chunk after compression.
-        content:
-          type: string
-          description: The content of the chunk. If the request is in JSON format, this will be base64-encoded.
-        originalSize:
-          type: integer
-          description: The original upload content size before compression.
-        index:
-          type: integer
-          description: The sequential index of the chunk (starts from 1).
-        lastChunk:
-          type: integer
-          description: Indicates if this is the last chunk of the file (1 if last, 0 otherwise).
-      required:
-      - compressionMode
-      - compressionSize
-      - content
-      - originalSize
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
-    MetaData:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of items available.
-        limit:
-          type: integer
-          description: Maximum number of items returned per page.
-        offset:
-          type: integer
-          description: Number of items skipped before the current page.
-    MobileInfo:
-      type: object
-      properties:
-        wopiSrc:
-          type: string
-          description: The WOPI (Web Application Open Platform Interface) source URL for the mobile application.
-        userId:
-          type: string
-          description: Unique identifier of the user.
-        service:
-          type: string
-          description: The WOPI service ID.
-        scheme:
-          type: string
-          description: URI scheme used by the mobile application to handle the file.
-        schemeSupport:
-          type: string
-          description: Indicates the level of support the mobile app has for the URI scheme.

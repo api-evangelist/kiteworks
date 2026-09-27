@@ -56,7 +56,7 @@ tags:
 - SCIM
 apis:
 - aid: kiteworks:kiteworks-activities-api
-  name: Kiteworks activities API
+  name: Kiteworks Activities API
   description: The activities API from Kiteworks — 2 operation(s) for activities.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -74,7 +74,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-admin-api
-  name: Kiteworks admin API
+  name: Kiteworks Admin API
   description: The admin API from Kiteworks — 19 operation(s) for admin.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -92,7 +92,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-advancedforms-api
-  name: Kiteworks advancedForms API
+  name: Kiteworks Advanced Forms API
   description: The advancedForms API from Kiteworks — 1 operation(s) for advancedforms.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -109,7 +109,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-cards-api
-  name: Kiteworks cards API
+  name: Kiteworks Cards API
   description: The cards API from Kiteworks — 3 operation(s) for cards.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -127,7 +127,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-clienteventlogs-api
-  name: Kiteworks clientEventLogs API
+  name: Kiteworks Client Event Logs API
   description: The clientEventLogs API from Kiteworks — 1 operation(s) for clienteventlogs.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -144,7 +144,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-clients-api
-  name: Kiteworks clients API
+  name: Kiteworks Clients API
   description: The clients API from Kiteworks — 4 operation(s) for clients.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -162,7 +162,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-comments-api
-  name: Kiteworks comments API
+  name: Kiteworks Comments API
   description: The comments API from Kiteworks — 4 operation(s) for comments.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -180,7 +180,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-contacts-api
-  name: Kiteworks contacts API
+  name: Kiteworks Contacts API
   description: The contacts API from Kiteworks — 2 operation(s) for contacts.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -198,7 +198,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-devices-api
-  name: Kiteworks devices API
+  name: Kiteworks Devices API
   description: The devices API from Kiteworks — 6 operation(s) for devices.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -216,7 +216,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-dli-api
-  name: Kiteworks dli API
+  name: Kiteworks Dli API
   description: The dli API from Kiteworks — 18 operation(s) for dli.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -232,7 +232,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-externaldl-api
-  name: Kiteworks externalDL API
+  name: Kiteworks External DL API
   description: The externalDL API from Kiteworks — 1 operation(s) for externaldl.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -248,7 +248,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-favorites-api
-  name: Kiteworks favorites API
+  name: Kiteworks Favorites API
   description: The favorites API from Kiteworks — 3 operation(s) for favorites.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -266,7 +266,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-files-api
-  name: Kiteworks files API
+  name: Kiteworks Files API
   description: The files API from Kiteworks — 61 operation(s) for files.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -284,7 +284,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-folders-api
-  name: Kiteworks folders API
+  name: Kiteworks Folders API
   description: The folders API from Kiteworks — 30 operation(s) for folders.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -302,7 +302,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-groups-api
-  name: Kiteworks groups API
+  name: Kiteworks Groups API
   description: The groups API from Kiteworks — 2 operation(s) for groups.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -320,7 +320,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-internal-api
-  name: Kiteworks internal API
+  name: Kiteworks Internal API
   description: The internal API from Kiteworks — 1 operation(s) for internal.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -338,7 +338,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-languages-api
-  name: Kiteworks languages API
+  name: Kiteworks Languages API
   description: The languages API from Kiteworks — 2 operation(s) for languages.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -356,7 +356,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-ldapgroups-api
-  name: Kiteworks ldapGroups API
+  name: Kiteworks Ldap Groups API
   description: The ldapGroups API from Kiteworks — 2 operation(s) for ldapgroups.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -373,7 +373,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-locations-api
-  name: Kiteworks locations API
+  name: Kiteworks Locations API
   description: The locations API from Kiteworks — 2 operation(s) for locations.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -391,7 +391,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-mail-api
-  name: Kiteworks mail API
+  name: Kiteworks Mail API
   description: The mail API from Kiteworks — 29 operation(s) for mail.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -409,7 +409,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-mobilesync-api
-  name: Kiteworks mobileSync API
+  name: Kiteworks Mobile Sync API
   description: The mobileSync API from Kiteworks — 5 operation(s) for mobilesync.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -426,7 +426,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-notifications-api
-  name: Kiteworks notifications API
+  name: Kiteworks Notifications API
   description: The notifications API from Kiteworks — 3 operation(s) for notifications.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -444,7 +444,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-permissions-api
-  name: Kiteworks permissions API
+  name: Kiteworks Permissions API
   description: The permissions API from Kiteworks — 4 operation(s) for permissions.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -462,7 +462,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-profiles-api
-  name: Kiteworks profiles API
+  name: Kiteworks Profiles API
   description: The profiles API from Kiteworks — 3 operation(s) for profiles.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -480,7 +480,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-requestfile-api
-  name: Kiteworks requestFile API
+  name: Kiteworks Request File API
   description: The requestFile API from Kiteworks — 13 operation(s) for requestfile.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -497,7 +497,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-roles-api
-  name: Kiteworks roles API
+  name: Kiteworks Roles API
   description: The roles API from Kiteworks — 2 operation(s) for roles.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -515,7 +515,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-scim-api
-  name: Kiteworks scim API
+  name: Kiteworks SCIM API
   description: The scim API from Kiteworks — 9 operation(s) for scim.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -533,7 +533,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-search-api
-  name: Kiteworks search API
+  name: Kiteworks Search API
   description: The search API from Kiteworks — 3 operation(s) for search.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -551,7 +551,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-settings-api
-  name: Kiteworks settings API
+  name: Kiteworks Settings API
   description: The settings API from Kiteworks — 2 operation(s) for settings.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -569,7 +569,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-sharedmailbox-api
-  name: Kiteworks sharedMailbox API
+  name: Kiteworks Shared Mailbox API
   description: The sharedMailbox API from Kiteworks — 6 operation(s) for sharedmailbox.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -586,7 +586,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-sources-api
-  name: Kiteworks sources API
+  name: Kiteworks Sources API
   description: The sources API from Kiteworks — 15 operation(s) for sources.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -604,7 +604,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-system-api
-  name: Kiteworks system API
+  name: Kiteworks System API
   description: The system API from Kiteworks — 6 operation(s) for system.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -622,7 +622,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-tasks-api
-  name: Kiteworks tasks API
+  name: Kiteworks Tasks API
   description: The tasks API from Kiteworks — 3 operation(s) for tasks.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -640,7 +640,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-uploads-api
-  name: Kiteworks uploads API
+  name: Kiteworks Uploads API
   description: The uploads API from Kiteworks — 10 operation(s) for uploads.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -658,7 +658,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-users-api
-  name: Kiteworks users API
+  name: Kiteworks Users API
   description: The users API from Kiteworks — 30 operation(s) for users.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -676,7 +676,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-usersshpublickeys-api
-  name: Kiteworks userSshPublicKeys API
+  name: Kiteworks User Ssh Public Keys API
   description: The userSshPublicKeys API from Kiteworks — 7 operation(s) for usersshpublickeys.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -693,7 +693,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-webforms-api
-  name: Kiteworks webForms API
+  name: Kiteworks Web Forms API
   description: The webForms API from Kiteworks — 2 operation(s) for webforms.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest
@@ -711,7 +711,7 @@ apis:
   - type: Documentation
     url: https://developer.kiteworks.com/pubsub-quick-start.html
 - aid: kiteworks:kiteworks-webhook-api
-  name: Kiteworks webhook API
+  name: Kiteworks Webhook API
   description: The webhook API from Kiteworks — 2 operation(s) for webhook.
   humanURL: https://developer.kiteworks.com/api-endpoints.html
   baseURL: https://your.kiteworks.domain/rest

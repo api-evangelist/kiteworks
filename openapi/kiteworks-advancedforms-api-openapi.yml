@@ -119,6 +119,37 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    SubmissionRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the subfolder to create under the form owner's folder for this submission.
+        submitter:
+          type:
+          - string
+          - 'null'
+          format: email
+          description: Email address of the user submitting the form. Pass `null` to create an anonymous submission.
+      required:
+      - name
+      - submitter
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
     UploadLink:
       type: object
       properties:
@@ -142,34 +173,3 @@ components:
         uploadUrl:
           type: string
           description: The complete URL for the upload link.
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    SubmissionRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the subfolder to create under the form owner's folder for this submission.
-        submitter:
-          type:
-          - string
-          - 'null'
-          format: email
-          description: Email address of the user submitting the form. Pass `null` to create an anonymous submission.
-      required:
-      - name
-      - submitter
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message

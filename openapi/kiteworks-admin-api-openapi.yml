@@ -2530,6 +2530,664 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ProfileMapping:
+      description: Class ProfileMapping
+      required:
+      - impact
+      properties:
+        impact:
+          description: Get the User Profile mapping order
+          type: array
+          items:
+            type: string
+        id:
+          description: Get the id of the target authentication source
+          type: string
+        name:
+          description: Get the name of the target authentication source
+          type: string
+        filter:
+          description: Get the filter of the target authentication source
+          type: string
+    ProfileMappingChanges:
+      description: Class ProfileMappingChanges
+      required:
+      - impact
+      properties:
+        impact:
+          description: Get the User Profile mapping order
+          type: array
+          items:
+            type: string
+    Activity:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the activity event.
+        created:
+          type: string
+          format: date
+          description: Date and time when the activity event was recorded.
+        event:
+          type: string
+          description: Name of the activity event.
+        message:
+          type: string
+          description: Human-readable summary of the activity event.
+        type:
+          type: string
+          description: Type category of the activity event.
+        successful:
+          type: boolean
+          description: Indicates whether the activity completed successfully.
+        user:
+          description: Details of the user who performed the activity.
+          allOf:
+          - $ref: '#/components/schemas/ActivityUser'
+        permissions:
+          type: array
+          description: List of permissions required for the activity.
+          items:
+            type: string
+        data:
+          readOnly: true
+          description: Additional event-specific data associated with the activity.
+    Device:
+      description: Class Device
+      required:
+      - clientId
+      - id
+      - installName
+      - userId
+      properties:
+        id:
+          description: Unique identifier of Device
+          type: integer
+        clientId:
+          description: Unique identifier of client for this Device
+          type: string
+        userId:
+          description: Unique identifier of user for this Device
+          type: string
+        installTagId:
+          description: Unique identifier of the install tag for this device. Usually the serial number of the device
+          type: string
+        installName:
+          description: Install Tag name for this Device. e.g. Someone's IPhone
+          type: string
+        wipeFlag:
+          description: "Flag that tells the device to remote wipe itself.\n     *                   0 = not set, 1 = set, 2 = device has been notified, 3 = wipe is completed"
+          type: string
+        mobileKeyStore:
+          description: Key to encrypt files on this device
+          type: string
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+    ProfileMappingChanges.Put:
+      description: Class ProfileMappingChanges
+      properties:
+        peek:
+          description: Set if we are peeking into the impact
+          type: boolean
+        changes:
+          description: policy changes to be tested/applied
+          type: array
+          items:
+            $ref: '#/components/schemas/ProfileMapping'
+    User:
+      description: Class User
+      required:
+      - basedirId
+      - email
+      - id
+      - mydirId
+      - name
+      - syncdirId
+      properties:
+        id:
+          description: The unique identifier of the user
+          type: string
+        basedirId:
+          description: The unique identifier of the user's root Kiteworks directory.
+          type: string
+        created:
+          description: Date and time the user account was created
+          type: string
+          format: date
+        email:
+          description: The user's email
+          type: string
+        mydirId:
+          description: The unique identifier of the user's mydir system directory.
+          type: string
+        name:
+          description: The name of the user
+          type: string
+        syncdirId:
+          description: The unique identifier of the user's 'My Folder'.
+          type: string
+        userTypeId:
+          description: The unique identifier of the user type (profile).
+          type: integer
+        internal:
+          description: Indicates whether the user is an internal user
+          type: boolean
+        profileIcon:
+          description: URL to the user's profile icon image
+          type: string
+        extDL:
+          description: Indicates whether the user is an External Distribution List
+          type: boolean
+        metadata:
+          description: List of user's metadata
+          type: array
+          items:
+            $ref: '#/components/schemas/UserMetadata'
+        adminRoleId:
+          description: The ID of the admin role assigned to the user.
+          type: integer
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+        active:
+          description: Indicates whether the user is an actual kitework user
+          type: boolean
+        suspended:
+          description: Indicates whether the user is suspended
+          type: boolean
+        deleted:
+          description: Indicates whether the user has been deleted
+          type: boolean
+        flags:
+          description: "Authentication type.\n     *                  0: No authentication,\n     *                  1: Authentication by kiteworks,\n     *                  2: Authentication by LDAP,\n     *                  4: Authentication by SSO"
+          type: integer
+        verified:
+          description: Indicates whether the user is verified
+          type: boolean
+        deactivated:
+          description: Indicates whether the user has been deactivated
+          type: boolean
+        lastActivityDateTime:
+          description: User's last activity datetime
+          type: string
+          format: date
+        passwordExpirationDateTime:
+          description: The exact timestamp when the user's password will expire
+          type: string
+          format: date
+    ActivityUser:
+      type: object
+      properties:
+        userId:
+          type: string
+        name:
+          type: string
+          description: Full name of the user.
+        email:
+          type: string
+          description: Email address associated with the user.
+        profileIcon:
+          type: string
+          description: URL or identifier for the user's profile icon.
+    ProfileMappingsTest:
+      description: Class ProfileMappingsTest
+      properties:
+        result:
+          description: Get profile mapping test results
+          type: array
+          items:
+            $ref: '#/components/schemas/ProfileMapping'
+    Attachment:
+      type: object
+      properties:
+        emailPackageId:
+          type: string
+          format: uuid
+          description: Unique identifier for the email package containing the attachment.
+        attachmentId:
+          type: string
+          description: Unique identifier for the attachment.
+        withdrawn:
+          type: boolean
+          description: Indicates whether the attachment has been withdrawn.
+        drmFile:
+          description: Details of the DRM-protected file associated with the attachment.
+          allOf:
+          - $ref: '#/components/schemas/DrmFile'
+        accessType:
+          type: integer
+          description: Access type for the attachment (e.g., read-only, editable).
+        tags:
+          description: List of tags associated with the attachment.
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        permissions:
+          type: array
+          description: List of permissions associated with the attachment.
+          items:
+            $ref: '#/components/schemas/Permission'
+        objectId:
+          type: string
+          format: uuid
+          description: Unique identifier for the file associated with the attachment.
+        name:
+          type: string
+          description: Name of the attachment file.
+        size:
+          type: integer
+          description: Size of the attachment file in bytes.
+        mime:
+          type: string
+          description: The MIME type of the attachment file.
+        created:
+          type: string
+          format: date
+          description: Date when the attachment file was created.
+        deleted:
+          type: boolean
+          description: Indicates if the attachment has been deleted.
+        fingerprint:
+          type: string
+          description: A unique hash identifying the file version.
+        fingerprintAlgo:
+          type: string
+          description: The algorithm used for generating the file version fingerprint. (e.g., sha3-256, md5).
+        fingerprints:
+          description: List of alternative fingerprints for the attachment file.
+          type: array
+          items:
+            $ref: '#/components/schemas/Fingerprint'
+        adminQuarantineStatus:
+          type: string
+          description: Status of the attachment in the admin quarantine system.
+        avStatus:
+          type: string
+          description: Antivirus (AV) scan status of the attachment.
+        dlpStatus:
+          type: string
+          description: Data Loss Prevention (DLP) status of the attachment.
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    Package:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of the email package.
+        selfCopy:
+          type: boolean
+          description: Indicates whether the package includes a copy for the sender.
+        includeFingerprint:
+          type: boolean
+          description: Indicates whether a fingerprint (hash) of the package should be included for verification.
+        expire:
+          type: integer
+          description: Expiration time of the package in seconds from creation.
+        fileCount:
+          readOnly: true
+          description: Count of the files attached to the package.
+        deleted:
+          type: boolean
+          description: Indicates whether the package has been marked as deleted.
+        acl:
+          type: string
+          description: Access control list (ACL) associated with the package, specifying who can access it.
+        attachments:
+          description: List of attachments included in the package.
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+        downloadLink:
+          type: string
+          description: Link for accessing the email.
+    Fingerprint:
+      type: object
+      properties:
+        algo:
+          type: string
+          description: The algorithm used to generate the fingerprint (e.g., sha3-256, md5).
+        hash:
+          type: string
+          description: The resulting hash value representing the fingerprint of the file or object.
+    ActivityList:
+      type: object
+      properties:
+        data:
+          type: array
+          description: List of activity events.
+          items:
+            $ref: '#/components/schemas/Activity'
+    Permission:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the permission.
+        name:
+          type: string
+          description: Name of the permission.
+        allowed:
+          type: boolean
+          description: Indicates whether the permission is granted (True) or denied (False).
+    ProfileMappings:
+      description: Class ProfileMappings
+      properties:
+        ldap:
+          description: Get the ldap policy filters for the user profile
+          type: array
+          items:
+            $ref: '#/components/schemas/ProfileMapping'
+        kiteworks:
+          description: Get the kiteworks policy filters for the user profile
+          type: array
+          items:
+            $ref: '#/components/schemas/ProfileMapping'
+        sso:
+          description: Get the ldap policy filters for the user profile
+          type: array
+          items:
+            $ref: '#/components/schemas/ProfileMapping'
+    ProfileMappingOrder.Put:
+      description: Class ProfileMappingOrder
+      required:
+      - order
+      properties:
+        peek:
+          description: Set if we are peeking into the impact
+          type: boolean
+        order:
+          description: Set the User Profile mapping order
+          type: array
+          items:
+            type: integer
+    UserMetadata:
+      description: Class UserMetadata
+      properties:
+        name:
+          description: Key name of the custom metadata attribute associated with the user
+          type: string
+        value:
+          description: Value assigned to the custom metadata attribute for the user
+          type: string
+    AdminRole:
+      description: Class AdminRole
+      required:
+      - id
+      - name
+      properties:
+        id:
+          description: Admin role unique identifier
+          type: integer
+        name:
+          description: Display name of the admin role
+          type: string
+        guid:
+          description: Admin role globally unique identifier
+          type: string
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+    Email:
+      description: Class Email
+      required:
+      - date
+      - emailPackageId
+      - id
+      - modifiedDate
+      - parentEmailId
+      - recipients
+      - senderId
+      - status
+      - subject
+      - type
+      properties:
+        id:
+          description: Email unique identifier
+          type: string
+        senderId:
+          description: Unique identifier of User who sent Email
+          type: string
+        templateId:
+          description: Email template unique identifier
+          type: integer
+        status:
+          description: 'Email status. Accepted values: `sent`, `draft`, `queued`, `transferring`, `error`, `self_send`'
+          type: string
+        type:
+          description: 'Email type. Accepted values: `original`, `resend`, `forward`, `reply`'
+          type: string
+        date:
+          description: Date and time the email was created
+          type: string
+          format: date
+        deleted:
+          description: Indicates whether the email is deleted
+          type: boolean
+        emailPackageId:
+          description: Email Package unique identifier
+          type: string
+        isPreview:
+          description: Indicates whether the email is a preview email
+          type: boolean
+        isUserSent:
+          description: Indicates whether the email was sent by a user
+          type: boolean
+        watermark:
+          description: The watermark on the preview email
+          type: string
+        package:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/Package'
+        expirationDate:
+          description: Email package expiration date
+          type: string
+          format: date-time
+        attachmentCount:
+          description: Number of attachments in the email package
+          type: integer
+        sender:
+          description: Sender's basic information (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/UserBasicInfo'
+        recipients:
+          type: array
+          items:
+            $ref: '#/components/schemas/Recipient'
+        variables:
+          type: array
+          items:
+            type: string
+        secureBody:
+          description: Indicates whether the email body is secured
+          type: boolean
+        modifiedDate:
+          description: Date and time the email was last modified
+          type: string
+          format: date
+        parentEmailId:
+          description: Unique identifier of the original email this email was forwarded or replied from
+          type: string
+        emailReturnReceipt:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailReturnReceipt'
+        error:
+          description: Error message when the email status is error
+          type: string
+        subject:
+          description: Subject line of the email as shown to recipients
+          type: string
+        body:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        rawBody:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        headline:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        notice:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        htmlBody:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        fullHtmlBody:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        emailFrom:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        isRead:
+          description: Indicates whether the email has been read by the current user
+          type: boolean
+        bucket:
+          description: 'Mailbox bucket the email belongs to. Accepted values: `inbox`, `sent`, `draft`, `outgoing`, `trash`'
+          type: string
+        templateBody:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        webFormId:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        webFormFields:
+          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: array
+          items:
+            type: string
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+    Profile:
+      description: Class Profile
+      required:
+      - builtIn
+      - cloneable
+      - id
+      - name
+      - prototype
+      properties:
+        id:
+          description: Unique Profile identifier
+          type: integer
+        name:
+          description: Display name of the profile
+          type: string
+        prototype:
+          description: Prototype Profile identifier
+          type: integer
+        builtIn:
+          description: Indicates whether the profile is a built-in profile
+          type: integer
+        cloneable:
+          description: Indicates whether the profile can be used as a prototype for new custom profiles
+          type: integer
+        features:
+          description: List of feature settings and their enabled state for the profile
+          type: array
+          items:
+            $ref: '#/components/schemas/FeaturesList'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    UserBasicInfo:
+      required:
+      - email
+      - id
+      - name
+      properties:
+        id:
+          description: The unique identifier of the user
+          type: string
+        name:
+          description: The name of the user
+          type: string
+        email:
+          description: The user's email
+          type: string
+        profileIcon:
+          description: URL to the user's profile icon image
+          type: string
+    Recipient:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: Unique identifier of the user associated with the recipient.
+        type:
+          type: integer
+          description: Recipient type.<br>`0` – To.<br>`1` – CC.<br>`2` – BCC.
+        email:
+          type: string
+          description: Email address of the recipient.
+        isDistributionList:
+          type: boolean
+          description: Indicates if the recipient is a distribution list rather than an individual user.
+        user:
+          description: Details of the user associated with the recipient.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+    User.Post:
+      description: Class User
+      required:
+      - email
+      properties:
+        email:
+          description: The user's email
+          type: string
+        name:
+          description: The name of the user
+          type: string
+        password:
+          description: The user's password
+          type: string
+        userTypeId:
+          description: The unique identifier of the user type
+          type: integer
+        verified:
+          description: Indicates whether the user is verified
+          type: boolean
+        sendNotification:
+          description: Indicates whether a notification is sent to the user
+          type: boolean
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
+    Tag:
+      type: object
+      properties:
+        guid:
+          type: string
+          format: uuid
+          description: Unique identifier (UUID) for the tag.
+        name:
+          type: string
+          description: Display name of the tag.
+        type:
+          type: string
+          description: Type category of the tag.
     FeaturesList:
       description: Class FeaturesList
       required:
@@ -2697,356 +3355,6 @@ components:
         fileLifetime:
           description: Get profile max file lifetime
           type: integer
-    Activity:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique identifier of the activity event.
-        created:
-          type: string
-          format: date
-          description: Date and time when the activity event was recorded.
-        event:
-          type: string
-          description: Name of the activity event.
-        message:
-          type: string
-          description: Human-readable summary of the activity event.
-        type:
-          type: string
-          description: Type category of the activity event.
-        successful:
-          type: boolean
-          description: Indicates whether the activity completed successfully.
-        user:
-          description: Details of the user who performed the activity.
-          allOf:
-          - $ref: '#/components/schemas/ActivityUser'
-        permissions:
-          type: array
-          description: List of permissions required for the activity.
-          items:
-            type: string
-        data:
-          readOnly: true
-          description: Additional event-specific data associated with the activity.
-    EmailReturnReceipt:
-      description: Class Recipient
-      required:
-      - mailId
-      - userId
-      properties:
-        mailId:
-          description: Email unique identifier for return receipt
-          type: integer
-        user:
-          description: User who is associated with this return receipt record
-          $ref: '#/components/schemas/UserBasicInfo'
-        userId:
-          description: User ID for Return Receipt
-          type: string
-    Device:
-      description: Class Device
-      required:
-      - clientId
-      - id
-      - installName
-      - userId
-      properties:
-        id:
-          description: Unique identifier of Device
-          type: integer
-        clientId:
-          description: Unique identifier of client for this Device
-          type: string
-        userId:
-          description: Unique identifier of user for this Device
-          type: string
-        installTagId:
-          description: Unique identifier of the install tag for this device. Usually the serial number of the device
-          type: string
-        installName:
-          description: Install Tag name for this Device. e.g. Someone's IPhone
-          type: string
-        wipeFlag:
-          description: "Flag that tells the device to remote wipe itself.\n     *                   0 = not set, 1 = set, 2 = device has been notified, 3 = wipe is completed"
-          type: string
-        mobileKeyStore:
-          description: Key to encrypt files on this device
-          type: string
-        links:
-          description: HATEOAS links associated with the entity
-          type: array
-          items:
-            type: string
-    DrmFile:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the DRM-protected file.
-        size:
-          type: integer
-          description: Size of the DRM-protected file in bytes.
-    Attachment:
-      type: object
-      properties:
-        emailPackageId:
-          type: string
-          format: uuid
-          description: Unique identifier for the email package containing the attachment.
-        attachmentId:
-          type: string
-          description: Unique identifier for the attachment.
-        withdrawn:
-          type: boolean
-          description: Indicates whether the attachment has been withdrawn.
-        drmFile:
-          description: Details of the DRM-protected file associated with the attachment.
-          allOf:
-          - $ref: '#/components/schemas/DrmFile'
-        accessType:
-          type: integer
-          description: Access type for the attachment (e.g., read-only, editable).
-        tags:
-          description: List of tags associated with the attachment.
-          type: array
-          items:
-            $ref: '#/components/schemas/Tag'
-        permissions:
-          type: array
-          description: List of permissions associated with the attachment.
-          items:
-            $ref: '#/components/schemas/Permission'
-        objectId:
-          type: string
-          format: uuid
-          description: Unique identifier for the file associated with the attachment.
-        name:
-          type: string
-          description: Name of the attachment file.
-        size:
-          type: integer
-          description: Size of the attachment file in bytes.
-        mime:
-          type: string
-          description: The MIME type of the attachment file.
-        created:
-          type: string
-          format: date
-          description: Date when the attachment file was created.
-        deleted:
-          type: boolean
-          description: Indicates if the attachment has been deleted.
-        fingerprint:
-          type: string
-          description: A unique hash identifying the file version.
-        fingerprintAlgo:
-          type: string
-          description: The algorithm used for generating the file version fingerprint. (e.g., sha3-256, md5).
-        fingerprints:
-          description: List of alternative fingerprints for the attachment file.
-          type: array
-          items:
-            $ref: '#/components/schemas/Fingerprint'
-        adminQuarantineStatus:
-          type: string
-          description: Status of the attachment in the admin quarantine system.
-        avStatus:
-          type: string
-          description: Antivirus (AV) scan status of the attachment.
-        dlpStatus:
-          type: string
-          description: Data Loss Prevention (DLP) status of the attachment.
-    ProfileMapping:
-      description: Class ProfileMapping
-      required:
-      - impact
-      properties:
-        impact:
-          description: Get the User Profile mapping order
-          type: array
-          items:
-            type: string
-        id:
-          description: Get the id of the target authentication source
-          type: string
-        name:
-          description: Get the name of the target authentication source
-          type: string
-        filter:
-          description: Get the filter of the target authentication source
-          type: string
-    AdminRole:
-      description: Class AdminRole
-      required:
-      - id
-      - name
-      properties:
-        id:
-          description: Admin role unique identifier
-          type: integer
-        name:
-          description: Display name of the admin role
-          type: string
-        guid:
-          description: Admin role globally unique identifier
-          type: string
-        links:
-          description: HATEOAS links associated with the entity
-          type: array
-          items:
-            type: string
-    User:
-      description: Class User
-      required:
-      - basedirId
-      - email
-      - id
-      - mydirId
-      - name
-      - syncdirId
-      properties:
-        id:
-          description: The unique identifier of the user
-          type: string
-        basedirId:
-          description: The unique identifier of the user's root Kiteworks directory.
-          type: string
-        created:
-          description: Date and time the user account was created
-          type: string
-          format: date
-        email:
-          description: The user's email
-          type: string
-        mydirId:
-          description: The unique identifier of the user's mydir system directory.
-          type: string
-        name:
-          description: The name of the user
-          type: string
-        syncdirId:
-          description: The unique identifier of the user's 'My Folder'.
-          type: string
-        userTypeId:
-          description: The unique identifier of the user type (profile).
-          type: integer
-        internal:
-          description: Indicates whether the user is an internal user
-          type: boolean
-        profileIcon:
-          description: URL to the user's profile icon image
-          type: string
-        extDL:
-          description: Indicates whether the user is an External Distribution List
-          type: boolean
-        metadata:
-          description: List of user's metadata
-          type: array
-          items:
-            $ref: '#/components/schemas/UserMetadata'
-        adminRoleId:
-          description: The ID of the admin role assigned to the user.
-          type: integer
-        links:
-          description: HATEOAS links associated with the entity
-          type: array
-          items:
-            type: string
-        active:
-          description: Indicates whether the user is an actual kitework user
-          type: boolean
-        suspended:
-          description: Indicates whether the user is suspended
-          type: boolean
-        deleted:
-          description: Indicates whether the user has been deleted
-          type: boolean
-        flags:
-          description: "Authentication type.\n     *                  0: No authentication,\n     *                  1: Authentication by kiteworks,\n     *                  2: Authentication by LDAP,\n     *                  4: Authentication by SSO"
-          type: integer
-        verified:
-          description: Indicates whether the user is verified
-          type: boolean
-        deactivated:
-          description: Indicates whether the user has been deactivated
-          type: boolean
-        lastActivityDateTime:
-          description: User's last activity datetime
-          type: string
-          format: date
-        passwordExpirationDateTime:
-          description: The exact timestamp when the user's password will expire
-          type: string
-          format: date
-    ProfileMappingsTest:
-      description: Class ProfileMappingsTest
-      properties:
-        result:
-          description: Get profile mapping test results
-          type: array
-          items:
-            $ref: '#/components/schemas/ProfileMapping'
-    UserBasic:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier (UUID) for the user.
-        email:
-          type: string
-          description: Email address associated with the user.
-        name:
-          type: string
-          description: Full name of the user.
-        profileIcon:
-          type: string
-          description: URL or identifier for the user's profile icon.
-    Hostname.Put:
-      description: Class Hostname
-      properties:
-        disabled:
-          description: Disable hostname
-          type: boolean
-        addLinks:
-          description: Indicates whether HATEOAS links should be included in the response
-          type: boolean
-    UserBasicInfo:
-      required:
-      - email
-      - id
-      - name
-      properties:
-        id:
-          description: The unique identifier of the user
-          type: string
-        name:
-          description: The name of the user
-          type: string
-        email:
-          description: The user's email
-          type: string
-        profileIcon:
-          description: URL to the user's profile icon image
-          type: string
-    ProfileMappingOrder:
-      description: Class ProfileMappingOrder
-      required:
-      - impact
-      - order
-      properties:
-        order:
-          description: Get the User Profile mapping order
-          type: array
-          items:
-            type: integer
-        impact:
-          description: Get the User Profile mapping order
-          type: array
-          items:
-            type: string
     UserDemoteOptions.Post:
       description: Class UserDemoteOptions
       properties:
@@ -3074,351 +3382,21 @@ components:
         withdrawFileLinks:
           description: Indicates whether sent files should be withdrawn.
           type: boolean
-    ProfileMappingChanges.Put:
-      description: Class ProfileMappingChanges
-      properties:
-        peek:
-          description: Set if we are peeking into the impact
-          type: boolean
-        changes:
-          description: policy changes to be tested/applied
-          type: array
-          items:
-            $ref: '#/components/schemas/ProfileMapping'
-    Recipient:
+    UserBasic:
       type: object
       properties:
-        userId:
+        id:
           type: string
-          description: Unique identifier of the user associated with the recipient.
-        type:
-          type: integer
-          description: Recipient type.<br>`0` – To.<br>`1` – CC.<br>`2` – BCC.
-        email:
-          type: string
-          description: Email address of the recipient.
-        isDistributionList:
-          type: boolean
-          description: Indicates if the recipient is a distribution list rather than an individual user.
-        user:
-          description: Details of the user associated with the recipient.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-    ActivityUser:
-      type: object
-      properties:
-        userId:
-          type: string
-        name:
-          type: string
-          description: Full name of the user.
+          description: Unique identifier (UUID) for the user.
         email:
           type: string
           description: Email address associated with the user.
+        name:
+          type: string
+          description: Full name of the user.
         profileIcon:
           type: string
           description: URL or identifier for the user's profile icon.
-    User.Post:
-      description: Class User
-      required:
-      - email
-      properties:
-        email:
-          description: The user's email
-          type: string
-        name:
-          description: The name of the user
-          type: string
-        password:
-          description: The user's password
-          type: string
-        userTypeId:
-          description: The unique identifier of the user type
-          type: integer
-        verified:
-          description: Indicates whether the user is verified
-          type: boolean
-        sendNotification:
-          description: Indicates whether a notification is sent to the user
-          type: boolean
-        addLinks:
-          description: Indicates whether HATEOAS links should be included in the response
-          type: boolean
-    Tag:
-      type: object
-      properties:
-        guid:
-          type: string
-          format: uuid
-          description: Unique identifier (UUID) for the tag.
-        name:
-          type: string
-          description: Display name of the tag.
-        type:
-          type: string
-          description: Type category of the tag.
-    Fingerprint:
-      type: object
-      properties:
-        algo:
-          type: string
-          description: The algorithm used to generate the fingerprint (e.g., sha3-256, md5).
-        hash:
-          type: string
-          description: The resulting hash value representing the fingerprint of the file or object.
-    ActivityList:
-      type: object
-      properties:
-        data:
-          type: array
-          description: List of activity events.
-          items:
-            $ref: '#/components/schemas/Activity'
-    Permission:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique identifier for the permission.
-        name:
-          type: string
-          description: Name of the permission.
-        allowed:
-          type: boolean
-          description: Indicates whether the permission is granted (True) or denied (False).
-    Profile:
-      description: Class Profile
-      required:
-      - builtIn
-      - cloneable
-      - id
-      - name
-      - prototype
-      properties:
-        id:
-          description: Unique Profile identifier
-          type: integer
-        name:
-          description: Display name of the profile
-          type: string
-        prototype:
-          description: Prototype Profile identifier
-          type: integer
-        builtIn:
-          description: Indicates whether the profile is a built-in profile
-          type: integer
-        cloneable:
-          description: Indicates whether the profile can be used as a prototype for new custom profiles
-          type: integer
-        features:
-          description: List of feature settings and their enabled state for the profile
-          type: array
-          items:
-            $ref: '#/components/schemas/FeaturesList'
-    ProfileMappingChanges:
-      description: Class ProfileMappingChanges
-      required:
-      - impact
-      properties:
-        impact:
-          description: Get the User Profile mapping order
-          type: array
-          items:
-            type: string
-    Package:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Unique identifier of the email package.
-        selfCopy:
-          type: boolean
-          description: Indicates whether the package includes a copy for the sender.
-        includeFingerprint:
-          type: boolean
-          description: Indicates whether a fingerprint (hash) of the package should be included for verification.
-        expire:
-          type: integer
-          description: Expiration time of the package in seconds from creation.
-        fileCount:
-          readOnly: true
-          description: Count of the files attached to the package.
-        deleted:
-          type: boolean
-          description: Indicates whether the package has been marked as deleted.
-        acl:
-          type: string
-          description: Access control list (ACL) associated with the package, specifying who can access it.
-        attachments:
-          description: List of attachments included in the package.
-          type: array
-          items:
-            $ref: '#/components/schemas/Attachment'
-        downloadLink:
-          type: string
-          description: Link for accessing the email.
-    Hostname:
-      description: Class Hostname
-      required:
-      - id
-      properties:
-        id:
-          description: Hostname unique identifier
-          type: integer
-        hostname:
-          description: Hostname
-          type: string
-        deleted:
-          description: Indicates whether the hostname is deleted
-          type: boolean
-        disabled:
-          description: Indicates whether the hostname is disabled
-          type: boolean
-        links:
-          description: HATEOAS links associated with the entity
-          type: array
-          items:
-            type: string
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    Email:
-      description: Class Email
-      required:
-      - date
-      - emailPackageId
-      - id
-      - modifiedDate
-      - parentEmailId
-      - recipients
-      - senderId
-      - status
-      - subject
-      - type
-      properties:
-        id:
-          description: Email unique identifier
-          type: string
-        senderId:
-          description: Unique identifier of User who sent Email
-          type: string
-        templateId:
-          description: Email template unique identifier
-          type: integer
-        status:
-          description: 'Email status. Accepted values: `sent`, `draft`, `queued`, `transferring`, `error`, `self_send`'
-          type: string
-        type:
-          description: 'Email type. Accepted values: `original`, `resend`, `forward`, `reply`'
-          type: string
-        date:
-          description: Date and time the email was created
-          type: string
-          format: date
-        deleted:
-          description: Indicates whether the email is deleted
-          type: boolean
-        emailPackageId:
-          description: Email Package unique identifier
-          type: string
-        isPreview:
-          description: Indicates whether the email is a preview email
-          type: boolean
-        isUserSent:
-          description: Indicates whether the email was sent by a user
-          type: boolean
-        watermark:
-          description: The watermark on the preview email
-          type: string
-        package:
-          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/Package'
-        expirationDate:
-          description: Email package expiration date
-          type: string
-          format: date-time
-        attachmentCount:
-          description: Number of attachments in the email package
-          type: integer
-        sender:
-          description: Sender's basic information (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/UserBasicInfo'
-        recipients:
-          type: array
-          items:
-            $ref: '#/components/schemas/Recipient'
-        variables:
-          type: array
-          items:
-            type: string
-        secureBody:
-          description: Indicates whether the email body is secured
-          type: boolean
-        modifiedDate:
-          description: Date and time the email was last modified
-          type: string
-          format: date
-        parentEmailId:
-          description: Unique identifier of the original email this email was forwarded or replied from
-          type: string
-        emailReturnReceipt:
-          type: array
-          items:
-            $ref: '#/components/schemas/EmailReturnReceipt'
-        error:
-          description: Error message when the email status is error
-          type: string
-        subject:
-          description: Subject line of the email as shown to recipients
-          type: string
-        body:
-          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: string
-        rawBody:
-          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: string
-        headline:
-          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: string
-        notice:
-          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: string
-        htmlBody:
-          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: string
-        fullHtmlBody:
-          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: string
-        emailFrom:
-          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: string
-        isRead:
-          description: Indicates whether the email has been read by the current user
-          type: boolean
-        bucket:
-          description: 'Mailbox bucket the email belongs to. Accepted values: `inbox`, `sent`, `draft`, `outgoing`, `trash`'
-          type: string
-        templateBody:
-          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: string
-        webFormId:
-          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: string
-        webFormFields:
-          description: (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: array
-          items:
-            type: string
-        links:
-          description: HATEOAS links associated with the entity
-          type: array
-          items:
-            type: string
     UsersEmailMigration.Post:
       description: Class UsersEmailMigration
       properties:
@@ -3430,33 +3408,46 @@ components:
         deleteIfExists:
           description: Indicates whether to delete users whose emails match any in the newEmail field.
           type: boolean
-    ProfileMappings:
-      description: Class ProfileMappings
+    EmailReturnReceipt:
+      description: Class Recipient
+      required:
+      - mailId
+      - userId
       properties:
-        ldap:
-          description: Get the ldap policy filters for the user profile
-          type: array
-          items:
-            $ref: '#/components/schemas/ProfileMapping'
-        kiteworks:
-          description: Get the kiteworks policy filters for the user profile
-          type: array
-          items:
-            $ref: '#/components/schemas/ProfileMapping'
-        sso:
-          description: Get the ldap policy filters for the user profile
-          type: array
-          items:
-            $ref: '#/components/schemas/ProfileMapping'
-    Error:
-      type: object
+        mailId:
+          description: Email unique identifier for return receipt
+          type: integer
+        user:
+          description: User who is associated with this return receipt record
+          $ref: '#/components/schemas/UserBasicInfo'
+        userId:
+          description: User ID for Return Receipt
+          type: string
+    ProfileMappingOrder:
+      description: Class ProfileMappingOrder
+      required:
+      - impact
+      - order
       properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
+        order:
+          description: Get the User Profile mapping order
+          type: array
+          items:
+            type: integer
+        impact:
+          description: Get the User Profile mapping order
+          type: array
+          items:
+            type: string
+    Hostname.Put:
+      description: Class Hostname
+      properties:
+        disabled:
+          description: Disable hostname
+          type: boolean
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
     User.Put:
       description: Class User
       properties:
@@ -3478,6 +3469,18 @@ components:
         addLinks:
           description: Indicates whether HATEOAS links should be included in the response
           type: boolean
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
     Hostname.Post:
       description: Class Hostname
       required:
@@ -3504,37 +3507,34 @@ components:
         newEmail:
           description: Email that the user should have after migration.
           type: string
-    ProfileMappingOrder.Put:
-      description: Class ProfileMappingOrder
+    Hostname:
+      description: Class Hostname
       required:
-      - order
+      - id
       properties:
-        peek:
-          description: Set if we are peeking into the impact
+        id:
+          description: Hostname unique identifier
+          type: integer
+        hostname:
+          description: Hostname
+          type: string
+        deleted:
+          description: Indicates whether the hostname is deleted
           type: boolean
-        order:
-          description: Set the User Profile mapping order
+        disabled:
+          description: Indicates whether the hostname is disabled
+          type: boolean
+        links:
+          description: HATEOAS links associated with the entity
           type: array
           items:
-            type: integer
-    MetaData:
+            type: string
+    DrmFile:
       type: object
       properties:
-        total:
-          type: integer
-          description: Total number of items available.
-        limit:
-          type: integer
-          description: Maximum number of items returned per page.
-        offset:
-          type: integer
-          description: Number of items skipped before the current page.
-    UserMetadata:
-      description: Class UserMetadata
-      properties:
         name:
-          description: Key name of the custom metadata attribute associated with the user
           type: string
-        value:
-          description: Value assigned to the custom metadata attribute for the user
-          type: string
+          description: Name of the DRM-protected file.
+        size:
+          type: integer
+          description: Size of the DRM-protected file in bytes.

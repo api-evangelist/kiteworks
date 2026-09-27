@@ -253,49 +253,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    LocationList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Location'
-        metadata:
-          $ref: '#/components/schemas/MetaData'
-    Location.Post:
-      description: Class Location
-      required:
-      - name
-      - domain
-      properties:
-        name:
-          description: Location name. Ask administrator for location names for your server
-          type: string
-        domain:
-          description: "A URL domain that can be used to access the servers in this location,\n                                 e.g. location.domain.com.\n                                    The domain should be registered in a DNS to point to the servers."
-          type: string
-        addLinks:
-          description: Indicates whether HATEOAS links should be included in the response
-          type: boolean
-    MetaData:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of items available.
-        limit:
-          type: integer
-          description: Maximum number of items returned per page.
-        offset:
-          type: integer
-          description: Number of items skipped before the current page.
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
     Location:
       type: object
       properties:
@@ -320,3 +277,46 @@ components:
         message:
           type: string
           description: Error message
+    LocationList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Location'
+        metadata:
+          $ref: '#/components/schemas/MetaData'
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    Location.Post:
+      description: Class Location
+      required:
+      - name
+      - domain
+      properties:
+        name:
+          description: Location name. Ask administrator for location names for your server
+          type: string
+        domain:
+          description: "A URL domain that can be used to access the servers in this location,\n                                 e.g. location.domain.com.\n                                    The domain should be registered in a DNS to point to the servers."
+          type: string
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
