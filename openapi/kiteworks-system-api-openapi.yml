@@ -800,6 +800,14 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    EpgdbImportRequest:
+      type: object
+      properties:
+        filename:
+          type: string
+          description: The filename of the EPGDB backup file being uploaded.
+      required:
+      - filename
     SftpMetric:
       type: object
       properties:
@@ -809,27 +817,15 @@ components:
         memory_usage_mb:
           type: integer
           description: Total RSS memory usage by SFTP processes in MB.
-    SystemResourcesMetric:
+    Error:
       type: object
       properties:
-        total_memory_usage_mb:
-          type: integer
-          description: Total system RSS memory usage in MB.
-        total_swap_usage_mb:
-          type: integer
-          description: Total system swap usage in MB.
-        total_cpu_usage_percent:
-          type: number
-          description: Total system CPU usage as a percentage.
-        system_load_average_1min:
-          type: number
-          description: System load average over the last 1 minute.
-        system_load_average_5min:
-          type: number
-          description: System load average over the last 5 minutes.
-        system_load_average_15min:
-          type: number
-          description: System load average over the last 15 minutes.
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
     WebRequestsMetric:
       type: object
       properties:
@@ -857,6 +853,62 @@ components:
         avg_requests_per_connection:
           type: number
           description: Ratio of total requests to handled connections.
+    EpgdbImportPost:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Upload session ID
+    NodeHealthStatusResponse:
+      type: object
+      properties:
+        ok:
+          type: integer
+          description: Overall health status indicator. `1` means all components are healthy; `0` means one or more components are unhealthy.
+    SystemResourcesMetric:
+      type: object
+      properties:
+        total_memory_usage_mb:
+          type: integer
+          description: Total system RSS memory usage in MB.
+        total_swap_usage_mb:
+          type: integer
+          description: Total system swap usage in MB.
+        total_cpu_usage_percent:
+          type: number
+          description: Total system CPU usage as a percentage.
+        system_load_average_1min:
+          type: number
+          description: System load average over the last 1 minute.
+        system_load_average_5min:
+          type: number
+          description: System load average over the last 5 minutes.
+        system_load_average_15min:
+          type: number
+          description: System load average over the last 15 minutes.
+    NodeHealthMetricResponse:
+      type: object
+      properties:
+        kw_database:
+          description: Database health metrics. Present when `metric_name` is `kwDatabase` or `allMetrics`.
+          allOf:
+          - $ref: '#/components/schemas/KwDatabaseMetric'
+        web_requests:
+          description: Web request health metrics. Present when `metric_name` is `webRequests` or `allMetrics`.
+          allOf:
+          - $ref: '#/components/schemas/WebRequestsMetric'
+        jobqueued:
+          description: Job queue health metrics. Present when `metric_name` is `jobqueued` or `allMetrics`.
+          allOf:
+          - $ref: '#/components/schemas/JobQueuedMetric'
+        sftp:
+          description: SFTP health metrics. Present when `metric_name` is `sftp` or `allMetrics`.
+          allOf:
+          - $ref: '#/components/schemas/SftpMetric'
+        system_resources:
+          description: System resource metrics. Present when `metric_name` is `systemResources` or `allMetrics`.
+          allOf:
+          - $ref: '#/components/schemas/SystemResourcesMetric'
     KwDatabaseMetric:
       type: object
       properties:
@@ -893,38 +945,13 @@ components:
         db_partition_used_mb:
           type: integer
           description: Used space on the database partition in MB.
-    Error:
+    Errors:
       type: object
       properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
-    NodeHealthMetricResponse:
-      type: object
-      properties:
-        kw_database:
-          description: Database health metrics. Present when `metric_name` is `kwDatabase` or `allMetrics`.
-          allOf:
-          - $ref: '#/components/schemas/KwDatabaseMetric'
-        web_requests:
-          description: Web request health metrics. Present when `metric_name` is `webRequests` or `allMetrics`.
-          allOf:
-          - $ref: '#/components/schemas/WebRequestsMetric'
-        jobqueued:
-          description: Job queue health metrics. Present when `metric_name` is `jobqueued` or `allMetrics`.
-          allOf:
-          - $ref: '#/components/schemas/JobQueuedMetric'
-        sftp:
-          description: SFTP health metrics. Present when `metric_name` is `sftp` or `allMetrics`.
-          allOf:
-          - $ref: '#/components/schemas/SftpMetric'
-        system_resources:
-          description: System resource metrics. Present when `metric_name` is `systemResources` or `allMetrics`.
-          allOf:
-          - $ref: '#/components/schemas/SystemResourcesMetric'
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
     JobQueuedMetric:
       type: object
       properties:
@@ -958,30 +985,3 @@ components:
         current_failed_job_count:
           type: integer
           description: Real-time number of jobs that have failed.
-    EpgdbImportPost:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Upload session ID
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    EpgdbImportRequest:
-      type: object
-      properties:
-        filename:
-          type: string
-          description: The filename of the EPGDB backup file being uploaded.
-      required:
-      - filename
-    NodeHealthStatusResponse:
-      type: object
-      properties:
-        ok:
-          type: integer
-          description: Overall health status indicator. `1` means all components are healthy; `0` means one or more components are unhealthy.

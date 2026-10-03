@@ -852,6 +852,56 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    UserBasic:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier (UUID) for the user.
+        email:
+          type: string
+          description: Email address associated with the user.
+        name:
+          type: string
+          description: Full name of the user.
+        profileIcon:
+          type: string
+          description: URL or identifier for the user's profile icon.
+    MailIdCounters:
+      type: object
+      properties:
+        id:
+          type: string
+        counters:
+          description: Email counters for this mail entity.
+          allOf:
+          - $ref: '#/components/schemas/MailCounters'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    SharedMailboxStatusPatchRequest:
+      type: object
+      properties:
+        data:
+          description: List of shared mailbox status updates to apply.
+          type: array
+          items:
+            $ref: '#/components/schemas/SharedMailboxMemberStatusPatchRequest'
+      required:
+      - data
     MailCountersList:
       type: object
       properties:
@@ -860,131 +910,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/MailIdCounters'
-    SharedMailbox:
-      type: object
-      properties:
-        id:
-          type: string
-        active:
-          type: boolean
-          description: Indicates whether the shared mailbox is active.
-        user:
-          description: Details of the shared mailbox user account.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-        members:
-          description: List of users who are members of the shared mailbox.
-          type: array
-          items:
-            $ref: '#/components/schemas/UserBasic'
-    SharedMailboxList:
-      type: object
-      properties:
-        data:
-          description: List of shared mailboxes.
-          type: array
-          items:
-            $ref: '#/components/schemas/SharedMailbox'
-        metadata:
-          description: Pagination metadata for the result set.
-          allOf:
-          - $ref: '#/components/schemas/MetaData'
-    MailCounters:
-      type: object
-      properties:
-        draft:
-          type: integer
-          description: Number of draft emails.
-        inbox:
-          type: integer
-          description: Number of emails in the inbox.
-        inboxUnread:
-          type: integer
-          description: Number of unread emails in the inbox.
-        outgoing:
-          type: integer
-          description: Number of outgoing emails.
-        outgoingError:
-          type: integer
-          description: Number of outgoing emails that encountered an error.
-        outgoingQueued:
-          type: integer
-          description: Number of outgoing emails queued for sending.
-        outgoingTransferring:
-          type: integer
-          description: Number of outgoing emails currently being transferred.
-        outgoingTransferringIds:
-          type: array
-          items:
-            type: string
-        trash:
-          type: integer
-          description: Number of emails in the trash.
-    WebForm:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier of the web form.
-        lastModified:
-          type: string
-          format: date
-          description: Date and time when the web form was last modified.
-        name:
-          type: string
-          description: Display name of the web form.
-        description:
-          type: string
-          description: Description of the web form.
-        url:
-          type: string
-          description: URL where the web form is accessible.
-        enabled:
-          type: boolean
-          description: Indicates whether the web form is active.
-        authRequired:
-          type: boolean
-          description: Indicates whether authentication is required to submit the web form.
-        embedded:
-          type: boolean
-          description: Indicates whether the web form can be embedded in external pages.
-        standalone:
-          type: boolean
-          description: Indicates whether the web form can be used as a standalone page.
-        profiles:
-          description: List of user profiles that have access to this web form.
-          type: array
-          items:
-            $ref: '#/components/schemas/WebFormProfile'
-        fields:
-          description: List of fields in the web form.
-          type: array
-          items:
-            $ref: '#/components/schemas/WebFormField'
-    WebFormList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/WebForm'
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    SharedMailboxPatchRequest:
-      type: object
-      properties:
-        memberIds:
-          type: array
-          description: List of member ids  (Recommended request size <= 100)
-          items:
-            type: string
-      required:
-      - memberIds
     SharedMailboxPostRequest:
       type: object
       properties:
@@ -1017,15 +942,96 @@ components:
       required:
       - memberIds
       - userId
-    Error:
+    WebFormProfile:
       type: object
       properties:
-        code:
+        webFormId:
           type: string
-          description: Error code
-        message:
+          description: Unique identifier of the web form.
+        profileId:
+          type: integer
+          description: Unique identifier of the user profile associated with the web form.
+    MailCounters:
+      type: object
+      properties:
+        draft:
+          type: integer
+          description: Number of draft emails.
+        inbox:
+          type: integer
+          description: Number of emails in the inbox.
+        inboxUnread:
+          type: integer
+          description: Number of unread emails in the inbox.
+        outgoing:
+          type: integer
+          description: Number of outgoing emails.
+        outgoingError:
+          type: integer
+          description: Number of outgoing emails that encountered an error.
+        outgoingQueued:
+          type: integer
+          description: Number of outgoing emails queued for sending.
+        outgoingTransferring:
+          type: integer
+          description: Number of outgoing emails currently being transferred.
+        outgoingTransferringIds:
+          type: array
+          items:
+            type: string
+        trash:
+          type: integer
+          description: Number of emails in the trash.
+    SharedMailbox:
+      type: object
+      properties:
+        id:
           type: string
-          description: Error message
+        active:
+          type: boolean
+          description: Indicates whether the shared mailbox is active.
+        user:
+          description: Details of the shared mailbox user account.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        members:
+          description: List of users who are members of the shared mailbox.
+          type: array
+          items:
+            $ref: '#/components/schemas/UserBasic'
+    WebFormField:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the web form field.
+        sequence:
+          type: integer
+          description: Display order of the field within the form.
+        label:
+          type: string
+          description: Display label of the field.
+        type:
+          type: string
+          description: Input type of the field (e.g., text, select, checkbox).
+        specialType:
+          type: string
+          description: Special processing type for the field, if applicable.
+        placeholder:
+          type: string
+          description: Placeholder text shown in the field before input.
+        defaultValue:
+          type: string
+          description: Default value pre-populated in the field.
+        optionValues:
+          type: string
+          description: Available option values for select-type fields.
+        mandatory:
+          type: boolean
+          description: Indicates whether the field is required.
+        editable:
+          type: boolean
+          description: Indicates whether the field can be edited by the user.
     SharedMailboxMemberStatusPatchRequest:
       type: object
       properties:
@@ -1038,6 +1044,34 @@ components:
       required:
       - active
       - id
+    WebFormList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebForm'
+    SendOption:
+      type: object
+      properties:
+        linkExpiry:
+          type: boolean
+          description: Indicates whether link expiry is enabled for sent files.
+        ACL:
+          type: integer
+          description: Access control level applied to sent files.
+    SharedMailboxList:
+      type: object
+      properties:
+        data:
+          description: List of shared mailboxes.
+          type: array
+          items:
+            $ref: '#/components/schemas/SharedMailbox'
+        metadata:
+          description: Pagination metadata for the result set.
+          allOf:
+          - $ref: '#/components/schemas/MetaData'
     SharedMailboxSetting:
       type: object
       properties:
@@ -1127,63 +1161,57 @@ components:
         defaultCountryCode:
           type: string
           description: Default country code used for phone number formatting.
-    UserBasic:
+    WebForm:
       type: object
       properties:
         id:
           type: string
-          description: Unique identifier (UUID) for the user.
-        email:
+          description: Unique identifier of the web form.
+        lastModified:
           type: string
-          description: Email address associated with the user.
+          format: date
+          description: Date and time when the web form was last modified.
         name:
           type: string
-          description: Full name of the user.
-        profileIcon:
+          description: Display name of the web form.
+        description:
           type: string
-          description: URL or identifier for the user's profile icon.
-    MailIdCounters:
+          description: Description of the web form.
+        url:
+          type: string
+          description: URL where the web form is accessible.
+        enabled:
+          type: boolean
+          description: Indicates whether the web form is active.
+        authRequired:
+          type: boolean
+          description: Indicates whether authentication is required to submit the web form.
+        embedded:
+          type: boolean
+          description: Indicates whether the web form can be embedded in external pages.
+        standalone:
+          type: boolean
+          description: Indicates whether the web form can be used as a standalone page.
+        profiles:
+          description: List of user profiles that have access to this web form.
+          type: array
+          items:
+            $ref: '#/components/schemas/WebFormProfile'
+        fields:
+          description: List of fields in the web form.
+          type: array
+          items:
+            $ref: '#/components/schemas/WebFormField'
+    SharedMailboxPatchRequest:
       type: object
       properties:
-        id:
-          type: string
-        counters:
-          description: Email counters for this mail entity.
-          allOf:
-          - $ref: '#/components/schemas/MailCounters'
-    WebFormField:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier of the web form field.
-        sequence:
-          type: integer
-          description: Display order of the field within the form.
-        label:
-          type: string
-          description: Display label of the field.
-        type:
-          type: string
-          description: Input type of the field (e.g., text, select, checkbox).
-        specialType:
-          type: string
-          description: Special processing type for the field, if applicable.
-        placeholder:
-          type: string
-          description: Placeholder text shown in the field before input.
-        defaultValue:
-          type: string
-          description: Default value pre-populated in the field.
-        optionValues:
-          type: string
-          description: Available option values for select-type fields.
-        mandatory:
-          type: boolean
-          description: Indicates whether the field is required.
-        editable:
-          type: boolean
-          description: Indicates whether the field can be edited by the user.
+        memberIds:
+          type: array
+          description: List of member ids  (Recommended request size <= 100)
+          items:
+            type: string
+      required:
+      - memberIds
     MetaData:
       type: object
       properties:
@@ -1196,31 +1224,3 @@ components:
         offset:
           type: integer
           description: Number of items skipped before the current page.
-    WebFormProfile:
-      type: object
-      properties:
-        webFormId:
-          type: string
-          description: Unique identifier of the web form.
-        profileId:
-          type: integer
-          description: Unique identifier of the user profile associated with the web form.
-    SendOption:
-      type: object
-      properties:
-        linkExpiry:
-          type: boolean
-          description: Indicates whether link expiry is enabled for sent files.
-        ACL:
-          type: integer
-          description: Access control level applied to sent files.
-    SharedMailboxStatusPatchRequest:
-      type: object
-      properties:
-        data:
-          description: List of shared mailbox status updates to apply.
-          type: array
-          items:
-            $ref: '#/components/schemas/SharedMailboxMemberStatusPatchRequest'
-      required:
-      - data

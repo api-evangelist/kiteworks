@@ -88,33 +88,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ClientEventLogsPostRequest:
-      type: object
-      properties:
-        created:
-          type: integer
-          description: Unix timestamp of when this event was created on the client.
-        eventName:
-          type: string
-          description: The name of the event being logged.
-        successful:
-          type: boolean
-          description: Indicates whether the event completed successfully.
-        eventId:
-          type: string
-          description: The unique identifier for this event on the client side.
-        data:
-          type: object
-          description: Additional event details as a key-value map.
-        singleLine:
-          type: string
-          description: A single-line summary of the event.
-      required:
-      - data
-      - eventId
-      - eventName
-      - singleLine
-      - successful
     Error:
       type: object
       properties:
@@ -145,6 +118,33 @@ components:
           description: List of client event log entries to submit.
           items:
             $ref: '#/components/schemas/ClientEventLogsPostRequest'
+    ClientEventLogsPostRequest:
+      type: object
+      properties:
+        created:
+          type: integer
+          description: Unix timestamp of when this event was created on the client.
+        eventName:
+          type: string
+          description: The name of the event being logged.
+        successful:
+          type: boolean
+          description: Indicates whether the event completed successfully.
+        eventId:
+          type: string
+          description: The unique identifier for this event on the client side.
+        data:
+          type: object
+          description: Additional event details as a key-value map.
+        singleLine:
+          type: string
+          description: A single-line summary of the event.
+      required:
+      - data
+      - eventId
+      - eventName
+      - singleLine
+      - successful
     Errors:
       type: object
       properties:

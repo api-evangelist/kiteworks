@@ -687,6 +687,213 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    UserBasic:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier (UUID) for the user.
+        email:
+          type: string
+          description: Email address associated with the user.
+        name:
+          type: string
+          description: Full name of the user.
+        profileIcon:
+          type: string
+          description: URL or identifier for the user's profile icon.
+    BaseObject:
+      description: Class Object
+      required:
+      - id
+      - name
+      - parentId
+      - userId
+      properties:
+        id:
+          description: Unique identifier of object
+          type: string
+        created:
+          description: Date and time when the object was created
+          type: string
+          format: date-time
+        deleted:
+          description: Indicates whether the object is deleted
+          type: boolean
+        permDeleted:
+          description: Indicates whether the object is permanently deleted
+          type: boolean
+        expire:
+          description: Date and time when the object expires and becomes inaccessible
+          type: string
+          format: date-time
+        modified:
+          description: Date and time when the object was last modified
+          type: string
+          format: date-time
+        name:
+          description: Display name of the object
+          type: string
+        parentId:
+          description: Parent Folder identifier
+          type: string
+        userId:
+          description: Unique identifier of Object creator
+          type: string
+        parent:
+          description: Folder that directly contains this object (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/Folder'
+        permalink:
+          description: Permanent URL for accessing the object in the web application
+          type: string
+        creator:
+          description: Basic profile information of the user who created the object (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          $ref: '#/components/schemas/UserBasicInfo'
+        permissions:
+          description: Current user's permissions (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        vendorDocId:
+          description: Identifier of the corresponding document in the external vendor system (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        vendorDocName:
+          description: Display name of the corresponding document in the external vendor system (Explicit field. May be retrieved only if mentioned in "with" parameter)
+          type: string
+        source:
+          description: Numeric code identifying the external system that originated this object (e.g. Salesforce, Teams)
+          type: integer
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+    Member:
+      type: object
+      properties:
+        objectId:
+          type: string
+          description: Unique identifier (UUID) of the associated object (file or folder).
+        roleId:
+          type: integer
+          description: Role assigned to the member.
+        userId:
+          type: string
+          description: Unique identifier (UUID) of the user.
+        groupId:
+          type: integer
+          description: Unique identifier of the LDAP group.
+        user:
+          description: User details of the member.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        role:
+          description: Role details assigned to the member.
+          allOf:
+          - $ref: '#/components/schemas/Role'
+        group:
+          description: Group details if the member belongs to a group.
+          allOf:
+          - $ref: '#/components/schemas/Group'
+        sharedBy:
+          description: Details of the user who shared the file or folder.
+          allOf:
+          - $ref: '#/components/schemas/UserBasic'
+        created:
+          type: string
+          format: date
+          description: Date when the file or folder was shared.
+        inheritRoleId:
+          type: integer
+          description: Inherited role ID from the parent folder, if applicable.
+        allowedFolderRoleId:
+          type: array
+          description: List of allowed folder role IDs.
+          items:
+            type: integer
+        email:
+          type: string
+          description: Email associated with the member.
+        rank:
+          type: integer
+          description: Rank of the member role.
+        originFolder:
+          readOnly: true
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    Comment.Post:
+      description: Class Comment
+      required:
+      - contents
+      properties:
+        parentId:
+          description: Unique identifier of the parent comment. Set this value when replying to an existing comment
+          type: integer
+        contents:
+          description: Text content of the comment
+          type: string
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
+    Permission:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the permission.
+        name:
+          type: string
+          description: Name of the permission.
+        allowed:
+          type: boolean
+          description: Indicates whether the permission is granted (True) or denied (False).
+    Role:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Role ID
+        name:
+          type: string
+          description: Role name
+        rank:
+          type: integer
+          description: Role rank
+        type:
+          type: string
+          description: Role type
+    UserBasicInfo:
+      required:
+      - email
+      - id
+      - name
+      properties:
+        id:
+          description: The unique identifier of the user
+          type: string
+        name:
+          description: The name of the user
+          type: string
+        email:
+          description: The user's email
+          type: string
+        profileIcon:
+          description: URL to the user's profile icon image
+          type: string
     Folder:
       type: object
       properties:
@@ -833,32 +1040,6 @@ components:
         inheritanceEnabled:
           type: boolean
           description: Indicates if a folder inherits permissions from the parent folder
-    Comment.Put:
-      description: Class Comment
-      required:
-      - contents
-      properties:
-        contents:
-          description: Text content of the comment
-          type: string
-        addLinks:
-          description: Indicates whether HATEOAS links should be included in the response
-          type: boolean
-    Role:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Role ID
-        name:
-          type: string
-          description: Role name
-        rank:
-          type: integer
-          description: Role rank
-        type:
-          type: string
-          description: Role type
     Comment:
       description: Class Comment
       required:
@@ -919,113 +1100,6 @@ components:
           type: array
           items:
             type: string
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
-    BaseObject:
-      description: Class Object
-      required:
-      - id
-      - name
-      - parentId
-      - userId
-      properties:
-        id:
-          description: Unique identifier of object
-          type: string
-        created:
-          description: Date and time when the object was created
-          type: string
-          format: date-time
-        deleted:
-          description: Indicates whether the object is deleted
-          type: boolean
-        permDeleted:
-          description: Indicates whether the object is permanently deleted
-          type: boolean
-        expire:
-          description: Date and time when the object expires and becomes inaccessible
-          type: string
-          format: date-time
-        modified:
-          description: Date and time when the object was last modified
-          type: string
-          format: date-time
-        name:
-          description: Display name of the object
-          type: string
-        parentId:
-          description: Parent Folder identifier
-          type: string
-        userId:
-          description: Unique identifier of Object creator
-          type: string
-        parent:
-          description: Folder that directly contains this object (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/Folder'
-        permalink:
-          description: Permanent URL for accessing the object in the web application
-          type: string
-        creator:
-          description: Basic profile information of the user who created the object (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          $ref: '#/components/schemas/UserBasicInfo'
-        permissions:
-          description: Current user's permissions (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
-        vendorDocId:
-          description: Identifier of the corresponding document in the external vendor system (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: string
-        vendorDocName:
-          description: Display name of the corresponding document in the external vendor system (Explicit field. May be retrieved only if mentioned in "with" parameter)
-          type: string
-        source:
-          description: Numeric code identifying the external system that originated this object (e.g. Salesforce, Teams)
-          type: integer
-        links:
-          description: HATEOAS links associated with the entity
-          type: array
-          items:
-            type: string
-    Comment.Post:
-      description: Class Comment
-      required:
-      - contents
-      properties:
-        parentId:
-          description: Unique identifier of the parent comment. Set this value when replying to an existing comment
-          type: integer
-        contents:
-          description: Text content of the comment
-          type: string
-        addLinks:
-          description: Indicates whether HATEOAS links should be included in the response
-          type: boolean
-    UserBasicInfo:
-      required:
-      - email
-      - id
-      - name
-      properties:
-        id:
-          description: The unique identifier of the user
-          type: string
-        name:
-          description: The name of the user
-          type: string
-        email:
-          description: The user's email
-          type: string
-        profileIcon:
-          description: URL to the user's profile icon image
-          type: string
     Group:
       type: object
       properties:
@@ -1056,88 +1130,14 @@ components:
         offset:
           type: integer
           description: Number of items skipped before the current page.
-    Member:
-      type: object
+    Comment.Put:
+      description: Class Comment
+      required:
+      - contents
       properties:
-        objectId:
+        contents:
+          description: Text content of the comment
           type: string
-          description: Unique identifier (UUID) of the associated object (file or folder).
-        roleId:
-          type: integer
-          description: Role assigned to the member.
-        userId:
-          type: string
-          description: Unique identifier (UUID) of the user.
-        groupId:
-          type: integer
-          description: Unique identifier of the LDAP group.
-        user:
-          description: User details of the member.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-        role:
-          description: Role details assigned to the member.
-          allOf:
-          - $ref: '#/components/schemas/Role'
-        group:
-          description: Group details if the member belongs to a group.
-          allOf:
-          - $ref: '#/components/schemas/Group'
-        sharedBy:
-          description: Details of the user who shared the file or folder.
-          allOf:
-          - $ref: '#/components/schemas/UserBasic'
-        created:
-          type: string
-          format: date
-          description: Date when the file or folder was shared.
-        inheritRoleId:
-          type: integer
-          description: Inherited role ID from the parent folder, if applicable.
-        allowedFolderRoleId:
-          type: array
-          description: List of allowed folder role IDs.
-          items:
-            type: integer
-        email:
-          type: string
-          description: Email associated with the member.
-        rank:
-          type: integer
-          description: Rank of the member role.
-        originFolder:
-          readOnly: true
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    UserBasic:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier (UUID) for the user.
-        email:
-          type: string
-          description: Email address associated with the user.
-        name:
-          type: string
-          description: Full name of the user.
-        profileIcon:
-          type: string
-          description: URL or identifier for the user's profile icon.
-    Permission:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique identifier for the permission.
-        name:
-          type: string
-          description: Name of the permission.
-        allowed:
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
           type: boolean
-          description: Indicates whether the permission is granted (True) or denied (False).

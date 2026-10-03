@@ -416,6 +416,30 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Code is the HTTP status code returned by the API.
+        message:
+          type: string
+          description: Message is a human-readable message in the format "[StatusText] detail" explaining the result.
+    WebhookList:
+      type: object
+      required:
+      - items
+      - totalItems
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookResponse'
+          description: Items is the list of webhook items in the current set
+        totalItems:
+          type: integer
+          description: TotalItems is the total number of items across all sets
+          example: 150
     Status:
       type: object
       required:
@@ -434,34 +458,6 @@ components:
           type: string
           description: Status description
           example: unknown
-    WebhookPatchRequest:
-      type: object
-      description: Partial webhook payload — all fields are optional; only provided fields are updated
-      properties:
-        url:
-          type: string
-          description: URL contains the webhook URL
-          example: https://example.com/webhook
-        token:
-          type: string
-          description: Token contains the webhook Token (if provided must not be empty or whitespace-only)
-          example: my-token
-        secret:
-          type: string
-          description: Secret contains the webhook Secret
-          example: my-secret
-        enabled:
-          type: boolean
-          description: Enabled is the value of the webhook enable/disable
-          example: true
-        subscriptions:
-          type: array
-          items:
-            type: string
-          description: Subscriptions is a list of NATS subject filter patterns associated with the webhook.
-          example:
-          - filesystem.file.create
-          - filesystem.>
     WebhookRequest:
       type: object
       required:
@@ -493,30 +489,34 @@ components:
           example:
           - filesystem.file.create
           - filesystem.>
-    Error:
+    WebhookPatchRequest:
       type: object
+      description: Partial webhook payload — all fields are optional; only provided fields are updated
       properties:
-        code:
-          type: integer
-          description: Code is the HTTP status code returned by the API.
-        message:
+        url:
           type: string
-          description: Message is a human-readable message in the format "[StatusText] detail" explaining the result.
-    WebhookList:
-      type: object
-      required:
-      - items
-      - totalItems
-      properties:
-        items:
+          description: URL contains the webhook URL
+          example: https://example.com/webhook
+        token:
+          type: string
+          description: Token contains the webhook Token (if provided must not be empty or whitespace-only)
+          example: my-token
+        secret:
+          type: string
+          description: Secret contains the webhook Secret
+          example: my-secret
+        enabled:
+          type: boolean
+          description: Enabled is the value of the webhook enable/disable
+          example: true
+        subscriptions:
           type: array
           items:
-            $ref: '#/components/schemas/WebhookResponse'
-          description: Items is the list of webhook items in the current set
-        totalItems:
-          type: integer
-          description: TotalItems is the total number of items across all sets
-          example: 150
+            type: string
+          description: Subscriptions is a list of NATS subject filter patterns associated with the webhook.
+          example:
+          - filesystem.file.create
+          - filesystem.>
     WebhookResponse:
       type: object
       required:

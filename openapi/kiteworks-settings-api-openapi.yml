@@ -63,38 +63,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Settings:
-      description: Class Settings
-      properties:
-        languageId:
-          description: Language identifier of the user the settings represent
-          type: integer
-        locationId:
-          description: Location identifier for user settings. User's personal default location for file send and uploads
-          type: integer
-        signature:
-          description: Email message signature
-          type: string
-        storageUsed:
-          description: Storage used by the user across the folders they own
-          type: integer
-        storageQuota:
-          description: Storage quota allocated to the user across all the folders they own
-          type: integer
-        mobileKeyStore:
-          description: Encrypted key store data used by the mobile client for secure operations
-          type: string
-        mobileNumber:
-          description: User's mobile number
-          type: string
-        mobileNumberVerified:
-          description: Indicates whether the mobile number is verified
-          type: boolean
-        links:
-          description: HATEOAS links associated with the entity
-          type: array
-          items:
-            type: string
     PasswordPolicy:
       description: Class PasswordPolicy
       required:
@@ -127,3 +95,35 @@ components:
         minUpperCharacters:
           description: Minimum number of uppercase characters required in the password
           type: integer
+    Settings:
+      description: Class Settings
+      properties:
+        languageId:
+          description: Language identifier of the user the settings represent
+          type: integer
+        locationId:
+          description: Location identifier for user settings. User's personal default location for file send and uploads
+          type: integer
+        signature:
+          description: Email message signature
+          type: string
+        storageUsed:
+          description: Storage used by the user across the folders they own
+          type: integer
+        storageQuota:
+          description: Storage quota allocated to the user across all the folders they own
+          type: integer
+        mobileKeyStore:
+          description: Encrypted key store data used by the mobile client for secure operations
+          type: string
+        mobileNumber:
+          description: User's mobile number
+          type: string
+        mobileNumberVerified:
+          description: Indicates whether the mobile number is verified
+          type: boolean
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string

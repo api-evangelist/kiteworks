@@ -676,6 +676,13 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    UserSshPublicKeyList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserSshPublicKey'
     UserSshPublicKey1:
       type: object
       properties:
@@ -699,15 +706,6 @@ components:
         deleted:
           type: boolean
           description: Indicates whether the SSH public key has been deleted.
-    UserGeneratedSshPublicKeyKey:
-      type: object
-      properties:
-        privateKey:
-          type: string
-          description: Generated SSH private key.
-        publicKey:
-          type: string
-          description: Generated SSH public key.
     Error:
       type: object
       properties:
@@ -717,13 +715,15 @@ components:
         message:
           type: string
           description: Error message
-    AdminUserSshPublicKeyList:
+    UserGeneratedSshPublicKeyKey:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserSshPublicKey1'
+        privateKey:
+          type: string
+          description: Generated SSH private key.
+        publicKey:
+          type: string
+          description: Generated SSH public key.
     UserSshPublicKeysPostCreateRequest:
       type: object
       properties:
@@ -737,13 +737,6 @@ components:
       required:
       - name
       - publicKey
-    UserSshPublicKeyList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserSshPublicKey'
     UserSshPublicKey:
       type: object
       properties:
@@ -764,6 +757,20 @@ components:
         adminActive:
           type: boolean
           description: Indicates whether an administrator has enabled this SSH public key.
+    AdminUserSshPublicKeyList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserSshPublicKey1'
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
     UserSshPublicKeysPostGenerateRequest:
       type: object
       properties:
@@ -776,10 +783,3 @@ components:
           description: Optional passphrase to protect the generated private key.
       required:
       - name
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'

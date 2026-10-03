@@ -318,6 +318,17 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    CardAction:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of card action.
+        url:
+          type: string
+          description: URL the card action links to.
+      required:
+      - type
     CardActionPostRequest:
       type: object
       properties:
@@ -393,17 +404,6 @@ components:
       - description
       - message
       - severity
-      - type
-    CardAction:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Type of card action.
-        url:
-          type: string
-          description: URL the card action links to.
-      required:
       - type
     Error:
       type: object
