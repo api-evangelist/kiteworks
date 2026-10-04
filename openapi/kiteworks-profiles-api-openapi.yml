@@ -281,6 +281,33 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    UserDemoteOptions.Post:
+      description: Class UserDemoteOptions
+      properties:
+        remoteWipe:
+          description: Indicates whether to remotely wipe data from both desktop and mobile devices.
+          type: boolean
+        deleteUnsharedData:
+          description: Indicates whether data owned by the user should be deleted. This is required and must be set to True if `retainData` is False, and vice versa.
+          type: boolean
+        retainData:
+          description: Indicates whether data should be retained and transferred to another user. This is required and must be True if `deleteUnsharedData` is False, and vice versa.
+          type: boolean
+        retainToUser:
+          description: The ID of the new owner to whom the data will be transferred, applicable when `retainData` and/or `retainPermissionToSharedData` are set to true.
+          type: string
+        retainToAdvancedFormUser:
+          description: The ID of the user to whom the advanced form data will be transferred, similar to retainToUser but specifically for advanced form components.
+          type: string
+        retainPermissionToSharedData:
+          description: Indicates whether permissions to shared folder should be retained.
+          type: boolean
+        withdrawRequestFiles:
+          description: Indicates whether request files should be withdrawn.
+          type: boolean
+        withdrawFileLinks:
+          description: Indicates whether sent files should be withdrawn.
+          type: boolean
     FeaturesList.Put:
       description: Class FeaturesList
       properties:
@@ -413,53 +440,6 @@ components:
         retainPermissionToSharedData:
           description: 'Disallow Collaboration: retain all permission to shared data'
           type: boolean
-    UserDemoteOptions.Post:
-      description: Class UserDemoteOptions
-      properties:
-        remoteWipe:
-          description: Indicates whether to remotely wipe data from both desktop and mobile devices.
-          type: boolean
-        deleteUnsharedData:
-          description: Indicates whether data owned by the user should be deleted. This is required and must be set to True if `retainData` is False, and vice versa.
-          type: boolean
-        retainData:
-          description: Indicates whether data should be retained and transferred to another user. This is required and must be True if `deleteUnsharedData` is False, and vice versa.
-          type: boolean
-        retainToUser:
-          description: The ID of the new owner to whom the data will be transferred, applicable when `retainData` and/or `retainPermissionToSharedData` are set to true.
-          type: string
-        retainToAdvancedFormUser:
-          description: The ID of the user to whom the advanced form data will be transferred, similar to retainToUser but specifically for advanced form components.
-          type: string
-        retainPermissionToSharedData:
-          description: Indicates whether permissions to shared folder should be retained.
-          type: boolean
-        withdrawRequestFiles:
-          description: Indicates whether request files should be withdrawn.
-          type: boolean
-        withdrawFileLinks:
-          description: Indicates whether sent files should be withdrawn.
-          type: boolean
-    Profile.Post:
-      description: Class Profile
-      required:
-      - name
-      properties:
-        name:
-          description: Display name of the profile
-          type: string
-        prototype:
-          description: Id of the prototype profile to be cloned. If not passed, the Standard profile will be used
-          type: integer
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
     FeaturesList:
       description: Class FeaturesList
       required:
@@ -627,13 +607,6 @@ components:
         fileLifetime:
           description: Get profile max file lifetime
           type: integer
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
     Profile:
       description: Class Profile
       required:
@@ -663,3 +636,30 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/FeaturesList'
+    Profile.Post:
+      description: Class Profile
+      required:
+      - name
+      properties:
+        name:
+          description: Display name of the profile
+          type: string
+        prototype:
+          description: Id of the prototype profile to be cloned. If not passed, the Standard profile will be used
+          type: integer
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'

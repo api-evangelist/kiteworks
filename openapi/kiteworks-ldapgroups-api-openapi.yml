@@ -289,30 +289,14 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
-    MetaData:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of items available.
-        limit:
-          type: integer
-          description: Maximum number of items returned per page.
-        offset:
-          type: integer
-          description: Number of items skipped before the current page.
-    LdapGroup.Put:
+    LdapGroup.Post:
       description: Class LdapGroup
+      required:
+      - dn
       properties:
+        dn:
+          description: LDAP distinguished name (DN)
+          type: string
         email:
           description: LDAP group email address
           type: string
@@ -345,6 +329,27 @@ components:
           type: array
           items:
             type: string
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
     Errors:
       type: object
       properties:
@@ -352,14 +357,9 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Error'
-    LdapGroup.Post:
+    LdapGroup.Put:
       description: Class LdapGroup
-      required:
-      - dn
       properties:
-        dn:
-          description: LDAP distinguished name (DN)
-          type: string
         email:
           description: LDAP group email address
           type: string

@@ -226,44 +226,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    UserNotification:
-      description: Class Notification
-      required:
-      - userId
-      properties:
-        objectId:
-          description: Unique identifier of the folder included in the notification
-          type: string
-        fileAdded:
-          description: Number of files added to the notification
-          type: integer
-        commentAdded:
-          description: Number of comments added to the notification
-          type: integer
-        links:
-          description: HATEOAS links associated with the entity
-          type: array
-          items:
-            type: string
-        userId:
-          description: Unique identifier of the user who receives the notification
-          type: string
     UserNotification.Post:
       description: Class Notification
       properties:
@@ -288,3 +250,41 @@ components:
         offset:
           type: integer
           description: Number of items skipped before the current page.
+    UserNotification:
+      description: Class Notification
+      required:
+      - userId
+      properties:
+        objectId:
+          description: Unique identifier of the folder included in the notification
+          type: string
+        fileAdded:
+          description: Number of files added to the notification
+          type: integer
+        commentAdded:
+          description: Number of comments added to the notification
+          type: integer
+        links:
+          description: HATEOAS links associated with the entity
+          type: array
+          items:
+            type: string
+        userId:
+          description: Unique identifier of the user who receives the notification
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'

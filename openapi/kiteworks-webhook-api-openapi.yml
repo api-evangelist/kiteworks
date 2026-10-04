@@ -416,15 +416,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        code:
-          type: integer
-          description: Code is the HTTP status code returned by the API.
-        message:
-          type: string
-          description: Message is a human-readable message in the format "[StatusText] detail" explaining the result.
     WebhookList:
       type: object
       required:
@@ -458,6 +449,51 @@ components:
           type: string
           description: Status description
           example: unknown
+    WebhookResponse:
+      type: object
+      required:
+      - id
+      - url
+      - enabled
+      - createdAt
+      - updatedAt
+      - subscriptions
+      - status
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Id is the unique identifier for the webhook.
+          example: 1a51a2bf-86e8-40e8-a53b-4edc6936db46
+        url:
+          type: string
+          description: URL contains the webhook URL
+          example: https://example.com/webhook
+        enabled:
+          type: boolean
+          description: Enabled is the value of the webhook enable/disable
+          example: true
+        createdAt:
+          type: string
+          format: date-time
+          description: CreatedAt is the timestamp when the webhook was created.
+          example: '2024-05-07T15:04:05Z'
+        updatedAt:
+          type: string
+          format: date-time
+          description: UpdatedAt is the timestamp when the webhook was last updated.
+          example: '2024-05-07T15:04:05Z'
+        subscriptions:
+          type: array
+          items:
+            type: string
+          description: Subscriptions is a list of NATS subject filter patterns associated with the webhook.
+          example:
+          - filesystem.file.create
+          - filesystem.>
+        status:
+          $ref: '#/components/schemas/Status'
+          description: Status is a status data associated with the webhook.
     WebhookRequest:
       type: object
       required:
@@ -517,48 +553,12 @@ components:
           example:
           - filesystem.file.create
           - filesystem.>
-    WebhookResponse:
+    Error:
       type: object
-      required:
-      - id
-      - url
-      - enabled
-      - createdAt
-      - updatedAt
-      - subscriptions
-      - status
       properties:
-        id:
+        code:
+          type: integer
+          description: Code is the HTTP status code returned by the API.
+        message:
           type: string
-          format: uuid
-          description: Id is the unique identifier for the webhook.
-          example: 1a51a2bf-86e8-40e8-a53b-4edc6936db46
-        url:
-          type: string
-          description: URL contains the webhook URL
-          example: https://example.com/webhook
-        enabled:
-          type: boolean
-          description: Enabled is the value of the webhook enable/disable
-          example: true
-        createdAt:
-          type: string
-          format: date-time
-          description: CreatedAt is the timestamp when the webhook was created.
-          example: '2024-05-07T15:04:05Z'
-        updatedAt:
-          type: string
-          format: date-time
-          description: UpdatedAt is the timestamp when the webhook was last updated.
-          example: '2024-05-07T15:04:05Z'
-        subscriptions:
-          type: array
-          items:
-            type: string
-          description: Subscriptions is a list of NATS subject filter patterns associated with the webhook.
-          example:
-          - filesystem.file.create
-          - filesystem.>
-        status:
-          $ref: '#/components/schemas/Status'
-          description: Status is a status data associated with the webhook.
+          description: Message is a human-readable message in the format "[StatusText] detail" explaining the result.

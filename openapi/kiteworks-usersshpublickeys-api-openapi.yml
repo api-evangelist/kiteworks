@@ -676,67 +676,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    UserSshPublicKeyList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserSshPublicKey'
-    UserSshPublicKey1:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique identifier of the SSH public key.
-        userId:
-          type: string
-        publicKey:
-          type: string
-          description: SSH public key string.
-        name:
-          type: string
-          description: Display name for the SSH public key.
-        active:
-          type: boolean
-          description: Indicates whether the SSH public key is active and can be used for authentication.
-        adminActive:
-          type: boolean
-          description: Indicates whether an administrator has enabled this SSH public key.
-        deleted:
-          type: boolean
-          description: Indicates whether the SSH public key has been deleted.
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
-    UserGeneratedSshPublicKeyKey:
-      type: object
-      properties:
-        privateKey:
-          type: string
-          description: Generated SSH private key.
-        publicKey:
-          type: string
-          description: Generated SSH public key.
-    UserSshPublicKeysPostCreateRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          maxLength: 50
-          description: The display name for the SSH public key (maximum 50 characters).
-        publicKey:
-          type: string
-          description: The SSH public key string to register.
-      required:
-      - name
-      - publicKey
     UserSshPublicKey:
       type: object
       properties:
@@ -764,13 +703,22 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UserSshPublicKey1'
-    Errors:
+    UserGeneratedSshPublicKeyKey:
       type: object
       properties:
-        error:
+        privateKey:
+          type: string
+          description: Generated SSH private key.
+        publicKey:
+          type: string
+          description: Generated SSH public key.
+    UserSshPublicKeyList:
+      type: object
+      properties:
+        data:
           type: array
           items:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/UserSshPublicKey'
     UserSshPublicKeysPostGenerateRequest:
       type: object
       properties:
@@ -783,3 +731,55 @@ components:
           description: Optional passphrase to protect the generated private key.
       required:
       - name
+    UserSshPublicKeysPostCreateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 50
+          description: The display name for the SSH public key (maximum 50 characters).
+        publicKey:
+          type: string
+          description: The SSH public key string to register.
+      required:
+      - name
+      - publicKey
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    UserSshPublicKey1:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the SSH public key.
+        userId:
+          type: string
+        publicKey:
+          type: string
+          description: SSH public key string.
+        name:
+          type: string
+          description: Display name for the SSH public key.
+        active:
+          type: boolean
+          description: Indicates whether the SSH public key is active and can be used for authentication.
+        adminActive:
+          type: boolean
+          description: Indicates whether an administrator has enabled this SSH public key.
+        deleted:
+          type: boolean
+          description: Indicates whether the SSH public key has been deleted.
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'

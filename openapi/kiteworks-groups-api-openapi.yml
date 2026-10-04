@@ -424,60 +424,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ContactItem:
-      type: object
-      properties:
-        email:
-          type: string
-          description: Email address of the contact.
-        isDistributionList:
-          type: boolean
-          description: Indicates whether the contact is a distribution list.
-        profileIcon:
-          type: string
-          description: URL or identifier of the contact's profile icon.
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
-    MetaData:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of items available.
-        limit:
-          type: integer
-          description: Maximum number of items returned per page.
-        offset:
-          type: integer
-          description: Number of items skipped before the current page.
-    GroupEmail:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
-          description: Email address of the group member.
-      required:
-      - email
-    ContactList:
-      type: object
-      properties:
-        metadata:
-          description: Pagination metadata for the result set.
-          allOf:
-          - $ref: '#/components/schemas/MetaData'
-        data:
-          type: array
-          description: List of contacts.
-          items:
-            $ref: '#/components/schemas/Contact'
     Contact:
       type: object
       properties:
@@ -506,6 +452,27 @@ components:
           description: List of email addresses or distribution lists for this contact.
           items:
             $ref: '#/components/schemas/ContactItem'
+    GroupEmail:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          description: Email address of the group member.
+      required:
+      - email
+    ContactItem:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Email address of the contact.
+        isDistributionList:
+          type: boolean
+          description: Indicates whether the contact is a distribution list.
+        profileIcon:
+          type: string
+          description: URL or identifier of the contact's profile icon.
     GroupCreate:
       type: object
       properties:
@@ -521,6 +488,39 @@ components:
       required:
       - items
       - name
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
+    ContactList:
+      type: object
+      properties:
+        metadata:
+          description: Pagination metadata for the result set.
+          allOf:
+          - $ref: '#/components/schemas/MetaData'
+        data:
+          type: array
+          description: List of contacts.
+          items:
+            $ref: '#/components/schemas/Contact'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
     Errors:
       type: object
       properties:

@@ -435,27 +435,15 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Error:
-      type: object
+    UserMetadata:
+      description: Class UserMetadata
       properties:
-        code:
+        name:
+          description: Key name of the custom metadata attribute associated with the user
           type: string
-          description: Error code
-        message:
+        value:
+          description: Value assigned to the custom metadata attribute for the user
           type: string
-          description: Error message
-    MetaData:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of items available.
-        limit:
-          type: integer
-          description: Maximum number of items returned per page.
-        offset:
-          type: integer
-          description: Number of items skipped before the current page.
     AdminRole:
       description: Class AdminRole
       required:
@@ -476,15 +464,6 @@ components:
           type: array
           items:
             type: string
-    UserMetadata:
-      description: Class UserMetadata
-      properties:
-        name:
-          description: Key name of the custom metadata attribute associated with the user
-          type: string
-        value:
-          description: Value assigned to the custom metadata attribute for the user
-          type: string
     User:
       description: Class User
       required:
@@ -579,6 +558,27 @@ components:
         adminRole:
           description: 'Admin role unique identifier. Possible values are: 1: System admin, 2: Application admin'
           type: string
+    MetaData:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items available.
+        limit:
+          type: integer
+          description: Maximum number of items returned per page.
+        offset:
+          type: integer
+          description: Number of items skipped before the current page.
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
     Errors:
       type: object
       properties:

@@ -1216,6 +1216,28 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ScimMultiValue:
+      type: object
+      properties:
+        value:
+          type: string
+          pattern: ^[A-Za-z0-9 _-]+$
+          description: The value of the multi-valued attribute.
+    ScimMultiValueMobile:
+      type: object
+      properties:
+        primary:
+          type: boolean
+          description: If true, designates this entry as the primary value.
+        value:
+          type: string
+          description: The phone number value.
+        type:
+          type: string
+          description: The type of phone number (e.g., `mobile`, `work`, `home`).
+      required:
+      - type
+      - value
     ScimUsers:
       type: object
       properties:
@@ -1238,23 +1260,52 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ScimUser'
-    ScimMeta:
+    ScimUsersPostRequest:
       type: object
       properties:
-        resourceType:
+        schemas:
+          type: array
+          minItems: 1
+          description: List of SCIM schema URNs applicable to this resource. Must include `urn:ietf:params:scim:schemas:core:2.0:User`.
+          items:
+            type: string
+        password:
           type: string
-          description: SCIM resource type (e.g., User).
-        created:
+          description: The user's password.
+        displayName:
           type: string
-          format: date
-          description: Date and time when the SCIM resource was created.
-        lastModified:
+          pattern: ^[^<>]+$
+          description: The user's display name. Must not contain `<` or `>` characters.
+        userType:
           type: string
-          format: date
-          description: Date and time when the SCIM resource was last modified.
-        location:
+          pattern: ^[A-Za-z0-9_-]+$
+          description: The user's type identifier (alphanumeric characters, underscores, and hyphens only).
+        phoneNumbers:
+          type: array
+          description: List of phone numbers associated with the user.
+          items:
+            $ref: '#/components/schemas/ScimMultiValueMobile'
+        roles:
+          type: array
+          maxItems: 1
+          description: List of roles assigned to the user. At most one role may be specified.
+          items:
+            $ref: '#/components/schemas/ScimMultiValue'
+        userName:
           type: string
-          description: URI of the SCIM resource.
+          format: email
+          description: The user's email address, used as the unique username.
+        notify:
+          type: boolean
+          default: false
+          description: If true, sends a notification email to the user upon account creation.
+        userMustChange:
+          type: boolean
+          default: false
+          description: If true, requires the user to change their password on first login.
+      required:
+      - schemas
+      - userName
     ScimUsersPutRequest:
       type: object
       properties:
@@ -1322,52 +1373,35 @@ components:
           type: string
           default: false
           description: UUID of the user who will receive ownership of the deleted user data.
-    ScimUsersPostRequest:
+    ScimMultiValue1:
       type: object
       properties:
-        schemas:
-          type: array
-          minItems: 1
-          description: List of SCIM schema URNs applicable to this resource. Must include `urn:ietf:params:scim:schemas:core:2.0:User`.
-          items:
-            type: string
-        password:
+        value:
           type: string
-          description: The user's password.
-        displayName:
+          description: Value of the multi-value attribute (e.g., email address or phone number).
+        type:
           type: string
-          pattern: ^[^<>]+$
-          description: The user's display name. Must not contain `<` or `>` characters.
-        userType:
-          type: string
-          pattern: ^[A-Za-z0-9_-]+$
-          description: The user's type identifier (alphanumeric characters, underscores, and hyphens only).
-        phoneNumbers:
-          type: array
-          description: List of phone numbers associated with the user.
-          items:
-            $ref: '#/components/schemas/ScimMultiValueMobile'
-        roles:
-          type: array
-          maxItems: 1
-          description: List of roles assigned to the user. At most one role may be specified.
-          items:
-            $ref: '#/components/schemas/ScimMultiValue'
-        userName:
-          type: string
-          format: email
-          description: The user's email address, used as the unique username.
-        notify:
+          description: Type label for the value (e.g., work, home).
+        primary:
           type: boolean
-          default: false
-          description: If true, sends a notification email to the user upon account creation.
-        userMustChange:
-          type: boolean
-          default: false
-          description: If true, requires the user to change their password on first login.
-      required:
-      - schemas
-      - userName
+          description: Indicates whether this is the primary value for the attribute.
+    ScimMeta:
+      type: object
+      properties:
+        resourceType:
+          type: string
+          description: SCIM resource type (e.g., User).
+        created:
+          type: string
+          format: date
+          description: Date and time when the SCIM resource was created.
+        lastModified:
+          type: string
+          format: date
+          description: Date and time when the SCIM resource was last modified.
+        location:
+          type: string
+          description: URI of the SCIM resource.
     ScimUser:
       type: object
       properties:
@@ -1418,37 +1452,3 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ScimMultiValue1'
-    ScimMultiValue:
-      type: object
-      properties:
-        value:
-          type: string
-          pattern: ^[A-Za-z0-9 _-]+$
-          description: The value of the multi-valued attribute.
-    ScimMultiValueMobile:
-      type: object
-      properties:
-        primary:
-          type: boolean
-          description: If true, designates this entry as the primary value.
-        value:
-          type: string
-          description: The phone number value.
-        type:
-          type: string
-          description: The type of phone number (e.g., `mobile`, `work`, `home`).
-      required:
-      - type
-      - value
-    ScimMultiValue1:
-      type: object
-      properties:
-        value:
-          type: string
-          description: Value of the multi-value attribute (e.g., email address or phone number).
-        type:
-          type: string
-          description: Type label for the value (e.g., work, home).
-        primary:
-          type: boolean
-          description: Indicates whether this is the primary value for the attribute.

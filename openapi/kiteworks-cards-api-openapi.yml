@@ -329,6 +329,47 @@ components:
           description: URL the card action links to.
       required:
       - type
+    Card:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Main message text of the card.
+        description:
+          type: string
+          description: Descriptive text providing additional detail for the card.
+        severity:
+          type: string
+          description: Severity level of the card.
+        actions:
+          description: List of actions available on the card.
+          type: array
+          items:
+            $ref: '#/components/schemas/CardAction'
+        type:
+          type: string
+          description: Type of the card.
+        host:
+          description: Host information associated with the card.
+          allOf:
+          - $ref: '#/components/schemas/CardHost'
+        data:
+          type: object
+          description: Additional structured data associated with the card.
+      required:
+      - description
+      - message
+      - severity
+      - type
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
     CardActionPostRequest:
       type: object
       properties:
@@ -373,47 +414,6 @@ components:
       required:
       - action
       - type
-    Card:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Main message text of the card.
-        description:
-          type: string
-          description: Descriptive text providing additional detail for the card.
-        severity:
-          type: string
-          description: Severity level of the card.
-        actions:
-          description: List of actions available on the card.
-          type: array
-          items:
-            $ref: '#/components/schemas/CardAction'
-        type:
-          type: string
-          description: Type of the card.
-        host:
-          description: Host information associated with the card.
-          allOf:
-          - $ref: '#/components/schemas/CardHost'
-        data:
-          type: object
-          description: Additional structured data associated with the card.
-      required:
-      - description
-      - message
-      - severity
-      - type
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
     CardHost:
       type: object
       properties:
