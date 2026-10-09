@@ -30,3 +30,23 @@ plans:
   price_text: CALL FOR PRICING
   period: none
   included_quota: Unlimited license package sizes, 16 Terabytes file size maximum
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models: []
+  units: []
+  plans:
+  - name: Business
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
+  - name: Enterprise
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
