@@ -431,6 +431,51 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    ContactCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Display name for the contact.
+        items:
+          type: array
+          minItems: 1
+          description: List of email addresses associated with this contact. At least one email address is required.
+          items:
+            $ref: '#/components/schemas/ContactEmail'
+      required:
+      - name
+    ContactItem:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Email address of the contact.
+        isDistributionList:
+          type: boolean
+          description: Indicates whether the contact is a distribution list.
+        profileIcon:
+          type: string
+          description: URL or identifier of the contact's profile icon.
+    ContactList:
+      type: object
+      properties:
+        metadata:
+          description: Pagination metadata for the result set.
+          allOf:
+          - $ref: '#/components/schemas/MetaData'
+        data:
+          type: array
+          description: List of contacts.
+          items:
+            $ref: '#/components/schemas/Contact'
     Contact:
       type: object
       properties:
@@ -459,32 +504,15 @@ components:
           description: List of email addresses or distribution lists for this contact.
           items:
             $ref: '#/components/schemas/ContactItem'
-    ContactCreate:
+    Error:
       type: object
       properties:
-        name:
+        code:
           type: string
-          description: Display name for the contact.
-        items:
-          type: array
-          minItems: 1
-          description: List of email addresses associated with this contact. At least one email address is required.
-          items:
-            $ref: '#/components/schemas/ContactEmail'
-      required:
-      - name
-    ContactItem:
-      type: object
-      properties:
-        email:
+          description: Error code
+        message:
           type: string
-          description: Email address of the contact.
-        isDistributionList:
-          type: boolean
-          description: Indicates whether the contact is a distribution list.
-        profileIcon:
-          type: string
-          description: URL or identifier of the contact's profile icon.
+          description: Error message
     MetaData:
       type: object
       properties:
@@ -497,27 +525,6 @@ components:
         offset:
           type: integer
           description: Number of items skipped before the current page.
-    ContactList:
-      type: object
-      properties:
-        metadata:
-          description: Pagination metadata for the result set.
-          allOf:
-          - $ref: '#/components/schemas/MetaData'
-        data:
-          type: array
-          description: List of contacts.
-          items:
-            $ref: '#/components/schemas/Contact'
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
     ContactEmail:
       type: object
       properties:
@@ -527,10 +534,3 @@ components:
           description: Email address of the contact.
       required:
       - email
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'

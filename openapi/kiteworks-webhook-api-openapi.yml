@@ -416,39 +416,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    WebhookList:
-      type: object
-      required:
-      - items
-      - totalItems
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/WebhookResponse'
-          description: Items is the list of webhook items in the current set
-        totalItems:
-          type: integer
-          description: TotalItems is the total number of items across all sets
-          example: 150
-    Status:
-      type: object
-      required:
-      - status
-      - description
-      properties:
-        status:
-          type: string
-          description: Status value
-          enum:
-          - UNKNOWN
-          - SUCCESS
-          - ERROR
-          example: UNKNOWN
-        description:
-          type: string
-          description: Status description
-          example: unknown
     WebhookResponse:
       type: object
       required:
@@ -494,6 +461,15 @@ components:
         status:
           $ref: '#/components/schemas/Status'
           description: Status is a status data associated with the webhook.
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Code is the HTTP status code returned by the API.
+        message:
+          type: string
+          description: Message is a human-readable message in the format "[StatusText] detail" explaining the result.
     WebhookRequest:
       type: object
       required:
@@ -553,12 +529,36 @@ components:
           example:
           - filesystem.file.create
           - filesystem.>
-    Error:
+    Status:
       type: object
+      required:
+      - status
+      - description
       properties:
-        code:
-          type: integer
-          description: Code is the HTTP status code returned by the API.
-        message:
+        status:
           type: string
-          description: Message is a human-readable message in the format "[StatusText] detail" explaining the result.
+          description: Status value
+          enum:
+          - UNKNOWN
+          - SUCCESS
+          - ERROR
+          example: UNKNOWN
+        description:
+          type: string
+          description: Status description
+          example: unknown
+    WebhookList:
+      type: object
+      required:
+      - items
+      - totalItems
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookResponse'
+          description: Items is the list of webhook items in the current set
+        totalItems:
+          type: integer
+          description: TotalItems is the total number of items across all sets
+          example: 150

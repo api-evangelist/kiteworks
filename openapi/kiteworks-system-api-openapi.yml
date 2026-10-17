@@ -800,113 +800,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    KwDatabaseMetric:
-      type: object
-      properties:
-        service_status:
-          type: string
-          enum:
-          - unknown
-          - abnormal
-          - warn
-          - running
-          - stopped
-          description: The MariaDB service status.<br>`active` – Service is running.<br>`inactive` – Service is not running.
-        active_connection_count:
-          type: integer
-          description: Real-time number of active database connections.
-        wsrep_cluster_status:
-          type: string
-          description: Galera cluster status indicating whether this node is the primary component.
-        wsrep_cluster_size:
-          type: integer
-          description: Number of healthy nodes in the Galera cluster.
-        wsrep_local_state_comment:
-          type: string
-          description: Galera local state indicating readiness to accept read/write requests. `Synced` is the healthy value.
-        memory_usage_mb:
-          type: integer
-          description: Real-time RSS memory usage of the MariaDB service in MB.
-        cpu_usage_percentage:
-          type: number
-          description: Real-time CPU usage percentage by the MariaDB service.
-        db_partition_free_mb:
-          type: integer
-          description: Free space available on the database partition in MB.
-        db_partition_used_mb:
-          type: integer
-          description: Used space on the database partition in MB.
-    EpgdbImportRequest:
-      type: object
-      properties:
-        filename:
-          type: string
-          description: The filename of the EPGDB backup file being uploaded.
-      required:
-      - filename
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
-    NodeHealthStatusResponse:
-      type: object
-      properties:
-        ok:
-          type: integer
-          description: Overall health status indicator. `1` means all components are healthy; `0` means one or more components are unhealthy.
-    WebRequestsMetric:
-      type: object
-      properties:
-        status:
-          type: string
-          enum:
-          - unknown
-          - abnormal
-          - warn
-          - running
-          - stopped
-          description: The Nginx service status.<br>`active` – Service is running.<br>`inactive` – Service is not running.
-        active_connections:
-          type: integer
-          description: Real-time number of active connections to the local Nginx instance.
-        reading:
-          type: integer
-          description: Real-time number of connections currently reading the request header.
-        writing:
-          type: integer
-          description: Real-time number of connections currently writing a response.
-        connection_efficiency:
-          type: number
-          description: Ratio of handled connections to accepted connections.
-        avg_requests_per_connection:
-          type: number
-          description: Ratio of total requests to handled connections.
-    SystemResourcesMetric:
-      type: object
-      properties:
-        total_memory_usage_mb:
-          type: integer
-          description: Total system RSS memory usage in MB.
-        total_swap_usage_mb:
-          type: integer
-          description: Total system swap usage in MB.
-        total_cpu_usage_percent:
-          type: number
-          description: Total system CPU usage as a percentage.
-        system_load_average_1min:
-          type: number
-          description: System load average over the last 1 minute.
-        system_load_average_5min:
-          type: number
-          description: System load average over the last 5 minutes.
-        system_load_average_15min:
-          type: number
-          description: System load average over the last 15 minutes.
     Errors:
       type: object
       properties:
@@ -947,15 +840,6 @@ components:
         current_failed_job_count:
           type: integer
           description: Real-time number of jobs that have failed.
-    SftpMetric:
-      type: object
-      properties:
-        active_connection_count:
-          type: integer
-          description: Number of active SFTP connections.
-        memory_usage_mb:
-          type: integer
-          description: Total RSS memory usage by SFTP processes in MB.
     EpgdbImportPost:
       type: object
       properties:
@@ -985,3 +869,119 @@ components:
           description: System resource metrics. Present when `metric_name` is `systemResources` or `allMetrics`.
           allOf:
           - $ref: '#/components/schemas/SystemResourcesMetric'
+    SftpMetric:
+      type: object
+      properties:
+        active_connection_count:
+          type: integer
+          description: Number of active SFTP connections.
+        memory_usage_mb:
+          type: integer
+          description: Total RSS memory usage by SFTP processes in MB.
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    KwDatabaseMetric:
+      type: object
+      properties:
+        service_status:
+          type: string
+          enum:
+          - unknown
+          - abnormal
+          - warn
+          - running
+          - stopped
+          description: The MariaDB service status.<br>`active` – Service is running.<br>`inactive` – Service is not running.
+        active_connection_count:
+          type: integer
+          description: Real-time number of active database connections.
+        wsrep_cluster_status:
+          type: string
+          description: Galera cluster status indicating whether this node is the primary component.
+        wsrep_cluster_size:
+          type: integer
+          description: Number of healthy nodes in the Galera cluster.
+        wsrep_local_state_comment:
+          type: string
+          description: Galera local state indicating readiness to accept read/write requests. `Synced` is the healthy value.
+        memory_usage_mb:
+          type: integer
+          description: Real-time RSS memory usage of the MariaDB service in MB.
+        cpu_usage_percentage:
+          type: number
+          description: Real-time CPU usage percentage by the MariaDB service.
+        db_partition_free_mb:
+          type: integer
+          description: Free space available on the database partition in MB.
+        db_partition_used_mb:
+          type: integer
+          description: Used space on the database partition in MB.
+    NodeHealthStatusResponse:
+      type: object
+      properties:
+        ok:
+          type: integer
+          description: Overall health status indicator. `1` means all components are healthy; `0` means one or more components are unhealthy.
+    EpgdbImportRequest:
+      type: object
+      properties:
+        filename:
+          type: string
+          description: The filename of the EPGDB backup file being uploaded.
+      required:
+      - filename
+    SystemResourcesMetric:
+      type: object
+      properties:
+        total_memory_usage_mb:
+          type: integer
+          description: Total system RSS memory usage in MB.
+        total_swap_usage_mb:
+          type: integer
+          description: Total system swap usage in MB.
+        total_cpu_usage_percent:
+          type: number
+          description: Total system CPU usage as a percentage.
+        system_load_average_1min:
+          type: number
+          description: System load average over the last 1 minute.
+        system_load_average_5min:
+          type: number
+          description: System load average over the last 5 minutes.
+        system_load_average_15min:
+          type: number
+          description: System load average over the last 15 minutes.
+    WebRequestsMetric:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - unknown
+          - abnormal
+          - warn
+          - running
+          - stopped
+          description: The Nginx service status.<br>`active` – Service is running.<br>`inactive` – Service is not running.
+        active_connections:
+          type: integer
+          description: Real-time number of active connections to the local Nginx instance.
+        reading:
+          type: integer
+          description: Real-time number of connections currently reading the request header.
+        writing:
+          type: integer
+          description: Real-time number of connections currently writing a response.
+        connection_efficiency:
+          type: number
+          description: Ratio of handled connections to accepted connections.
+        avg_requests_per_connection:
+          type: number
+          description: Ratio of total requests to handled connections.

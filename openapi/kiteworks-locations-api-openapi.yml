@@ -253,21 +253,22 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Location.Post:
-      description: Class Location
-      required:
-      - name
-      - domain
+    LocationList:
+      type: object
       properties:
-        name:
-          description: Location name. Ask administrator for location names for your server
-          type: string
-        domain:
-          description: "A URL domain that can be used to access the servers in this location,\n                                 e.g. location.domain.com.\n                                    The domain should be registered in a DNS to point to the servers."
-          type: string
-        addLinks:
-          description: Indicates whether HATEOAS links should be included in the response
-          type: boolean
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Location'
+        metadata:
+          $ref: '#/components/schemas/MetaData'
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
     Location:
       type: object
       properties:
@@ -283,6 +284,30 @@ components:
         tenantId:
           type: integer
           description: Tenant ID
+    Location.Post:
+      description: Class Location
+      required:
+      - name
+      - domain
+      properties:
+        name:
+          description: Location name. Ask administrator for location names for your server
+          type: string
+        domain:
+          description: "A URL domain that can be used to access the servers in this location,\n                                 e.g. location.domain.com.\n                                    The domain should be registered in a DNS to point to the servers."
+          type: string
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
     MetaData:
       type: object
       properties:
@@ -295,28 +320,3 @@ components:
         offset:
           type: integer
           description: Number of items skipped before the current page.
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-    LocationList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Location'
-        metadata:
-          $ref: '#/components/schemas/MetaData'

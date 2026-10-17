@@ -145,6 +145,13 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
     WebForm:
       type: object
       properties:
@@ -237,10 +244,3 @@ components:
         profileId:
           type: integer
           description: Unique identifier of the user profile associated with the web form.
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'

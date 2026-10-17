@@ -232,12 +232,13 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ExternalDL:
+    Errors:
       type: object
       properties:
-        email:
-          type: string
-          description: Email address of the external distribution list entry.
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
     ExternalDLs:
       type: object
       properties:
@@ -246,6 +247,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ExternalDL'
+    ExternalDL:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Email address of the external distribution list entry.
     ExternalDLUpdateRequest:
       type: object
       properties:
@@ -266,10 +273,3 @@ components:
         message:
           type: string
           description: Error message
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'

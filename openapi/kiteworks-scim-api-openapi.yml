@@ -1216,28 +1216,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ScimMultiValue:
-      type: object
-      properties:
-        value:
-          type: string
-          pattern: ^[A-Za-z0-9 _-]+$
-          description: The value of the multi-valued attribute.
-    ScimMultiValueMobile:
-      type: object
-      properties:
-        primary:
-          type: boolean
-          description: If true, designates this entry as the primary value.
-        value:
-          type: string
-          description: The phone number value.
-        type:
-          type: string
-          description: The type of phone number (e.g., `mobile`, `work`, `home`).
-      required:
-      - type
-      - value
     ScimUsers:
       type: object
       properties:
@@ -1260,6 +1238,46 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ScimUser'
+    ScimUsersPutRequest:
+      type: object
+      properties:
+        schemas:
+          type: array
+          minItems: 1
+          description: List of SCIM schema URNs applicable to this resource. Must include `urn:ietf:params:scim:schemas:core:2.0:User`.
+          items:
+            type: string
+        password:
+          type: string
+          description: The user's password.
+        displayName:
+          type: string
+          pattern: ^[^<>]+$
+          description: The user's display name. Must not contain `<` or `>` characters.
+        userType:
+          type: string
+          pattern: ^[A-Za-z0-9_-]+$
+          description: The user's type identifier (alphanumeric characters, underscores, and hyphens only).
+        phoneNumbers:
+          type: array
+          description: List of phone numbers associated with the user.
+          items:
+            $ref: '#/components/schemas/ScimMultiValueMobile'
+        roles:
+          type: array
+          maxItems: 1
+          description: List of roles assigned to the user. At most one role may be specified.
+          items:
+            $ref: '#/components/schemas/ScimMultiValue'
+        active:
+          type: boolean
+          description: If true, activates the user account; if false, deactivates it.
+        userTypeDemotionOptions:
+          description: Data retention options to apply when the user type is demoted.
+          allOf:
+          - $ref: '#/components/schemas/DataRetentionOption'
+      required:
+      - schemas
     ScimUsersPostRequest:
       type: object
       properties:
@@ -1306,102 +1324,6 @@ components:
       required:
       - schemas
       - userName
-    ScimUsersPutRequest:
-      type: object
-      properties:
-        schemas:
-          type: array
-          minItems: 1
-          description: List of SCIM schema URNs applicable to this resource. Must include `urn:ietf:params:scim:schemas:core:2.0:User`.
-          items:
-            type: string
-        password:
-          type: string
-          description: The user's password.
-        displayName:
-          type: string
-          pattern: ^[^<>]+$
-          description: The user's display name. Must not contain `<` or `>` characters.
-        userType:
-          type: string
-          pattern: ^[A-Za-z0-9_-]+$
-          description: The user's type identifier (alphanumeric characters, underscores, and hyphens only).
-        phoneNumbers:
-          type: array
-          description: List of phone numbers associated with the user.
-          items:
-            $ref: '#/components/schemas/ScimMultiValueMobile'
-        roles:
-          type: array
-          maxItems: 1
-          description: List of roles assigned to the user. At most one role may be specified.
-          items:
-            $ref: '#/components/schemas/ScimMultiValue'
-        active:
-          type: boolean
-          description: If true, activates the user account; if false, deactivates it.
-        userTypeDemotionOptions:
-          description: Data retention options to apply when the user type is demoted.
-          allOf:
-          - $ref: '#/components/schemas/DataRetentionOption'
-      required:
-      - schemas
-    DataRetentionOption:
-      type: object
-      properties:
-        remoteWipe:
-          type: boolean
-          default: false
-          description: If true, triggers a remote wipe of the user data from all registered devices.
-        deleteUnsharedData:
-          type:
-          - boolean
-          - 'null'
-          default: null
-          description: If true, permanently deletes data that is not shared with other users.
-        retainData:
-          type:
-          - boolean
-          - 'null'
-          default: null
-          description: If true, retains the user data after deletion.
-        retainPermissionToSharedData:
-          type: boolean
-          default: false
-          description: If true, the specified `retainToUser` will retain access to shared data.
-        retainToUser:
-          type: string
-          default: false
-          description: UUID of the user who will receive ownership of the deleted user data.
-    ScimMultiValue1:
-      type: object
-      properties:
-        value:
-          type: string
-          description: Value of the multi-value attribute (e.g., email address or phone number).
-        type:
-          type: string
-          description: Type label for the value (e.g., work, home).
-        primary:
-          type: boolean
-          description: Indicates whether this is the primary value for the attribute.
-    ScimMeta:
-      type: object
-      properties:
-        resourceType:
-          type: string
-          description: SCIM resource type (e.g., User).
-        created:
-          type: string
-          format: date
-          description: Date and time when the SCIM resource was created.
-        lastModified:
-          type: string
-          format: date
-          description: Date and time when the SCIM resource was last modified.
-        location:
-          type: string
-          description: URI of the SCIM resource.
     ScimUser:
       type: object
       properties:
@@ -1452,3 +1374,81 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ScimMultiValue1'
+    ScimMultiValue1:
+      type: object
+      properties:
+        value:
+          type: string
+          description: Value of the multi-value attribute (e.g., email address or phone number).
+        type:
+          type: string
+          description: Type label for the value (e.g., work, home).
+        primary:
+          type: boolean
+          description: Indicates whether this is the primary value for the attribute.
+    ScimMeta:
+      type: object
+      properties:
+        resourceType:
+          type: string
+          description: SCIM resource type (e.g., User).
+        created:
+          type: string
+          format: date
+          description: Date and time when the SCIM resource was created.
+        lastModified:
+          type: string
+          format: date
+          description: Date and time when the SCIM resource was last modified.
+        location:
+          type: string
+          description: URI of the SCIM resource.
+    ScimMultiValueMobile:
+      type: object
+      properties:
+        primary:
+          type: boolean
+          description: If true, designates this entry as the primary value.
+        value:
+          type: string
+          description: The phone number value.
+        type:
+          type: string
+          description: The type of phone number (e.g., `mobile`, `work`, `home`).
+      required:
+      - type
+      - value
+    DataRetentionOption:
+      type: object
+      properties:
+        remoteWipe:
+          type: boolean
+          default: false
+          description: If true, triggers a remote wipe of the user data from all registered devices.
+        deleteUnsharedData:
+          type:
+          - boolean
+          - 'null'
+          default: null
+          description: If true, permanently deletes data that is not shared with other users.
+        retainData:
+          type:
+          - boolean
+          - 'null'
+          default: null
+          description: If true, retains the user data after deletion.
+        retainPermissionToSharedData:
+          type: boolean
+          default: false
+          description: If true, the specified `retainToUser` will retain access to shared data.
+        retainToUser:
+          type: string
+          default: false
+          description: UUID of the user who will receive ownership of the deleted user data.
+    ScimMultiValue:
+      type: object
+      properties:
+        value:
+          type: string
+          pattern: ^[A-Za-z0-9 _-]+$
+          description: The value of the multi-valued attribute.

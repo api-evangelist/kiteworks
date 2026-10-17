@@ -318,58 +318,25 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    CardAction:
+    Errors:
       type: object
       properties:
-        type:
-          type: string
-          description: Type of card action.
-        url:
-          type: string
-          description: URL the card action links to.
-      required:
-      - type
-    Card:
-      type: object
-      properties:
-        message:
-          type: string
-          description: Main message text of the card.
-        description:
-          type: string
-          description: Descriptive text providing additional detail for the card.
-        severity:
-          type: string
-          description: Severity level of the card.
-        actions:
-          description: List of actions available on the card.
+        error:
           type: array
           items:
-            $ref: '#/components/schemas/CardAction'
-        type:
-          type: string
-          description: Type of the card.
-        host:
-          description: Host information associated with the card.
-          allOf:
-          - $ref: '#/components/schemas/CardHost'
-        data:
-          type: object
-          description: Additional structured data associated with the card.
-      required:
-      - description
-      - message
-      - severity
-      - type
-    Error:
+            $ref: '#/components/schemas/Error'
+    CardHost:
       type: object
       properties:
-        code:
+        id:
           type: string
-          description: Error code
-        message:
+          description: Unique identifier of the card host.
+        name:
           type: string
-          description: Error message
+          description: Display name of the card host.
+      required:
+      - id
+      - name
     CardActionPostRequest:
       type: object
       properties:
@@ -414,22 +381,55 @@ components:
       required:
       - action
       - type
-    CardHost:
+    Card:
       type: object
       properties:
-        id:
+        message:
           type: string
-          description: Unique identifier of the card host.
-        name:
+          description: Main message text of the card.
+        description:
           type: string
-          description: Display name of the card host.
-      required:
-      - id
-      - name
-    Errors:
-      type: object
-      properties:
-        error:
+          description: Descriptive text providing additional detail for the card.
+        severity:
+          type: string
+          description: Severity level of the card.
+        actions:
+          description: List of actions available on the card.
           type: array
           items:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/CardAction'
+        type:
+          type: string
+          description: Type of the card.
+        host:
+          description: Host information associated with the card.
+          allOf:
+          - $ref: '#/components/schemas/CardHost'
+        data:
+          type: object
+          description: Additional structured data associated with the card.
+      required:
+      - description
+      - message
+      - severity
+      - type
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    CardAction:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of card action.
+        url:
+          type: string
+          description: URL the card action links to.
+      required:
+      - type

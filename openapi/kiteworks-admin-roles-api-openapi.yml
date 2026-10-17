@@ -435,15 +435,13 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    UserMetadata:
-      description: Class UserMetadata
+    Errors:
+      type: object
       properties:
-        name:
-          description: Key name of the custom metadata attribute associated with the user
-          type: string
-        value:
-          description: Value assigned to the custom metadata attribute for the user
-          type: string
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
     AdminRole:
       description: Class AdminRole
       required:
@@ -464,6 +462,17 @@ components:
           type: array
           items:
             type: string
+    UserAdminRole:
+      description: Class UserAdminRole
+      required:
+      - userId
+      properties:
+        userId:
+          description: User unique identifier
+          type: string
+        adminRole:
+          description: 'Admin role unique identifier. Possible values are: 1: System admin, 2: Application admin'
+          type: string
     User:
       description: Class User
       required:
@@ -547,16 +556,23 @@ components:
           description: The exact timestamp when the user's password will expire
           type: string
           format: date
-    UserAdminRole:
-      description: Class UserAdminRole
-      required:
-      - userId
+    Error:
+      type: object
       properties:
-        userId:
-          description: User unique identifier
+        code:
           type: string
-        adminRole:
-          description: 'Admin role unique identifier. Possible values are: 1: System admin, 2: Application admin'
+          description: Error code
+        message:
+          type: string
+          description: Error message
+    UserMetadata:
+      description: Class UserMetadata
+      properties:
+        name:
+          description: Key name of the custom metadata attribute associated with the user
+          type: string
+        value:
+          description: Value assigned to the custom metadata attribute for the user
           type: string
     MetaData:
       type: object
@@ -570,19 +586,3 @@ components:
         offset:
           type: integer
           description: Number of items skipped before the current page.
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'

@@ -491,6 +491,34 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    Device.Post:
+      description: Class Device
+      properties:
+        clientId:
+          description: Unique identifier of client for this Device
+          type: string
+        userId:
+          description: Unique identifier of user for this Device
+          type: string
+        installTagId:
+          description: Unique identifier of the install tag for this device. Usually the serial number of the device
+          type: string
+        installName:
+          description: Install Tag name for this Device. e.g. Someone's IPhone
+          type: string
+        mobileKeyStore:
+          description: Key to encrypt files on this device
+          type: string
+        addLinks:
+          description: Indicates whether HATEOAS links should be included in the response
+          type: boolean
     Device.Put:
       description: Class Device
       properties:
@@ -537,6 +565,21 @@ components:
           type: array
           items:
             type: string
+    Logout:
+      type: object
+      properties:
+        redirectUri:
+          type: string
+          description: URL to redirect to after logout.
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error message
     MetaData:
       type: object
       properties:
@@ -549,46 +592,3 @@ components:
         offset:
           type: integer
           description: Number of items skipped before the current page.
-    Logout:
-      type: object
-      properties:
-        redirectUri:
-          type: string
-          description: URL to redirect to after logout.
-    Device.Post:
-      description: Class Device
-      properties:
-        clientId:
-          description: Unique identifier of client for this Device
-          type: string
-        userId:
-          description: Unique identifier of user for this Device
-          type: string
-        installTagId:
-          description: Unique identifier of the install tag for this device. Usually the serial number of the device
-          type: string
-        installName:
-          description: Install Tag name for this Device. e.g. Someone's IPhone
-          type: string
-        mobileKeyStore:
-          description: Key to encrypt files on this device
-          type: string
-        addLinks:
-          description: Indicates whether HATEOAS links should be included in the response
-          type: boolean
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code
-        message:
-          type: string
-          description: Error message
-    Errors:
-      type: object
-      properties:
-        error:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
