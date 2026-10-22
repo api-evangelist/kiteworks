@@ -66,3 +66,45 @@
     detected: '2026-10-21'
   status: not-a-workflow
   arazzo: null
+- slug: kiteworks-nist-cryptographic-module-validation-program-fips-140
+  label: NIST Cryptographic Module Validation Program (FIPS 140)
+  partner_name: NIST Cryptographic Module Validation Program (FIPS 140)
+  category: FIPS 140 cryptographic module validation (NIST / CCCS CMVP)
+  type: register
+  channel: standard-directory
+  evidence: https://csrc.nist.gov/projects/cryptographic-module-validation-program/validated-modules/search/all
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: 'NIST CMVP validated cryptographic modules (csrc.nist.gov validated-modules search: active + historical)
+      and Modules In Process list'
+    standard: FIPS 140-2 / FIPS 140-3
+    spec_file: null
+    role: fips-140-validated-vendor
+    registered_name: Kiteworks
+    matched_domain: kiteworks.com
+    matched_by: domain
+    signal_note: 'certified_products = one entry per (FIPS 140 edition, CMVP module type) held; a pair whose certificates
+      are all on the historical list is lapsed: true; Modules In Process are listing only (in_process), never certified;
+      certificate and module counts are context, never counted'
+    detected_by: sweep-nist-cmvp-fips-140-modules.py
+    detected: '2026-10-22'
+    certified_products:
+    - product: FIPS 140-2 Software cryptographic module
+      product_type: Software
+      standard: FIPS 140-2
+      status: Historical
+      lapsed: true
+      validated: '2024-11-20'
+    - product: FIPS 140-3 Software cryptographic module
+      product_type: Software
+      standard: FIPS 140-3
+      status: Active
+      lapsed: false
+      validated: '2025-03-03'
+    vendor_country: USA
+    identity_source: register website (CMVP certificate Vendor panel)
+    other_registrations:
+    - Kiteworks (Accellion Inc.)
+  status: not-a-workflow
+  arazzo: null
