@@ -64,29 +64,214 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Kiteworks operates a Private Data Network (PDN) that unifies secure email, secure file sharing, secure web forms, managed file transfer (MFT), and SFTP behind a single hardened virtual appliance with a common governance, encryption, and audit layer. It serves regulated industries — government, defense, healthcare, financial services, legal, manufacturing, and higher education — where sensitive content leaving the organization must be tracked and provably compliant. The company was formerly known as Accellion.
+Kiteworks operates a Private Data Network (PDN) that unifies secure email, secure file sharing, secure web forms, managed file transfer (MFT), and SFTP behind a single hardened virtual appliance with a common governance, encryption, and audit layer. The platform targets regulated industries — government, defense, healthcare, financial services, legal, manufacturing, and higher education — where sensitive content leaving the organization must be tracked and provably compliant with regimes such as CMMC 2.0, FedRAMP, HIPAA, GDPR, and NIST 800-171. Kiteworks exposes its platform through a versioned REST API (currently v28) covering files, folders, mail, web forms, users, admin, SCIM provisioning, and search across roughly 400 endpoints, plus a PubSub webhook service for real-time event delivery and an Apache-2.0 licensed Model Context Protocol (MCP) server that lets AI assistants operate on Kiteworks content under OAuth 2.1. The company was formerly known as Accellion.
 
-- Website: https://www.kiteworks.com/
-- Developer portal: https://developer.kiteworks.com/
-- GitHub: https://github.com/kiteworks
+**Areas:** Company · Secure File Sharing · Managed File Transfer · Secure Email · Data Governance · Regulatory Compliance · Content Security · Private Data Network · CMMC · SCIM
 
-## APIs
+## Kiteworks on APIs.io
 
-| API | Spec | Notes |
-|---|---|---|
-| Kiteworks Core API | `openapi/kiteworks-core-openapi-original.json` | OpenAPI 3.0.2, version 28 — 304 paths / 394 operations across 40 tags (files, folders, mail, users, admin, SCIM, search) |
-| Kiteworks PubSub Consumer API | `openapi/kiteworks-pubsub-openapi-original.yml` | OpenAPI 3.0.3, version 1.0.0 — webhook registration for the NATS-backed event bus |
+Everything profiled for Kiteworks is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/kiteworks/](https://apis.io/providers/kiteworks/)** — or go straight to one of the APIs or properties below.
 
-Kiteworks is a per-tenant appliance, so base URLs are templated on the customer instance
-host (`https://{instance}/rest`) rather than a shared multi-tenant API host.
+### APIs (41)
 
-## Artifacts
+- [Kiteworks Activities API](https://apis.io/apis/kiteworks/kiteworks-activities-api/) — The activities API from Kiteworks — 2 operation(s) for activities.
+- [Kiteworks Admin API](https://apis.io/apis/kiteworks/kiteworks-admin-api/) — The admin API from Kiteworks — 19 operation(s) for admin.
+- [Kiteworks Advanced Forms API](https://apis.io/apis/kiteworks/kiteworks-advancedforms-api/) — The advancedForms API from Kiteworks — 1 operation(s) for advancedforms.
+- [Kiteworks Cards API](https://apis.io/apis/kiteworks/kiteworks-cards-api/) — The cards API from Kiteworks — 3 operation(s) for cards.
+- [Kiteworks Client Event Logs API](https://apis.io/apis/kiteworks/kiteworks-clienteventlogs-api/) — The clientEventLogs API from Kiteworks — 1 operation(s) for clienteventlogs.
+- [Kiteworks Clients API](https://apis.io/apis/kiteworks/kiteworks-clients-api/) — The clients API from Kiteworks — 4 operation(s) for clients.
+- [Kiteworks Comments API](https://apis.io/apis/kiteworks/kiteworks-comments-api/) — The comments API from Kiteworks — 4 operation(s) for comments.
+- [Kiteworks Contacts API](https://apis.io/apis/kiteworks/kiteworks-contacts-api/) — The contacts API from Kiteworks — 2 operation(s) for contacts.
+- [Kiteworks Devices API](https://apis.io/apis/kiteworks/kiteworks-devices-api/) — The devices API from Kiteworks — 6 operation(s) for devices.
+- [Kiteworks Dli API](https://apis.io/apis/kiteworks/kiteworks-dli-api/) — The dli API from Kiteworks — 18 operation(s) for dli.
+- [Kiteworks External DL API](https://apis.io/apis/kiteworks/kiteworks-externaldl-api/) — The externalDL API from Kiteworks — 1 operation(s) for externaldl.
+- [Kiteworks Favorites API](https://apis.io/apis/kiteworks/kiteworks-favorites-api/) — The favorites API from Kiteworks — 3 operation(s) for favorites.
+- [Kiteworks Files API](https://apis.io/apis/kiteworks/kiteworks-files-api/) — The files API from Kiteworks — 61 operation(s) for files.
+- [Kiteworks Folders API](https://apis.io/apis/kiteworks/kiteworks-folders-api/) — The folders API from Kiteworks — 30 operation(s) for folders.
+- [Kiteworks Groups API](https://apis.io/apis/kiteworks/kiteworks-groups-api/) — The groups API from Kiteworks — 2 operation(s) for groups.
+- [Kiteworks Internal API](https://apis.io/apis/kiteworks/kiteworks-internal-api/) — The internal API from Kiteworks — 1 operation(s) for internal.
+- [Kiteworks Languages API](https://apis.io/apis/kiteworks/kiteworks-languages-api/) — The languages API from Kiteworks — 2 operation(s) for languages.
+- [Kiteworks Ldap Groups API](https://apis.io/apis/kiteworks/kiteworks-ldapgroups-api/) — The ldapGroups API from Kiteworks — 2 operation(s) for ldapgroups.
+- [Kiteworks Locations API](https://apis.io/apis/kiteworks/kiteworks-locations-api/) — The locations API from Kiteworks — 2 operation(s) for locations.
+- [Kiteworks Mail API](https://apis.io/apis/kiteworks/kiteworks-mail-api/) — The mail API from Kiteworks — 29 operation(s) for mail.
+- [Kiteworks Mobile Sync API](https://apis.io/apis/kiteworks/kiteworks-mobilesync-api/) — The mobileSync API from Kiteworks — 5 operation(s) for mobilesync.
+- [Kiteworks Notifications API](https://apis.io/apis/kiteworks/kiteworks-notifications-api/) — The notifications API from Kiteworks — 3 operation(s) for notifications.
+- [Kiteworks Permissions API](https://apis.io/apis/kiteworks/kiteworks-permissions-api/) — The permissions API from Kiteworks — 4 operation(s) for permissions.
+- [Kiteworks Profiles API](https://apis.io/apis/kiteworks/kiteworks-profiles-api/) — The profiles API from Kiteworks — 3 operation(s) for profiles.
+- [Kiteworks Request File API](https://apis.io/apis/kiteworks/kiteworks-requestfile-api/) — The requestFile API from Kiteworks — 13 operation(s) for requestfile.
+- [Kiteworks Roles API](https://apis.io/apis/kiteworks/kiteworks-roles-api/) — The roles API from Kiteworks — 2 operation(s) for roles.
+- [Kiteworks SCIM API](https://apis.io/apis/kiteworks/kiteworks-scim-api/) — The scim API from Kiteworks — 9 operation(s) for scim.
+- [Kiteworks Search API](https://apis.io/apis/kiteworks/kiteworks-search-api/) — The search API from Kiteworks — 3 operation(s) for search.
+- [Kiteworks Settings API](https://apis.io/apis/kiteworks/kiteworks-settings-api/) — The settings API from Kiteworks — 2 operation(s) for settings.
+- [Kiteworks Shared Mailbox API](https://apis.io/apis/kiteworks/kiteworks-sharedmailbox-api/) — The sharedMailbox API from Kiteworks — 6 operation(s) for sharedmailbox.
+- [Kiteworks Sources API](https://apis.io/apis/kiteworks/kiteworks-sources-api/) — The sources API from Kiteworks — 15 operation(s) for sources.
+- [Kiteworks System API](https://apis.io/apis/kiteworks/kiteworks-system-api/) — The system API from Kiteworks — 6 operation(s) for system.
+- [Kiteworks Tasks API](https://apis.io/apis/kiteworks/kiteworks-tasks-api/) — The tasks API from Kiteworks — 3 operation(s) for tasks.
+- [Kiteworks Uploads API](https://apis.io/apis/kiteworks/kiteworks-uploads-api/) — The uploads API from Kiteworks — 10 operation(s) for uploads.
+- [Kiteworks Users API](https://apis.io/apis/kiteworks/kiteworks-users-api/) — The users API from Kiteworks — 30 operation(s) for users.
+- [Kiteworks User Ssh Public Keys API](https://apis.io/apis/kiteworks/kiteworks-usersshpublickeys-api/) — The userSshPublicKeys API from Kiteworks — 7 operation(s) for usersshpublickeys.
+- [Kiteworks Web Forms API](https://apis.io/apis/kiteworks/kiteworks-webforms-api/) — The webForms API from Kiteworks — 2 operation(s) for webforms.
+- [Kiteworks Webhook API](https://apis.io/apis/kiteworks/kiteworks-webhook-api/) — The webhook API from Kiteworks — 2 operation(s) for webhook.
+- [Kiteworks Admin Roles API](https://apis.io/apis/kiteworks/kiteworks-admin-roles-api/) — The Admin Roles API from Kiteworks — 4 operation(s) for admin roles.
+- [Kiteworks Short Links API](https://apis.io/apis/kiteworks/kiteworks-short-links-api/) — The Short Links API from Kiteworks — 1 operation(s) for short links.
+- [Kiteworks Source Types API](https://apis.io/apis/kiteworks/kiteworks-source-types-api/) — The Source Types API from Kiteworks — 2 operation(s) for source types.
 
-- `authentication/`, `scopes/` — OAuth 2.0 authorization code (PKCE) and JWT bearer; pattern-based scopes (`{METHOD}/{resource}/{qualifier}`)
-- `conventions/` — offset pagination, `orderBy` sorting, proprietary `{code, message, field}` error envelope; **no idempotency contract**
-- `errors/`, `data-model/` — derived from the v28 OpenAPI (including the non-standard `490` WAF status)
-- `rate-limits/` — 30 req/s standard, 300 req/s MFT, `429` + `Retry-After`
-- `asyncapi/` — PubSub webhook catalog; HMAC-SHA256 signing via `X-KW-Signature` (no AsyncAPI document is published)
-- `mcp/` — the official Apache-2.0 Kiteworks MCP Server (20 tools, OAuth 2.1, FIPS 140-3 mode)
-- `skills/` — five generated Agent Skills grounded in verified spec paths
-- `security/`, `conformance/`, `well-known/` — PGP-signed security.txt, UpGuard trust center, and the published compliance framework list
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Kiteworks Pubsub Webhooks](https://apis.io/asyncapis/kiteworks/kiteworks-pubsub-webhooks/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [kiteworks](https://apis.io/servers/kiteworks/kiteworks/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Kiteworks Agentic Access](https://apis.io/agentic-access/kiteworks/kiteworks-agentic-access/)
+
+#### Collections (41)
+
+Postman and Open Collection request collections.
+
+- [Kiteworks API Documentation activities API](https://apis.io/collections/kiteworks/open-kiteworks-activities-api/)
+- [Kiteworks API Documentation activities admin API](https://apis.io/collections/kiteworks/open-kiteworks-admin-api/)
+- [Kiteworks API Documentation activities adminRoles API](https://apis.io/collections/kiteworks/open-kiteworks-adminroles-api/)
+- [Kiteworks API Documentation activities advancedForms API](https://apis.io/collections/kiteworks/open-kiteworks-advancedforms-api/)
+- [Kiteworks API Documentation activities cards API](https://apis.io/collections/kiteworks/open-kiteworks-cards-api/)
+- [Kiteworks API Documentation activities clientEventLogs API](https://apis.io/collections/kiteworks/open-kiteworks-clienteventlogs-api/)
+- [Kiteworks API Documentation activities clients API](https://apis.io/collections/kiteworks/open-kiteworks-clients-api/)
+- [Kiteworks API Documentation activities comments API](https://apis.io/collections/kiteworks/open-kiteworks-comments-api/)
+- [Kiteworks API Documentation activities contacts API](https://apis.io/collections/kiteworks/open-kiteworks-contacts-api/)
+- [Kiteworks API Documentation activities devices API](https://apis.io/collections/kiteworks/open-kiteworks-devices-api/)
+- [Kiteworks API Documentation activities dli API](https://apis.io/collections/kiteworks/open-kiteworks-dli-api/)
+- [Kiteworks API Documentation activities externalDL API](https://apis.io/collections/kiteworks/open-kiteworks-externaldl-api/)
+- [Kiteworks API Documentation activities favorites API](https://apis.io/collections/kiteworks/open-kiteworks-favorites-api/)
+- [Kiteworks API Documentation activities files API](https://apis.io/collections/kiteworks/open-kiteworks-files-api/)
+- [Kiteworks API Documentation activities folders API](https://apis.io/collections/kiteworks/open-kiteworks-folders-api/)
+- [Kiteworks API Documentation activities groups API](https://apis.io/collections/kiteworks/open-kiteworks-groups-api/)
+- [Kiteworks API Documentation activities internal API](https://apis.io/collections/kiteworks/open-kiteworks-internal-api/)
+- [Kiteworks API Documentation activities languages API](https://apis.io/collections/kiteworks/open-kiteworks-languages-api/)
+- [Kiteworks API Documentation activities ldapGroups API](https://apis.io/collections/kiteworks/open-kiteworks-ldapgroups-api/)
+- [Kiteworks API Documentation activities locations API](https://apis.io/collections/kiteworks/open-kiteworks-locations-api/)
+- [Kiteworks API Documentation activities mail API](https://apis.io/collections/kiteworks/open-kiteworks-mail-api/)
+- [Kiteworks API Documentation activities mobileSync API](https://apis.io/collections/kiteworks/open-kiteworks-mobilesync-api/)
+- [Kiteworks API Documentation activities notifications API](https://apis.io/collections/kiteworks/open-kiteworks-notifications-api/)
+- [Kiteworks API Documentation activities permissions API](https://apis.io/collections/kiteworks/open-kiteworks-permissions-api/)
+- [Kiteworks API Documentation activities profiles API](https://apis.io/collections/kiteworks/open-kiteworks-profiles-api/)
+- …and 16 more published on APIs.io
+
+#### Overlays (2)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Kiteworks Core Overlay](https://apis.io/overlays/kiteworks/kiteworks-core-overlay/)
+- [Kiteworks Pubsub Overlay](https://apis.io/overlays/kiteworks/kiteworks-pubsub-overlay/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Kiteworks Authentication](https://apis.io/security/kiteworks/kiteworks-authentication/)
+- [Kiteworks Domain Security](https://apis.io/security/kiteworks/kiteworks-domain-security/)
+- [Kiteworks Trust Center](https://apis.io/security/kiteworks/kiteworks-trust-center/)
+- [Kiteworks Vulnerability Disclosure](https://apis.io/security/kiteworks/kiteworks-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Kiteworks Scopes](https://apis.io/scopes/kiteworks/kiteworks-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Kiteworks Plans Pricing](https://apis.io/plans/kiteworks/kiteworks-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Kiteworks Rate Limits](https://apis.io/rate-limits/kiteworks/kiteworks-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.kiteworks.com/)
+- [Documentation](https://developer.kiteworks.com/api-concepts.html)
+- [Getting started](https://developer.kiteworks.com/quick-start.html)
+- [API reference](https://developer.kiteworks.com/api-reference.html)
+- [Pricing](https://www.kiteworks.com/pricing/)
+- [Sign up](https://info.kiteworks.com/demo-request)
+- [Support](https://www.kiteworks.com/support/)
+- [Blog](https://www.kiteworks.com/blog/)
+- [Security](https://security.kiteworks.com)
+- [Compliance](https://www.kiteworks.com/platform/compliance/)
+- [Terms of service](https://www.kiteworks.com/legal/)
+- [Privacy policy](https://www.kiteworks.com/privacy-policy/)
+- [GitHub](https://github.com/kiteworks)
+
+## API Evangelist rating
+
+**Kin Score 65.5** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 56.1 |
+| Contract governance | 18.2 |
+| Operational transparency | 57.9 |
+| Developer ergonomics | 66.1 |
+| Access clarity | 81.6 |
+
+**Agent readiness 38.2** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | partial |
+| Operation Distinctiveness | mostly |
+
+**Regulatory alignment 45.1** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/kiteworks/](https://apis.io/providers/kiteworks/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Kiteworks: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/kiteworks/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
